@@ -8,6 +8,7 @@ LPGL v3
 
 = Pre-requisites =
 Running ejabberd with bosh at localhost:5280/http-bind/
+gwt2.0
 gwt-eclipse-plugin installed
 test1@localhost and test2@localhost registered users in ejabberd
 
