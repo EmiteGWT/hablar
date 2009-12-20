@@ -1,34 +1,8 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	<ui:style>
-		.login {
-			border: 3px solid #E9E9E9;
-		}
-		
-		.credentials {
-			padding: 3px 5px;
-			background-color: #E9E9E9;
-			border-bottom: 1px solid #BBBBBB;
-		}
-		
-		.label {
-			display: block;
-			margin: 0;
-			padding: 0 0 0 3px;
-		}
-		
-		.box {
-			padding: 2px;
-			display: block;
-			border: 1px solid #BBBBBB;
-			margin: 0 0 3px 0;
-		}
-		
-		.output {
-			overflow: auto;
-		}
-	</ui:style>
+	<ui:style src="LoginWidget.css" />
+	
 	<g:DockLayoutPanel styleName="{style.login}" unit="EM">
 		<g:north size="9">
 			<g:HTMLPanel styleName="{style.credentials}">

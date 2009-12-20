@@ -1,56 +1,18 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	<ui:style type="com.calclab.hablar.client.pages.PageHeader.Styles">
-		.title {
-			padding: 3px;
-			display: block;
-		}
-		
-		@sprite .icon {
-			display: block;
-			float: left;
-			gwt-image: 'chatBasic';
-			width: 19px;
-			margin: 3px 0 0 3px;
-		}
-		
-		@sprite .close {
-			display: block;
-			float: right;
-			margin: -17px 0 0 -19px;
-			width: 16px;
-			height: 16px;
-			gwt-image: 'closeIcon';
-		}
-		
-		.header {
-			width: 100%;
-			overflow: hidden;
-			cursor: pointer;
-			/*background-color: #E9E9E9;*/
-			background-color: #e9e9e9;
-			height: 22px;
-			overflow: hidden;
-			border-bottom: 1px solid #BBBBBB;
-			border-top: 1px solid white;
-		}
-		
-		.pageHeader {
-			width: 100%;
-			overflow: hidden;
-		}
-		
-		.active {
-			/*font-weight: bold;*/
-			/*background-color: orange;*/
-		}
-		
-		.open {
-			/*cursor: default;*/
-			/*font-weight: bold;*/
-		}
-	</ui:style>
+	<ui:style src="PageWidget.css"
+		type="com.calclab.hablar.client.pages.PageHeader.Styles" />
+			
+		<ui:style field="icons">
+			@sprite .roster {
+				gwt-image: 'chatBasic';
+			}
+			
+			@sprite .close {
+				gwt-image: 'closeIcon';
+			}
+		</ui:style>
 
 	<ui:image field='chatBasic' src='chat-basic.gif' />
 	<ui:image field='closeIcon' src='close.png' />
@@ -58,8 +20,8 @@
 
 	<g:FlowPanel styleName='hablar-pageHeader {style.header}'
 		ui:field="header">
-		<g:Label styleName='{style.icon}' ui:field="icon"></g:Label>
-		<g:Label styleName="{style.title} " ui:field="title"></g:Label>
-		<g:Label styleName='{style.close}' ui:field="close" />
+		<g:Label styleName='{style.icon} {icons.roster}' ui:field="icon"></g:Label>
+		<g:Label styleName="{style.title}" ui:field="title"></g:Label>
+		<g:Label styleName='{style.close} {icons.close}' ui:field="close" />
 	</g:FlowPanel>
 </ui:UiBinder> 

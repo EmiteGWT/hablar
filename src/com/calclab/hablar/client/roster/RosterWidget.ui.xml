@@ -1,64 +1,23 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	<ui:style>
-		.important {
-			font-weight: bold;
-		}
+	<ui:style src="RosterWidget.css" />
 		
-		.roster {
-			border: 3px solid #E9E9E9;
-		}
-		
-		.list {
-			width: 100%;
-			overflow: hidden;
-		}
-		
-		.panel {
-			width: 100%;
-			overflow: hidden;
-			background-color: #E9E9E9;
-		}
-		.questionPanel {
-			border-bottom: 1px solid #BBBBBB;
-		}
-		
-		.textBox {
-			width: 100%;
-			padding: 3px;
-			border: 3px solid #BBBBBB;
-		}
-		
-		.buddyBox {
-			width: 90%;
-			margin: 4px 5%;
-			border: 1px solid gray;
-			padding: 2px;
-		}
-		
-		@sprite .addBuddyIcon {
+	<ui:style field="icons">
+		@sprite .userAdd {
 			gwt-image: 'userAdd';
-			display: block;
-			float: left;
-			width: 20px;
-			height: 16px;
-			margin: 3px 5px 0 3px;
 		}
-		
-		.questionBody {color: gray; display: block; height: 2.5em;}
-		
-		.actions {width: 100%; overflow: hidden;}
-		.action {float: left; margin-right: 6px;}
 	</ui:style>
 
 	<ui:image field="userAdd" src="user_add.png"></ui:image>
 
 	<g:LayoutPanel ui:field="roster" styleName="{style.roster}">
 		<g:layer left="0" top="0" width="100%" height="0px">
-			<g:HTMLPanel styleName="{style.panel} {style.questionPanel}" ui:field="questionPanel">
+			<g:HTMLPanel styleName="{style.panel} {style.questionPanel}"
+				ui:field="questionPanel">
 				<div>
-					<g:Label ui:field="questionBody" styleName="{style.questionBody}">This is the body of the question. Two lines will be more significative</g:Label>
+					<g:Label ui:field="questionBody" styleName="{style.questionBody}">This is the body
+						of the question. Two lines will be more significative</g:Label>
 					<div style="{style.actions}">
 						<g:Button ui:field="btnYes" styleName="{style.action}">Yes</g:Button>
 						<g:Button ui:field="btnNo" styleName="{style.action}">No</g:Button>
@@ -77,7 +36,7 @@
 		<g:layer left="0" bottom="0" width="100%" height="20px">
 			<g:HTMLPanel styleName="{style.panel}">
 				<div>
-					<g:Label ui:field="addBuddyIcon" styleName="{style.addBuddyIcon}"></g:Label>
+					<g:Label ui:field="addBuddyIcon" styleName="{style.actionIcon} {icons.userAdd}"></g:Label>
 				</div>
 			</g:HTMLPanel>
 		</g:layer>

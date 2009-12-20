@@ -1,0 +1,39 @@
+/* ChatWidget */
+
+.chat {
+	border: 1px solid #E9E9E9;
+}
+
+.list {
+	width: 100%;
+	overflow: auto;
+}
+
+.talker {
+	background-color: #E9E9E9;
+}
+
+.talkBox {
+	width: 100%;
+	padding: 3px;
+	height: 54;
+	border: 3px solid #BBBBBB;
+}
+
+/* ChatMessage */
+.chatMessage {
+	display: block;
+	width: 94%;
+	overflow: hidden;
+	padding: 3px 3% 0 3%;
+}
+
+.author {
+	display: block;
+	float: left;
+	font-weight: bold;
+}
+
+.body {
+	
+}

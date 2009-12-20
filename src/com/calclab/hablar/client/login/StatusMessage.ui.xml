@@ -1,29 +1,16 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	<ui:style>
-		.message {
-			display: block;
-			width: 100%;
-			overflow: hidden;
-		}
+	<ui:style src="LoginWidget.css" />
 		
-		@sprite .icon {
+	<ui:style field="icons">
+		@sprite .info {
 			gwt-image: 'info';
-			display: block;
-			float: left;
-			width: 19px;
-			height: 16px;
-		}
-		
-		.body {
-			display: block;
-			float: left;
 		}
 	</ui:style>
 	<ui:image field="info" src="info.gif"></ui:image>
 	<g:HTMLPanel styleName="{style.message}">
-		<span class='{style.icon}' ui:field="icon"></span>
+		<span class='{style.icon} {icons.info}' ui:field="icon"></span>
 		<g:Label styleName="{style.body}" ui:field="body"></g:Label>
 	</g:HTMLPanel>
 </ui:UiBinder> 
