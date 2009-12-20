@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='hablar'>
+	<inherits name='com.google.gwt.user.User' />
+	 <inherits name='com.google.gwt.user.theme.standard.Standard'/> 
+	<!-- <inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
+	<!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
+	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
+
+	<inherits name='com.calclab.emite.core.EmiteCore' />
+	<inherits name='com.calclab.emite.im.EmiteIM' />
+	<inherits name='com.calclab.emite.browser.EmiteBrowser' />
+	<entry-point class='com.calclab.hablar.client.Hablar' />
+	<source path='client' />
+</module>

@@ -1,0 +1,22 @@
+= Hablar =
+
+Hablar emite widget
+
+A skeleton for a new emite ui widget.
+
+LPGL v3
+
+= Pre-requisites =
+Running ejabberd with bosh at localhost:5280/http-bind/
+gwt-eclipse-plugin installed
+test1@localhost and test2@localhost registered users in ejabberd
+
+= Instructions =
+Open the eclipse project
+Add the two .jar files inside /lib folder to the project builder path
+Run the project as web application (right button over project > Run As > Web Application)
+Choose one of the url* from the Development Mode panel and play!
+
+* Each of the url are the same module running with different 
+configurations 
+
