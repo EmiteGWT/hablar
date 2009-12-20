@@ -10,9 +10,9 @@ import com.google.gwt.user.client.ui.StackLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * A StackPanel with a status. Can add PageWidgets.
- * 
- * @author dani
+ * A StackPanel with a status and more control over the current opened widgets.
+ * Can add and remove PageWidgets. Can retrieve the current visible page and
+ * fire events when a page is open or close
  * 
  */
 public class PagesPanel extends Composite {

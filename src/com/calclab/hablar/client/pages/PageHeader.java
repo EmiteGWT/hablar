@@ -13,9 +13,10 @@ import com.google.gwt.user.client.ui.Widget;
 
 /**
  * The header of the page. The header has text, icon, close button (optional)
- * and active state
+ * and active state. Each PageWidget has one PageHeader. The PageWidget creates
+ * the header.
  */
-public class PageHeader extends Composite {
+class PageHeader extends Composite {
 
     private static StackHeaderUiBinder uiBinder = GWT.create(StackHeaderUiBinder.class);
 

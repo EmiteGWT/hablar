@@ -7,7 +7,8 @@ import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.user.client.ui.Composite;
 
 /**
- * A PageWidget is a widget with a header
+ * A PageWidget is a widget with a header and some status. Is the base
+ * of the hablar widgets panels.
  */
 public abstract class PageWidget extends Composite {
 

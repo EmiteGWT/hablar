@@ -42,13 +42,13 @@
 		}
 		
 		.active {
-			font-weight: bold;
-			background-color: orange;
+			/*font-weight: bold;*/
+			/*background-color: orange;*/
 		}
 		
 		.open {
-			cursor: default;
-			font-weight: bold;
+			/*cursor: default;*/
+			/*font-weight: bold;*/
 		}
 	</ui:style>
 
