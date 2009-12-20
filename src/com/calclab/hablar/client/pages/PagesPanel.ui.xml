@@ -9,7 +9,7 @@
 		}
 	</ui:style>
 
-	<g:DockLayoutPanel unit='PX'>
+	<g:DockLayoutPanel unit='PX' styleName="hablar-Page">
 		<g:center>
 			<g:StackLayoutPanel ui:field="stack" unit='PX'>
 			</g:StackLayoutPanel>

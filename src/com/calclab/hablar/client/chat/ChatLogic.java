@@ -18,6 +18,7 @@ public class ChatLogic {
 	    @Override
 	    public void onEvent(Message message) {
 		widget.showMessage(name, message.getBody(), ChatWidget.MessageType.incoming);
+		widget.setStatus("Incoming message from " + name);
 	    }
 	});
     }

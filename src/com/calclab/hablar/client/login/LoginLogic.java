@@ -45,8 +45,8 @@ public class LoginLogic {
     }
 
     private void setStatus(String status) {
-	widget.setHeaderTitle(status);
 	widget.setStatus(status);
+	widget.setHeaderTitle(status);
     }
 
     public void onAction() {

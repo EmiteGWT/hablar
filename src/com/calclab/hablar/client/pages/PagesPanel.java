@@ -1,5 +1,6 @@
 package com.calclab.hablar.client.pages;
 
+import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -26,26 +27,53 @@ public class PagesPanel extends Composite {
     @UiField
     StackLayoutPanel stack;
 
+    private final Listener<String> statusListener;
+    private final Listener<PageWidget> openListener;
+    private PageWidget currentPage;
+
     public PagesPanel() {
 	initWidget(uiBinder.createAndBindUi(this));
+	statusListener = new Listener<String>() {
+	    @Override
+	    public void onEvent(String status) {
+		GWT.log("Hablar status: " + status, null);
+		setStatus(status);
+	    }
+	};
+	openListener = new Listener<PageWidget>() {
+	    @Override
+	    public void onEvent(PageWidget page) {
+		if (currentPage != null && page.isOpened()) {
+		    currentPage.setOpen(false);
+		    currentPage = page;
+		}
+	    }
+	};
+    }
+
+    public PageWidget getCurrentPage() {
+	return currentPage;
     }
 
     public void setStatus(String status) {
 	this.status.setText(status);
     }
 
-    public void add(PageWidget widget, boolean visible) {
-	stack.add(widget, widget.getHeader(), 24);
+    public void add(PageWidget page, boolean visible) {
+	page.onStatusChanged(statusListener);
+	page.onOpenChanged(openListener);
+	stack.add(page, page.getHeader(), 24);
 	if (visible)
-	    stack.showWidget(widget);
+	    show(page);
     }
 
-    public void show(Widget widget) {
-	stack.showWidget(widget);
+    public void show(PageWidget page) {
+	page.setOpen(true);
+	stack.showWidget(page);
     }
 
-    public void remove(PageWidget panel) {
-	stack.remove(panel);
+    public void remove(PageWidget page) {
+	stack.remove(page);
     }
 
 }

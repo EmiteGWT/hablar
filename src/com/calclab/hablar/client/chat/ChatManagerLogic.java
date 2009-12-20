@@ -30,7 +30,7 @@ public class ChatManagerLogic {
 		    pages.setStatus(status);
 		}
 	    });
-	    pages.add(chatWidget, true);
+	    pages.add(chatWidget, false);
 	}
 
 	chatManager.onChatCreated(new Listener<Chat>() {
