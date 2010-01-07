@@ -14,6 +14,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -42,6 +43,9 @@ public class SearchPage extends PageWidget {
     LayoutPanel self;
 
     @UiField
+    ScrollPanel scroll;
+
+    @UiField
     FlowPanel results, messagePanel;
 
     @UiField
@@ -64,6 +68,10 @@ public class SearchPage extends PageWidget {
 	results.add(new SearchResult(item));
     }
 
+    public void clearResults() {
+	results.clear();
+    }
+
     @UiHandler("term")
     public void onFocus(FocusEvent evt) {
 	term.setText("");
@@ -79,7 +87,7 @@ public class SearchPage extends PageWidget {
 
     public void showMessage(String body, String style) {
 	self.setWidgetTopHeight(messagePanel, 0, PX, 25, PX);
-	self.setWidgetTopBottom(results, 33, PX, 28, PX);
+	self.setWidgetTopBottom(scroll, 33, PX, 33, PX);
 	self.animate(250);
 
 	message.setText(body);

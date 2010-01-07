@@ -18,6 +18,7 @@ public class SearchLogic {
     }
 
     public void search(final String text) {
+	view.clearResults();
 	view.showMessage("Searching " + text + "...", view.style.info());
 	HashMap<String, String> query = new HashMap<String, String>();
 	query.put("nick", text + "*");
@@ -30,7 +31,7 @@ public class SearchLogic {
 
 	    @Override
 	    public void onSuccess(List<Item> items) {
-		view.showMessage("Search for: " + text + ". " + items.size() + " users found.", view.style.success());
+		view.showMessage("Results for '" + text + "'. " + items.size() + " users found.", view.style.success());
 		for (Item item : items) {
 		    view.addResult(item);
 		}

@@ -15,6 +15,6 @@
 	<ui:image field="buddy" src="buddy.gif"></ui:image>
 	<g:HTMLPanel styleName="{style.result}">
 		<span class="{hablar.icon} {icons.userAdd}"></span>
-		<g:Label ui:field="name">Result</g:Label>
+		<g:Label ui:field="name" styleName="{style.resultName}">Result</g:Label>
 	</g:HTMLPanel>
 </ui:UiBinder> 
