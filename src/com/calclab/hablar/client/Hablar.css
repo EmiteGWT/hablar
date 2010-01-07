@@ -1,4 +1,13 @@
 
+.page {
+	background-color: #E9E9E9;
+}
+
+.contents {
+	background-color: white;
+	height: 100%;
+}
+
 .panel {
 	width: 100%;
 	overflow: hidden;

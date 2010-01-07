@@ -4,22 +4,26 @@
 
 	<ui:style src="../Hablar.css" field="hablar" />
 		
-	<ui:style src="SearchPage.css" type="com.calclab.hablar.client.search.SearchPage.Styles"/>
-		
-	<g:DockLayoutPanel unit="PX">
-		<g:north size="40">
-		<g:FlowPanel>
-		<g:Label ui:field="message" styleName="{hablar.panel} {style.message}"></g:Label>
-		</g:FlowPanel>
-		</g:north>
-		<g:center>
-			<g:FlowPanel ui:field="results">
+	<ui:style src="SearchPage.css"
+		type="com.calclab.hablar.client.search.SearchPage.Styles" />
+			
+		<g:LayoutPanel ui:field="self" styleName="{hablar.page}">
+		<g:layer left="0" top="0" width="100%" height="0">
+			<g:FlowPanel ui:field="messagePanel">
+				<g:Label ui:field="message" styleName="{hablar.panel} {style.message}">
+				</g:Label>
 			</g:FlowPanel>
-		</g:center>
-		<g:south size="37">
+		</g:layer>
+		<g:layer left="3" top="3" right="3" bottom="33">
+			<g:FlowPanel styleName="{hablar.contents}" ui:field="results">
+			</g:FlowPanel>
+		</g:layer>
+		<g:layer left="0" bottom="0" width="100%" height="30">
 			<g:FlowPanel styleName="{hablar.panel} {style.panel}">
 				<g:TextBox ui:field="term" styleName="{hablar.textBox} {style.unfocus}">Search users...</g:TextBox>
 			</g:FlowPanel>
-		</g:south>
-	</g:DockLayoutPanel>
+		</g:layer>
+	</g:LayoutPanel>
+
+
 </ui:UiBinder> 

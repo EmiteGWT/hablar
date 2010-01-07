@@ -9,6 +9,7 @@
 }
 
 .result {
+	padding: 5px 0;
 	display: block;
 	width: 100%;
 	overflow: hidden;

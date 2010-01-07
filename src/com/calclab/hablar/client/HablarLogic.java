@@ -33,7 +33,7 @@ public class HablarLogic {
 
 	if (config.hasSearch) {
 	    SearchPage searchPage = new SearchPage();
-	    hablar.add(searchPage, true);
+	    hablar.add(searchPage, false);
 	}
 
 	session.onStateChanged(new Listener0() {

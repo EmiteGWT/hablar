@@ -1,5 +1,7 @@
 package com.calclab.hablar.client.search;
 
+import static com.google.gwt.dom.client.Style.Unit.PX;
+
 import com.calclab.emite.xep.search.client.Item;
 import com.calclab.hablar.client.pages.PageWidget;
 import com.google.gwt.core.client.GWT;
@@ -11,6 +13,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -36,7 +39,10 @@ public class SearchPage extends PageWidget {
     private final SearchLogic logic;
 
     @UiField
-    FlowPanel results;
+    LayoutPanel self;
+
+    @UiField
+    FlowPanel results, messagePanel;
 
     @UiField
     public Styles style;
@@ -72,8 +78,11 @@ public class SearchPage extends PageWidget {
     }
 
     public void showMessage(String body, String style) {
+	self.setWidgetTopHeight(messagePanel, 0, PX, 25, PX);
+	self.setWidgetTopBottom(results, 33, PX, 28, PX);
+	self.animate(250);
+
 	message.setText(body);
 	message.getElement().addClassName(style);
     }
-
 }
