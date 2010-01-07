@@ -15,9 +15,9 @@ public class RosterLogic {
 
     private final Roster roster;
     private final ChatManager chatManager;
-    private final RosterWidget widget;
+    private final RosterPage widget;
 
-    public RosterLogic(final RosterWidget widget) {
+    public RosterLogic(final RosterPage widget) {
 	this.widget = widget;
 	this.roster = Suco.get(Roster.class);
 	this.chatManager = Suco.get(ChatManager.class);

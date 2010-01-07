@@ -1,0 +1,25 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+	<ui:style src="../Hablar.css" field="hablar" />
+		
+	<ui:style src="SearchPage.css" type="com.calclab.hablar.client.search.SearchPage.Styles"/>
+		
+	<g:DockLayoutPanel unit="PX">
+		<g:north size="40">
+		<g:FlowPanel>
+		<g:Label ui:field="message" styleName="{hablar.panel} {style.message}"></g:Label>
+		</g:FlowPanel>
+		</g:north>
+		<g:center>
+			<g:FlowPanel ui:field="results">
+			</g:FlowPanel>
+		</g:center>
+		<g:south size="37">
+			<g:FlowPanel styleName="{hablar.panel} {style.panel}">
+				<g:TextBox ui:field="term" styleName="{hablar.textBox} {style.unfocus}">Search users...</g:TextBox>
+			</g:FlowPanel>
+		</g:south>
+	</g:DockLayoutPanel>
+</ui:UiBinder> 

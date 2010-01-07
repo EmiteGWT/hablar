@@ -8,7 +8,9 @@
 
 	<inherits name='com.calclab.emite.core.EmiteCore' />
 	<inherits name='com.calclab.emite.im.EmiteIM' />
+	<inherits name='com.calclab.emite.xep.search.EmiteSearch' />
 	<inherits name='com.calclab.emite.browser.EmiteBrowser' />
+	
 	<entry-point class='com.calclab.hablar.client.Hablar' />
 	<source path='client' />
 </module>

@@ -18,12 +18,12 @@ import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
-public class RosterWidget extends PageWidget {
+public class RosterPage extends PageWidget {
+
+    interface RosterWidgetUiBinder extends UiBinder<Widget, RosterPage> {
+    }
 
     private static RosterWidgetUiBinder uiBinder = GWT.create(RosterWidgetUiBinder.class);
-
-    interface RosterWidgetUiBinder extends UiBinder<Widget, RosterWidget> {
-    }
 
     @UiField
     LayoutPanel roster;
@@ -45,7 +45,7 @@ public class RosterWidget extends PageWidget {
     private boolean isAddBuddyPanelVisible;
     private boolean isQuestionPanelVisible;
 
-    public RosterWidget() {
+    public RosterPage() {
 	super(false);
 	this.isAddBuddyPanelVisible = false;
 	this.isQuestionPanelVisible = false;
@@ -58,12 +58,33 @@ public class RosterWidget extends PageWidget {
 	list.add(itemWidget);
     }
 
+    public void ask(String body, Listener<Boolean> answer) {
+	this.answer = answer;
+	questionBody.setText(body);
+    }
+
     @UiHandler("addBuddyBox")
     public void handleChange(ChangeEvent event) {
 	try {
 	    logic.addBuddy(XmppURI.uri(addBuddyBox.getText()));
 	} catch (RuntimeException e) {
 
+	}
+    }
+
+    public boolean isAddBuddyPanelVisible() {
+	return isAddBuddyPanelVisible;
+    }
+
+    @UiHandler("addBuddyIcon")
+    public void onAddBuddy(ClickEvent event) {
+	logic.toggleAddBuddyAction();
+    }
+
+    @UiHandler("btnNo")
+    public void onNo(ClickEvent event) {
+	if (this.answer != null) {
+	    answer.onEvent(false);
 	}
     }
 
@@ -74,25 +95,16 @@ public class RosterWidget extends PageWidget {
 	}
     }
 
-    @UiHandler("btnNo")
-    public void onNo(ClickEvent event) {
-	if (this.answer != null) {
-	    answer.onEvent(false);
+    public void setAddBuddyPanelVisible(boolean visible) {
+	if (visible != isAddBuddyPanelVisible) {
+	    isAddBuddyPanelVisible = visible;
+	    if (visible) {
+		roster.setWidgetBottomHeight(addBuddyPanel, 20, Unit.PX, 30, Unit.PX);
+	    } else {
+		roster.setWidgetBottomHeight(addBuddyPanel, 0, Unit.PX, 0, Unit.PX);
+	    }
+	    roster.animate(250);
 	}
-    }
-
-    @UiHandler("addBuddyIcon")
-    public void onAddBuddy(ClickEvent event) {
-	logic.toggleAddBuddyAction();
-    }
-
-    public boolean isAddBuddyPanelVisible() {
-	return isAddBuddyPanelVisible;
-    }
-
-    public void ask(String body, Listener<Boolean> answer) {
-	this.answer = answer;
-	questionBody.setText(body);
     }
 
     public void setQuestionVisible(boolean visible) {
@@ -106,18 +118,6 @@ public class RosterWidget extends PageWidget {
 		roster.setWidgetTopBottom(list, 0, Unit.PX, 50, Unit.PX);
 	    }
 	    roster.animate(500);
-	}
-    }
-
-    public void setAddBuddyPanelVisible(boolean visible) {
-	if (visible != isAddBuddyPanelVisible) {
-	    isAddBuddyPanelVisible = visible;
-	    if (visible) {
-		roster.setWidgetBottomHeight(addBuddyPanel, 20, Unit.PX, 30, Unit.PX);
-	    } else {
-		roster.setWidgetBottomHeight(addBuddyPanel, 0, Unit.PX, 0, Unit.PX);
-	    }
-	    roster.animate(250);
 	}
     }
 

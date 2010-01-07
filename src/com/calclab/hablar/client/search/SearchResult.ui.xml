@@ -1,7 +1,10 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	<ui:style src="RosterWidget.css" />
+
+	<ui:style src="../Hablar.css" field="hablar" />
+		
+	<ui:style src="SearchPage.css" />
 		
 	<ui:style field="icons">
 		@sprite .userAdd {
@@ -10,8 +13,8 @@
 	</ui:style>
 
 	<ui:image field="buddy" src="buddy.gif"></ui:image>
-	<g:HTMLPanel styleName="{style.item}">
-		<span class="{style.icon} {icons.userAdd}"></span>
-		<g:Label styleName="{style.name}" ui:field="name" />
+	<g:HTMLPanel styleName="{style.result}">
+		<span class="{hablar.icon} {icons.userAdd}"></span>
+		<g:Label ui:field="name">Result</g:Label>
 	</g:HTMLPanel>
 </ui:UiBinder> 

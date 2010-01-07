@@ -1,0 +1,20 @@
+
+.panel {
+	width: 100%;
+	overflow: hidden;
+	background-color: #E9E9E9;
+}
+
+.textBox {
+	width: 98%;
+	padding: 3px;
+	border: 1px solid #BBBBBB;
+}
+
+.icon {
+	display: block;
+	float: left;
+	width: 19px;
+	height: 16px;
+	margin-left: 3px;
+}
