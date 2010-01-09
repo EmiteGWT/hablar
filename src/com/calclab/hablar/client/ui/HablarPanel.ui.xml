@@ -1,0 +1,13 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.pages {height: 100%;
+		background-color: #efefef;
+		}
+		
+	</ui:style>
+	
+	<g:LayoutPanel ui:field="panel">
+	</g:LayoutPanel>
+</ui:UiBinder> 

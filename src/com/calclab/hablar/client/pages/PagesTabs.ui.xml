@@ -1,0 +1,11 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.tabs {
+			height: 100%;
+		}
+	</ui:style>
+	<g:TabLayoutPanel ui:field="tabs" barUnit='PX'
+		barHeight='24' styleName="{style.tabs}"></g:TabLayoutPanel>
+</ui:UiBinder> 

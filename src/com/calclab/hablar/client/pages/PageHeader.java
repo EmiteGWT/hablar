@@ -16,23 +16,24 @@ import com.google.gwt.user.client.ui.Widget;
  * and active state. Each PageWidget has one PageHeader. The PageWidget creates
  * the header.
  */
-class PageHeader extends Composite {
-
-    private static StackHeaderUiBinder uiBinder = GWT.create(StackHeaderUiBinder.class);
+public class PageHeader extends Composite {
 
     interface StackHeaderUiBinder extends UiBinder<Widget, PageHeader> {
     }
-    
+
     interface Styles extends CssResource {
 	public String active();
+
 	public String open();
     }
+
+    private static StackHeaderUiBinder uiBinder = GWT.create(StackHeaderUiBinder.class);
 
     @UiField
     Label title, close, icon;
     @UiField
     FlowPanel header;
-    
+
     @UiField
     Styles style;
 
@@ -46,8 +47,14 @@ class PageHeader extends Composite {
 	close.setVisible(closeable);
     }
 
-    void setHeaderTitle(String title) {
-	this.title.setText(title);
+    @UiHandler("title")
+    public void handleActivateTitle(ClickEvent event) {
+	page.setOpen(true);
+    }
+
+    @UiHandler("close")
+    public void handleClose(ClickEvent event) {
+	page.close();
     }
 
     public void setActive(boolean active) {
@@ -58,22 +65,16 @@ class PageHeader extends Composite {
 	}
     }
 
-    @UiHandler("close")
-    public void handleClose(ClickEvent event) {
-	page.close();
-    }
-
-    @UiHandler("title")
-    public void handleActivateTitle(ClickEvent event) {
-	page.setOpen(true);
-    }
-
     public void setOpen(boolean open) {
 	this.open = open;
 	if (open)
 	    header.getElement().addClassName(style.open());
 	else
 	    header.getElement().removeClassName(style.open());
+    }
+
+    void setHeaderTitle(String title) {
+	this.title.setText(title);
     }
 
 }

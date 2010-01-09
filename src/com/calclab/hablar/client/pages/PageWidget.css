@@ -14,9 +14,18 @@
 	background-color: #e9e9e9;
 	height: 22px;
 	overflow: hidden;
+	margin-right: 3px;
+	border-top: 1px solid #BBBBBB;
+	border-left: 1px solid #BBBBBB;
+	border-right: 1px solid #BBBBBB;
+	border-bottom: 1px solid #E9E9E9;
+}
+
+.accHeader {
 	border-bottom: 1px solid #BBBBBB;
 	border-top: 1px solid white;
-}
+}	
+	
 
 .title {
 	width: 100%; margin-left: 19px;

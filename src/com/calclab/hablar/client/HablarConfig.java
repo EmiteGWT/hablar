@@ -17,4 +17,9 @@ public class HablarConfig {
      */
     public boolean hasSearch;
 
+    /**
+     * Show or not as an accordion
+     */
+    public boolean isAccordion;
+
 }
