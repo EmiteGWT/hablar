@@ -3,7 +3,7 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style src="PageWidget.css" />
 	<ui:style field="defaultStyles" 
-		type="com.calclab.hablar.client.pages.PageHeader.DefaultStyles" >
+		type="com.calclab.hablar.client.ui.pages.PageHeader.DefaultStyles" >
 		.open {}
 		.closed {}
 		.requestFocus {}

@@ -1,6 +1,6 @@
 package com.calclab.hablar.client.login;
 
-import com.calclab.hablar.client.pages.PageWidget;
+import com.calclab.hablar.client.ui.pages.PageWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;

@@ -3,7 +3,7 @@ package com.calclab.hablar.client.search;
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
 import com.calclab.emite.xep.search.client.Item;
-import com.calclab.hablar.client.pages.PageWidget;
+import com.calclab.hablar.client.ui.pages.PageWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.FocusEvent;

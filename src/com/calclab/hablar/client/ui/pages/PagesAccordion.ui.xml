@@ -4,7 +4,7 @@
 	<ui:style src="PageWidget.css" />
 		
 	<ui:style field="headerStyle"
-		type="com.calclab.hablar.client.pages.PagesAccordion.HeaderStyle">
+		type="com.calclab.hablar.client.ui.pages.PagesAccordion.HeaderStyle">
 			.requestFocus {
 				
 			}

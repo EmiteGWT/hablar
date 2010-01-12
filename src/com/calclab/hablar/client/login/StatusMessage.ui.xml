@@ -8,7 +8,7 @@
 			gwt-image: 'info';
 		}
 	</ui:style>
-	<ui:image field="info" src="info.gif"></ui:image>
+	<ui:image field="info" src="info.png"></ui:image>
 	<g:HTMLPanel styleName="{style.message}">
 		<span class='{style.icon} {icons.info}' ui:field="icon"></span>
 		<g:Label styleName="{style.body}" ui:field="body"></g:Label>

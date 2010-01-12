@@ -3,10 +3,10 @@ package com.calclab.hablar.client;
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.session.Session.State;
 import com.calclab.hablar.client.login.LoginPage;
-import com.calclab.hablar.client.pages.PagesWidget;
-import com.calclab.hablar.client.pages.PagesWidget.Position;
 import com.calclab.hablar.client.roster.RosterPage;
 import com.calclab.hablar.client.search.SearchPage;
+import com.calclab.hablar.client.ui.pages.PagesWidget;
+import com.calclab.hablar.client.ui.pages.PagesWidget.Position;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener0;
 

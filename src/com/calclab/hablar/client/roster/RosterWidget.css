@@ -60,26 +60,5 @@
 	margin-right: 6px;
 }
 
-/** RosterItemWidget */
-.item {
-	display: block;
-	width: 100%;
-	overflow: hidden;
-	padding: 5px 3px 0 3px;
-	border-bottom: 1px solid #E9E9E9;
-	height: 20px;
-}
 
-.icon {
-	display: block;
-	float: left;
-	width: 19px;
-	height: 16px;
-	margin-left: 3px;
-}
 
-.name {
-	display: block;
-	float: left;
-	cursor: pointer;
-}

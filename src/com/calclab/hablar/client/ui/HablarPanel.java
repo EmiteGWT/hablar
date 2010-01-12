@@ -1,7 +1,7 @@
 package com.calclab.hablar.client.ui;
 
 import com.calclab.hablar.client.HablarConfig;
-import com.calclab.hablar.client.pages.PagesWidget;
+import com.calclab.hablar.client.ui.pages.PagesWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.uibinder.client.UiBinder;

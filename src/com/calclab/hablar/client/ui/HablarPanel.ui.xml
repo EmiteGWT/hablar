@@ -1,6 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:mail="urn:import:com.calclab.hablar.client">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" 
+	xmlns:hablar="urn:import:com.calclab.hablar.client.ui.state">
 
 	<ui:style>
 		.pages {
@@ -16,14 +17,7 @@
 
 	<g:LayoutPanel ui:field="panel" styleName="{style.pages}">
 		<g:layer left="0" top="0" right="0" height="20">
-			<g:LayoutPanel>
-				<g:layer left="0" top="0" width="20px" bottom="0">
-					<g:Label>x</g:Label>
-				</g:layer>
-				<g:layer left="20" top="0" width="6em" bottom="0">
-					<g:Label>danigb</g:Label>
-				</g:layer>
-			</g:LayoutPanel>
+		<hablar:StatePanel></hablar:StatePanel>
 		</g:layer>
 		<g:layer left="0" bottom="0" right="0" height="20">
 			<g:Label ui:field="status" styleName="{style.status}">Hablar</g:Label>

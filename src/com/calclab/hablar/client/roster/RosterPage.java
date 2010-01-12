@@ -1,7 +1,7 @@
 package com.calclab.hablar.client.roster;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
-import com.calclab.hablar.client.pages.PageWidget;
+import com.calclab.hablar.client.ui.pages.PageWidget;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;

@@ -1,4 +1,4 @@
-package com.calclab.hablar.client.pages;
+package com.calclab.hablar.client.ui.pages;
 
 import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Listener;

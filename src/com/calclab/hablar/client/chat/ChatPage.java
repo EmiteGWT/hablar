@@ -1,7 +1,7 @@
 package com.calclab.hablar.client.chat;
 
 import com.calclab.emite.im.client.chat.Chat;
-import com.calclab.hablar.client.pages.PageWidget;
+import com.calclab.hablar.client.ui.pages.PageWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.resources.client.CssResource;
