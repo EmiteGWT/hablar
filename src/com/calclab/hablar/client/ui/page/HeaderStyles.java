@@ -1,4 +1,4 @@
-package com.calclab.hablar.client.ui.pages;
+package com.calclab.hablar.client.ui.page;
 
 import com.google.gwt.resources.client.CssResource;
 

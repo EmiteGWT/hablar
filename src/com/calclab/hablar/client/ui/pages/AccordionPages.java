@@ -1,5 +1,8 @@
 package com.calclab.hablar.client.ui.pages;
 
+import com.calclab.hablar.client.ui.page.HeaderStyles;
+import com.calclab.hablar.client.ui.page.Page;
+import com.calclab.hablar.client.ui.page.PageHeader;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;

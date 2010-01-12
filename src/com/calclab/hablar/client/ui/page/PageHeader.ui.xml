@@ -3,7 +3,7 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
 	<ui:style field="defaultStyles"
-		type="com.calclab.hablar.client.ui.pages.PageHeader.DefaultStyles">
+		type="com.calclab.hablar.client.ui.page.PageHeader.DefaultStyles">
 			.open {
 				color: blue;
 				
@@ -40,8 +40,8 @@
 		
 		.title {
 			width: 100%;
-			padding-left: 19px;
 			margin-right: 15px;
+			margin-left: 20px;
 			padding: 3px;
 			display: block;
 		}
@@ -49,7 +49,7 @@
 		.icon {
 			display: block;
 			float: left;
-			width: 19px;
+			width: 23px;
 			margin: 3px 0 0 3px;
 		}
 		

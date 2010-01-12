@@ -1,6 +1,7 @@
 package com.calclab.hablar.client.ui.pages;
 
-import com.calclab.hablar.client.ui.pages.Page.Visibility;
+import com.calclab.hablar.client.ui.page.Page;
+import com.calclab.hablar.client.ui.page.Page.Visibility;
 
 public interface Pages {
 

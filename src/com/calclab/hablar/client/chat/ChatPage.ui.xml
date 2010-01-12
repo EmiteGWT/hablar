@@ -7,16 +7,16 @@
 		@sprite .chatIcon {
 			gwt-image: 'buddy';
 		}
-		@sprite .buddyIconOn {
+		@sprite .chatIconOn {
 			gwt-image: 'buddyOn';
 		}
-		@sprite .buddyIconOff {
+		@sprite .chatIconOff {
 			gwt-image: 'buddyOff';
 		}
-		@sprite .buddyIconDnd {
+		@sprite .chatIconDnd {
 			gwt-image: 'buddyDnd';
 		}
-		@sprite .buddyIconWait {
+		@sprite .chatIconWait {
 			gwt-image: 'buddyWait';
 		}
 	</ui:style>

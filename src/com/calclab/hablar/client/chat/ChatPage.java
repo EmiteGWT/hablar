@@ -1,7 +1,8 @@
 package com.calclab.hablar.client.chat;
 
+import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.chat.Chat;
-import com.calclab.hablar.client.ui.pages.PageWidget;
+import com.calclab.hablar.client.ui.page.PageWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.resources.client.CssResource;
@@ -20,6 +21,14 @@ public class ChatPage extends PageWidget {
     interface Icons extends CssResource {
 
 	String chatIcon();
+
+	String chatIconDnd();
+
+	String chatIconOff();
+
+	String chatIconOn();
+
+	String chatIconWait();
     }
 
     enum MessageType {
@@ -58,6 +67,20 @@ public class ChatPage extends PageWidget {
 	    event.stopPropagation();
 	    event.preventDefault();
 	}
+    }
+
+    public void setPresence(Show show) {
+	if (show == Show.chat) {
+	    setHeaderIconClass(icons.chatIconOn());
+	} else if (show == Show.dnd) {
+	    setHeaderIconClass(icons.chatIconDnd());
+	} else if (show == Show.away) {
+	    setHeaderIconClass(icons.chatIconWait());
+	} else {
+	    setHeaderIconClass(icons.chatIconOff());
+
+	}
+
     }
 
     public void showMessage(String name, String body, MessageType type) {

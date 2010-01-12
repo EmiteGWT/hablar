@@ -7,7 +7,6 @@ import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.presence.PresenceManager;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
-import com.calclab.suco.client.events.Listener0;
 
 public class StatePanelLogic {
     private final StatePanel panel;
@@ -17,9 +16,9 @@ public class StatePanelLogic {
     public StatePanelLogic(StatePanel panel) {
 	this.panel = panel;
 	final Session session = Suco.get(Session.class);
-	session.onStateChanged(new Listener0() {
+	session.onStateChanged(new Listener<Session>() {
 	    @Override
-	    public void onEvent() {
+	    public void onEvent(Session session) {
 		setState(session);
 	    }
 	});

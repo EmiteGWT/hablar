@@ -2,7 +2,9 @@ package com.calclab.hablar.client.ui.pages;
 
 import java.util.ArrayList;
 
-import com.calclab.hablar.client.ui.pages.Page.Visibility;
+import com.calclab.hablar.client.ui.page.Page;
+import com.calclab.hablar.client.ui.page.PageWidget;
+import com.calclab.hablar.client.ui.page.Page.Visibility;
 import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
@@ -67,6 +69,7 @@ public abstract class AbstractPages extends Composite implements Pages {
 	    } else if (currentPage != null) {
 		open(currentPage);
 	    }
+	    page.setVisibility(visibility);
 	}
     }
 

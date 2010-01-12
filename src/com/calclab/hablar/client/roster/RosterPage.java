@@ -1,6 +1,7 @@
 package com.calclab.hablar.client.roster;
 
-import com.calclab.hablar.client.ui.pages.PageWidget;
+import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.hablar.client.ui.page.PageWidget;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
@@ -17,7 +18,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class RosterPage extends PageWidget {
+public class RosterPage extends PageWidget implements RosterView {
 
     public static interface Icons extends CssResource {
 
@@ -50,13 +51,14 @@ public class RosterPage extends PageWidget {
 
     private final boolean isAddBuddyPanelVisible;
     private boolean isQuestionPanelVisible;
+    private final RosterLogic logic;
 
     public RosterPage() {
 	super(false);
 	this.isAddBuddyPanelVisible = false;
 	this.isQuestionPanelVisible = false;
 	initWidget(uiBinder.createAndBindUi(this));
-	new RosterLogic(this);
+	logic = new RosterLogic(this);
 	setHeaderTitle("Roster");
 	setHeaderIconClass(icons.rosterIcon());
     }
@@ -69,8 +71,11 @@ public class RosterPage extends PageWidget {
 	actions.add(label);
     }
 
-    public void addItem(RosterItemWidget itemWidget) {
-	list.add(itemWidget);
+    @Override
+    public RosterItemView addItem(RosterItem item) {
+	RosterItemWidget view = new RosterItemWidget(item, logic);
+	list.add(view);
+	return view;
     }
 
     public void ask(String body, Listener<Boolean> answer) {

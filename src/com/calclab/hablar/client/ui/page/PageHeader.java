@@ -1,6 +1,6 @@
-package com.calclab.hablar.client.ui.pages;
+package com.calclab.hablar.client.ui.page;
 
-import com.calclab.hablar.client.ui.pages.Page.Visibility;
+import com.calclab.hablar.client.ui.page.Page.Visibility;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -46,6 +46,7 @@ public class PageHeader extends Composite {
 	initWidget(element);
 	close.setVisible(closeable);
 	this.currentStyles = defaultStyles;
+	// UIUtils.setTextSelectionEnabled(title.getElement(), false);
     }
 
     public void requestFocus() {

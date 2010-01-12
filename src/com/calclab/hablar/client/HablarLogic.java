@@ -5,10 +5,10 @@ import com.calclab.emite.core.client.xmpp.session.Session.State;
 import com.calclab.hablar.client.login.LoginPage;
 import com.calclab.hablar.client.roster.RosterPage;
 import com.calclab.hablar.client.search.SearchPage;
+import com.calclab.hablar.client.ui.page.Page.Visibility;
 import com.calclab.hablar.client.ui.pages.Pages;
-import com.calclab.hablar.client.ui.pages.Page.Visibility;
 import com.calclab.suco.client.Suco;
-import com.calclab.suco.client.events.Listener0;
+import com.calclab.suco.client.events.Listener;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
@@ -44,9 +44,9 @@ public class HablarLogic {
 	    }
 	}
 
-	session.onStateChanged(new Listener0() {
+	session.onStateChanged(new Listener<Session>() {
 	    @Override
-	    public void onEvent() {
+	    public void onEvent(Session session) {
 		setState(session.getState());
 	    }
 

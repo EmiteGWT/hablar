@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
-public class RosterItemWidget extends Composite {
+public class RosterItemWidget extends Composite implements RosterItemView {
 
     interface Icons extends CssResource {
 	String buddyIcon();

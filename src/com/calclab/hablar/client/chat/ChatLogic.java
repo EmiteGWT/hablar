@@ -13,7 +13,7 @@ public class ChatLogic {
 	this.widget = widget;
 
 	final String name = chat.getURI().getNode();
-	widget.setHeaderTitle("Chat with " + name);
+	widget.setHeaderTitle(name);
 	chat.onMessageReceived(new Listener<Message>() {
 	    @Override
 	    public void onEvent(Message message) {

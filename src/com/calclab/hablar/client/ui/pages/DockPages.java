@@ -1,6 +1,7 @@
 package com.calclab.hablar.client.ui.pages;
 
-import com.calclab.hablar.client.ui.pages.Page.Visibility;
+import com.calclab.hablar.client.ui.page.Page;
+import com.calclab.hablar.client.ui.page.Page.Visibility;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;

@@ -15,13 +15,13 @@ public class RosterLogic {
 
     private final Roster roster;
     private final ChatManager chatManager;
-    private final RosterPage widget;
-    private final HashMap<XmppURI, RosterItemWidget> items;
+    private final HashMap<XmppURI, RosterItemView> items;
+    private final RosterView view;
 
-    public RosterLogic(final RosterPage widget) {
-	this.widget = widget;
+    public RosterLogic(final RosterView view) {
+	this.view = view;
 	this.roster = Suco.get(Roster.class);
-	this.items = new HashMap<XmppURI, RosterItemWidget>();
+	this.items = new HashMap<XmppURI, RosterItemView>();
 	this.chatManager = Suco.get(ChatManager.class);
 
 	roster.onRosterRetrieved(new Listener<Collection<RosterItem>>() {
@@ -29,8 +29,7 @@ public class RosterLogic {
 	    public void onEvent(Collection<RosterItem> items) {
 		GWT.log("Retrieved roster", null);
 		for (RosterItem item : items) {
-		    GWT.log("Item!" + item.getName(), null);
-		    widget.addItem(getWidget(item));
+		    getWidget(item);
 		}
 	    }
 
@@ -74,10 +73,10 @@ public class RosterLogic {
 	chatManager.open(uri);
     }
 
-    private RosterItemWidget getWidget(RosterItem item) {
-	RosterItemWidget itemWidget = items.get(item.getJID());
+    private RosterItemView getWidget(RosterItem item) {
+	RosterItemView itemWidget = items.get(item.getJID());
 	if (itemWidget == null) {
-	    itemWidget = new RosterItemWidget(item, RosterLogic.this);
+	    itemWidget = view.addItem(item);
 	    items.put(item.getJID(), itemWidget);
 	}
 	return itemWidget;
