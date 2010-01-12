@@ -1,11 +1,12 @@
 package com.calclab.hablar.client;
 
 import com.calclab.hablar.client.HablarConfig.Layout;
+import com.calclab.hablar.client.chat.ChatConfig;
 import com.calclab.hablar.client.chat.ChatManagerLogic;
 import com.calclab.hablar.client.ui.HablarPanel;
-import com.calclab.hablar.client.ui.pages.DockPages;
-import com.calclab.hablar.client.ui.pages.AccordionPages;
 import com.calclab.hablar.client.ui.pages.AbstractPages;
+import com.calclab.hablar.client.ui.pages.AccordionPages;
+import com.calclab.hablar.client.ui.pages.DockPages;
 import com.calclab.hablar.client.ui.pages.TabPages;
 import com.google.gwt.user.client.ui.Composite;
 
@@ -21,7 +22,7 @@ public class HablarWidget extends Composite {
 	    pages = new TabPages();
 	}
 	new HablarLogic(config, pages);
-	new ChatManagerLogic(pages);
+	new ChatManagerLogic(ChatConfig.getFromMeta(), pages);
 	HablarPanel panel = new HablarPanel(config, pages);
 	initWidget(panel);
     }

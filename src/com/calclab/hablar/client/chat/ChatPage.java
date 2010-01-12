@@ -13,7 +13,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 
-public class ChatPage extends PageWidget {
+public class ChatPage extends PageWidget implements ChatView {
 
     interface ChatWidgetUiBinder extends UiBinder<Widget, ChatPage> {
     }
@@ -29,10 +29,6 @@ public class ChatPage extends PageWidget {
 	String chatIconOn();
 
 	String chatIconWait();
-    }
-
-    enum MessageType {
-	incoming, sent
     }
 
     private static ChatWidgetUiBinder uiBinder = GWT.create(ChatWidgetUiBinder.class);

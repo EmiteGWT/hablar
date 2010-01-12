@@ -41,28 +41,6 @@ public class RosterLogic {
 		getWidget(item).setItem(item);
 	    }
 	});
-
-	// final SubscriptionManager subscriptionManager =
-	// Suco.get(SubscriptionManager.class);
-	// subscriptionManager.onSubscriptionRequested(new Listener2<XmppURI,
-	// String>() {
-	// @Override
-	// public void onEvent(final XmppURI uri, final String nickName) {
-	// String msg = nickName + "(" + uri +
-	// ") want to add you as buddy. Do you agree?";
-	// widget.ask(msg, new Listener<Boolean>() {
-	// @Override
-	// public void onEvent(Boolean yes) {
-	// if (yes.booleanValue()) {
-	// subscriptionManager.approveSubscriptionRequest(uri, nickName);
-	// } else {
-	// subscriptionManager.refuseSubscriptionRequest(uri);
-	// }
-	// }
-	// });
-	// }
-	// });
-
     }
 
     public void onItemClick(RosterItem item) {

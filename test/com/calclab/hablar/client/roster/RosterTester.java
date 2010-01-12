@@ -5,11 +5,7 @@ import java.util.Collection;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.AbstractRoster;
-import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.suco.client.ioc.Container;
-import com.calclab.suco.client.ioc.Provider;
-import com.calclab.suco.client.ioc.decorator.NoDecoration;
 
 public class RosterTester extends AbstractRoster {
     public static class Modification {
@@ -23,25 +19,6 @@ public class RosterTester extends AbstractRoster {
 	    this.groups = groups;
 	}
 
-    }
-
-    /**
-     * Changes the real Roster to a instance of RosterTester
-     * 
-     * @param container
-     *            the container to replace in
-     * @return the RosterTester instance
-     */
-    public static RosterTester install(Container container) {
-	final RosterTester instance = new RosterTester();
-	container.removeProvider(Roster.class);
-	container.registerProvider(NoDecoration.instance, Roster.class, new Provider<Roster>() {
-	    @Override
-	    public Roster get() {
-		return instance;
-	    }
-	});
-	return instance;
     }
 
     private final ArrayList<Modification> added;
