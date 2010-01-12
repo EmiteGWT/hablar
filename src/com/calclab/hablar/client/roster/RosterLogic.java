@@ -7,10 +7,8 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.emite.im.client.roster.SubscriptionManager;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
-import com.calclab.suco.client.events.Listener2;
 import com.google.gwt.core.client.GWT;
 
 public class RosterLogic {
@@ -45,23 +43,26 @@ public class RosterLogic {
 	    }
 	});
 
-	final SubscriptionManager subscriptionManager = Suco.get(SubscriptionManager.class);
-	subscriptionManager.onSubscriptionRequested(new Listener2<XmppURI, String>() {
-	    @Override
-	    public void onEvent(final XmppURI uri, final String nickName) {
-		String msg = nickName + "(" + uri + ") want to add you as buddy. Do you agree?";
-		widget.ask(msg, new Listener<Boolean>() {
-		    @Override
-		    public void onEvent(Boolean yes) {
-			if (yes.booleanValue()) {
-			    subscriptionManager.approveSubscriptionRequest(uri, nickName);
-			} else {
-			    subscriptionManager.refuseSubscriptionRequest(uri);
-			}
-		    }
-		});
-	    }
-	});
+	// final SubscriptionManager subscriptionManager =
+	// Suco.get(SubscriptionManager.class);
+	// subscriptionManager.onSubscriptionRequested(new Listener2<XmppURI,
+	// String>() {
+	// @Override
+	// public void onEvent(final XmppURI uri, final String nickName) {
+	// String msg = nickName + "(" + uri +
+	// ") want to add you as buddy. Do you agree?";
+	// widget.ask(msg, new Listener<Boolean>() {
+	// @Override
+	// public void onEvent(Boolean yes) {
+	// if (yes.booleanValue()) {
+	// subscriptionManager.approveSubscriptionRequest(uri, nickName);
+	// } else {
+	// subscriptionManager.refuseSubscriptionRequest(uri);
+	// }
+	// }
+	// });
+	// }
+	// });
 
     }
 
