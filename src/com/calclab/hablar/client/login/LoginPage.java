@@ -1,10 +1,10 @@
 package com.calclab.hablar.client.login;
 
-import com.calclab.hablar.client.pages.HeaderStyles;
 import com.calclab.hablar.client.pages.PageWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -16,7 +16,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class LoginPage extends PageWidget {
 
-    interface HeaderStyle extends HeaderStyles {
+    interface Icons extends CssResource {
 	String loggedInIcon();
 
 	String loggedOutIcon();
@@ -37,7 +37,7 @@ public class LoginPage extends PageWidget {
     FlowPanel output;
 
     @UiField
-    HeaderStyle headerStyle;
+    Icons icons;
 
     private final LoginLogic logic;
 
@@ -45,7 +45,6 @@ public class LoginPage extends PageWidget {
 	super(false);
 	initWidget(uiBinder.createAndBindUi(this));
 	this.logic = new LoginLogic(this);
-	setHeaderStyles(headerStyle);
     }
 
     public void addMessage(String string) {

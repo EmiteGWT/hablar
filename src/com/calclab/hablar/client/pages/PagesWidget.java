@@ -24,8 +24,8 @@ public abstract class PagesWidget extends Composite {
 	    public void onEvent(PageWidget page) {
 		if (currentPage != null && page.isOpened()) {
 		    currentPage.setOpen(false);
-		    currentPage = page;
 		}
+		currentPage = page;
 	    }
 	};
     }

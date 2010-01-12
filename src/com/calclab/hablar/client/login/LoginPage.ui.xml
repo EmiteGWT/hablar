@@ -3,12 +3,8 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style src="LoginPage.css" />
 		
-	<ui:style field="headerStyle"
-		type="com.calclab.hablar.client.login.LoginPage.HeaderStyle">
-			@sprite .defaultIcon {
-				gwt-image: 'loggedOutIcon';
-			}
-
+	<ui:style field="icons"
+		type="com.calclab.hablar.client.login.LoginPage.Icons">
 			@sprite .loggedInIcon {
 				gwt-image: 'loggedInIcon';
 			}

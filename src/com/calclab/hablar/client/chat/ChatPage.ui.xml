@@ -4,7 +4,7 @@
 	<ui:style src="ChatPage.css" />
 		
 	<ui:style field="icons" type="com.calclab.hablar.client.chat.ChatPage.Icons">
-		@sprite .defaultIcon {
+		@sprite .chatIcon {
 			gwt-image: 'chatBasic';
 		}
 	</ui:style>

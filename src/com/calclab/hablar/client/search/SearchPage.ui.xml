@@ -7,9 +7,9 @@
 	<ui:style src="SearchPage.css"
 		type="com.calclab.hablar.client.search.SearchPage.Styles" />
 			
-		<ui:style field="header"
-		type="com.calclab.hablar.client.search.SearchPage.HeaderStyle">
-			@sprite .defaultIcon {
+		<ui:style field="icons"
+		type="com.calclab.hablar.client.search.SearchPage.Icons">
+			@sprite .searchIcon {
 				gwt-image: 'searchIcon';
 			}
 		</ui:style>

@@ -13,12 +13,16 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  */
 public class PagesAccordion extends PagesWidget {
-
     interface HablarWidgetUiBinder extends UiBinder<Widget, PagesAccordion> {
+    }
+    interface HeaderStyle extends HeaderStyles {
+
     }
 
     private static HablarWidgetUiBinder uiBinder = GWT.create(HablarWidgetUiBinder.class);
 
+    @UiField
+    HeaderStyle headerStyle;
     @UiField
     StackLayoutPanel stack;
 
@@ -33,7 +37,9 @@ public class PagesAccordion extends PagesWidget {
 
     @Override
     protected void addPage(PageWidget page) {
-	stack.add(page, page.getHeader(), 24);
+	PageHeader header = page.getHeader();
+	header.setStyles(headerStyle);
+	stack.add(page, header, 24);
     }
 
     @Override

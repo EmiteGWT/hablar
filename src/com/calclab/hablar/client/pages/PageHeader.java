@@ -2,7 +2,6 @@ package com.calclab.hablar.client.pages;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -18,13 +17,10 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class PageHeader extends Composite {
 
-    interface StackHeaderUiBinder extends UiBinder<Widget, PageHeader> {
+    interface DefaultStyles extends HeaderStyles {
     }
 
-    interface Styles extends CssResource {
-	public String active();
-
-	public String open();
+    interface StackHeaderUiBinder extends UiBinder<Widget, PageHeader> {
     }
 
     private static StackHeaderUiBinder uiBinder = GWT.create(StackHeaderUiBinder.class);
@@ -35,19 +31,20 @@ public class PageHeader extends Composite {
     FlowPanel header;
 
     @UiField
-    Styles style;
+    DefaultStyles defaultStyles;
 
     private final PageWidget page;
     private boolean open;
     private String iconClass;
 
-    private HeaderStyles styles;
+    private HeaderStyles currentStyles;
 
     public PageHeader(PageWidget page, boolean closeable) {
 	this.page = page;
 	Widget element = uiBinder.createAndBindUi(this);
 	initWidget(element);
 	close.setVisible(closeable);
+	this.currentStyles = defaultStyles;
     }
 
     @UiHandler("title")
@@ -62,9 +59,9 @@ public class PageHeader extends Composite {
 
     public void setActive(boolean active) {
 	if (active && !open) {
-	    header.getElement().addClassName(style.active());
+	    header.getElement().addClassName(currentStyles.requestFocus());
 	} else {
-	    header.getElement().removeClassName(style.active());
+	    header.getElement().removeClassName(currentStyles.requestFocus());
 	}
     }
 
@@ -78,18 +75,24 @@ public class PageHeader extends Composite {
     }
 
     public void setOpen(boolean open) {
+	GWT.log("Page header open " + open, null);
 	this.open = open;
-	if (open)
-	    header.getElement().addClassName(style.open());
-	else
-	    header.getElement().removeClassName(style.open());
+	applyStyles();
     }
 
     public void setStyles(HeaderStyles styles) {
-	if (this.styles != null) {
+	this.currentStyles = styles;
+	applyStyles();
+    }
+
+    private void applyStyles() {
+	if (open) {
+	    header.getElement().removeClassName(currentStyles.closed());
+	    header.getElement().addClassName(currentStyles.open());
+	} else {
+	    header.getElement().removeClassName(currentStyles.open());
+	    header.getElement().addClassName(currentStyles.closed());
 	}
-	setIconClass(styles.defaultIcon());
-	this.styles = styles;
     }
 
     void setHeaderTitle(String title) {

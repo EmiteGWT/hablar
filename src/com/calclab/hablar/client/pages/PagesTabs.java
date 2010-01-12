@@ -11,10 +11,17 @@ public class PagesTabs extends PagesWidget {
     interface PagesTabsUiBinder extends UiBinder<Widget, PagesTabs> {
     }
 
+    interface TabStyles extends HeaderStyles {
+
+    }
+
     private static PagesTabsUiBinder uiBinder = GWT.create(PagesTabsUiBinder.class);
 
     @UiField
     TabLayoutPanel tabs;
+
+    @UiField
+    TabStyles headerStyle;
 
     public PagesTabs() {
 	initWidget(uiBinder.createAndBindUi(this));
@@ -27,7 +34,9 @@ public class PagesTabs extends PagesWidget {
 
     @Override
     protected void addPage(PageWidget page) {
-	tabs.add(page, page.getHeader());
+	PageHeader header = page.getHeader();
+	header.setStyles(headerStyle);
+	tabs.add(page, header);
     }
 
     @Override

@@ -1,13 +1,13 @@
 package com.calclab.hablar.client.roster;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
-import com.calclab.hablar.client.pages.HeaderStyles;
 import com.calclab.hablar.client.pages.PageWidget;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -21,7 +21,9 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class RosterPage extends PageWidget {
 
-    public static interface Styles extends HeaderStyles {
+    public static interface Icons extends CssResource {
+
+	String rosterIcon();
     }
 
     interface RosterWidgetUiBinder extends UiBinder<Widget, RosterPage> {
@@ -33,7 +35,7 @@ public class RosterPage extends PageWidget {
     LayoutPanel roster;
 
     @UiField
-    Styles header;
+    Icons icons;
 
     @UiField
     FlowPanel list;
@@ -59,7 +61,7 @@ public class RosterPage extends PageWidget {
 	initWidget(uiBinder.createAndBindUi(this));
 	this.logic = new RosterLogic(this);
 	setHeaderTitle("Roster");
-	setHeaderStyles(header);
+	setHeaderIconClass(icons.rosterIcon());
     }
 
     public void addItem(RosterItemWidget itemWidget) {

@@ -15,10 +15,6 @@
 	height: 22px;
 	overflow: hidden;
 	margin-right: 3px;
-	border-top: 1px solid #BBBBBB;
-	border-left: 1px solid #BBBBBB;
-	border-right: 1px solid #BBBBBB;
-	border-bottom: 1px solid #E9E9E9;
 }
 
 .accHeader {
@@ -28,7 +24,7 @@
 	
 
 .title {
-	width: 100%; margin-left: 19px;
+	width: 100%; margin-left: 19px; margin-right: 15px;
 	padding: 3px;
 	display: block;
 }
@@ -44,7 +40,7 @@
 .close {
 	display: block;
 	float: right;
-	margin: -17px 0 0 -22px;
+	margin: -17px 5px 0 -22px;
 	width: 16px;
 	height: 16px;
 }
@@ -56,10 +52,3 @@
 	overflow: hidden;
 }
 
-.active { /*font-weight: bold;*/ /*background-color: orange;*/
-	
-}
-
-.open { /*cursor: default;*/ /*font-weight: bold;*/
-	
-}

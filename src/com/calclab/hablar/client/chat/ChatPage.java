@@ -1,10 +1,10 @@
 package com.calclab.hablar.client.chat;
 
 import com.calclab.emite.im.client.chat.Chat;
-import com.calclab.hablar.client.pages.HeaderStyles;
 import com.calclab.hablar.client.pages.PageWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -17,7 +17,9 @@ public class ChatPage extends PageWidget {
     interface ChatWidgetUiBinder extends UiBinder<Widget, ChatPage> {
     }
 
-    interface Icons extends HeaderStyles {
+    interface Icons extends CssResource {
+
+	String chatIcon();
     }
 
     enum MessageType {
@@ -41,7 +43,7 @@ public class ChatPage extends PageWidget {
 	super(true);
 	initWidget(uiBinder.createAndBindUi(this));
 	logic = new ChatLogic(chat, this);
-	setHeaderStyles(icons);
+	setHeaderIconClass(icons.chatIcon());
     }
 
     public void clearAndFocus() {

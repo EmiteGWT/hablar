@@ -3,6 +3,23 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style src="PageWidget.css" />
 		
+	<ui:style field="headerStyle"
+		type="com.calclab.hablar.client.pages.PagesAccordion.HeaderStyle">
+			.requestFocus {
+				
+			}
+			
+			.open {
+				
+			}
+			
+			.closed {
+				
+			}
+		</ui:style>
+
+
+
 	<g:StackLayoutPanel ui:field="stack" unit='PX'>
 	</g:StackLayoutPanel>
 

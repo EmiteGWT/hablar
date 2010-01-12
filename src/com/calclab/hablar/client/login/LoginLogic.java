@@ -53,11 +53,11 @@ public class LoginLogic {
 	    page.setActionText("Logout");
 	    page.setActionEnabled(true);
 	    String userName = session.getCurrentUser().getNode();
-	    setStatus("Connected as " + userName, page.headerStyle.loggedInIcon());
+	    setStatus("Connected as " + userName, page.icons.loggedInIcon());
 	} else if (state == State.disconnected) {
 	    page.setActionText("Login");
 	    page.setActionEnabled(true);
-	    setStatus("Disconnected", page.headerStyle.loggedOutIcon());
+	    setStatus("Disconnected", page.icons.loggedOutIcon());
 	} else {
 	    page.setActionText("Wait...");
 	    page.setActionEnabled(false);
