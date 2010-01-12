@@ -1,10 +1,28 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	<ui:style src="ChatPage.css" />
+	<ui:style>
+		.chatMessage {
+			display: block;
+			width: 94%;
+			overflow: hidden;
+			padding: 3px 3% 0 3%;
+		}
 		
-	<g:HTMLPanel styleName="{style.chatMessage}">
-		<span ui:field="author" styleName="{style.author}"></span>
-		<span ui:field="body" style="{style.body}"></span>
+		.author {
+			display: block;
+			float: left;
+			font-weight: bold;
+		}
+		
+		.body {
+			margin-left: 10px;
+			float: left;
+		}
+	</ui:style>
+
+	<g:HTMLPanel styleName="hablar-chat-msg {style.chatMessage}">
+		<span ui:field="author" class="{style.author}"></span>
+		<span ui:field="body" class="{style.body}"></span>
 	</g:HTMLPanel>
 </ui:UiBinder> 

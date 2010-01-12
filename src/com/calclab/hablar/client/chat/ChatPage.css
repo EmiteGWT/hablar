@@ -21,19 +21,3 @@
 }
 
 /* ChatMessage */
-.chatMessage {
-	display: block;
-	width: 94%;
-	overflow: hidden;
-	padding: 3px 3% 0 3%;
-}
-
-.author {
-	display: block;
-	float: left;
-	font-weight: bold;
-}
-
-.body {
-	
-}

@@ -35,4 +35,5 @@ public class RosterLogicTest {
 	tester.roster.fireRosterReady(items);
 	verify(view).addItem(item);
     }
+
 }
