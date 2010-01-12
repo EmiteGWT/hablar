@@ -51,10 +51,10 @@
 			gwt-image: 'stateDndIcon';
 		}
 	</ui:style>
-	<ui:image field='stateOffIcon' src='offline.gif' />
-	<ui:image field='stateOnIcon' src='online.gif' />
-	<ui:image field='stateWaitIcon' src='inactive.gif' />
-	<ui:image field='stateDndIcon' src='dnd.gif' />
+	<ui:image field='stateOffIcon' src='../../buddy-small-off.png' />
+	<ui:image field='stateOnIcon' src='../../buddy-small-on.png' />
+	<ui:image field='stateWaitIcon' src='../../buddy-small-wait.png' />
+	<ui:image field='stateDndIcon' src='../../buddy-small-dnd.png' />
 
 	<g:LayoutPanel styleName="{style.panel}">
 		<g:layer left="2px" top="2px" width="20px" bottom="0">

@@ -11,11 +11,9 @@ public class SubscriptionHandler {
 	none, acceptAll, refuseAll
     }
 
-    private final SubscriptionManager manager;
     private Behaviour behaviour;
 
     public SubscriptionHandler(final SubscriptionManager manager) {
-	this.manager = manager;
 	this.behaviour = Behaviour.none;
 
 	manager.onSubscriptionRequested(new Listener2<XmppURI, String>() {

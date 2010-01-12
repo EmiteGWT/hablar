@@ -5,14 +5,17 @@
 	<ui:style field="defaultStyles"
 		type="com.calclab.hablar.client.ui.pages.PageHeader.DefaultStyles">
 			.open {
+				color: blue;
 				
 			}
 			
 			.closed {
-				
+				color: black;
 			}
 			
 			.requestFocus {
+				color: #c00;
+				font-weight: bold;
 				
 			}
 		</ui:style>

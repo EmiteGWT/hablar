@@ -57,10 +57,6 @@ public abstract class PageWidget extends Composite implements Page {
 	header.setIconClass(iconClass);
     }
 
-    public void setHeaderStyles(HeaderStyles styles) {
-	header.setStyles(styles);
-    }
-
     public void setHeaderTitle(String title) {
 	header.setHeaderTitle(title);
     }
@@ -69,12 +65,12 @@ public abstract class PageWidget extends Composite implements Page {
 	this.status = status;
 	statusAction.fire(this);
 	if (visibility == Visibility.closed)
-	    header.setActive(true);
+	    header.requestFocus();
     }
 
     public void setVisibility(Visibility visibility) {
 	this.visibility = visibility;
-	header.setOpen(visibility);
+	header.setVisibility(visibility);
     }
 
     protected void fireClose() {

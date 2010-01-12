@@ -66,28 +66,12 @@ public class RosterLogic {
 
     }
 
-    public void addBuddy(XmppURI uri) {
-	roster.addItem(uri.getJID(), uri.getNode());
-	widget.setAddBuddyPanelVisible(false);
-	widget.setStatus("Add item request sent...");
-    }
-
     public void onItemClick(RosterItem item) {
 	chatManager.open(item.getJID());
     }
 
     public void openChat(XmppURI uri) {
 	chatManager.open(uri);
-    }
-
-    public void toggleAddBuddyAction() {
-	if (widget.isAddBuddyPanelVisible()) {
-	    widget.setAddBuddyPanelVisible(false);
-	    widget.setStatus("");
-	} else {
-	    widget.setAddBuddyPanelVisible(true);
-	    widget.setStatus("Write a the jid you want to add");
-	}
     }
 
     private RosterItemWidget getWidget(RosterItem item) {

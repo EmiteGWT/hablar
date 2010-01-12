@@ -48,11 +48,10 @@ public class PageHeader extends Composite {
 	this.currentStyles = defaultStyles;
     }
 
-    public void setActive(boolean active) {
-	if (active && visibility == Visibility.closed) {
+    public void requestFocus() {
+	if (visibility == Visibility.closed) {
 	    header.getElement().addClassName(currentStyles.requestFocus());
-	} else {
-	    header.getElement().removeClassName(currentStyles.requestFocus());
+	    header.getElement().removeClassName(currentStyles.closed());
 	}
     }
 
@@ -65,21 +64,22 @@ public class PageHeader extends Composite {
 
     }
 
-    public void setOpen(Visibility visibility) {
-	this.visibility = visibility;
-	applyStyles();
-    }
-
     public void setStyles(HeaderStyles styles) {
 	this.currentStyles = styles;
 	applyStyles();
     }
 
+    public void setVisibility(Visibility visibility) {
+	this.visibility = visibility;
+	applyStyles();
+    }
+
     private void applyStyles() {
+	header.getElement().removeClassName(currentStyles.requestFocus());
 	if (visibility == Visibility.open) {
 	    header.getElement().removeClassName(currentStyles.closed());
 	    header.getElement().addClassName(currentStyles.open());
-	} else {
+	} else if (visibility == Visibility.closed) {
 	    header.getElement().removeClassName(currentStyles.open());
 	    header.getElement().addClassName(currentStyles.closed());
 	}

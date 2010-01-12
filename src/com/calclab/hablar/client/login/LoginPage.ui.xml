@@ -14,8 +14,8 @@
 			}
 		</ui:style>
 
-	<ui:image field="loggedInIcon" src="lightbulb.png"></ui:image>
-	<ui:image field="loggedOutIcon" src="lightbulb_off.png"></ui:image>
+	<ui:image field="loggedInIcon" src="../on.png"></ui:image>
+	<ui:image field="loggedOutIcon" src="../off.png"></ui:image>
 
 	<g:DockLayoutPanel styleName="{style.login}" unit="EM">
 		<g:north size="9">

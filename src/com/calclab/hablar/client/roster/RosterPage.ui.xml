@@ -18,20 +18,14 @@
 				gwt-image: 'rosterIcon';
 			}
 			
-			@sprite .addBuddyIcon {
-				gwt-image: 'addBuddyIcon';
-			}
 		</ui:style>
 
-	<ui:image field="usersIcon" src="userf.gif"></ui:image>
 	<ui:image field="rosterIcon" src="roster.png"></ui:image>
-	<ui:image field="addBuddyIcon" src="user_add.png"></ui:image>
 
 	<g:LayoutPanel ui:field="roster" styleName="{style.roster}">
 		<!--  Actions -->
 		<g:layer left="0" top="0" width="100%" height="20px">
 			<g:FlowPanel ui:field="actions" styleName="{style.panel}">
-				<g:Label ui:field="btnAddBuddy" styleName="{icons.action} {icons.addBuddyIcon}"></g:Label>
 			</g:FlowPanel>
 		</g:layer>
 		<!-- Question -->
@@ -51,12 +45,6 @@
 		<!-- Results -->
 		<g:layer left="0" top="20px" width="100%" bottom="0px">
 			<g:FlowPanel styleName="{style.list}" ui:field="list"></g:FlowPanel>
-		</g:layer>
-		<!-- Add buddy panel -->
-		<g:layer left="0" bottom="20px" width="100%" height="0px">
-			<g:HTMLPanel ui:field="addBuddyPanel" styleName="{style.panel}">
-				<g:TextBox ui:field="addBuddyBox" styleName="{style.textBox}"></g:TextBox>
-			</g:HTMLPanel>
 		</g:layer>
 	</g:LayoutPanel>
 </ui:UiBinder> 
