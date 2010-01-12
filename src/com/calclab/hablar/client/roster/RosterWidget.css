@@ -11,12 +11,14 @@
 	width: 100%;
 	overflow: hidden;
 	background-color: white;
+	border-left: 1px solid #BBBBBB;
 }
 
 .panel {
 	width: 100%;
 	overflow: hidden;
 	background-color: #E9E9E9;
+	border-bottom: 1px solid #BBBBBB;
 }
 
 .questionPanel {
@@ -36,13 +38,7 @@
 	padding: 2px;
 }
 
-.actionIcon {
-	display: block;
-	float: left;
-	width: 20px;
-	height: 16px;
-	margin: 3px 5px 0 3px;
-}
+
 
 .questionBody {
 	color: gray;

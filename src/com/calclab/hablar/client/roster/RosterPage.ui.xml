@@ -5,21 +5,37 @@
 		
 	<ui:style field="icons"
 		type="com.calclab.hablar.client.roster.RosterPage.Icons">
-			@sprite .userAdd {
-				gwt-image: 'userAddIcon';
+			.action {
+				display: block;
+				float: left;
+				width: 20px;
+				height: 16px;
+				margin: 2px 5px 0 3px;
+				cursor: pointer;
 			}
 			
 			@sprite .rosterIcon {
 				gwt-image: 'rosterIcon';
 			}
+			
+			@sprite .addBuddyIcon {
+				gwt-image: 'addBuddyIcon';
+			}
 		</ui:style>
 
-	<ui:image field="userAddIcon" src="user_add.png"></ui:image>
 	<ui:image field="usersIcon" src="userf.gif"></ui:image>
 	<ui:image field="rosterIcon" src="roster.png"></ui:image>
+	<ui:image field="addBuddyIcon" src="user_add.png"></ui:image>
 
 	<g:LayoutPanel ui:field="roster" styleName="{style.roster}">
-		<g:layer left="0" top="0" width="100%" height="0px">
+		<!--  Actions -->
+		<g:layer left="0" top="0" width="100%" height="20px">
+			<g:FlowPanel ui:field="actions" styleName="{style.panel}">
+				<g:Label ui:field="btnAddBuddy" styleName="{icons.action} {icons.addBuddyIcon}"></g:Label>
+			</g:FlowPanel>
+		</g:layer>
+		<!-- Question -->
+		<g:layer left="0" top="20px" width="100%" height="0px">
 			<g:HTMLPanel styleName="{style.panel} {style.questionPanel}"
 				ui:field="questionPanel">
 				<div>
@@ -32,18 +48,15 @@
 				</div>
 			</g:HTMLPanel>
 		</g:layer>
-		<g:layer left="0" top="0px" width="100%" bottom="50px">
+		<!-- Results -->
+		<g:layer left="0" top="20px" width="100%" bottom="0px">
 			<g:FlowPanel styleName="{style.list}" ui:field="list"></g:FlowPanel>
 		</g:layer>
+		<!-- Add buddy panel -->
 		<g:layer left="0" bottom="20px" width="100%" height="0px">
 			<g:HTMLPanel ui:field="addBuddyPanel" styleName="{style.panel}">
 				<g:TextBox ui:field="addBuddyBox" styleName="{style.textBox}"></g:TextBox>
 			</g:HTMLPanel>
-		</g:layer>
-		<g:layer left="0" bottom="0" width="100%" height="20px">
-			<g:FlowPanel styleName="{style.panel}">
-				<g:Label ui:field="addBuddyIcon" styleName="{style.actionIcon} {icons.userAdd}"></g:Label>
-			</g:FlowPanel>
 		</g:layer>
 	</g:LayoutPanel>
 </ui:UiBinder> 

@@ -12,7 +12,7 @@
 		}
 	</ui:style>
 
-	<ui:image field="buddy" src="buddy.gif"></ui:image>
+	<ui:image field="buddy" src="../buddy-small.png"></ui:image>
 	<g:HTMLPanel styleName="{style.result}">
 		<span class="{hablar.icon} {icons.userAdd}"></span>
 		<g:Label ui:field="name" styleName="{style.resultName}">Result</g:Label>

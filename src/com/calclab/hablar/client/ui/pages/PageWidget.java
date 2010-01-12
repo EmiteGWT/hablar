@@ -8,7 +8,7 @@ import com.google.gwt.user.client.ui.Composite;
  * A PageWidget is a widget with a header and some status. Is the base of the
  * hablar widgets panels.
  */
-public abstract class PageWidget extends Composite {
+public abstract class PageWidget extends Composite implements Page {
 
     protected final PageHeader header;
     private final Event<String> statusAction;

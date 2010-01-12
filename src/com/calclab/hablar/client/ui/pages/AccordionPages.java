@@ -26,24 +26,30 @@ public class AccordionPages extends AbstractPages {
     AccordionPanel accordion;
 
     public AccordionPages() {
+	super();
 	initWidget(uiBinder.createAndBindUi(this));
     }
 
     @Override
-    public void removePage(PageWidget page) {
-	accordion.remove(page);
+    public boolean hasPage(Page page) {
+	return accordion.hasWidget((Widget) page);
     }
 
     @Override
-    protected void addPage(PageWidget page, Position position) {
+    public void hide(Page page) {
+	accordion.remove((Widget) page);
+    }
+
+    @Override
+    protected void addPage(Page page, Pages.Position position) {
 	PageHeader header = page.getHeader();
 	header.setStyles(headerStyle);
-	accordion.add(page, header, 24);
+	accordion.add((Widget) page, header, 24);
     }
 
     @Override
-    protected void showPage(PageWidget page) {
-	accordion.showWidget(page);
+    protected void showPage(Page page) {
+	accordion.showWidget((Widget) page);
     }
 
 }

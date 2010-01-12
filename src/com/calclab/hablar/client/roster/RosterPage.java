@@ -7,6 +7,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -23,6 +24,8 @@ public class RosterPage extends PageWidget {
 
     public static interface Icons extends CssResource {
 
+	String action();
+
 	String rosterIcon();
     }
 
@@ -38,11 +41,11 @@ public class RosterPage extends PageWidget {
     Icons icons;
 
     @UiField
-    FlowPanel list;
+    FlowPanel list, actions;
     @UiField
     TextBox addBuddyBox;
     @UiField
-    Label addBuddyIcon, questionBody;
+    Label questionBody;
     @UiField
     HTMLPanel addBuddyPanel, questionPanel;
     @UiField
@@ -62,6 +65,14 @@ public class RosterPage extends PageWidget {
 	this.logic = new RosterLogic(this);
 	setHeaderTitle("Roster");
 	setHeaderIconClass(icons.rosterIcon());
+    }
+
+    public void addAction(String iconStyle, ClickHandler clickHandler) {
+	Label label = new Label();
+	label.getElement().addClassName(icons.action());
+	label.getElement().addClassName(iconStyle);
+	label.addClickHandler(clickHandler);
+	actions.add(label);
     }
 
     public void addItem(RosterItemWidget itemWidget) {
@@ -86,7 +97,7 @@ public class RosterPage extends PageWidget {
 	return isAddBuddyPanelVisible;
     }
 
-    @UiHandler("addBuddyIcon")
+    @UiHandler("btnAddBuddy")
     public void onAddBuddy(ClickEvent event) {
 	logic.toggleAddBuddyAction();
     }

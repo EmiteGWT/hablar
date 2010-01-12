@@ -110,6 +110,17 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
 	return visibleWidget;
     }
 
+    /**
+     * Check if the given widget is a child of this accordion
+     * 
+     * @param widget
+     *            the widget to check
+     * @return true if the widget is in the accordion, false if not
+     */
+    public boolean hasWidget(Widget widget) {
+	return widget.getParent() == layoutPanel;
+    }
+
     public Iterator<Widget> iterator() {
 	return new Iterator<Widget>() {
 	    int i = 0, last = -1;
@@ -148,7 +159,7 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
      * @see http://code.google.com/p/google-web-toolkit/issues/detail?id=4174
      */
     public boolean remove(Widget child) {
-	if (child.getParent() != layoutPanel) {
+	if (!hasWidget(child)) {
 	    return false;
 	}
 	if (child == visibleWidget) {

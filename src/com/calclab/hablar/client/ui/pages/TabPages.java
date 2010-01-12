@@ -28,20 +28,25 @@ public class TabPages extends AbstractPages {
     }
 
     @Override
-    public void removePage(PageWidget page) {
-	tabs.remove(page);
+    public boolean hasPage(Page page) {
+	return tabs.getWidgetIndex((Widget) page) != -1;
     }
 
     @Override
-    protected void addPage(PageWidget page, Position position) {
+    public void hide(Page page) {
+	tabs.remove((Widget) page);
+    }
+
+    @Override
+    protected void addPage(Page page, Pages.Position position) {
 	PageHeader header = page.getHeader();
 	header.setStyles(headerStyle);
-	tabs.add(page, header);
+	tabs.add((Widget) page, header);
     }
 
     @Override
-    protected void showPage(PageWidget page) {
-	int index = tabs.getWidgetIndex(page);
+    protected void showPage(Page page) {
+	int index = tabs.getWidgetIndex((Widget) page);
 	tabs.selectTab(index);
     }
 

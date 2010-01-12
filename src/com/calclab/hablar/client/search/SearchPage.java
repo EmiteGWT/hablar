@@ -20,7 +20,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class SearchPage extends PageWidget {
 
-    interface Icons extends CssResource {
+    public interface Icons extends CssResource {
 
 	String searchIcon();
 
@@ -58,7 +58,7 @@ public class SearchPage extends PageWidget {
     public Styles style;
 
     @UiField
-    Icons icons;
+    public Icons icons;
 
     @UiField
     TextBox term;

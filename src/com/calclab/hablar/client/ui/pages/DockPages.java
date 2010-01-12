@@ -19,38 +19,48 @@ public class DockPages extends AbstractPages {
     @UiField
     DockLayoutPanel west;
 
-    private PageWidget docked;
+    private Page docked;
 
     public DockPages() {
 	initWidget(uiBinder.createAndBindUi(this));
     }
 
     @Override
-    public void add(PageWidget page, Position position) {
-	if (position == Position.WEST) {
+    public void add(Page page, Pages.Position position) {
+	if (position == Pages.Position.WEST) {
 	    this.docked = page;
 	    west.addNorth(page.getHeader(), 22);
-	    west.add(page);
+	    west.add((Widget) page);
 	} else {
 	    pages.add(page, position);
 	}
     }
 
     @Override
-    public void removePage(PageWidget page) {
-	if (page != docked) {
-	    pages.removePage(page);
+    public boolean hasPage(Page page) {
+	if (page == docked) {
+	    return true;
 	} else {
-	    west.remove(docked);
+	    return pages.hasPage(page);
 	}
     }
 
     @Override
-    protected void addPage(PageWidget page, Position position) {
+    public void hide(Page page) {
+	if (page != docked) {
+	    pages.hide(page);
+	} else {
+	    west.remove((Widget) docked);
+	}
     }
 
     @Override
-    protected void showPage(PageWidget page) {
+    protected void addPage(Page page, Pages.Position position) {
+	assert false : "Do not call this";
+    }
+
+    @Override
+    protected void showPage(Page page) {
 	if (page != docked) {
 	    pages.showPage(page);
 	}

@@ -5,17 +5,14 @@ import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Composite;
 
-public abstract class AbstractPages extends Composite {
-    public static enum Position {
-	normal, visible, WEST
-    }
+public abstract class AbstractPages extends Composite implements Pages {
     protected final Listener<String> statusListener;
     protected final Listener<PageWidget> openListener;
-    private PageWidget currentPage;
+    private Page currentPage;
 
     private final Event<String> onStatus;
     private final Listener<PageWidget> closeListener;
-    private PageWidget previouslyVisiblePage;
+    private Page previouslyVisiblePage;
 
     public AbstractPages() {
 	this.onStatus = new Event<String>("pages.onStatus");
@@ -32,7 +29,7 @@ public abstract class AbstractPages extends Composite {
 		if (page.isOpened())
 		    showPreviousPage();
 		else
-		    openPage(page);
+		    open(page);
 	    }
 	};
 
@@ -45,33 +42,41 @@ public abstract class AbstractPages extends Composite {
 
     }
 
-    public void add(PageWidget page, Position position) {
-	page.onStatusChanged(statusListener);
-	page.onOpenChanged(openListener);
-	page.onClose(closeListener);
-	addPage(page, position);
-	if (position == Position.visible) {
-	    openPage(page);
-	} else if (position == Position.normal && currentPage != null) {
-	    openPage(currentPage);
+    /**
+     * @see Pages
+     */
+    @Override
+    public void add(Page page, Position position) {
+	if (!hasPage(page)) {
+	    page.onStatusChanged(statusListener);
+	    page.onOpenChanged(openListener);
+	    page.onClose(closeListener);
+	    addPage(page, position);
+	    if (position == Pages.Position.visible) {
+		open(page);
+	    } else if (position == Pages.Position.normal && currentPage != null) {
+		open(currentPage);
+	    }
 	}
     }
 
-    public PageWidget getCurrentPage() {
+    public Page getCurrentPage() {
 	return currentPage;
     }
 
     /**
-     * Open the given page. The page is added to the container if needed.
-     * 
-     * @param page
-     *            the page to be open
+     * @see Pages
      */
-    public void openPage(PageWidget page) {
+    @Override
+    public void open(Page page) {
 	if (currentPage != page) {
 	    this.previouslyVisiblePage = currentPage;
 	    if (currentPage != null) {
 		currentPage.setOpen(false);
+	    }
+
+	    if (!hasPage(page)) {
+		add(page, Pages.Position.normal);
 	    }
 
 	    showPage(page);
@@ -80,13 +85,11 @@ public abstract class AbstractPages extends Composite {
 	}
     }
 
-    public abstract void removePage(PageWidget page);
-
     public void showPreviousPage() {
 	GWT.log("PREVIOUS: " + previouslyVisiblePage, null);
 	if (previouslyVisiblePage != null) {
 	    GWT.log("SHOW PREVIOUS", null);
-	    openPage(previouslyVisiblePage);
+	    open(previouslyVisiblePage);
 	}
     }
 
@@ -95,11 +98,11 @@ public abstract class AbstractPages extends Composite {
 	    GWT.log("CLOSE PAGE VISIBLE - Showing previous page...", null);
 	    showPreviousPage();
 	}
-	removePage(page);
+	hide(page);
 
     }
 
-    protected abstract void addPage(PageWidget page, Position position);
+    protected abstract void addPage(Page page, Pages.Position position);
 
-    protected abstract void showPage(PageWidget page);
+    protected abstract void showPage(Page page);
 }
