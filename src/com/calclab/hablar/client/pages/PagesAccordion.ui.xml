@@ -10,11 +10,14 @@
 			}
 			
 			.open {
-				
+				border-bottom: 1px solid #BBBBBB;
+				border-top: 1px solid white;
 			}
 			
 			.closed {
-				
+				color: gray;
+				border-bottom: 1px solid #BBBBBB;
+				border-top: 1px solid white;
 			}
 		</ui:style>
 

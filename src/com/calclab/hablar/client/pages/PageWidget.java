@@ -63,9 +63,11 @@ public abstract class PageWidget extends Composite {
     }
 
     public void setOpen(boolean open) {
-	this.open = open;
-	header.setOpen(open);
-	openEvent.fire(this);
+	if (this.open != open) {
+	    this.open = open;
+	    header.setOpen(open);
+	    openEvent.fire(this);
+	}
     }
 
     public void setStatus(String status) {

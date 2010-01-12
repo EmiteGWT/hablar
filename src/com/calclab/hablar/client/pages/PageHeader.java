@@ -47,16 +47,6 @@ public class PageHeader extends Composite {
 	this.currentStyles = defaultStyles;
     }
 
-    @UiHandler("title")
-    public void handleActivateTitle(ClickEvent event) {
-	page.setOpen(true);
-    }
-
-    @UiHandler("close")
-    public void handleClose(ClickEvent event) {
-	page.close();
-    }
-
     public void setActive(boolean active) {
 	if (active && !open) {
 	    header.getElement().addClassName(currentStyles.requestFocus());
@@ -93,6 +83,16 @@ public class PageHeader extends Composite {
 	    header.getElement().removeClassName(currentStyles.open());
 	    header.getElement().addClassName(currentStyles.closed());
 	}
+    }
+
+    @UiHandler("title")
+    void handleActivateTitle(ClickEvent event) {
+	page.setOpen(true);
+    }
+
+    @UiHandler("close")
+    void handleClose(ClickEvent event) {
+	page.close();
     }
 
     void setHeaderTitle(String title) {

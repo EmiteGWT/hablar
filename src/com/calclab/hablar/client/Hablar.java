@@ -17,7 +17,7 @@ public class Hablar implements EntryPoint {
 	config.hasLogin = !"false".equals(PageAssist.getMeta("hablar.loginWidget"));
 	config.hasRoster = !"false".equals(PageAssist.getMeta("hablar.rosterWidget"));
 	config.hasSearch = !"false".equals(PageAssist.getMeta("hablar.searchWidget"));
-	config.isAccordion = false;
+	config.isAccordion = "accordion".equals(PageAssist.getMeta("hablar.layout"));
 
 	HablarDialog hablarDialog = new HablarDialog(config);
 	hablarDialog.show();
