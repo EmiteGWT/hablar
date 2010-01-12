@@ -24,7 +24,7 @@ public class HablarPanel extends Composite {
 	initWidget(uiBinder.createAndBindUi(this));
 	panel.add(pages);
 	panel.setWidgetLeftWidth(pages, 0, Unit.PX, 100, Unit.PCT);
-	panel.setWidgetTopHeight(pages, 0, Unit.PX, 100, Unit.PCT);
+	panel.setWidgetTopBottom(pages, 20, Unit.PX, 20, Unit.PX);
 	panel.forceLayout();
     }
 

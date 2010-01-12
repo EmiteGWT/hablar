@@ -5,9 +5,13 @@ import com.calclab.suco.client.events.Listener;
 import com.google.gwt.user.client.ui.Composite;
 
 public abstract class PagesWidget extends Composite {
+    public static enum Position {
+	normal, visible, WEST
+    }
     protected final Listener<String> statusListener;
     protected final Listener<PageWidget> openListener;
     private PageWidget currentPage;
+
     private final Event<String> onStatus;
 
     public PagesWidget() {
@@ -30,11 +34,11 @@ public abstract class PagesWidget extends Composite {
 	};
     }
 
-    public void add(PageWidget page, boolean visible) {
+    public void add(PageWidget page, Position position) {
 	page.onStatusChanged(statusListener);
 	page.onOpenChanged(openListener);
 	addPage(page);
-	if (visible) {
+	if (position == Position.visible) {
 	    show(page);
 	}
     }

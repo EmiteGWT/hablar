@@ -7,6 +7,7 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.hablar.client.pages.PagesWidget;
+import com.calclab.hablar.client.pages.PagesWidget.Position;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
@@ -54,7 +55,7 @@ public class ChatManagerLogic {
 		}
 	    });
 	    widgets.put(chat, widget);
-	    pages.add(widget, true);
+	    pages.add(widget, Position.normal);
 	}
 	return widget;
     }

@@ -2,6 +2,15 @@ package com.calclab.hablar.client;
 
 public class HablarConfig {
 
+    public static enum Layout {
+	accordion, tabs, dock
+    }
+
+    /**
+     * Choose a layout
+     */
+    public Layout layout;
+
     /**
      * Show or not login panel
      */
@@ -18,8 +27,18 @@ public class HablarConfig {
     public boolean hasSearch;
 
     /**
-     * Show or not as an accordion
+     * If not null, show 'hablar' inside the div with the id given
      */
-    public boolean isAccordion;
+    public String inline;
+
+    /**
+     * Width
+     */
+    public String width;
+
+    /**
+     * Height
+     */
+    public String height;
 
 }

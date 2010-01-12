@@ -6,9 +6,9 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class PagesTabs extends PagesWidget {
+public class TabPages extends PagesWidget {
 
-    interface PagesTabsUiBinder extends UiBinder<Widget, PagesTabs> {
+    interface PagesTabsUiBinder extends UiBinder<Widget, TabPages> {
     }
 
     interface TabStyles extends HeaderStyles {
@@ -23,7 +23,7 @@ public class PagesTabs extends PagesWidget {
     @UiField
     TabStyles headerStyle;
 
-    public PagesTabs() {
+    public TabPages() {
 	initWidget(uiBinder.createAndBindUi(this));
     }
 

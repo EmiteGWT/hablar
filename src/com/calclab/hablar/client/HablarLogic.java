@@ -4,6 +4,7 @@ import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.session.Session.State;
 import com.calclab.hablar.client.login.LoginPage;
 import com.calclab.hablar.client.pages.PagesWidget;
+import com.calclab.hablar.client.pages.PagesWidget.Position;
 import com.calclab.hablar.client.roster.RosterPage;
 import com.calclab.hablar.client.search.SearchPage;
 import com.calclab.suco.client.Suco;
@@ -23,17 +24,17 @@ public class HablarLogic {
 	/* we always have the panel, to see the status, but not always visible */
 	loginPage = new LoginPage();
 	if (config.hasLogin) {
-	    pages.add(loginPage, true);
+	    pages.add(loginPage, Position.normal);
 	}
 
 	if (config.hasRoster) {
 	    rosterPage = new RosterPage();
-	    pages.add(rosterPage, true);
+	    pages.add(rosterPage, Position.WEST);
 	}
 
 	if (config.hasSearch) {
 	    SearchPage searchPage = new SearchPage();
-	    pages.add(searchPage, false);
+	    pages.add(searchPage, Position.normal);
 	}
 
 	session.onStateChanged(new Listener0() {
