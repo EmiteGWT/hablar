@@ -45,11 +45,11 @@
 		}
 	</ui:style>
 
-	<ui:image field="buddy" src="buddy-small.png"></ui:image>
-	<ui:image field="buddyOn" src="buddy-small-on.png"></ui:image>
-	<ui:image field="buddyOff" src="buddy-small-off.png"></ui:image>
-	<ui:image field="buddyDnd" src="buddy-small-dnd.png"></ui:image>
-	<ui:image field="buddyWait" src="buddy-small-wait.png"></ui:image>
+	<ui:image field="buddy" src="../buddy-small.png"></ui:image>
+	<ui:image field="buddyOn" src="../buddy-small-on.png"></ui:image>
+	<ui:image field="buddyOff" src="../buddy-small-off.png"></ui:image>
+	<ui:image field="buddyDnd" src="../buddy-small-dnd.png"></ui:image>
+	<ui:image field="buddyWait" src="../buddy-small-wait.png"></ui:image>
 	
 	<g:FlowPanel styleName="{style.item}">
 		<g:Label styleName="{style.icon}" ui:field="icon"></g:Label>

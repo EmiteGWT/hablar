@@ -5,12 +5,27 @@
 		
 	<ui:style field="icons" type="com.calclab.hablar.client.chat.ChatPage.Icons">
 		@sprite .chatIcon {
-			gwt-image: 'chatBasic';
+			gwt-image: 'buddy';
+		}
+		@sprite .buddyIconOn {
+			gwt-image: 'buddyOn';
+		}
+		@sprite .buddyIconOff {
+			gwt-image: 'buddyOff';
+		}
+		@sprite .buddyIconDnd {
+			gwt-image: 'buddyDnd';
+		}
+		@sprite .buddyIconWait {
+			gwt-image: 'buddyWait';
 		}
 	</ui:style>
 
-	<ui:image field='chatBasic' src='chat-basic.gif' />
-
+	<ui:image field="buddy" src="../buddy-small.png"></ui:image>
+	<ui:image field="buddyOn" src="../buddy-small-on.png"></ui:image>
+	<ui:image field="buddyOff" src="../buddy-small-off.png"></ui:image>
+	<ui:image field="buddyDnd" src="../buddy-small-dnd.png"></ui:image>
+	<ui:image field="buddyWait" src="../buddy-small-wait.png"></ui:image>
 
 	<g:DockLayoutPanel unit='PX' styleName="{style.chat}">
 		<g:center>

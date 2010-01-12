@@ -87,12 +87,17 @@ public class PageHeader extends Composite {
 
     @UiHandler("title")
     void handleActivateTitle(ClickEvent event) {
-	page.setOpen(true);
+	page.fireOpen();
     }
 
     @UiHandler("close")
     void handleClose(ClickEvent event) {
-	page.close();
+	page.fireClose();
+    }
+
+    @UiHandler("icon")
+    void onIconClicked(ClickEvent event) {
+	page.fireOpen();
     }
 
     void setHeaderTitle(String title) {

@@ -4,17 +4,17 @@ import com.calclab.hablar.client.HablarConfig.Layout;
 import com.calclab.hablar.client.chat.ChatManagerLogic;
 import com.calclab.hablar.client.ui.HablarPanel;
 import com.calclab.hablar.client.ui.pages.DockPages;
-import com.calclab.hablar.client.ui.pages.PagesAccordion;
-import com.calclab.hablar.client.ui.pages.PagesWidget;
+import com.calclab.hablar.client.ui.pages.AccordionPages;
+import com.calclab.hablar.client.ui.pages.AbstractPages;
 import com.calclab.hablar.client.ui.pages.TabPages;
 import com.google.gwt.user.client.ui.Composite;
 
 public class HablarWidget extends Composite {
 
     public HablarWidget(HablarConfig config) {
-	PagesWidget pages = null;
+	AbstractPages pages = null;
 	if (config.layout == Layout.accordion) {
-	    pages = new PagesAccordion();
+	    pages = new AccordionPages();
 	} else if (config.layout == Layout.dock) {
 	    pages = new DockPages();
 	} else {

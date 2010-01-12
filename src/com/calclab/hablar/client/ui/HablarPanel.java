@@ -1,7 +1,7 @@
 package com.calclab.hablar.client.ui;
 
 import com.calclab.hablar.client.HablarConfig;
-import com.calclab.hablar.client.ui.pages.PagesWidget;
+import com.calclab.hablar.client.ui.pages.AbstractPages;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -20,7 +20,7 @@ public class HablarPanel extends Composite {
     @UiField
     LayoutPanel panel;
 
-    public HablarPanel(HablarConfig config, PagesWidget pages) {
+    public HablarPanel(HablarConfig config, AbstractPages pages) {
 	initWidget(uiBinder.createAndBindUi(this));
 	panel.add(pages);
 	panel.setWidgetLeftWidth(pages, 0, Unit.PX, 100, Unit.PCT);

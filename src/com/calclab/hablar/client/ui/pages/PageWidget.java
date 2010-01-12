@@ -1,9 +1,7 @@
 package com.calclab.hablar.client.ui.pages;
 
 import com.calclab.suco.client.events.Event;
-import com.calclab.suco.client.events.Event0;
 import com.calclab.suco.client.events.Listener;
-import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.user.client.ui.Composite;
 
 /**
@@ -14,20 +12,20 @@ public abstract class PageWidget extends Composite {
 
     protected final PageHeader header;
     private final Event<String> statusAction;
-    private final Event0 closeEvent;
+    private final Event<PageWidget> closeEvent;
     private final Event<PageWidget> openEvent;
     private boolean open;
 
     public PageWidget(boolean closeable) {
-	this.closeEvent = new Event0("page.close");
+	this.closeEvent = new Event<PageWidget>("page.close");
 	this.header = new PageHeader(this, closeable);
 	this.statusAction = new Event<String>("page.status");
 	this.openEvent = new Event<PageWidget>("page.open");
 	this.open = false;
     }
 
-    public void close() {
-	closeEvent.fire();
+    public void fireOpen() {
+	openEvent.fire(this);
     }
 
     public PageHeader getHeader() {
@@ -38,7 +36,7 @@ public abstract class PageWidget extends Composite {
 	return open;
     }
 
-    public void onClose(Listener0 listener) {
+    public void onClose(Listener<PageWidget> listener) {
 	closeEvent.add(listener);
     }
 
@@ -63,17 +61,18 @@ public abstract class PageWidget extends Composite {
     }
 
     public void setOpen(boolean open) {
-	if (this.open != open) {
-	    this.open = open;
-	    header.setOpen(open);
-	    openEvent.fire(this);
-	}
+	this.open = open;
+	header.setOpen(open);
     }
 
     public void setStatus(String status) {
 	statusAction.fire(status);
 	if (!open)
 	    header.setActive(true);
+    }
+
+    protected void fireClose() {
+	closeEvent.fire(this);
     }
 
 }

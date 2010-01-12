@@ -23,7 +23,6 @@ public class StatePanelLogic {
 		setState(session);
 	    }
 	});
-	setState(session);
 
 	manager = Suco.get(PresenceManager.class);
 	manager.onOwnPresenceChanged(new Listener<Presence>() {
@@ -32,7 +31,7 @@ public class StatePanelLogic {
 		setShow(manager.getOwnPresence().getShow());
 	    }
 	});
-	setShow(manager.getOwnPresence().getShow());
+	setState(session);
     }
 
     public void onShowChange() {

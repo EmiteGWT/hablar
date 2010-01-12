@@ -6,7 +6,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class TabPages extends PagesWidget {
+public class TabPages extends AbstractPages {
 
     interface PagesTabsUiBinder extends UiBinder<Widget, TabPages> {
     }
@@ -28,12 +28,12 @@ public class TabPages extends PagesWidget {
     }
 
     @Override
-    public void remove(PageWidget page) {
+    public void removePage(PageWidget page) {
 	tabs.remove(page);
     }
 
     @Override
-    protected void addPage(PageWidget page) {
+    protected void addPage(PageWidget page, Position position) {
 	PageHeader header = page.getHeader();
 	header.setStyles(headerStyle);
 	tabs.add(page, header);

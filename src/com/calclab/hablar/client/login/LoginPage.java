@@ -67,6 +67,10 @@ public class LoginPage extends PageWidget {
 	button.setText(text);
     }
 
+    public void setPassword(String password) {
+	this.password.setText(password);
+    }
+
     public void setUserName(String userName) {
 	uri.setText(userName);
 	uri.setFocus(true);

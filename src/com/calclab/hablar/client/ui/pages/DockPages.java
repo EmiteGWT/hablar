@@ -6,7 +6,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class DockPages extends PagesWidget {
+public class DockPages extends AbstractPages {
 
     interface DockPagesUiBinder extends UiBinder<Widget, DockPages> {
     }
@@ -37,16 +37,16 @@ public class DockPages extends PagesWidget {
     }
 
     @Override
-    public void remove(PageWidget page) {
+    public void removePage(PageWidget page) {
 	if (page != docked) {
-	    pages.remove(page);
+	    pages.removePage(page);
 	} else {
 	    west.remove(docked);
 	}
     }
 
     @Override
-    protected void addPage(PageWidget page) {
+    protected void addPage(PageWidget page, Position position) {
     }
 
     @Override

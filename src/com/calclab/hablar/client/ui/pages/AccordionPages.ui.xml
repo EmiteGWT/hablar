@@ -1,10 +1,10 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:hablar="urn:import:com.calclab.hablar.client.ui.pages">
 	<ui:style src="PageWidget.css" />
 		
 	<ui:style field="headerStyle"
-		type="com.calclab.hablar.client.ui.pages.PagesAccordion.HeaderStyle">
+		type="com.calclab.hablar.client.ui.pages.AccordionPages.HeaderStyle">
 			.requestFocus {
 				
 			}
@@ -23,7 +23,6 @@
 
 
 
-	<g:StackLayoutPanel ui:field="stack" unit='PX'>
-	</g:StackLayoutPanel>
-
+	<hablar:AccordionPanel ui:field="accordion">
+	</hablar:AccordionPanel>
 </ui:UiBinder> 

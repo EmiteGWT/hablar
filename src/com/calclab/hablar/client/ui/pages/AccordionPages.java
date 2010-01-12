@@ -3,7 +3,6 @@ package com.calclab.hablar.client.ui.pages;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.StackLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -12,8 +11,8 @@ import com.google.gwt.user.client.ui.Widget;
  * fire events when a page is open or close
  * 
  */
-public class PagesAccordion extends PagesWidget {
-    interface HablarWidgetUiBinder extends UiBinder<Widget, PagesAccordion> {
+public class AccordionPages extends AbstractPages {
+    interface HablarWidgetUiBinder extends UiBinder<Widget, AccordionPages> {
     }
     interface HeaderStyle extends HeaderStyles {
 
@@ -24,28 +23,27 @@ public class PagesAccordion extends PagesWidget {
     @UiField
     HeaderStyle headerStyle;
     @UiField
-    StackLayoutPanel stack;
+    AccordionPanel accordion;
 
-    public PagesAccordion() {
+    public AccordionPages() {
 	initWidget(uiBinder.createAndBindUi(this));
     }
 
     @Override
-    public void remove(PageWidget page) {
-	stack.remove(page);
+    public void removePage(PageWidget page) {
+	accordion.remove(page);
     }
 
     @Override
-    protected void addPage(PageWidget page) {
-	GWT.log("ACCORDION ADD PAGE", null);
+    protected void addPage(PageWidget page, Position position) {
 	PageHeader header = page.getHeader();
 	header.setStyles(headerStyle);
-	stack.add(page, header, 24);
+	accordion.add(page, header, 24);
     }
 
     @Override
     protected void showPage(PageWidget page) {
-	stack.showWidget(page);
+	accordion.showWidget(page);
     }
 
 }

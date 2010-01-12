@@ -6,8 +6,11 @@ import com.calclab.emite.core.client.xmpp.session.Session.State;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener0;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.user.client.Window;
 
-public class LoginLogic {
+class LoginLogic {
     private final Session session;
     private final LoginPage page;
 
@@ -17,6 +20,7 @@ public class LoginLogic {
 
 	String userName = PageAssist.getMeta("hablar.user");
 	widget.setUserName(userName);
+	widget.setPassword(PageAssist.getMeta("hablar.password"));
 
 	session.onStateChanged(new Listener0() {
 	    @Override
@@ -25,6 +29,12 @@ public class LoginLogic {
 	    }
 	});
 	setState(session.getState());
+
+	Window.addCloseHandler(new CloseHandler<Window>() {
+	    public void onClose(final CloseEvent<Window> arg0) {
+		PageAssist.closeSession(session);
+	    }
+	});
     }
 
     public void onAction() {

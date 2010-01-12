@@ -15,7 +15,8 @@
 		</ui:style>
 
 	<ui:image field="userAddIcon" src="user_add.png"></ui:image>
-	<ui:image field="rosterIcon" src="userf.gif"></ui:image>
+	<ui:image field="usersIcon" src="userf.gif"></ui:image>
+	<ui:image field="rosterIcon" src="roster.png"></ui:image>
 
 	<g:LayoutPanel ui:field="roster" styleName="{style.roster}">
 		<g:layer left="0" top="0" width="100%" height="0px">
