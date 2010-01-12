@@ -6,7 +6,7 @@ import com.calclab.hablar.client.login.LoginPage;
 import com.calclab.hablar.client.roster.RosterPage;
 import com.calclab.hablar.client.search.SearchPage;
 import com.calclab.hablar.client.ui.pages.Pages;
-import com.calclab.hablar.client.ui.pages.Pages.Position;
+import com.calclab.hablar.client.ui.pages.Page.Visibility;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -26,15 +26,15 @@ public class HablarLogic {
 	/* we always have the panel, to see the status, but not always visible */
 	loginPage = new LoginPage();
 	if (config.hasLogin) {
-	    pages.add(loginPage, Pages.Position.normal);
+	    pages.add(loginPage, Visibility.open);
 	}
 
 	if (config.hasRoster) {
 	    rosterPage = new RosterPage();
-	    pages.add(rosterPage, Pages.Position.WEST);
+	    pages.add(rosterPage, Visibility.closed);
 	    if (config.hasSearch) {
 		final SearchPage searchPage = new SearchPage();
-		pages.add(searchPage, Pages.Position.normal);
+		pages.add(searchPage, Visibility.hidden);
 		rosterPage.addAction(searchPage.icons.searchIcon(), new ClickHandler() {
 		    @Override
 		    public void onClick(ClickEvent event) {

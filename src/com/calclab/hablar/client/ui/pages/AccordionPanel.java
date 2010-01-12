@@ -98,6 +98,8 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
 	    // will
 	    // be updated onLoad().
 	    visibleWidget = widget;
+	} else if (isVisible()) {
+	    animate(0);
 	}
     }
 

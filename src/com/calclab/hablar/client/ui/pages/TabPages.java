@@ -33,12 +33,12 @@ public class TabPages extends AbstractPages {
     }
 
     @Override
-    public void hide(Page page) {
+    public void removePage(Page page) {
 	tabs.remove((Widget) page);
     }
 
     @Override
-    protected void addPage(Page page, Pages.Position position) {
+    protected void addPage(Page page) {
 	PageHeader header = page.getHeader();
 	header.setStyles(headerStyle);
 	tabs.add((Widget) page, header);

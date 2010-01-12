@@ -1,11 +1,10 @@
 package com.calclab.hablar.client.ui.pages;
 
-public interface Pages {
-    public static enum Position {
-	normal, visible, WEST, hidden
-    }
+import com.calclab.hablar.client.ui.pages.Page.Visibility;
 
-    void add(Page page, Pages.Position position);
+public interface Pages {
+
+    void add(Page page, Visibility initialVisibility);
 
     boolean hasPage(Page page);
 
@@ -13,6 +12,7 @@ public interface Pages {
      * Hide a page (do not show it in the pages ui).
      * 
      * @param page
+     *            the page to be hidden
      */
     void hide(Page page);
 
@@ -20,6 +20,14 @@ public interface Pages {
      * Open the given page. If the page is hidden, it whill be show
      * 
      * @param page
+     *            the page to be showed
      */
     void open(Page page);
+
+    /**
+     * Show a previously hidden page
+     * 
+     * @param page
+     */
+    void show(Page page);
 }

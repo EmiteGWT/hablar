@@ -1,5 +1,6 @@
 package com.calclab.hablar.client.ui.pages;
 
+import com.calclab.hablar.client.ui.pages.Page.Visibility;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -34,10 +35,10 @@ public class PageHeader extends Composite {
     DefaultStyles defaultStyles;
 
     private final PageWidget page;
-    private boolean open;
     private String iconClass;
-
     private HeaderStyles currentStyles;
+
+    private Visibility visibility;
 
     public PageHeader(PageWidget page, boolean closeable) {
 	this.page = page;
@@ -48,7 +49,7 @@ public class PageHeader extends Composite {
     }
 
     public void setActive(boolean active) {
-	if (active && !open) {
+	if (active && visibility == Visibility.closed) {
 	    header.getElement().addClassName(currentStyles.requestFocus());
 	} else {
 	    header.getElement().removeClassName(currentStyles.requestFocus());
@@ -64,9 +65,8 @@ public class PageHeader extends Composite {
 
     }
 
-    public void setOpen(boolean open) {
-	GWT.log("Page header open " + open, null);
-	this.open = open;
+    public void setOpen(Visibility visibility) {
+	this.visibility = visibility;
 	applyStyles();
     }
 
@@ -76,7 +76,7 @@ public class PageHeader extends Composite {
     }
 
     private void applyStyles() {
-	if (open) {
+	if (visibility == Visibility.open) {
 	    header.getElement().removeClassName(currentStyles.closed());
 	    header.getElement().addClassName(currentStyles.open());
 	} else {

@@ -36,15 +36,15 @@ public class AccordionPages extends AbstractPages {
     }
 
     @Override
-    public void hide(Page page) {
-	accordion.remove((Widget) page);
-    }
-
-    @Override
-    protected void addPage(Page page, Pages.Position position) {
+    protected void addPage(Page page) {
 	PageHeader header = page.getHeader();
 	header.setStyles(headerStyle);
 	accordion.add((Widget) page, header, 24);
+    }
+
+    @Override
+    protected void removePage(Page page) {
+	accordion.remove((Widget) page);
     }
 
     @Override

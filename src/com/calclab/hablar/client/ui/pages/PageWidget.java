@@ -11,17 +11,18 @@ import com.google.gwt.user.client.ui.Composite;
 public abstract class PageWidget extends Composite implements Page {
 
     protected final PageHeader header;
-    private final Event<String> statusAction;
+    private final Event<PageWidget> statusAction;
     private final Event<PageWidget> closeEvent;
     private final Event<PageWidget> openEvent;
-    private boolean open;
+    private Visibility visibility;
+    private String status;
 
     public PageWidget(boolean closeable) {
 	this.closeEvent = new Event<PageWidget>("page.close");
 	this.header = new PageHeader(this, closeable);
-	this.statusAction = new Event<String>("page.status");
+	this.statusAction = new Event<PageWidget>("page.status");
 	this.openEvent = new Event<PageWidget>("page.open");
-	this.open = false;
+	this.visibility = Visibility.hidden;
     }
 
     public void fireOpen() {
@@ -32,8 +33,12 @@ public abstract class PageWidget extends Composite implements Page {
 	return this.header;
     }
 
-    public boolean isOpened() {
-	return open;
+    public String getStatus() {
+	return status;
+    }
+
+    public Visibility getVisibility() {
+	return visibility;
     }
 
     public void onClose(Listener<PageWidget> listener) {
@@ -44,7 +49,7 @@ public abstract class PageWidget extends Composite implements Page {
 	openEvent.add(listener);
     }
 
-    public void onStatusChanged(Listener<String> listener) {
+    public void onStatusChanged(Listener<PageWidget> listener) {
 	statusAction.add(listener);
     }
 
@@ -60,15 +65,16 @@ public abstract class PageWidget extends Composite implements Page {
 	header.setHeaderTitle(title);
     }
 
-    public void setOpen(boolean open) {
-	this.open = open;
-	header.setOpen(open);
+    public void setStatus(String status) {
+	this.status = status;
+	statusAction.fire(this);
+	if (visibility == Visibility.closed)
+	    header.setActive(true);
     }
 
-    public void setStatus(String status) {
-	statusAction.fire(status);
-	if (!open)
-	    header.setActive(true);
+    public void setVisibility(Visibility visibility) {
+	this.visibility = visibility;
+	header.setOpen(visibility);
     }
 
     protected void fireClose() {

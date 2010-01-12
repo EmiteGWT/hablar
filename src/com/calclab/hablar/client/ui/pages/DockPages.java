@@ -1,5 +1,6 @@
 package com.calclab.hablar.client.ui.pages;
 
+import com.calclab.hablar.client.ui.pages.Page.Visibility;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -26,13 +27,14 @@ public class DockPages extends AbstractPages {
     }
 
     @Override
-    public void add(Page page, Pages.Position position) {
-	if (position == Pages.Position.WEST) {
+    public void add(Page page, Visibility visibility) {
+	// FIXME: take care with this
+	if (page.getHeader().getTitle().equals("Roster")) {
 	    this.docked = page;
 	    west.addNorth(page.getHeader(), 22);
 	    west.add((Widget) page);
 	} else {
-	    pages.add(page, position);
+	    pages.add(page, visibility);
 	}
     }
 
@@ -46,16 +48,14 @@ public class DockPages extends AbstractPages {
     }
 
     @Override
-    public void hide(Page page) {
+    public void removePage(Page page) {
 	if (page != docked) {
 	    pages.hide(page);
-	} else {
-	    west.remove((Widget) docked);
 	}
     }
 
     @Override
-    protected void addPage(Page page, Pages.Position position) {
+    protected void addPage(Page page) {
 	assert false : "Do not call this";
     }
 
