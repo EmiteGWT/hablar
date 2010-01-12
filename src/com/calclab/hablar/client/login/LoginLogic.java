@@ -9,10 +9,10 @@ import com.calclab.suco.client.events.Listener0;
 
 public class LoginLogic {
     private final Session session;
-    private final LoginWidget widget;
+    private final LoginPage page;
 
-    public LoginLogic(final LoginWidget widget) {
-	this.widget = widget;
+    public LoginLogic(final LoginPage widget) {
+	this.page = widget;
 	this.session = Suco.get(Session.class);
 
 	String userName = PageAssist.getMeta("hablar.user");
@@ -32,7 +32,7 @@ public class LoginLogic {
 	if (state == State.disconnected) {
 	    XmppURI uri = getUri();
 	    if (uri != null) {
-		session.login(uri, widget.getPassword());
+		session.login(uri, page.getPassword());
 	    }
 	} else if (state == State.ready) {
 	    session.logout();
@@ -42,7 +42,7 @@ public class LoginLogic {
     // FIXME: XmppURI class needs a look
     private XmppURI getUri() {
 	try {
-	    return XmppURI.uri(widget.getUserName());
+	    return XmppURI.uri(page.getUserName());
 	} catch (RuntimeException e) {
 	    return null;
 	}
@@ -50,24 +50,25 @@ public class LoginLogic {
 
     private void setState(State state) {
 	if (state == State.ready) {
-	    widget.setActionText("Logout");
-	    widget.setActionEnabled(true);
+	    page.setActionText("Logout");
+	    page.setActionEnabled(true);
 	    String userName = session.getCurrentUser().getNode();
-	    setStatus("Connected as " + userName);
+	    setStatus("Connected as " + userName, page.headerStyle.loggedInIcon());
 	} else if (state == State.disconnected) {
-	    widget.setActionText("Login");
-	    widget.setActionEnabled(true);
-	    setStatus("Disconnected");
+	    page.setActionText("Login");
+	    page.setActionEnabled(true);
+	    setStatus("Disconnected", page.headerStyle.loggedOutIcon());
 	} else {
-	    widget.setActionText("Wait...");
-	    widget.setActionEnabled(false);
+	    page.setActionText("Wait...");
+	    page.setActionEnabled(false);
 	}
-	widget.addMessage("Session state: " + state);
+	page.addMessage("Session state: " + state);
     }
 
-    private void setStatus(String status) {
-	widget.setStatus(status);
-	widget.setHeaderTitle(status);
+    private void setStatus(String status, String iconStyle) {
+	page.setStatus(status);
+	page.setHeaderTitle(status);
+	page.setHeaderIconClass(iconStyle);
     }
 
 }

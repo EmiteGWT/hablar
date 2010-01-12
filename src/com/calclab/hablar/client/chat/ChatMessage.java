@@ -1,6 +1,6 @@
 package com.calclab.hablar.client.chat;
 
-import com.calclab.hablar.client.chat.ChatWidget.MessageType;
+import com.calclab.hablar.client.chat.ChatPage.MessageType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.uibinder.client.UiBinder;

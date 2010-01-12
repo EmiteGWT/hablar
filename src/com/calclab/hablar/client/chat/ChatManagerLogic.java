@@ -12,12 +12,12 @@ import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 
 public class ChatManagerLogic {
-    private final HashMap<Chat, ChatWidget> widgets;
+    private final HashMap<Chat, ChatPage> widgets;
     private final PagesWidget pages;
 
     public ChatManagerLogic(final PagesWidget pages) {
 	this.pages = pages;
-	this.widgets = new HashMap<Chat, ChatWidget>();
+	this.widgets = new HashMap<Chat, ChatPage>();
 
 	ChatManager chatManager = Suco.get(ChatManager.class);
 	String chatURI = PageAssist.getMeta("hablar.chatWidget");
@@ -41,11 +41,11 @@ public class ChatManagerLogic {
 
     }
 
-    private ChatWidget getWidget(Chat chat) {
-	ChatWidget widget = widgets.get(chat);
+    private ChatPage getWidget(Chat chat) {
+	ChatPage widget = widgets.get(chat);
 	if (widget == null) {
-	    widget = new ChatWidget(chat);
-	    final ChatWidget page = widget;
+	    widget = new ChatPage(chat);
+	    final ChatPage page = widget;
 	    widget.onClose(new Listener0() {
 		@Override
 		public void onEvent() {

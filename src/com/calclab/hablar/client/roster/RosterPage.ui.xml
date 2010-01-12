@@ -3,13 +3,18 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style src="RosterWidget.css" />
 		
-	<ui:style field="icons">
+	<ui:style field="header" type="com.calclab.hablar.client.roster.RosterPage.Styles">
 		@sprite .userAdd {
-			gwt-image: 'userAdd';
+			gwt-image: 'userAddIcon';
+		}
+		
+		@sprite .defaultIcon {
+			gwt-image: 'rosterIcon';
 		}
 	</ui:style>
 
-	<ui:image field="userAdd" src="user_add.png"></ui:image>
+	<ui:image field="userAddIcon" src="user_add.png"></ui:image>
+	<ui:image field="rosterIcon" src="userf.gif"></ui:image>
 
 	<g:LayoutPanel ui:field="roster" styleName="{style.roster}">
 		<g:layer left="0" top="0" width="100%" height="0px">
@@ -36,7 +41,7 @@
 		<g:layer left="0" bottom="0" width="100%" height="20px">
 			<g:HTMLPanel styleName="{style.panel}">
 				<div>
-					<g:Label ui:field="addBuddyIcon" styleName="{style.actionIcon} {icons.userAdd}"></g:Label>
+					<g:Label ui:field="addBuddyIcon" styleName="{style.actionIcon} {header.userAdd}"></g:Label>
 				</div>
 			</g:HTMLPanel>
 		</g:layer>

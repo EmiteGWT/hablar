@@ -1,6 +1,7 @@
 package com.calclab.hablar.client.roster;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
+import com.calclab.hablar.client.pages.HeaderStyles;
 import com.calclab.hablar.client.pages.PageWidget;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
@@ -20,6 +21,9 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class RosterPage extends PageWidget {
 
+    public static interface Styles extends HeaderStyles {
+    }
+
     interface RosterWidgetUiBinder extends UiBinder<Widget, RosterPage> {
     }
 
@@ -27,6 +31,9 @@ public class RosterPage extends PageWidget {
 
     @UiField
     LayoutPanel roster;
+
+    @UiField
+    Styles header;
 
     @UiField
     FlowPanel list;
@@ -52,6 +59,7 @@ public class RosterPage extends PageWidget {
 	initWidget(uiBinder.createAndBindUi(this));
 	this.logic = new RosterLogic(this);
 	setHeaderTitle("Roster");
+	setHeaderStyles(header);
     }
 
     public void addItem(RosterItemWidget itemWidget) {

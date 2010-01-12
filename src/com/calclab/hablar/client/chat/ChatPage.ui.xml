@@ -1,7 +1,16 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	<ui:style src="ChatWidget.css" />
+	<ui:style src="ChatPage.css" />
+		
+	<ui:style field="icons" type="com.calclab.hablar.client.chat.ChatPage.Icons">
+		@sprite .defaultIcon {
+			gwt-image: 'chatBasic';
+		}
+	</ui:style>
+
+	<ui:image field='chatBasic' src='chat-basic.gif' />
+
 
 	<g:DockLayoutPanel unit='PX' styleName="{style.chat}">
 		<g:center>

@@ -3,6 +3,7 @@ package com.calclab.hablar.client.search;
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
 import com.calclab.emite.xep.search.client.Item;
+import com.calclab.hablar.client.pages.HeaderStyles;
 import com.calclab.hablar.client.pages.PageWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -19,6 +20,10 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 public class SearchPage extends PageWidget {
+
+    interface HeaderStyle extends HeaderStyles {
+
+    }
 
     interface SearchPageUiBinder extends UiBinder<Widget, SearchPage> {
     }
@@ -52,6 +57,9 @@ public class SearchPage extends PageWidget {
     public Styles style;
 
     @UiField
+    HeaderStyle header;
+
+    @UiField
     TextBox term;
 
     @UiField
@@ -62,6 +70,7 @@ public class SearchPage extends PageWidget {
 	initWidget(uiBinder.createAndBindUi(this));
 	logic = new SearchLogic(this);
 	setHeaderTitle("Search users");
+	setHeaderStyles(header);
     }
 
     public void addResult(Item item) {

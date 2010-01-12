@@ -1,8 +1,26 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	<ui:style src="LoginWidget.css" />
-	
+	<ui:style src="LoginPage.css" />
+		
+	<ui:style field="headerStyle"
+		type="com.calclab.hablar.client.login.LoginPage.HeaderStyle">
+			@sprite .defaultIcon {
+				gwt-image: 'loggedOutIcon';
+			}
+
+			@sprite .loggedInIcon {
+				gwt-image: 'loggedInIcon';
+			}
+			
+			@sprite .loggedOutIcon {
+				gwt-image: 'loggedOutIcon';
+			}
+		</ui:style>
+
+	<ui:image field="loggedInIcon" src="lightbulb.png"></ui:image>
+	<ui:image field="loggedOutIcon" src="lightbulb_off.png"></ui:image>
+
 	<g:DockLayoutPanel styleName="{style.login}" unit="EM">
 		<g:north size="9">
 			<g:HTMLPanel styleName="{style.credentials}">

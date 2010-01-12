@@ -50,6 +50,14 @@ public abstract class PageWidget extends Composite {
 	statusAction.add(listener);
     }
 
+    public void setHeaderIconClass(String iconClass) {
+	header.setIconClass(iconClass);
+    }
+
+    public void setHeaderStyles(HeaderStyles styles) {
+	header.setStyles(styles);
+    }
+
     public void setHeaderTitle(String title) {
 	header.setHeaderTitle(title);
     }

@@ -5,22 +5,17 @@
 		type="com.calclab.hablar.client.pages.PageHeader.Styles" />
 			
 		<ui:style field="icons">
-			@sprite .roster {
-				gwt-image: 'chatBasic';
-			}
-			
 			@sprite .close {
 				gwt-image: 'closeIcon';
 			}
 		</ui:style>
 
-	<ui:image field='chatBasic' src='chat-basic.gif' />
 	<ui:image field='closeIcon' src='close.png' />
 
 
 	<g:FlowPanel styleName='hablar-pageHeader {style.header}'
 		ui:field="header">
-		<g:Label styleName='{style.icon} {icons.roster}' ui:field="icon"></g:Label>
+		<g:Label styleName='{style.icon}' ui:field="icon"></g:Label>
 		<g:Label styleName="{style.title}" ui:field="title"></g:Label>
 		<g:Label styleName='{style.close} {icons.close}' ui:field="close" />
 	</g:FlowPanel>

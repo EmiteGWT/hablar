@@ -7,7 +7,16 @@
 	<ui:style src="SearchPage.css"
 		type="com.calclab.hablar.client.search.SearchPage.Styles" />
 			
-		<g:LayoutPanel ui:field="self" styleName="{hablar.page}">
+		<ui:style field="header"
+		type="com.calclab.hablar.client.search.SearchPage.HeaderStyle">
+			@sprite .defaultIcon {
+				gwt-image: 'searchIcon';
+			}
+		</ui:style>
+
+	<ui:image field="searchIcon" src="magnifier.png"></ui:image>
+
+	<g:LayoutPanel ui:field="self" styleName="{hablar.page}">
 		<g:layer left="0" top="0" width="100%" height="0">
 			<g:FlowPanel ui:field="messagePanel">
 				<g:Label ui:field="message" styleName="{hablar.panel} {style.message}">

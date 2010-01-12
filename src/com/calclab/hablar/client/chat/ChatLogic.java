@@ -6,9 +6,9 @@ import com.calclab.suco.client.events.Listener;
 
 public class ChatLogic {
     private final Chat chat;
-    private final ChatWidget widget;
+    private final ChatPage widget;
 
-    public ChatLogic(Chat chat, final ChatWidget widget) {
+    public ChatLogic(Chat chat, final ChatPage widget) {
 	this.chat = chat;
 	this.widget = widget;
 
@@ -17,14 +17,14 @@ public class ChatLogic {
 	chat.onMessageReceived(new Listener<Message>() {
 	    @Override
 	    public void onEvent(Message message) {
-		widget.showMessage(name, message.getBody(), ChatWidget.MessageType.incoming);
+		widget.showMessage(name, message.getBody(), ChatPage.MessageType.incoming);
 		widget.setStatus("Incoming message from " + name);
 	    }
 	});
     }
 
     public void onTalk(String text) {
-	widget.showMessage("me", text, ChatWidget.MessageType.sent);
+	widget.showMessage("me", text, ChatPage.MessageType.sent);
 	chat.send(new Message(text));
 	widget.clearAndFocus();
     }

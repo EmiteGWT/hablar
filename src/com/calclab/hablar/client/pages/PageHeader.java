@@ -39,6 +39,9 @@ public class PageHeader extends Composite {
 
     private final PageWidget page;
     private boolean open;
+    private String iconClass;
+
+    private HeaderStyles styles;
 
     public PageHeader(PageWidget page, boolean closeable) {
 	this.page = page;
@@ -65,12 +68,28 @@ public class PageHeader extends Composite {
 	}
     }
 
+    public void setIconClass(String iconClass) {
+	if (this.iconClass != null) {
+	    icon.getElement().removeClassName(this.iconClass);
+	}
+	icon.getElement().addClassName(iconClass);
+	this.iconClass = iconClass;
+
+    }
+
     public void setOpen(boolean open) {
 	this.open = open;
 	if (open)
 	    header.getElement().addClassName(style.open());
 	else
 	    header.getElement().removeClassName(style.open());
+    }
+
+    public void setStyles(HeaderStyles styles) {
+	if (this.styles != null) {
+	}
+	setIconClass(styles.defaultIcon());
+	this.styles = styles;
     }
 
     void setHeaderTitle(String title) {
