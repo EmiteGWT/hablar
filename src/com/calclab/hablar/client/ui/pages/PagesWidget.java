@@ -40,6 +40,8 @@ public abstract class PagesWidget extends Composite {
 	addPage(page);
 	if (position == Position.visible) {
 	    show(page);
+	} else if (position == Position.normal && currentPage != null) {
+	    show(currentPage);
 	}
     }
 

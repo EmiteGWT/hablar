@@ -8,14 +8,17 @@
     <meta id="emite.httpBase" content="/proxy" />
     <meta id="emite.host" content="localhost" />
     <meta id="emite.searchHost" content="search.localhost" />
-    
+
     <meta id="emite.session" content="login" />
     <meta id="emite.user" content="test2@localhost" />
  	<meta id="emite.password" content="test2" />
-    <meta id="hablar.user" content="test2@localhost" />
+
     <meta id="hablar.loginWidget" content="false" />
     <meta id="hablar.rosterWidget" content="true" />
-    <meta id="hablar.chatWidget" content="test1@localhost" />
+    <meta id="hablar.layout" content="accordion" />    
+    <meta id="hablar.inline" content="accordion_div" />
+    <meta id="hablar.width" content="300px" />
+    <meta id="hablar.height" content="100%" />
     
     <script type="text/javascript" language="javascript" src="hablar/hablar.nocache.js"></script>
   </head>
@@ -29,6 +32,10 @@
         in order for this application to display correctly.
       </div>
     </noscript>
-    Hablar widget 0.0.1 - emite-lib 0.4.6
+
+	<div style="position: absolute; left: 50%;top: 0;height: 100%;">
+	<div id="accordion_div"></div>
+	</div>
+    
   </body>
 </html>

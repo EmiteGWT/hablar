@@ -37,6 +37,7 @@ public class PagesAccordion extends PagesWidget {
 
     @Override
     protected void addPage(PageWidget page) {
+	GWT.log("ACCORDION ADD PAGE", null);
 	PageHeader header = page.getHeader();
 	header.setStyles(headerStyle);
 	stack.add(page, header, 24);

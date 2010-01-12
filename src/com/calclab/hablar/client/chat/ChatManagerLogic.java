@@ -11,13 +11,12 @@ import com.calclab.hablar.client.ui.pages.PagesWidget.Position;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
+import com.google.gwt.core.client.GWT;
 
 public class ChatManagerLogic {
     private final HashMap<Chat, ChatPage> widgets;
-    private final PagesWidget pages;
 
     public ChatManagerLogic(final PagesWidget pages) {
-	this.pages = pages;
 	this.widgets = new HashMap<Chat, ChatPage>();
 
 	ChatManager chatManager = Suco.get(ChatManager.class);
@@ -29,35 +28,31 @@ public class ChatManagerLogic {
 	chatManager.onChatCreated(new Listener<Chat>() {
 	    @Override
 	    public void onEvent(Chat chat) {
-		getWidget(chat);
+		GWT.log("HABLAR ChatManager - CREATE", null);
+		ChatPage widget = new ChatPage(chat);
+		final ChatPage page = widget;
+		widget.onClose(new Listener0() {
+		    @Override
+		    public void onEvent() {
+			pages.remove(page);
+			widgets.remove(page);
+		    }
+		});
+		widgets.put(chat, widget);
+		pages.add(widget, Position.normal);
 	    }
 	});
 
 	chatManager.onChatOpened(new Listener<Chat>() {
 	    @Override
 	    public void onEvent(Chat chat) {
-		pages.show(getWidget(chat));
+		GWT.log("HABLAR ChatManager - OPEN", null);
+		ChatPage widget = widgets.get(chat);
+		assert widget != null;
+		pages.show(widget);
 	    }
 	});
 
-    }
-
-    private ChatPage getWidget(Chat chat) {
-	ChatPage widget = widgets.get(chat);
-	if (widget == null) {
-	    widget = new ChatPage(chat);
-	    final ChatPage page = widget;
-	    widget.onClose(new Listener0() {
-		@Override
-		public void onEvent() {
-		    pages.remove(page);
-		    widgets.remove(page);
-		}
-	    });
-	    widgets.put(chat, widget);
-	    pages.add(widget, Position.normal);
-	}
-	return widget;
     }
 
 }
