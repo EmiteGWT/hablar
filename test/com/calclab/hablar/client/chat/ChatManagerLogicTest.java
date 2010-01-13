@@ -16,7 +16,6 @@ import com.calclab.hablar.client.ui.pages.Pages;
 public class ChatManagerLogicTest {
 
     private Pages pages;
-    private ChatManagerLogic logic;
     private EmiteTester tester;
     private ArrayList<ChatView> views;
 
@@ -25,7 +24,7 @@ public class ChatManagerLogicTest {
 	views = new ArrayList<ChatView>();
 	tester = new EmiteTester();
 	pages = mock(Pages.class);
-	logic = new ChatManagerLogic(new ChatConfig(), pages, new ChatPageFactory() {
+	new ChatManagerLogic(new ChatConfig(), pages, new ChatPageFactory() {
 	    @Override
 	    public ChatView create(Chat chat) {
 		ChatView view = mock(ChatView.class);

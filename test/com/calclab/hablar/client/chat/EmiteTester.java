@@ -5,8 +5,10 @@ import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.im.client.InstantMessagingModule;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
+import com.calclab.emite.xep.search.client.SearchManager;
 import com.calclab.emite.xtesting.SessionTester;
 import com.calclab.hablar.client.roster.RosterTester;
+import com.calclab.hablar.client.search.SearchManagerTester;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.SucoCoreModule;
 import com.calclab.suco.client.ioc.Container;
@@ -19,6 +21,7 @@ public class EmiteTester {
 
     public final ChatManagerTester chatManager;
     public final RosterTester roster;
+    public final SearchManagerTester searchManager;
 
     public EmiteTester() {
 	// FIXME: Add setContainer to Suco (switch context)
@@ -26,12 +29,18 @@ public class EmiteTester {
 	container.clear();
 	new SucoCoreModule().onInstall(container);
 	Suco.install(new EmiteCoreModule(), new InstantMessagingModule());
+
 	session = new SessionTester();
 	install(container, Session.class, session);
+
 	chatManager = new ChatManagerTester(session);
 	install(container, ChatManager.class, chatManager);
+
 	roster = new RosterTester();
 	install(container, Roster.class, roster);
+
+	searchManager = new SearchManagerTester();
+	install(container, SearchManager.class, searchManager);
     }
 
     private <T> T install(Container container, Class<T> clazz, final T instance) {

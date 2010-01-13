@@ -2,7 +2,7 @@ package com.calclab.hablar.client.search;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
-import com.calclab.emite.xep.search.client.Item;
+import com.calclab.emite.xep.search.client.SearchResultItem;
 import com.calclab.hablar.client.ui.page.PageWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -18,7 +18,7 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
-public class SearchPage extends PageWidget {
+public class SearchPage extends PageWidget implements SearchView {
 
     public interface Icons extends CssResource {
 
@@ -29,7 +29,7 @@ public class SearchPage extends PageWidget {
     interface SearchPageUiBinder extends UiBinder<Widget, SearchPage> {
     }
 
-    interface Styles extends CssResource {
+    static interface Styles extends CssResource {
 	String alert();
 
 	String focus();
@@ -74,7 +74,7 @@ public class SearchPage extends PageWidget {
 	setHeaderIconClass(icons.searchIcon());
     }
 
-    public void addResult(Item item) {
+    public void addResult(SearchResultItem item) {
 	results.add(new SearchResult(item));
     }
 
@@ -95,12 +95,26 @@ public class SearchPage extends PageWidget {
 	term.setText("");
     }
 
-    public void showMessage(String body, String style) {
+    @Override
+    public void showMessage(String body, Level level) {
 	self.setWidgetTopHeight(messagePanel, 0, PX, 25, PX);
 	self.setWidgetTopBottom(scroll, 33, PX, 33, PX);
 	self.animate(250);
 
 	message.setText(body);
-	message.getElement().addClassName(style);
+	message.getElement().addClassName(getStyle(level));
     }
+
+    private String getStyle(Level level) {
+	String value = null;
+	if (level == Level.success) {
+	    value = style.success();
+	} else if (level == Level.error) {
+	    value = style.alert();
+	} else {
+	    value = style.success();
+	}
+	return value;
+    }
+
 }
