@@ -1,6 +1,7 @@
 package com.calclab.hablar.client.roster;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
@@ -34,6 +35,16 @@ public class RosterLogicTest {
 	items.add(item);
 	tester.roster.fireRosterReady(items);
 	verify(view).addItem(item);
+    }
+
+    @Test
+    public void shouldSetRosterInactiveWhenLoggedOut() {
+	verify(view).setActive(false);
+	tester.session.login(XmppURI.uri("someone"), null);
+	tester.session.setReady();
+	verify(view).setActive(true);
+	tester.session.logout();
+	verify(view, times(2)).setActive(false);
     }
 
 }

@@ -4,4 +4,6 @@ import com.calclab.emite.im.client.roster.RosterItem;
 
 public interface RosterView {
     RosterItemView addItem(RosterItem widget);
+
+    void setActive(boolean active);
 }

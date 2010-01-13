@@ -44,7 +44,7 @@ public class ChatPage extends PageWidget implements ChatView {
 
     private final ChatLogic logic;
 
-    public ChatPage(final Chat chat) {
+    public ChatPage(Chat chat) {
 	super(true);
 	initWidget(uiBinder.createAndBindUi(this));
 	logic = new ChatLogic(chat, this);
@@ -57,19 +57,15 @@ public class ChatPage extends PageWidget implements ChatView {
     }
 
     @UiHandler("talkBox")
-    public void handleKeys(final KeyDownEvent event) {
+    public void handleKeys(KeyDownEvent event) {
 	if (event.getNativeKeyCode() == 13) {
-	    final String message = talkBox.getText();
-	    if (!message.isEmpty()) {
-		// Prevents empty messages (when person only press enter)
-		logic.onTalk(message);
-	    }
+	    logic.onTalk(talkBox.getText());
 	    event.stopPropagation();
 	    event.preventDefault();
 	}
     }
 
-    public void setPresence(final Show show) {
+    public void setPresence(Show show) {
 	if (show == Show.chat) {
 	    setHeaderIconClass(icons.chatIconOn());
 	} else if (show == Show.dnd) {
@@ -83,7 +79,7 @@ public class ChatPage extends PageWidget implements ChatView {
 
     }
 
-    public void showMessage(final String name, final String body, final MessageType type) {
+    public void showMessage(String name, String body, MessageType type) {
 	list.add(new ChatMessage(name, body, type));
     }
 

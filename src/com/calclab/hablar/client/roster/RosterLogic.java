@@ -3,6 +3,8 @@ package com.calclab.hablar.client.roster;
 import java.util.Collection;
 import java.util.HashMap;
 
+import com.calclab.emite.core.client.xmpp.session.Session;
+import com.calclab.emite.core.client.xmpp.session.Session.State;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
@@ -17,6 +19,7 @@ public class RosterLogic {
     private final ChatManager chatManager;
     private final HashMap<XmppURI, RosterItemView> items;
     private final RosterView view;
+    private boolean active;
 
     public RosterLogic(final RosterView view) {
 	this.view = view;
@@ -41,6 +44,21 @@ public class RosterLogic {
 		getWidget(item).setItem(item);
 	    }
 	});
+
+	Session session = Suco.get(Session.class);
+	session.onStateChanged(new Listener<Session>() {
+	    @Override
+	    public void onEvent(Session session) {
+		boolean isActive = session.getState() == State.ready;
+		if (active != isActive) {
+		    active = isActive;
+		    view.setActive(isActive);
+		}
+	    }
+	});
+
+	this.active = session.getState() == State.ready;
+	view.setActive(active);
     }
 
     public void onItemClick(RosterItem item) {

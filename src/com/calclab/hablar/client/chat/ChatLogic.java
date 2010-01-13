@@ -8,7 +8,7 @@ public class ChatLogic {
     private final Chat chat;
     private final ChatView view;
 
-    public ChatLogic(final Chat chat, final ChatView view) {
+    public ChatLogic(Chat chat, final ChatView view) {
 	this.chat = chat;
 	this.view = view;
 
@@ -21,14 +21,14 @@ public class ChatLogic {
 	view.setHeaderTitle(name);
 	chat.onMessageReceived(new Listener<Message>() {
 	    @Override
-	    public void onEvent(final Message message) {
+	    public void onEvent(Message message) {
 		view.showMessage(name, message.getBody(), ChatPage.MessageType.incoming);
 		view.setStatus("Incoming message from " + name);
 	    }
 	});
     }
 
-    public void onTalk(final String text) {
+    public void onTalk(String text) {
 	view.showMessage("me", text, ChatPage.MessageType.sent);
 	chat.send(new Message(text));
 	view.clearAndFocus();
