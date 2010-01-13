@@ -22,14 +22,8 @@ public class ChatMessage extends Composite {
 
     public ChatMessage(final String name, final String body, final MessageType type) {
 	initWidget(uiBinder.createAndBindUi(this));
-	// FIXME
-	// Include ChatTextFormater.67 for:
-	// 1) escape html
-	// 2) urls
-	// 3) emoticons
-	// 4) "\n"
 	this.author.setInnerText(name + ": ");
-	this.body.setInnerText(body);
+	this.body.setInnerHTML(ChatMessageFormatter.format(body));
     }
 
 }
