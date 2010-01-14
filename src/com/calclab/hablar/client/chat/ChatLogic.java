@@ -20,7 +20,7 @@ public class ChatLogic {
 	    @Override
 	    public void onEvent(final Message message) {
 		view.showMessage(name, message.getBody(), ChatPage.MessageType.incoming);
-		view.setStatus("Incoming message from " + name);
+		view.setStatusMessage("Incoming message from " + name);
 	    }
 	});
     }

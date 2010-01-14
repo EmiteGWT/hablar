@@ -3,7 +3,7 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
 	<ui:style field="defaultStyles"
-		type="com.calclab.hablar.client.ui.page.PageHeader.DefaultStyles">
+		type="com.calclab.hablar.client.ui.page.HeaderWidget.DefaultStyles">
 			.open {
 				color: blue;
 				

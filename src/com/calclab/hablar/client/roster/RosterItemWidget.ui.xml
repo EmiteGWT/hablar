@@ -7,7 +7,7 @@
 			display: block;
 			width: 100%;
 			overflow: hidden;
-			padding: 5px 3px 0 3px;
+			padding: 5px 0px 0 0px;
 			border-bottom: 1px solid #E9E9E9;
 			height: 20px;
 		}
@@ -24,8 +24,21 @@
 			cursor: pointer;
 		}
 		
+		.jid {
+			float: left;
+			display: block;
+			color: #BBB;
+		}
+		
 		.status {
 			color: gray;
+		}
+		
+		@sprite .menuTrigger {
+			gwt-image: 'menuIcon';
+			display: block;
+			float: right; 
+			margin-right: 3px;
 		}
 		
 		@sprite .buddyIcon {
@@ -50,10 +63,13 @@
 	<ui:image field="buddyOff" src="../buddy-small-off.png"></ui:image>
 	<ui:image field="buddyDnd" src="../buddy-small-dnd.png"></ui:image>
 	<ui:image field="buddyWait" src="../buddy-small-wait.png"></ui:image>
+	<ui:image field="menuIcon" src="../menu.png" />
 	
 	<g:FlowPanel styleName="{style.item}">
 		<g:Label styleName="{style.icon}" ui:field="icon"></g:Label>
-		<g:Label styleName="{style.name}" ui:field="name" />
+		<g:Label styleName="{style.name}" ui:field="name">name-here</g:Label>
+		<g:Label styleName="{style.jid}" ui:field="jid">jid</g:Label>
 		<g:Label styleName="{style.status}" ui:field="status" />
+        <g:Label styleName="{style.menuTrigger}" ui:field="menuTrigger"></g:Label>
 	</g:FlowPanel>
 </ui:UiBinder> 

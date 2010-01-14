@@ -2,10 +2,10 @@ package com.calclab.hablar.client.search;
 
 import com.calclab.emite.xep.search.client.SearchResultItem;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
@@ -34,6 +34,7 @@ public class SearchResult extends Composite implements SearchResultView {
 	initWidget(uiBinder.createAndBindUi(this));
 	this.name.setText(item.getNick());
 	setAddToRosterVisible(addToRoster);
+	sinkEvents(Event.ONCLICK);
     }
 
     @Override
@@ -41,9 +42,11 @@ public class SearchResult extends Composite implements SearchResultView {
 	return item;
     }
 
-    @UiHandler("addToRoster")
-    public void onAddToRoster(ClickEvent e) {
-	logic.onResultToRoster(this);
+    @Override
+    public void onBrowserEvent(Event event) {
+	if (event.getTypeInt() == Event.ONCLICK) {
+	    Window.alert("Pincha!");
+	}
     }
 
     @Override

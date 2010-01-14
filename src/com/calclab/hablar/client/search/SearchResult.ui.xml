@@ -21,7 +21,7 @@
 		}
 		
 		.addToRoster {
-			float: right;
+			float: left;
 			font-size: 80%;
 			background-color: #E9E9E9;
 			color: white;

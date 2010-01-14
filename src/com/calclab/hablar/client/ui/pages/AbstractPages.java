@@ -15,13 +15,13 @@ public abstract class AbstractPages extends Composite implements Pages {
     protected final Listener<PageWidget> visibilityChangedListener;
     private Page currentPage;
 
-    private final Event<String> onStatus;
+    private final Event<Page> onStatus;
     private final Listener<PageWidget> closeListener;
     private Page previouslyVisiblePage;
     private final ArrayList<Page> hidden;
 
     public AbstractPages() {
-	this.onStatus = new Event<String>("pages.onStatus");
+	this.onStatus = new Event<Page>("pages.onStatus");
 	this.hidden = new ArrayList<Page>();
 
 	statusListener = new Listener<PageWidget>() {
@@ -30,7 +30,7 @@ public abstract class AbstractPages extends Composite implements Pages {
 		if (page.getVisibility() == Visibility.hidden) {
 		    show(page);
 		}
-		onStatus.fire(page.getStatus());
+		onStatus.fire(page);
 	    }
 	};
 	visibilityChangedListener = new Listener<PageWidget>() {
@@ -58,7 +58,7 @@ public abstract class AbstractPages extends Composite implements Pages {
     @Override
     public void add(Page page, Visibility visibility) {
 	if (!hasPage(page)) {
-	    page.onStatusChanged(statusListener);
+	    page.onStatusMessageChanged(statusListener);
 	    page.onVisibilityChanged(visibilityChangedListener);
 	    page.onClose(closeListener);
 	    addPage(page);
@@ -85,6 +85,11 @@ public abstract class AbstractPages extends Composite implements Pages {
 	hidden.add(page);
 	page.setVisibility(Visibility.hidden);
 	removePage(page);
+    }
+
+    @Override
+    public void onStatusMessageChanged(Listener<Page> listener) {
+	onStatus.add(listener);
     }
 
     /**

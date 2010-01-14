@@ -15,8 +15,6 @@ public interface ChatView extends Page {
 
     void setPresence(Show show);
 
-    void setStatus(String string);
-
     void showMessage(String name, String body, MessageType type);
 
 }

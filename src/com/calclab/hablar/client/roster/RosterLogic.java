@@ -38,6 +38,14 @@ public class RosterLogic {
 
 	});
 
+	roster.onItemAdded(new Listener<RosterItem>() {
+	    @Override
+	    public void onEvent(RosterItem item) {
+		view.addItem(item);
+		view.setStatusMessage(item.getName() + " has been added to roster.");
+	    }
+	});
+
 	roster.onItemChanged(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(RosterItem item) {

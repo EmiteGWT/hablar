@@ -10,7 +10,7 @@ import com.google.gwt.user.client.ui.Composite;
  */
 public abstract class PageWidget extends Composite implements Page {
 
-    protected final PageHeader header;
+    protected final HeaderWidget header;
     private final Event<PageWidget> statusAction;
     private final Event<PageWidget> closeEvent;
     private final Event<PageWidget> openEvent;
@@ -19,7 +19,7 @@ public abstract class PageWidget extends Composite implements Page {
 
     public PageWidget(boolean closeable) {
 	this.closeEvent = new Event<PageWidget>("page.close");
-	this.header = new PageHeader(this, closeable);
+	this.header = new HeaderWidget(this, closeable);
 	this.statusAction = new Event<PageWidget>("page.status");
 	this.openEvent = new Event<PageWidget>("page.open");
 	this.visibility = Visibility.hidden;
@@ -29,11 +29,16 @@ public abstract class PageWidget extends Composite implements Page {
 	openEvent.fire(this);
     }
 
-    public HeaderView getHeader() {
+    public PageHeader getHeader() {
 	return this.header;
     }
 
     public String getStatus() {
+	return status;
+    }
+
+    @Override
+    public String getStatusMessage() {
 	return status;
     }
 
@@ -45,7 +50,7 @@ public abstract class PageWidget extends Composite implements Page {
 	closeEvent.add(listener);
     }
 
-    public void onStatusChanged(Listener<PageWidget> listener) {
+    public void onStatusMessageChanged(Listener<PageWidget> listener) {
 	statusAction.add(listener);
     }
 
@@ -61,7 +66,8 @@ public abstract class PageWidget extends Composite implements Page {
 	header.setHeaderTitle(title);
     }
 
-    public void setStatus(String status) {
+    @Override
+    public void setStatusMessage(String status) {
 	this.status = status;
 	statusAction.fire(this);
 	if (visibility == Visibility.closed)

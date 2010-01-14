@@ -76,7 +76,7 @@ class LoginLogic {
     }
 
     private void setStatus(String status, String iconStyle) {
-	page.setStatus(status);
+	page.setStatusMessage(status);
 	page.setHeaderTitle(status);
 	page.setHeaderIconClass(iconStyle);
     }

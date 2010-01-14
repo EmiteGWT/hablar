@@ -8,7 +8,9 @@ public interface Page {
 	open, closed, hidden
     }
 
-    HeaderView getHeader();
+    PageHeader getHeader();
+
+    String getStatusMessage();
 
     /**
      * Add a listener to onClose events. This listener is called when the close
@@ -19,6 +21,13 @@ public interface Page {
     void onClose(Listener<PageWidget> closeListener);
 
     /**
+     * Add a listener to know when the status message of this page has changed
+     * 
+     * @param statusListener
+     */
+    void onStatusMessageChanged(Listener<PageWidget> statusListener);
+
+    /**
      * Add a listener to know when this page is open
      * 
      * @param openListener
@@ -26,11 +35,11 @@ public interface Page {
     void onVisibilityChanged(Listener<PageWidget> openListener);
 
     /**
-     * Add a listener to know when the status message of this page has changed
+     * Change the status message of this page
      * 
-     * @param statusListener
+     * @param status
      */
-    void onStatusChanged(Listener<PageWidget> statusListener);
+    void setStatusMessage(String status);
 
     /**
      * Inform the page about it's current visibility state

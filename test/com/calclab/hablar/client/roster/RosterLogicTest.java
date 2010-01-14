@@ -1,5 +1,6 @@
 package com.calclab.hablar.client.roster;
 
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -30,6 +31,8 @@ public class RosterLogicTest {
     public void shouldActivateViewWhenItemAddedToRoster() {
 	RosterItem item = newItem("someone");
 	tester.roster.fireItemAdded(item);
+	verify(view).addItem(item);
+	verify(view).setStatusMessage(anyString());
     }
 
     @Test

@@ -1,7 +1,7 @@
 package com.calclab.hablar.client.ui.pages;
 
 import com.calclab.hablar.client.ui.page.HeaderStyles;
-import com.calclab.hablar.client.ui.page.HeaderView;
+import com.calclab.hablar.client.ui.page.PageHeader;
 import com.calclab.hablar.client.ui.page.Page;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -42,7 +42,7 @@ public class TabPages extends AbstractPages {
 
     @Override
     protected void addPage(Page page) {
-	HeaderView header = page.getHeader();
+	PageHeader header = page.getHeader();
 	header.setStyles(headerStyle);
 	tabs.add((Widget) page, (Widget) header);
     }
