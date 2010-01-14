@@ -29,7 +29,7 @@ public abstract class PageWidget extends Composite implements Page {
 	openEvent.fire(this);
     }
 
-    public PageHeader getHeader() {
+    public HeaderView getHeader() {
 	return this.header;
     }
 
@@ -45,12 +45,12 @@ public abstract class PageWidget extends Composite implements Page {
 	closeEvent.add(listener);
     }
 
-    public void onOpenChanged(Listener<PageWidget> listener) {
-	openEvent.add(listener);
-    }
-
     public void onStatusChanged(Listener<PageWidget> listener) {
 	statusAction.add(listener);
+    }
+
+    public void onVisibilityChanged(Listener<PageWidget> listener) {
+	openEvent.add(listener);
     }
 
     public void setHeaderIconClass(String iconClass) {

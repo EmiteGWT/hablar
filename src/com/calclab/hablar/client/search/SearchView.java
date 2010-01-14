@@ -9,7 +9,7 @@ public interface SearchView extends Page {
 	info, error, success
     }
 
-    void addResult(SearchResultItem item);
+    void addResult(SearchResultItem item, boolean addToRoster);
 
     void clearResults();
 

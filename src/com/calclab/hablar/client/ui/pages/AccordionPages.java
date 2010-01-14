@@ -1,8 +1,8 @@
 package com.calclab.hablar.client.ui.pages;
 
 import com.calclab.hablar.client.ui.page.HeaderStyles;
+import com.calclab.hablar.client.ui.page.HeaderView;
 import com.calclab.hablar.client.ui.page.Page;
-import com.calclab.hablar.client.ui.page.PageHeader;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -40,9 +40,9 @@ public class AccordionPages extends AbstractPages {
 
     @Override
     protected void addPage(Page page) {
-	PageHeader header = page.getHeader();
+	HeaderView header = page.getHeader();
 	header.setStyles(headerStyle);
-	accordion.add((Widget) page, header, 24);
+	accordion.add((Widget) page, (Widget) header, 24);
     }
 
     @Override

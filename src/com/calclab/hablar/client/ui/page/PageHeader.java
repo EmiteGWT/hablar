@@ -16,7 +16,7 @@ import com.google.gwt.user.client.ui.Widget;
  * and active state. Each PageWidget has one PageHeader. The PageWidget creates
  * the header.
  */
-public class PageHeader extends Composite {
+public class PageHeader extends Composite implements HeaderView {
 
     interface DefaultStyles extends HeaderStyles {
     }

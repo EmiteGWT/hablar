@@ -21,8 +21,10 @@
 		}
 		
 		.addToRoster {
+			float: right;
 			font-size: 80%;
-			color: #BBB;
+			background-color: #E9E9E9;
+			color: white;
 			cursor: pointer;
 		}
 	</ui:style>
@@ -37,6 +39,6 @@
 	<g:HTMLPanel styleName="{style.result}">
 		<span class="{hablar.icon} {icons.userAdd}"></span>
 		<g:Label ui:field="name" styleName="{style.resultName}">Result</g:Label>
-		<g:Anchor ui:field="addToRoster" styleName="{style.addToRoster}"> add to roster</g:Anchor>
+		<g:Anchor ui:field="addToRoster" styleName=" {hablar.btnLink} {style.addToRoster}"> add to roster</g:Anchor>
 	</g:HTMLPanel>
 </ui:UiBinder> 

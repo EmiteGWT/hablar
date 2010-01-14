@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.Composite;
 
 public abstract class AbstractPages extends Composite implements Pages {
     protected final Listener<PageWidget> statusListener;
-    protected final Listener<PageWidget> openListener;
+    protected final Listener<PageWidget> visibilityChangedListener;
     private Page currentPage;
 
     private final Event<String> onStatus;
@@ -33,7 +33,7 @@ public abstract class AbstractPages extends Composite implements Pages {
 		onStatus.fire(page.getStatus());
 	    }
 	};
-	openListener = new Listener<PageWidget>() {
+	visibilityChangedListener = new Listener<PageWidget>() {
 	    @Override
 	    public void onEvent(PageWidget page) {
 		if (page.getVisibility() == Visibility.open)
@@ -59,7 +59,7 @@ public abstract class AbstractPages extends Composite implements Pages {
     public void add(Page page, Visibility visibility) {
 	if (!hasPage(page)) {
 	    page.onStatusChanged(statusListener);
-	    page.onOpenChanged(openListener);
+	    page.onVisibilityChanged(visibilityChangedListener);
 	    page.onClose(closeListener);
 	    addPage(page);
 	    if (visibility == Visibility.open) {

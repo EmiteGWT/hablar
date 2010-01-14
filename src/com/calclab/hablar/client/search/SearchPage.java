@@ -74,8 +74,8 @@ public class SearchPage extends PageWidget implements SearchView {
 	setHeaderIconClass(icons.searchIcon());
     }
 
-    public void addResult(SearchResultItem item) {
-	results.add(new SearchResult(item));
+    public void addResult(SearchResultItem item, boolean addToRoster) {
+	results.add(new SearchResult(logic, item, addToRoster));
     }
 
     public void clearResults() {

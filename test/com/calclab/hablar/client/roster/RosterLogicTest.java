@@ -11,9 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
-import com.calclab.emite.core.client.xmpp.stanzas.Presence.Type;
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.emite.im.client.roster.SubscriptionState;
 import com.calclab.hablar.client.chat.EmiteTester;
 
 public class RosterLogicTest {
@@ -29,9 +27,15 @@ public class RosterLogicTest {
     }
 
     @Test
+    public void shouldActivateViewWhenItemAddedToRoster() {
+	RosterItem item = newItem("someone");
+	tester.roster.fireItemAdded(item);
+    }
+
+    @Test
     public void shouldAddItemWhenRosterReceived() {
 	Collection<RosterItem> items = new ArrayList<RosterItem>();
-	RosterItem item = new RosterItem(XmppURI.uri("some@one"), SubscriptionState.from, "some", Type.subscribed);
+	RosterItem item = newItem("someone");
 	items.add(item);
 	tester.roster.fireRosterReady(items);
 	verify(view).addItem(item);
@@ -45,6 +49,10 @@ public class RosterLogicTest {
 	verify(view).setActive(true);
 	tester.session.logout();
 	verify(view, times(2)).setActive(false);
+    }
+
+    private RosterItem newItem(String name) {
+	return new RosterItem(XmppURI.uri(name + "@host"), null, name, null);
     }
 
 }

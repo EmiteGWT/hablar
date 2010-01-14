@@ -11,7 +11,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
-public class SearchResult extends Composite {
+public class SearchResult extends Composite implements SearchResultView {
 
     interface SearchResultUiBinder extends UiBinder<Widget, SearchResult> {
     }
@@ -24,14 +24,31 @@ public class SearchResult extends Composite {
     @UiField
     Anchor addToRoster;
 
-    public SearchResult(SearchResultItem item) {
+    private final SearchLogic logic;
+
+    private final SearchResultItem item;
+
+    public SearchResult(SearchLogic logic, SearchResultItem item, boolean addToRoster) {
+	this.logic = logic;
+	this.item = item;
 	initWidget(uiBinder.createAndBindUi(this));
 	this.name.setText(item.getNick());
+	setAddToRosterVisible(addToRoster);
+    }
+
+    @Override
+    public SearchResultItem getItem() {
+	return item;
     }
 
     @UiHandler("addToRoster")
     public void onAddToRoster(ClickEvent e) {
+	logic.onResultToRoster(this);
+    }
 
+    @Override
+    public void setAddToRosterVisible(boolean visible) {
+	this.addToRoster.setVisible(visible);
     }
 
 }

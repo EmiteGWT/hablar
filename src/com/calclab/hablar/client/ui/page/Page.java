@@ -8,14 +8,35 @@ public interface Page {
 	open, closed, hidden
     }
 
-    PageHeader getHeader();
+    HeaderView getHeader();
 
+    /**
+     * Add a listener to onClose events. This listener is called when the close
+     * button in the header is clicked
+     * 
+     * @param closeListener
+     */
     void onClose(Listener<PageWidget> closeListener);
 
-    void onOpenChanged(Listener<PageWidget> openListener);
+    /**
+     * Add a listener to know when this page is open
+     * 
+     * @param openListener
+     */
+    void onVisibilityChanged(Listener<PageWidget> openListener);
 
+    /**
+     * Add a listener to know when the status message of this page has changed
+     * 
+     * @param statusListener
+     */
     void onStatusChanged(Listener<PageWidget> statusListener);
 
+    /**
+     * Inform the page about it's current visibility state
+     * 
+     * @param visibility
+     */
     void setVisibility(Visibility visibility);
 
 }

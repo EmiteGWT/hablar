@@ -32,7 +32,7 @@ public class DockPages extends AbstractPages {
 	// FIXME: take care with this
 	if (page.getHeader().getTitle().equals("Roster")) {
 	    this.docked = page;
-	    west.addNorth(page.getHeader(), 22);
+	    west.addNorth((Widget) page.getHeader(), 22);
 	    west.add((Widget) page);
 	} else {
 	    pages.add(page, visibility);

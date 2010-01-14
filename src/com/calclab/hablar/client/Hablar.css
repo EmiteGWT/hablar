@@ -28,3 +28,9 @@
 	height: 16px;
 	margin-left: 3px;
 }
+
+.btnLink {
+	display: block;
+	-moz-border-radius: 0.5em;
+	-webkit-border-radius: 0.5em;
+}

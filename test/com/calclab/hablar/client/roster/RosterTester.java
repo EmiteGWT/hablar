@@ -37,14 +37,35 @@ public class RosterTester extends AbstractRoster {
 	this.removed = new ArrayList<XmppURI>();
     }
 
-    @Override
-    public void addItem(XmppURI jid, String name, String... groups) {
-	added.add(new Modification(jid, name, groups));
+    /**
+     * Add an item to this roster tester. No signals.
+     * 
+     * @param jid
+     * @param name
+     */
+    public void addItem(XmppURI jid, String name) {
+	super.storeItem(new RosterItem(jid, null, name, null));
     }
 
     @Override
     public void fireRosterReady(Collection<RosterItem> collection) {
 	super.fireRosterReady(collection);
+    }
+
+    /**
+     * Test if the given jid has been requested to add to roster
+     * 
+     * @param jid
+     *            the jid
+     * @return true if has been requested, false otherwise
+     */
+    public boolean hasRequestedToAdd(XmppURI jid) {
+	for (Modification m : added) {
+	    if (m.jid.equals(jid)) {
+		return true;
+	    }
+	}
+	return false;
     }
 
     @Override
@@ -53,7 +74,18 @@ public class RosterTester extends AbstractRoster {
     }
 
     @Override
+    public void requestAddItem(XmppURI jid, String name, String... groups) {
+	added.add(new Modification(jid, name, groups));
+    }
+
+    @Override
     public void updateItem(XmppURI jid, String name, String... groups) {
 	updated.add(new Modification(jid, name, groups));
     }
+
+    @Override
+    protected void fireItemAdded(RosterItem item) {
+	super.fireItemAdded(item);
+    }
+
 }
