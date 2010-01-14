@@ -1,6 +1,9 @@
 package com.calclab.hablar.client.chat;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
@@ -24,14 +27,22 @@ public class ChatLogicTest {
     }
 
     @Test
-    public void shouldShowIncommingMessages() {
-	chat.receive(new Message("hello"));
-	verify(view).showMessage("friend", "hello", MessageType.incoming);
+    public void shouldNotShowEmptyMessages() {
+	logic.onTalk("");
+	verify(view, times(0)).showMessage(anyString(), anyString(), (MessageType) any());
     }
 
     @Test
-    public void shouldShowOutputMessages() {
-	logic.onTalk("hello too!");
-	verify(view).showMessage("me", "hello too!", MessageType.sent);
+    public void shouldShowFormattedIncommingMessages() {
+	String msg = "hello http://simple.com";
+	chat.receive(new Message(msg));
+	verify(view).showMessage("friend", ChatMessageFormatter.format(msg), MessageType.incoming);
+    }
+
+    @Test
+    public void shouldShowFormattedOutcomingMessages() {
+	String msg = "hello too! http://simple.com";
+	logic.onTalk(msg);
+	verify(view).showMessage("me", ChatMessageFormatter.format(msg), MessageType.sent);
     }
 }

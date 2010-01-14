@@ -60,12 +60,7 @@ public class ChatPage extends PageWidget implements ChatView {
     public void handleKeys(final KeyDownEvent event) {
 	if (event.getNativeKeyCode() == 13) {
 	    final String message = talkBox.getText();
-	    if (message.isEmpty()) {
-		// Do nothing when person only press enter (prevents empty
-		// messages) as gtalk and other chat clients do)
-	    } else {
-		logic.onTalk(message);
-	    }
+	    logic.onTalk(message);
 	    event.stopPropagation();
 	    event.preventDefault();
 	}

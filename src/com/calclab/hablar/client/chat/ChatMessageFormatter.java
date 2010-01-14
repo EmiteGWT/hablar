@@ -12,11 +12,11 @@ public class ChatMessageFormatter {
 	return message;
     }
 
-    static String formatUrls(String message) {
+    private static String formatUrls(String message) {
 	return message = message.replaceAll(TextUtils.URL_REGEXP, "<a href=\"$1\" target=\"_blank\">$1</a>");
     }
 
-    public ChatMessageFormatter() {
+    protected ChatMessageFormatter() {
     }
 
 }

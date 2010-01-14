@@ -19,16 +19,20 @@ public class ChatLogic {
 	chat.onMessageReceived(new Listener<Message>() {
 	    @Override
 	    public void onEvent(final Message message) {
-		view.showMessage(name, message.getBody(), ChatPage.MessageType.incoming);
+		String body = ChatMessageFormatter.format(message.getBody());
+		view.showMessage(name, body, ChatPage.MessageType.incoming);
 		view.setStatusMessage("Incoming message from " + name);
 	    }
 	});
     }
 
     public void onTalk(final String text) {
-	view.showMessage("me", text, ChatPage.MessageType.sent);
-	chat.send(new Message(text));
-	view.clearAndFocus();
+	if (!text.isEmpty()) {
+	    String body = ChatMessageFormatter.format(text);
+	    view.showMessage("me", body, ChatPage.MessageType.sent);
+	    chat.send(new Message(text));
+	    view.clearAndFocus();
+	}
     }
 
 }
