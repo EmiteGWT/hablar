@@ -2,21 +2,22 @@ package com.calclab.hablar.client.roster;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.hablar.client.ui.styles.HablarStyles;
 import com.calclab.hablar.client.ui.styles.HablarStyles.IconType;
 
 public class RosterItemLogic {
-    public static IconType getIcon(RosterItem item) {
+    public static HablarStyles.IconType getIcon(RosterItem item) {
 	Show show = item.getShow();
 	if (show == Show.dnd) {
-	    return IconType.buddyDnd;
+	    return HablarStyles.IconType.buddyDnd;
 	} else if (show == Show.xa) {
-	    return IconType.buddyWait;
+	    return HablarStyles.IconType.buddyWait;
 	} else if (show == Show.away) {
-	    return IconType.buddyWait;
+	    return HablarStyles.IconType.buddyWait;
 	} else if (item.isAvailable()) {
-	    return IconType.buddyOn;
+	    return HablarStyles.IconType.buddyOn;
 	} else {
-	    return IconType.buddyOff;
+	    return HablarStyles.IconType.buddyOff;
 	}
     }
 

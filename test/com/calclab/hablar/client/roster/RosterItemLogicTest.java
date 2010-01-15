@@ -10,6 +10,7 @@ import org.junit.Test;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.hablar.client.ui.styles.HablarStyles;
 import com.calclab.hablar.client.ui.styles.HablarStyles.IconType;
 
 public class RosterItemLogicTest {
@@ -29,15 +30,15 @@ public class RosterItemLogicTest {
     @Test
     public void shouldSetAvailable() {
 	item.setAvailable(true);
-	item.setShow(Show.notSpecified);
-	assertSame(IconType.buddyOn, RosterItemLogic.getIcon(item));
+	item.setShow(Show.unknown);
+	assertSame(HablarStyles.IconType.buddyOn, RosterItemLogic.getIcon(item));
     }
 
     @Test
     public void shouldSetOffline() {
 	item.setAvailable(false);
-	item.setShow(Show.notSpecified);
-	assertSame(IconType.buddyOff, RosterItemLogic.getIcon(item));
+	item.setShow(Show.unknown);
+	assertSame(HablarStyles.IconType.buddyOff, RosterItemLogic.getIcon(item));
     }
 
     @Test

@@ -4,9 +4,11 @@ import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.session.Session.State;
 import com.calclab.hablar.client.login.LoginPage;
 import com.calclab.hablar.client.roster.RosterPageWidget;
-import com.calclab.hablar.client.search.SearchPage;
+import com.calclab.hablar.client.search.SearchPageWidget;
 import com.calclab.hablar.client.ui.page.Page.Visibility;
 import com.calclab.hablar.client.ui.pages.Pages;
+import com.calclab.hablar.client.ui.styles.HablarStyles;
+import com.calclab.hablar.client.ui.styles.HablarStyles.IconType;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -33,12 +35,12 @@ public class HablarLogic {
 	    rosterPageWidget = new RosterPageWidget();
 	    pages.add(rosterPageWidget, Visibility.closed);
 	    if (config.hasSearch) {
-		final SearchPage searchPage = new SearchPage();
-		pages.add(searchPage, Visibility.hidden);
-		rosterPageWidget.addAction(searchPage.icons.searchIcon(), new ClickHandler() {
+		final SearchPageWidget searchPageWidget = new SearchPageWidget();
+		pages.add(searchPageWidget, Visibility.hidden);
+		rosterPageWidget.addAction(HablarStyles.get(HablarStyles.IconType.search), new ClickHandler() {
 		    @Override
 		    public void onClick(ClickEvent event) {
-			pages.open(searchPage);
+			pages.open(searchPageWidget);
 		    }
 		});
 	    }

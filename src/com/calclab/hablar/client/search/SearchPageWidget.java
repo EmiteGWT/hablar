@@ -7,6 +7,8 @@ import com.calclab.hablar.client.ui.menu.MenuAction;
 import com.calclab.hablar.client.ui.menu.PopupMenu;
 import com.calclab.hablar.client.ui.menu.PopupMenuView;
 import com.calclab.hablar.client.ui.page.PageWidget;
+import com.calclab.hablar.client.ui.styles.HablarStyles;
+import com.calclab.hablar.client.ui.styles.HablarStyles.IconType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.FocusEvent;
@@ -21,15 +23,9 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
-public class SearchPage extends PageWidget implements SearchView {
+public class SearchPageWidget extends PageWidget implements SearchView {
 
-    public interface Icons extends CssResource {
-
-	String searchIcon();
-
-    }
-
-    interface SearchPageUiBinder extends UiBinder<Widget, SearchPage> {
+    interface SearchPageUiBinder extends UiBinder<Widget, SearchPageWidget> {
     }
 
     static interface Styles extends CssResource {
@@ -61,20 +57,17 @@ public class SearchPage extends PageWidget implements SearchView {
     public Styles style;
 
     @UiField
-    public Icons icons;
-
-    @UiField
     TextBox term;
 
     @UiField
     Label message;
 
-    public SearchPage() {
+    public SearchPageWidget() {
 	super(true);
 	initWidget(uiBinder.createAndBindUi(this));
 	logic = new SearchLogic(this);
 	setHeaderTitle("Search users");
-	setHeaderIconClass(icons.searchIcon());
+	setHeaderIconClass(HablarStyles.get(HablarStyles.IconType.search));
     }
 
     public void addResult(SearchResultItem item) {

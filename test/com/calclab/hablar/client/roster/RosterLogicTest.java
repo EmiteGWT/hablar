@@ -19,6 +19,7 @@ import org.mockito.stubbing.Answer;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.client.chat.EmiteTester;
+import com.calclab.hablar.client.ui.styles.HablarStyles;
 
 public class RosterLogicTest {
 
@@ -27,6 +28,7 @@ public class RosterLogicTest {
 
     @Before
     public void before() {
+	HablarStyles.setStyles(new HablarStyles());
 	tester = new EmiteTester();
 	view = mock(RosterView.class);
 	when(view.createItemView()).thenAnswer(new Answer<RosterItemView>() {

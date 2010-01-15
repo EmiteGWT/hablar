@@ -56,7 +56,7 @@ public class PresencePanel extends Composite implements PresenceView {
     }
 
     @Override
-    public void setIcon(IconType icon) {
+    public void setIcon(HablarStyles.IconType icon) {
 	String iconClass = HablarStyles.get(icon);
 	if (this.iconClass != null) {
 	    btnState.getElement().removeClassName(this.iconClass);

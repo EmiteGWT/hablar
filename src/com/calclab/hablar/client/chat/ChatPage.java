@@ -39,7 +39,7 @@ public class ChatPage extends PageWidget implements ChatView {
 	super(true);
 	initWidget(uiBinder.createAndBindUi(this));
 	logic = new ChatLogic(chat, this);
-	setHeaderIconClass(HablarStyles.get(IconType.buddy));
+	setHeaderIconClass(HablarStyles.get(HablarStyles.IconType.buddy));
     }
 
     public void clearAndFocus() {

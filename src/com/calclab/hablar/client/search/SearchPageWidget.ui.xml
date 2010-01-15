@@ -4,7 +4,7 @@
 
 	<ui:style src="../Hablar.css" field="hablar" />
 		
-	<ui:style type="com.calclab.hablar.client.search.SearchPage.Styles">
+	<ui:style type="com.calclab.hablar.client.search.SearchPageWidget.Styles">
 		.panel {
 			padding: 5px 1% 3px 1%;
 		}
@@ -22,7 +22,7 @@
 		}
 		
 		.success {
-			color: #090;
+			colxor: #090;
 		}
 		
 		.unfocus {
@@ -54,13 +54,6 @@
 		</g:layer>
 	</g:LayoutPanel>
 
-	<ui:image field="searchIcon" src="../search.png"></ui:image>
-
-	<ui:style field="icons"
-		type="com.calclab.hablar.client.search.SearchPage.Icons">
-			@sprite .searchIcon {
-				gwt-image: 'searchIcon';
-			}
-		</ui:style>
+	
 
 </ui:UiBinder> 

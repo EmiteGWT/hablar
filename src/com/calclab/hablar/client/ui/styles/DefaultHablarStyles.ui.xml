@@ -2,7 +2,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
-	<ui:style type="com.calclab.hablar.client.ui.styles.HablarStyles.Styles">
+	<ui:style type="com.calclab.hablar.client.ui.styles.DefaultHablarStyles.Styles">
 		.active {
 			background-color: #EEEEEE;
 		}
@@ -13,7 +13,7 @@
 	</ui:style>
 
 	<ui:style field="icons"
-		type="com.calclab.hablar.client.ui.styles.HablarStyles.StyleIcons">
+		type="com.calclab.hablar.client.ui.styles.DefaultHablarStyles.StyleIcons">
 			@sprite .buddyIcon {
 				gwt-image: 'buddy';
 			}
@@ -37,9 +37,22 @@
 			@sprite .rosterIcon {
 				gwt-image: 'rosterIcon';
 			}
-            @sprite .menuIcon {
-                gwt-image: 'menuIcon';
-            }
+			
+			@sprite .menuIcon {
+				gwt-image: 'menuIcon';
+			}
+			
+			@sprite .chatIcon {
+				gwt-image: 'chatIcon';
+			}
+			
+			@sprite .chatAddIcon {
+				gwt-image: 'chatAddIcon';
+			}
+			
+			@sprite .searchIcon {
+				gwt-image: 'searchIcon';
+			}
 		</ui:style>
 
 	<ui:image field="rosterIcon" src="roster.png"></ui:image>
@@ -48,7 +61,10 @@
 	<ui:image field="buddyOff" src="buddy-small-off.png"></ui:image>
 	<ui:image field="buddyDnd" src="buddy-small-dnd.png"></ui:image>
 	<ui:image field="buddyWait" src="buddy-small-wait.png"></ui:image>
-    <ui:image field="menuIcon" src="menu2.png"></ui:image>
+	<ui:image field="menuIcon" src="menu2.png"></ui:image>
+	<ui:image field="chatIcon" src="chat.png"></ui:image>
+	<ui:image field="chatAddIcon" src="chat_add.png"></ui:image>
+	<ui:image field="searchIcon" src="search2.png"></ui:image>
 
 	<g:SimplePanel></g:SimplePanel>
 </ui:UiBinder> 

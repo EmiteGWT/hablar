@@ -6,6 +6,7 @@ import com.calclab.emite.im.client.roster.SubscriptionHandler;
 import com.calclab.emite.im.client.roster.SubscriptionHandler.Behaviour;
 import com.calclab.emite.xep.search.client.SearchManager;
 import com.calclab.hablar.client.ui.HablarResources;
+import com.calclab.hablar.client.ui.styles.DefaultHablarStyles;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -16,6 +17,8 @@ public class Hablar implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
+	DefaultHablarStyles.init();
+
 	SubscriptionHandler handler = Suco.get(SubscriptionHandler.class);
 	handler.setBehaviour(Behaviour.acceptAll);
 

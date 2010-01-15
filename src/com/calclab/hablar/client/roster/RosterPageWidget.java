@@ -50,9 +50,10 @@ public class RosterPageWidget extends PageWidget implements RosterView {
 	initWidget(uiBinder.createAndBindUi(this));
 	logic = new RosterLogic(this);
 	setHeaderTitle("Roster");
-	setHeaderIconClass(HablarStyles.get(IconType.roster));
+	setHeaderIconClass(HablarStyles.get(HablarStyles.IconType.roster));
     }
 
+    @Override
     public void addAction(final String iconStyle, final ClickHandler clickHandler) {
 	final Label label = new Label();
 	label.getElement().addClassName(style.action());

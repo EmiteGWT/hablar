@@ -27,7 +27,7 @@ class RosterItemWidget extends ListItemWiget implements RosterItemView {
     public RosterItemWidget(RosterLogic logic) {
 	super(logic);
 	initWidget(uiBinder.createAndBindUi(this));
-	menu.addStyleName(HablarStyles.get(IconType.menu));
+	menu.addStyleName(HablarStyles.get(HablarStyles.IconType.menu));
 	super.setMenu(menu);
 	setMenuVisible(false);
     }
@@ -38,7 +38,7 @@ class RosterItemWidget extends ListItemWiget implements RosterItemView {
     }
 
     @Override
-    public void setIcon(IconType iconType) {
+    public void setIcon(HablarStyles.IconType iconType) {
 	if (this.iconStyle != null) {
 	    icon.removeStyleName(iconStyle);
 	}

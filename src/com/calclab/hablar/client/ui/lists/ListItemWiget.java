@@ -51,11 +51,11 @@ public abstract class ListItemWiget extends Composite implements ListItemView {
     @Override
     public void setSelected(boolean active) {
 	if (active) {
-	    removeStyleName(HablarStyles.styleOf(StyleType.inactive));
-	    addStyleName(HablarStyles.styleOf(StyleType.active));
+	    removeStyleName(HablarStyles.styleOf(HablarStyles.StyleType.inactive));
+	    addStyleName(HablarStyles.styleOf(HablarStyles.StyleType.active));
 	} else {
-	    removeStyleName(HablarStyles.styleOf(StyleType.active));
-	    addStyleName(HablarStyles.styleOf(StyleType.inactive));
+	    removeStyleName(HablarStyles.styleOf(HablarStyles.StyleType.active));
+	    addStyleName(HablarStyles.styleOf(HablarStyles.StyleType.inactive));
 	}
     }
 }

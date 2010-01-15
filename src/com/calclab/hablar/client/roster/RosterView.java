@@ -4,8 +4,11 @@ import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.client.ui.menu.MenuAction;
 import com.calclab.hablar.client.ui.menu.PopupMenuView;
 import com.calclab.hablar.client.ui.page.Page;
+import com.google.gwt.event.dom.client.ClickHandler;
 
 public interface RosterView extends Page {
+    void addAction(String iconStyle, ClickHandler clickHandler);
+
     RosterItemView createItemView();
 
     PopupMenuView<RosterItem> createMenu(MenuAction<RosterItem>... actions);

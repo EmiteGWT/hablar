@@ -13,10 +13,15 @@ import com.calclab.hablar.client.ui.lists.ListItemView;
 import com.calclab.hablar.client.ui.lists.ListLogic;
 import com.calclab.hablar.client.ui.menu.MenuAction;
 import com.calclab.hablar.client.ui.menu.PopupMenuView;
+import com.calclab.hablar.client.ui.styles.HablarStyles;
+import com.calclab.hablar.client.ui.styles.HablarStyles.IconType;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.UIObject;
 
 public class RosterLogic implements ListLogic {
@@ -34,6 +39,48 @@ public class RosterLogic implements ListLogic {
 	this.items = new HashMap<XmppURI, RosterItemView>();
 	this.chatManager = Suco.get(ChatManager.class);
 	createMenu();
+
+	addRosterListeners();
+	addSessionListeners();
+
+	view.addAction(HablarStyles.get(HablarStyles.IconType.chatAdd), new ClickHandler() {
+	    @Override
+	    public void onClick(ClickEvent event) {
+		String jid = Window.prompt("Write the JID of the person you want to chat with", "");
+		chatManager.open(XmppURI.jid(jid));
+	    }
+	});
+
+    }
+
+    public void onItemClick(ListItemView view, Event event) {
+	RosterItemView rosterView = (RosterItemView) view;
+	chatManager.open(rosterView.getItem().getJID());
+    }
+
+    @Override
+    public void onMenuClicked(ListItemView view, UIObject ui) {
+	RosterItem item = ((RosterItemView) view).getItem();
+	if (menu.isVisible()) {
+	    GWT.log("menu visible!", null);
+	    menu.hide();
+	} else {
+	    menu.setTarget(item);
+	    menu.showRelativeToMenu(ui);
+	}
+    }
+
+    @Override
+    public void onMouseOver(ListItemView view, boolean over) {
+	view.setSelected(over);
+	view.setMenuVisible(over);
+    }
+
+    public void openChat(XmppURI uri) {
+	chatManager.open(uri);
+    }
+
+    private void addRosterListeners() {
 	roster.onRosterRetrieved(new Listener<Collection<RosterItem>>() {
 	    @Override
 	    public void onEvent(Collection<RosterItem> items) {
@@ -67,7 +114,9 @@ public class RosterLogic implements ListLogic {
 		view.setStatusMessage(item.getName() + " has been removed from roster.");
 	    }
 	});
+    }
 
+    private void addSessionListeners() {
 	Session session = Suco.get(Session.class);
 	session.onStateChanged(new Listener<Session>() {
 	    @Override
@@ -82,33 +131,6 @@ public class RosterLogic implements ListLogic {
 
 	this.active = session.getState() == State.ready;
 	view.setActive(active);
-    }
-
-    public void onItemClick(ListItemView view, Event event) {
-	RosterItemView rosterView = (RosterItemView) view;
-	chatManager.open(rosterView.getItem().getJID());
-    }
-
-    @Override
-    public void onMenuClicked(ListItemView view, UIObject ui) {
-	RosterItem item = ((RosterItemView) view).getItem();
-	if (menu.isVisible()) {
-	    GWT.log("menu visible!", null);
-	    menu.hide();
-	} else {
-	    menu.setTarget(item);
-	    menu.showRelativeToMenu(ui);
-	}
-    }
-
-    @Override
-    public void onMouseOver(ListItemView view, boolean over) {
-	view.setSelected(over);
-	view.setMenuVisible(over);
-    }
-
-    public void openChat(XmppURI uri) {
-	chatManager.open(uri);
     }
 
     @SuppressWarnings("unchecked")

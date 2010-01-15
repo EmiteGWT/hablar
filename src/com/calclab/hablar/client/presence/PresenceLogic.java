@@ -5,6 +5,7 @@ import com.calclab.emite.core.client.xmpp.session.Session.State;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.presence.PresenceManager;
+import com.calclab.hablar.client.ui.styles.HablarStyles;
 import com.calclab.hablar.client.ui.styles.HablarStyles.IconType;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
@@ -65,11 +66,11 @@ public class PresenceLogic {
 
     private void setShow(Show show) {
 	if (show == Show.notSpecified || show == Show.chat) {
-	    view.setIcon(IconType.buddyOn);
+	    view.setIcon(HablarStyles.IconType.buddyOn);
 	} else if (show == Show.dnd) {
-	    view.setIcon(IconType.buddyDnd);
+	    view.setIcon(HablarStyles.IconType.buddyDnd);
 	} else if (show == Show.xa) {
-	    view.setIcon(IconType.buddyWait);
+	    view.setIcon(HablarStyles.IconType.buddyWait);
 	}
 	this.show = show;
     }
@@ -78,10 +79,10 @@ public class PresenceLogic {
 	State state = session.getState();
 	if (state == State.disconnected) {
 	    view.setName("");
-	    view.setIcon(IconType.buddyOff);
+	    view.setIcon(HablarStyles.IconType.buddyOff);
 	} else if (state == State.ready) {
 	    view.setName(session.getCurrentUser().getNode());
-	    view.setIcon(IconType.buddyOn);
+	    view.setIcon(HablarStyles.IconType.buddyOn);
 	}
 
     }

@@ -27,7 +27,7 @@ public class SearchResultItemWidget extends ListItemWiget implements SearchResul
     public SearchResultItemWidget(SearchLogic logic, SearchResultItem item) {
 	super(logic);
 	initWidget(uiBinder.createAndBindUi(this));
-	menu.addStyleName(HablarStyles.get(IconType.menu));
+	menu.addStyleName(HablarStyles.get(HablarStyles.IconType.menu));
 	setItem(item);
 	setMenuVisible(false);
     }

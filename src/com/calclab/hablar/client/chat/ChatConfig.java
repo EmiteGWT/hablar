@@ -8,11 +8,7 @@ public class ChatConfig {
     public static ChatConfig getFromMeta() {
 	ChatConfig config = new ChatConfig();
 	String chatURI = PageAssist.getMeta("hablar.chatWidget");
-	try {
-	    config.uri = XmppURI.uri(chatURI);
-	} catch (Exception e) {
-	}
-
+	config.uri = XmppURI.uri(chatURI);
 	return config;
     }
 

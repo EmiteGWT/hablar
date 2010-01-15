@@ -49,13 +49,8 @@ class LoginLogic {
 	}
     }
 
-    // FIXME: XmppURI class needs a look
     private XmppURI getUri() {
-	try {
-	    return XmppURI.uri(page.getUserName());
-	} catch (RuntimeException e) {
-	    return null;
-	}
+	return XmppURI.uri(page.getUserName());
     }
 
     private void setState(State state) {

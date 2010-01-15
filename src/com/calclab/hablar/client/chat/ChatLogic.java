@@ -48,13 +48,13 @@ public class ChatLogic {
 
     public void setPresence(final Show show) {
 	if (show == Show.chat) {
-	    view.setHeaderIconClass(HablarStyles.get(IconType.buddyOn));
+	    view.setHeaderIconClass(HablarStyles.get(HablarStyles.IconType.buddyOn));
 	} else if (show == Show.dnd) {
-	    view.setHeaderIconClass(HablarStyles.get(IconType.buddyDnd));
+	    view.setHeaderIconClass(HablarStyles.get(HablarStyles.IconType.buddyDnd));
 	} else if (show == Show.away) {
-	    view.setHeaderIconClass(HablarStyles.get(IconType.buddyWait));
+	    view.setHeaderIconClass(HablarStyles.get(HablarStyles.IconType.buddyWait));
 	} else {
-	    view.setHeaderIconClass(HablarStyles.get(IconType.buddyOff));
+	    view.setHeaderIconClass(HablarStyles.get(HablarStyles.IconType.buddyOff));
 	}
     }
 
