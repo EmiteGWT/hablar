@@ -1,6 +1,5 @@
 package com.calclab.hablar.client.roster;
 
-import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.client.ui.page.PageWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
@@ -58,8 +57,8 @@ public class RosterPage extends PageWidget implements RosterView {
     }
 
     @Override
-    public RosterItemView addItem(final RosterItem item) {
-	final RosterItemWidget view = new RosterItemWidget(item, logic);
+    public RosterItemView createItemView() {
+	RosterItemWidget view = new RosterItemWidget(logic);
 	list.add(view);
 	return view;
     }

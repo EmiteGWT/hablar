@@ -2,7 +2,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
-	<ui:style type="com.calclab.hablar.client.roster.RosterItemWidget.Icons">
+	<ui:style type="com.calclab.hablar.client.roster.RosterItemIcons">
 		.item {
 			display: block;
 			width: 100%;

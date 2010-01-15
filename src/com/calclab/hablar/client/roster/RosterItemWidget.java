@@ -1,10 +1,8 @@
 package com.calclab.hablar.client.roster;
 
-import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -16,18 +14,6 @@ import com.google.gwt.user.client.ui.Widget;
 
 class RosterItemWidget extends Composite implements RosterItemView {
 
-    interface Icons extends CssResource {
-	String buddyIcon();
-
-	String buddyIconDnd();
-
-	String buddyIconOff();
-
-	String buddyIconOn();
-
-	String buddyIconWait();
-    }
-
     interface RosterItemWidgetUiBinder extends UiBinder<Widget, RosterItemWidget> {
     }
 
@@ -37,18 +23,22 @@ class RosterItemWidget extends Composite implements RosterItemView {
     Label name, status, icon, jid;
 
     @UiField
-    Icons style;
+    RosterItemIcons style;
 
     private final RosterLogic logic;
     private RosterItem item;
 
     private String iconStyle;
 
-    public RosterItemWidget(RosterItem item, RosterLogic logic) {
-	this.logic = logic;
+    public RosterItemWidget(RosterLogic logic) {
 	initWidget(uiBinder.createAndBindUi(this));
-	setItem(item);
+	this.logic = logic;
 	sinkEvents(Event.ONCLICK | Event.ONDBLCLICK);
+    }
+
+    @Override
+    public RosterItemIcons getIconStyles() {
+	return style;
     }
 
     @Override
@@ -63,17 +53,8 @@ class RosterItemWidget extends Composite implements RosterItemView {
 	}
     }
 
-    public void setItem(RosterItem item) {
-	GWT.log("ITEM: " + item.getName() + ":" + item.getJID(), null);
-	this.item = item;
-	name.setText(item.getName());
-	jid.setText(item.getJID().toString());
-	setShow(item);
-	setStatus(item.getStatus());
-	sinkEvents(Event.ONCLICK);
-    }
-
-    private void setIcon(String iconStyle) {
+    @Override
+    public void setIcon(String iconStyle) {
 	if (this.iconStyle != null) {
 	    icon.getElement().removeClassName(this.iconStyle);
 	}
@@ -81,28 +62,24 @@ class RosterItemWidget extends Composite implements RosterItemView {
 	icon.getElement().addClassName(iconStyle);
     }
 
-    private void setShow(RosterItem item) {
-	Show show = item.getShow();
-	GWT.log("ITEM SHOW: " + show + " > " + item.isAvailable(), null);
-	if (show == Show.dnd) {
-	    setIcon(style.buddyIconDnd());
-	} else if (show == Show.xa) {
-	    setIcon(style.buddyIconWait());
-	} else if (show == Show.away) {
-	    setIcon(style.buddyIconOff());
-	} else if (item.isAvailable()) {
-	    setIcon(style.buddyIconOn());
-	} else {
-	    setIcon(style.buddyIconOff());
-	}
+    @Override
+    public void setJID(String jidString) {
+	jid.setText(jidString);
     }
 
-    private void setStatus(String status) {
-	if (status != null && status.trim().length() > 0) {
-	    this.status.setText(status);
-	} else {
-	    this.status.setVisible(false);
-	}
+    @Override
+    public void setName(String nameString) {
+	name.setText(nameString);
+    }
+
+    @Override
+    public void setStatus(String status) {
+	this.status.setText(status);
+    }
+
+    @Override
+    public void setStatusVisible(boolean visible) {
+	this.status.setVisible(visible);
     }
 
     @UiHandler("name")

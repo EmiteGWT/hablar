@@ -48,6 +48,21 @@ public class RosterTester extends AbstractRoster {
     }
 
     @Override
+    public void fireItemAdded(RosterItem item) {
+	super.fireItemAdded(item);
+    }
+
+    @Override
+    public void fireItemChanged(RosterItem item) {
+	super.fireItemChanged(item);
+    }
+
+    @Override
+    public void fireItemRemoved(RosterItem item) {
+	super.fireItemRemoved(item);
+    }
+
+    @Override
     public void fireRosterReady(Collection<RosterItem> collection) {
 	super.fireRosterReady(collection);
     }
@@ -81,11 +96,6 @@ public class RosterTester extends AbstractRoster {
     @Override
     public void updateItem(XmppURI jid, String name, String... groups) {
 	updated.add(new Modification(jid, name, groups));
-    }
-
-    @Override
-    protected void fireItemAdded(RosterItem item) {
-	super.fireItemAdded(item);
     }
 
 }

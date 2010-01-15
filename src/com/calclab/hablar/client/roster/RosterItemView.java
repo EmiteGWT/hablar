@@ -1,7 +1,16 @@
 package com.calclab.hablar.client.roster;
 
-import com.calclab.emite.im.client.roster.RosterItem;
-
 public interface RosterItemView {
-    void setItem(RosterItem item);
+
+    RosterItemIcons getIconStyles();
+
+    void setIcon(String iconStyle);
+
+    void setJID(String string);
+
+    void setName(String name);
+
+    void setStatus(String status);
+
+    void setStatusVisible(boolean b);
 }

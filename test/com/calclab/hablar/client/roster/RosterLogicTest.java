@@ -4,12 +4,15 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterItem;
@@ -24,6 +27,15 @@ public class RosterLogicTest {
     public void before() {
 	tester = new EmiteTester();
 	view = mock(RosterView.class);
+	when(view.createItemView()).thenAnswer(new Answer<RosterItemView>() {
+	    @Override
+	    public RosterItemView answer(InvocationOnMock invocation) throws Throwable {
+		RosterItemIcons icons = mock(RosterItemIcons.class);
+		RosterItemView itemView = mock(RosterItemView.class);
+		when(itemView.getIconStyles()).thenReturn(icons);
+		return itemView;
+	    }
+	});
 	new RosterLogic(view);
     }
 
@@ -31,7 +43,7 @@ public class RosterLogicTest {
     public void shouldActivateViewWhenItemAddedToRoster() {
 	RosterItem item = newItem("someone");
 	tester.roster.fireItemAdded(item);
-	verify(view).addItem(item);
+	verify(view).createItemView();
 	verify(view).setStatusMessage(anyString());
     }
 
@@ -41,7 +53,15 @@ public class RosterLogicTest {
 	RosterItem item = newItem("someone");
 	items.add(item);
 	tester.roster.fireRosterReady(items);
-	verify(view).addItem(item);
+	verify(view).createItemView();
+    }
+
+    @Test
+    public void shouldRemoveItems() {
+	RosterItem item = newItem("friend");
+	tester.roster.fireItemAdded(item);
+	verify(view).createItemView();
+	tester.roster.fireItemRemoved(item);
     }
 
     @Test

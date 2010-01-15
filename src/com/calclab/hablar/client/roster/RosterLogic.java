@@ -32,7 +32,7 @@ public class RosterLogic {
 	    public void onEvent(Collection<RosterItem> items) {
 		GWT.log("Retrieved roster", null);
 		for (RosterItem item : items) {
-		    getWidget(item);
+		    getOrCreateWidget(item);
 		}
 	    }
 
@@ -41,7 +41,7 @@ public class RosterLogic {
 	roster.onItemAdded(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(RosterItem item) {
-		view.addItem(item);
+		getOrCreateWidget(item);
 		view.setStatusMessage(item.getName() + " has been added to roster.");
 	    }
 	});
@@ -49,7 +49,7 @@ public class RosterLogic {
 	roster.onItemChanged(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(RosterItem item) {
-		getWidget(item).setItem(item);
+		getOrCreateWidget(item);
 	    }
 	});
 
@@ -77,12 +77,19 @@ public class RosterLogic {
 	chatManager.open(uri);
     }
 
-    private RosterItemView getWidget(RosterItem item) {
+    /**
+     * Returns a roster item view ALWAYS
+     * 
+     * @param item
+     * @return
+     */
+    RosterItemView getOrCreateWidget(RosterItem item) {
 	RosterItemView itemWidget = items.get(item.getJID());
 	if (itemWidget == null) {
-	    itemWidget = view.addItem(item);
+	    itemWidget = view.createItemView();
 	    items.put(item.getJID(), itemWidget);
 	}
+	RosterItemLogic.setItem(item, itemWidget);
 	return itemWidget;
     }
 
