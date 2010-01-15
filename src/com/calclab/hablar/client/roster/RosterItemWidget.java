@@ -6,10 +6,12 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.MenuBar;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 class RosterItemWidget extends Composite implements RosterItemView {
@@ -45,9 +47,19 @@ class RosterItemWidget extends Composite implements RosterItemView {
     public void onBrowserEvent(Event event) {
 	int eventType = event.getTypeInt();
 	if (eventType == Event.ONDBLCLICK) {
-	    Window.alert("Abre!");
 	} else if (eventType == Event.ONCLICK) {
-	    Window.alert("Pincha!");
+	    final PopupPanel panel = new PopupPanel(true);
+	    MenuBar bar = new MenuBar(true);
+	    bar.addItem("Chat", true, new Command() {
+		@Override
+		public void execute() {
+		    panel.hide();
+		    logic.onItemClick(item);
+		}
+	    });
+	    panel.add(bar);
+	    panel.setPopupPosition(event.getClientX(), event.getClientY());
+	    panel.show();
 	} else {
 	    super.onBrowserEvent(event);
 	}

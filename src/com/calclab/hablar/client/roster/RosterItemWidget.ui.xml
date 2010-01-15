@@ -19,7 +19,7 @@
 		.icon {
 			display: block;
 			float: left;
-			margin: 2px 5px 0 2px;
+			margin: 2px 5px 2px 2px;
 		}
 		
 		.name {
@@ -37,7 +37,7 @@
 		
 		.status {
 			display: block;
-			margin-left: 24px;
+			margin: 0 0 2px 25px;
 			color: gray;
 		}
 		
