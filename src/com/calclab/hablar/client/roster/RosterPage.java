@@ -25,6 +25,8 @@ public class RosterPage extends PageWidget implements RosterView {
     interface RosterWidgetUiBinder extends UiBinder<Widget, RosterPage> {
     }
 
+    public static final String ID = "RosterPage";
+
     private static RosterWidgetUiBinder uiBinder = GWT.create(RosterWidgetUiBinder.class);
 
     @UiField
@@ -40,14 +42,15 @@ public class RosterPage extends PageWidget implements RosterView {
 
     public RosterPage() {
 	super(false);
+	setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
 	logic = new RosterLogic(this);
 	setHeaderTitle("Roster");
 	setHeaderIconClass(icons.rosterIcon());
     }
 
-    public void addAction(String iconStyle, ClickHandler clickHandler) {
-	Label label = new Label();
+    public void addAction(final String iconStyle, final ClickHandler clickHandler) {
+	final Label label = new Label();
 	label.getElement().addClassName(icons.action());
 	label.getElement().addClassName(iconStyle);
 	label.addClickHandler(clickHandler);
@@ -55,13 +58,13 @@ public class RosterPage extends PageWidget implements RosterView {
     }
 
     @Override
-    public RosterItemView addItem(RosterItem item) {
-	RosterItemWidget view = new RosterItemWidget(item, logic);
+    public RosterItemView addItem(final RosterItem item) {
+	final RosterItemWidget view = new RosterItemWidget(item, logic);
 	list.add(view);
 	return view;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(final boolean active) {
 	GWT.log("ROSTER: " + active, null);
 	if (active) {
 	    roster.setWidgetTopHeight(actions, 0, Unit.PX, 20, Unit.PX);

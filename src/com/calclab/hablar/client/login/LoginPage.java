@@ -25,6 +25,8 @@ public class LoginPage extends PageWidget {
     interface LoginWidgetUiBinder extends UiBinder<Widget, LoginPage> {
     }
 
+    public static final String ID = "LoginPage";
+
     private static LoginWidgetUiBinder uiBinder = GWT.create(LoginWidgetUiBinder.class);
 
     @UiField
@@ -43,11 +45,13 @@ public class LoginPage extends PageWidget {
 
     public LoginPage() {
 	super(false);
+	// FIXME: better this can go in the constructor
+	super.setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
 	this.logic = new LoginLogic(this);
     }
 
-    public void addMessage(String string) {
+    public void addMessage(final String string) {
 	output.add(new StatusMessage(string));
     }
 
@@ -59,35 +63,35 @@ public class LoginPage extends PageWidget {
 	return uri.getText();
     }
 
-    public void setActionEnabled(boolean enabled) {
+    public void setActionEnabled(final boolean enabled) {
 	button.setEnabled(enabled);
     }
 
-    public void setActionText(String text) {
+    public void setActionText(final String text) {
 	button.setText(text);
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
 	this.password.setText(password);
     }
 
-    public void setUserName(String userName) {
+    public void setUserName(final String userName) {
 	uri.setText(userName);
 	uri.setFocus(true);
     }
 
     @UiHandler("button")
-    void onClick(ClickEvent e) {
+    void onClick(final ClickEvent e) {
 	logic.onAction();
     }
 
     @UiHandler("uri")
-    void onNameChanged(ChangeEvent event) {
+    void onNameChanged(final ChangeEvent event) {
 	password.setFocus(true);
     }
 
     @UiHandler("password")
-    void onPasswordChanged(ChangeEvent event) {
+    void onPasswordChanged(final ChangeEvent event) {
 	logic.onAction();
     }
 

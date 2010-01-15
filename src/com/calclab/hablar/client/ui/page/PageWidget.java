@@ -17,7 +17,7 @@ public abstract class PageWidget extends Composite implements Page {
     private Visibility visibility;
     private String status;
 
-    public PageWidget(boolean closeable) {
+    public PageWidget(final boolean closeable) {
 	this.closeEvent = new Event<PageWidget>("page.close");
 	this.header = new HeaderWidget(this, closeable);
 	this.statusAction = new Event<PageWidget>("page.status");
@@ -46,35 +46,40 @@ public abstract class PageWidget extends Composite implements Page {
 	return visibility;
     }
 
-    public void onClose(Listener<PageWidget> listener) {
+    public void onClose(final Listener<PageWidget> listener) {
 	closeEvent.add(listener);
     }
 
-    public void onStatusMessageChanged(Listener<PageWidget> listener) {
+    public void onStatusMessageChanged(final Listener<PageWidget> listener) {
 	statusAction.add(listener);
     }
 
-    public void onVisibilityChanged(Listener<PageWidget> listener) {
+    public void onVisibilityChanged(final Listener<PageWidget> listener) {
 	openEvent.add(listener);
     }
 
-    public void setHeaderIconClass(String iconClass) {
+    public void setHeaderIconClass(final String iconClass) {
 	header.setIconClass(iconClass);
     }
 
-    public void setHeaderTitle(String title) {
+    public void setHeaderTitle(final String title) {
 	header.setHeaderTitle(title);
     }
 
-    @Override
-    public void setStatusMessage(String status) {
-	this.status = status;
-	statusAction.fire(this);
-	if (visibility == Visibility.closed)
-	    header.requestFocus();
+    public void setId(final String id) {
+	header.ensureDebugId(id);
     }
 
-    public void setVisibility(Visibility visibility) {
+    @Override
+    public void setStatusMessage(final String status) {
+	this.status = status;
+	statusAction.fire(this);
+	if (visibility == Visibility.closed) {
+	    header.requestFocus();
+	}
+    }
+
+    public void setVisibility(final Visibility visibility) {
 	this.visibility = visibility;
 	header.setVisibility(visibility);
     }
