@@ -34,6 +34,13 @@ public class RosterItemLogicTest {
     }
 
     @Test
+    public void shouldSetOffline() {
+	item.setAvailable(false);
+	item.setShow(Show.notSpecified);
+	assertSame(IconType.buddyOff, RosterItemLogic.getIcon(item));
+    }
+
+    @Test
     public void shouldSetProperties() {
 	RosterItemLogic.setItem(item, view);
 	verify(view).setName(item.getName());

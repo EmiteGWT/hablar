@@ -16,7 +16,7 @@ public class RosterItemLogic {
 	} else if (item.isAvailable()) {
 	    return IconType.buddyOn;
 	} else {
-	    return IconType.buddyOn;
+	    return IconType.buddyOff;
 	}
     }
 
