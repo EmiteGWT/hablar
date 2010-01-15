@@ -6,6 +6,4 @@ public interface SearchResultView {
 
     SearchResultItem getItem();
 
-    void setAddToRosterVisible(boolean visible);
-
 }

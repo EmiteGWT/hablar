@@ -5,8 +5,10 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.SubscriptionHandler;
 import com.calclab.emite.im.client.roster.SubscriptionHandler.Behaviour;
 import com.calclab.emite.xep.search.client.SearchManager;
+import com.calclab.hablar.client.ui.HablarResources;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -16,6 +18,9 @@ public class Hablar implements EntryPoint {
     public void onModuleLoad() {
 	SubscriptionHandler handler = Suco.get(SubscriptionHandler.class);
 	handler.setBehaviour(Behaviour.acceptAll);
+
+	HablarResources res = GWT.create(HablarResources.class);
+	res.generalCSS().ensureInjected();
 
 	XmppURI host = XmppURI.uri(PageAssist.getMeta("emite.searchHost"));
 	Suco.get(SearchManager.class).setHost(host);

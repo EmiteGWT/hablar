@@ -39,7 +39,6 @@ public class SearchLogicTest {
 	when(resultView.getItem()).thenReturn(item);
 
 	logic.onResultToRoster(resultView);
-	verify(resultView).setAddToRosterVisible(false);
 	assertTrue(tester.roster.hasRequestedToAdd(item.getJid()));
     }
 
@@ -50,7 +49,7 @@ public class SearchLogicTest {
 	results.add(newItem("one"));
 	logic.search("anything");
 	tester.searchManager.fireSearchSuccess(results);
-	verify(view).addResult(results.get(0), false);
+	verify(view).addResult(results.get(0));
     }
 
     @Test
@@ -80,8 +79,8 @@ public class SearchLogicTest {
 	results.add(newItem("one"));
 	results.add(newItem("one"));
 	tester.searchManager.fireSearchSuccess(results);
-	verify(view).addResult(results.get(0), true);
-	verify(view).addResult(results.get(1), true);
+	verify(view).addResult(results.get(0));
+	verify(view).addResult(results.get(1));
     }
 
     private SearchResultItem newItem(String name) {

@@ -10,7 +10,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class Icons extends Composite {
 
     public static enum IconType {
-	buddy, buddyDnd, buddyOff, buddyOn, buddyWait
+	buddy, buddyDnd, buddyOff, buddyOn, buddyWait, roster
     }
 
     interface IconsUiBinder extends UiBinder<Widget, Icons> {
@@ -28,6 +28,7 @@ public class Icons extends Composite {
 
 	String buddyIconWait();
 
+	String rosterIcon();
     }
 
     private static IconsUiBinder uiBinder = GWT.create(IconsUiBinder.class);
@@ -49,16 +50,20 @@ public class Icons extends Composite {
     }
 
     private String getIconStyle(IconType iconType) {
-	if (iconType == IconType.buddy)
+	switch (iconType) {
+	case buddy:
 	    return style.buddyIcon();
-	else if (iconType == IconType.buddyDnd)
+	case buddyDnd:
 	    return style.buddyIconDnd();
-	else if (iconType == IconType.buddyOn)
-	    return style.buddyIconOn();
-	else if (iconType == IconType.buddyOff)
+	case buddyOff:
 	    return style.buddyIconOff();
-	else if (iconType == IconType.buddyWait)
+	case buddyWait:
 	    return style.buddyIconWait();
+	case buddyOn:
+	    return style.buddyIconOn();
+	case roster:
+	    return style.rosterIcon();
+	}
 	return null;
     }
 }

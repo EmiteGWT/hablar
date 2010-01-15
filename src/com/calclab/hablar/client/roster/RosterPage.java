@@ -1,5 +1,7 @@
 package com.calclab.hablar.client.roster;
 
+import com.calclab.hablar.client.ui.icons.Icons;
+import com.calclab.hablar.client.ui.icons.Icons.IconType;
 import com.calclab.hablar.client.ui.page.PageWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
@@ -14,11 +16,10 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class RosterPage extends PageWidget implements RosterView {
 
-    public static interface Icons extends CssResource {
+    public static interface Style extends CssResource {
 
 	String action();
 
-	String rosterIcon();
     }
 
     interface RosterWidgetUiBinder extends UiBinder<Widget, RosterPage> {
@@ -32,7 +33,7 @@ public class RosterPage extends PageWidget implements RosterView {
     LayoutPanel roster;
 
     @UiField
-    Icons icons;
+    Style style;
 
     @UiField
     FlowPanel list, actions, disabledPanel;
@@ -45,12 +46,12 @@ public class RosterPage extends PageWidget implements RosterView {
 	initWidget(uiBinder.createAndBindUi(this));
 	logic = new RosterLogic(this);
 	setHeaderTitle("Roster");
-	setHeaderIconClass(icons.rosterIcon());
+	setHeaderIconClass(Icons.get(IconType.roster));
     }
 
     public void addAction(final String iconStyle, final ClickHandler clickHandler) {
 	final Label label = new Label();
-	label.getElement().addClassName(icons.action());
+	label.getElement().addClassName(style.action());
 	label.getElement().addClassName(iconStyle);
 	label.addClickHandler(clickHandler);
 	actions.add(label);
@@ -74,6 +75,6 @@ public class RosterPage extends PageWidget implements RosterView {
 	    roster.setWidgetTopBottom(disabledPanel, 0, Unit.PX, 0, Unit.PX);
 	    roster.setWidgetBottomHeight(list, 0, Unit.PX, 0, Unit.PX);
 	}
-	roster.animate(500);
+	roster.animate(active ? 500 : 0);
     }
 }

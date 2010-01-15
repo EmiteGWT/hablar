@@ -2,7 +2,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
-	<ui:style type="com.calclab.hablar.client.roster.RosterItemIcons">
+	<ui:style >
 		.item {
 			display: block;
 			width: 100%;
@@ -41,40 +41,7 @@
 			color: gray;
 		}
 		
-		@sprite .menuTrigger {
-			gwt-image: 'menuIcon';
-			display: block;
-			float: right;
-			margin-right: 3px;
-		}
-		
-		@sprite .buddyIcon {
-			gwt-image: 'buddy';
-		}
-		
-		@sprite .buddyIconOn {
-			gwt-image: 'buddyOn';
-		}
-		
-		@sprite .buddyIconOff {
-			gwt-image: 'buddyOff';
-		}
-		
-		@sprite .buddyIconDnd {
-			gwt-image: 'buddyDnd';
-		}
-		
-		@sprite .buddyIconWait {
-			gwt-image: 'buddyWait';
-		}
 	</ui:style>
-
-	<ui:image field="buddy" src="../buddy-small.png"></ui:image>
-	<ui:image field="buddyOn" src="../buddy-small-on.png"></ui:image>
-	<ui:image field="buddyOff" src="../buddy-small-off.png"></ui:image>
-	<ui:image field="buddyDnd" src="../buddy-small-dnd.png"></ui:image>
-	<ui:image field="buddyWait" src="../buddy-small-wait.png"></ui:image>
-	<ui:image field="menuIcon" src="../menu.png" />
 
 	<g:FlowPanel styleName="{style.item}">
 		<g:FlowPanel styleName="{style.user}">

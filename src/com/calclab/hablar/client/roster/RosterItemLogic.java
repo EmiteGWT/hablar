@@ -2,27 +2,28 @@ package com.calclab.hablar.client.roster;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.hablar.client.ui.icons.Icons.IconType;
 
 public class RosterItemLogic {
-    public static String getIcon(RosterItem item, RosterItemIcons icons) {
+    public static IconType getIcon(RosterItem item) {
 	Show show = item.getShow();
 	if (show == Show.dnd) {
-	    return icons.buddyIconDnd();
+	    return IconType.buddyDnd;
 	} else if (show == Show.xa) {
-	    return icons.buddyIconWait();
+	    return IconType.buddyWait;
 	} else if (show == Show.away) {
-	    return icons.buddyIconOff();
+	    return IconType.buddyWait;
 	} else if (item.isAvailable()) {
-	    return icons.buddyIconOn();
+	    return IconType.buddyOn;
 	} else {
-	    return icons.buddyIconOff();
+	    return IconType.buddyOn;
 	}
     }
 
     public static void setItem(RosterItem item, RosterItemView view) {
 	view.setName(item.getName());
 	view.setJID(item.getJID().toString());
-	view.setIcon(getIcon(item, view.getIconStyles()));
+	view.setIcon(getIcon(item));
 
 	String status = item.getStatus();
 	if (status != null && status.trim().length() > 0) {
@@ -31,7 +32,7 @@ public class RosterItemLogic {
 	} else {
 	    view.setStatusVisible(false);
 	}
-
+	view.setItem(item);
     }
 
 }

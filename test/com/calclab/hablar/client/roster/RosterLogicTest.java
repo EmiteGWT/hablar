@@ -30,10 +30,7 @@ public class RosterLogicTest {
 	when(view.createItemView()).thenAnswer(new Answer<RosterItemView>() {
 	    @Override
 	    public RosterItemView answer(InvocationOnMock invocation) throws Throwable {
-		RosterItemIcons icons = mock(RosterItemIcons.class);
-		RosterItemView itemView = mock(RosterItemView.class);
-		when(itemView.getIconStyles()).thenReturn(icons);
-		return itemView;
+		return mock(RosterItemView.class);
 	    }
 	});
 	new RosterLogic(view);

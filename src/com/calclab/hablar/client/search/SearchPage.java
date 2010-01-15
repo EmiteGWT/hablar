@@ -3,6 +3,9 @@ package com.calclab.hablar.client.search;
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
 import com.calclab.emite.xep.search.client.SearchResultItem;
+import com.calclab.hablar.client.ui.menu.MenuAction;
+import com.calclab.hablar.client.ui.menu.PopupMenu;
+import com.calclab.hablar.client.ui.menu.PopupMenuView;
 import com.calclab.hablar.client.ui.page.PageWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -74,12 +77,18 @@ public class SearchPage extends PageWidget implements SearchView {
 	setHeaderIconClass(icons.searchIcon());
     }
 
-    public void addResult(SearchResultItem item, boolean addToRoster) {
-	results.add(new SearchResult(logic, item, addToRoster));
+    public void addResult(SearchResultItem item) {
+	results.add(new SearchResult(logic, item));
     }
 
     public void clearResults() {
 	results.clear();
+    }
+
+    @Override
+    public PopupMenuView<SearchResultView> createMenu(MenuAction<SearchResultView>... actions) {
+	PopupMenu<SearchResultView> popupMenu = new PopupMenu<SearchResultView>(actions);
+	return popupMenu;
     }
 
     @UiHandler("term")
