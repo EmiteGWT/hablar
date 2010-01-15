@@ -4,10 +4,37 @@
 
 	<ui:style src="../Hablar.css" field="hablar" />
 		
-	<ui:style src="SearchPage.css"
-		type="com.calclab.hablar.client.search.SearchPage.Styles" />
-			
-		<g:LayoutPanel ui:field="self" styleName="{hablar.page}">
+	<ui:style type="com.calclab.hablar.client.search.SearchPage.Styles">
+		.panel {
+			padding: 5px 1% 3px 1%;
+		}
+		
+		.message {
+			padding: 3px 1%;
+		}
+		
+		.info {
+			color: #BBBBBB;
+		}
+		
+		.alert {
+			color: #c00;
+		}
+		
+		.success {
+			color: #090;
+		}
+		
+		.unfocus {
+			color: #E9E9E9;
+		}
+		
+		.focus {
+			color: black;
+		}
+	</ui:style>
+
+	<g:LayoutPanel ui:field="self" styleName="{hablar.page}">
 		<g:layer left="0" top="0" width="100%" height="0">
 			<g:FlowPanel ui:field="messagePanel">
 				<g:Label ui:field="message" styleName="{hablar.panel} {style.message}">

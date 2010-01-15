@@ -5,19 +5,15 @@
 	<ui:style src="../Hablar.css" field="hablar" />
 		
 	<ui:style>
-		.result {
-			padding: 5px 0;
-			display: block;
-			width: 100%;
-			overflow: hidden;
-			background-color: white;
-			border-bottom: 1px solid #e9e9e9;
-		}
-		
 		.resultName {
 			display: block;
 			float: left;
 			margin: 0 10px;
+		}
+		.jid {
+			display: block;
+			float: left;
+			color: gray;
 		}
 	</ui:style>
 
@@ -28,8 +24,10 @@
 	</ui:style>
 
 	<ui:image field="buddy" src="../buddy-small.png"></ui:image>
-	<g:HTMLPanel styleName="{style.result}">
+	<g:HTMLPanel styleName="{hablar.listItemWidget}">
 		<span class="{hablar.icon} {icons.userAdd}"></span>
 		<g:Label ui:field="name" styleName="{style.resultName}">Result</g:Label>
+		<g:Label ui:field="jid" styleName="{style.jid}">JID</g:Label>
+		<g:Label ui:field="menu" styleName="{hablar.listItemMenu}"></g:Label>
 	</g:HTMLPanel>
 </ui:UiBinder> 

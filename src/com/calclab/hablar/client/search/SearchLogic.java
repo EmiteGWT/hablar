@@ -9,11 +9,15 @@ import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.xep.search.client.SearchManager;
 import com.calclab.emite.xep.search.client.SearchResultItem;
 import com.calclab.hablar.client.search.SearchView.Level;
+import com.calclab.hablar.client.ui.lists.ListItemView;
+import com.calclab.hablar.client.ui.lists.ListLogic;
 import com.calclab.hablar.client.ui.menu.MenuAction;
 import com.calclab.hablar.client.ui.menu.PopupMenuView;
 import com.calclab.suco.client.Suco;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.ui.UIObject;
 
-public class SearchLogic {
+public class SearchLogic implements ListLogic {
     private final SearchView view;
     private final SearchManager manager;
     private final Roster roster;
@@ -27,11 +31,23 @@ public class SearchLogic {
 	createMenus();
     }
 
-    public void onResultClicked(SearchResultView view, int x, int y) {
-	boolean addToRoster = roster.getItemByJID(view.getItem().getJid()) == null;
+    @Override
+    public void onItemClick(ListItemView view, Event event) {
+    }
+
+    @Override
+    public void onMenuClicked(ListItemView view, UIObject ui) {
+	SearchResultView resultView = (SearchResultView) view;
+	boolean addToRoster = roster.getItemByJID(resultView.getItem().getJid()) == null;
 	PopupMenuView<SearchResultView> menu = addToRoster ? addToRosterMenu : removeFromRosterMenu;
-	menu.setTarget(view);
-	menu.show(x, y);
+	menu.setTarget(resultView);
+	menu.showRelativeToMenu(ui);
+    }
+
+    @Override
+    public void onMouseOver(ListItemView view, boolean over) {
+	view.setSelected(over);
+	view.setMenuVisible(true);
     }
 
     public void search(final String text) {

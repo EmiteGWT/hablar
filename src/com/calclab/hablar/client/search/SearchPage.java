@@ -78,7 +78,7 @@ public class SearchPage extends PageWidget implements SearchView {
     }
 
     public void addResult(SearchResultItem item) {
-	results.add(new SearchResult(logic, item));
+	results.add(new SearchResultItemWidget(logic, item));
     }
 
     public void clearResults() {
@@ -106,8 +106,8 @@ public class SearchPage extends PageWidget implements SearchView {
 
     @Override
     public void showMessage(String body, Level level) {
-	self.setWidgetTopHeight(messagePanel, 0, PX, 25, PX);
-	self.setWidgetTopBottom(scroll, 33, PX, 33, PX);
+	self.setWidgetTopHeight(messagePanel, 0, PX, 22, PX);
+	self.setWidgetTopBottom(scroll, 22, PX, 33, PX);
 	self.animate(250);
 
 	message.setText(body);

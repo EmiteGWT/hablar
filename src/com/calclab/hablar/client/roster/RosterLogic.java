@@ -9,13 +9,17 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.hablar.client.ui.lists.ListItemView;
+import com.calclab.hablar.client.ui.lists.ListLogic;
 import com.calclab.hablar.client.ui.menu.MenuAction;
 import com.calclab.hablar.client.ui.menu.PopupMenuView;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.ui.UIObject;
 
-public class RosterLogic {
+public class RosterLogic implements ListLogic {
 
     private final Roster roster;
     private final ChatManager chatManager;
@@ -72,15 +76,27 @@ public class RosterLogic {
 	view.setActive(active);
     }
 
-    public void onItemClick(RosterItem item, int left, int top) {
-	GWT.log("Item clicked", null);
+    public void onItemClick(ListItemView view, Event event) {
+	RosterItemView rosterView = (RosterItemView) view;
+	chatManager.open(rosterView.getItem().getJID());
+    }
+
+    @Override
+    public void onMenuClicked(ListItemView view, UIObject ui) {
+	RosterItem item = ((RosterItemView) view).getItem();
 	if (menu.isVisible()) {
 	    GWT.log("menu visible!", null);
 	    menu.hide();
 	} else {
 	    menu.setTarget(item);
-	    menu.show(left, top);
+	    menu.showRelativeToMenu(ui);
 	}
+    }
+
+    @Override
+    public void onMouseOver(ListItemView view, boolean over) {
+	view.setSelected(over);
+	view.setMenuVisible(over);
     }
 
     public void openChat(XmppURI uri) {

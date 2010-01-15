@@ -5,6 +5,8 @@ import com.calclab.hablar.client.ui.styles.HablarStyles.IconType;
 
 public interface RosterItemView {
 
+    RosterItem getItem();
+
     void setIcon(IconType icon);
 
     void setItem(RosterItem item);
@@ -12,6 +14,8 @@ public interface RosterItemView {
     void setJID(String string);
 
     void setName(String name);
+
+    void setSelected(boolean selected);
 
     void setStatus(String status);
 

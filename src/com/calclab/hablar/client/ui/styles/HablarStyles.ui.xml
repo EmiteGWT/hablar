@@ -37,6 +37,9 @@
 			@sprite .rosterIcon {
 				gwt-image: 'rosterIcon';
 			}
+            @sprite .menuIcon {
+                gwt-image: 'menuIcon';
+            }
 		</ui:style>
 
 	<ui:image field="rosterIcon" src="roster.png"></ui:image>
@@ -45,6 +48,7 @@
 	<ui:image field="buddyOff" src="buddy-small-off.png"></ui:image>
 	<ui:image field="buddyDnd" src="buddy-small-dnd.png"></ui:image>
 	<ui:image field="buddyWait" src="buddy-small-wait.png"></ui:image>
+    <ui:image field="menuIcon" src="menu2.png"></ui:image>
 
 	<g:SimplePanel></g:SimplePanel>
 </ui:UiBinder> 

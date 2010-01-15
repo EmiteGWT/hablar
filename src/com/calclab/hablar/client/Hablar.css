@@ -26,8 +26,7 @@
 	overflow: hidden;
 	background-color: white;
 	border-left: 1px solid #BBBBBB;
-    border-top: 1px solid #BBBBBB;
-	
+	border-top: 1px solid #BBBBBB;
 }
 
 .icon {
@@ -38,8 +37,16 @@
 	margin-left: 3px;
 }
 
-.btnLink {
+.listItemWidget {
 	display: block;
-	-moz-border-radius: 0.5em;
-	-webkit-border-radius: 0.5em;
+	width: 100%;
+	overflow: hidden;
+	padding: 5px 0px 0 0px;
+	border-bottom: 1px solid #E9E9E9;
+	cursor: pointer;
+}
+
+.listItemMenu {
+    float: right;
+    margin-right: 3px;
 }

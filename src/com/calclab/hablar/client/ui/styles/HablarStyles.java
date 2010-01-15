@@ -10,7 +10,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class HablarStyles extends Composite {
 
     public static enum IconType {
-	buddy, buddyDnd, buddyOff, buddyOn, buddyWait, roster
+	buddy, buddyDnd, buddyOff, buddyOn, buddyWait, roster, menu
     }
 
     public static enum StyleType {
@@ -31,6 +31,8 @@ public class HablarStyles extends Composite {
 	String buddyIconOn();
 
 	String buddyIconWait();
+
+	String menuIcon();
 
 	String rosterIcon();
     }
@@ -76,6 +78,8 @@ public class HablarStyles extends Composite {
 	    return icons.buddyIconOn();
 	case roster:
 	    return icons.rosterIcon();
+	case menu:
+	    return icons.menuIcon();
 	}
 	return null;
     }

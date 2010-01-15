@@ -2,14 +2,10 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
+    <ui:style src="../Hablar.css" field="hablar" />
+
+
 	<ui:style >
-		.item {
-			display: block;
-			width: 100%;
-			overflow: hidden;
-			padding: 5px 0px 0 0px;
-			border-bottom: 1px solid #E9E9E9;
-		}
 		
 		.user {
 			width: 100%;
@@ -43,11 +39,12 @@
 		
 	</ui:style>
 
-	<g:FlowPanel styleName="{style.item}">
+	<g:FlowPanel styleName="{hablar.listItemWidget}">
 		<g:FlowPanel styleName="{style.user}">
 			<g:Label styleName="{style.icon}" ui:field="icon"></g:Label>
 			<g:Label styleName="{style.name}" ui:field="name">name-here</g:Label>
 			<g:Label styleName="{style.jid}" ui:field="jid">jid</g:Label>
+			<g:Label ui:field="menu" styleName="{hablar.listItemMenu}"></g:Label>
 		</g:FlowPanel>
 		<g:Label styleName="{style.status}" ui:field="status" />
 	</g:FlowPanel>
