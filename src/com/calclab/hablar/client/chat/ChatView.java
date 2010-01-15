@@ -15,6 +15,8 @@ public interface ChatView extends Page {
 
     void setPresence(Show show);
 
+    void setTextBoxVisible(boolean visible);
+
     void showMessage(String name, String body, MessageType type);
 
 }

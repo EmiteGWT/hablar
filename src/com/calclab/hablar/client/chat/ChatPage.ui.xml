@@ -1,40 +1,25 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	<ui:style src="ChatPage.css" />
+	<ui:style src="../Hablar.css" field="hablar" />
 		
-	<ui:style field="icons" type="com.calclab.hablar.client.chat.ChatPage.Icons">
-		@sprite .chatIcon {
-			gwt-image: 'buddy';
-		}
-		@sprite .chatIconOn {
-			gwt-image: 'buddyOn';
-		}
-		@sprite .chatIconOff {
-			gwt-image: 'buddyOff';
-		}
-		@sprite .chatIconDnd {
-			gwt-image: 'buddyDnd';
-		}
-		@sprite .chatIconWait {
-			gwt-image: 'buddyWait';
+	<ui:style>
+		.talkBox {
+			width: 100%;
+			margin: 3px 0;
+			padding: 3px;
+			height: 54px;
+			border: 1px solid #BBBBBB;
 		}
 	</ui:style>
 
-	<ui:image field="buddy" src="../buddy-small.png"></ui:image>
-	<ui:image field="buddyOn" src="../buddy-small-on.png"></ui:image>
-	<ui:image field="buddyOff" src="../buddy-small-off.png"></ui:image>
-	<ui:image field="buddyDnd" src="../buddy-small-dnd.png"></ui:image>
-	<ui:image field="buddyWait" src="../buddy-small-wait.png"></ui:image>
 
-	<g:DockLayoutPanel unit='PX' styleName="{style.chat}">
-		<g:center>
-			<g:FlowPanel styleName="{style.list}" ui:field="list"></g:FlowPanel>
-		</g:center>
-		<g:south size="60">
-			<g:HTMLPanel styleName="{style.talker}">
-				<g:TextArea styleName="{style.talkBox}" ui:field="talkBox"></g:TextArea>
-			</g:HTMLPanel>
-		</g:south>
-	</g:DockLayoutPanel>
+	<g:LayoutPanel styleName="{hablar.page}" ui:field="page">
+		<g:layer top='0px' left='0px' right='0px' bottom='69px'>
+			<g:FlowPanel styleName="{hablar.list}" ui:field="list"></g:FlowPanel>
+		</g:layer>
+		<g:layer left="0" right="0" bottom="0" height="61px">
+			<g:TextArea styleName="{style.talkBox}" ui:field="talkBox"></g:TextArea>
+		</g:layer>
+	</g:LayoutPanel>
 </ui:UiBinder> 

@@ -2,7 +2,11 @@ package com.calclab.hablar.client.chat;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
+import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.chat.Chat;
+import com.calclab.emite.im.client.chat.Chat.State;
+import com.calclab.hablar.client.ui.styles.HablarStyles;
+import com.calclab.hablar.client.ui.styles.HablarStyles.IconType;
 import com.calclab.suco.client.events.Listener;
 
 public class ChatLogic {
@@ -24,6 +28,13 @@ public class ChatLogic {
 		view.setStatusMessage("Incoming message from " + name);
 	    }
 	});
+	chat.onStateChanged(new Listener<State>() {
+	    @Override
+	    public void onEvent(State state) {
+		setState(state);
+	    }
+	});
+	setState(chat.getState());
     }
 
     public void onTalk(final String text) {
@@ -35,4 +46,20 @@ public class ChatLogic {
 	}
     }
 
+    public void setPresence(final Show show) {
+	if (show == Show.chat) {
+	    view.setHeaderIconClass(HablarStyles.get(IconType.buddyOn));
+	} else if (show == Show.dnd) {
+	    view.setHeaderIconClass(HablarStyles.get(IconType.buddyDnd));
+	} else if (show == Show.away) {
+	    view.setHeaderIconClass(HablarStyles.get(IconType.buddyWait));
+	} else {
+	    view.setHeaderIconClass(HablarStyles.get(IconType.buddyOff));
+	}
+    }
+
+    private void setState(State state) {
+	boolean visible = state == State.ready;
+	view.setTextBoxVisible(visible);
+    }
 }

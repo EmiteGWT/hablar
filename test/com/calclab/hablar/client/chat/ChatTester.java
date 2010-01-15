@@ -28,4 +28,9 @@ public class ChatTester extends AbstractChat implements Chat {
 	super.receive(message);
     }
 
+    @Override
+    public void setState(State state) {
+	super.setState(state);
+    }
+
 }

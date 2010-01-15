@@ -4,7 +4,7 @@
 
 	<ui:style type="com.calclab.hablar.client.ui.styles.HablarStyles.Styles">
 		.active {
-			background-color: #EFEFEF;
+			background-color: #EEEEEE;
 		}
 		
 		.inactive {

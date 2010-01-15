@@ -10,7 +10,7 @@
 		</g:layer>
 		<!-- Results -->
 		<g:layer left="0" top="20px" width="100%" bottom="0px">
-			<g:FlowPanel styleName="{style.list}" ui:field="list"></g:FlowPanel>
+			<g:FlowPanel styleName="{hablar.list}" ui:field="list"></g:FlowPanel>
 		</g:layer>
 		<!-- Anactive -->
 		<g:layer left="0" top="20px" width="100%" height="0px">
@@ -35,18 +35,11 @@
 			border: 3px solid #E9E9E9;
 		}
 		
-		.list {
-			width: 100%;
-			overflow: hidden;
-			background-color: white;
-			border-left: 1px solid #BBBBBB;
-		}
 		
 		.actionsPanel {
 			width: 100%;
 			overflow: hidden;
 			background-color: #E9E9E9;
-			border-bottom: 1px solid #BBBBBB;
 		}
 		
 		.action {
@@ -74,4 +67,7 @@
 			color: #E9E9E9;
 		}
 	</ui:style>
+	
+	   <ui:style src="../Hablar.css" field="hablar" />
+	
 </ui:UiBinder> 

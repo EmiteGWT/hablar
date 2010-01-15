@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
+import com.calclab.emite.im.client.chat.Chat.State;
 import com.calclab.hablar.client.chat.ChatView.MessageType;
 
 public class ChatLogicTest {
@@ -23,7 +24,12 @@ public class ChatLogicTest {
 	view = mock(ChatView.class);
 	chat = new ChatTester("friend@host", "me@host");
 	logic = new ChatLogic(chat, view);
+    }
 
+    @Test
+    public void shouldHideTextBoxWhenChatLocked() {
+	chat.setState(State.locked);
+	verify(view).setTextBoxVisible(false);
     }
 
     @Test

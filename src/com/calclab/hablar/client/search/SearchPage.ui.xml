@@ -14,13 +14,13 @@
 				</g:Label>
 			</g:FlowPanel>
 		</g:layer>
-		<g:layer left="3" top="3" right="3" bottom="43">
-			<g:ScrollPanel ui:field="scroll">
+		<g:layer left="0" top="0" right="0" bottom="43px">
+			<g:ScrollPanel ui:field="scroll" styleName="{hablar.list}">
 				<g:FlowPanel styleName="{hablar.contents}" ui:field="results">
 				</g:FlowPanel>
 			</g:ScrollPanel>
 		</g:layer>
-		<g:layer left="0" bottom="0" width="100%" height="40">
+		<g:layer left="0" bottom="0" width="100%" height="40px">
 			<g:FlowPanel styleName="{hablar.panel} {style.panel}">
 				<g:TextBox ui:field="term" styleName="{hablar.textBox} {style.unfocus}">Search users...</g:TextBox>
 			</g:FlowPanel>

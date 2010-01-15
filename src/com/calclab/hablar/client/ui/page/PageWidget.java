@@ -58,10 +58,12 @@ public abstract class PageWidget extends Composite implements Page {
 	openEvent.add(listener);
     }
 
+    @Override
     public void setHeaderIconClass(final String iconClass) {
 	header.setIconClass(iconClass);
     }
 
+    @Override
     public void setHeaderTitle(final String title) {
 	header.setHeaderTitle(title);
     }

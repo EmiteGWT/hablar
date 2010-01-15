@@ -35,6 +35,21 @@ public interface Page {
     void onVisibilityChanged(Listener<PageWidget> openListener);
 
     /**
+     * Change the icon class of the header
+     * 
+     * @param iconStyle
+     */
+    void setHeaderIconClass(String iconStyle);
+
+    /**
+     * Changes the header title of this page
+     * 
+     * @param title
+     *            the new title
+     */
+    void setHeaderTitle(String title);
+
+    /**
      * Change the status message of this page
      * 
      * @param status

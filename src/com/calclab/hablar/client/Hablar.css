@@ -1,6 +1,6 @@
-
 .page {
 	background-color: #E9E9E9;
+	border: 3px solid #E9E9E9;
 }
 
 .contents {
@@ -19,6 +19,15 @@
 	width: 98%;
 	padding: 3px;
 	border: 1px solid #BBBBBB;
+}
+
+.list {
+	width: 100%;
+	overflow: hidden;
+	background-color: white;
+	border-left: 1px solid #BBBBBB;
+    border-top: 1px solid #BBBBBB;
+	
 }
 
 .icon {
