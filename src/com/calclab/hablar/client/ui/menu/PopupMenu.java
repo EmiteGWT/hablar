@@ -7,6 +7,7 @@ import com.google.gwt.user.client.ui.PopupPanel;
 public class PopupMenu<T> extends PopupPanel implements PopupMenuView<T> {
     private final MenuBar bar;
     private T target;
+    private boolean visible;
 
     public PopupMenu(MenuAction<T>... actions) {
 	super(true);
@@ -22,6 +23,18 @@ public class PopupMenu<T> extends PopupPanel implements PopupMenuView<T> {
 	    });
 	}
 	setWidget(bar);
+	visible = false;
+    }
+
+    @Override
+    public void hide() {
+	visible = false;
+	super.hide();
+    }
+
+    @Override
+    public boolean isVisible() {
+	return visible;
     }
 
     @Override
@@ -31,6 +44,7 @@ public class PopupMenu<T> extends PopupPanel implements PopupMenuView<T> {
 
     @Override
     public void show(int left, int top) {
+	this.visible = true;
 	setPopupPosition(left, top);
 	show();
     }

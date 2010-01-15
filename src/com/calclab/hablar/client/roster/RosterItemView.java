@@ -1,7 +1,7 @@
 package com.calclab.hablar.client.roster;
 
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.hablar.client.ui.icons.Icons.IconType;
+import com.calclab.hablar.client.ui.styles.HablarStyles.IconType;
 
 public interface RosterItemView {
 

@@ -1,19 +1,15 @@
 package com.calclab.hablar.client.roster;
 
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.hablar.client.ui.icons.Icons;
-import com.calclab.hablar.client.ui.icons.Icons.IconType;
+import com.calclab.hablar.client.ui.styles.HablarStyles;
+import com.calclab.hablar.client.ui.styles.HablarStyles.IconType;
+import com.calclab.hablar.client.ui.styles.HablarStyles.StyleType;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.MenuBar;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 class RosterItemWidget extends Composite implements RosterItemView {
@@ -34,28 +30,20 @@ class RosterItemWidget extends Composite implements RosterItemView {
     public RosterItemWidget(RosterLogic logic) {
 	initWidget(uiBinder.createAndBindUi(this));
 	this.logic = logic;
-	sinkEvents(Event.ONCLICK | Event.ONDBLCLICK);
+	sinkEvents(Event.ONCLICK | Event.ONMOUSEOVER | Event.ONMOUSEOUT);
     }
 
     @Override
     public void onBrowserEvent(Event event) {
 	int eventType = event.getTypeInt();
-	if (eventType == Event.ONDBLCLICK) {
+	if (eventType == Event.ONMOUSEOVER) {
+	    removeStyleName(HablarStyles.styleOf(StyleType.inactive));
+	    addStyleName(HablarStyles.styleOf(StyleType.active));
+	} else if (eventType == Event.ONMOUSEOUT) {
+	    removeStyleName(HablarStyles.styleOf(StyleType.active));
+	    addStyleName(HablarStyles.styleOf(StyleType.inactive));
 	} else if (eventType == Event.ONCLICK) {
-	    if (event.getCurrentEventTarget().equals(name.getElement()))
-		return;
-	    final PopupPanel panel = new PopupPanel(true);
-	    MenuBar bar = new MenuBar(true);
-	    bar.addItem("Chat", true, new Command() {
-		@Override
-		public void execute() {
-		    panel.hide();
-		    logic.onItemClick(item);
-		}
-	    });
-	    panel.add(bar);
-	    panel.setPopupPosition(event.getClientX(), event.getClientY());
-	    panel.show();
+	    logic.onItemClick(item, event.getClientX(), event.getClientY());
 	} else {
 	    super.onBrowserEvent(event);
 	}
@@ -67,7 +55,7 @@ class RosterItemWidget extends Composite implements RosterItemView {
 	    icon.getElement().removeClassName(iconStyle);
 	    // icon.removeStyleName(iconStyle);
 	}
-	this.iconStyle = Icons.get(iconType);
+	this.iconStyle = HablarStyles.get(iconType);
 	icon.getElement().addClassName(iconStyle);
 	// icon.addStyleName(iconStyle);
     }
@@ -95,11 +83,6 @@ class RosterItemWidget extends Composite implements RosterItemView {
     @Override
     public void setStatusVisible(boolean visible) {
 	this.status.setVisible(visible);
-    }
-
-    @UiHandler("name")
-    void onClick(ClickEvent e) {
-	logic.onItemClick(item);
     }
 
 }

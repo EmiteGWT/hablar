@@ -9,6 +9,8 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.hablar.client.ui.menu.MenuAction;
+import com.calclab.hablar.client.ui.menu.PopupMenuView;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
@@ -20,13 +22,14 @@ public class RosterLogic {
     private final HashMap<XmppURI, RosterItemView> items;
     private final RosterView view;
     private boolean active;
+    private PopupMenuView<RosterItem> menu;
 
     public RosterLogic(final RosterView view) {
 	this.view = view;
 	this.roster = Suco.get(Roster.class);
 	this.items = new HashMap<XmppURI, RosterItemView>();
 	this.chatManager = Suco.get(ChatManager.class);
-
+	createMenu();
 	roster.onRosterRetrieved(new Listener<Collection<RosterItem>>() {
 	    @Override
 	    public void onEvent(Collection<RosterItem> items) {
@@ -69,12 +72,34 @@ public class RosterLogic {
 	view.setActive(active);
     }
 
-    public void onItemClick(RosterItem item) {
-	chatManager.open(item.getJID());
+    public void onItemClick(RosterItem item, int left, int top) {
+	GWT.log("Item clicked", null);
+	if (menu.isVisible()) {
+	    GWT.log("menu visible!", null);
+	    menu.hide();
+	} else {
+	    menu.setTarget(item);
+	    menu.show(left, top);
+	}
     }
 
     public void openChat(XmppURI uri) {
 	chatManager.open(uri);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void createMenu() {
+	menu = view.createMenu(new MenuAction<RosterItem>("Chat") {
+	    @Override
+	    public void execute(RosterItem target) {
+		onChatWith(target);
+	    }
+	}, new MenuAction<RosterItem>("Remove from roster") {
+	    @Override
+	    public void execute(RosterItem target) {
+		onRemoveItem(target);
+	    }
+	});
     }
 
     /**
@@ -91,6 +116,14 @@ public class RosterLogic {
 	}
 	RosterItemLogic.setItem(item, itemWidget);
 	return itemWidget;
+    }
+
+    void onChatWith(RosterItem item) {
+	chatManager.open(item.getJID());
+    }
+
+    void onRemoveItem(RosterItem item) {
+	roster.removeItem(item.getJID());
     }
 
 }

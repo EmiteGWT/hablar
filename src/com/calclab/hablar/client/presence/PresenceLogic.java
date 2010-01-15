@@ -5,7 +5,7 @@ import com.calclab.emite.core.client.xmpp.session.Session.State;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.presence.PresenceManager;
-import com.calclab.hablar.client.ui.icons.Icons.IconType;
+import com.calclab.hablar.client.ui.styles.HablarStyles.IconType;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 

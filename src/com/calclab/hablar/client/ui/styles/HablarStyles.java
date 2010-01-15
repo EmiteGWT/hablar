@@ -1,4 +1,4 @@
-package com.calclab.hablar.client.ui.icons;
+package com.calclab.hablar.client.ui.styles;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.CssResource;
@@ -7,16 +7,20 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-public class Icons extends Composite {
+public class HablarStyles extends Composite {
 
     public static enum IconType {
 	buddy, buddyDnd, buddyOff, buddyOn, buddyWait, roster
     }
 
-    interface IconsUiBinder extends UiBinder<Widget, Icons> {
+    public static enum StyleType {
+	active, inactive
     }
 
-    interface Styles extends CssResource {
+    interface IconsUiBinder extends UiBinder<Widget, HablarStyles> {
+    }
+
+    interface StyleIcons extends CssResource {
 
 	String buddyIcon();
 
@@ -31,38 +35,57 @@ public class Icons extends Composite {
 	String rosterIcon();
     }
 
+    interface Styles extends CssResource {
+	String active();
+
+	String inactive();
+    }
+
     private static IconsUiBinder uiBinder = GWT.create(IconsUiBinder.class);
 
     @UiField
+    StyleIcons icons;
+    @UiField
     Styles style;
 
-    private static Icons instance;
+    private static HablarStyles instance = new HablarStyles();;
 
     public static String get(IconType iconType) {
-	if (instance == null) {
-	    instance = new Icons();
-	}
 	return instance.getIconStyle(iconType);
     }
 
-    Icons() {
+    public static String styleOf(StyleType type) {
+	return instance.getStyleOf(type);
+    }
+
+    HablarStyles() {
 	initWidget(uiBinder.createAndBindUi(this));
     }
 
     private String getIconStyle(IconType iconType) {
 	switch (iconType) {
 	case buddy:
-	    return style.buddyIcon();
+	    return icons.buddyIcon();
 	case buddyDnd:
-	    return style.buddyIconDnd();
+	    return icons.buddyIconDnd();
 	case buddyOff:
-	    return style.buddyIconOff();
+	    return icons.buddyIconOff();
 	case buddyWait:
-	    return style.buddyIconWait();
+	    return icons.buddyIconWait();
 	case buddyOn:
-	    return style.buddyIconOn();
+	    return icons.buddyIconOn();
 	case roster:
-	    return style.rosterIcon();
+	    return icons.rosterIcon();
+	}
+	return null;
+    }
+
+    private String getStyleOf(StyleType type) {
+	switch (type) {
+	case active:
+	    return style.active();
+	case inactive:
+	    return style.inactive();
 	}
 	return null;
     }
