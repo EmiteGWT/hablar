@@ -60,6 +60,14 @@ public class RosterLogic implements ListLogic {
 	    }
 	});
 
+	roster.onItemRemoved(new Listener<RosterItem>() {
+	    @Override
+	    public void onEvent(RosterItem item) {
+		view.removeItemView(getOrCreateWidget(item));
+		view.setStatusMessage(item.getName() + " has been removed from roster.");
+	    }
+	});
+
 	Session session = Suco.get(Session.class);
 	session.onStateChanged(new Listener<Session>() {
 	    @Override

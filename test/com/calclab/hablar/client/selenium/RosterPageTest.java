@@ -2,7 +2,7 @@ package com.calclab.hablar.client.selenium;
 
 import org.openqa.selenium.WebElement;
 
-import com.calclab.hablar.client.roster.RosterPage;
+import com.calclab.hablar.client.roster.RosterPageWidget;
 
 public class RosterPageTest extends AbstractWebElement {
 
@@ -16,7 +16,7 @@ public class RosterPageTest extends AbstractWebElement {
     }
 
     private WebElement mainPanel() {
-	return getById(RosterPage.ID);
+	return getById(RosterPageWidget.ID);
     }
 
 }

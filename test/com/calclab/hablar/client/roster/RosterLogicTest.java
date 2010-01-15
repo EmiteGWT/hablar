@@ -1,6 +1,8 @@
 package com.calclab.hablar.client.roster;
 
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -59,6 +61,8 @@ public class RosterLogicTest {
 	tester.roster.fireItemAdded(item);
 	verify(view).createItemView();
 	tester.roster.fireItemRemoved(item);
+	verify(view).removeItemView((RosterItemView) anyObject());
+	verify(view, atLeastOnce()).setStatusMessage(anyString());
     }
 
     @Test

@@ -21,7 +21,7 @@
 		</g:layer>
 	</g:LayoutPanel>
 
-	<ui:style type="com.calclab.hablar.client.roster.RosterPage.Style">
+	<ui:style type="com.calclab.hablar.client.roster.RosterPageWidget.Style">
 		.action {
 			display: block;
 			float: left;

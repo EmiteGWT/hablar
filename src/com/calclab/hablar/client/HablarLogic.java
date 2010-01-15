@@ -3,7 +3,7 @@ package com.calclab.hablar.client;
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.session.Session.State;
 import com.calclab.hablar.client.login.LoginPage;
-import com.calclab.hablar.client.roster.RosterPage;
+import com.calclab.hablar.client.roster.RosterPageWidget;
 import com.calclab.hablar.client.search.SearchPage;
 import com.calclab.hablar.client.ui.page.Page.Visibility;
 import com.calclab.hablar.client.ui.pages.Pages;
@@ -14,7 +14,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 
 public class HablarLogic {
     private final LoginPage loginPage;
-    private RosterPage rosterPage;
+    private RosterPageWidget rosterPageWidget;
     private final HablarConfig config;
     private final Pages pages;
 
@@ -30,12 +30,12 @@ public class HablarLogic {
 	}
 
 	if (config.hasRoster) {
-	    rosterPage = new RosterPage();
-	    pages.add(rosterPage, Visibility.closed);
+	    rosterPageWidget = new RosterPageWidget();
+	    pages.add(rosterPageWidget, Visibility.closed);
 	    if (config.hasSearch) {
 		final SearchPage searchPage = new SearchPage();
 		pages.add(searchPage, Visibility.hidden);
-		rosterPage.addAction(searchPage.icons.searchIcon(), new ClickHandler() {
+		rosterPageWidget.addAction(searchPage.icons.searchIcon(), new ClickHandler() {
 		    @Override
 		    public void onClick(ClickEvent event) {
 			pages.open(searchPage);
@@ -56,7 +56,7 @@ public class HablarLogic {
 
     private void setState(State state) {
 	if (config.hasRoster && state == State.ready) {
-	    pages.open(rosterPage);
+	    pages.open(rosterPageWidget);
 	} else if (config.hasLogin && state == State.disconnected) {
 	    pages.open(loginPage);
 	}

@@ -10,5 +10,7 @@ public interface RosterView extends Page {
 
     PopupMenuView<RosterItem> createMenu(MenuAction<RosterItem>... actions);
 
+    void removeItemView(RosterItemView view);
+
     void setActive(boolean active);
 }

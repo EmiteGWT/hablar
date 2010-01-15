@@ -47,7 +47,7 @@ public class SearchLogic implements ListLogic {
     @Override
     public void onMouseOver(ListItemView view, boolean over) {
 	view.setSelected(over);
-	view.setMenuVisible(true);
+	view.setMenuVisible(over);
     }
 
     public void search(final String text) {

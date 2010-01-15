@@ -18,7 +18,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class RosterPage extends PageWidget implements RosterView {
+public class RosterPageWidget extends PageWidget implements RosterView {
 
     public static interface Style extends CssResource {
 
@@ -26,7 +26,7 @@ public class RosterPage extends PageWidget implements RosterView {
 
     }
 
-    interface RosterWidgetUiBinder extends UiBinder<Widget, RosterPage> {
+    interface RosterWidgetUiBinder extends UiBinder<Widget, RosterPageWidget> {
     }
 
     public static final String ID = "RosterPage";
@@ -44,7 +44,7 @@ public class RosterPage extends PageWidget implements RosterView {
 
     private final RosterLogic logic;
 
-    public RosterPage() {
+    public RosterPageWidget() {
 	super(false);
 	setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
@@ -71,6 +71,11 @@ public class RosterPage extends PageWidget implements RosterView {
     @Override
     public PopupMenuView<RosterItem> createMenu(MenuAction<RosterItem>... actions) {
 	return new PopupMenu<RosterItem>(actions);
+    }
+
+    @Override
+    public void removeItemView(RosterItemView view) {
+	list.remove((Widget) view);
     }
 
     public void setActive(final boolean active) {
