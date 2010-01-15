@@ -4,6 +4,7 @@ import com.calclab.emite.browser.client.PageAssist;
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.session.Session.State;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
+import com.calclab.hablar.client.i18n.Mes;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.event.logical.shared.CloseEvent;
@@ -18,13 +19,13 @@ class LoginLogic {
 	this.page = widget;
 	this.session = Suco.get(Session.class);
 
-	String userName = PageAssist.getMeta("hablar.user");
+	final String userName = PageAssist.getMeta("hablar.user");
 	widget.setUserName(userName);
 	widget.setPassword(PageAssist.getMeta("hablar.password"));
 
 	session.onStateChanged(new Listener<Session>() {
 	    @Override
-	    public void onEvent(Session session) {
+	    public void onEvent(final Session session) {
 		setState(session.getState());
 	    }
 	});
@@ -38,9 +39,9 @@ class LoginLogic {
     }
 
     public void onAction() {
-	State state = session.getState();
+	final State state = session.getState();
 	if (state == State.disconnected) {
-	    XmppURI uri = getUri();
+	    final XmppURI uri = getUri();
 	    if (uri != null) {
 		session.login(uri, page.getPassword());
 	    }
@@ -53,24 +54,24 @@ class LoginLogic {
 	return XmppURI.uri(page.getUserName());
     }
 
-    private void setState(State state) {
+    private void setState(final State state) {
 	if (state == State.ready) {
-	    page.setActionText("Logout");
+	    page.setActionText(Mes.sa.ge().logout());
 	    page.setActionEnabled(true);
-	    String userName = session.getCurrentUser().getNode();
-	    setStatus("Connected as " + userName, page.icons.loggedInIcon());
+	    final String userName = session.getCurrentUser().getNode();
+	    setStatus(Mes.sa.ge().conectedAs(userName), page.icons.loggedInIcon());
 	} else if (state == State.disconnected) {
-	    page.setActionText("Login");
+	    page.setActionText(Mes.sa.ge().login());
 	    page.setActionEnabled(true);
-	    setStatus("Disconnected", page.icons.loggedOutIcon());
+	    setStatus(Mes.sa.ge().disconnected(), page.icons.loggedOutIcon());
 	} else {
-	    page.setActionText("Wait...");
+	    page.setActionText(Mes.sa.ge().waitDots());
 	    page.setActionEnabled(false);
 	}
 	page.addMessage("Session state: " + state);
     }
 
-    private void setStatus(String status, String iconStyle) {
+    private void setStatus(final String status, final String iconStyle) {
 	page.setStatusMessage(status);
 	page.setHeaderTitle(status);
 	page.setHeaderIconClass(iconStyle);

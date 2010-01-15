@@ -6,7 +6,6 @@ import com.calclab.hablar.client.ui.menu.PopupMenu;
 import com.calclab.hablar.client.ui.menu.PopupMenuView;
 import com.calclab.hablar.client.ui.page.PageWidget;
 import com.calclab.hablar.client.ui.styles.HablarStyles;
-import com.calclab.hablar.client.ui.styles.HablarStyles.IconType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -49,7 +48,7 @@ public class RosterPageWidget extends PageWidget implements RosterView {
 	setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
 	logic = new RosterLogic(this);
-	setHeaderTitle("Roster");
+	setHeaderTitle("Contacts");
 	setHeaderIconClass(HablarStyles.get(HablarStyles.IconType.roster));
     }
 
@@ -64,18 +63,18 @@ public class RosterPageWidget extends PageWidget implements RosterView {
 
     @Override
     public RosterItemView createItemView() {
-	RosterItemWidget view = new RosterItemWidget(logic);
+	final RosterItemWidget view = new RosterItemWidget(logic);
 	list.add(view);
 	return view;
     }
 
     @Override
-    public PopupMenuView<RosterItem> createMenu(MenuAction<RosterItem>... actions) {
+    public PopupMenuView<RosterItem> createMenu(final MenuAction<RosterItem>... actions) {
 	return new PopupMenu<RosterItem>(actions);
     }
 
     @Override
-    public void removeItemView(RosterItemView view) {
+    public void removeItemView(final RosterItemView view) {
 	list.remove((Widget) view);
     }
 
