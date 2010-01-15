@@ -1,8 +1,10 @@
-package com.calclab.hablar.client.ui.state;
+package com.calclab.hablar.client.presence;
 
+import com.calclab.hablar.client.ui.icons.Icons;
+import com.calclab.hablar.client.ui.icons.Icons.IconType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.resources.client.CssResource;
+import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -11,25 +13,12 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
-public class StatePanel extends Composite {
+public class PresencePanel extends Composite implements PresenceView {
 
-    interface Icons extends CssResource {
-	String iconDnd();
-
-	String iconOff();
-
-	String iconOn();
-
-	String iconWait();
-    }
-
-    interface StatePanelUiBinder extends UiBinder<Widget, StatePanel> {
+    interface StatePanelUiBinder extends UiBinder<Widget, PresencePanel> {
     }
 
     private static StatePanelUiBinder uiBinder = GWT.create(StatePanelUiBinder.class);
-
-    @UiField
-    Icons style;
 
     @UiField
     Label btnState, nick, status;
@@ -39,12 +28,21 @@ public class StatePanel extends Composite {
 
     private String iconClass;
 
-    private final StatePanelLogic logic;
+    private final PresenceLogic logic;
 
-    public StatePanel() {
+    public PresencePanel() {
 	initWidget(uiBinder.createAndBindUi(this));
-	logic = new StatePanelLogic(this);
-	statusBox.setVisible(false);
+	logic = new PresenceLogic(this);
+    }
+
+    @UiHandler("statusBox")
+    public void handleKeys(final KeyDownEvent event) {
+	if (event.getNativeKeyCode() == 13) {
+	    final String message = statusBox.getText();
+	    logic.onStatusMessageChanged(message);
+	    event.stopPropagation();
+	    event.preventDefault();
+	}
     }
 
     @UiHandler("btnState")
@@ -54,10 +52,12 @@ public class StatePanel extends Composite {
 
     @UiHandler("status")
     public void onChangeStatus(ClickEvent e) {
-
+	logic.onChangeStatusMessage();
     }
 
-    public void setIconClass(String iconClass) {
+    @Override
+    public void setIcon(IconType icon) {
+	String iconClass = Icons.get(icon);
 	if (this.iconClass != null) {
 	    btnState.getElement().removeClassName(this.iconClass);
 	}
@@ -72,6 +72,21 @@ public class StatePanel extends Composite {
 	} else {
 	    nick.setVisible(false);
 	}
+    }
+
+    @Override
+    public void setStatusBoxVisible(boolean visible) {
+	statusBox.setVisible(visible);
+    }
+
+    @Override
+    public void setStatusMessage(String statusMessage) {
+	status.setText(statusMessage);
+    }
+
+    @Override
+    public void setStatusMessageVisible(boolean visible) {
+	status.setVisible(visible);
     }
 
 }
