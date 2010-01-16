@@ -69,7 +69,7 @@ public abstract class PageWidget extends Composite implements Page {
     }
 
     public void setId(final String id) {
-	header.ensureDebugId(id);
+	header.setId(id);
     }
 
     @Override

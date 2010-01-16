@@ -40,9 +40,9 @@ class HeaderWidget extends Composite implements PageHeader {
 
     private Visibility visibility;
 
-    public HeaderWidget(PageWidget page, boolean closeable) {
+    public HeaderWidget(final PageWidget page, final boolean closeable) {
 	this.page = page;
-	Widget element = uiBinder.createAndBindUi(this);
+	final Widget element = uiBinder.createAndBindUi(this);
 	initWidget(element);
 	close.setVisible(closeable);
 	this.currentStyles = defaultStyles;
@@ -56,7 +56,7 @@ class HeaderWidget extends Composite implements PageHeader {
 	}
     }
 
-    public void setIconClass(String iconClass) {
+    public void setIconClass(final String iconClass) {
 	if (this.iconClass != null) {
 	    icon.getElement().removeClassName(this.iconClass);
 	}
@@ -65,14 +65,37 @@ class HeaderWidget extends Composite implements PageHeader {
 
     }
 
-    public void setStyles(HeaderStyles styles) {
+    public void setId(final String id) {
+	title.ensureDebugId(id);
+    }
+
+    public void setStyles(final HeaderStyles styles) {
 	this.currentStyles = styles;
 	applyStyles();
     }
 
-    public void setVisibility(Visibility visibility) {
+    public void setVisibility(final Visibility visibility) {
 	this.visibility = visibility;
 	applyStyles();
+    }
+
+    @UiHandler("title")
+    void handleActivateTitle(final ClickEvent event) {
+	page.fireOpen();
+    }
+
+    @UiHandler("close")
+    void handleClose(final ClickEvent event) {
+	page.fireClose();
+    }
+
+    @UiHandler("icon")
+    void onIconClicked(final ClickEvent event) {
+	page.fireOpen();
+    }
+
+    void setHeaderTitle(final String title) {
+	this.title.setText(title);
     }
 
     private void applyStyles() {
@@ -84,25 +107,6 @@ class HeaderWidget extends Composite implements PageHeader {
 	    header.getElement().removeClassName(currentStyles.open());
 	    header.getElement().addClassName(currentStyles.closed());
 	}
-    }
-
-    @UiHandler("title")
-    void handleActivateTitle(ClickEvent event) {
-	page.fireOpen();
-    }
-
-    @UiHandler("close")
-    void handleClose(ClickEvent event) {
-	page.fireClose();
-    }
-
-    @UiHandler("icon")
-    void onIconClicked(ClickEvent event) {
-	page.fireOpen();
-    }
-
-    void setHeaderTitle(String title) {
-	this.title.setText(title);
     }
 
 }

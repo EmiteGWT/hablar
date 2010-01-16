@@ -1,6 +1,7 @@
 package com.calclab.hablar.client.roster;
 
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.hablar.client.i18n.Mes;
 import com.calclab.hablar.client.ui.menu.MenuAction;
 import com.calclab.hablar.client.ui.menu.PopupMenu;
 import com.calclab.hablar.client.ui.menu.PopupMenuView;
@@ -29,6 +30,7 @@ public class RosterPageWidget extends PageWidget implements RosterView {
     }
 
     public static final String ID = "RosterPage";
+    public static final String DISABLED_LABEL = "RosterPage-DisableLabel";
 
     private static RosterWidgetUiBinder uiBinder = GWT.create(RosterWidgetUiBinder.class);
 
@@ -41,6 +43,9 @@ public class RosterPageWidget extends PageWidget implements RosterView {
     @UiField
     FlowPanel list, actions, disabledPanel;
 
+    @UiField
+    Label disabledLabel;
+
     private final RosterLogic logic;
 
     public RosterPageWidget() {
@@ -48,7 +53,9 @@ public class RosterPageWidget extends PageWidget implements RosterView {
 	setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
 	logic = new RosterLogic(this);
-	setHeaderTitle("Contacts");
+	setHeaderTitle(Mes.sa.ge().contacts());
+	disabledLabel.setText(Mes.sa.ge().rosterDisabled());
+	disabledLabel.ensureDebugId(DISABLED_LABEL);
 	setHeaderIconClass(HablarStyles.get(HablarStyles.IconType.roster));
     }
 

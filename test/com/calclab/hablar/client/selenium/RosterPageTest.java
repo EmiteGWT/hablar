@@ -4,19 +4,14 @@ import org.openqa.selenium.WebElement;
 
 import com.calclab.hablar.client.roster.RosterPageWidget;
 
-public class RosterPageTest extends AbstractWebElement {
+public class RosterPageTest extends AbstractPageTest {
 
     public RosterPageTest(final WebTester tester) {
-	super(tester);
+	super(tester, RosterPageWidget.ID);
     }
 
-    public void focus() {
-	final WebElement panel = mainPanel();
-	panel.click();
-    }
-
-    private WebElement mainPanel() {
-	return getById(RosterPageWidget.ID);
+    public WebElement getDisableLabel() {
+	return getById(RosterPageWidget.DISABLED_LABEL);
     }
 
 }

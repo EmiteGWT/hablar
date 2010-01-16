@@ -1,8 +1,8 @@
 package com.calclab.hablar.client.presence;
 
 import com.calclab.hablar.client.ui.styles.HablarStyles;
-import com.calclab.hablar.client.ui.styles.HablarStyles.IconType;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -38,26 +38,25 @@ public class PresencePanel extends Composite implements PresenceView {
     @UiHandler("statusBox")
     public void handleKeys(final KeyDownEvent event) {
 	if (event.getNativeKeyCode() == 13) {
-	    final String message = statusBox.getText();
-	    logic.onStatusMessageChanged(message);
+	    doStatusChange();
 	    event.stopPropagation();
 	    event.preventDefault();
 	}
     }
 
     @UiHandler("btnState")
-    public void onChangeState(ClickEvent e) {
+    public void onChangeState(final ClickEvent e) {
 	logic.onShowChange();
     }
 
     @UiHandler("status")
-    public void onChangeStatus(ClickEvent e) {
+    public void onChangeStatus(final ClickEvent e) {
 	logic.onChangeStatusMessage();
     }
 
     @Override
-    public void setIcon(HablarStyles.IconType icon) {
-	String iconClass = HablarStyles.get(icon);
+    public void setIcon(final HablarStyles.IconType icon) {
+	final String iconClass = HablarStyles.get(icon);
 	if (this.iconClass != null) {
 	    btnState.getElement().removeClassName(this.iconClass);
 	}
@@ -65,7 +64,7 @@ public class PresencePanel extends Composite implements PresenceView {
 	btnState.getElement().addClassName(iconClass);
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
 	if (name != null) {
 	    nick.setText(name);
 	    nick.setVisible(true);
@@ -75,18 +74,33 @@ public class PresencePanel extends Composite implements PresenceView {
     }
 
     @Override
-    public void setStatusBoxVisible(boolean visible) {
+    public void setStatusBoxFocus(final boolean focus) {
+	statusBox.setFocus(focus);
+    }
+
+    @Override
+    public void setStatusBoxVisible(final boolean visible) {
 	statusBox.setVisible(visible);
     }
 
     @Override
-    public void setStatusMessage(String statusMessage) {
+    public void setStatusMessage(final String statusMessage) {
 	status.setText(statusMessage);
     }
 
     @Override
-    public void setStatusMessageVisible(boolean visible) {
+    public void setStatusMessageVisible(final boolean visible) {
 	status.setVisible(visible);
+    }
+
+    @UiHandler("statusBox")
+    void onBlur(final BlurEvent event) {
+	doStatusChange();
+    }
+
+    private void doStatusChange() {
+	final String message = statusBox.getText();
+	logic.onStatusMessageChanged(message);
     }
 
 }

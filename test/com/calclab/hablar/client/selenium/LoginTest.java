@@ -1,28 +1,30 @@
 package com.calclab.hablar.client.selenium;
 
-public class LoginTest implements WebTest {
+import junit.framework.Assert;
 
-    @Override
-    public void run(final WebContext ctx) {
-	final AbstractWebTester webHelper = ctx.getWebHelper();
-	webHelper.home();
-	final LoginPageTest login = new LoginPageTest(webHelper);
-	final RosterPageTest roster = new RosterPageTest(webHelper);
-	login.focus();
-	login.as("admin@localhost", "easyeasy");
-	// FIXME use constants/resources here:
-	webHelper.wait(2000);
-	assertTrue(login.hasHeader(".*Connected.*"));
-	// only for test
-	login.focus();
-	webHelper.wait(1000);
-	roster.focus();
-	webHelper.close();
+import com.calclab.hablar.client.i18n.Msg;
+
+public class LoginTest extends SeleniumTestSuite {
+    private final WebTest basicLogin;
+
+    public LoginTest() {
+	basicLogin = new WebTest() {
+	    @Override
+	    public void run(final WebContext ctx) {
+		final AbstractWebTester webHelper = ctx.getWebHelper();
+		webHelper.home();
+		final LoginPageTest login = new LoginPageTest(webHelper);
+		login.click();
+		Assert.assertTrue(login.getHeader().getText().contains(Msg.DISCONNECTED));
+		login.as("admin@localhost", "easyeasy");
+		Assert.assertTrue(login.getHeader().getText().contains(Msg.CONNECTED_AS));
+		login.click();
+	    }
+	};
     }
 
-    private void assertTrue(final boolean object) {
-	if (object == false) {
-	    // do something
-	}
+    @Override
+    public void registerTests() {
+	add("Basic login", basicLogin);
     }
 }

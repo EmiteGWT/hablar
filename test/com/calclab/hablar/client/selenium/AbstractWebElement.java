@@ -14,34 +14,4 @@ public abstract class AbstractWebElement {
 	return tester.getById(id);
     }
 
-    protected void waitForTextInside(final WebElement element, final String text) throws Exception {
-	for (int second = 0;; second++) {
-	    if (second >= 60) {
-		// FIXME fail("timeout");
-	    }
-	    try {
-		final String selText = element.getText();
-		if (selText.indexOf(text) >= 0) {
-		    break;
-		}
-	    } catch (final Exception e) {
-	    }
-	    Thread.sleep(1000);
-	}
-    }
-
-    protected void waitForTextRegExp(final WebElement element, final String text) throws Exception {
-	for (int second = 0;; second++) {
-	    if (second >= 60) {
-		// FIXME fail("timeout");
-	    }
-	    try {
-		if (element.getText().matches(text)) {
-		    break;
-		}
-	    } catch (final Exception e) {
-	    }
-	    Thread.sleep(1000);
-	}
-    }
 }

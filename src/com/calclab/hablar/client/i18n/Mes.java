@@ -9,11 +9,11 @@ import com.google.gwt.i18n.client.LocalizableResource.GenerateKeys;
  * 
  * Emite i18n messages
  * 
- * @see <a href='http://code.google.com/intl/es-ES/webtoolkit/doc/latest/DevGuideI18n.html#DevGuideAnnota
- *      t i o n s ' > I18nAnnotations</a>
+ * @see <a href='http://code.google.com/intl/es-ES/webtoolkit/doc/latest/DevGuideI18n.html#DevGuideA
+ *      n n o t a t i o n s ' > I18nAnnotations</a>
  * @see <a href=
- *      'http://code.google.com/intl/en/webtoolkit/doc/latest/DevGuideUiBinderI18n.ht
- *      m l ' >UiBinderAnnotations</a>
+ *      'http://code.google.com/intl/en/webtoolkit/doc/latest/DevGuideUiBinderI1
+ *      8 n . h t m l ' >UiBinderAnnotations</a>
  */
 @DefaultLocale("en_GB")
 // Line below defaults to I18N_default.xlf, I18N_de.xlf, etc
@@ -34,11 +34,15 @@ public interface Mes extends Messages {
 	}
     }
 
-    @DefaultMessage("Connected as {0}")
+    @DefaultMessage(Msg.CONNECTED_AS + " {0}")
     @Description("The specified user has connected")
     String conectedAs(@Example("john.doe") String userName);
 
-    @DefaultMessage("Disconnected")
+    @DefaultMessage(Msg.CONTACTS)
+    @Description("The roster panel title")
+    String contacts();
+
+    @DefaultMessage(Msg.DISCONNECTED)
     String disconnected();
 
     @DefaultMessage("Sign in")
@@ -46,6 +50,9 @@ public interface Mes extends Messages {
 
     @DefaultMessage("Sign out")
     String logout();
+
+    @DefaultMessage(Msg.ROSTER_DISABLED)
+    String rosterDisabled();
 
     @DefaultMessage("Wait...")
     String waitDots();

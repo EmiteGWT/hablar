@@ -4,16 +4,14 @@ import org.openqa.selenium.WebElement;
 
 import com.calclab.hablar.client.login.LoginPage;
 
-public class LoginPageTest extends AbstractWebElement {
+public class LoginPageTest extends AbstractPageTest {
 
-    private final WebElement mainPanel;
     private final WebElement login;
     private final WebElement passwd;
     private final WebElement button;
 
     public LoginPageTest(final WebTester tester) {
-	super(tester);
-	mainPanel = getById(LoginPage.ID);
+	super(tester, LoginPage.ID);
 	login = getById("LoginPage-uri");
 	passwd = getById("LoginPage-passwd");
 	button = getById("LoginPage-button");
@@ -27,17 +25,4 @@ public class LoginPageTest extends AbstractWebElement {
 	button.submit();
     }
 
-    public void focus() {
-	mainPanel.click();
-    }
-
-    public boolean hasHeader(final String header) {
-	// FIXME: while defining if we use Junit or not
-	try {
-	    super.waitForTextRegExp(mainPanel, header);
-	    return true;
-	} catch (final Exception e) {
-	    return false;
-	}
-    }
 }

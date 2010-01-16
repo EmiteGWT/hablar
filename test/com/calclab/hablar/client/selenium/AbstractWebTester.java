@@ -1,28 +1,37 @@
 package com.calclab.hablar.client.selenium;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriverBackedSelenium;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import com.thoughtworks.selenium.Selenium;
+
 public abstract class AbstractWebTester implements WebTester {
     private static FirefoxDriver driver;
+    private final String baseUrl;
+    private final Selenium selenium;
 
-    private String initUrl;
-
-    public AbstractWebTester() {
+    public AbstractWebTester(final String baseUrl) {
 	// http://code.google.com/p/selenium/wiki/FirefoxDriver
 	// System.getProperties().put("webdriver.firefox.useExisting", "true");
 	// System.setProperty("webdriver.firefox.useExisting", "true");
 
+	this.baseUrl = baseUrl;
 	// This is the profile of your browser (in you use OOPHM you must
 	// install the GWT plugin in the "selenium" profile
 	// See:
 	// http://code.google.com/intl/es-ES/webtoolkit/doc/latest/DevGuideTestingRemoteTesting.html#Firefox_Profile
 	driver = new FirefoxDriver("selenium");
+
+	// About Webdriver or Selenium APIs: Not clear what to use, See:
+	// http://groups.google.com/group/webdriver/browse_frm/thread/2c86604006234012/ff2806873921efd6?lnk=gst&q=timeout#ff2806873921efd6
+	selenium = new WebDriverBackedSelenium(driver, baseUrl);
+	selenium.setTimeout("5000");
     }
 
     public void close() {
-	driver.close();
+	selenium.close();
     }
 
     public WebElement getById(final String id) {
@@ -30,22 +39,15 @@ public abstract class AbstractWebTester implements WebTester {
     }
 
     public void home() {
-	// About webdriver with multiple windows:
-	// http://groups.google.com/group/webdriver/browse_thread/thread/6d19907f7653e8b1
-	// to test
-	driver.get(initUrl);
-    }
-
-    public void initUrl(final String url) {
-	this.initUrl = url;
+	assert baseUrl != null;
+	driver.get(baseUrl);
     }
 
     public void wait(final int milliseconds) {
 	try {
 	    Thread.sleep(milliseconds);
 	} catch (final InterruptedException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	    Logger.error("Exception in wait method", e);
 	}
     }
 
