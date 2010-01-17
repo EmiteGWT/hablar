@@ -3,9 +3,10 @@ package com.calclab.hablar.client.selenium;
 import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.calclab.hablar.client.i18n.Msg;
 import com.calclab.hablar.client.login.LoginPage;
 
-public class LoginPageObject {
+public class LoginPageObject extends CustomPageObject {
     @FindBy(id = Debug.PRE + LoginPage.ID)
     private RenderedWebElement header;
     @FindBy(id = Debug.PRE + LoginPage.URI)
@@ -18,14 +19,6 @@ public class LoginPageObject {
     public LoginPageObject() {
     }
 
-    public void as(final String username, final String password) {
-	login.clear();
-	passwd.clear();
-	login.sendKeys(username);
-	passwd.sendKeys(password);
-	button.submit();
-    }
-
     public RenderedWebElement getHeader() {
 	return header;
     }
@@ -34,4 +27,21 @@ public class LoginPageObject {
 	return getHeader();
     }
 
+    public void signIn(final String username, final String password) {
+	header.click();
+	login.clear();
+	passwd.clear();
+	waitFor(header, Msg.DISCONNECTED);
+	login.sendKeys(username);
+	passwd.sendKeys(password);
+	button.click();
+	waitFor(header, Msg.CONNECTED_AS);
+    }
+
+    public void signOut() {
+	header.click();
+	waitFor(button, Msg.SIGN_OUT);
+	button.click();
+	waitFor(header, Msg.DISCONNECTED);
+    }
 }

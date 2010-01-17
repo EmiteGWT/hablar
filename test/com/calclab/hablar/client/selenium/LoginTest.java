@@ -15,7 +15,7 @@ public class LoginTest extends SeleniumTestSuite {
 		webHelper.home();
 		login.getHeader().click();
 		Assert.assertTrue(login.Header().getText().contains(Msg.DISCONNECTED));
-		login.as("test1@localhost", "test1");
+		login.signIn("test1@localhost", "test1");
 		Assert.assertTrue(login.Header().getText().contains(Msg.CONNECTED_AS));
 		login.getHeader().click();
 	    }
