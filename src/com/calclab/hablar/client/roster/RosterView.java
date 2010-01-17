@@ -7,7 +7,7 @@ import com.calclab.hablar.client.ui.page.Page;
 import com.google.gwt.event.dom.client.ClickHandler;
 
 public interface RosterView extends Page {
-    void addAction(String iconStyle, ClickHandler clickHandler);
+    void addAction(String iconStyle, String debugId, ClickHandler clickHandler);
 
     RosterItemView createItemView();
 

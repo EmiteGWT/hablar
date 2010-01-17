@@ -1,7 +1,7 @@
 package com.calclab.hablar.client.search;
 
 import com.calclab.emite.xep.search.client.SearchResultItem;
-import com.calclab.hablar.client.ui.lists.ListItemWiget;
+import com.calclab.hablar.client.ui.lists.ListItemWidget;
 import com.calclab.hablar.client.ui.styles.HablarStyles;
 import com.calclab.hablar.client.ui.styles.HablarStyles.IconType;
 import com.google.gwt.core.client.GWT;
@@ -12,7 +12,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
-public class SearchResultItemWidget extends ListItemWiget implements SearchResultView {
+public class SearchResultItemWidget extends ListItemWidget implements SearchResultView {
 
     interface SearchResultUiBinder extends UiBinder<Widget, SearchResultItemWidget> {
     }

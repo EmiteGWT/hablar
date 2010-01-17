@@ -26,9 +26,9 @@ public class LoginPage extends PageWidget {
     }
 
     public static final String ID = "LoginPage";
-    public static final String URI = "LoginPage-uri";
-    public static final String PASSWD = "LoginPage-passwd";
-    public static final String BTN = "LoginPage-btn";
+    public static final String URI = ID + "-uri";
+    public static final String PASSWD = ID + "-passwd";
+    public static final String BTN = ID + "-btn";
 
     private static LoginWidgetUiBinder uiBinder = GWT.create(LoginWidgetUiBinder.class);
 

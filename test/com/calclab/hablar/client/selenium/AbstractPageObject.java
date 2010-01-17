@@ -3,7 +3,7 @@ package com.calclab.hablar.client.selenium;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-public class CustomPageObject {
+public class AbstractPageObject {
 
     private static final long[] POLL_INTERVALS = { 10, 20, 30, 40, 50, 50, 50, 50, 100 };
 

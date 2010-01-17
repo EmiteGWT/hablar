@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import com.calclab.hablar.client.i18n.Msg;
 import com.calclab.hablar.client.login.LoginPage;
 
-public class LoginPageObject extends CustomPageObject {
+public class LoginPageObject extends AbstractPageObject {
     @FindBy(id = Debug.PRE + LoginPage.ID)
     private RenderedWebElement header;
     @FindBy(id = Debug.PRE + LoginPage.URI)
@@ -36,6 +36,10 @@ public class LoginPageObject extends CustomPageObject {
 	passwd.sendKeys(password);
 	button.click();
 	waitFor(header, Msg.CONNECTED_AS);
+    }
+
+    public void signInDefUser() {
+	signIn("test1@localhost", "test1");
     }
 
     public void signOut() {

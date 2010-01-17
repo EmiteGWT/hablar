@@ -9,12 +9,12 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.hablar.client.i18n.Mes;
 import com.calclab.hablar.client.ui.lists.ListItemView;
 import com.calclab.hablar.client.ui.lists.ListLogic;
 import com.calclab.hablar.client.ui.menu.MenuAction;
 import com.calclab.hablar.client.ui.menu.PopupMenuView;
 import com.calclab.hablar.client.ui.styles.HablarStyles;
-import com.calclab.hablar.client.ui.styles.HablarStyles.IconType;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
@@ -25,6 +25,8 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.UIObject;
 
 public class RosterLogic implements ListLogic {
+
+    public static final String CHAT_ADD = "RosterLogic-chatAdd-Action";
 
     private final Roster roster;
     private final ChatManager chatManager;
@@ -43,24 +45,24 @@ public class RosterLogic implements ListLogic {
 	addRosterListeners();
 	addSessionListeners();
 
-	view.addAction(HablarStyles.get(HablarStyles.IconType.chatAdd), new ClickHandler() {
+	view.addAction(HablarStyles.get(HablarStyles.IconType.chatAdd), CHAT_ADD, new ClickHandler() {
 	    @Override
-	    public void onClick(ClickEvent event) {
-		String jid = Window.prompt("Write the JID of the person you want to chat with", "");
+	    public void onClick(final ClickEvent event) {
+		final String jid = Window.prompt("Write the JID of the person you want to chat with", "");
 		chatManager.open(XmppURI.jid(jid));
 	    }
 	});
 
     }
 
-    public void onItemClick(ListItemView view, Event event) {
-	RosterItemView rosterView = (RosterItemView) view;
+    public void onItemClick(final ListItemView view, final Event event) {
+	final RosterItemView rosterView = (RosterItemView) view;
 	chatManager.open(rosterView.getItem().getJID());
     }
 
     @Override
-    public void onMenuClicked(ListItemView view, UIObject ui) {
-	RosterItem item = ((RosterItemView) view).getItem();
+    public void onMenuClicked(final ListItemView view, final UIObject ui) {
+	final RosterItem item = ((RosterItemView) view).getItem();
 	if (menu.isVisible()) {
 	    GWT.log("menu visible!", null);
 	    menu.hide();
@@ -71,21 +73,45 @@ public class RosterLogic implements ListLogic {
     }
 
     @Override
-    public void onMouseOver(ListItemView view, boolean over) {
+    public void onMouseOver(final ListItemView view, final boolean over) {
 	view.setSelected(over);
 	view.setMenuVisible(over);
     }
 
-    public void openChat(XmppURI uri) {
+    public void openChat(final XmppURI uri) {
 	chatManager.open(uri);
+    }
+
+    /**
+     * Returns a roster item view ALWAYS
+     * 
+     * @param item
+     * @return
+     */
+    RosterItemView getOrCreateWidget(final RosterItem item) {
+	RosterItemView itemWidget = items.get(item.getJID());
+	if (itemWidget == null) {
+	    itemWidget = view.createItemView();
+	    items.put(item.getJID(), itemWidget);
+	}
+	RosterItemLogic.setItem(item, itemWidget);
+	return itemWidget;
+    }
+
+    void onChatWith(final RosterItem item) {
+	chatManager.open(item.getJID());
+    }
+
+    void onRemoveItem(final RosterItem item) {
+	roster.removeItem(item.getJID());
     }
 
     private void addRosterListeners() {
 	roster.onRosterRetrieved(new Listener<Collection<RosterItem>>() {
 	    @Override
-	    public void onEvent(Collection<RosterItem> items) {
+	    public void onEvent(final Collection<RosterItem> items) {
 		GWT.log("Retrieved roster", null);
-		for (RosterItem item : items) {
+		for (final RosterItem item : items) {
 		    getOrCreateWidget(item);
 		}
 	    }
@@ -94,34 +120,34 @@ public class RosterLogic implements ListLogic {
 
 	roster.onItemAdded(new Listener<RosterItem>() {
 	    @Override
-	    public void onEvent(RosterItem item) {
+	    public void onEvent(final RosterItem item) {
 		getOrCreateWidget(item);
-		view.setStatusMessage(item.getName() + " has been added to roster.");
+		view.setStatusMessage(item.getName() + " has been added to Contacts.");
 	    }
 	});
 
 	roster.onItemChanged(new Listener<RosterItem>() {
 	    @Override
-	    public void onEvent(RosterItem item) {
+	    public void onEvent(final RosterItem item) {
 		getOrCreateWidget(item);
 	    }
 	});
 
 	roster.onItemRemoved(new Listener<RosterItem>() {
 	    @Override
-	    public void onEvent(RosterItem item) {
+	    public void onEvent(final RosterItem item) {
 		view.removeItemView(getOrCreateWidget(item));
-		view.setStatusMessage(item.getName() + " has been removed from roster.");
+		view.setStatusMessage(item.getName() + " has been removed from Contacts.");
 	    }
 	});
     }
 
     private void addSessionListeners() {
-	Session session = Suco.get(Session.class);
+	final Session session = Suco.get(Session.class);
 	session.onStateChanged(new Listener<Session>() {
 	    @Override
-	    public void onEvent(Session session) {
-		boolean isActive = session.getState() == State.ready;
+	    public void onEvent(final Session session) {
+		final boolean isActive = session.getState() == State.ready;
 		if (active != isActive) {
 		    active = isActive;
 		    view.setActive(isActive);
@@ -135,41 +161,17 @@ public class RosterLogic implements ListLogic {
 
     @SuppressWarnings("unchecked")
     private void createMenu() {
-	menu = view.createMenu(new MenuAction<RosterItem>("Chat") {
+	menu = view.createMenu(new MenuAction<RosterItem>(Mes.sa.ge().chat()) {
 	    @Override
-	    public void execute(RosterItem target) {
+	    public void execute(final RosterItem target) {
 		onChatWith(target);
 	    }
-	}, new MenuAction<RosterItem>("Remove from roster") {
+	}, new MenuAction<RosterItem>(Mes.sa.ge().removeFromContacts()) {
 	    @Override
-	    public void execute(RosterItem target) {
+	    public void execute(final RosterItem target) {
 		onRemoveItem(target);
 	    }
 	});
-    }
-
-    /**
-     * Returns a roster item view ALWAYS
-     * 
-     * @param item
-     * @return
-     */
-    RosterItemView getOrCreateWidget(RosterItem item) {
-	RosterItemView itemWidget = items.get(item.getJID());
-	if (itemWidget == null) {
-	    itemWidget = view.createItemView();
-	    items.put(item.getJID(), itemWidget);
-	}
-	RosterItemLogic.setItem(item, itemWidget);
-	return itemWidget;
-    }
-
-    void onChatWith(RosterItem item) {
-	chatManager.open(item.getJID());
-    }
-
-    void onRemoveItem(RosterItem item) {
-	roster.removeItem(item.getJID());
     }
 
 }

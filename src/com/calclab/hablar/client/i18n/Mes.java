@@ -9,13 +9,15 @@ import com.google.gwt.i18n.client.LocalizableResource.GenerateKeys;
  * 
  * Emite i18n messages
  * 
- * @see <a href='http://code.google.com/intl/es-ES/webtoolkit/doc/latest/DevGuideI18n.html#DevGuideA
- *      n n o t a t i o n s ' > I18nAnnotations</a>
+ * @see <a href=
+ *      'http://code.google.com/intl/es-ES/webtoolkit/doc/latest/DevGuideI18n.ht
+ *      m l # D e v G u i d e A n n o t a t i o n s ' > I18nAnnotations</a>
  * @see <a href=
  *      'http://code.google.com/intl/en/webtoolkit/doc/latest/DevGuideUiBinderI1
  *      8 n . h t m l ' >UiBinderAnnotations</a>
  */
-@DefaultLocale("en_GB")
+
+@DefaultLocale("en")
 // Line below defaults to I18N_default.xlf, I18N_de.xlf, etc
 // GenerateKeys defaults to MD5 hash of text and meaning
 @GenerateKeys
@@ -34,6 +36,12 @@ public interface Mes extends Messages {
 	}
     }
 
+    @DefaultMessage(Msg.ADD_TO_CONTACTS)
+    String addToContacts();
+
+    @DefaultMessage(Msg.CHAT)
+    String chat();
+
     @DefaultMessage(Msg.CONNECTED_AS + " {0}")
     @Description("The specified user has connected")
     String conectedAs(@Example("john.doe") String userName);
@@ -45,15 +53,24 @@ public interface Mes extends Messages {
     @DefaultMessage(Msg.DISCONNECTED)
     String disconnected();
 
-    @DefaultMessage("Sign in")
+    @DefaultMessage(Msg.SIGN_IN)
     String login();
 
-    @DefaultMessage("Sign out")
+    @DefaultMessage(Msg.SIGN_OUT)
     String logout();
+
+    @DefaultMessage(Msg.REMOVE_FROM_CONTACTS)
+    String removeFromContacts();
 
     @DefaultMessage(Msg.ROSTER_DISABLED)
     String rosterDisabled();
 
+    @DefaultMessage(Msg.RESULTS_FOR + " «{0}»: {1} users found.")
+    @Description("Results for a users search")
+    @PluralText( { "one", "Results for «{0}»: One user found." })
+    String searchResultsFor(String term, @PluralCount @Optional int count);
+
     @DefaultMessage("Wait...")
     String waitDots();
+
 }

@@ -1,7 +1,7 @@
 package com.calclab.hablar.client.roster;
 
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.hablar.client.ui.lists.ListItemWiget;
+import com.calclab.hablar.client.ui.lists.ListItemWidget;
 import com.calclab.hablar.client.ui.styles.HablarStyles;
 import com.calclab.hablar.client.ui.styles.HablarStyles.IconType;
 import com.google.gwt.core.client.GWT;
@@ -10,7 +10,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
-class RosterItemWidget extends ListItemWiget implements RosterItemView {
+class RosterItemWidget extends ListItemWidget implements RosterItemView {
 
     interface RosterItemWidgetUiBinder extends UiBinder<Widget, RosterItemWidget> {
     }

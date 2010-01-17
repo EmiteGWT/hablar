@@ -8,11 +8,11 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 
-public abstract class ListItemWiget extends Composite implements ListItemView {
+public abstract class ListItemWidget extends Composite implements ListItemView {
     protected final ListLogic logic;
     private Label menu;
 
-    public ListItemWiget(ListLogic logic) {
+    public ListItemWidget(ListLogic logic) {
 	this.logic = logic;
 	sinkEvents(Event.ONCLICK | Event.ONMOUSEOVER | Event.ONMOUSEOUT);
     }
@@ -37,7 +37,7 @@ public abstract class ListItemWiget extends Composite implements ListItemView {
 	    @Override
 	    public void onClick(ClickEvent event) {
 		event.stopPropagation();
-		logic.onMenuClicked(ListItemWiget.this, menu);
+		logic.onMenuClicked(ListItemWidget.this, menu);
 	    }
 	});
 	setMenuVisible(false);

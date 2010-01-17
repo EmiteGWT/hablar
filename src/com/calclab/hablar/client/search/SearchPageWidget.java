@@ -8,7 +8,6 @@ import com.calclab.hablar.client.ui.menu.PopupMenu;
 import com.calclab.hablar.client.ui.menu.PopupMenuView;
 import com.calclab.hablar.client.ui.page.PageWidget;
 import com.calclab.hablar.client.ui.styles.HablarStyles;
-import com.calclab.hablar.client.ui.styles.HablarStyles.IconType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.FocusEvent;
@@ -41,6 +40,10 @@ public class SearchPageWidget extends PageWidget implements SearchView {
 
     }
 
+    public static final String ID = "SearchPageWidget";
+    public static final String TERM = ID + "-term";
+    public static final String MESSAGE = ID + "-message";
+
     private static SearchPageUiBinder uiBinder = GWT.create(SearchPageUiBinder.class);
     private final SearchLogic logic;
 
@@ -64,13 +67,16 @@ public class SearchPageWidget extends PageWidget implements SearchView {
 
     public SearchPageWidget() {
 	super(true);
+	super.setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
+	term.ensureDebugId(TERM);
+	message.ensureDebugId(MESSAGE);
 	logic = new SearchLogic(this);
 	setHeaderTitle("Search users");
 	setHeaderIconClass(HablarStyles.get(HablarStyles.IconType.search));
     }
 
-    public void addResult(SearchResultItem item) {
+    public void addResult(final SearchResultItem item) {
 	results.add(new SearchResultItemWidget(logic, item));
     }
 
@@ -79,26 +85,26 @@ public class SearchPageWidget extends PageWidget implements SearchView {
     }
 
     @Override
-    public PopupMenuView<SearchResultView> createMenu(MenuAction<SearchResultView>... actions) {
-	PopupMenu<SearchResultView> popupMenu = new PopupMenu<SearchResultView>(actions);
+    public PopupMenuView<SearchResultView> createMenu(final MenuAction<SearchResultView>... actions) {
+	final PopupMenu<SearchResultView> popupMenu = new PopupMenu<SearchResultView>(actions);
 	return popupMenu;
     }
 
     @UiHandler("term")
-    public void onFocus(FocusEvent evt) {
+    public void onFocus(final FocusEvent evt) {
 	term.setText("");
 	term.getElement().removeClassName(style.unfocus());
 	term.getElement().addClassName(style.focus());
     }
 
     @UiHandler("term")
-    public void onSearch(ChangeEvent evt) {
+    public void onSearch(final ChangeEvent evt) {
 	logic.search(term.getText());
 	term.setText("");
     }
 
     @Override
-    public void showMessage(String body, Level level) {
+    public void showMessage(final String body, final Level level) {
 	self.setWidgetTopHeight(messagePanel, 0, PX, 22, PX);
 	self.setWidgetTopBottom(scroll, 22, PX, 33, PX);
 	self.animate(250);
@@ -107,7 +113,7 @@ public class SearchPageWidget extends PageWidget implements SearchView {
 	message.getElement().addClassName(getStyle(level));
     }
 
-    private String getStyle(Level level) {
+    private String getStyle(final Level level) {
 	String value = null;
 	if (level == Level.success) {
 	    value = style.success();

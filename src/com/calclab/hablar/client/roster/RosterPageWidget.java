@@ -60,11 +60,12 @@ public class RosterPageWidget extends PageWidget implements RosterView {
     }
 
     @Override
-    public void addAction(final String iconStyle, final ClickHandler clickHandler) {
+    public void addAction(final String iconStyle, final String id, final ClickHandler clickHandler) {
 	final Label label = new Label();
 	label.getElement().addClassName(style.action());
 	label.getElement().addClassName(iconStyle);
 	label.addClickHandler(clickHandler);
+	label.ensureDebugId(id);
 	actions.add(label);
     }
 
