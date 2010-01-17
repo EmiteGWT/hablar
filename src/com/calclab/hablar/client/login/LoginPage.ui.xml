@@ -23,15 +23,14 @@
         <label styleName="{style.label}">
           <ui:msg description="User field">User:</ui:msg>
         </label>
-        <g:TextBox styleName="{style.box}" ui:field="uri"
-          debugId="LoginPage-uri" />
+        <g:TextBox styleName="{style.box}" ui:field="uri"/>
         <label styleName="{style.label}">
           <ui:msg description="Password field">Password:</ui:msg>
         </label>
         <g:PasswordTextBox styleName="{style.box}"
-          ui:field="password" debugId="LoginPage-passwd" />
+          ui:field="password"/>
         <div>
-          <g:Button ui:field="button" debugId="LoginPage-button">Login</g:Button>
+          <g:Button ui:field="button">Login</g:Button>
         </div>
       </g:HTMLPanel>
     </g:north>

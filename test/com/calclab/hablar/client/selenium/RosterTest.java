@@ -2,23 +2,28 @@ package com.calclab.hablar.client.selenium;
 
 import org.junit.Assert;
 
-import com.calclab.hablar.client.i18n.Msg;
-
 public class RosterTest extends SeleniumTestSuite {
 
     private final WebTest rosterPanelSelectionNotLogged;
+    private final WebTest rosterPanelSelectionNotLoggedNotVisible;
 
-    public RosterTest() {
+    public RosterTest(final RosterPageObject roster) {
+	rosterPanelSelectionNotLoggedNotVisible = new WebTest() {
+	    @Override
+	    public void run(final WebContext ctx) {
+		final AbstractWebTester webHelper = ctx.getWebHelper();
+		webHelper.home();
+		// FIXME: this must fail...
+		Assert.assertTrue("Roster disabled label visible", roster.getDisableLabel().isDisplayed());
+	    }
+	};
 	rosterPanelSelectionNotLogged = new WebTest() {
 	    @Override
 	    public void run(final WebContext ctx) {
 		final AbstractWebTester webHelper = ctx.getWebHelper();
 		webHelper.home();
-		final RosterPageTest roster = new RosterPageTest(webHelper);
-		roster.click();
-		Assert.assertTrue("Roster disabled label not visible", roster.getDisableLabel().getText().contains(
-			Msg.ROSTER_DISABLED));
-		webHelper.wait(1000);
+		roster.Header().click();
+		Assert.assertTrue("Roster disabled label not visible", roster.getDisableLabel().isDisplayed());
 	    }
 	};
     }
@@ -26,5 +31,6 @@ public class RosterTest extends SeleniumTestSuite {
     @Override
     public void registerTests() {
 	add("Roster panel selection when not logged", rosterPanelSelectionNotLogged);
+	add("Roster panel selection when not logged not visible", rosterPanelSelectionNotLoggedNotVisible);
     }
 }

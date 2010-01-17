@@ -26,6 +26,9 @@ public class LoginPage extends PageWidget {
     }
 
     public static final String ID = "LoginPage";
+    public static final String URI = "LoginPage-uri";
+    public static final String PASSWD = "LoginPage-passwd";
+    public static final String BTN = "LoginPage-btn";
 
     private static LoginWidgetUiBinder uiBinder = GWT.create(LoginWidgetUiBinder.class);
 
@@ -48,6 +51,9 @@ public class LoginPage extends PageWidget {
 	// FIXME: better this can go in the constructor
 	super.setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
+	uri.ensureDebugId(URI);
+	password.ensureDebugId(PASSWD);
+	button.ensureDebugId(BTN);
 	this.logic = new LoginLogic(this);
     }
 
