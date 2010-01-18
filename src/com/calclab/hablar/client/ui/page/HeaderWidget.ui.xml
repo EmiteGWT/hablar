@@ -6,7 +6,6 @@
 		type="com.calclab.hablar.client.ui.page.HeaderWidget.DefaultStyles">
 			.open {
 				color: blue;
-				
 			}
 			
 			.closed {
