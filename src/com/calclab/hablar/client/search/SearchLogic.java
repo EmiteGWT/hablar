@@ -8,7 +8,7 @@ import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.xep.search.client.SearchManager;
 import com.calclab.emite.xep.search.client.SearchResultItem;
-import com.calclab.hablar.client.i18n.Mes;
+import com.calclab.hablar.client.i18n.Msg;
 import com.calclab.hablar.client.search.SearchView.Level;
 import com.calclab.hablar.client.ui.lists.ListItemView;
 import com.calclab.hablar.client.ui.lists.ListLogic;
@@ -24,11 +24,13 @@ public class SearchLogic implements ListLogic {
     private final Roster roster;
     private PopupMenuView<SearchResultView> addToRosterMenu;
     private PopupMenuView<SearchResultView> removeFromRosterMenu;
+    private final Msg i18n;
 
     public SearchLogic(final SearchView view) {
 	this.view = view;
 	manager = Suco.get(SearchManager.class);
 	roster = Suco.get(Roster.class);
+	i18n = Suco.get(Msg.class);
 	createMenus();
     }
 
@@ -65,7 +67,7 @@ public class SearchLogic implements ListLogic {
 
 	    @Override
 	    public void onSuccess(final List<SearchResultItem> items) {
-		view.showMessage(Mes.sa.ge().searchResultsFor(text, items.size()), Level.success);
+		view.showMessage(i18n.searchResultsFor(text, items.size()), Level.success);
 		for (final SearchResultItem item : items) {
 		    view.addResult(item);
 		}
@@ -88,12 +90,12 @@ public class SearchLogic implements ListLogic {
 
     @SuppressWarnings("unchecked")
     private void createMenus() {
-	addToRosterMenu = view.createMenu(new MenuAction<SearchResultView>(Mes.sa.ge().addToContacts()) {
+	addToRosterMenu = view.createMenu(new MenuAction<SearchResultView>(i18n.addToContacts()) {
 	    @Override
 	    public void execute(final SearchResultView target) {
 		onResultToRoster(target);
 	    }
-	}, new MenuAction<SearchResultView>(Mes.sa.ge().chat()) {
+	}, new MenuAction<SearchResultView>(i18n.chat()) {
 	    @Override
 	    public void execute(final SearchResultView target) {
 		onChatWith(target);

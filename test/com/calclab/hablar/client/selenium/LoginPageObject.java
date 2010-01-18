@@ -3,7 +3,6 @@ package com.calclab.hablar.client.selenium;
 import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.calclab.hablar.client.i18n.Msg;
 import com.calclab.hablar.client.login.LoginPage;
 
 public class LoginPageObject extends AbstractPageObject {
@@ -19,12 +18,12 @@ public class LoginPageObject extends AbstractPageObject {
     public LoginPageObject() {
     }
 
-    public void assertIsConnected() {
-	waitFor(header, Msg.CONNECTED_AS);
+    public void assertIsConnectedAs(final String user) {
+	waitFor(header, i18n.get("connectedAs", user));
     }
 
     public void assertIsDisconnected() {
-	waitFor(header, Msg.DISCONNECTED);
+	waitFor(header, i18n.get("disconnected"));
     }
 
     public RenderedWebElement getHeader() {
@@ -51,7 +50,7 @@ public class LoginPageObject extends AbstractPageObject {
 
     public void signOut() {
 	header.click();
-	waitFor(button, Msg.SIGN_OUT);
+	waitFor(button, i18n.get("logout"));
 	button.click();
 	assertIsDisconnected();
     }

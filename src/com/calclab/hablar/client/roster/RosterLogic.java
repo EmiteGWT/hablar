@@ -9,7 +9,7 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.hablar.client.i18n.Mes;
+import com.calclab.hablar.client.i18n.Msg;
 import com.calclab.hablar.client.ui.lists.ListItemView;
 import com.calclab.hablar.client.ui.lists.ListLogic;
 import com.calclab.hablar.client.ui.menu.MenuAction;
@@ -34,12 +34,14 @@ public class RosterLogic implements ListLogic {
     private final RosterView view;
     private boolean active;
     private PopupMenuView<RosterItem> menu;
+    private final Msg i18n;
 
     public RosterLogic(final RosterView view) {
 	this.view = view;
 	this.roster = Suco.get(Roster.class);
 	this.items = new HashMap<XmppURI, RosterItemView>();
 	this.chatManager = Suco.get(ChatManager.class);
+	i18n = Suco.get(Msg.class);
 	createMenu();
 
 	addRosterListeners();
@@ -162,12 +164,12 @@ public class RosterLogic implements ListLogic {
 
     @SuppressWarnings("unchecked")
     private void createMenu() {
-	menu = view.createMenu(new MenuAction<RosterItem>(Mes.sa.ge().chat()) {
+	menu = view.createMenu(new MenuAction<RosterItem>(i18n.chat()) {
 	    @Override
 	    public void execute(final RosterItem target) {
 		onChatWith(target);
 	    }
-	}, new MenuAction<RosterItem>(Mes.sa.ge().removeFromContacts()) {
+	}, new MenuAction<RosterItem>(i18n.removeFromContacts()) {
 	    @Override
 	    public void execute(final RosterItem target) {
 		onRemoveItem(target);

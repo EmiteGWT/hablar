@@ -2,11 +2,7 @@ package com.calclab.hablar.client.roster;
 
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,10 +26,11 @@ public class RosterLogicTest {
     public void before() {
 	HablarStyles.setStyles(new HablarStyles());
 	tester = new EmiteTester();
+	AbstractLogicTest.registerI18n();
 	view = mock(RosterView.class);
 	when(view.createItemView()).thenAnswer(new Answer<RosterItemView>() {
 	    @Override
-	    public RosterItemView answer(InvocationOnMock invocation) throws Throwable {
+	    public RosterItemView answer(final InvocationOnMock invocation) throws Throwable {
 		return mock(RosterItemView.class);
 	    }
 	});
@@ -42,7 +39,7 @@ public class RosterLogicTest {
 
     @Test
     public void shouldActivateViewWhenItemAddedToRoster() {
-	RosterItem item = newItem("someone");
+	final RosterItem item = newItem("someone");
 	tester.roster.fireItemAdded(item);
 	verify(view).createItemView();
 	verify(view).setStatusMessage(anyString());
@@ -50,8 +47,8 @@ public class RosterLogicTest {
 
     @Test
     public void shouldAddItemWhenRosterReceived() {
-	Collection<RosterItem> items = new ArrayList<RosterItem>();
-	RosterItem item = newItem("someone");
+	final Collection<RosterItem> items = new ArrayList<RosterItem>();
+	final RosterItem item = newItem("someone");
 	items.add(item);
 	tester.roster.fireRosterReady(items);
 	verify(view).createItemView();
@@ -59,7 +56,7 @@ public class RosterLogicTest {
 
     @Test
     public void shouldRemoveItems() {
-	RosterItem item = newItem("friend");
+	final RosterItem item = newItem("friend");
 	tester.roster.fireItemAdded(item);
 	verify(view).createItemView();
 	tester.roster.fireItemRemoved(item);
@@ -77,7 +74,7 @@ public class RosterLogicTest {
 	verify(view, times(2)).setActive(false);
     }
 
-    private RosterItem newItem(String name) {
+    private RosterItem newItem(final String name) {
 	return new RosterItem(XmppURI.uri(name + "@host"), null, name, null);
     }
 

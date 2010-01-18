@@ -33,11 +33,18 @@ public class SeleniumModule extends AbstractModule {
 	    }
 	});
 
+	register(Singleton.class, new Factory<I18nHelper>(I18nHelper.class) {
+	    @Override
+	    public I18nHelper create() {
+		return new I18nHelper();
+	    }
+	});
+
 	register(Singleton.class, new Factory<ElementLocatorFactory>(ElementLocatorFactory.class) {
 	    @Override
 	    public ElementLocatorFactory create() {
 		// The number is the timeout
-		return new AjaxElementLocatorFactory($(WebDriver.class), 7);
+		return new AjaxElementLocatorFactory($(WebDriver.class), SeleniumConstants.TIMEOUT);
 	    }
 	});
 
@@ -67,5 +74,6 @@ public class SeleniumModule extends AbstractModule {
 		return roster;
 	    }
 	});
+
     }
 }

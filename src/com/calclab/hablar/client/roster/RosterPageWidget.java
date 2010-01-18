@@ -1,12 +1,13 @@
 package com.calclab.hablar.client.roster;
 
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.hablar.client.i18n.Mes;
+import com.calclab.hablar.client.i18n.Msg;
 import com.calclab.hablar.client.ui.menu.MenuAction;
 import com.calclab.hablar.client.ui.menu.PopupMenu;
 import com.calclab.hablar.client.ui.menu.PopupMenuView;
 import com.calclab.hablar.client.ui.page.PageWidget;
 import com.calclab.hablar.client.ui.styles.HablarStyles;
+import com.calclab.suco.client.Suco;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -52,9 +53,11 @@ public class RosterPageWidget extends PageWidget implements RosterView {
 	super(false);
 	setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
+	final Msg i18n = Suco.get(Msg.class);
+
 	logic = new RosterLogic(this);
-	setHeaderTitle(Mes.sa.ge().contacts());
-	disabledLabel.setText(Mes.sa.ge().rosterDisabled());
+	setHeaderTitle(i18n.contacts());
+	disabledLabel.setText(i18n.rosterDisabled());
 	disabledLabel.ensureDebugId(DISABLED_LABEL);
 	setHeaderIconClass(HablarStyles.get(HablarStyles.IconType.roster));
     }

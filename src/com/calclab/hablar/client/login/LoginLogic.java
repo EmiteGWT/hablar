@@ -4,7 +4,7 @@ import com.calclab.emite.browser.client.PageAssist;
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.session.Session.State;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
-import com.calclab.hablar.client.i18n.Mes;
+import com.calclab.hablar.client.i18n.Msg;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.event.logical.shared.CloseEvent;
@@ -14,10 +14,12 @@ import com.google.gwt.user.client.Window;
 class LoginLogic {
     private final Session session;
     private final LoginPage page;
+    private final Msg i18n;
 
     public LoginLogic(final LoginPage widget) {
 	this.page = widget;
 	this.session = Suco.get(Session.class);
+	this.i18n = Suco.get(Msg.class);
 
 	final String userName = PageAssist.getMeta("hablar.user");
 	widget.setUserName(userName);
@@ -56,16 +58,16 @@ class LoginLogic {
 
     private void setState(final State state) {
 	if (state == State.ready) {
-	    page.setActionText(Mes.sa.ge().logout());
+	    page.setActionText(i18n.logout());
 	    page.setActionEnabled(true);
 	    final String userName = session.getCurrentUser().getNode();
-	    setStatus(Mes.sa.ge().conectedAs(userName), page.icons.loggedInIcon());
+	    setStatus(i18n.connectedAs(userName), page.icons.loggedInIcon());
 	} else if (state == State.disconnected) {
-	    page.setActionText(Mes.sa.ge().login());
+	    page.setActionText(i18n.login());
 	    page.setActionEnabled(true);
-	    setStatus(Mes.sa.ge().disconnected(), page.icons.loggedOutIcon());
+	    setStatus(i18n.disconnected(), page.icons.loggedOutIcon());
 	} else {
-	    page.setActionText(Mes.sa.ge().waitDots());
+	    page.setActionText(i18n.waitDots());
 	    page.setActionEnabled(false);
 	}
 	page.addMessage("Session state: " + state);

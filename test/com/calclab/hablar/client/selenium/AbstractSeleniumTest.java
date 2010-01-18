@@ -36,7 +36,7 @@ public class AbstractSeleniumTest {
     @DataProvider(name = "correctlogin")
     public Object[][] createCorrectLogin() {
 	// The default correct user/password used in tests
-	return new Object[][] { { SeleniumConstants.USER, SeleniumConstants.PASSWD }, };
+	return new Object[][] { { SeleniumConstants.USER, SeleniumConstants.PASSWD, SeleniumConstants.USERNODE }, };
     }
 
     @DataProvider(name = "incorrectlogin")

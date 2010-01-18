@@ -3,9 +3,13 @@ package com.calclab.hablar.client.selenium;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import com.calclab.suco.client.Suco;
+
 public class AbstractPageObject {
 
     private static final long[] POLL_INTERVALS = { 10, 20, 30, 40, 50, 50, 50, 50, 100 };
+
+    protected static final I18nHelper i18n = Suco.get(I18nHelper.class);
 
     // Thanks to:
     // http://groups.google.com/group/webdriver/browse_frm/thread/6e705242cc6d75ed/f5f8dca438397254?lnk=gst#f5f8dca438397254

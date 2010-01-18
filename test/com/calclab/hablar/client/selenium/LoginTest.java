@@ -14,21 +14,21 @@ public class LoginTest extends AbstractSeleniumTest {
     }
 
     @Test(dataProvider = "correctlogin")
-    public void severalsSignInSingOut(final String user, final String passwd) {
+    public void severalsSignInSingOut(final String user, final String passwd, final String userNode) {
 	login.signIn(user, passwd);
-	login.assertIsConnected();
+	login.assertIsConnectedAs(userNode);
 	login.signOut();
 	login.assertIsDisconnected();
 	login.signIn(user, passwd);
-	login.assertIsConnected();
+	login.assertIsConnectedAs(userNode);
 	login.signOut();
 	login.assertIsDisconnected();
     }
 
     @Test(dataProvider = "correctlogin")
-    public void signIn(final String user, final String passwd) {
+    public void signIn(final String user, final String passwd, final String usernode) {
 	login.signIn(user, passwd);
-	login.assertIsConnected();
+	login.assertIsConnectedAs(usernode);
     }
 
     @Test(dataProvider = "incorrectlogin")

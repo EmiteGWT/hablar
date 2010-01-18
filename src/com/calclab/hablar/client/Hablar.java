@@ -19,24 +19,27 @@ public class Hablar implements EntryPoint {
     public void onModuleLoad() {
 	DefaultHablarStyles.init();
 
-	SubscriptionHandler handler = Suco.get(SubscriptionHandler.class);
+	final SubscriptionHandler handler = Suco.get(SubscriptionHandler.class);
 	handler.setBehaviour(Behaviour.acceptAll);
 
-	HablarResources res = GWT.create(HablarResources.class);
+	final HablarResources res = GWT.create(HablarResources.class);
 	res.generalCSS().ensureInjected();
 
-	XmppURI host = XmppURI.uri(PageAssist.getMeta("emite.searchHost"));
+	// FIXME: revise this (needed to Mock i18n for tests)
+	Suco.install(new HablarModule());
+
+	final XmppURI host = XmppURI.uri(PageAssist.getMeta("emite.searchHost"));
 	Suco.get(SearchManager.class).setHost(host);
 
-	HablarConfig config = HablarConfig.getFromMeta();
+	final HablarConfig config = HablarConfig.getFromMeta();
 
 	if (config.inline == null) {
-	    HablarDialog hablarDialog = new HablarDialog(config);
+	    final HablarDialog hablarDialog = new HablarDialog(config);
 	    setSize(hablarDialog, config);
 	    hablarDialog.show();
 	    hablarDialog.center();
 	} else {
-	    HablarWidget widget = new HablarWidget(config);
+	    final HablarWidget widget = new HablarWidget(config);
 	    setSize(widget, config);
 	    RootPanel rootPanel = RootPanel.get(config.inline);
 	    if (rootPanel != null) {
@@ -48,7 +51,7 @@ public class Hablar implements EntryPoint {
 
     }
 
-    private void setSize(Widget widget, HablarConfig config) {
+    private void setSize(final Widget widget, final HablarConfig config) {
 	if (config.width != null) {
 	    widget.setWidth(config.width);
 	}
