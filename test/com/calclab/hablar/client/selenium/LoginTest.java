@@ -1,29 +1,39 @@
 package com.calclab.hablar.client.selenium;
 
-import junit.framework.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
-import com.calclab.hablar.client.i18n.Msg;
+import com.calclab.suco.client.Suco;
 
-public class LoginTest extends SeleniumTestSuite {
-    private final WebTest basicLogin;
+public class LoginTest extends AbstractSeleniumTest {
+    private LoginPageObject login;
 
-    public LoginTest(final LoginPageObject login) {
-	basicLogin = new WebTest() {
-	    @Override
-	    public void run(final WebContext ctx) {
-		final AbstractWebTester webHelper = ctx.getWebHelper();
-		webHelper.home();
-		login.getHeader().click();
-		Assert.assertTrue(login.Header().getText().contains(Msg.DISCONNECTED));
-		login.signIn("test1@localhost", "test1");
-		Assert.assertTrue(login.Header().getText().contains(Msg.CONNECTED_AS));
-		login.getHeader().click();
-	    }
-	};
+    @BeforeClass
+    public void beforeClass() {
+	login = Suco.get(LoginPageObject.class);
     }
 
-    @Override
-    public void registerTests() {
-	add("Basic login", basicLogin);
+    @Test(dataProvider = "correctlogin")
+    public void severalsSignInSingOut(final String user, final String passwd) {
+	login.signIn(user, passwd);
+	login.assertIsConnected();
+	login.signOut();
+	login.assertIsDisconnected();
+	login.signIn(user, passwd);
+	login.assertIsConnected();
+	login.signOut();
+	login.assertIsDisconnected();
+    }
+
+    @Test(dataProvider = "correctlogin")
+    public void signIn(final String user, final String passwd) {
+	login.signIn(user, passwd);
+	login.assertIsConnected();
+    }
+
+    @Test(dataProvider = "incorrectlogin")
+    public void signInIncorrectPasswd(final String user, final String passwd) {
+	login.signIn(user, passwd);
+	login.assertIsDisconnected();
     }
 }

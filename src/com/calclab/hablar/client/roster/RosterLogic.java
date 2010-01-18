@@ -137,7 +137,8 @@ public class RosterLogic implements ListLogic {
 	    @Override
 	    public void onEvent(final RosterItem item) {
 		view.removeItemView(getOrCreateWidget(item));
-		view.setStatusMessage(item.getName() + " has been removed from Contacts.");
+		// item.getName() returns null in a removed item
+		view.setStatusMessage(item.getJID().getNode() + " has been removed from Contacts.");
 	    }
 	});
     }

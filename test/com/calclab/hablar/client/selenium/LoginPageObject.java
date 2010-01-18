@@ -19,6 +19,14 @@ public class LoginPageObject extends AbstractPageObject {
     public LoginPageObject() {
     }
 
+    public void assertIsConnected() {
+	waitFor(header, Msg.CONNECTED_AS);
+    }
+
+    public void assertIsDisconnected() {
+	waitFor(header, Msg.DISCONNECTED);
+    }
+
     public RenderedWebElement getHeader() {
 	return header;
     }
@@ -31,21 +39,20 @@ public class LoginPageObject extends AbstractPageObject {
 	header.click();
 	login.clear();
 	passwd.clear();
-	waitFor(header, Msg.DISCONNECTED);
+	assertIsDisconnected();
 	login.sendKeys(username);
 	passwd.sendKeys(password);
 	button.click();
-	waitFor(header, Msg.CONNECTED_AS);
     }
 
     public void signInDefUser() {
-	signIn("test1@localhost", "test1");
+	signIn(SeleniumConstants.USER, SeleniumConstants.PASSWD);
     }
 
     public void signOut() {
 	header.click();
 	waitFor(button, Msg.SIGN_OUT);
 	button.click();
-	waitFor(header, Msg.DISCONNECTED);
+	assertIsDisconnected();
     }
 }

@@ -1,12 +1,13 @@
-<!DOCTYPE suite SYSTEM "<a class="linkification-ext" href="http://testng.org/testng-1.0.dtd" title="Linkification: http://testng.org/testng-1.0.dtd">http://testng.org/testng-1.0.dtd</a>" >
-<test name="Suite1">
-  <groups>
-    <run>
-      <include name="functest"/>
-    </run>
-  </groups>
-  <classes>
-    <class name="com.calclab.hablar.client.selenium.LoginNGTest"/>
-    <class name="com.calclab.hablar.client.selenium.SearchTest"/>
-  </classes>
-</test>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Suite1" verbose="2" >
+  <test name="functest" >
+    <packages>
+      <package name="com.calclab.hablar.client.selenium" />
+   </packages>
+ </test>
+ <test name="functest2">
+    <classes>
+      <class name="com.calclab.hablar.client.selenium.LoginTest"/>
+    </classes>
+  </test>
+</suite>

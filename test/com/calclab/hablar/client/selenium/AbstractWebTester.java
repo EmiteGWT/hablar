@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import com.google.gwt.user.client.ui.UIObject;
 import com.thoughtworks.selenium.Selenium;
 
-public abstract class AbstractWebTester implements WebTester {
+public abstract class AbstractWebTester {
     private final WebDriver driver;
     private final String baseUrl;
     private final Selenium selenium;
@@ -17,14 +17,12 @@ public abstract class AbstractWebTester implements WebTester {
 	this.driver = driver;
 	this.baseUrl = baseUrl;
 
-	// About Webdriver or Selenium APIs: Not clear what to use, See:
-	// http://groups.google.com/group/webdriver/browse_frm/thread/2c86604006234012/ff2806873921efd6?lnk=gst&q=timeout#ff2806873921efd6
 	selenium = new WebDriverBackedSelenium(driver, baseUrl);
 	selenium.setTimeout("5000");
     }
 
     public void close() {
-	selenium.close();
+	driver.close();
     }
 
     public WebElement getById(final String id) {

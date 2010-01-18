@@ -1,23 +1,61 @@
 package com.calclab.hablar.client.selenium;
 
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.BeforeClass;
+import org.testng.ITestContext;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.DataProvider;
+
+import com.calclab.suco.client.Suco;
 
 public class AbstractSeleniumTest {
 
-    protected FirefoxDriver driver;
-    protected WebContext ctx;
+    @AfterSuite
+    public void AfterSuite() {
+	// We try to only open one window for all our selenium tests (maybe we
+	// want something different in the future)
+	closeBrowser();
+    }
 
-    @BeforeClass
-    // http://testng.org/doc/documentation-main.html
-    public void beforeAll() {
-	// FIXME: If we decide to use TestNG get this out of here and clean-up
-	driver = new FirefoxDriver("selenium");
-	ctx = new WebContext(new GenericWebTester(driver,
-		"http://localhost:8888/Hablar.html?gwt.codesvr=127.0.1.1:9997"));
+    @BeforeMethod
+    public void beforeMethod() {
+	// This reload the baseUrl and then "starts" the GWT page to test, in
+	// every test method
+	goHome();
+    }
+
+    @BeforeSuite
+    public void beforeSuite(final ITestContext context) {
+	Suco.install(new SeleniumModule());
+    }
+
+    public void closeBrowser() {
+	getWebTester().close();
+    }
+
+    @DataProvider(name = "correctlogin")
+    public Object[][] createCorrectLogin() {
+	// The default correct user/password used in tests
+	return new Object[][] { { SeleniumConstants.USER, SeleniumConstants.PASSWD }, };
+    }
+
+    @DataProvider(name = "incorrectlogin")
+    public Object[][] createIncorrectLogin() {
+	// Some pairs of user/passwd that must fail when try to login
+	return new Object[][] { { "test1@localhost", "test1blabla" }, { "test1", "test1" },
+		{ "test1@localhost", "test" }, { "", "" } };
+    }
+
+    public void goHome() {
+	getWebTester().home();
     }
 
     public void sleep(final int milliseconds) {
-	ctx.getWebHelper().wait(milliseconds);
+	getWebTester().wait(milliseconds);
     }
+
+    private GenericWebTester getWebTester() {
+	return Suco.get(GenericWebTester.class);
+    }
+
 }
