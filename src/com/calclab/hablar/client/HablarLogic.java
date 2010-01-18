@@ -26,6 +26,7 @@ public class HablarLogic {
 	this.pages = pages;
 	final Session session = Suco.get(Session.class);
 
+	// FIXME: no longer necessary
 	/* we always have the panel, to see the status, but not always visible */
 	loginPage = new LoginPage();
 	if (config.hasLogin) {

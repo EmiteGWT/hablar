@@ -38,7 +38,12 @@ public class Hablar implements EntryPoint {
 	} else {
 	    HablarWidget widget = new HablarWidget(config);
 	    setSize(widget, config);
-	    RootPanel.get(config.inline).add(widget);
+	    RootPanel rootPanel = RootPanel.get(config.inline);
+	    if (rootPanel != null) {
+		rootPanel.add(widget);
+	    } else {
+		throw new RuntimeException("The div with id " + config.inline + " is not found.");
+	    }
 	}
 
     }

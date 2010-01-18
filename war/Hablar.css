@@ -19,12 +19,31 @@ html,body {
 	padding: 5px;
 }
 
-#accordion_div {
+.hablar {
+	padding: 1px;
+	background-color: #bBBBBB;
+}
+
+#vertical_div {
 	position: absolute;
 	left: -150px;
 	width: 300px;
 	top: 5%;
 	height: 90%;
-	padding: 1px;
-	background-color: #bBBBBB;
+}
+
+#vertical_dock_div {
+	position: absolute;
+	left: -250px;
+	width: 500px;
+	top: 5%;
+	height: 90%;
+}
+
+#horizontal_div {
+	position: absolute;
+	left: -350px;
+	width: 700px;
+	top: 15%;
+	height: 70%;
 }

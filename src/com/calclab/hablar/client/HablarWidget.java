@@ -6,7 +6,6 @@ import com.calclab.hablar.client.chat.ChatManagerLogic;
 import com.calclab.hablar.client.ui.HablarPanel;
 import com.calclab.hablar.client.ui.pages.AbstractPages;
 import com.calclab.hablar.client.ui.pages.AccordionPages;
-import com.calclab.hablar.client.ui.pages.DockPages;
 import com.calclab.hablar.client.ui.pages.TabPages;
 import com.google.gwt.user.client.ui.Composite;
 
@@ -16,10 +15,10 @@ public class HablarWidget extends Composite {
 	AbstractPages pages = null;
 	if (config.layout == Layout.accordion) {
 	    pages = new AccordionPages();
-	} else if (config.layout == Layout.dock) {
-	    pages = new DockPages();
-	} else {
+	} else if (config.layout == Layout.tabs) {
 	    pages = new TabPages();
+	} else {
+	    throw new RuntimeException("Layout not configured.");
 	}
 	new HablarLogic(config, pages);
 	new ChatManagerLogic(ChatConfig.getFromMeta(), pages);

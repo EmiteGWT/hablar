@@ -5,7 +5,7 @@ import com.calclab.emite.browser.client.PageAssist;
 public class HablarConfig {
 
     public static enum Layout {
-	accordion, tabs, dock
+	accordion, tabs
     }
 
     /**
@@ -19,13 +19,13 @@ public class HablarConfig {
 	config.hasRoster = !"false".equals(PageAssist.getMeta("hablar.rosterWidget"));
 	config.hasSearch = !"false".equals(PageAssist.getMeta("hablar.searchWidget"));
 
+	config.dockRoster = PageAssist.getMeta("hablar.dockRoster");
+
 	String layout = PageAssist.getMeta("hablar.layout");
-	if ("accordion".equals(layout))
-	    config.layout = HablarConfig.Layout.accordion;
-	else if ("dock".equals(layout))
-	    config.layout = HablarConfig.Layout.dock;
-	else
+	if ("tabs".equals(layout))
 	    config.layout = HablarConfig.Layout.tabs;
+	else
+	    config.layout = HablarConfig.Layout.accordion;
 
 	config.inline = PageAssist.getMeta("hablar.inline");
 	config.width = PageAssist.getMeta("hablar.width");
@@ -36,6 +36,11 @@ public class HablarConfig {
 	    config.height = "400px";
 	return config;
     }
+
+    /**
+     * Dock the roster
+     */
+    public String dockRoster;
 
     /**
      * Choose a layout
