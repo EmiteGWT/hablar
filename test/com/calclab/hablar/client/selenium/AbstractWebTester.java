@@ -1,5 +1,7 @@
 package com.calclab.hablar.client.selenium;
 
+import java.awt.Point;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverBackedSelenium;
@@ -32,6 +34,10 @@ public abstract class AbstractWebTester {
     public void home() {
 	assert baseUrl != null;
 	driver.get(baseUrl);
+    }
+
+    public void moveMouseAt(final Point point) {
+	selenium.mouseMoveAt(String.valueOf(point.getX()), String.valueOf(point.getY()));
     }
 
 }

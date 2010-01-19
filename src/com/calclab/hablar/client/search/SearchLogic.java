@@ -19,6 +19,12 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.UIObject;
 
 public class SearchLogic implements ListLogic {
+    public static final String ADD_ROSTER_MENU_DEB_ID = "SearchLogic-add-menu";
+    public static final String REMOVE_ROSTER_MENU_DEB_ID = "SearchLogic-remove-menu";
+    public static final String CHAT_DEB_ID = "SearchLogic-chat";
+    public static final String ADD_ROSTERITEM_DEB_ID = "SearchLogic-add-item";
+    public static final String REMOVE_ROSTERITEM_DEB_ID = "SearchLogic-remove-item";
+
     private final SearchView view;
     private final SearchManager manager;
     private final Roster roster;
@@ -90,23 +96,25 @@ public class SearchLogic implements ListLogic {
 
     @SuppressWarnings("unchecked")
     private void createMenus() {
-	addToRosterMenu = view.createMenu(new MenuAction<SearchResultView>(i18n.addToContacts()) {
+	addToRosterMenu = view.createMenu(ADD_ROSTER_MENU_DEB_ID, new MenuAction<SearchResultView>(
+		i18n.addToContacts(), ADD_ROSTERITEM_DEB_ID) {
 	    @Override
 	    public void execute(final SearchResultView target) {
 		onResultToRoster(target);
 	    }
-	}, new MenuAction<SearchResultView>(i18n.chat()) {
+	}, new MenuAction<SearchResultView>(i18n.chat(), CHAT_DEB_ID) {
 	    @Override
 	    public void execute(final SearchResultView target) {
 		onChatWith(target);
 	    }
 	});
-	removeFromRosterMenu = view.createMenu(new MenuAction<SearchResultView>("Remove from roster") {
+	removeFromRosterMenu = view.createMenu(REMOVE_ROSTER_MENU_DEB_ID, new MenuAction<SearchResultView>(
+		"Remove from roster", REMOVE_ROSTERITEM_DEB_ID) {
 	    @Override
 	    public void execute(final SearchResultView target) {
 		onRemoveFromRoster(target);
 	    }
-	}, new MenuAction<SearchResultView>("Chat") {
+	}, new MenuAction<SearchResultView>("Chat", CHAT_DEB_ID) {
 	    @Override
 	    public void execute(final SearchResultView target) {
 		onChatWith(target);

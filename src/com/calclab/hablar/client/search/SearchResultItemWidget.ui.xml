@@ -25,7 +25,7 @@
 
 	<ui:image field="buddy" src="../buddy-small.png"></ui:image>
 	<g:HTMLPanel styleName="{hablar.listItemWidget}">
-		<span class="{hablar.icon} {icons.userAdd}"></span>
+		<span class="{hablar.icon} {icons.userAdd}" ui:field="span"></span>
 		<g:Label ui:field="name" styleName="{style.resultName}">Result</g:Label>
 		<g:Label ui:field="jid" styleName="{style.jid}">JID</g:Label>
 		<g:Label ui:field="menu" styleName="{hablar.listItemMenu}"></g:Label>

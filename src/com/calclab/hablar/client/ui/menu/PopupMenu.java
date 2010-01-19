@@ -2,6 +2,7 @@ package com.calclab.hablar.client.ui.menu;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.MenuBar;
+import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.UIObject;
 
@@ -10,19 +11,21 @@ public class PopupMenu<T> extends PopupPanel implements PopupMenuView<T> {
     private T target;
     private boolean visible;
 
-    public PopupMenu(final MenuAction<T>... actions) {
+    public PopupMenu(final String debugId, final MenuAction<T>... actions) {
 	super(true);
+	super.ensureDebugId(debugId);
 	setStyleName("def-PopupPanel");
 	bar = new MenuBar(true);
 	for (final MenuAction<T> a : actions) {
 	    final MenuAction<T> action = a;
-	    bar.addItem(action.getHTML(), true, new Command() {
+	    final MenuItem addedItem = bar.addItem(action.getHTML(), true, new Command() {
 		@Override
 		public void execute() {
 		    PopupMenu.this.hide();
 		    action.execute(target);
 		}
 	    });
+	    addedItem.ensureDebugId(action.getId());
 	}
 	setWidget(bar);
 	visible = false;

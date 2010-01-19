@@ -2,10 +2,13 @@ package com.calclab.hablar.client.selenium;
 
 import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ByIdOrName;
 import org.openqa.selenium.support.FindBy;
 
 import com.calclab.hablar.client.HablarLogic;
+import com.calclab.hablar.client.roster.RosterItemLogic;
 import com.calclab.hablar.client.roster.RosterPageWidget;
+import com.calclab.hablar.client.ui.debug.Debug;
 
 public class RosterPageObject extends AbstractPageObject {
 
@@ -27,6 +30,10 @@ public class RosterPageObject extends AbstractPageObject {
 
     public RenderedWebElement getHeader() {
 	return header;
+    }
+
+    public RenderedWebElement getItemMenu(final String jid) {
+	return findElement(new ByIdOrName(Debug.getIdFromJid(RosterItemLogic.ROSTERITEM_MENU_DEB_ID, jid)));
     }
 
     public RenderedWebElement Header() {

@@ -10,14 +10,7 @@ public class SearchTest extends AbstractSeleniumTest {
     private RosterPageObject roster;
     private SearchPageObject search;
     private I18nHelper i18n;
-
-    /*
-     * Uncomment if you don't want to close the browser
-     * 
-     * @Override
-     * 
-     * @AfterSuite public void AfterSuite() { // Don't close browser }
-     */
+    private ChatPageObject chat;
 
     @BeforeClass
     public void beforeClass() {
@@ -25,12 +18,14 @@ public class SearchTest extends AbstractSeleniumTest {
 	roster = Suco.get(RosterPageObject.class);
 	search = Suco.get(SearchPageObject.class);
 	i18n = Suco.get(I18nHelper.class);
+	chat = Suco.get(ChatPageObject.class);
     }
 
     @Test()
     public void testBasicSearch() {
 	loginAndSearchClick();
 	search.term("test1");
+	sleep(5000);
 	search.waitForResult(i18n.get("searchResultsFor", "test1", 1));
     }
 
@@ -38,8 +33,25 @@ public class SearchTest extends AbstractSeleniumTest {
     public void testBasicSearchNoResult() {
 	loginAndSearchClick();
 	search.term("Something difficult to search");
+	sleep(5000);
 	// zero it's plural in English
 	search.waitForResult(i18n.get("searchResultsFor", "Something difficult to search", 0));
+    }
+
+    @Test()
+    public void testSearchAndChat() {
+	loginAndSearchClick();
+	search.term("test1");
+	sleep(7000);
+	// The menu it's not visible then we need to show it
+	search.getResultName(SeleniumConstants.USERJID).click();
+	// Now we can click the menu
+	search.getResultMenu(SeleniumConstants.USERJID).click();
+	search.ChatMenuItem().click();
+	chat.TalkBox().sendKeys("Hi ;)\n");
+	chat.TalkBox().sendKeys("some echo tests\n");
+	// Uncomment to don't close the window
+	// mustCloseFinally = false;
     }
 
     private void loginAndSearchClick() {
@@ -51,5 +63,4 @@ public class SearchTest extends AbstractSeleniumTest {
 	roster.Header().click();
 	search.Header().click();
     }
-
 }

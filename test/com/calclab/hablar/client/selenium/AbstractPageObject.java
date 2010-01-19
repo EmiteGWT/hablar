@@ -1,5 +1,8 @@
 package com.calclab.hablar.client.selenium;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.RenderedWebElement;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -10,6 +13,10 @@ public class AbstractPageObject {
     private static final long[] POLL_INTERVALS = { 10, 20, 30, 40, 50, 50, 50, 50, 100 };
 
     protected static final I18nHelper i18n = Suco.get(I18nHelper.class);
+
+    protected RenderedWebElement findElement(final By by) {
+	return (RenderedWebElement) Suco.get(WebDriver.class).findElement(by);
+    }
 
     // Thanks to:
     // http://groups.google.com/group/webdriver/browse_frm/thread/6e705242cc6d75ed/f5f8dca438397254?lnk=gst#f5f8dca438397254

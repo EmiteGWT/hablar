@@ -75,5 +75,14 @@ public class SeleniumModule extends AbstractModule {
 	    }
 	});
 
+	register(Singleton.class, new Factory<ChatPageObject>(ChatPageObject.class) {
+	    @Override
+	    public ChatPageObject create() {
+		final ChatPageObject chat = new ChatPageObject();
+		PageFactory.initElements($(ElementLocatorFactory.class), chat);
+		return chat;
+	    }
+	});
+
     }
 }

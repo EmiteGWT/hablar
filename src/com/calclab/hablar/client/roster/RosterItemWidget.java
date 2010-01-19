@@ -3,7 +3,6 @@ package com.calclab.hablar.client.roster;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.client.ui.lists.ListItemWidget;
 import com.calclab.hablar.client.ui.styles.HablarStyles;
-import com.calclab.hablar.client.ui.styles.HablarStyles.IconType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -24,7 +23,7 @@ class RosterItemWidget extends ListItemWidget implements RosterItemView {
 
     private String iconStyle;
 
-    public RosterItemWidget(RosterLogic logic) {
+    public RosterItemWidget(final RosterLogic logic) {
 	super(logic);
 	initWidget(uiBinder.createAndBindUi(this));
 	menu.addStyleName(HablarStyles.get(HablarStyles.IconType.menu));
@@ -38,7 +37,7 @@ class RosterItemWidget extends ListItemWidget implements RosterItemView {
     }
 
     @Override
-    public void setIcon(HablarStyles.IconType iconType) {
+    public void setIcon(final HablarStyles.IconType iconType) {
 	if (this.iconStyle != null) {
 	    icon.removeStyleName(iconStyle);
 	}
@@ -48,27 +47,37 @@ class RosterItemWidget extends ListItemWidget implements RosterItemView {
     }
 
     @Override
-    public void setItem(RosterItem item) {
+    public void setItem(final RosterItem item) {
 	this.item = item;
     }
 
     @Override
-    public void setJID(String jidString) {
+    public void setJID(final String jidString) {
 	jid.setText(jidString);
     }
 
     @Override
-    public void setName(String nameString) {
+    public void setMenuDebugId(final String debugId) {
+	menu.ensureDebugId(debugId);
+    }
+
+    @Override
+    public void setName(final String nameString) {
 	name.setText(nameString);
     }
 
     @Override
-    public void setStatus(String status) {
+    public void setNameDebugId(final String debugId) {
+	name.ensureDebugId(debugId);
+    }
+
+    @Override
+    public void setStatus(final String status) {
 	this.status.setText(status);
     }
 
     @Override
-    public void setStatusVisible(boolean visible) {
+    public void setStatusVisible(final boolean visible) {
 	this.status.setVisible(visible);
     }
 }

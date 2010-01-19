@@ -41,8 +41,8 @@ public class SearchPageWidget extends PageWidget implements SearchView {
     }
 
     public static final String ID = "SearchPageWidget";
-    public static final String TERM = ID + "-term";
-    public static final String MESSAGE = ID + "-message";
+    public static final String TERM_DEB_ID = "SearchPageWidget-term";
+    public static final String MESSAGE_DEB_ID = "SearchPageWidget-message";
 
     private static SearchPageUiBinder uiBinder = GWT.create(SearchPageUiBinder.class);
     private final SearchLogic logic;
@@ -69,8 +69,8 @@ public class SearchPageWidget extends PageWidget implements SearchView {
 	super(true);
 	super.setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
-	term.ensureDebugId(TERM);
-	message.ensureDebugId(MESSAGE);
+	term.ensureDebugId(TERM_DEB_ID);
+	message.ensureDebugId(MESSAGE_DEB_ID);
 	logic = new SearchLogic(this);
 	setHeaderTitle("Search users");
 	setHeaderIconClass(HablarStyles.get(HablarStyles.IconType.search));
@@ -85,8 +85,9 @@ public class SearchPageWidget extends PageWidget implements SearchView {
     }
 
     @Override
-    public PopupMenuView<SearchResultView> createMenu(final MenuAction<SearchResultView>... actions) {
-	final PopupMenu<SearchResultView> popupMenu = new PopupMenu<SearchResultView>(actions);
+    public PopupMenuView<SearchResultView> createMenu(final String debugId,
+	    final MenuAction<SearchResultView>... actions) {
+	final PopupMenu<SearchResultView> popupMenu = new PopupMenu<SearchResultView>(debugId, actions);
 	return popupMenu;
     }
 

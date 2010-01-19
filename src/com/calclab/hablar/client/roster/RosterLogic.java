@@ -26,7 +26,10 @@ import com.google.gwt.user.client.ui.UIObject;
 
 public class RosterLogic implements ListLogic {
 
-    public static final String CHAT_ADD = "RosterLogic-chatAdd-Action";
+    public static final String CHAT_START_DEB_ID = "RosterLogic-chatStart-Action";
+    public static final String CHAT_DEB_ID = "RosterLogic-chat";
+    public static final String REMOVE_ROSTERITEM_DEB_ID = "RosterLogic-remove-rosteritem";
+    public static final String ROSTERITEM_MENU_DEB_ID = "RosterLogic-remove-menu";
 
     private final Roster roster;
     private final ChatManager chatManager;
@@ -47,7 +50,7 @@ public class RosterLogic implements ListLogic {
 	addRosterListeners();
 	addSessionListeners();
 
-	view.addAction(HablarStyles.get(HablarStyles.IconType.chatAdd), CHAT_ADD, new ClickHandler() {
+	view.addAction(HablarStyles.get(HablarStyles.IconType.chatAdd), CHAT_START_DEB_ID, new ClickHandler() {
 	    @Override
 	    public void onClick(final ClickEvent event) {
 		final String jid = Window.prompt("Write the JID of the person you want to chat with", "");
@@ -164,12 +167,12 @@ public class RosterLogic implements ListLogic {
 
     @SuppressWarnings("unchecked")
     private void createMenu() {
-	menu = view.createMenu(new MenuAction<RosterItem>(i18n.chat()) {
+	menu = view.createMenu(ROSTERITEM_MENU_DEB_ID, new MenuAction<RosterItem>(i18n.chat(), CHAT_DEB_ID) {
 	    @Override
 	    public void execute(final RosterItem target) {
 		onChatWith(target);
 	    }
-	}, new MenuAction<RosterItem>(i18n.removeFromContacts()) {
+	}, new MenuAction<RosterItem>(i18n.removeFromContacts(), REMOVE_ROSTERITEM_DEB_ID) {
 	    @Override
 	    public void execute(final RosterItem target) {
 		onRemoveItem(target);

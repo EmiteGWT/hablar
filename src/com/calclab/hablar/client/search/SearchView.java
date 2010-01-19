@@ -15,7 +15,7 @@ public interface SearchView extends Page {
 
     void clearResults();
 
-    PopupMenuView<SearchResultView> createMenu(MenuAction<SearchResultView>... actions);
+    PopupMenuView<SearchResultView> createMenu(String debugId, MenuAction<SearchResultView>... actions);
 
     void showMessage(String body, Level level);
 

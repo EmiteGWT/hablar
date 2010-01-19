@@ -2,12 +2,15 @@ package com.calclab.hablar.client.roster;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.hablar.client.ui.debug.Debug;
 import com.calclab.hablar.client.ui.styles.HablarStyles;
-import com.calclab.hablar.client.ui.styles.HablarStyles.IconType;
 
 public class RosterItemLogic {
-    public static HablarStyles.IconType getIcon(RosterItem item) {
-	Show show = item.getShow();
+    public static final String ROSTERITEM_MENU_DEB_ID = "RosterItemLogic-item-menu-";
+    public static final String ROSTERITEM_NAME_DEB_ID = "RosterItemLogic-item-label-";
+
+    public static HablarStyles.IconType getIcon(final RosterItem item) {
+	final Show show = item.getShow();
 	if (show == Show.dnd) {
 	    return HablarStyles.IconType.buddyDnd;
 	} else if (show == Show.xa) {
@@ -21,12 +24,14 @@ public class RosterItemLogic {
 	}
     }
 
-    public static void setItem(RosterItem item, RosterItemView view) {
+    public static void setItem(final RosterItem item, final RosterItemView view) {
 	view.setName(item.getName());
 	view.setJID(item.getJID().toString());
+	view.setNameDebugId(Debug.getIdFromJid(ROSTERITEM_NAME_DEB_ID, item.getJID()));
+	view.setMenuDebugId(Debug.getIdFromJid(ROSTERITEM_MENU_DEB_ID, item.getJID()));
 	view.setIcon(getIcon(item));
 
-	String status = item.getStatus();
+	final String status = item.getStatus();
 	if (status != null && status.trim().length() > 0) {
 	    view.setStatus(status);
 	    view.setStatusVisible(true);

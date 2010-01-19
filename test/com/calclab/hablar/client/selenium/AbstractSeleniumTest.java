@@ -1,5 +1,7 @@
 package com.calclab.hablar.client.selenium;
 
+import java.awt.Point;
+
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
@@ -10,12 +12,14 @@ import org.testng.annotations.DataProvider;
 import com.calclab.suco.client.Suco;
 
 public class AbstractSeleniumTest {
+    public static boolean mustCloseFinally = true;
 
     @AfterSuite
     public void AfterSuite() {
-	// We try to only open one window for all our selenium tests (maybe we
-	// want something different in the future)
-	closeBrowser();
+	// We try to only open one window for all our selenium tests
+	if (mustCloseFinally) {
+	    closeBrowser();
+	}
     }
 
     @BeforeMethod
@@ -37,7 +41,7 @@ public class AbstractSeleniumTest {
     @DataProvider(name = "correctlogin")
     public Object[][] createCorrectLogin() {
 	// The default correct user/password used in tests
-	return new Object[][] { { SeleniumConstants.USER, SeleniumConstants.PASSWD, SeleniumConstants.USERNODE }, };
+	return new Object[][] { { SeleniumConstants.USERJID, SeleniumConstants.PASSWD, SeleniumConstants.USERNODE }, };
     }
 
     @DataProvider(name = "incorrectlogin")
@@ -49,6 +53,10 @@ public class AbstractSeleniumTest {
 
     public void goHome() {
 	getWebTester().home();
+    }
+
+    public void moveMouseAt(final Point point) {
+	getWebTester().moveMouseAt(point);
     }
 
     public void sleep(final int milliseconds) {

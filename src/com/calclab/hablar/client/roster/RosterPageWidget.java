@@ -80,8 +80,8 @@ public class RosterPageWidget extends PageWidget implements RosterView {
     }
 
     @Override
-    public PopupMenuView<RosterItem> createMenu(final MenuAction<RosterItem>... actions) {
-	return new PopupMenu<RosterItem>(actions);
+    public PopupMenuView<RosterItem> createMenu(final String debugId, final MenuAction<RosterItem>... actions) {
+	return new PopupMenu<RosterItem>(debugId, actions);
     }
 
     @Override

@@ -4,6 +4,7 @@ import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.calclab.hablar.client.login.LoginPage;
+import com.calclab.hablar.client.ui.debug.Debug;
 
 public class LoginPageObject extends AbstractPageObject {
     @FindBy(id = Debug.PRE + LoginPage.ID)
@@ -45,7 +46,7 @@ public class LoginPageObject extends AbstractPageObject {
     }
 
     public void signInDefUser() {
-	signIn(SeleniumConstants.USER, SeleniumConstants.PASSWD);
+	signIn(SeleniumConstants.USERJID, SeleniumConstants.PASSWD);
     }
 
     public void signOut() {

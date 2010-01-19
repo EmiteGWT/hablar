@@ -21,9 +21,9 @@ public class ChatPage extends PageWidget implements ChatView {
     interface ChatWidgetUiBinder extends UiBinder<Widget, ChatPage> {
     }
 
-    private static final String ID = "ChatPage";
-    private static final String TALKBOX = "ChatPage-talkBox";
-    private static final String LIST = "ChatPage-list";
+    public static final String ID = "ChatPage";
+    public static final String TALKBOX_DEB_ID = "ChatPage-talkBox";
+    public static final String LIST_DEB_ID = "ChatPage-list";
 
     private static ChatWidgetUiBinder uiBinder = GWT.create(ChatWidgetUiBinder.class);
 
@@ -42,8 +42,8 @@ public class ChatPage extends PageWidget implements ChatView {
 	super(true);
 	super.setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
-	talkBox.ensureDebugId(TALKBOX);
-	list.ensureDebugId(LIST);
+	talkBox.ensureDebugId(TALKBOX_DEB_ID);
+	list.ensureDebugId(LIST_DEB_ID);
 	logic = new ChatLogic(chat, this);
 	setHeaderIconClass(HablarStyles.get(HablarStyles.IconType.buddy));
     }
