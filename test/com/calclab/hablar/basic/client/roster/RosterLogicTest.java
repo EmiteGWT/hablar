@@ -18,7 +18,7 @@ import com.calclab.hablar.basic.client.chat.EmiteTester;
 import com.calclab.hablar.basic.client.roster.RosterItemView;
 import com.calclab.hablar.basic.client.roster.RosterLogic;
 import com.calclab.hablar.basic.client.roster.RosterView;
-import com.calclab.hablar.basic.client.ui.styles.HablarStyles;
+import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
 
 public class RosterLogicTest {
 
@@ -27,7 +27,7 @@ public class RosterLogicTest {
 
     @Before
     public void before() {
-	HablarStyles.setStyles(new HablarStyles());
+	HablarIcons.setStyles(new HablarIcons());
 	tester = new EmiteTester();
 	AbstractLogicTest.registerI18n();
 	view = mock(RosterView.class);

@@ -1,6 +1,6 @@
 package com.calclab.hablar.basic.client.presence;
 
-import com.calclab.hablar.basic.client.ui.styles.HablarStyles;
+import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -55,8 +55,8 @@ public class PresencePanel extends Composite implements PresenceView {
     }
 
     @Override
-    public void setIcon(final HablarStyles.IconType icon) {
-	final String iconClass = HablarStyles.get(icon);
+    public void setIcon(final HablarIcons.IconType icon) {
+	final String iconClass = HablarIcons.get(icon);
 	if (this.iconClass != null) {
 	    btnState.getElement().removeClassName(this.iconClass);
 	}

@@ -12,8 +12,8 @@ import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.basic.client.roster.RosterItemLogic;
 import com.calclab.hablar.basic.client.roster.RosterItemView;
-import com.calclab.hablar.basic.client.ui.styles.HablarStyles;
-import com.calclab.hablar.basic.client.ui.styles.HablarStyles.IconType;
+import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
+import com.calclab.hablar.basic.client.ui.icons.HablarIcons.IconType;
 
 public class RosterItemLogicTest {
 
@@ -33,14 +33,14 @@ public class RosterItemLogicTest {
     public void shouldSetAvailable() {
 	item.setAvailable(true);
 	item.setShow(Show.unknown);
-	assertSame(HablarStyles.IconType.buddyOn, RosterItemLogic.getIcon(item));
+	assertSame(HablarIcons.IconType.buddyOn, RosterItemLogic.getIcon(item));
     }
 
     @Test
     public void shouldSetOffline() {
 	item.setAvailable(false);
 	item.setShow(Show.unknown);
-	assertSame(HablarStyles.IconType.buddyOff, RosterItemLogic.getIcon(item));
+	assertSame(HablarIcons.IconType.buddyOff, RosterItemLogic.getIcon(item));
     }
 
     @Test

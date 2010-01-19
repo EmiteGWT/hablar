@@ -5,8 +5,8 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.chat.Chat.State;
-import com.calclab.hablar.basic.client.ui.styles.HablarStyles;
-import com.calclab.hablar.basic.client.ui.styles.HablarStyles.IconType;
+import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
+import com.calclab.hablar.basic.client.ui.icons.HablarIcons.IconType;
 import com.calclab.suco.client.events.Listener;
 
 public class ChatLogic {
@@ -48,13 +48,13 @@ public class ChatLogic {
 
     public void setPresence(final Show show) {
 	if (show == Show.chat) {
-	    view.setHeaderIconClass(HablarStyles.get(HablarStyles.IconType.buddyOn));
+	    view.setHeaderIconClass(HablarIcons.get(HablarIcons.IconType.buddyOn));
 	} else if (show == Show.dnd) {
-	    view.setHeaderIconClass(HablarStyles.get(HablarStyles.IconType.buddyDnd));
+	    view.setHeaderIconClass(HablarIcons.get(HablarIcons.IconType.buddyDnd));
 	} else if (show == Show.away) {
-	    view.setHeaderIconClass(HablarStyles.get(HablarStyles.IconType.buddyWait));
+	    view.setHeaderIconClass(HablarIcons.get(HablarIcons.IconType.buddyWait));
 	} else {
-	    view.setHeaderIconClass(HablarStyles.get(HablarStyles.IconType.buddyOff));
+	    view.setHeaderIconClass(HablarIcons.get(HablarIcons.IconType.buddyOff));
 	}
     }
 

@@ -1,10 +1,10 @@
 package com.calclab.hablar.basic.client.presence;
 
-import com.calclab.hablar.basic.client.ui.styles.HablarStyles;
+import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
 
 public interface PresenceView {
 
-    void setIcon(HablarStyles.IconType icon);
+    void setIcon(HablarIcons.IconType icon);
 
     void setName(String name);
 

@@ -1,8 +1,8 @@
 package com.calclab.hablar.basic.client.search;
 
 import com.calclab.emite.xep.search.client.SearchResultItem;
+import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
 import com.calclab.hablar.basic.client.ui.lists.ListItemWidget;
-import com.calclab.hablar.basic.client.ui.styles.HablarStyles;
 import com.calclab.hablar.basic.client.ui.utils.DebugId;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -30,7 +30,7 @@ public class SearchResultItemWidget extends ListItemWidget implements SearchResu
     public SearchResultItemWidget(final SearchLogic logic, final SearchResultItem item) {
 	super(logic);
 	initWidget(uiBinder.createAndBindUi(this));
-	menu.addStyleName(HablarStyles.get(HablarStyles.IconType.menu));
+	menu.addStyleName(HablarIcons.get(HablarIcons.IconType.menu));
 	setItem(item);
 	setMenuVisible(false);
     }

@@ -2,25 +2,25 @@ package com.calclab.hablar.basic.client.roster;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.hablar.basic.client.ui.styles.HablarStyles;
+import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
 import com.calclab.hablar.basic.client.ui.utils.DebugId;
 
 public class RosterItemLogic {
     public static final String ROSTERITEM_MENU_DEB_ID = "RosterItemLogic-item-menu-";
     public static final String ROSTERITEM_NAME_DEB_ID = "RosterItemLogic-item-label-";
 
-    public static HablarStyles.IconType getIcon(final RosterItem item) {
+    public static HablarIcons.IconType getIcon(final RosterItem item) {
 	final Show show = item.getShow();
 	if (show == Show.dnd) {
-	    return HablarStyles.IconType.buddyDnd;
+	    return HablarIcons.IconType.buddyDnd;
 	} else if (show == Show.xa) {
-	    return HablarStyles.IconType.buddyWait;
+	    return HablarIcons.IconType.buddyWait;
 	} else if (show == Show.away) {
-	    return HablarStyles.IconType.buddyWait;
+	    return HablarIcons.IconType.buddyWait;
 	} else if (item.isAvailable()) {
-	    return HablarStyles.IconType.buddyOn;
+	    return HablarIcons.IconType.buddyOn;
 	} else {
-	    return HablarStyles.IconType.buddyOff;
+	    return HablarIcons.IconType.buddyOff;
 	}
     }
 

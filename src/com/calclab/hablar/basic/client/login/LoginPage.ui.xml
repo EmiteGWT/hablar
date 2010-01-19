@@ -5,18 +5,7 @@
   xmlns:g="urn:import:com.google.gwt.user.client.ui">
   <ui:style src="LoginPage.css" />
 
-  <ui:style field="icons"
-    type="com.calclab.hablar.basic.client.login.LoginPage.Icons">
-      @sprite .loggedInIcon {
-        gwt-image: 'loggedInIcon';
-      }
 
-      @sprite .loggedOutIcon {
-        gwt-image: 'loggedOutIcon';
-      }
-    </ui:style>
-  <ui:image field="loggedInIcon" src="../on.png"></ui:image>
-  <ui:image field="loggedOutIcon" src="../off.png"></ui:image>
   <g:DockLayoutPanel styleName="{style.login}" unit="EM">
     <g:north size="9">
       <g:HTMLPanel styleName="{style.credentials}">

@@ -1,8 +1,8 @@
 package com.calclab.hablar.basic.client.roster;
 
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
 import com.calclab.hablar.basic.client.ui.lists.ListItemWidget;
-import com.calclab.hablar.basic.client.ui.styles.HablarStyles;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -26,7 +26,7 @@ class RosterItemWidget extends ListItemWidget implements RosterItemView {
     public RosterItemWidget(final RosterLogic logic) {
 	super(logic);
 	initWidget(uiBinder.createAndBindUi(this));
-	menu.addStyleName(HablarStyles.get(HablarStyles.IconType.menu));
+	menu.addStyleName(HablarIcons.get(HablarIcons.IconType.menu));
 	super.setMenu(menu);
 	setMenuVisible(false);
     }
@@ -37,11 +37,11 @@ class RosterItemWidget extends ListItemWidget implements RosterItemView {
     }
 
     @Override
-    public void setIcon(final HablarStyles.IconType iconType) {
+    public void setIcon(final HablarIcons.IconType iconType) {
 	if (this.iconStyle != null) {
 	    icon.removeStyleName(iconStyle);
 	}
-	this.iconStyle = HablarStyles.get(iconType);
+	this.iconStyle = HablarIcons.get(iconType);
 	icon.getElement().addClassName(iconStyle);
 	icon.addStyleName(iconStyle);
     }

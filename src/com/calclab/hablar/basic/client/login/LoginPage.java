@@ -4,7 +4,6 @@ import com.calclab.hablar.basic.client.ui.page.PageWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -15,12 +14,6 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 public class LoginPage extends PageWidget implements LoginView {
-
-    interface Icons extends CssResource {
-	String loggedInIcon();
-
-	String loggedOutIcon();
-    }
 
     interface LoginWidgetUiBinder extends UiBinder<Widget, LoginPage> {
     }
@@ -40,9 +33,6 @@ public class LoginPage extends PageWidget implements LoginView {
     PasswordTextBox password;
     @UiField
     FlowPanel output;
-
-    @UiField
-    Icons icons;
 
     private final LoginLogic logic;
 

@@ -4,8 +4,8 @@ import static com.google.gwt.dom.client.Style.Unit.PX;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.chat.Chat;
+import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
 import com.calclab.hablar.basic.client.ui.page.PageWidget;
-import com.calclab.hablar.basic.client.ui.styles.HablarStyles;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -49,7 +49,7 @@ public class ChatPage extends PageWidget implements ChatView {
 	talkBox.ensureDebugId(TALKBOX_DEB_ID);
 	list.ensureDebugId(LIST_DEB_ID);
 	logic = new ChatLogic(chat, this);
-	setHeaderIconClass(HablarStyles.get(HablarStyles.IconType.buddy));
+	setHeaderIconClass(HablarIcons.get(HablarIcons.IconType.buddy));
     }
 
     public void clearAndFocus() {

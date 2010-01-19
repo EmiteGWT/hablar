@@ -13,8 +13,8 @@ import com.calclab.hablar.basic.client.chat.EmiteTester;
 import com.calclab.hablar.basic.client.chat.PresenceManagerTester;
 import com.calclab.hablar.basic.client.presence.PresenceLogic;
 import com.calclab.hablar.basic.client.presence.PresenceView;
-import com.calclab.hablar.basic.client.ui.styles.HablarStyles;
-import com.calclab.hablar.basic.client.ui.styles.HablarStyles.IconType;
+import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
+import com.calclab.hablar.basic.client.ui.icons.HablarIcons.IconType;
 
 public class PresenceLogicTest {
 
@@ -57,7 +57,7 @@ public class PresenceLogicTest {
     public void shouldShowOnIconWhenLoggedIn() {
 	tester.session.setLoggedIn("me@host");
 	tester.session.setReady();
-	verify(view).setIcon(HablarStyles.IconType.buddyOn);
+	verify(view).setIcon(HablarIcons.IconType.buddyOn);
     }
 
     @Test

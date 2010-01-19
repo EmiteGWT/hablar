@@ -1,7 +1,7 @@
 package com.calclab.hablar.basic.client.ui.lists;
 
-import com.calclab.hablar.basic.client.ui.styles.HablarStyles;
-import com.calclab.hablar.basic.client.ui.styles.HablarStyles.StyleType;
+import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
+import com.calclab.hablar.basic.client.ui.icons.HablarIcons.StyleType;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Event;
@@ -51,11 +51,11 @@ public abstract class ListItemWidget extends Composite implements ListItemView {
     @Override
     public void setSelected(boolean active) {
 	if (active) {
-	    removeStyleName(HablarStyles.styleOf(HablarStyles.StyleType.inactive));
-	    addStyleName(HablarStyles.styleOf(HablarStyles.StyleType.active));
+	    removeStyleName(HablarIcons.styleOf(HablarIcons.StyleType.inactive));
+	    addStyleName(HablarIcons.styleOf(HablarIcons.StyleType.active));
 	} else {
-	    removeStyleName(HablarStyles.styleOf(HablarStyles.StyleType.active));
-	    addStyleName(HablarStyles.styleOf(HablarStyles.StyleType.inactive));
+	    removeStyleName(HablarIcons.styleOf(HablarIcons.StyleType.active));
+	    addStyleName(HablarIcons.styleOf(HablarIcons.StyleType.inactive));
 	}
     }
 }

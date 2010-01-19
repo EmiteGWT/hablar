@@ -5,6 +5,8 @@ import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.session.Session.State;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.hablar.basic.client.i18n.Msg;
+import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
+import com.calclab.hablar.basic.client.ui.icons.HablarIcons.IconType;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.event.logical.shared.CloseEvent;
@@ -61,11 +63,11 @@ class LoginLogic {
 	    page.setActionText(i18n.logout());
 	    page.setActionEnabled(true);
 	    final String userName = session.getCurrentUser().getNode();
-	    setStatus(i18n.connectedAs(userName), page.icons.loggedInIcon());
+	    setStatus(i18n.connectedAs(userName), HablarIcons.get(IconType.on));
 	} else if (state == State.disconnected) {
 	    page.setActionText(i18n.login());
 	    page.setActionEnabled(true);
-	    setStatus(i18n.disconnected(), page.icons.loggedOutIcon());
+	    setStatus(i18n.disconnected(), HablarIcons.get(IconType.off));
 	} else {
 	    page.setActionText(i18n.waitDots());
 	    page.setActionEnabled(false);

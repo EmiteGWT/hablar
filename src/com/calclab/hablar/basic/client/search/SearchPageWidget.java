@@ -4,11 +4,11 @@ import static com.google.gwt.dom.client.Style.Unit.PX;
 
 import com.calclab.emite.xep.search.client.SearchResultItem;
 import com.calclab.hablar.basic.client.i18n.Msg;
+import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
 import com.calclab.hablar.basic.client.ui.menu.MenuAction;
 import com.calclab.hablar.basic.client.ui.menu.PopupMenu;
 import com.calclab.hablar.basic.client.ui.menu.PopupMenuView;
 import com.calclab.hablar.basic.client.ui.page.PageWidget;
-import com.calclab.hablar.basic.client.ui.styles.HablarStyles;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -77,7 +77,7 @@ public class SearchPageWidget extends PageWidget implements SearchView {
 	message.ensureDebugId(MESSAGE_DEB_ID);
 	logic = new SearchLogic(this);
 	setHeaderTitle("Search users");
-	setHeaderIconClass(HablarStyles.get(HablarStyles.IconType.search));
+	setHeaderIconClass(HablarIcons.get(HablarIcons.IconType.search));
     }
 
     public void addResult(final SearchResultItem item) {

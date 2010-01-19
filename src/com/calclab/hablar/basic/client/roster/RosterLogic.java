@@ -10,11 +10,11 @@ import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.basic.client.i18n.Msg;
+import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
 import com.calclab.hablar.basic.client.ui.lists.ListItemView;
 import com.calclab.hablar.basic.client.ui.lists.ListLogic;
 import com.calclab.hablar.basic.client.ui.menu.MenuAction;
 import com.calclab.hablar.basic.client.ui.menu.PopupMenuView;
-import com.calclab.hablar.basic.client.ui.styles.HablarStyles;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
@@ -50,7 +50,7 @@ public class RosterLogic implements ListLogic {
 	addRosterListeners();
 	addSessionListeners();
 
-	view.addAction(HablarStyles.get(HablarStyles.IconType.chatAdd), CHAT_START_DEB_ID, new ClickHandler() {
+	view.addAction(HablarIcons.get(HablarIcons.IconType.chatAdd), CHAT_START_DEB_ID, new ClickHandler() {
 	    @Override
 	    public void onClick(final ClickEvent event) {
 		final String jid = Window.prompt("Write the JID of the person you want to chat with", "");
