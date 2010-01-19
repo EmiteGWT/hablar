@@ -9,6 +9,7 @@ import com.calclab.hablar.basic.client.ui.pages.panel.AccordionPages;
 import com.calclab.hablar.basic.client.ui.pages.panel.TabPages;
 import com.calclab.hablar.chat.client.HablarChat;
 import com.calclab.hablar.search.client.HablarSearch;
+import com.calclab.hablar.signals.client.HablarSignals;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -22,6 +23,7 @@ public class HablarEntryPoint implements EntryPoint {
 	final HablarWidget hablar = createWidget(config, config);
 
 	HablarChat.install(hablar);
+	HablarSignals.install(hablar);
 	if (config.hasSearch) {
 	    HablarSearch.install(hablar);
 	}
