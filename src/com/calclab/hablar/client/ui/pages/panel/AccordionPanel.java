@@ -94,11 +94,13 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
 	layoutData.add(data);
 
 	if (visibleWidget == null) {
-	    // If there's no visible widget, display the first one. The layout
-	    // will
-	    // be updated onLoad().
 	    visibleWidget = widget;
-	} else if (isVisible()) {
+	}
+
+	GWT.log("Accordion widget add", null);
+
+	if (isVisible()) {
+	    GWT.log("ANIMATE Accordion widget add", null);
 	    animate(0);
 	}
     }
@@ -164,16 +166,17 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
 	if (!hasWidget(child)) {
 	    return false;
 	}
-	if (child == visibleWidget) {
-	    return false;
-	}
 	int index = getLayoutDataIndex(child);
 	assert index != -1 : "Accordion error in remove!";
 	LayoutData data = layoutData.get(index);
 	layoutPanel.remove(data.header);
 	layoutPanel.remove(child);
 	layoutData.remove(index);
-	animate(250);
+	if (layoutPanel.getWidgetCount() > 0)
+	    animate(250);
+	else
+	    layoutPanel.forceLayout();
+
 	return true;
     }
 
@@ -236,7 +239,7 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
 
     @Override
     protected void onLoad() {
-	// When the widget becomes attached, update its layout.
-	animate(0);
+	if (layoutPanel.getWidgetCount() > 0)
+	    animate(0);
     }
 }

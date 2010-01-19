@@ -7,6 +7,7 @@ import com.calclab.hablar.client.ui.page.PageWidget;
 import com.calclab.hablar.client.ui.page.Page.Visibility;
 import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Listener;
+import com.google.gwt.core.client.GWT;
 
 public class PagesLogic implements Pages {
     protected final Listener<PageWidget> statusListener;
@@ -102,6 +103,9 @@ public class PagesLogic implements Pages {
 	if (page.getVisibility() == Visibility.open) {
 	    showPreviousPage();
 	}
+	if (currentPage == page) {
+	    currentPage = null;
+	}
 	hidden.add(page);
 	page.setVisibility(Visibility.hidden);
 	view.removePage(page);
@@ -117,6 +121,7 @@ public class PagesLogic implements Pages {
     public void open(Page page) {
 	boolean isHidden = hidden.contains(page);
 	if (view.hasPage(page) || isHidden) {
+	    GWT.log("Show page (hidden " + isHidden + ")", null);
 	    if (currentPage != page) {
 		this.previouslyVisiblePage = currentPage;
 		if (currentPage != null) {
@@ -124,6 +129,7 @@ public class PagesLogic implements Pages {
 		}
 
 		if (isHidden) {
+		    GWT.log("ADDPAGE", null);
 		    hidden.remove(page);
 		    view.addPage(page);
 		}
