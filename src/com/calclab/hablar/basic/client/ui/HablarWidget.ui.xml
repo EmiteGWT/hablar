@@ -1,7 +1,27 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui" 
-	xmlns:hablar="urn:import:com.calclab.hablar.basic.client.presence">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:hablar="urn:import:com.calclab.hablar.basic.client.presence">
+
+	<ui:style field="headerStyle"
+		type="com.calclab.hablar.basic.client.ui.HablarWidget.HeaderStyle">
+			.requestFocus {
+				color: #c00;
+				font-weight: bold;
+				border-bottom: 1px solid #BBBBBB;
+				border-top: 1px solid white;
+			}
+			
+			.open {
+				border-bottom: 1px solid #BBBBBB;
+				border-top: 1px solid white;
+			}
+			
+			.closed {
+				color: gray;
+				border-bottom: 1px solid #BBBBBB;
+				border-top: 1px solid white;
+			}
+		</ui:style>
 
 	<ui:style>
 		.pages {

@@ -11,10 +11,6 @@
     <ui:style field="headerStyle"
         type="com.calclab.hablar.basic.client.ui.pages.panel.AccordionPages.HeaderStyle">
             .requestFocus {
-                color: #c00;
-                font-weight: bold;
-                border-bottom: 1px solid #BBBBBB;
-                border-top: 1px solid white;
             }
             
             .open {
@@ -23,9 +19,6 @@
             }
             
             .closed {
-                color: gray;
-                border-bottom: 1px solid #BBBBBB;
-                border-top: 1px solid white;
             }
         </ui:style>
 

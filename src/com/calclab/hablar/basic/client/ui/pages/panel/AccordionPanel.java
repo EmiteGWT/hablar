@@ -100,8 +100,7 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
 	GWT.log("Accordion widget add", null);
 
 	if (isVisible()) {
-	    GWT.log("ANIMATE Accordion widget add", null);
-	    animate(0);
+	    animate(250);
 	}
     }
 
@@ -166,16 +165,18 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
 	if (!hasWidget(child)) {
 	    return false;
 	}
+
 	int index = getLayoutDataIndex(child);
-	assert index != -1 : "Accordion error in remove!";
 	LayoutData data = layoutData.get(index);
 	layoutPanel.remove(data.header);
 	layoutPanel.remove(child);
 	layoutData.remove(index);
 	if (layoutPanel.getWidgetCount() > 0)
 	    animate(250);
-	else
+	else {
+	    visibleWidget = null;
 	    layoutPanel.forceLayout();
+	}
 
 	return true;
     }

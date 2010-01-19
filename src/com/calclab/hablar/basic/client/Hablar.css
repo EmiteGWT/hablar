@@ -1,56 +1,56 @@
 .page {
-  background-color: #E9E9E9;
-  border: 3px solid #E9E9E9;
+	background-color: #E9E9E9;
+	border: 3px solid #E9E9E9;
 }
 
 .contents {
-  background-color: white;
-  height: 100%;
-  overflow: auto;
+	background-color: white;
+	height: 100%;
+	overflow: auto;
 }
 
 .panel {
-  width: 100%;
-  overflow: hidden;
-  background-color: #E9E9E9;
+	width: 100%;
+	overflow: hidden;
+	background-color: #E9E9E9;
 }
 
 .textBox {
-  width: 98%;
-  padding: 3px;
-  border: 1px solid #BBBBBB;
+	width: 98%;
+	padding: 3px;
+	border: 1px solid #BBBBBB;
 }
 
 .list {
-  width: 100%;
-  overflow: hidden;
+	width: 100%;
+	overflow: hidden;
 }
 
 .scroll {
-  background-color: white;
-  border-left: 1px solid #BBBBBB;
-  /* This border affects scroll visibility
-     border-top: 1px solid #BBBBBB; */
+	background-color: white;
+	border-left: 1px solid #BBBBBB;
+	/* This border affects scroll visibility */
+	border-top: 1px solid #BBBBBB;
 }
 
 .icon {
-  display: block;
-  float: left;
-  width: 19px;
-  height: 16px;
-  margin-left: 3px;
+	display: block;
+	float: left;
+	width: 19px;
+	height: 16px;
+	margin-left: 3px;
 }
 
 .listItemWidget {
-  display: block;
-  width: 100%;
-  overflow: hidden;
-  padding: 5px 0px 0 0px;
-  border-bottom: 1px solid #E9E9E9;
-  cursor: pointer;
+	display: block;
+	width: 100%;
+	overflow: hidden;
+	padding: 5px 0px 0 0px;
+	border-bottom: 1px solid #E9E9E9;
+	cursor: pointer;
 }
 
 .listItemMenu {
-  float: right;
-  margin-right: 3px;
+	float: right;
+	margin-right: 3px;
 }

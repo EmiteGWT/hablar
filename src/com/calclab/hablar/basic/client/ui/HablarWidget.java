@@ -7,6 +7,8 @@ import com.calclab.hablar.basic.client.login.LoginPage;
 import com.calclab.hablar.basic.client.login.LoginView;
 import com.calclab.hablar.basic.client.roster.RosterPageWidget;
 import com.calclab.hablar.basic.client.roster.RosterView;
+import com.calclab.hablar.basic.client.ui.page.HeaderStyles;
+import com.calclab.hablar.basic.client.ui.page.PageHeader;
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.hablar.basic.client.ui.pages.Pages;
@@ -30,6 +32,10 @@ public class HablarWidget extends Composite implements HablarView {
     interface ChatPanelUiBinder extends UiBinder<Widget, HablarWidget> {
     }
 
+    interface HeaderStyle extends HeaderStyles {
+
+    }
+
     private static ChatPanelUiBinder uiBinder = GWT.create(ChatPanelUiBinder.class);
 
     @UiField
@@ -37,6 +43,9 @@ public class HablarWidget extends Composite implements HablarView {
 
     @UiField
     Label status;
+
+    @UiField
+    HeaderStyle headerStyle;
 
     private final Pages pages;
     private PageView dockedPageView;
@@ -98,11 +107,16 @@ public class HablarWidget extends Composite implements HablarView {
     public void setDocked(PageView pageView, int size) {
 	assert dockedPageView == null : "Only one docked page in hablar widget is allowed.";
 	this.dockedPageView = pageView;
+
+	PageHeader pageHeader = pageView.getHeader();
+	pageHeader.setStyles(headerStyle);
+	pageView.setVisibility(Visibility.open);
+
 	Widget docked = (Widget) pageView;
-	Widget header = (Widget) pageView.getHeader();
+	Widget header = (Widget) pageHeader;
 
 	container.add(header);
-	container.setWidgetTopHeight(header, 21, PX, 23, PX);
+	container.setWidgetTopHeight(header, 20, PX, 24, PX);
 	container.setWidgetLeftWidth(header, 0, PX, size, PX);
 
 	container.add(docked);
