@@ -46,11 +46,4 @@ public interface Pages {
      *            the page to be showed
      */
     void open(Page page);
-
-    /**
-     * Show a previously hidden page
-     * 
-     * @param page
-     */
-    void show(Page page);
 }

@@ -28,9 +28,6 @@ public class PagesLogic implements Pages {
 	statusListener = new Listener<PageWidget>() {
 	    @Override
 	    public void onEvent(PageWidget page) {
-		if (page.getVisibility() == Visibility.hidden) {
-		    show(page);
-		}
 		onStatus.fire(page);
 	    }
 	};
@@ -118,24 +115,23 @@ public class PagesLogic implements Pages {
      * @see Pages
      */
     public void open(Page page) {
-	if (currentPage != page) {
-	    this.previouslyVisiblePage = currentPage;
-	    if (currentPage != null) {
-		currentPage.setVisibility(Visibility.closed);
+	boolean isHidden = hidden.contains(page);
+	if (view.hasPage(page) || isHidden) {
+	    if (currentPage != page) {
+		this.previouslyVisiblePage = currentPage;
+		if (currentPage != null) {
+		    currentPage.setVisibility(Visibility.closed);
+		}
+
+		if (isHidden) {
+		    hidden.remove(page);
+		    view.addPage(page);
+		}
+
+		view.showPage(page);
+		currentPage = page;
+		page.setVisibility(Visibility.open);
 	    }
-
-	    show(page);
-
-	    view.showPage(page);
-	    currentPage = page;
-	    page.setVisibility(Visibility.open);
-	}
-    }
-
-    public void show(Page page) {
-	if (hidden.contains(page)) {
-	    hidden.remove(page);
-	    view.addPage(page);
 	}
     }
 

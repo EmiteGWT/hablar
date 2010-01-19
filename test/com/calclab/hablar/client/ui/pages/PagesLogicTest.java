@@ -1,6 +1,8 @@
 package com.calclab.hablar.client.ui.pages;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -17,7 +19,7 @@ public class PagesLogicTest {
 
     @Before
     public void setup() {
-	view = mock(PagesPanel.class);
+	view = new PagesPanelTester();
 	logic = new PagesLogic(view);
     }
 
@@ -41,13 +43,13 @@ public class PagesLogicTest {
     }
 
     @Test
-    public void shouldShowIfNotadded() {
+    public void shouldNotOpenIfNotAddedBefore() {
 	Page pageIn = createPage(Visibility.open);
 	logic.add(pageIn);
 	verify(pageIn).setVisibility(Visibility.open);
 	Page pageOut = createPage(Visibility.open);
-	logic.show(pageOut);
-	verify(pageIn, times(0)).setVisibility(Visibility.closed);
+	logic.open(pageOut);
+	verify(pageIn, never()).setVisibility(Visibility.closed);
     }
 
     @Test
@@ -73,6 +75,6 @@ public class PagesLogicTest {
     private void shouldAddPage(Visibility visibility) {
 	Page page = createPage(visibility);
 	logic.add(page);
-	verify(view).addPage(page);
+	assertTrue(view.hasPage(page));
     }
 }

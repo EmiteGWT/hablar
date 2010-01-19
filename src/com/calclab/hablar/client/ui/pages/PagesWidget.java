@@ -43,8 +43,4 @@ public class PagesWidget extends Composite implements Pages {
 	logic.open(page);
     }
 
-    @Override
-    public void show(Page page) {
-	logic.show(page);
-    }
 }
