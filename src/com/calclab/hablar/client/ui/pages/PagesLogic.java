@@ -65,10 +65,13 @@ public class PagesLogic implements Pages {
 		open(page);
 	    } else if (visibility == Visibility.hidden) {
 		hide(page);
-	    } else if (currentPage != null) {
-		open(currentPage);
+	    } else {
+		page.setVisibility(Visibility.closed);
+		if (currentPage != null) {
+		    open(currentPage);
+		}
 	    }
-	    page.setVisibility(visibility);
+
 	}
     }
 
