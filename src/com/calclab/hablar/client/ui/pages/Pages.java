@@ -7,6 +7,21 @@ public interface Pages {
 
     void add(Page page);
 
+    /**
+     * Close the given page.
+     * 
+     * @param page
+     *            the page to be closed
+     * @return true if closed, false if the page was not open or it was the only
+     *         visible page
+     */
+    boolean close(Page page);
+
+    /**
+     * 
+     * @param page
+     * @return
+     */
     boolean hasPage(Page page);
 
     /**

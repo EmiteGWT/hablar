@@ -7,7 +7,6 @@ import com.calclab.hablar.client.ui.page.PageWidget;
 import com.calclab.hablar.client.ui.page.Page.Visibility;
 import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Listener;
-import com.google.gwt.core.client.GWT;
 
 public class PagesLogic implements Pages {
     protected final Listener<PageWidget> statusListener;
@@ -19,6 +18,7 @@ public class PagesLogic implements Pages {
     private Page previouslyVisiblePage;
     private final ArrayList<Page> hidden;
     private final PagesPanel view;
+    private int visiblePagesCount = 0;
 
     public PagesLogic(PagesPanel view) {
 	this.view = view;
@@ -48,7 +48,7 @@ public class PagesLogic implements Pages {
 	closeListener = new Listener<PageWidget>() {
 	    @Override
 	    public void onEvent(PageWidget page) {
-		closePage(page);
+		hide(page);
 	    }
 	};
     }
@@ -65,15 +65,27 @@ public class PagesLogic implements Pages {
 	    Visibility visibility = page.getVisibility();
 	    if (visibility == Visibility.open) {
 		view.addPage(page);
+		visiblePagesCount++;
 		open(page);
 	    } else if (visibility == Visibility.hidden) {
 		hidden.add(page);
 	    } else if (visibility == Visibility.closed) {
 		view.addPage(page);
+		visiblePagesCount++;
 		if (currentPage != null) {
 		    open(currentPage);
 		}
 	    }
+	}
+    }
+
+    @Override
+    public boolean close(Page page) {
+	if (page.getVisibility() == Visibility.open) {
+	    page.setVisibility(Visibility.closed);
+	    return true;
+	} else {
+	    return false;
 	}
     }
 
@@ -90,6 +102,9 @@ public class PagesLogic implements Pages {
      * @see Pages
      */
     public void hide(Page page) {
+	if (page.getVisibility() == Visibility.open) {
+	    showPreviousPage();
+	}
 	hidden.add(page);
 	page.setVisibility(Visibility.hidden);
 	view.removePage(page);
@@ -113,8 +128,7 @@ public class PagesLogic implements Pages {
 
 	    view.showPage(page);
 	    currentPage = page;
-	    if (page.getVisibility() != Visibility.open)
-		page.setVisibility(Visibility.open);
+	    page.setVisibility(Visibility.open);
 	}
     }
 
@@ -126,19 +140,9 @@ public class PagesLogic implements Pages {
     }
 
     public void showPreviousPage() {
-	GWT.log("PREVIOUS: " + previouslyVisiblePage, null);
 	if (previouslyVisiblePage != null) {
-	    GWT.log("SHOW PREVIOUS", null);
 	    open(previouslyVisiblePage);
 	}
-    }
-
-    private void closePage(PageWidget page) {
-	if (page.getVisibility() == Visibility.open) {
-	    // show other page first (visible pages cannot be closed)
-	    showPreviousPage();
-	}
-	hide(page);
     }
 
 }

@@ -19,6 +19,11 @@ public class PagesWidget extends Composite implements Pages {
     }
 
     @Override
+    public boolean close(Page page) {
+	return logic.close(page);
+    }
+
+    @Override
     public boolean hasPage(Page page) {
 	return logic.hasPage(page);
     }
