@@ -30,6 +30,15 @@ public class SearchTest extends AbstractSeleniumTest {
     }
 
     @Test()
+    public void testBasicSearchAndChat() {
+	loginSearchTestUserAndChat();
+	chat.TalkBox().sendKeys("Hi ;)\n");
+	chat.TalkBox().sendKeys("some echo tests\n");
+	// Uncomment to don't close the window
+	// mustCloseFinally = false;
+    }
+
+    @Test()
     public void testBasicSearchNoResult() {
 	loginAndSearchClick();
 	search.term("Something difficult to search");
@@ -39,19 +48,12 @@ public class SearchTest extends AbstractSeleniumTest {
     }
 
     @Test()
-    public void testSearchAndChat() {
-	loginAndSearchClick();
-	search.term("test1");
-	sleep(7000);
-	// The menu it's not visible then we need to show it
-	search.getResultName(SeleniumConstants.USERJID).click();
-	// Now we can click the menu
-	search.getResultMenu(SeleniumConstants.USERJID).click();
-	search.ChatMenuItem().click();
-	chat.TalkBox().sendKeys("Hi ;)\n");
-	chat.TalkBox().sendKeys("some echo tests\n");
-	// Uncomment to don't close the window
-	// mustCloseFinally = false;
+    public void testChatLoremPaste() {
+	loginSearchTestUserAndChat();
+	chat.TalkBox().sendKeys(Lorem.latin);
+	chat.TalkBox().sendKeys(Lorem.chinese);
+	chat.TalkBox().sendKeys(":P\n");
+	chat.waitFor(":P\n");
     }
 
     private void loginAndSearchClick() {
@@ -62,5 +64,16 @@ public class SearchTest extends AbstractSeleniumTest {
 	// Only to test accordion
 	roster.Header().click();
 	search.Header().click();
+    }
+
+    private void loginSearchTestUserAndChat() {
+	loginAndSearchClick();
+	search.term("test1");
+	sleep(7000);
+	// The menu it's not visible then we need to show it
+	search.getResultName(SeleniumConstants.USERJID).click();
+	// Now we can click the menu
+	search.getResultMenu(SeleniumConstants.USERJID).click();
+	search.ChatMenuItem().click();
     }
 }

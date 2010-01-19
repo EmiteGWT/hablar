@@ -36,4 +36,8 @@ public class ChatPageObject extends AbstractPageObject {
     public RenderedWebElement TalkBox() {
 	return getTalkBox();
     }
+
+    public void waitFor(final String text) {
+	waitFor(list, text);
+    }
 }

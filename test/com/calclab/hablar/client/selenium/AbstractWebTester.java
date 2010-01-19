@@ -36,6 +36,10 @@ public abstract class AbstractWebTester {
 	driver.get(baseUrl);
     }
 
+    public boolean isTextPresent(final String text) {
+	return selenium.isTextPresent(text);
+    }
+
     public void moveMouseAt(final Point point) {
 	selenium.mouseMoveAt(String.valueOf(point.getX()), String.valueOf(point.getY()));
     }
