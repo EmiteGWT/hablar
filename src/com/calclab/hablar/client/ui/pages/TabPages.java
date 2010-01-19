@@ -1,8 +1,8 @@
 package com.calclab.hablar.client.ui.pages;
 
 import com.calclab.hablar.client.ui.page.HeaderStyles;
-import com.calclab.hablar.client.ui.page.PageHeader;
 import com.calclab.hablar.client.ui.page.Page;
+import com.calclab.hablar.client.ui.page.PageHeader;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -31,6 +31,13 @@ public class TabPages extends AbstractPages {
     }
 
     @Override
+    public void addPage(Page page) {
+	PageHeader header = page.getHeader();
+	header.setStyles(headerStyle);
+	tabs.add((Widget) page, (Widget) header);
+    }
+
+    @Override
     public boolean hasPage(Page page) {
 	return tabs.getWidgetIndex((Widget) page) != -1;
     }
@@ -41,14 +48,7 @@ public class TabPages extends AbstractPages {
     }
 
     @Override
-    protected void addPage(Page page) {
-	PageHeader header = page.getHeader();
-	header.setStyles(headerStyle);
-	tabs.add((Widget) page, (Widget) header);
-    }
-
-    @Override
-    protected void showPage(Page page) {
+    public void showPage(Page page) {
 	int index = tabs.getWidgetIndex((Widget) page);
 	tabs.selectTab(index);
     }

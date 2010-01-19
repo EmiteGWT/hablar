@@ -26,7 +26,7 @@ public interface Pages {
     void onStatusMessageChanged(Listener<Page> listener);
 
     /**
-     * Open the given page. If the page is hidden, it whill be show
+     * Open the given page. If the page is hidden, it whill be show.
      * 
      * @param page
      *            the page to be showed

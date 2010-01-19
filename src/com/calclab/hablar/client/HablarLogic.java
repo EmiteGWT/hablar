@@ -5,6 +5,7 @@ import com.calclab.emite.core.client.xmpp.session.Session.State;
 import com.calclab.hablar.client.login.LoginPage;
 import com.calclab.hablar.client.roster.RosterPageWidget;
 import com.calclab.hablar.client.search.SearchPageWidget;
+import com.calclab.hablar.client.ui.HablarView;
 import com.calclab.hablar.client.ui.page.Page.Visibility;
 import com.calclab.hablar.client.ui.pages.Pages;
 import com.calclab.hablar.client.ui.styles.HablarStyles;
@@ -21,7 +22,7 @@ public class HablarLogic {
     private final HablarConfig config;
     private final Pages pages;
 
-    public HablarLogic(final HablarConfig config, final Pages pages) {
+    public HablarLogic(final HablarConfig config, HablarView hablarView, final Pages pages) {
 	this.config = config;
 	this.pages = pages;
 	final Session session = Suco.get(Session.class);
@@ -35,19 +36,14 @@ public class HablarLogic {
 
 	if (config.hasRoster) {
 	    rosterPageWidget = new RosterPageWidget();
-	    pages.add(rosterPageWidget, Visibility.closed);
-	    if (config.hasSearch) {
-		final SearchPageWidget searchPageWidget = new SearchPageWidget();
-		pages.add(searchPageWidget, Visibility.hidden);
-		rosterPageWidget.addAction(HablarStyles.get(HablarStyles.IconType.search), SEARCH_ICON,
-			new ClickHandler() {
-			    @Override
-			    public void onClick(final ClickEvent event) {
-				pages.open(searchPageWidget);
-			    }
-			});
+	    addSearchPage(config, pages);
+	    if ("left".equals(config.dockRoster)) {
+		hablarView.addDocked(rosterPageWidget);
+	    } else {
+		pages.add(rosterPageWidget, Visibility.closed);
 	    }
 	}
+	hablarView.init();
 
 	session.onStateChanged(new Listener<Session>() {
 	    @Override
@@ -57,6 +53,19 @@ public class HablarLogic {
 
 	});
 	setState(session.getState());
+    }
+
+    private void addSearchPage(final HablarConfig config, final Pages pages) {
+	if (config.hasSearch) {
+	    final SearchPageWidget searchPageWidget = new SearchPageWidget();
+	    pages.add(searchPageWidget, Visibility.hidden);
+	    rosterPageWidget.addAction(HablarStyles.get(HablarStyles.IconType.search), SEARCH_ICON, new ClickHandler() {
+		@Override
+		public void onClick(final ClickEvent event) {
+		    pages.open(searchPageWidget);
+		}
+	    });
+	}
     }
 
     private void setState(final State state) {

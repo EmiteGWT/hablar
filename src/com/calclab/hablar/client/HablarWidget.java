@@ -20,9 +20,9 @@ public class HablarWidget extends Composite {
 	} else {
 	    throw new RuntimeException("Layout not configured.");
 	}
-	new HablarLogic(config, pages);
-	new ChatManagerLogic(ChatConfig.getFromMeta(), pages);
 	HablarPanel panel = new HablarPanel(config, pages);
+	new HablarLogic(config, panel, pages);
+	new ChatManagerLogic(ChatConfig.getFromMeta(), pages);
 	initWidget(panel);
     }
 
