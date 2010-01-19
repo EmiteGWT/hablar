@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.search;
+package com.calclab.hablar.search.client;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,30 +9,30 @@ import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.xep.search.client.SearchManager;
 import com.calclab.emite.xep.search.client.SearchResultItem;
 import com.calclab.hablar.basic.client.i18n.Msg;
-import com.calclab.hablar.basic.client.search.SearchView.Level;
 import com.calclab.hablar.basic.client.ui.lists.ListItemView;
 import com.calclab.hablar.basic.client.ui.lists.ListLogic;
 import com.calclab.hablar.basic.client.ui.menu.MenuAction;
 import com.calclab.hablar.basic.client.ui.menu.PopupMenuView;
+import com.calclab.hablar.search.client.SearchPageView.Level;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.UIObject;
 
-public class SearchLogic implements ListLogic {
+public class SearchPageLogic implements ListLogic {
     public static final String ADD_ROSTER_MENU_DEB_ID = "SearchLogic-add-menu";
     public static final String REMOVE_ROSTER_MENU_DEB_ID = "SearchLogic-remove-menu";
     public static final String CHAT_DEB_ID = "SearchLogic-chat";
     public static final String ADD_ROSTERITEM_DEB_ID = "SearchLogic-add-item";
     public static final String REMOVE_ROSTERITEM_DEB_ID = "SearchLogic-remove-item";
 
-    private final SearchView view;
+    private final SearchPageView view;
     private final SearchManager manager;
     private final Roster roster;
-    private PopupMenuView<SearchResultView> addToRosterMenu;
-    private PopupMenuView<SearchResultView> removeFromRosterMenu;
+    private PopupMenuView<SearchResultItemView> addToRosterMenu;
+    private PopupMenuView<SearchResultItemView> removeFromRosterMenu;
     private final Msg i18n;
 
-    public SearchLogic(final SearchView view) {
+    public SearchPageLogic(final SearchPageView view) {
 	this.view = view;
 	manager = Suco.get(SearchManager.class);
 	roster = Suco.get(Roster.class);
@@ -46,9 +46,9 @@ public class SearchLogic implements ListLogic {
 
     @Override
     public void onMenuClicked(final ListItemView view, final UIObject ui) {
-	final SearchResultView resultView = (SearchResultView) view;
+	final SearchResultItemView resultView = (SearchResultItemView) view;
 	final boolean addToRoster = roster.getItemByJID(resultView.getItem().getJid()) == null;
-	final PopupMenuView<SearchResultView> menu = addToRoster ? addToRosterMenu : removeFromRosterMenu;
+	final PopupMenuView<SearchResultItemView> menu = addToRoster ? addToRosterMenu : removeFromRosterMenu;
 	menu.setTarget(resultView);
 	menu.showRelativeToMenu(ui);
     }
@@ -81,42 +81,42 @@ public class SearchLogic implements ListLogic {
 	});
     }
 
-    void onChatWith(final SearchResultView result) {
+    void onChatWith(final SearchResultItemView result) {
 	Suco.get(ChatManager.class).open(result.getItem().getJid());
     }
 
-    void onRemoveFromRoster(final SearchResultView result) {
+    void onRemoveFromRoster(final SearchResultItemView result) {
 	roster.removeItem(result.getItem().getJid());
     }
 
-    void onResultToRoster(final SearchResultView result) {
+    void onResultToRoster(final SearchResultItemView result) {
 	final SearchResultItem item = result.getItem();
 	roster.requestAddItem(item.getJid(), item.getNick());
     }
 
     @SuppressWarnings("unchecked")
     private void createMenus() {
-	addToRosterMenu = view.createMenu(ADD_ROSTER_MENU_DEB_ID, new MenuAction<SearchResultView>(
+	addToRosterMenu = view.createMenu(ADD_ROSTER_MENU_DEB_ID, new MenuAction<SearchResultItemView>(
 		i18n.addToContacts(), ADD_ROSTERITEM_DEB_ID) {
 	    @Override
-	    public void execute(final SearchResultView target) {
+	    public void execute(final SearchResultItemView target) {
 		onResultToRoster(target);
 	    }
-	}, new MenuAction<SearchResultView>(i18n.chat(), CHAT_DEB_ID) {
+	}, new MenuAction<SearchResultItemView>(i18n.chat(), CHAT_DEB_ID) {
 	    @Override
-	    public void execute(final SearchResultView target) {
+	    public void execute(final SearchResultItemView target) {
 		onChatWith(target);
 	    }
 	});
-	removeFromRosterMenu = view.createMenu(REMOVE_ROSTER_MENU_DEB_ID, new MenuAction<SearchResultView>(
+	removeFromRosterMenu = view.createMenu(REMOVE_ROSTER_MENU_DEB_ID, new MenuAction<SearchResultItemView>(
 		"Remove from roster", REMOVE_ROSTERITEM_DEB_ID) {
 	    @Override
-	    public void execute(final SearchResultView target) {
+	    public void execute(final SearchResultItemView target) {
 		onRemoveFromRoster(target);
 	    }
-	}, new MenuAction<SearchResultView>("Chat", CHAT_DEB_ID) {
+	}, new MenuAction<SearchResultItemView>("Chat", CHAT_DEB_ID) {
 	    @Override
-	    public void execute(final SearchResultView target) {
+	    public void execute(final SearchResultItemView target) {
 		onChatWith(target);
 	    }
 	});

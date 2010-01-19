@@ -9,7 +9,7 @@ import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.xep.search.client.SearchManager;
 import com.calclab.emite.xtesting.SessionTester;
 import com.calclab.hablar.basic.client.roster.RosterTester;
-import com.calclab.hablar.basic.client.search.SearchManagerTester;
+import com.calclab.hablar.search.client.SearchManagerTester;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.SucoCoreModule;
 import com.calclab.suco.client.ioc.Container;

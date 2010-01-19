@@ -1,13 +1,13 @@
-package com.calclab.hablar.basic.client.selenium;
+package com.calclab.hablar.selenium;
 
 import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.support.ByIdOrName;
 import org.openqa.selenium.support.FindBy;
 
-import com.calclab.hablar.basic.client.search.SearchLogic;
-import com.calclab.hablar.basic.client.search.SearchPageWidget;
-import com.calclab.hablar.basic.client.search.SearchResultItemWidget;
 import com.calclab.hablar.basic.client.ui.utils.DebugId;
+import com.calclab.hablar.search.client.SearchPageLogic;
+import com.calclab.hablar.search.client.SearchPageWidget;
+import com.calclab.hablar.search.client.SearchResultItemWidget;
 
 public class SearchPageObject extends AbstractPageObject {
     @FindBy(id = DebugId.PRE + SearchPageWidget.TERM_DEB_ID)
@@ -20,7 +20,7 @@ public class SearchPageObject extends AbstractPageObject {
     private RenderedWebElement message;
 
     public RenderedWebElement ChatMenuItem() {
-	return findElement(new ByIdOrName(DebugId.getGwtId(SearchLogic.CHAT_DEB_ID)));
+	return findElement(new ByIdOrName(DebugId.getGwtId(SearchPageLogic.CHAT_DEB_ID)));
     }
 
     public RenderedWebElement getHeader() {

@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.selenium;
+package com.calclab.hablar.selenium;
 
 import java.awt.Point;
 

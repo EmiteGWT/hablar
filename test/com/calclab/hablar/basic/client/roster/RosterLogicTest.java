@@ -2,7 +2,11 @@ package com.calclab.hablar.basic.client.roster;
 
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,9 +19,6 @@ import org.mockito.stubbing.Answer;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.basic.client.chat.EmiteTester;
-import com.calclab.hablar.basic.client.roster.RosterItemView;
-import com.calclab.hablar.basic.client.roster.RosterLogic;
-import com.calclab.hablar.basic.client.roster.RosterView;
 import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
 
 public class RosterLogicTest {

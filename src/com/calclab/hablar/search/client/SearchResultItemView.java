@@ -1,8 +1,8 @@
-package com.calclab.hablar.basic.client.search;
+package com.calclab.hablar.search.client;
 
 import com.calclab.emite.xep.search.client.SearchResultItem;
 
-public interface SearchResultView {
+public interface SearchResultItemView {
 
     SearchResultItem getItem();
 

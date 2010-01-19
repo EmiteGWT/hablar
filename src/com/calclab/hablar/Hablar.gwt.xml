@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module rename-to='hablar'>
-    <inherits name='com.calclab.hablar.basic.HablarBasic' />
+	<inherits name='com.calclab.hablar.basic.HablarBasic' />
+    <inherits name='com.calclab.hablar.search.HablarSearch' />
+	<inherits name='com.google.gwt.user.theme.chrome.Chrome' />
+	<!-- <inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
+	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
+
+	<!--
+		for add ensureDebugIds (debugId in UIBinder), remove/comment in
+		production see UIObject.ensureDebugId())
+	-->
+	<inherits name="com.google.gwt.user.Debug" />
+
 	<source path='' />
 	<entry-point class="com.calclab.hablar.HablarEntryPoint"></entry-point>
 </module>

@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.selenium;
+package com.calclab.hablar.selenium;
 
 import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.support.FindBy;

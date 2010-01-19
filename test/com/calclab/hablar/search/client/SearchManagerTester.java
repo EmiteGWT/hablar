@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.search;
+package com.calclab.hablar.search.client;
 
 import java.util.HashMap;
 import java.util.List;

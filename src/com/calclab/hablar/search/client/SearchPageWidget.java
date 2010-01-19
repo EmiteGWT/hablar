@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.search;
+package com.calclab.hablar.search.client;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
@@ -24,7 +24,7 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
-public class SearchPageWidget extends PageWidget implements SearchView {
+public class SearchPageWidget extends PageWidget implements SearchPageView {
 
     interface SearchPageUiBinder extends UiBinder<Widget, SearchPageWidget> {
     }
@@ -47,7 +47,7 @@ public class SearchPageWidget extends PageWidget implements SearchView {
     public static final String MESSAGE_DEB_ID = "SearchPageWidget-message";
 
     private static SearchPageUiBinder uiBinder = GWT.create(SearchPageUiBinder.class);
-    private final SearchLogic logic;
+    private final SearchPageLogic logic;
 
     @UiField
     LayoutPanel self;
@@ -75,7 +75,7 @@ public class SearchPageWidget extends PageWidget implements SearchView {
 	term.ensureDebugId(TERM_DEB_ID);
 	term.setText(i18n.typeToSearchUsers());
 	message.ensureDebugId(MESSAGE_DEB_ID);
-	logic = new SearchLogic(this);
+	logic = new SearchPageLogic(this);
 	setHeaderTitle("Search users");
 	setHeaderIconClass(HablarIcons.get(HablarIcons.IconType.search));
     }
@@ -89,9 +89,9 @@ public class SearchPageWidget extends PageWidget implements SearchView {
     }
 
     @Override
-    public PopupMenuView<SearchResultView> createMenu(final String debugId,
-	    final MenuAction<SearchResultView>... actions) {
-	final PopupMenu<SearchResultView> popupMenu = new PopupMenu<SearchResultView>(debugId, actions);
+    public PopupMenuView<SearchResultItemView> createMenu(final String debugId,
+	    final MenuAction<SearchResultItemView>... actions) {
+	final PopupMenu<SearchResultItemView> popupMenu = new PopupMenu<SearchResultItemView>(debugId, actions);
 	return popupMenu;
     }
 

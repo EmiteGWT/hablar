@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.selenium;
+package com.calclab.hablar.selenium;
 
 public final class SeleniumConstants {
     public static final String USERJID = "test1@localhost";

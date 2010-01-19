@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.search;
+package com.calclab.hablar.search.client;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -17,28 +17,28 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.xep.search.client.SearchResultItem;
 import com.calclab.hablar.basic.client.chat.EmiteTester;
 import com.calclab.hablar.basic.client.roster.AbstractLogicTest;
-import com.calclab.hablar.basic.client.search.SearchLogic;
-import com.calclab.hablar.basic.client.search.SearchResultView;
-import com.calclab.hablar.basic.client.search.SearchView;
-import com.calclab.hablar.basic.client.search.SearchView.Level;
+import com.calclab.hablar.search.client.SearchPageLogic;
+import com.calclab.hablar.search.client.SearchResultItemView;
+import com.calclab.hablar.search.client.SearchPageView;
+import com.calclab.hablar.search.client.SearchPageView.Level;
 
 public class SearchLogicTest {
     private EmiteTester tester;
-    private SearchView view;
-    private SearchLogic logic;
+    private SearchPageView view;
+    private SearchPageLogic logic;
 
     @Before
     public void before() {
 	tester = new EmiteTester();
-	view = mock(SearchView.class);
+	view = mock(SearchPageView.class);
 	AbstractLogicTest.registerI18n();
-	logic = new SearchLogic(view);
+	logic = new SearchPageLogic(view);
     }
 
     @Test
     public void shouldAddToRoster() {
 	final SearchResultItem item = newItem("some");
-	final SearchResultView resultView = mock(SearchResultView.class);
+	final SearchResultItemView resultView = mock(SearchResultItemView.class);
 	when(resultView.getItem()).thenReturn(item);
 
 	logic.onResultToRoster(resultView);

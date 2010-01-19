@@ -11,10 +11,7 @@ import org.junit.Test;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.hablar.basic.client.chat.EmiteTester;
 import com.calclab.hablar.basic.client.chat.PresenceManagerTester;
-import com.calclab.hablar.basic.client.presence.PresenceLogic;
-import com.calclab.hablar.basic.client.presence.PresenceView;
 import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
-import com.calclab.hablar.basic.client.ui.icons.HablarIcons.IconType;
 
 public class PresenceLogicTest {
 

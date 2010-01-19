@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.search;
+package com.calclab.hablar.search.client;
 
 import com.calclab.emite.xep.search.client.SearchResultItem;
 import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
@@ -12,7 +12,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
-public class SearchResultItemWidget extends ListItemWidget implements SearchResultView {
+public class SearchResultItemWidget extends ListItemWidget implements SearchResultItemView {
 
     interface SearchResultUiBinder extends UiBinder<Widget, SearchResultItemWidget> {
     }
@@ -27,7 +27,7 @@ public class SearchResultItemWidget extends ListItemWidget implements SearchResu
 
     private SearchResultItem item;
 
-    public SearchResultItemWidget(final SearchLogic logic, final SearchResultItem item) {
+    public SearchResultItemWidget(final SearchPageLogic logic, final SearchResultItem item) {
 	super(logic);
 	initWidget(uiBinder.createAndBindUi(this));
 	menu.addStyleName(HablarIcons.get(HablarIcons.IconType.menu));

@@ -1,7 +1,6 @@
 package com.calclab.hablar.basic.client.ui.lists;
 
 import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
-import com.calclab.hablar.basic.client.ui.icons.HablarIcons.StyleType;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Event;
