@@ -1,5 +1,6 @@
 package com.calclab.hablar.client.selenium;
 
+import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -51,7 +52,11 @@ public class AbstractSeleniumTest {
     }
 
     public void sleep(final int milliseconds) {
-	getWebTester().wait(milliseconds);
+	try {
+	    Thread.sleep(milliseconds);
+	} catch (final InterruptedException e) {
+	    Assert.fail("Exception in sleep method", e);
+	}
     }
 
     private GenericWebTester getWebTester() {

@@ -34,12 +34,4 @@ public abstract class AbstractWebTester {
 	driver.get(baseUrl);
     }
 
-    public void wait(final int milliseconds) {
-	try {
-	    Thread.sleep(milliseconds);
-	} catch (final InterruptedException e) {
-	    Logger.error("Exception in wait method", e);
-	}
-    }
-
 }

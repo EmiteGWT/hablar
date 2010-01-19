@@ -10,10 +10,11 @@ public class PopupMenu<T> extends PopupPanel implements PopupMenuView<T> {
     private T target;
     private boolean visible;
 
-    public PopupMenu(MenuAction<T>... actions) {
+    public PopupMenu(final MenuAction<T>... actions) {
 	super(true);
+	setStyleName("def-PopupPanel");
 	bar = new MenuBar(true);
-	for (MenuAction<T> a : actions) {
+	for (final MenuAction<T> a : actions) {
 	    final MenuAction<T> action = a;
 	    bar.addItem(action.getHTML(), true, new Command() {
 		@Override
@@ -39,19 +40,19 @@ public class PopupMenu<T> extends PopupPanel implements PopupMenuView<T> {
     }
 
     @Override
-    public void setTarget(T target) {
+    public void setTarget(final T target) {
 	this.target = target;
     }
 
     @Override
-    public void show(int left, int top) {
+    public void show(final int left, final int top) {
 	this.visible = true;
 	setPopupPosition(left, top);
 	show();
     }
 
     @Override
-    public void showRelativeToMenu(UIObject target) {
+    public void showRelativeToMenu(final UIObject target) {
 	this.visible = true;
 	super.showRelativeTo(target);
     }
