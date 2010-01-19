@@ -13,6 +13,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.LayoutPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -35,6 +36,9 @@ public class ChatPage extends PageWidget implements ChatView {
 
     @UiField
     FlowPanel list;
+
+    @UiField
+    ScrollPanel scroll;
 
     private final ChatLogic logic;
 
@@ -71,17 +75,19 @@ public class ChatPage extends PageWidget implements ChatView {
     @Override
     public void setTextBoxVisible(final boolean visible) {
 	if (visible) {
-	    page.setWidgetTopBottom(list, 0, PX, 64, PX);
+	    page.setWidgetTopBottom(scroll, 0, PX, 64, PX);
 	    page.setWidgetBottomHeight(talkBox, 0, PX, 61, PX);
 	} else {
-	    page.setWidgetTopBottom(list, 0, PX, 0, PX);
+	    page.setWidgetTopBottom(scroll, 0, PX, 0, PX);
 	    page.setWidgetBottomHeight(talkBox, 0, PX, 0, PX);
 	}
 	page.animate(500);
     }
 
     public void showMessage(final String name, final String body, final MessageType type) {
-	list.add(new ChatMessage(name, body, type));
+	final ChatMessage message = new ChatMessage(name, body, type);
+	list.add(message);
+	scroll.ensureVisible(message);
     }
 
 }

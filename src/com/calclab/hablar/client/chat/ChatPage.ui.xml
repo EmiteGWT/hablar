@@ -1,25 +1,25 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	<ui:style src="../Hablar.css" field="hablar" />
-		
-	<ui:style>
-		.talkBox {
-			width: 100%;
-			margin: 3px 0;
-			padding: 3px;
-			height: 54px;
-			border: 1px solid #BBBBBB;
-		}
-	</ui:style>
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:style src="../Hablar.css" field="hablar" />
 
-
-	<g:LayoutPanel styleName="{hablar.page}" ui:field="page">
-		<g:layer top='0px' left='0px' right='0px' bottom='69px'>
-			<g:FlowPanel styleName="{hablar.list}" ui:field="list"></g:FlowPanel>
-		</g:layer>
-		<g:layer left="0" right="0" bottom="0" height="61px">
-			<g:TextArea styleName="{style.talkBox}" ui:field="talkBox"></g:TextArea>
-		</g:layer>
-	</g:LayoutPanel>
-</ui:UiBinder> 
+  <ui:style>
+    .talkBox {
+      width: 100%;
+      margin: 3px 0;
+      padding: 3px;
+      height: 54px;
+      border: 1px solid #BBBBBB;
+    }
+  </ui:style>
+  <g:LayoutPanel styleName="{hablar.page}" ui:field="page">
+    <g:layer top='0px' left='0px' right='0px' bottom='69px' >
+      <g:ScrollPanel ui:field="scroll" height="100%" styleName="{hablar.scroll}">
+        <g:FlowPanel styleName="{hablar.list}" ui:field="list" />
+      </g:ScrollPanel>
+    </g:layer>
+    <g:layer left="0" right="0" bottom="0" height="61px">
+      <g:TextArea styleName="{style.talkBox}" ui:field="talkBox"></g:TextArea>
+    </g:layer>
+  </g:LayoutPanel>
+</ui:UiBinder>
