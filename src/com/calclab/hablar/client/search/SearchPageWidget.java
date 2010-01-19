@@ -3,11 +3,13 @@ package com.calclab.hablar.client.search;
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
 import com.calclab.emite.xep.search.client.SearchResultItem;
+import com.calclab.hablar.client.i18n.Msg;
 import com.calclab.hablar.client.ui.menu.MenuAction;
 import com.calclab.hablar.client.ui.menu.PopupMenu;
 import com.calclab.hablar.client.ui.menu.PopupMenuView;
 import com.calclab.hablar.client.ui.page.PageWidget;
 import com.calclab.hablar.client.ui.styles.HablarStyles;
+import com.calclab.suco.client.Suco;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.FocusEvent;
@@ -69,7 +71,9 @@ public class SearchPageWidget extends PageWidget implements SearchView {
 	super(visibility, true);
 	super.setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
+	final Msg i18n = Suco.get(Msg.class);
 	term.ensureDebugId(TERM_DEB_ID);
+	term.setText(i18n.typeToSearchUsers());
 	message.ensureDebugId(MESSAGE_DEB_ID);
 	logic = new SearchLogic(this);
 	setHeaderTitle("Search users");

@@ -56,6 +56,9 @@ public interface Msg extends Messages {
     @PluralText( { "one", "Results for «{0}»: One user found." })
     String searchResultsFor(String term, @PluralCount @Optional int count);
 
+    @DefaultMessage("Type to search users")
+    String typeToSearchUsers();
+
     @DefaultMessage("Wait...")
     String waitDots();
 

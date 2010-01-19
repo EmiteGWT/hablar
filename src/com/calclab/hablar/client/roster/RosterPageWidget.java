@@ -17,6 +17,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class RosterPageWidget extends PageWidget implements RosterView {
@@ -46,6 +47,9 @@ public class RosterPageWidget extends PageWidget implements RosterView {
 
     @UiField
     Label disabledLabel;
+
+    @UiField
+    ScrollPanel scroll;
 
     private final RosterLogic logic;
 
@@ -94,11 +98,11 @@ public class RosterPageWidget extends PageWidget implements RosterView {
 	if (active) {
 	    roster.setWidgetTopHeight(actions, 0, Unit.PX, 20, Unit.PX);
 	    roster.setWidgetTopHeight(disabledPanel, 0, Unit.PX, 0, Unit.PX);
-	    roster.setWidgetTopBottom(list, 20, Unit.PX, 0, Unit.PX);
+	    roster.setWidgetTopBottom(scroll, 20, Unit.PX, 0, Unit.PX);
 	} else {
 	    roster.setWidgetTopHeight(actions, 0, Unit.PX, 0, Unit.PX);
 	    roster.setWidgetTopBottom(disabledPanel, 0, Unit.PX, 0, Unit.PX);
-	    roster.setWidgetBottomHeight(list, 0, Unit.PX, 0, Unit.PX);
+	    roster.setWidgetBottomHeight(scroll, 0, Unit.PX, 0, Unit.PX);
 	}
 	roster.animate(active ? 500 : 0);
     }
