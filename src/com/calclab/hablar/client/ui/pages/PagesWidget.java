@@ -1,7 +1,6 @@
 package com.calclab.hablar.client.ui.pages;
 
 import com.calclab.hablar.client.ui.page.Page;
-import com.calclab.hablar.client.ui.page.Page.Visibility;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
@@ -15,8 +14,8 @@ public class PagesWidget extends Composite implements Pages {
     }
 
     @Override
-    public void add(Page page, Visibility visibility) {
-	logic.add(page, visibility);
+    public void add(Page page) {
+	logic.add(page);
     }
 
     @Override

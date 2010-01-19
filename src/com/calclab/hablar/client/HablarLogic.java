@@ -29,18 +29,18 @@ public class HablarLogic {
 
 	// FIXME: no longer necessary
 	/* we always have the panel, to see the status, but not always visible */
-	loginPage = new LoginPage();
+	loginPage = new LoginPage(Visibility.open);
 	if (config.hasLogin) {
-	    pages.add(loginPage, Visibility.open);
+	    pages.add(loginPage);
 	}
 
 	if (config.hasRoster) {
-	    rosterPageWidget = new RosterPageWidget();
+	    rosterPageWidget = new RosterPageWidget(Visibility.closed);
 	    addSearchPage(config, pages);
 	    if ("left".equals(config.dockRoster)) {
 		hablarView.addDocked(rosterPageWidget);
 	    } else {
-		pages.add(rosterPageWidget, Visibility.closed);
+		pages.add(rosterPageWidget);
 	    }
 	}
 	hablarView.init();
@@ -57,8 +57,8 @@ public class HablarLogic {
 
     private void addSearchPage(final HablarConfig config, final Pages pages) {
 	if (config.hasSearch) {
-	    final SearchPageWidget searchPageWidget = new SearchPageWidget();
-	    pages.add(searchPageWidget, Visibility.hidden);
+	    final SearchPageWidget searchPageWidget = new SearchPageWidget(Visibility.hidden);
+	    pages.add(searchPageWidget);
 	    rosterPageWidget.addAction(HablarStyles.get(HablarStyles.IconType.search), SEARCH_ICON, new ClickHandler() {
 		@Override
 		public void onClick(final ClickEvent event) {

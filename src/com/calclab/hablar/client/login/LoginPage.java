@@ -46,8 +46,8 @@ public class LoginPage extends PageWidget {
 
     private final LoginLogic logic;
 
-    public LoginPage() {
-	super(false);
+    public LoginPage(Visibility visibility) {
+	super(visibility, false);
 	// FIXME: better this can go in the constructor
 	super.setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));

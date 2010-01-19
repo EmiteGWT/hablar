@@ -37,7 +37,8 @@ public class PagesLogic implements Pages {
 	visibilityChangedListener = new Listener<PageWidget>() {
 	    @Override
 	    public void onEvent(PageWidget page) {
-		if (page.getVisibility() == Visibility.open)
+		Visibility visibility = page.getVisibility();
+		if (visibility == Visibility.open)
 		    showPreviousPage();
 		else
 		    open(page);
@@ -55,23 +56,24 @@ public class PagesLogic implements Pages {
     /**
      * @see Pages
      */
-    public void add(Page page, Visibility visibility) {
+    public void add(Page page) {
 	if (!view.hasPage(page)) {
 	    page.onStatusMessageChanged(statusListener);
 	    page.onVisibilityChanged(visibilityChangedListener);
 	    page.onClose(closeListener);
-	    view.addPage(page);
+
+	    Visibility visibility = page.getVisibility();
 	    if (visibility == Visibility.open) {
+		view.addPage(page);
 		open(page);
 	    } else if (visibility == Visibility.hidden) {
-		hide(page);
-	    } else {
-		page.setVisibility(Visibility.closed);
+		hidden.add(page);
+	    } else if (visibility == Visibility.closed) {
+		view.addPage(page);
 		if (currentPage != null) {
 		    open(currentPage);
 		}
 	    }
-
 	}
     }
 
@@ -111,7 +113,8 @@ public class PagesLogic implements Pages {
 
 	    view.showPage(page);
 	    currentPage = page;
-	    page.setVisibility(Visibility.open);
+	    if (page.getVisibility() != Visibility.open)
+		page.setVisibility(Visibility.open);
 	}
     }
 

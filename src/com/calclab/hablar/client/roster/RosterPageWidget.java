@@ -49,8 +49,8 @@ public class RosterPageWidget extends PageWidget implements RosterView {
 
     private final RosterLogic logic;
 
-    public RosterPageWidget() {
-	super(false);
+    public RosterPageWidget(Visibility visibility) {
+	super(visibility, false);
 	setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
 	final Msg i18n = Suco.get(Msg.class);

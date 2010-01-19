@@ -65,8 +65,8 @@ public class SearchPageWidget extends PageWidget implements SearchView {
     @UiField
     Label message;
 
-    public SearchPageWidget() {
-	super(true);
+    public SearchPageWidget(Visibility visibility) {
+	super(visibility, true);
 	super.setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
 	term.ensureDebugId(TERM_DEB_ID);

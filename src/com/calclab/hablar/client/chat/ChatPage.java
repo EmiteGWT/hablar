@@ -42,8 +42,8 @@ public class ChatPage extends PageWidget implements ChatView {
 
     private final ChatLogic logic;
 
-    public ChatPage(final Chat chat) {
-	super(true);
+    public ChatPage(final Chat chat, Visibility visibility) {
+	super(visibility, true);
 	super.setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
 	talkBox.ensureDebugId(TALKBOX_DEB_ID);

@@ -2,6 +2,7 @@ package com.calclab.hablar.client.chat;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
@@ -26,8 +27,9 @@ public class ChatManagerLogicTest {
 	pages = mock(Pages.class);
 	new ChatManagerLogic(new ChatConfig(), pages, new ChatPageFactory() {
 	    @Override
-	    public ChatView create(Chat chat) {
+	    public ChatView create(Chat chat, Visibility visibility) {
 		ChatView view = mock(ChatView.class);
+		when(view.getVisibility()).thenReturn(visibility);
 		views.add(view);
 		return view;
 	    }
@@ -37,7 +39,7 @@ public class ChatManagerLogicTest {
     @Test
     public void shouldAddAClosedChatViewWhenChatCreated() {
 	tester.chatManager.fireChatCreated(new ChatTester("me@host", "you@host"));
-	verify(pages).add(views.get(0), Visibility.closed);
+	verify(pages).add(views.get(0));
     }
 
     @Test

@@ -17,17 +17,17 @@ public abstract class PageWidget extends Composite implements Page {
     private Visibility visibility;
     private String status;
 
-    public PageWidget(final boolean closeable) {
+    public PageWidget(Visibility visibility, final boolean closeable) {
 	this.closeEvent = new Event<PageWidget>("page.close");
 	this.header = new HeaderWidget(this, closeable);
 	this.statusAction = new Event<PageWidget>("page.status");
 	this.openEvent = new Event<PageWidget>("page.open");
-	this.visibility = Visibility.hidden;
+	this.visibility = visibility;
     }
 
     public void fireOpen() {
 	openEvent.fire(this);
-    }
+    };
 
     public PageHeader getHeader() {
 	return this.header;
@@ -42,6 +42,7 @@ public abstract class PageWidget extends Composite implements Page {
 	return status;
     }
 
+    @Override
     public Visibility getVisibility() {
 	return visibility;
     }

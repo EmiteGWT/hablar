@@ -13,6 +13,13 @@ public interface Page {
     String getStatusMessage();
 
     /**
+     * Ask the page about it's current visibility state
+     * 
+     * @param visibility
+     */
+    Visibility getVisibility();
+
+    /**
      * Add a listener to onClose events. This listener is called when the close
      * button in the header is clicked
      * 

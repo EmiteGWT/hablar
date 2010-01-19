@@ -17,7 +17,7 @@ import com.google.gwt.core.client.GWT;
 
 public class ChatManagerLogic {
     public static interface ChatPageFactory {
-	ChatView create(Chat chat);
+	ChatView create(Chat chat, Visibility visibility);
     }
     private final HashMap<Chat, ChatView> chatPages;
     private final Pages pages;
@@ -28,8 +28,8 @@ public class ChatManagerLogic {
     public ChatManagerLogic(ChatConfig config, final Pages pages) {
 	this(config, pages, new ChatPageFactory() {
 	    @Override
-	    public ChatView create(Chat chat) {
-		return new ChatPage(chat);
+	    public ChatView create(Chat chat, Visibility visibility) {
+		return new ChatPage(chat, visibility);
 	    }
 	});
     }
@@ -49,7 +49,7 @@ public class ChatManagerLogic {
 	chatManager.onChatCreated(new Listener<Chat>() {
 	    @Override
 	    public void onEvent(Chat chat) {
-		createChat(chat);
+		createChat(chat, Visibility.closed);
 	    }
 	});
 
@@ -76,11 +76,11 @@ public class ChatManagerLogic {
 
     }
 
-    private void createChat(Chat chat) {
+    private void createChat(Chat chat, Visibility visibility) {
 	GWT.log("HABLAR ChatManager - CREATE", null);
-	ChatView chatPage = factory.create(chat);
+	ChatView chatPage = factory.create(chat, Visibility.closed);
 	chatPages.put(chat, chatPage);
-	pages.add(chatPage, Visibility.closed);
+	pages.add(chatPage);
 	RosterItem item = roster.getItemByJID(chat.getURI().getJID());
 	Show show = item != null ? item.getShow() : Show.unknown;
 	chatPage.setPresence(show);
