@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
-public class LoginPage extends PageWidget {
+public class LoginPage extends PageWidget implements LoginView {
 
     interface Icons extends CssResource {
 	String loggedInIcon();

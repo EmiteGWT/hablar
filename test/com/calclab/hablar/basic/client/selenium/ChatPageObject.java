@@ -4,14 +4,14 @@ import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.calclab.hablar.basic.client.chat.ChatPage;
-import com.calclab.hablar.basic.client.ui.debug.Debug;
+import com.calclab.hablar.basic.client.ui.utils.DebugId;
 
 public class ChatPageObject extends AbstractPageObject {
-    @FindBy(id = Debug.PRE + ChatPage.ID)
+    @FindBy(id = DebugId.PRE + ChatPage.ID)
     private RenderedWebElement header;
-    @FindBy(id = Debug.PRE + ChatPage.TALKBOX_DEB_ID)
+    @FindBy(id = DebugId.PRE + ChatPage.TALKBOX_DEB_ID)
     private RenderedWebElement talkbox;
-    @FindBy(id = Debug.PRE + ChatPage.LIST_DEB_ID)
+    @FindBy(id = DebugId.PRE + ChatPage.LIST_DEB_ID)
     private RenderedWebElement list;
 
     public ChatPageObject() {

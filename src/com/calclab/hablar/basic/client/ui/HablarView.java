@@ -1,11 +1,22 @@
 package com.calclab.hablar.basic.client.ui;
 
-import com.calclab.hablar.basic.client.roster.RosterPageWidget;
+import com.calclab.hablar.basic.client.login.LoginView;
+import com.calclab.hablar.basic.client.roster.RosterView;
+import com.calclab.hablar.basic.client.ui.page.Page;
+import com.calclab.hablar.basic.client.ui.pages.Pages;
 
 public interface HablarView {
 
-    void addDocked(RosterPageWidget rosterPageWidget);
+    LoginView getLoginPage();
 
-    void init();
+    Pages getPages();
+
+    RosterView getRosterPage();
+
+    boolean hasLogin();
+
+    boolean hasRoster();
+
+    void setDocked(Page page, int size);
 
 }

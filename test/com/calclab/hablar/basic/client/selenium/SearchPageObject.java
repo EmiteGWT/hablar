@@ -7,20 +7,20 @@ import org.openqa.selenium.support.FindBy;
 import com.calclab.hablar.basic.client.search.SearchLogic;
 import com.calclab.hablar.basic.client.search.SearchPageWidget;
 import com.calclab.hablar.basic.client.search.SearchResultItemWidget;
-import com.calclab.hablar.basic.client.ui.debug.Debug;
+import com.calclab.hablar.basic.client.ui.utils.DebugId;
 
 public class SearchPageObject extends AbstractPageObject {
-    @FindBy(id = Debug.PRE + SearchPageWidget.TERM_DEB_ID)
+    @FindBy(id = DebugId.PRE + SearchPageWidget.TERM_DEB_ID)
     private RenderedWebElement term;
 
-    @FindBy(id = Debug.PRE + SearchPageWidget.ID)
+    @FindBy(id = DebugId.PRE + SearchPageWidget.ID)
     private RenderedWebElement header;
 
-    @FindBy(id = Debug.PRE + SearchPageWidget.MESSAGE_DEB_ID)
+    @FindBy(id = DebugId.PRE + SearchPageWidget.MESSAGE_DEB_ID)
     private RenderedWebElement message;
 
     public RenderedWebElement ChatMenuItem() {
-	return findElement(new ByIdOrName(Debug.gwtId(SearchLogic.CHAT_DEB_ID)));
+	return findElement(new ByIdOrName(DebugId.getGwtId(SearchLogic.CHAT_DEB_ID)));
     }
 
     public RenderedWebElement getHeader() {
@@ -53,7 +53,7 @@ public class SearchPageObject extends AbstractPageObject {
     }
 
     private RenderedWebElement findJid(final String prefix, final String jid) {
-	return findElement(new ByIdOrName(Debug.gwtId(Debug.getIdFromJid(prefix, jid))));
+	return findElement(new ByIdOrName(DebugId.getGwtId(DebugId.getFromJid(prefix, jid))));
     }
 
 }

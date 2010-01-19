@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.ui;
+package com.calclab.hablar.basic.client.ui.utils;
 
 import com.google.gwt.user.client.Element;
 

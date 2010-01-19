@@ -15,7 +15,7 @@
 		}
 	</ui:style>
 
-	<g:LayoutPanel ui:field="panel">
+	<g:LayoutPanel ui:field="container">
 		<g:layer left="0" top="0" right="0" height="20">
 			<hablar:PresencePanel></hablar:PresencePanel>
 		</g:layer>

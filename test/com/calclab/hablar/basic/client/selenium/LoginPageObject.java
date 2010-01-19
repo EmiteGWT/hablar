@@ -4,16 +4,16 @@ import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.calclab.hablar.basic.client.login.LoginPage;
-import com.calclab.hablar.basic.client.ui.debug.Debug;
+import com.calclab.hablar.basic.client.ui.utils.DebugId;
 
 public class LoginPageObject extends AbstractPageObject {
-    @FindBy(id = Debug.PRE + LoginPage.ID)
+    @FindBy(id = DebugId.PRE + LoginPage.ID)
     private RenderedWebElement header;
-    @FindBy(id = Debug.PRE + LoginPage.URI)
+    @FindBy(id = DebugId.PRE + LoginPage.URI)
     private RenderedWebElement login;
-    @FindBy(id = Debug.PRE + LoginPage.PASSWD)
+    @FindBy(id = DebugId.PRE + LoginPage.PASSWD)
     private RenderedWebElement passwd;
-    @FindBy(id = Debug.PRE + LoginPage.BTN)
+    @FindBy(id = DebugId.PRE + LoginPage.BTN)
     private RenderedWebElement button;
 
     public LoginPageObject() {

@@ -1,9 +1,9 @@
 package com.calclab.hablar.basic.client.search;
 
 import com.calclab.emite.xep.search.client.SearchResultItem;
-import com.calclab.hablar.basic.client.ui.debug.Debug;
 import com.calclab.hablar.basic.client.ui.lists.ListItemWidget;
 import com.calclab.hablar.basic.client.ui.styles.HablarStyles;
+import com.calclab.hablar.basic.client.ui.utils.DebugId;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -54,8 +54,8 @@ public class SearchResultItemWidget extends ListItemWidget implements SearchResu
 	this.item = item;
 	this.name.setText(item.getNick());
 	this.jid.setText(item.getJid().toString());
-	this.menu.ensureDebugId(Debug.getIdFromJid(SEARCHRESULT_ITEM_MENU_DEB_ID, item.getJid()));
-	this.name.ensureDebugId(Debug.getIdFromJid(SEARCHRESULT_ITEM_NAME_DEB_ID, item.getJid()));
+	this.menu.ensureDebugId(DebugId.getFromJid(SEARCHRESULT_ITEM_MENU_DEB_ID, item.getJid()));
+	this.name.ensureDebugId(DebugId.getFromJid(SEARCHRESULT_ITEM_NAME_DEB_ID, item.getJid()));
     }
 
 }

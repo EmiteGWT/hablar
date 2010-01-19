@@ -2,8 +2,8 @@ package com.calclab.hablar.basic.client.roster;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.hablar.basic.client.ui.debug.Debug;
 import com.calclab.hablar.basic.client.ui.styles.HablarStyles;
+import com.calclab.hablar.basic.client.ui.utils.DebugId;
 
 public class RosterItemLogic {
     public static final String ROSTERITEM_MENU_DEB_ID = "RosterItemLogic-item-menu-";
@@ -27,8 +27,8 @@ public class RosterItemLogic {
     public static void setItem(final RosterItem item, final RosterItemView view) {
 	view.setName(item.getName());
 	view.setJID(item.getJID().toString());
-	view.setNameDebugId(Debug.getIdFromJid(ROSTERITEM_NAME_DEB_ID, item.getJID()));
-	view.setMenuDebugId(Debug.getIdFromJid(ROSTERITEM_MENU_DEB_ID, item.getJID()));
+	view.setNameDebugId(DebugId.getFromJid(ROSTERITEM_NAME_DEB_ID, item.getJID()));
+	view.setMenuDebugId(DebugId.getFromJid(ROSTERITEM_MENU_DEB_ID, item.getJID()));
 	view.setIcon(getIcon(item));
 
 	final String status = item.getStatus();

@@ -8,17 +8,17 @@ import org.openqa.selenium.support.FindBy;
 import com.calclab.hablar.basic.client.HablarLogic;
 import com.calclab.hablar.basic.client.roster.RosterItemLogic;
 import com.calclab.hablar.basic.client.roster.RosterPageWidget;
-import com.calclab.hablar.basic.client.ui.debug.Debug;
+import com.calclab.hablar.basic.client.ui.utils.DebugId;
 
 public class RosterPageObject extends AbstractPageObject {
 
-    @FindBy(id = Debug.PRE + RosterPageWidget.DISABLED_LABEL)
+    @FindBy(id = DebugId.PRE + RosterPageWidget.DISABLED_LABEL)
     private RenderedWebElement disabledLabel;
 
-    @FindBy(id = Debug.PRE + RosterPageWidget.ID)
+    @FindBy(id = DebugId.PRE + RosterPageWidget.ID)
     private RenderedWebElement header;
 
-    @FindBy(id = Debug.PRE + HablarLogic.SEARCH_ICON)
+    @FindBy(id = DebugId.PRE + HablarLogic.SEARCH_ICON)
     private RenderedWebElement searchIcon;
 
     public RosterPageObject() {
@@ -33,7 +33,7 @@ public class RosterPageObject extends AbstractPageObject {
     }
 
     public RenderedWebElement getItemMenu(final String jid) {
-	return findElement(new ByIdOrName(Debug.getIdFromJid(RosterItemLogic.ROSTERITEM_MENU_DEB_ID, jid)));
+	return findElement(new ByIdOrName(DebugId.getFromJid(RosterItemLogic.ROSTERITEM_MENU_DEB_ID, jid)));
     }
 
     public RenderedWebElement Header() {

@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client;
+package com.calclab.hablar;
 
 import com.calclab.emite.browser.client.PageAssist;
 
