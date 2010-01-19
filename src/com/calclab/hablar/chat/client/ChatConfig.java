@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.chat;
+package com.calclab.hablar.chat.client;
 
 import com.calclab.emite.browser.client.PageAssist;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;

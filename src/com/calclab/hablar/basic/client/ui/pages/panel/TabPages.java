@@ -1,7 +1,7 @@
 package com.calclab.hablar.basic.client.ui.pages.panel;
 
 import com.calclab.hablar.basic.client.ui.page.HeaderStyles;
-import com.calclab.hablar.basic.client.ui.page.Page;
+import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.page.PageHeader;
 import com.calclab.hablar.basic.client.ui.pages.PagesPanel;
 import com.google.gwt.core.client.GWT;
@@ -33,25 +33,25 @@ public class TabPages extends Composite implements PagesPanel {
     }
 
     @Override
-    public void addPage(Page page) {
-	PageHeader header = page.getHeader();
+    public void addPageView(PageView pageView) {
+	PageHeader header = pageView.getHeader();
 	header.setStyles(headerStyle);
-	tabs.add((Widget) page, (Widget) header);
+	tabs.add((Widget) pageView, (Widget) header);
     }
 
     @Override
-    public boolean hasPage(Page page) {
-	return tabs.getWidgetIndex((Widget) page) != -1;
+    public boolean hasPageView(PageView pageView) {
+	return tabs.getWidgetIndex((Widget) pageView) != -1;
     }
 
     @Override
-    public void removePage(Page page) {
-	tabs.remove((Widget) page);
+    public void removePageView(PageView pageView) {
+	tabs.remove((Widget) pageView);
     }
 
     @Override
-    public void showPage(Page page) {
-	int index = tabs.getWidgetIndex((Widget) page);
+    public void showPageView(PageView pageView) {
+	int index = tabs.getWidgetIndex((Widget) pageView);
 	tabs.selectTab(index);
     }
 

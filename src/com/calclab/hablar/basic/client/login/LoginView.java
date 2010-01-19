@@ -1,7 +1,7 @@
 package com.calclab.hablar.basic.client.login;
 
-import com.calclab.hablar.basic.client.ui.page.Page;
+import com.calclab.hablar.basic.client.ui.page.PageView;
 
-public interface LoginView extends Page {
+public interface LoginView extends PageView {
 
 }

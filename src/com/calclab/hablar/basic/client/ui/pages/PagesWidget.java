@@ -1,6 +1,6 @@
 package com.calclab.hablar.basic.client.ui.pages;
 
-import com.calclab.hablar.basic.client.ui.page.Page;
+import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
@@ -14,33 +14,33 @@ public class PagesWidget extends Composite implements Pages {
     }
 
     @Override
-    public void add(Page page) {
-	logic.add(page);
+    public void add(PageView pageView) {
+	logic.add(pageView);
     }
 
     @Override
-    public boolean close(Page page) {
-	return logic.close(page);
+    public boolean close(PageView pageView) {
+	return logic.close(pageView);
     }
 
     @Override
-    public boolean hasPage(Page page) {
-	return logic.hasPage(page);
+    public boolean hasPageView(PageView pageView) {
+	return logic.hasPageView(pageView);
     }
 
     @Override
-    public void hide(Page page) {
-	logic.hide(page);
+    public void hide(PageView pageView) {
+	logic.hide(pageView);
     }
 
     @Override
-    public void onStatusMessageChanged(Listener<Page> listener) {
+    public void onStatusMessageChanged(Listener<PageView> listener) {
 	logic.onStatusMessageChanged(listener);
     }
 
     @Override
-    public void open(Page page) {
-	logic.open(page);
+    public void open(PageView pageView) {
+	logic.open(pageView);
     }
 
 }

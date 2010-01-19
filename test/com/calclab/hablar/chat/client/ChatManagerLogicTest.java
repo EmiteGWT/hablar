@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.chat;
+package com.calclab.hablar.chat.client;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -10,12 +10,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.calclab.emite.im.client.chat.Chat;
-import com.calclab.hablar.basic.client.chat.ChatConfig;
-import com.calclab.hablar.basic.client.chat.ChatManagerLogic;
-import com.calclab.hablar.basic.client.chat.ChatView;
-import com.calclab.hablar.basic.client.chat.ChatManagerLogic.ChatPageFactory;
-import com.calclab.hablar.basic.client.ui.page.Page.Visibility;
+import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.hablar.basic.client.ui.pages.Pages;
+import com.calclab.hablar.chat.client.ChatConfig;
+import com.calclab.hablar.chat.client.ChatManagerLogic;
+import com.calclab.hablar.chat.client.ChatView;
+import com.calclab.hablar.chat.client.ChatManagerLogic.ChatPageFactory;
 
 public class ChatManagerLogicTest {
 

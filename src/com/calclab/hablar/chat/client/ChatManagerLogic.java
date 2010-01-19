@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.chat;
+package com.calclab.hablar.chat.client;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -9,7 +9,7 @@ import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.hablar.basic.client.ui.page.Page.Visibility;
+import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.hablar.basic.client.ui.pages.Pages;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;

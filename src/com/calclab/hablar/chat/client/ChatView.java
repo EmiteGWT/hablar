@@ -1,9 +1,9 @@
-package com.calclab.hablar.basic.client.chat;
+package com.calclab.hablar.chat.client;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
-import com.calclab.hablar.basic.client.ui.page.Page;
+import com.calclab.hablar.basic.client.ui.page.PageView;
 
-public interface ChatView extends Page {
+public interface ChatView extends PageView {
 
     enum MessageType {
 	incoming, sent

@@ -3,8 +3,8 @@ package com.calclab.hablar.selenium;
 import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.calclab.hablar.basic.client.chat.ChatPage;
 import com.calclab.hablar.basic.client.ui.utils.DebugId;
+import com.calclab.hablar.chat.client.ChatPage;
 
 public class ChatPageObject extends AbstractPageObject {
     @FindBy(id = DebugId.PRE + ChatPage.ID)

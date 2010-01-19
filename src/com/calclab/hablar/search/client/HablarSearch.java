@@ -3,7 +3,7 @@ package com.calclab.hablar.search.client;
 import com.calclab.hablar.basic.client.ui.HablarView;
 import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
 import com.calclab.hablar.basic.client.ui.icons.HablarIcons.IconType;
-import com.calclab.hablar.basic.client.ui.page.Page.Visibility;
+import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.hablar.basic.client.ui.pages.Pages;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;

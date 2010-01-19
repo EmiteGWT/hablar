@@ -3,9 +3,9 @@ package com.calclab.hablar.search.client;
 import com.calclab.emite.xep.search.client.SearchResultItem;
 import com.calclab.hablar.basic.client.ui.menu.MenuAction;
 import com.calclab.hablar.basic.client.ui.menu.PopupMenuView;
-import com.calclab.hablar.basic.client.ui.page.Page;
+import com.calclab.hablar.basic.client.ui.page.PageView;
 
-public interface SearchPageView extends Page {
+public interface SearchPageView extends PageView {
 
     public static enum Level {
 	info, error, success

@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.chat;
+package com.calclab.hablar.chat.client;
 
 import com.calclab.emite.core.client.EmiteCoreModule;
 import com.calclab.emite.core.client.xmpp.session.Session;

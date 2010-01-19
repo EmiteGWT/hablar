@@ -18,8 +18,8 @@ import org.mockito.stubbing.Answer;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.hablar.basic.client.chat.EmiteTester;
 import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
+import com.calclab.hablar.chat.client.EmiteTester;
 
 public class RosterLogicTest {
 

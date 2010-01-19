@@ -2,34 +2,34 @@ package com.calclab.hablar.basic.client.ui.pages;
 
 import java.util.ArrayList;
 
-import com.calclab.hablar.basic.client.ui.page.Page;
+import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.pages.PagesPanel;
 
 public class PagesPanelTester implements PagesPanel {
 
-    private final ArrayList<Page> pages;
+    private final ArrayList<PageView> pageViews;
 
     public PagesPanelTester() {
-	this.pages = new ArrayList<Page>();
+	this.pageViews = new ArrayList<PageView>();
     }
 
     @Override
-    public void addPage(Page page) {
-	pages.add(page);
+    public void addPageView(PageView pageView) {
+	pageViews.add(pageView);
     }
 
     @Override
-    public boolean hasPage(Page page) {
-	return pages.contains(page);
+    public boolean hasPageView(PageView pageView) {
+	return pageViews.contains(pageView);
     }
 
     @Override
-    public void removePage(Page page) {
-	pages.remove(page);
+    public void removePageView(PageView pageView) {
+	pageViews.remove(pageView);
     }
 
     @Override
-    public void showPage(Page page) {
+    public void showPageView(PageView pageView) {
 
     }
 

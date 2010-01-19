@@ -2,7 +2,7 @@ package com.calclab.hablar.basic.client.ui.page;
 
 import com.calclab.suco.client.events.Listener;
 
-public interface Page {
+public interface PageView {
 
     public static enum Visibility {
 	open, closed, hidden

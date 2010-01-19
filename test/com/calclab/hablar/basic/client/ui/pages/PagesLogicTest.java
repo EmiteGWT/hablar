@@ -10,8 +10,8 @@ import static org.mockito.Mockito.when;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.calclab.hablar.basic.client.ui.page.Page;
-import com.calclab.hablar.basic.client.ui.page.Page.Visibility;
+import com.calclab.hablar.basic.client.ui.page.PageView;
+import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.hablar.basic.client.ui.pages.PagesLogic;
 import com.calclab.hablar.basic.client.ui.pages.PagesPanel;
 
@@ -37,46 +37,46 @@ public class PagesLogicTest {
 
     @Test
     public void shouldClosePreviousPageWhenOpenAPage() {
-	Page page1 = createPage(Visibility.open);
-	logic.add(page1);
-	Page page2 = createPage(Visibility.open);
-	logic.add(page2);
-	verify(page1).setVisibility(Visibility.closed);
+	PageView pageView1 = createPageView(Visibility.open);
+	logic.add(pageView1);
+	PageView pageView2 = createPageView(Visibility.open);
+	logic.add(pageView2);
+	verify(pageView1).setVisibility(Visibility.closed);
     }
 
     @Test
     public void shouldNotOpenIfNotAddedBefore() {
-	Page pageIn = createPage(Visibility.open);
-	logic.add(pageIn);
-	verify(pageIn).setVisibility(Visibility.open);
-	Page pageOut = createPage(Visibility.open);
-	logic.open(pageOut);
-	verify(pageIn, never()).setVisibility(Visibility.closed);
+	PageView pageViewIn = createPageView(Visibility.open);
+	logic.add(pageViewIn);
+	verify(pageViewIn).setVisibility(Visibility.open);
+	PageView pageViewOut = createPageView(Visibility.open);
+	logic.open(pageViewOut);
+	verify(pageViewIn, never()).setVisibility(Visibility.closed);
     }
 
     @Test
     public void shouldShowPreviousPageWhenHideAOpenedPage() {
-	Page page1 = createPage(Visibility.open);
-	logic.add(page1);
-	verify(page1).setVisibility(Visibility.open);
-	Page page2 = createPage(Visibility.open);
-	logic.add(page2);
-	verify(page2).setVisibility(Visibility.open);
-	logic.hide(page2);
+	PageView pageView1 = createPageView(Visibility.open);
+	logic.add(pageView1);
+	verify(pageView1).setVisibility(Visibility.open);
+	PageView pageView2 = createPageView(Visibility.open);
+	logic.add(pageView2);
+	verify(pageView2).setVisibility(Visibility.open);
+	logic.hide(pageView2);
 
-	verify(page2).setVisibility(Visibility.hidden);
-	verify(page1, times(2)).setVisibility(Visibility.open);
+	verify(pageView2).setVisibility(Visibility.hidden);
+	verify(pageView1, times(2)).setVisibility(Visibility.open);
     }
 
-    private Page createPage(Visibility visibility) {
-	Page page = mock(Page.class);
-	when(page.getVisibility()).thenReturn(visibility);
-	return page;
+    private PageView createPageView(Visibility visibility) {
+	PageView pageView = mock(PageView.class);
+	when(pageView.getVisibility()).thenReturn(visibility);
+	return pageView;
     }
 
     private void shouldAddPage(Visibility visibility) {
-	Page page = createPage(visibility);
-	logic.add(page);
-	assertTrue(view.hasPage(page));
+	PageView pageView = createPageView(visibility);
+	logic.add(pageView);
+	assertTrue(view.hasPageView(pageView));
     }
 }

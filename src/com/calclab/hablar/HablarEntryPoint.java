@@ -1,14 +1,13 @@
 package com.calclab.hablar;
 
 import com.calclab.hablar.HablarConfig.Layout;
-import com.calclab.hablar.basic.client.chat.ChatConfig;
-import com.calclab.hablar.basic.client.chat.ChatManagerLogic;
 import com.calclab.hablar.basic.client.login.LoginView;
 import com.calclab.hablar.basic.client.roster.RosterView;
 import com.calclab.hablar.basic.client.ui.HablarWidget;
 import com.calclab.hablar.basic.client.ui.pages.PagesWidget;
 import com.calclab.hablar.basic.client.ui.pages.panel.AccordionPages;
 import com.calclab.hablar.basic.client.ui.pages.panel.TabPages;
+import com.calclab.hablar.chat.client.HablarChat;
 import com.calclab.hablar.search.client.HablarSearch;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -22,6 +21,7 @@ public class HablarEntryPoint implements EntryPoint {
 	final HablarConfig config = HablarConfig.getFromMeta();
 	final HablarWidget hablar = createWidget(config, config);
 
+	HablarChat.install(hablar);
 	if (config.hasSearch) {
 	    HablarSearch.install(hablar);
 	}
@@ -63,7 +63,6 @@ public class HablarEntryPoint implements EntryPoint {
 	    throw new RuntimeException("Layout not configured.");
 	}
 	HablarWidget hablar = new HablarWidget(pages);
-	new ChatManagerLogic(ChatConfig.getFromMeta(), pages);
 
 	if (config.hasLogin) {
 	    LoginView login = hablar.getLoginPage();

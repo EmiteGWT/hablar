@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.chat;
+package com.calclab.hablar.chat.client;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
 

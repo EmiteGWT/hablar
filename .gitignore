@@ -3,6 +3,7 @@ war/WEB-INF/classes
 icons/
 test-output/
 war/HablarBasic/
-war/com.calclab.hablar.basic.HablarBasic/
+war/HablarSearch/
+war/HablarChat/
 war/HablarSignals/
 

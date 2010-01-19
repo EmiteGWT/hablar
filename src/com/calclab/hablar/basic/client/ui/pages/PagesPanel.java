@@ -1,17 +1,17 @@
 package com.calclab.hablar.basic.client.ui.pages;
 
-import com.calclab.hablar.basic.client.ui.page.Page;
+import com.calclab.hablar.basic.client.ui.page.PageView;
 
 /**
  * Lo que se supone que tiene que implementar un planel
  */
 public interface PagesPanel {
-    void addPage(Page page);
+    void addPageView(PageView pageView);
 
-    boolean hasPage(Page page);
+    boolean hasPageView(PageView pageView);
 
-    void removePage(Page page);
+    void removePageView(PageView pageView);
 
-    void showPage(Page page);
+    void showPageView(PageView pageView);
 
 }

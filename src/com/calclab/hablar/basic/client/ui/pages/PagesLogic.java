@@ -2,9 +2,9 @@ package com.calclab.hablar.basic.client.ui.pages;
 
 import java.util.ArrayList;
 
-import com.calclab.hablar.basic.client.ui.page.Page;
+import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.page.PageWidget;
-import com.calclab.hablar.basic.client.ui.page.Page.Visibility;
+import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
@@ -12,19 +12,19 @@ import com.google.gwt.core.client.GWT;
 public class PagesLogic implements Pages {
     protected final Listener<PageWidget> statusListener;
     protected final Listener<PageWidget> visibilityChangedListener;
-    private Page currentPage;
+    private PageView currentPageView;
 
-    private final Event<Page> onStatus;
+    private final Event<PageView> onStatus;
     private final Listener<PageWidget> closeListener;
-    private Page previouslyVisiblePage;
-    private final ArrayList<Page> hidden;
+    private PageView previouslyVisiblePageView;
+    private final ArrayList<PageView> hidden;
     private final PagesPanel view;
     private int visiblePagesCount = 0;
 
     public PagesLogic(PagesPanel view) {
 	this.view = view;
-	this.onStatus = new Event<Page>("pages.onStatus");
-	this.hidden = new ArrayList<Page>();
+	this.onStatus = new Event<PageView>("pages.onStatus");
+	this.hidden = new ArrayList<PageView>();
 
 	statusListener = new Listener<PageWidget>() {
 	    @Override
@@ -54,99 +54,99 @@ public class PagesLogic implements Pages {
     /**
      * @see Pages
      */
-    public void add(Page page) {
-	if (!view.hasPage(page)) {
-	    page.onStatusMessageChanged(statusListener);
-	    page.onVisibilityChanged(visibilityChangedListener);
-	    page.onClose(closeListener);
+    public void add(PageView pageView) {
+	if (!view.hasPageView(pageView)) {
+	    pageView.onStatusMessageChanged(statusListener);
+	    pageView.onVisibilityChanged(visibilityChangedListener);
+	    pageView.onClose(closeListener);
 
-	    Visibility visibility = page.getVisibility();
+	    Visibility visibility = pageView.getVisibility();
 	    if (visibility == Visibility.open) {
-		view.addPage(page);
+		view.addPageView(pageView);
 		visiblePagesCount++;
-		open(page);
+		open(pageView);
 	    } else if (visibility == Visibility.hidden) {
-		hidden.add(page);
+		hidden.add(pageView);
 	    } else if (visibility == Visibility.closed) {
-		view.addPage(page);
+		view.addPageView(pageView);
 		visiblePagesCount++;
-		if (currentPage != null) {
-		    open(currentPage);
+		if (currentPageView != null) {
+		    open(currentPageView);
 		}
 	    }
 	}
     }
 
     @Override
-    public boolean close(Page page) {
-	if (page.getVisibility() == Visibility.open) {
-	    page.setVisibility(Visibility.closed);
+    public boolean close(PageView pageView) {
+	if (pageView.getVisibility() == Visibility.open) {
+	    pageView.setVisibility(Visibility.closed);
 	    return true;
 	} else {
 	    return false;
 	}
     }
 
-    public Page getCurrentPage() {
-	return currentPage;
+    public PageView getCurrentPageView() {
+	return currentPageView;
     }
 
     @Override
-    public boolean hasPage(Page page) {
-	return view.hasPage(page);
+    public boolean hasPageView(PageView pageView) {
+	return view.hasPageView(pageView);
     }
 
     /**
      * @see Pages
      */
-    public void hide(Page page) {
-	if (page.getVisibility() == Visibility.open) {
+    public void hide(PageView pageView) {
+	if (pageView.getVisibility() == Visibility.open) {
 	    showPreviousPage();
 	}
-	if (currentPage == page) {
-	    currentPage = null;
+	if (currentPageView == pageView) {
+	    currentPageView = null;
 	}
-	if (previouslyVisiblePage == page) {
-	    previouslyVisiblePage = null;
+	if (previouslyVisiblePageView == pageView) {
+	    previouslyVisiblePageView = null;
 	}
-	hidden.add(page);
-	page.setVisibility(Visibility.hidden);
-	view.removePage(page);
+	hidden.add(pageView);
+	pageView.setVisibility(Visibility.hidden);
+	view.removePageView(pageView);
     }
 
-    public void onStatusMessageChanged(Listener<Page> listener) {
+    public void onStatusMessageChanged(Listener<PageView> listener) {
 	onStatus.add(listener);
     }
 
     /**
      * @see Pages
      */
-    public void open(Page page) {
-	boolean isHidden = hidden.contains(page);
-	if (view.hasPage(page) || isHidden) {
+    public void open(PageView pageView) {
+	boolean isHidden = hidden.contains(pageView);
+	if (view.hasPageView(pageView) || isHidden) {
 	    GWT.log("Show page (hidden " + isHidden + ")", null);
-	    if (currentPage != page) {
-		this.previouslyVisiblePage = currentPage;
-		if (currentPage != null) {
-		    currentPage.setVisibility(Visibility.closed);
+	    if (currentPageView != pageView) {
+		this.previouslyVisiblePageView = currentPageView;
+		if (currentPageView != null) {
+		    currentPageView.setVisibility(Visibility.closed);
 		}
 
 		if (isHidden) {
 		    GWT.log("ADDPAGE", null);
-		    hidden.remove(page);
-		    view.addPage(page);
+		    hidden.remove(pageView);
+		    view.addPageView(pageView);
 		}
 
-		view.showPage(page);
-		currentPage = page;
-		page.setVisibility(Visibility.open);
+		view.showPageView(pageView);
+		currentPageView = pageView;
+		pageView.setVisibility(Visibility.open);
 	    }
 	}
     }
 
     public void showPreviousPage() {
-	if (previouslyVisiblePage != null) {
-	    open(previouslyVisiblePage);
+	if (previouslyVisiblePageView != null) {
+	    open(previouslyVisiblePageView);
 	}
     }
 

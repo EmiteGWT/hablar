@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.chat;
+package com.calclab.hablar.chat.client;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
@@ -11,10 +11,10 @@ import org.junit.Test;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
 import com.calclab.emite.im.client.chat.Chat.State;
-import com.calclab.hablar.basic.client.chat.ChatLogic;
-import com.calclab.hablar.basic.client.chat.ChatMessageFormatter;
-import com.calclab.hablar.basic.client.chat.ChatView;
-import com.calclab.hablar.basic.client.chat.ChatView.MessageType;
+import com.calclab.hablar.chat.client.ChatLogic;
+import com.calclab.hablar.chat.client.ChatMessageFormatter;
+import com.calclab.hablar.chat.client.ChatView;
+import com.calclab.hablar.chat.client.ChatView.MessageType;
 
 public class ChatLogicTest {
 

@@ -1,11 +1,11 @@
-package com.calclab.hablar.basic.client.chat;
+package com.calclab.hablar.chat.client;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.calclab.hablar.basic.client.chat.ChatMessageFormatter;
+import com.calclab.hablar.chat.client.ChatMessageFormatter;
 
 public class ChatMessageFormatterTest {
 

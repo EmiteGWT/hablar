@@ -2,7 +2,7 @@ package com.calclab.hablar.basic.client.ui;
 
 import com.calclab.hablar.basic.client.login.LoginView;
 import com.calclab.hablar.basic.client.roster.RosterView;
-import com.calclab.hablar.basic.client.ui.page.Page;
+import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.pages.Pages;
 
 public interface HablarView {
@@ -17,6 +17,6 @@ public interface HablarView {
 
     boolean hasRoster();
 
-    void setDocked(Page page, int size);
+    void setDocked(PageView pageView, int size);
 
 }

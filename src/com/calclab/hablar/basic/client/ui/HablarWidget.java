@@ -7,8 +7,8 @@ import com.calclab.hablar.basic.client.login.LoginPage;
 import com.calclab.hablar.basic.client.login.LoginView;
 import com.calclab.hablar.basic.client.roster.RosterPageWidget;
 import com.calclab.hablar.basic.client.roster.RosterView;
-import com.calclab.hablar.basic.client.ui.page.Page;
-import com.calclab.hablar.basic.client.ui.page.Page.Visibility;
+import com.calclab.hablar.basic.client.ui.page.PageView;
+import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.hablar.basic.client.ui.pages.Pages;
 import com.calclab.hablar.basic.client.ui.pages.PagesWidget;
 import com.calclab.suco.client.events.Listener;
@@ -39,7 +39,7 @@ public class HablarWidget extends Composite implements HablarView {
     Label status;
 
     private final Pages pages;
-    private Page dockedPage;
+    private PageView dockedPageView;
 
     private LoginView loginPage;
 
@@ -54,10 +54,10 @@ public class HablarWidget extends Composite implements HablarView {
 	container.setWidgetTopBottom(center, 20, Unit.PX, 20, Unit.PX);
 	container.forceLayout();
 
-	pages.onStatusMessageChanged(new Listener<Page>() {
+	pages.onStatusMessageChanged(new Listener<PageView>() {
 	    @Override
-	    public void onEvent(Page page) {
-		status.setText(page.getStatusMessage());
+	    public void onEvent(PageView pageView) {
+		status.setText(pageView.getStatusMessage());
 	    }
 	});
 	new HablarLogic(this);
@@ -95,11 +95,11 @@ public class HablarWidget extends Composite implements HablarView {
     }
 
     @Override
-    public void setDocked(Page page, int size) {
-	assert dockedPage == null : "Only one docked page in hablar widget is allowed.";
-	this.dockedPage = page;
-	Widget docked = (Widget) page;
-	Widget header = (Widget) page.getHeader();
+    public void setDocked(PageView pageView, int size) {
+	assert dockedPageView == null : "Only one docked page in hablar widget is allowed.";
+	this.dockedPageView = pageView;
+	Widget docked = (Widget) pageView;
+	Widget header = (Widget) pageView.getHeader();
 
 	container.add(header);
 	container.setWidgetTopHeight(header, 21, PX, 23, PX);

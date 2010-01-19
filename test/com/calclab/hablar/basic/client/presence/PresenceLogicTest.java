@@ -9,9 +9,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
-import com.calclab.hablar.basic.client.chat.EmiteTester;
-import com.calclab.hablar.basic.client.chat.PresenceManagerTester;
 import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
+import com.calclab.hablar.chat.client.EmiteTester;
+import com.calclab.hablar.chat.client.PresenceManagerTester;
 
 public class PresenceLogicTest {
 

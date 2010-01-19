@@ -1,7 +1,7 @@
 package com.calclab.hablar.basic.client.ui.pages.panel;
 
 import com.calclab.hablar.basic.client.ui.page.HeaderStyles;
-import com.calclab.hablar.basic.client.ui.page.Page;
+import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.page.PageHeader;
 import com.calclab.hablar.basic.client.ui.pages.PagesPanel;
 import com.google.gwt.core.client.GWT;
@@ -36,25 +36,25 @@ public class AccordionPages extends Composite implements PagesPanel {
     }
 
     @Override
-    public void addPage(Page page) {
-	PageHeader header = page.getHeader();
+    public void addPageView(PageView pageView) {
+	PageHeader header = pageView.getHeader();
 	header.setStyles(headerStyle);
-	accordion.add((Widget) page, (Widget) header, 24);
+	accordion.add((Widget) pageView, (Widget) header, 24);
     }
 
     @Override
-    public boolean hasPage(Page page) {
-	return accordion.hasWidget((Widget) page);
+    public boolean hasPageView(PageView pageView) {
+	return accordion.hasWidget((Widget) pageView);
     }
 
     @Override
-    public void removePage(Page page) {
-	accordion.remove((Widget) page);
+    public void removePageView(PageView pageView) {
+	accordion.remove((Widget) pageView);
     }
 
     @Override
-    public void showPage(Page page) {
-	accordion.showWidget((Widget) page);
+    public void showPageView(PageView pageView) {
+	accordion.showWidget((Widget) pageView);
     }
 
 }
