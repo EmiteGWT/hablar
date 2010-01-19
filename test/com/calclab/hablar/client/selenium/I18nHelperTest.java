@@ -15,6 +15,11 @@ public class I18nHelperTest {
     }
 
     @Test
+    public void testOnePlural() {
+	assertEquals("Results for «test1»: One user found.", i18n.get("searchResultsFor", "test1", 1));
+    }
+
+    @Test
     public void testSimpleArg() {
 	assertEquals("Connected as test1", i18n.get("connectedAs", "test1"));
     }

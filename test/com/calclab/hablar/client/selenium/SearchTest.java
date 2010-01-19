@@ -11,6 +11,14 @@ public class SearchTest extends AbstractSeleniumTest {
     private SearchPageObject search;
     private I18nHelper i18n;
 
+    /*
+     * Uncomment if you don't want to close the browser
+     * 
+     * @Override
+     * 
+     * @AfterSuite public void AfterSuite() { // Don't close browser }
+     */
+
     @BeforeClass
     public void beforeClass() {
 	login = Suco.get(LoginPageObject.class);
@@ -19,8 +27,7 @@ public class SearchTest extends AbstractSeleniumTest {
 	i18n = Suco.get(I18nHelper.class);
     }
 
-    @Test(enabled = false)
-    // Disabled while we fix the plural in I18nHelper
+    @Test()
     public void testBasicSearch() {
 	loginAndSearchClick();
 	search.term("test1");
@@ -44,4 +51,5 @@ public class SearchTest extends AbstractSeleniumTest {
 	roster.Header().click();
 	search.Header().click();
     }
+
 }

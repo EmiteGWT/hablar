@@ -12,7 +12,6 @@
 	<classpathentry kind="lib" path="lib/selenium-java-2.0a1.jar"/>
 	<classpathentry kind="lib" path="lib/json-20080701.jar"/>
 	<classpathentry kind="lib" path="lib/google-collect-1.0-rc3.jar"/>
-	<classpathentry kind="lib" path="lib/gwt-log-3.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/testng-5.11-jdk15.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
