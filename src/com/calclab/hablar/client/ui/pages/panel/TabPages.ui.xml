@@ -10,7 +10,7 @@
 	</ui:style>
 
 	<ui:style field="headerStyle"
-		type="com.calclab.hablar.client.ui.pages.TabPages.TabStyles">
+		type="com.calclab.hablar.client.ui.pages.panel.TabPages.TabStyles">
 			.closed {
 				color: gray;
 				border-top: 1px solid white;

@@ -1,4 +1,4 @@
-package com.calclab.hablar.client.ui.pages;
+package com.calclab.hablar.client.ui.pages.panel;
 
 import java.util.Iterator;
 

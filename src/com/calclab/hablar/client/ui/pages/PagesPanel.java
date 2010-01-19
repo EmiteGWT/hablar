@@ -5,7 +5,7 @@ import com.calclab.hablar.client.ui.page.Page;
 /**
  * Lo que se supone que tiene que implementar un planel
  */
-interface PagesPanel {
+public interface PagesPanel {
     void addPage(Page page);
 
     boolean hasPage(Page page);

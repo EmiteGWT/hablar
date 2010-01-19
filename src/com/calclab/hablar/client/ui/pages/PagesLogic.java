@@ -9,7 +9,7 @@ import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
 
-public class PagesLogic {
+public class PagesLogic implements Pages {
     protected final Listener<PageWidget> statusListener;
     protected final Listener<PageWidget> visibilityChangedListener;
     private Page currentPage;
@@ -74,6 +74,11 @@ public class PagesLogic {
 
     public Page getCurrentPage() {
 	return currentPage;
+    }
+
+    @Override
+    public boolean hasPage(Page page) {
+	return view.hasPage(page);
     }
 
     /**

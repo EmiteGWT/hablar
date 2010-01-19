@@ -4,17 +4,24 @@ import com.calclab.hablar.client.ui.page.Page;
 import com.calclab.hablar.client.ui.page.Page.Visibility;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Widget;
 
-public abstract class AbstractPages extends Composite implements Pages, PagesPanel {
+public class PagesWidget extends Composite implements Pages {
     private final PagesLogic logic;
 
-    public AbstractPages() {
-	logic = new PagesLogic(this);
+    public PagesWidget(PagesPanel panel) {
+	logic = new PagesLogic(panel);
+	initWidget((Widget) panel);
     }
 
     @Override
     public void add(Page page, Visibility visibility) {
 	logic.add(page, visibility);
+    }
+
+    @Override
+    public boolean hasPage(Page page) {
+	return logic.hasPage(page);
     }
 
     @Override

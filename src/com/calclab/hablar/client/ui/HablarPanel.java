@@ -6,7 +6,7 @@ import com.calclab.hablar.client.HablarConfig;
 import com.calclab.hablar.client.HablarWidget;
 import com.calclab.hablar.client.roster.RosterPageWidget;
 import com.calclab.hablar.client.ui.page.Page;
-import com.calclab.hablar.client.ui.pages.AbstractPages;
+import com.calclab.hablar.client.ui.pages.PagesWidget;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
@@ -39,10 +39,10 @@ public class HablarPanel extends Composite implements HablarView {
     @UiField
     Label status;
 
-    private final AbstractPages pages;
+    private final Widget pages;
     private Page docked;
 
-    public HablarPanel(HablarConfig config, AbstractPages pages) {
+    public HablarPanel(HablarConfig config, PagesWidget pages) {
 	initWidget(uiBinder.createAndBindUi(this));
 	this.pages = pages;
 	pages.onStatusMessageChanged(new Listener<Page>() {

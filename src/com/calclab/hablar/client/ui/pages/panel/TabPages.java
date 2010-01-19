@@ -1,15 +1,17 @@
-package com.calclab.hablar.client.ui.pages;
+package com.calclab.hablar.client.ui.pages.panel;
 
 import com.calclab.hablar.client.ui.page.HeaderStyles;
 import com.calclab.hablar.client.ui.page.Page;
 import com.calclab.hablar.client.ui.page.PageHeader;
+import com.calclab.hablar.client.ui.pages.PagesPanel;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class TabPages extends AbstractPages {
+public class TabPages extends Composite implements PagesPanel {
 
     interface PagesTabsUiBinder extends UiBinder<Widget, TabPages> {
     }

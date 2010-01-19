@@ -1,11 +1,13 @@
-package com.calclab.hablar.client.ui.pages;
+package com.calclab.hablar.client.ui.pages.panel;
 
 import com.calclab.hablar.client.ui.page.HeaderStyles;
 import com.calclab.hablar.client.ui.page.Page;
 import com.calclab.hablar.client.ui.page.PageHeader;
+import com.calclab.hablar.client.ui.pages.PagesPanel;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -14,7 +16,7 @@ import com.google.gwt.user.client.ui.Widget;
  * fire events when a page is open or close
  * 
  */
-public class AccordionPages extends AbstractPages {
+public class AccordionPages extends Composite implements PagesPanel {
     interface HablarWidgetUiBinder extends UiBinder<Widget, AccordionPages> {
     }
     interface HeaderStyle extends HeaderStyles {
