@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module rename-to='hablar'>
-  <inherits name='com.google.gwt.user.User' />
-  <inherits name='com.google.gwt.i18n.I18N'/>
-  <inherits name='com.google.gwt.user.theme.chrome.Chrome'/>
-  <!-- <inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
-  <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
-  <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
-  <inherits name='com.calclab.emite.core.EmiteCore' />
-  <inherits name='com.calclab.emite.im.EmiteIM' />
-  <inherits name='com.calclab.emite.xep.search.EmiteSearch' />
-  <inherits name='com.calclab.emite.browser.EmiteBrowser' />
-  <!--
-    for add ensureDebugIds (debugId in UIBinder), remove/comment in
-    production see UIObject.ensureDebugId())
-  -->
-  <inherits name="com.google.gwt.user.Debug"/>
-
-  <entry-point class='com.calclab.hablar.client.Hablar' />
-  <source path='client' />
+    <inherits name='com.calclab.hablar.basic.HablarBasic' />
+	<source path='' />
+	<entry-point class="com.calclab.hablar.HablarEntryPoint"></entry-point>
 </module>

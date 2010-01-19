@@ -1,0 +1,41 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+  ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:style src="LoginPage.css" />
+
+  <ui:style field="icons"
+    type="com.calclab.hablar.basic.client.login.LoginPage.Icons">
+      @sprite .loggedInIcon {
+        gwt-image: 'loggedInIcon';
+      }
+
+      @sprite .loggedOutIcon {
+        gwt-image: 'loggedOutIcon';
+      }
+    </ui:style>
+  <ui:image field="loggedInIcon" src="../on.png"></ui:image>
+  <ui:image field="loggedOutIcon" src="../off.png"></ui:image>
+  <g:DockLayoutPanel styleName="{style.login}" unit="EM">
+    <g:north size="9">
+      <g:HTMLPanel styleName="{style.credentials}">
+        <label styleName="{style.label}">
+          <ui:msg description="User field">User:</ui:msg>
+        </label>
+        <g:TextBox styleName="{style.box}" ui:field="uri"/>
+        <label styleName="{style.label}">
+          <ui:msg description="Password field">Password:</ui:msg>
+        </label>
+        <g:PasswordTextBox styleName="{style.box}"
+          ui:field="password"/>
+        <div>
+          <g:Button ui:field="button">Login</g:Button>
+        </div>
+      </g:HTMLPanel>
+    </g:north>
+    <g:center>
+      <g:FlowPanel ui:field="output" styleName="{style.output}"></g:FlowPanel>
+    </g:center>
+  </g:DockLayoutPanel>
+</ui:UiBinder>

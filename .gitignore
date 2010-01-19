@@ -1,6 +1,7 @@
 war/hablar
 war/WEB-INF/classes
-images/
+icons/
 test-output/
-
+war/HablarBasic/
+war/com.calclab.hablar.basic.HablarBasic/
 
