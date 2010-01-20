@@ -1,5 +1,7 @@
 package com.calclab.hablar.basic.client.ui.pages;
 
+import java.util.List;
+
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.suco.client.events.Listener;
 
@@ -16,6 +18,8 @@ public interface Pages {
      *         visible page
      */
     boolean close(PageView pageView);
+
+    List<PageView> getPagesOfType(String pageType);
 
     /**
      * 

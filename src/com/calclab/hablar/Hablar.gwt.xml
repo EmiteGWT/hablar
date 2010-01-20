@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module rename-to='hablar'>
 	<inherits name='com.calclab.hablar.basic.HablarBasic' />
+    <inherits name='com.calclab.hablar.login.HablarLogin' />
+    <inherits name='com.calclab.hablar.roster.HablarRoster' />
     <inherits name='com.calclab.hablar.search.HablarSearch' />
     <inherits name='com.calclab.hablar.signals.HablarSignals' />
 	<inherits name='com.google.gwt.user.theme.chrome.Chrome' />

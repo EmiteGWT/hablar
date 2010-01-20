@@ -68,8 +68,8 @@ public class SearchPageWidget extends PageWidget implements SearchPageView {
     @UiField
     Label message;
 
-    public SearchPageWidget(Visibility visibility) {
-	super(TYPE, visibility, true);
+    public SearchPageWidget(Visibility visibility, boolean closeable) {
+	super(TYPE, visibility, closeable);
 	super.setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
 	final Msg i18n = Suco.get(Msg.class);

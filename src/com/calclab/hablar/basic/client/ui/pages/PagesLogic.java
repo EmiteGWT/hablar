@@ -1,6 +1,7 @@
 package com.calclab.hablar.basic.client.ui.pages;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.page.PageWidget;
@@ -17,18 +18,19 @@ public class PagesLogic implements Pages {
     private final Event<PageView> onStatus;
     private final Listener<PageWidget> closeListener;
     private PageView previouslyVisiblePageView;
-    private final ArrayList<PageView> hidden;
+    private final ArrayList<PageView> hiddenPages;
     private final PagesPanel view;
-    private int visiblePagesCount = 0;
     private final Event<PageView> onOpened;
     private final Event<PageView> onClosed;
+    private final ArrayList<PageView> visiblePages;
 
     public PagesLogic(PagesPanel view) {
 	this.view = view;
 	this.onStatus = new Event<PageView>("pages.onStatus");
 	this.onOpened = new Event<PageView>("pages.onOpen");
 	this.onClosed = new Event<PageView>("pages.onOpen");
-	this.hidden = new ArrayList<PageView>();
+	this.hiddenPages = new ArrayList<PageView>();
+	this.visiblePages = new ArrayList<PageView>();
 
 	statusListener = new Listener<PageWidget>() {
 	    @Override
@@ -67,13 +69,13 @@ public class PagesLogic implements Pages {
 	    Visibility visibility = pageView.getVisibility();
 	    if (visibility == Visibility.open) {
 		view.addPageView(pageView);
-		visiblePagesCount++;
+		visiblePages.add(pageView);
 		open(pageView);
 	    } else if (visibility == Visibility.hidden) {
-		hidden.add(pageView);
+		hiddenPages.add(pageView);
 	    } else if (visibility == Visibility.closed) {
 		view.addPageView(pageView);
-		visiblePagesCount++;
+		visiblePages.add(pageView);
 		if (currentPageView != null) {
 		    open(currentPageView);
 		}
@@ -96,6 +98,24 @@ public class PagesLogic implements Pages {
     }
 
     @Override
+    public List<PageView> getPagesOfType(String pageType) {
+	ArrayList<PageView> list = new ArrayList<PageView>();
+
+	for (PageView pageView : visiblePages) {
+	    if (pageType.equals(pageView.getPageType())) {
+		list.add(pageView);
+	    }
+	}
+	for (PageView pageView : hiddenPages) {
+	    if (pageType.equals(pageView.getPageType())) {
+		list.add(pageView);
+	    }
+	}
+
+	return list;
+    }
+
+    @Override
     public boolean hasPageView(PageView pageView) {
 	return view.hasPageView(pageView);
     }
@@ -113,7 +133,7 @@ public class PagesLogic implements Pages {
 	if (previouslyVisiblePageView == pageView) {
 	    previouslyVisiblePageView = null;
 	}
-	hidden.add(pageView);
+	hiddenPages.add(pageView);
 	pageView.setVisibility(Visibility.hidden);
 	view.removePageView(pageView);
 	onClosed.fire(pageView);
@@ -137,7 +157,7 @@ public class PagesLogic implements Pages {
      * @see Pages
      */
     public void open(PageView pageView) {
-	boolean isHidden = hidden.contains(pageView);
+	boolean isHidden = hiddenPages.contains(pageView);
 	if (view.hasPageView(pageView) || isHidden) {
 	    GWT.log("Show page (hidden " + isHidden + ")", null);
 	    if (currentPageView != pageView) {
@@ -148,7 +168,7 @@ public class PagesLogic implements Pages {
 
 		if (isHidden) {
 		    GWT.log("ADDPAGE", null);
-		    hidden.remove(pageView);
+		    hiddenPages.remove(pageView);
 		    view.addPageView(pageView);
 		}
 

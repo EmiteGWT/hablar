@@ -11,6 +11,8 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
+import com.calclab.hablar.roster.client.RosterItemLogic;
+import com.calclab.hablar.roster.client.RosterItemView;
 
 public class RosterItemLogicTest {
 

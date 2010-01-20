@@ -1,5 +1,7 @@
 package com.calclab.hablar.basic.client.ui.pages;
 
+import java.util.List;
+
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.user.client.ui.Composite;
@@ -21,6 +23,11 @@ public class PagesWidget extends Composite implements Pages {
     @Override
     public boolean close(PageView pageView) {
 	return logic.close(pageView);
+    }
+
+    @Override
+    public List<PageView> getPagesOfType(String pageType) {
+	return logic.getPagesOfType(pageType);
     }
 
     @Override

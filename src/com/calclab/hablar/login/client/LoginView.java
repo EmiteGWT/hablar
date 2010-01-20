@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.login;
+package com.calclab.hablar.login.client;
 
 import com.calclab.hablar.basic.client.ui.page.PageView;
 

@@ -2,10 +2,6 @@ package com.calclab.hablar.basic.client.ui;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
-import com.calclab.hablar.basic.client.login.LoginPage;
-import com.calclab.hablar.basic.client.login.LoginView;
-import com.calclab.hablar.basic.client.roster.RosterPageWidget;
-import com.calclab.hablar.basic.client.roster.RosterView;
 import com.calclab.hablar.basic.client.ui.page.HeaderStyles;
 import com.calclab.hablar.basic.client.ui.page.PageHeader;
 import com.calclab.hablar.basic.client.ui.page.PageView;
@@ -49,10 +45,6 @@ public class HablarWidget extends Composite implements HablarView {
     private final Pages pages;
     private PageView dockedPageView;
 
-    private LoginView loginPage;
-
-    private RosterPageWidget rosterPage;
-
     public HablarWidget(PagesWidget pages) {
 	initWidget(uiBinder.createAndBindUi(this));
 	this.pages = pages;
@@ -72,34 +64,8 @@ public class HablarWidget extends Composite implements HablarView {
     }
 
     @Override
-    public LoginView getLoginPage() {
-	if (this.loginPage == null) {
-	    loginPage = new LoginPage(Visibility.open);
-	}
-	return loginPage;
-    }
-
-    @Override
     public Pages getPages() {
 	return pages;
-    }
-
-    @Override
-    public RosterView getRosterPage() {
-	if (rosterPage == null) {
-	    rosterPage = new RosterPageWidget(Visibility.closed);
-	}
-	return rosterPage;
-    }
-
-    @Override
-    public boolean hasLogin() {
-	return loginPage != null;
-    }
-
-    @Override
-    public boolean hasRoster() {
-	return rosterPage != null;
     }
 
     @Override

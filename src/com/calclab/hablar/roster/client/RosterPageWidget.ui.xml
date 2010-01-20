@@ -2,28 +2,9 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
     xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
-    <g:LayoutPanel ui:field="roster" styleName="roster-panel {style.roster}">
-        <!--  Actions -->
-        <g:layer left="0" top="0" width="100%" height="20px">
-            <g:FlowPanel ui:field="actions" styleName="{style.actionsPanel}">
-            </g:FlowPanel>
-        </g:layer>
-        <!-- Results -->
-        <g:layer left="0" top="20px" width="100%" bottom="0px">
-            <g:ScrollPanel ui:field="scroll" height="100%" styleName="{hablar.scroll}">
-                <g:FlowPanel styleName="{hablar.list}" ui:field="list"></g:FlowPanel>
-            </g:ScrollPanel>
-        </g:layer>
-        <!-- Inactive -->
-        <g:layer left="0" top="20px" width="100%" height="0px">
-            <g:FlowPanel styleName="roster-disabled {style.disabledPanel}"
-                ui:field="disabledPanel">
-                <g:Label ui:field="disabledLabel" styleName="{style.disabledMessage}" />
-            </g:FlowPanel>
-        </g:layer>
-    </g:LayoutPanel>
+<ui:style src="../../basic/client/Hablar.css" field="hablar" />
 
-    <ui:style type="com.calclab.hablar.basic.client.roster.RosterPageWidget.Style">
+    <ui:style type="com.calclab.hablar.roster.client.RosterPageWidget.Style">
         .action {
             display: block;
             float: left;
@@ -70,6 +51,27 @@
         }
     </ui:style>
 
-       <ui:style src="../Hablar.css" field="hablar" />
+       
+
+    <g:LayoutPanel ui:field="roster" styleName="roster-panel {style.roster}">
+        <!--  Actions -->
+        <g:layer left="0" top="0" width="100%" height="20px">
+            <g:FlowPanel ui:field="actions" styleName="{style.actionsPanel}">
+            </g:FlowPanel>
+        </g:layer>
+        <!-- Results -->
+        <g:layer left="0" top="20px" width="100%" bottom="0px">
+            <g:ScrollPanel ui:field="scroll" height="100%" styleName="{hablar.scroll}">
+                <g:FlowPanel styleName="{hablar.list}" ui:field="list"></g:FlowPanel>
+            </g:ScrollPanel>
+        </g:layer>
+        <!-- Inactive -->
+        <g:layer left="0" top="20px" width="100%" height="0px">
+            <g:FlowPanel styleName="roster-disabled {style.disabledPanel}"
+                ui:field="disabledPanel">
+                <g:Label ui:field="disabledLabel" styleName="{style.disabledMessage}" />
+            </g:FlowPanel>
+        </g:layer>
+    </g:LayoutPanel>
 
 </ui:UiBinder>

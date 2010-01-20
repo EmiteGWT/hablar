@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.login;
+package com.calclab.hablar.login.client;
 
 import com.calclab.emite.browser.client.PageAssist;
 import com.calclab.emite.core.client.xmpp.session.Session;

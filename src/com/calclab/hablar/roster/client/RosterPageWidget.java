@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.roster;
+package com.calclab.hablar.roster.client;
 
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.basic.client.i18n.Msg;
@@ -23,9 +23,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class RosterPageWidget extends PageWidget implements RosterView {
 
     public static interface Style extends CssResource {
-
 	String action();
-
     }
 
     interface RosterWidgetUiBinder extends UiBinder<Widget, RosterPageWidget> {
@@ -33,8 +31,6 @@ public class RosterPageWidget extends PageWidget implements RosterView {
 
     public static final String ID = "RosterPage";
     public static final String DISABLED_LABEL = "RosterPage-DisableLabel";
-    public static final String TYPE = "Roster";
-
     private static RosterWidgetUiBinder uiBinder = GWT.create(RosterWidgetUiBinder.class);
 
     @UiField
@@ -55,7 +51,7 @@ public class RosterPageWidget extends PageWidget implements RosterView {
     private final RosterLogic logic;
 
     public RosterPageWidget(Visibility visibility) {
-	super(TYPE, visibility, false);
+	super(RosterView.TYPE, visibility, false);
 	setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
 	final Msg i18n = Suco.get(Msg.class);

@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.roster;
+package com.calclab.hablar.roster.client;
 
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.basic.client.ui.menu.MenuAction;
@@ -7,6 +7,8 @@ import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.google.gwt.event.dom.client.ClickHandler;
 
 public interface RosterView extends PageView {
+    public static final String TYPE = "Roster";
+
     void addAction(String iconStyle, String debugId, ClickHandler clickHandler);
 
     RosterItemView createItemView();

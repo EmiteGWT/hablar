@@ -5,10 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ByIdOrName;
 import org.openqa.selenium.support.FindBy;
 
-import com.calclab.hablar.basic.client.roster.RosterItemLogic;
-import com.calclab.hablar.basic.client.roster.RosterPageWidget;
 import com.calclab.hablar.basic.client.ui.HablarLogic;
 import com.calclab.hablar.basic.client.ui.utils.DebugId;
+import com.calclab.hablar.roster.client.RosterItemLogic;
+import com.calclab.hablar.roster.client.RosterPageWidget;
 
 public class RosterPageObject extends AbstractPageObject {
 

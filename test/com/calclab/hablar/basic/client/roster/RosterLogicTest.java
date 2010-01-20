@@ -20,6 +20,9 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
 import com.calclab.hablar.chat.client.EmiteTester;
+import com.calclab.hablar.roster.client.RosterItemView;
+import com.calclab.hablar.roster.client.RosterLogic;
+import com.calclab.hablar.roster.client.RosterView;
 
 public class RosterLogicTest {
 

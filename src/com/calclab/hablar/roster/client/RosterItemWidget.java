@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.roster;
+package com.calclab.hablar.roster.client;
 
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons;

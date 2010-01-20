@@ -1,13 +1,13 @@
 package com.calclab.hablar;
 
 import com.calclab.hablar.HablarConfig.Layout;
-import com.calclab.hablar.basic.client.login.LoginView;
-import com.calclab.hablar.basic.client.roster.RosterView;
 import com.calclab.hablar.basic.client.ui.HablarWidget;
 import com.calclab.hablar.basic.client.ui.pages.PagesWidget;
 import com.calclab.hablar.basic.client.ui.pages.panel.AccordionPages;
 import com.calclab.hablar.basic.client.ui.pages.panel.TabPages;
 import com.calclab.hablar.chat.client.HablarChat;
+import com.calclab.hablar.login.client.HablarLogin;
+import com.calclab.hablar.roster.client.HablarRoster;
 import com.calclab.hablar.search.client.HablarSearch;
 import com.calclab.hablar.signals.client.HablarSignals;
 import com.google.gwt.core.client.EntryPoint;
@@ -24,8 +24,17 @@ public class HablarEntryPoint implements EntryPoint {
 
 	HablarChat.install(hablar);
 	HablarSignals.install(hablar);
+	if (config.hasLogin) {
+	    HablarLogin.install(hablar);
+	}
+
 	if (config.hasSearch) {
 	    HablarSearch.install(hablar);
+	}
+
+	if (config.hasRoster) {
+	    boolean isDocked = "left".equals(config.dockRoster);
+	    HablarRoster.install(hablar, isDocked);
 	}
 
 	if (config.inline == null) {
@@ -65,20 +74,6 @@ public class HablarEntryPoint implements EntryPoint {
 	    throw new RuntimeException("Layout not configured.");
 	}
 	HablarWidget hablar = new HablarWidget(pages);
-
-	if (config.hasLogin) {
-	    LoginView login = hablar.getLoginPage();
-	    hablar.getPages().add(login);
-	}
-
-	if (config.hasRoster) {
-	    RosterView rosterPage = hablar.getRosterPage();
-	    if ("left".equals(config.dockRoster)) {
-		hablar.setDocked(rosterPage, 200);
-	    } else {
-		hablar.getPages().add(rosterPage);
-	    }
-	}
 
 	return hablar;
     }

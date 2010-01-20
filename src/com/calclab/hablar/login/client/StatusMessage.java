@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.login;
+package com.calclab.hablar.login.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;

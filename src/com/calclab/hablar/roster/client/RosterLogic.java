@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.roster;
+package com.calclab.hablar.roster.client;
 
 import java.util.Collection;
 import java.util.HashMap;
