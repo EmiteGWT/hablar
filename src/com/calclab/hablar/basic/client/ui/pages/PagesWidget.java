@@ -34,6 +34,11 @@ public class PagesWidget extends Composite implements Pages {
     }
 
     @Override
+    public void onPageOpened(Listener<PageView> listener) {
+	logic.onPageOpened(listener);
+    }
+
+    @Override
     public void onStatusMessageChanged(Listener<PageView> listener) {
 	logic.onStatusMessageChanged(listener);
     }

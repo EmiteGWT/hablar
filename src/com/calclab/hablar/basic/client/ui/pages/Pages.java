@@ -32,6 +32,8 @@ public interface Pages {
      */
     void hide(PageView pageView);
 
+    void onPageOpened(Listener<PageView> listener);
+
     /**
      * Add a listener to know when a status message changed in any of the pages
      * 

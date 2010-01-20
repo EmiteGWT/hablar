@@ -20,10 +20,12 @@ public class PagesLogic implements Pages {
     private final ArrayList<PageView> hidden;
     private final PagesPanel view;
     private int visiblePagesCount = 0;
+    private final Event<PageView> onOpen;
 
     public PagesLogic(PagesPanel view) {
 	this.view = view;
 	this.onStatus = new Event<PageView>("pages.onStatus");
+	this.onOpen = new Event<PageView>("pages.onOpen");
 	this.hidden = new ArrayList<PageView>();
 
 	statusListener = new Listener<PageWidget>() {
@@ -114,6 +116,11 @@ public class PagesLogic implements Pages {
 	view.removePageView(pageView);
     }
 
+    @Override
+    public void onPageOpened(Listener<PageView> listener) {
+	onOpen.add(listener);
+    }
+
     public void onStatusMessageChanged(Listener<PageView> listener) {
 	onStatus.add(listener);
     }
@@ -141,6 +148,7 @@ public class PagesLogic implements Pages {
 		currentPageView = pageView;
 		pageView.setVisibility(Visibility.open);
 	    }
+	    onOpen.fire(pageView);
 	}
     }
 

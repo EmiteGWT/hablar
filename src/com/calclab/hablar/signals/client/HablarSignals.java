@@ -22,6 +22,14 @@ public class HablarSignals implements EntryPoint {
 		GWT.log("GROWL: " + page.getStatusMessage(), null);
 	    }
 	});
+
+	hablar.getPages().onPageOpened(new Listener<PageView>() {
+	    @Override
+	    public void onEvent(PageView parameter) {
+		// con esto ya sabes qué ventana (página)
+		// está activa
+	    }
+	});
     }
 
     @Override
