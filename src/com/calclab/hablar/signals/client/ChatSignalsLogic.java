@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.calclab.hablar.basic.client.ui.page.PageView;
+import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Listener;
 
@@ -30,26 +31,27 @@ public class ChatSignalsLogic {
 
     public void onChatClosed(final PageView chatPage) {
 	if (set.remove(chatPage)) {
+	    if (set.size() == 0) {
+		currentChat = null;
+	    }
 	    fire();
 	}
     }
 
     public void onChatOpened(final PageView chatPage) {
 	currentChat = chatPage;
-	if (set.remove(chatPage)) {
-	    fire();
-	}
     }
 
     public void onNewMsg(final PageView chatPage) {
-	if (chatPage != currentChat) {
+	if (chatPage.getVisibility() != Visibility.open) {
 	    if (set.add(chatPage)) {
 		if (currentChat == null) {
+		    // Maybe I can remove this
 		    currentChat = chatPage;
 		}
+		fire();
 		// This chat it's new
 		newUnattendedChat.fire(chatPage);
-		fire();
 	    }
 	}
     }

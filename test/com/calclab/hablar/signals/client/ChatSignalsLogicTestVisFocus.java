@@ -9,9 +9,10 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.calclab.hablar.basic.client.ui.page.PageView;
+import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.suco.testing.events.MockedListener;
 
-public class ChatSignalsLogicTest {
+public class ChatSignalsLogicTestVisFocus {
 
     private ChatSignalsLogic logic;
     private MockedListener<Set<PageView>> chatsUnattendedListener;
@@ -30,6 +31,7 @@ public class ChatSignalsLogicTest {
 	chat1 = Mockito.mock(PageView.class);
 	chat2 = Mockito.mock(PageView.class);
 	chat3 = Mockito.mock(PageView.class);
+	mockVisibility(Visibility.open);
     }
 
     @Test
@@ -37,8 +39,8 @@ public class ChatSignalsLogicTest {
 	logic.onChatOpened(chat1);
 	logic.onNewMsg(chat1);
 	logic.onNewMsg(chat1);
-	assertTrue(chatsUnattendedListener.isCalled(0));
-	assertTrue(newUnattendedChatListener.isCalled(0));
+	assertEquals(0, chatsUnattendedListener.getCalledTimes());
+	assertEquals(0, newUnattendedChatListener.getCalledTimes());
     }
 
     @Test
@@ -46,11 +48,9 @@ public class ChatSignalsLogicTest {
 	logic.onNewMsg(chat1);
 	logic.onNewMsg(chat1);
 	logic.onChatOpened(chat1);
-	assertTrue(newUnattendedChatListener.isCalled(1));
+	assertEquals(1, newUnattendedChatListener.getCalledTimes());
 	assertTrue(newUnattendedChatListener.getValue(0).equals(chat1));
-	assertTrue(chatsUnattendedListener.isCalled(2));
-	final Set<PageView> set = chatsUnattendedListener.getValue(1);
-	assertEquals(0, set.size());
+	assertEquals(0, chatsUnattendedListener.getCalledTimes());
     }
 
     @Test
@@ -64,10 +64,10 @@ public class ChatSignalsLogicTest {
 	logic.onNewMsg(chat2);
 	logic.onNewMsg(chat3);
 	logic.onNewMsg(chat3);
-	assertTrue(newUnattendedChatListener.isCalled(2));
+	assertEquals(2, newUnattendedChatListener.getCalledTimes());
 	assertTrue(newUnattendedChatListener.getValue(0).equals(chat1));
 	assertTrue(newUnattendedChatListener.getValue(1).equals(chat2));
-	assertTrue(chatsUnattendedListener.isCalled(2));
+	assertEquals(2, chatsUnattendedListener.getCalledTimes());
 	final Set<PageView> set = chatsUnattendedListener.getValue(1);
 	assertEquals(2, set.size());
 	assertTrue(set.contains(chat1));
@@ -88,11 +88,11 @@ public class ChatSignalsLogicTest {
 	logic.onNewMsg(chat3);
 	logic.onNewMsg(chat3);
 	logic.onNewMsg(chat2);
-	assertTrue(newUnattendedChatListener.isCalled(3));
+	assertEquals(3, newUnattendedChatListener.getCalledTimes());
 	assertTrue(newUnattendedChatListener.getValue(0).equals(chat1));
 	assertTrue(newUnattendedChatListener.getValue(1).equals(chat2));
 	assertTrue(newUnattendedChatListener.getValue(2).equals(chat3));
-	assertTrue(chatsUnattendedListener.isCalled(4));
+	assertEquals(4, chatsUnattendedListener.getCalledTimes());
 	final Set<PageView> set = chatsUnattendedListener.getValue(3);
 	assertEquals(2, set.size());
 	assertTrue(set.contains(chat1));
@@ -107,12 +107,36 @@ public class ChatSignalsLogicTest {
 	logic.onChatOpened(chat3);
 	logic.onNewMsg(chat1);
 	logic.onNewMsg(chat1);
-	assertTrue(newUnattendedChatListener.isCalled(1));
+	assertEquals(1, newUnattendedChatListener.getCalledTimes());
 	assertTrue(newUnattendedChatListener.getValue(0).equals(chat1));
-	assertTrue(chatsUnattendedListener.isCalled(1));
+	assertEquals(1, chatsUnattendedListener.getCalledTimes());
 	final Set<PageView> set = chatsUnattendedListener.getValue(0);
 	assertEquals(1, set.size());
 	assertTrue(set.contains(chat1));
+    }
+
+    @Test
+    public void whenOpenningAndClosingTwoChatsShouldNotifyCorrectly() {
+	logic.onChatOpened(chat1);
+	logic.onChatOpened(chat2);
+	logic.onNewMsg(chat1);
+	logic.onNewMsg(chat1);
+	logic.onNewMsg(chat2);
+	logic.onNewMsg(chat2);
+	logic.onChatClosed(chat2);
+	logic.onChatClosed(chat1);
+	logic.onChatOpened(chat1);
+	assertEquals(2, newUnattendedChatListener.getCalledTimes());
+	assertTrue(newUnattendedChatListener.getValue(0).equals(chat1));
+	assertEquals(4, chatsUnattendedListener.getCalledTimes());
+	final Set<PageView> set = chatsUnattendedListener.getValue(3);
+	assertEquals(0, set.size());
+    }
+
+    private void mockVisibility(final Visibility visibility) {
+	Mockito.when(chat1.getVisibility()).thenReturn(visibility);
+	Mockito.when(chat2.getVisibility()).thenReturn(visibility);
+	Mockito.when(chat3.getVisibility()).thenReturn(visibility);
     }
 
 }
