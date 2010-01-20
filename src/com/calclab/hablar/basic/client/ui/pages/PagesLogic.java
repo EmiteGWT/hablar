@@ -97,6 +97,10 @@ public class PagesLogic implements Pages {
 	return currentPageView;
     }
 
+    public List<PageView> getHiddenPages() {
+	return hiddenPages;
+    }
+
     @Override
     public List<PageView> getPagesOfType(String pageType) {
 	ArrayList<PageView> list = new ArrayList<PageView>();
@@ -113,6 +117,10 @@ public class PagesLogic implements Pages {
 	}
 
 	return list;
+    }
+
+    public List<PageView> getVisiblePages() {
+	return visiblePages;
     }
 
     @Override
@@ -133,6 +141,7 @@ public class PagesLogic implements Pages {
 	if (previouslyVisiblePageView == pageView) {
 	    previouslyVisiblePageView = null;
 	}
+	visiblePages.remove(pageView);
 	hiddenPages.add(pageView);
 	pageView.setVisibility(Visibility.hidden);
 	view.removePageView(pageView);

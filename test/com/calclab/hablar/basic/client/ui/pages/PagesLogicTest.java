@@ -1,5 +1,6 @@
 package com.calclab.hablar.basic.client.ui.pages;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -12,8 +13,6 @@ import org.junit.Test;
 
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
-import com.calclab.hablar.basic.client.ui.pages.PagesLogic;
-import com.calclab.hablar.basic.client.ui.pages.PagesPanel;
 
 public class PagesLogicTest {
     private PagesPanel view;
@@ -45,6 +44,19 @@ public class PagesLogicTest {
     }
 
     @Test
+    public void shouldHidePages() {
+	PageView page = createPageView(Visibility.open);
+	logic.add(page);
+	assertEquals(1, logic.getVisiblePages().size());
+	assertEquals(0, logic.getHiddenPages().size());
+	assertEquals(Visibility.open, page.getVisibility());
+	logic.hide(page);
+	assertEquals(0, logic.getVisiblePages().size());
+	assertEquals(1, logic.getHiddenPages().size());
+	verify(page).setVisibility(Visibility.hidden);
+    }
+
+    @Test
     public void shouldNotOpenIfNotAddedBefore() {
 	PageView pageViewIn = createPageView(Visibility.open);
 	logic.add(pageViewIn);
@@ -52,6 +64,15 @@ public class PagesLogicTest {
 	PageView pageViewOut = createPageView(Visibility.open);
 	logic.open(pageViewOut);
 	verify(pageViewIn, never()).setVisibility(Visibility.closed);
+    }
+
+    @Test
+    public void shouldRetrieveVisibleAndHiddenPages() {
+	logic.add(createPageView(Visibility.open));
+	logic.add(createPageView(Visibility.open));
+	logic.add(createPageView(Visibility.hidden));
+	assertEquals(2, logic.getVisiblePages().size());
+	assertEquals(1, logic.getHiddenPages().size());
     }
 
     @Test

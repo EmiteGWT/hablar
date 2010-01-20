@@ -15,8 +15,8 @@ import org.junit.Test;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.xep.search.client.SearchResultItem;
-import com.calclab.hablar.basic.client.roster.AbstractLogicTest;
 import com.calclab.hablar.chat.client.EmiteTester;
+import com.calclab.hablar.roster.client.AbstractLogicTest;
 import com.calclab.hablar.search.client.SearchPageLogic;
 import com.calclab.hablar.search.client.SearchResultItemView;
 import com.calclab.hablar.search.client.SearchPageView;

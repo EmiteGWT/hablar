@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.roster;
+package com.calclab.hablar.roster.client;
 
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
