@@ -32,6 +32,18 @@ public interface Pages {
      */
     void hide(PageView pageView);
 
+    /**
+     * Add a listener to know when a page has been opened
+     * 
+     * @param listener
+     */
+    void onPageClosed(Listener<PageView> listener);
+
+    /**
+     * Add a listener to know when a page has been opened
+     * 
+     * @param listener
+     */
     void onPageOpened(Listener<PageView> listener);
 
     /**
