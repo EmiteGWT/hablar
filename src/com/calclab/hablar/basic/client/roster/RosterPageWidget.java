@@ -33,6 +33,7 @@ public class RosterPageWidget extends PageWidget implements RosterView {
 
     public static final String ID = "RosterPage";
     public static final String DISABLED_LABEL = "RosterPage-DisableLabel";
+    public static final String TYPE = "Roster";
 
     private static RosterWidgetUiBinder uiBinder = GWT.create(RosterWidgetUiBinder.class);
 
@@ -54,7 +55,7 @@ public class RosterPageWidget extends PageWidget implements RosterView {
     private final RosterLogic logic;
 
     public RosterPageWidget(Visibility visibility) {
-	super(visibility, false);
+	super(TYPE, visibility, false);
 	setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
 	final Msg i18n = Suco.get(Msg.class);

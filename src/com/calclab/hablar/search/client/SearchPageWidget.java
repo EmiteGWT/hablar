@@ -45,6 +45,7 @@ public class SearchPageWidget extends PageWidget implements SearchPageView {
     public static final String ID = "SearchPageWidget";
     public static final String TERM_DEB_ID = "SearchPageWidget-term";
     public static final String MESSAGE_DEB_ID = "SearchPageWidget-message";
+    public static final String TYPE = "Search";
 
     private static SearchPageUiBinder uiBinder = GWT.create(SearchPageUiBinder.class);
     private final SearchPageLogic logic;
@@ -68,7 +69,7 @@ public class SearchPageWidget extends PageWidget implements SearchPageView {
     Label message;
 
     public SearchPageWidget(Visibility visibility) {
-	super(visibility, true);
+	super(TYPE, visibility, true);
 	super.setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
 	final Msg i18n = Suco.get(Msg.class);

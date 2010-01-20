@@ -25,6 +25,7 @@ public class ChatPage extends PageWidget implements ChatView {
     public static final String ID = "ChatPage";
     public static final String TALKBOX_DEB_ID = "ChatPage-talkBox";
     public static final String LIST_DEB_ID = "ChatPage-list";
+    public static final String TYPE = "Chat";
 
     private static ChatWidgetUiBinder uiBinder = GWT.create(ChatWidgetUiBinder.class);
 
@@ -43,7 +44,7 @@ public class ChatPage extends PageWidget implements ChatView {
     private final ChatLogic logic;
 
     public ChatPage(final Chat chat, Visibility visibility) {
-	super(visibility, true);
+	super(TYPE, visibility, true);
 	super.setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
 	talkBox.ensureDebugId(TALKBOX_DEB_ID);

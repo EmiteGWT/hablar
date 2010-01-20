@@ -16,8 +16,10 @@ public abstract class PageWidget extends Composite implements PageView {
     private final Event<PageWidget> openEvent;
     private Visibility visibility;
     private String status;
+    private final String pageType;
 
-    public PageWidget(Visibility visibility, final boolean closeable) {
+    public PageWidget(String pageType, Visibility visibility, final boolean closeable) {
+	this.pageType = pageType;
 	this.closeEvent = new Event<PageWidget>("page.close");
 	this.header = new HeaderWidget(this, closeable);
 	this.statusAction = new Event<PageWidget>("page.status");
@@ -27,10 +29,15 @@ public abstract class PageWidget extends Composite implements PageView {
 
     public void fireOpen() {
 	openEvent.fire(this);
-    };
+    }
 
     public PageHeader getHeader() {
 	return this.header;
+    };
+
+    @Override
+    public String getPageType() {
+	return pageType;
     }
 
     public String getStatus() {

@@ -10,6 +10,13 @@ public interface PageView {
 
     PageHeader getHeader();
 
+    /**
+     * Get the page type (Roster, Chat...)
+     * 
+     * @return
+     */
+    String getPageType();
+
     String getStatusMessage();
 
     /**
