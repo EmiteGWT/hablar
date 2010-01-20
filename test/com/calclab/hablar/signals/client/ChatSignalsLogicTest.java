@@ -68,7 +68,7 @@ public class ChatSignalsLogicTest {
 	assertTrue(newUnattendedChatListener.getValue(0).equals(chat1));
 	assertTrue(newUnattendedChatListener.getValue(1).equals(chat2));
 	assertTrue(chatsUnattendedListener.isCalled(2));
-	final Set<PageView> set = chatsUnattendedListener.getValue(0);
+	final Set<PageView> set = chatsUnattendedListener.getValue(1);
 	assertEquals(2, set.size());
 	assertTrue(set.contains(chat1));
 	assertTrue(set.contains(chat2));
@@ -93,7 +93,7 @@ public class ChatSignalsLogicTest {
 	assertTrue(newUnattendedChatListener.getValue(1).equals(chat2));
 	assertTrue(newUnattendedChatListener.getValue(2).equals(chat3));
 	assertTrue(chatsUnattendedListener.isCalled(4));
-	final Set<PageView> set = chatsUnattendedListener.getValue(0);
+	final Set<PageView> set = chatsUnattendedListener.getValue(3);
 	assertEquals(2, set.size());
 	assertTrue(set.contains(chat1));
 	assertTrue(set.contains(chat3));
