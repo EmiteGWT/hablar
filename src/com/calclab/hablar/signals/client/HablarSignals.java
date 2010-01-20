@@ -6,7 +6,6 @@ import com.calclab.hablar.basic.client.ui.pages.Pages;
 import com.calclab.hablar.chat.client.ChatPage;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
 
 public class HablarSignals implements EntryPoint {
 
@@ -19,8 +18,6 @@ public class HablarSignals implements EntryPoint {
 	    @Override
 	    public void onEvent(final PageView chatPage) {
 		chatSignalsLogic.onNewMsg(chatPage);
-		((ChatPage) chatPage).getChat().getURI();
-		GWT.log("GROWL: " + chatPage.getStatusMessage(), null);
 	    }
 	};
 

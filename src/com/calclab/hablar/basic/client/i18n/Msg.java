@@ -45,6 +45,9 @@ public interface Msg extends Messages {
     @DefaultMessage("Sign out")
     String logout();
 
+    @DefaultMessage("User `{0}` says «{1}»")
+    String newChatFrom(String user, String msg);
+
     @DefaultMessage("Remove from Contacts")
     String removeFromContacts();
 
@@ -58,6 +61,10 @@ public interface Msg extends Messages {
 
     @DefaultMessage("Type to search users")
     String typeToSearchUsers();
+
+    @DefaultMessage("{0} chats unread")
+    @PluralText( { "one", "1 chat unread" })
+    String unreadChats(@PluralCount int users);
 
     @DefaultMessage("Wait...")
     String waitDots();

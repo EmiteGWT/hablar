@@ -10,16 +10,22 @@ import com.calclab.suco.client.events.Listener;
 public class ChatSignalsLogic {
 
     private PageView currentChat;
-    private final Event<Set<PageView>> chatUnattended;
     private final Set<PageView> set;
+    private final Event<Set<PageView>> chatsUnattendedChanged;
+    private final Event<PageView> newUnattendedChat;
 
     public ChatSignalsLogic() {
-	this.chatUnattended = new Event<Set<PageView>>("chatUnattended");
+	this.newUnattendedChat = new Event<PageView>("newUnattendedChat");
+	this.chatsUnattendedChanged = new Event<Set<PageView>>("chatsUnattendedChanged");
 	set = new HashSet<PageView>();
     }
 
-    public void addChatUnattended(final Listener<Set<PageView>> listener) {
-	chatUnattended.add(listener);
+    public void addChatsUnattendedChanged(final Listener<Set<PageView>> listener) {
+	chatsUnattendedChanged.add(listener);
+    }
+
+    public void addNewUnattendedChat(final Listener<PageView> listener) {
+	newUnattendedChat.add(listener);
     }
 
     public void onChatClosed(final PageView chatPage) {
@@ -33,20 +39,23 @@ public class ChatSignalsLogic {
 	if (set.remove(chatPage)) {
 	    fire();
 	}
-
     }
 
     public void onNewMsg(final PageView chatPage) {
 	if (chatPage != currentChat) {
 	    if (set.add(chatPage)) {
+		if (currentChat == null) {
+		    currentChat = chatPage;
+		}
+		// This chat it's new
+		newUnattendedChat.fire(chatPage);
 		fire();
 	    }
 	}
-
     }
 
     private void fire() {
-	chatUnattended.fire(set);
+	chatsUnattendedChanged.fire(set);
     }
 
 }
