@@ -34,14 +34,15 @@ class HeaderWidget extends Composite implements PageHeader {
     @UiField
     DefaultStyles defaultStyles;
 
-    private final PageWidget page;
     private String iconClass;
     private HeaderStyles currentStyles;
 
     private Visibility visibility;
 
-    public HeaderWidget(final PageWidget page, final boolean closeable) {
-	this.page = page;
+    private final PageLogic logic;
+
+    public HeaderWidget(final PageLogic logic, final boolean closeable) {
+	this.logic = logic;
 	final Widget element = uiBinder.createAndBindUi(this);
 	initWidget(element);
 	close.setVisible(closeable);
@@ -49,6 +50,7 @@ class HeaderWidget extends Composite implements PageHeader {
 	// UIUtils.setTextSelectionEnabled(title.getElement(), false);
     }
 
+    @Override
     public void requestFocus() {
 	if (visibility == Visibility.closed) {
 	    header.getElement().addClassName(currentStyles.requestFocus());
@@ -74,28 +76,10 @@ class HeaderWidget extends Composite implements PageHeader {
 	applyStyles();
     }
 
+    @Override
     public void setVisibility(final Visibility visibility) {
 	this.visibility = visibility;
 	applyStyles();
-    }
-
-    @UiHandler("title")
-    void handleActivateTitle(final ClickEvent event) {
-	page.fireOpen();
-    }
-
-    @UiHandler("close")
-    void handleClose(final ClickEvent event) {
-	page.fireClose();
-    }
-
-    @UiHandler("icon")
-    void onIconClicked(final ClickEvent event) {
-	page.fireOpen();
-    }
-
-    void setHeaderTitle(final String title) {
-	this.title.setText(title);
     }
 
     private void applyStyles() {
@@ -107,6 +91,25 @@ class HeaderWidget extends Composite implements PageHeader {
 	    header.getElement().removeClassName(currentStyles.open());
 	    header.getElement().addClassName(currentStyles.closed());
 	}
+    }
+
+    @UiHandler("title")
+    void handleActivateTitle(final ClickEvent event) {
+	logic.fireOpen();
+    }
+
+    @UiHandler("close")
+    void handleClose(final ClickEvent event) {
+	logic.fireClose();
+    }
+
+    @UiHandler("icon")
+    void onIconClicked(final ClickEvent event) {
+	logic.fireOpen();
+    }
+
+    void setHeaderTitle(final String title) {
+	this.title.setText(title);
     }
 
 }

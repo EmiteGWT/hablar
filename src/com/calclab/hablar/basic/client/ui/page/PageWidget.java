@@ -1,6 +1,5 @@
 package com.calclab.hablar.basic.client.ui.page;
 
-import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.user.client.ui.Composite;
 
@@ -11,24 +10,17 @@ import com.google.gwt.user.client.ui.Composite;
 public abstract class PageWidget extends Composite implements PageView {
 
     protected final HeaderWidget header;
-    private final Event<PageView> statusAction;
-    private final Event<PageView> closeEvent;
-    private final Event<PageView> openEvent;
-    private Visibility visibility;
-    private String status;
+    private final PageLogic logic;
     private final String pageType;
 
     public PageWidget(String pageType, Visibility visibility, final boolean closeable) {
 	this.pageType = pageType;
-	this.closeEvent = new Event<PageView>("page.close");
-	this.header = new HeaderWidget(this, closeable);
-	this.statusAction = new Event<PageView>("page.status");
-	this.openEvent = new Event<PageView>("page.open");
-	this.visibility = visibility;
+	logic = new PageLogic(this, visibility);
+	this.header = new HeaderWidget(logic, closeable);
     }
 
     public void fireOpen() {
-	openEvent.fire(this);
+	logic.fireOpen();
     }
 
     public PageHeader getHeader() {
@@ -40,30 +32,26 @@ public abstract class PageWidget extends Composite implements PageView {
 	return pageType;
     }
 
-    public String getStatus() {
-	return status;
-    }
-
     @Override
     public String getStatusMessage() {
-	return status;
+	return logic.getStatusMessage();
     }
 
     @Override
     public Visibility getVisibility() {
-	return visibility;
+	return logic.getVisibility();
     }
 
     public void onClose(final Listener<PageView> listener) {
-	closeEvent.add(listener);
+	logic.onClose(listener);
     }
 
     public void onStatusMessageChanged(final Listener<PageView> listener) {
-	statusAction.add(listener);
+	logic.onStatusMessageChanged(listener);
     }
 
     public void onVisibilityChanged(final Listener<PageView> listener) {
-	openEvent.add(listener);
+	logic.onVisibilityChanged(listener);
     }
 
     @Override
@@ -82,20 +70,12 @@ public abstract class PageWidget extends Composite implements PageView {
 
     @Override
     public void setStatusMessage(final String status) {
-	this.status = status;
-	statusAction.fire(this);
-	if (visibility == Visibility.closed) {
-	    header.requestFocus();
-	}
+	logic.setStatusMessage(status);
     }
 
-    public void setVisibility(final Visibility visibility) {
-	this.visibility = visibility;
-	header.setVisibility(visibility);
-    }
-
-    protected void fireClose() {
-	closeEvent.fire(this);
+    @Override
+    public void setVisibility(Visibility visibility) {
+	logic.setVisibility(visibility);
     }
 
 }
