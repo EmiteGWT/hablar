@@ -2,6 +2,7 @@ package com.calclab.hablar.signals.client;
 
 import com.calclab.hablar.basic.client.ui.HablarWidget;
 import com.calclab.hablar.basic.client.ui.page.PageView;
+import com.calclab.hablar.basic.client.ui.pages.Pages;
 import com.calclab.hablar.chat.client.ChatPage;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.EntryPoint;
@@ -10,29 +11,61 @@ import com.google.gwt.core.client.GWT;
 public class HablarSignals implements EntryPoint {
 
     public static void install(final HablarWidget hablar) {
-	hablar.getPages().onStatusMessageChanged(new Listener<PageView>() {
+
+	final ChatSignalsLogic chatSignalsLogic = new ChatSignalsLogic();
+	new WindowTitleManager(chatSignalsLogic);
+
+	final Listener<PageView> statusMessageChgListener = new Listener<PageView>() {
+	    @Override
+	    public void onEvent(final PageView chatPage) {
+		chatSignalsLogic.onNewMsg(chatPage);
+		((ChatPage) chatPage).getChat().getURI();
+		GWT.log("GROWL: " + chatPage.getStatusMessage(), null);
+	    }
+	};
+
+	final Listener<PageView> onPageOpened = new Listener<PageView>() {
+	    @Override
+	    public void onEvent(final PageView chatPage) {
+		chatSignalsLogic.onChatOpened(chatPage);
+	    }
+	};
+
+	final Listener<PageView> onPageClose = new Listener<PageView>() {
+	    @Override
+	    public void onEvent(final PageView chatPage) {
+		chatSignalsLogic.onChatClosed(chatPage);
+	    }
+	};
+
+	final Pages pages = hablar.getPages();
+	pages.onStatusMessageChanged(new Listener<PageView>() {
 	    @Override
 	    public void onEvent(final PageView page) {
-		final String pageType = page.getPageType();
-		if (pageType == ChatPage.TYPE) {
-		    GWT.log("GROWL: " + page.getStatusMessage(), null);
-		    final ChatPage chatPage = (ChatPage) page;
-		    chatPage.getChat().getURI();
-		}
+		ifChat(page, statusMessageChgListener);
 	    }
 	});
 
-	hablar.getPages().onPageClosed(new Listener<PageView>() {
+	pages.onPageClosed(new Listener<PageView>() {
 	    @Override
-	    public void onEvent(final PageView parameter) {
+	    public void onEvent(final PageView page) {
+		ifChat(page, onPageClose);
 	    }
 	});
 
-	hablar.getPages().onPageOpened(new Listener<PageView>() {
+	pages.onPageOpened(new Listener<PageView>() {
 	    @Override
-	    public void onEvent(final PageView parameter) {
+	    public void onEvent(final PageView page) {
+		ifChat(page, onPageOpened);
 	    }
 	});
+    }
+
+    protected static void ifChat(final PageView page, final Listener<PageView> listener) {
+	final String pageType = page.getPageType();
+	if (pageType == ChatPage.TYPE) {
+	    listener.onEvent(page);
+	}
     }
 
     @Override
