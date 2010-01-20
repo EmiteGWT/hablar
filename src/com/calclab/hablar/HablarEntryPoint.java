@@ -23,18 +23,22 @@ public class HablarEntryPoint implements EntryPoint {
 	final HablarWidget hablar = createWidget(config, config);
 
 	HablarChat.install(hablar);
-	HablarSignals.install(hablar);
+
 	if (config.hasLogin) {
 	    HablarLogin.install(hablar);
+	}
+
+	if (config.hasRoster) {
+	    boolean isDocked = "left".equals(config.dockRoster);
+	    HablarRoster.install(hablar, isDocked);
 	}
 
 	if (config.hasSearch) {
 	    HablarSearch.install(hablar);
 	}
 
-	if (config.hasRoster) {
-	    boolean isDocked = "left".equals(config.dockRoster);
-	    HablarRoster.install(hablar, isDocked);
+	if (config.hasSignals) {
+	    HablarSignals.install(hablar);
 	}
 
 	if (config.inline == null) {

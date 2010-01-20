@@ -39,10 +39,9 @@ class HeaderWidget extends Composite implements PageHeader {
 
     private Visibility visibility;
 
-    private final PageLogic logic;
+    private PageLogic logic;
 
-    public HeaderWidget(final PageLogic logic, final boolean closeable) {
-	this.logic = logic;
+    public HeaderWidget(final boolean closeable) {
 	final Widget element = uiBinder.createAndBindUi(this);
 	initWidget(element);
 	close.setVisible(closeable);
@@ -69,6 +68,11 @@ class HeaderWidget extends Composite implements PageHeader {
 
     public void setId(final String id) {
 	title.ensureDebugId(id);
+    }
+
+    @Override
+    public void setLogic(PageLogic logic) {
+	this.logic = logic;
     }
 
     public void setStyles(final HeaderStyles styles) {

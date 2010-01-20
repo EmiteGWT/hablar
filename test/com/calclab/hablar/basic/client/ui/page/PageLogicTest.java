@@ -2,7 +2,6 @@ package com.calclab.hablar.basic.client.ui.page;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,8 +18,7 @@ public class PageLogicTest {
     public void setup() {
 	header = mock(PageHeader.class);
 	view = mock(PageView.class);
-	when(view.getHeader()).thenReturn(header);
-	logic = new PageLogic(view, Visibility.focused);
+	logic = new PageLogic(view, header, Visibility.focused);
     }
 
     @Test

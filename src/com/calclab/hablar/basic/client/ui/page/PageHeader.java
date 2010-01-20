@@ -8,6 +8,8 @@ public interface PageHeader {
 
     void requestFocus();
 
+    void setLogic(PageLogic logic);
+
     void setStyles(HeaderStyles styles);
 
     void setVisibility(Visibility visibility);

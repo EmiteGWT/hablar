@@ -13,6 +13,7 @@ import com.google.gwt.core.client.GWT;
 public class HablarRoster implements EntryPoint {
 
     public static void createLoginPage(final HablarView hablar, boolean isDocked, Session session) {
+	GWT.log("INSTALL ROSTER", null);
 	boolean isReady = session.getState() == State.ready;
 	Visibility visibility = isReady ? Visibility.focused : Visibility.notFocused;
 	final RosterView rosterPage = new RosterPageWidget(visibility);

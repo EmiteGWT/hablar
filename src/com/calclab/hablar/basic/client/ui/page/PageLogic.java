@@ -8,16 +8,19 @@ public class PageLogic {
     private final Event<PageView> statusAction;
     private final Event<PageView> closeEvent;
     private final Event<PageView> openEvent;
-    private String status;
     private final PageView view;
+    private final PageHeader header;
+    private String status;
     private Visibility visibility;
 
-    public PageLogic(PageView view, Visibility visibility) {
+    public PageLogic(PageView view, PageHeader header, Visibility visibility) {
 	this.view = view;
+	this.header = header;
 	this.visibility = visibility;
 	this.closeEvent = new Event<PageView>("page.close");
 	this.statusAction = new Event<PageView>("page.status");
 	this.openEvent = new Event<PageView>("page.open");
+	header.setLogic(this);
     }
 
     public void fireOpen() {
@@ -48,13 +51,13 @@ public class PageLogic {
 	this.status = status;
 	statusAction.fire(view);
 	if (visibility != Visibility.focused) {
-	    view.getHeader().requestFocus();
+	    header.requestFocus();
 	}
     }
 
     public void setVisibility(final Visibility visibility) {
 	this.visibility = visibility;
-	view.getHeader().setVisibility(visibility);
+	header.setVisibility(visibility);
     }
 
     protected void fireClose() {

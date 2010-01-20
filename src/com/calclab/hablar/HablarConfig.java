@@ -15,9 +15,12 @@ public class HablarConfig {
      */
     public static HablarConfig getFromMeta() {
 	HablarConfig config = new HablarConfig();
-	config.hasLogin = !"false".equals(PageAssist.getMeta("hablar.loginWidget"));
-	config.hasRoster = !"false".equals(PageAssist.getMeta("hablar.rosterWidget"));
-	config.hasSearch = !"false".equals(PageAssist.getMeta("hablar.searchWidget"));
+
+	config.hasLogin = isTrueMeta("hablar.loginWidget");
+	config.hasRoster = isTrueMeta("hablar.rosterWidget");
+	config.hasSearch = isTrueMeta("hablar.searchWidget");
+	config.hasSignals = isTrueMeta("hablar.hasSignals");
+	config.hasChat = isTrueMeta("hablar.hasChats");
 
 	config.dockRoster = PageAssist.getMeta("hablar.dockRoster");
 
@@ -36,6 +39,15 @@ public class HablarConfig {
 	    config.height = "400px";
 	return config;
     }
+
+    private static boolean isTrueMeta(String id) {
+	return !"false".equals(PageAssist.getMeta(id));
+    }
+
+    /**
+     * Has ChatModule
+     */
+    public boolean hasChat;
 
     /**
      * Dock the roster
@@ -76,5 +88,10 @@ public class HablarConfig {
      * Height
      */
     public String height;
+
+    /**
+     * Has SignalModule
+     */
+    public boolean hasSignals;
 
 }

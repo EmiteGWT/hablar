@@ -8,6 +8,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -85,6 +87,16 @@ public class PagesLogicTest {
 	assertEquals(1, logic.getVisiblePages().size());
 	assertEquals(0, logic.getHiddenPages().size());
 	verify(pageView).setVisibility(Visibility.focused);
+    }
+
+    @Test
+    public void shouldRetrievePagesByType() {
+	PageView page = createPageView(Visibility.focused);
+	when(page.getPageType()).thenReturn("pageType");
+	logic.add(page);
+	List<PageView> pages = logic.getPagesOfType("pageType");
+	assertEquals(1, pages.size());
+	assertTrue(pages.contains(page));
     }
 
     @Test
