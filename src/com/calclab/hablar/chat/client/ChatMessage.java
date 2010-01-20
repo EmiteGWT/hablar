@@ -24,6 +24,7 @@ public class ChatMessage extends Composite {
 	initWidget(uiBinder.createAndBindUi(this));
 	this.author.setInnerText(name + ": ");
 	this.body.setInnerHTML(body);
+	this.body.addClassName("chat-message-body-" + type.toString());
     }
 
 }
