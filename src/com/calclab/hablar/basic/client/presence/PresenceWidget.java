@@ -13,9 +13,9 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
-public class PresencePanel extends Composite implements PresenceView {
+public class PresenceWidget extends Composite implements PresenceView {
 
-    interface StatePanelUiBinder extends UiBinder<Widget, PresencePanel> {
+    interface StatePanelUiBinder extends UiBinder<Widget, PresenceWidget> {
     }
 
     private static StatePanelUiBinder uiBinder = GWT.create(StatePanelUiBinder.class);
@@ -30,7 +30,7 @@ public class PresencePanel extends Composite implements PresenceView {
 
     private final PresenceLogic logic;
 
-    public PresencePanel() {
+    public PresenceWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
 	logic = new PresenceLogic(this);
     }
@@ -51,7 +51,7 @@ public class PresencePanel extends Composite implements PresenceView {
 
     @UiHandler("status")
     public void onChangeStatus(final ClickEvent e) {
-	logic.onChangeStatusMessage();
+	logic.whenChangeStatusMessage();
     }
 
     @Override

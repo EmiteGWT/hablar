@@ -40,12 +40,6 @@ public class PresenceLogic {
 
     }
 
-    public void onChangeStatusMessage() {
-	view.setStatusMessageVisible(false);
-	view.setStatusBoxVisible(true);
-	view.setStatusBoxFocus(true);
-    }
-
     public void onShowChange() {
 	if (session.getState() == State.ready) {
 	    final Show nextShow = this.show == Show.dnd ? Show.chat : Show.dnd;
@@ -62,6 +56,17 @@ public class PresenceLogic {
 	presence.setStatus(statusMessage);
 	manager.changeOwnPresence(presence);
 	setStatusMessage(presence);
+    }
+
+    /**
+     * Called when the view was asked to change the status message
+     */
+    public void whenChangeStatusMessage() {
+	if (session.getState() == State.ready) {
+	    view.setStatusMessageVisible(false);
+	    view.setStatusBoxVisible(true);
+	    view.setStatusBoxFocus(true);
+	}
     }
 
     private void setShow(final Show show) {

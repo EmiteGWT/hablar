@@ -2,6 +2,7 @@ package com.calclab.hablar.basic.client.presence;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -29,11 +30,26 @@ public class PresenceLogicTest {
     }
 
     @Test
+    public void shouldChangeStatusIfSessionReady() {
+	tester.setSessionReady("test1@localhost");
+	logic.whenChangeStatusMessage();
+	verify(view, times(1)).setStatusBoxVisible(true);
+
+    }
+
+    @Test
     public void shouldChangeStatusMessage() {
 	logic.onStatusMessageChanged("epa");
 	verify(view, times(2)).setStatusBoxVisible(false);
 	verify(view, times(2)).setStatusMessageVisible(true);
 	assertEquals("epa", presenceManager.getOwnPresence().getStatus());
+    }
+
+    @Test
+    public void shouldNotChangeStatusUnlessSessionReady() {
+	tester.session.logout();
+	logic.whenChangeStatusMessage();
+	verify(view, never()).setStatusBoxVisible(true);
     }
 
     @Test
@@ -67,7 +83,8 @@ public class PresenceLogicTest {
 
     @Test
     public void shouldShowTextBox() {
-	logic.onChangeStatusMessage();
+	tester.setSessionReady("test1@host");
+	logic.whenChangeStatusMessage();
 	verify(view).setStatusMessageVisible(false);
 	verify(view).setStatusBoxVisible(true);
     }

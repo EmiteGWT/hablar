@@ -48,6 +48,11 @@ public class EmiteTester {
 	install(container, PresenceManager.class, presenceManager);
     }
 
+    public void setSessionReady(String uri) {
+	session.setLoggedIn(uri);
+	session.setReady();
+    }
+
     private <T> T install(Container container, Class<T> clazz, final T instance) {
 	container.removeProvider(clazz);
 	container.registerProvider(NoDecoration.instance, clazz, new Provider<T>() {
