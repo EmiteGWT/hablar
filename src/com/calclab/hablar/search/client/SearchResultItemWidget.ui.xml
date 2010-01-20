@@ -23,7 +23,7 @@
 		}
 	</ui:style>
 
-	<ui:image field="buddy" src="../../basic/client/ui/icons/png/buddy-small.png"></ui:image>
+	<ui:image field="buddy" src="../../basic/client/ui/icon/png/buddy-small.png"></ui:image>
 	<g:HTMLPanel styleName="{hablar.listItemWidget}">
 		<span class="{hablar.icon} {icons.userAdd}" ui:field="span"></span>
 		<g:Label ui:field="name" styleName="{style.resultName}">Result</g:Label>

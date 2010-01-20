@@ -1,6 +1,6 @@
 package com.calclab.hablar.basic.client.presence;
 
-import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
+import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.ClickEvent;

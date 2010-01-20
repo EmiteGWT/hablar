@@ -5,7 +5,7 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.chat.Chat.State;
-import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
+import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
 import com.calclab.suco.client.events.Listener;
 
 public class ChatLogic {

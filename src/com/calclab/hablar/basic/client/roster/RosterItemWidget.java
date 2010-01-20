@@ -1,7 +1,7 @@
 package com.calclab.hablar.basic.client.roster;
 
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
+import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
 import com.calclab.hablar.basic.client.ui.lists.ListItemWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;

@@ -2,7 +2,7 @@ package com.calclab.hablar.basic.client.roster;
 
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.basic.client.i18n.Msg;
-import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
+import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
 import com.calclab.hablar.basic.client.ui.menu.MenuAction;
 import com.calclab.hablar.basic.client.ui.menu.PopupMenu;
 import com.calclab.hablar.basic.client.ui.menu.PopupMenuView;

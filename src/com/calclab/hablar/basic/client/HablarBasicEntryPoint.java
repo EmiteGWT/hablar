@@ -3,7 +3,7 @@ package com.calclab.hablar.basic.client;
 import com.calclab.emite.im.client.roster.SubscriptionHandler;
 import com.calclab.emite.im.client.roster.SubscriptionHandler.Behaviour;
 import com.calclab.hablar.basic.client.ui.HablarResources;
-import com.calclab.hablar.basic.client.ui.icons.DefaultHablarIcons;
+import com.calclab.hablar.basic.client.ui.icon.DefaultHablarIcons;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;

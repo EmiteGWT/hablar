@@ -4,7 +4,7 @@ import static com.google.gwt.dom.client.Style.Unit.PX;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.chat.Chat;
-import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
+import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
 import com.calclab.hablar.basic.client.ui.page.PageWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.KeyDownEvent;

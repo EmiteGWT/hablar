@@ -1,7 +1,7 @@
 package com.calclab.hablar.search.client;
 
 import com.calclab.emite.xep.search.client.SearchResultItem;
-import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
+import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
 import com.calclab.hablar.basic.client.ui.lists.ListItemWidget;
 import com.calclab.hablar.basic.client.ui.utils.DebugId;
 import com.google.gwt.core.client.GWT;

@@ -1,6 +1,6 @@
 package com.calclab.hablar.basic.client.presence;
 
-import com.calclab.hablar.basic.client.ui.icons.HablarIcons;
+import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
 
 public interface PresenceView {
 
