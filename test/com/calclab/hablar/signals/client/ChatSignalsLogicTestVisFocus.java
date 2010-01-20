@@ -31,7 +31,7 @@ public class ChatSignalsLogicTestVisFocus {
 	chat1 = Mockito.mock(PageView.class);
 	chat2 = Mockito.mock(PageView.class);
 	chat3 = Mockito.mock(PageView.class);
-	mockVisibility(Visibility.open);
+	mockVisibility(Visibility.focused);
     }
 
     @Test

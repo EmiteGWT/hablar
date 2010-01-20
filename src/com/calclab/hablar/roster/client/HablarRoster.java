@@ -14,7 +14,7 @@ public class HablarRoster implements EntryPoint {
 
     public static void createLoginPage(final HablarView hablar, boolean isDocked, Session session) {
 	boolean isReady = session.getState() == State.ready;
-	Visibility visibility = isReady ? Visibility.open : Visibility.closed;
+	Visibility visibility = isReady ? Visibility.focused : Visibility.notFocused;
 	final RosterView rosterPage = new RosterPageWidget(visibility);
 
 	final Pages pages = hablar.getPages();

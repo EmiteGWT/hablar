@@ -75,7 +75,7 @@ public class HablarWidget extends Composite implements HablarView {
 
 	PageHeader pageHeader = pageView.getHeader();
 	pageHeader.setStyles(headerStyle);
-	pageView.setVisibility(Visibility.open);
+	pageView.setVisibility(Visibility.focused);
 
 	Widget docked = (Widget) pageView;
 	Widget header = (Widget) pageHeader;

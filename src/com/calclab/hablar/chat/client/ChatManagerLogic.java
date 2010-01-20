@@ -49,7 +49,7 @@ public class ChatManagerLogic {
 	chatManager.onChatCreated(new Listener<Chat>() {
 	    @Override
 	    public void onEvent(Chat chat) {
-		createChat(chat, Visibility.closed);
+		createChat(chat, Visibility.notFocused);
 	    }
 	});
 
@@ -77,7 +77,7 @@ public class ChatManagerLogic {
     }
 
     private void createChat(Chat chat, Visibility visibility) {
-	ChatView chatPage = factory.create(chat, Visibility.closed);
+	ChatView chatPage = factory.create(chat, Visibility.notFocused);
 	chatPages.put(chat, chatPage);
 	pages.add(chatPage);
 	RosterItem item = roster.getItemByJID(chat.getURI().getJID());

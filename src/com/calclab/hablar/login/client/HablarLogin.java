@@ -19,7 +19,7 @@ public class HablarLogin implements EntryPoint {
 
     private static void createLoginPage(HablarView hablar, Session session) {
 	boolean isDisconnected = session.getState() == State.disconnected;
-	Visibility visibility = isDisconnected ? Visibility.open : Visibility.closed;
+	Visibility visibility = isDisconnected ? Visibility.focused : Visibility.notFocused;
 	final LoginView login = new LoginPage(visibility);
 	final Pages pages = hablar.getPages();
 	pages.add(login);

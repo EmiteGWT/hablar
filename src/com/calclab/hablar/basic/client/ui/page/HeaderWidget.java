@@ -52,7 +52,7 @@ class HeaderWidget extends Composite implements PageHeader {
 
     @Override
     public void requestFocus() {
-	if (visibility == Visibility.closed) {
+	if (visibility == Visibility.notFocused) {
 	    header.getElement().addClassName(currentStyles.requestFocus());
 	    header.getElement().removeClassName(currentStyles.closed());
 	}
@@ -84,10 +84,10 @@ class HeaderWidget extends Composite implements PageHeader {
 
     private void applyStyles() {
 	header.getElement().removeClassName(currentStyles.requestFocus());
-	if (visibility == Visibility.open) {
+	if (visibility == Visibility.focused) {
 	    header.getElement().removeClassName(currentStyles.closed());
 	    header.getElement().addClassName(currentStyles.open());
-	} else if (visibility == Visibility.closed) {
+	} else if (visibility == Visibility.notFocused) {
 	    header.getElement().removeClassName(currentStyles.open());
 	    header.getElement().addClassName(currentStyles.closed());
 	}

@@ -20,19 +20,19 @@ public class PageLogicTest {
 	header = mock(PageHeader.class);
 	view = mock(PageView.class);
 	when(view.getHeader()).thenReturn(header);
-	logic = new PageLogic(view, Visibility.open);
+	logic = new PageLogic(view, Visibility.focused);
     }
 
     @Test
     public void shouldRequestFocusWhenMessageAndClosed() {
-	logic.setVisibility(Visibility.closed);
+	logic.setVisibility(Visibility.notFocused);
 	logic.setStatusMessage("new status");
 	verify(header).requestFocus();
     }
 
     @Test
     public void shouldRequestFocusWhenMessageAndHidden() {
-	logic.setVisibility(Visibility.hidden);
+	logic.setVisibility(Visibility.closed);
 	logic.setStatusMessage("new status");
 	verify(header).requestFocus();
     }

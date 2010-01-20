@@ -63,13 +63,13 @@ public class PagesLogic implements Pages {
 
 	    Visibility visibility = pageView.getVisibility();
 	    GWT.log("ADD: " + visibility, null);
-	    if (visibility == Visibility.open || (visibility == visibility.closed) && visiblePages.size() == 0) {
+	    if (visibility == Visibility.focused || (visibility == visibility.notFocused) && visiblePages.size() == 0) {
 		view.addPageView(pageView);
 		visiblePages.add(pageView);
 		open(pageView);
-	    } else if (visibility == Visibility.hidden) {
-		hiddenPages.add(pageView);
 	    } else if (visibility == Visibility.closed) {
+		hiddenPages.add(pageView);
+	    } else if (visibility == Visibility.notFocused) {
 		view.addPageView(pageView);
 		visiblePages.add(pageView);
 		reopenCurrentPage();
@@ -79,12 +79,12 @@ public class PagesLogic implements Pages {
 
     @Override
     public boolean close(PageView pageView) {
-	if (pageView.getVisibility() == Visibility.open) {
-	    pageView.setVisibility(Visibility.closed);
+	if (pageView.getVisibility() == Visibility.focused) {
+	    pageView.setVisibility(Visibility.notFocused);
 	    return true;
-	} else if (pageView.getVisibility() == Visibility.hidden) {
+	} else if (pageView.getVisibility() == Visibility.closed) {
 	    unhide(pageView);
-	    pageView.setVisibility(Visibility.closed);
+	    pageView.setVisibility(Visibility.notFocused);
 	    reopenCurrentPage();
 	    return true;
 	} else {
@@ -132,7 +132,7 @@ public class PagesLogic implements Pages {
      * @see Pages
      */
     public void hide(PageView pageView) {
-	if (pageView.getVisibility() == Visibility.open) {
+	if (pageView.getVisibility() == Visibility.focused) {
 	    showPreviousPage();
 	}
 	if (currentPageView == pageView) {
@@ -143,7 +143,7 @@ public class PagesLogic implements Pages {
 	}
 	visiblePages.remove(pageView);
 	hiddenPages.add(pageView);
-	pageView.setVisibility(Visibility.hidden);
+	pageView.setVisibility(Visibility.closed);
 	view.removePageView(pageView);
 	onClosed.fire(pageView);
     }
@@ -171,7 +171,7 @@ public class PagesLogic implements Pages {
 	    if (currentPageView != pageView) {
 		this.previouslyVisiblePageView = currentPageView;
 		if (currentPageView != null) {
-		    currentPageView.setVisibility(Visibility.closed);
+		    currentPageView.setVisibility(Visibility.notFocused);
 		}
 
 		if (isHidden) {
@@ -180,7 +180,7 @@ public class PagesLogic implements Pages {
 
 		view.showPageView(pageView);
 		currentPageView = pageView;
-		pageView.setVisibility(Visibility.open);
+		pageView.setVisibility(Visibility.focused);
 	    }
 	    GWT.log("OPEN OPEN", null);
 	    onOpened.fire(pageView);
@@ -215,7 +215,7 @@ public class PagesLogic implements Pages {
      * @param page
      */
     void whenStatus(PageView page) {
-	if (page.getVisibility() == Visibility.hidden) {
+	if (page.getVisibility() == Visibility.closed) {
 	    close(page);
 	}
 	onStatus.fire(page);
@@ -223,7 +223,7 @@ public class PagesLogic implements Pages {
 
     void whenVisibilityChanged(PageView page) {
 	Visibility visibility = page.getVisibility();
-	if (visibility == Visibility.open)
+	if (visibility == Visibility.focused)
 	    showPreviousPage();
 	else
 	    open(page);

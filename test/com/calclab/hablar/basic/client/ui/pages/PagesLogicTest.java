@@ -26,103 +26,103 @@ public class PagesLogicTest {
 
     @Test
     public void shouldAddClosedPages() {
-	shouldAddPage(Visibility.closed);
+	shouldAddPage(Visibility.notFocused);
     }
 
     @Test
     public void shouldAddOpenPages() {
-	shouldAddPage(Visibility.open);
+	shouldAddPage(Visibility.focused);
     }
 
     @Test
     public void shouldCloseHiddenPages() {
-	PageView pageView = createPageView(Visibility.hidden);
+	PageView pageView = createPageView(Visibility.closed);
 	logic.add(pageView);
 	logic.close(pageView);
 	assertEquals(1, logic.getVisiblePages().size());
 	assertEquals(0, logic.getHiddenPages().size());
-	verify(pageView).setVisibility(Visibility.closed);
+	verify(pageView).setVisibility(Visibility.notFocused);
 
     }
 
     @Test
     public void shouldClosePreviousPageWhenOpenAPage() {
-	PageView pageView1 = createPageView(Visibility.open);
+	PageView pageView1 = createPageView(Visibility.focused);
 	logic.add(pageView1);
-	PageView pageView2 = createPageView(Visibility.open);
+	PageView pageView2 = createPageView(Visibility.focused);
 	logic.add(pageView2);
-	verify(pageView1).setVisibility(Visibility.closed);
+	verify(pageView1).setVisibility(Visibility.notFocused);
     }
 
     @Test
     public void shouldHidePages() {
-	PageView page = createPageView(Visibility.open);
+	PageView page = createPageView(Visibility.focused);
 	logic.add(page);
 	assertEquals(1, logic.getVisiblePages().size());
 	assertEquals(0, logic.getHiddenPages().size());
-	assertEquals(Visibility.open, page.getVisibility());
+	assertEquals(Visibility.focused, page.getVisibility());
 	logic.hide(page);
 	assertEquals(0, logic.getVisiblePages().size());
 	assertEquals(1, logic.getHiddenPages().size());
-	verify(page).setVisibility(Visibility.hidden);
+	verify(page).setVisibility(Visibility.closed);
     }
 
     @Test
     public void shouldNotOpenIfNotAddedBefore() {
-	PageView pageViewIn = createPageView(Visibility.open);
+	PageView pageViewIn = createPageView(Visibility.focused);
 	logic.add(pageViewIn);
-	verify(pageViewIn).setVisibility(Visibility.open);
-	PageView pageViewOut = createPageView(Visibility.open);
+	verify(pageViewIn).setVisibility(Visibility.focused);
+	PageView pageViewOut = createPageView(Visibility.focused);
 	logic.open(pageViewOut);
-	verify(pageViewIn, never()).setVisibility(Visibility.closed);
+	verify(pageViewIn, never()).setVisibility(Visibility.notFocused);
     }
 
     @Test
     public void shouldOpenHiddenPages() {
-	PageView pageView = createPageView(Visibility.hidden);
+	PageView pageView = createPageView(Visibility.closed);
 	logic.add(pageView);
 	logic.open(pageView);
 	assertEquals(1, logic.getVisiblePages().size());
 	assertEquals(0, logic.getHiddenPages().size());
-	verify(pageView).setVisibility(Visibility.open);
+	verify(pageView).setVisibility(Visibility.focused);
     }
 
     @Test
     public void shouldRetrieveVisibleAndHiddenPages() {
-	logic.add(createPageView(Visibility.open));
-	logic.add(createPageView(Visibility.open));
-	logic.add(createPageView(Visibility.hidden));
+	logic.add(createPageView(Visibility.focused));
+	logic.add(createPageView(Visibility.focused));
+	logic.add(createPageView(Visibility.closed));
 	assertEquals(2, logic.getVisiblePages().size());
 	assertEquals(1, logic.getHiddenPages().size());
     }
 
     @Test
     public void shouldSetOpenIfClosedPageAddedAsFirstPage() {
-	PageView pageView = createPageView(Visibility.closed);
+	PageView pageView = createPageView(Visibility.notFocused);
 	logic.add(pageView);
-	verify(pageView).setVisibility(Visibility.open);
+	verify(pageView).setVisibility(Visibility.focused);
     }
 
     @Test
     public void shouldShowHiddenPageIfWhenStatus() {
-	PageView page = createPageView(Visibility.hidden);
+	PageView page = createPageView(Visibility.closed);
 	logic.add(page);
 	logic.whenStatus(page);
-	verify(page).setVisibility(Visibility.closed);
+	verify(page).setVisibility(Visibility.notFocused);
     }
 
     @Test
     public void shouldShowPreviousPageWhenHideAOpenedPage() {
-	PageView pageView1 = createPageView(Visibility.open);
+	PageView pageView1 = createPageView(Visibility.focused);
 	logic.add(pageView1);
-	verify(pageView1).setVisibility(Visibility.open);
-	PageView pageView2 = createPageView(Visibility.open);
+	verify(pageView1).setVisibility(Visibility.focused);
+	PageView pageView2 = createPageView(Visibility.focused);
 	logic.add(pageView2);
-	verify(pageView2).setVisibility(Visibility.open);
+	verify(pageView2).setVisibility(Visibility.focused);
 	logic.hide(pageView2);
 
-	verify(pageView2).setVisibility(Visibility.hidden);
-	verify(pageView1, times(2)).setVisibility(Visibility.open);
+	verify(pageView2).setVisibility(Visibility.closed);
+	verify(pageView1, times(2)).setVisibility(Visibility.focused);
     }
 
     private PageView createPageView(Visibility visibility) {

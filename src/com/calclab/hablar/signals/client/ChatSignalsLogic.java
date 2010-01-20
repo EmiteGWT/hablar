@@ -43,7 +43,7 @@ public class ChatSignalsLogic {
     }
 
     public void onNewMsg(final PageView chatPage) {
-	if (chatPage.getVisibility() != Visibility.open) {
+	if (chatPage.getVisibility() != Visibility.focused) {
 	    if (set.add(chatPage)) {
 		if (currentChat == null) {
 		    // Maybe I can remove this

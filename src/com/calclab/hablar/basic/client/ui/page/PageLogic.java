@@ -47,7 +47,7 @@ public class PageLogic {
     public void setStatusMessage(String status) {
 	this.status = status;
 	statusAction.fire(view);
-	if (visibility != Visibility.open) {
+	if (visibility != Visibility.focused) {
 	    view.getHeader().requestFocus();
 	}
     }
