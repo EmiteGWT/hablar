@@ -14,8 +14,7 @@ public interface Pages {
      * 
      * @param pageView
      *            the page to be closed
-     * @return true if closed, false if the page was not open or it was the only
-     *         visible page
+     * @return true if closed
      */
     boolean close(PageView pageView);
 

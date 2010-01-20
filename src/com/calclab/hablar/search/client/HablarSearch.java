@@ -23,7 +23,7 @@ public class HablarSearch {
 	List<PageView> rosters = pages.getPagesOfType(RosterView.TYPE);
 	boolean isRoster = rosters.size() > 0;
 
-	Visibility visibility = isRoster ? Visibility.hidden : Visibility.open;
+	Visibility visibility = isRoster ? Visibility.hidden : Visibility.closed;
 	final SearchPageWidget searchPage = new SearchPageWidget(visibility, !isRoster);
 	pages.add(searchPage);
 

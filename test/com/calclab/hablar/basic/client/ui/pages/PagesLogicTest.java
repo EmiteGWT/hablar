@@ -35,6 +35,17 @@ public class PagesLogicTest {
     }
 
     @Test
+    public void shouldCloseHiddenPages() {
+	PageView pageView = createPageView(Visibility.hidden);
+	logic.add(pageView);
+	logic.close(pageView);
+	assertEquals(1, logic.getVisiblePages().size());
+	assertEquals(0, logic.getHiddenPages().size());
+	verify(pageView).setVisibility(Visibility.closed);
+
+    }
+
+    @Test
     public void shouldClosePreviousPageWhenOpenAPage() {
 	PageView pageView1 = createPageView(Visibility.open);
 	logic.add(pageView1);
@@ -67,12 +78,30 @@ public class PagesLogicTest {
     }
 
     @Test
+    public void shouldOpenHiddenPages() {
+	PageView pageView = createPageView(Visibility.hidden);
+	logic.add(pageView);
+	logic.open(pageView);
+	assertEquals(1, logic.getVisiblePages().size());
+	assertEquals(0, logic.getHiddenPages().size());
+	verify(pageView).setVisibility(Visibility.open);
+    }
+
+    @Test
     public void shouldRetrieveVisibleAndHiddenPages() {
 	logic.add(createPageView(Visibility.open));
 	logic.add(createPageView(Visibility.open));
 	logic.add(createPageView(Visibility.hidden));
 	assertEquals(2, logic.getVisiblePages().size());
 	assertEquals(1, logic.getHiddenPages().size());
+    }
+
+    @Test
+    public void shouldShowHiddenPageIfWhenStatus() {
+	PageView page = createPageView(Visibility.hidden);
+	logic.add(page);
+	logic.whenStatus(page);
+	verify(page).setVisibility(Visibility.closed);
     }
 
     @Test

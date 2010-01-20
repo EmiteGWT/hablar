@@ -11,19 +11,19 @@ import com.google.gwt.user.client.ui.Composite;
 public abstract class PageWidget extends Composite implements PageView {
 
     protected final HeaderWidget header;
-    private final Event<PageWidget> statusAction;
-    private final Event<PageWidget> closeEvent;
-    private final Event<PageWidget> openEvent;
+    private final Event<PageView> statusAction;
+    private final Event<PageView> closeEvent;
+    private final Event<PageView> openEvent;
     private Visibility visibility;
     private String status;
     private final String pageType;
 
     public PageWidget(String pageType, Visibility visibility, final boolean closeable) {
 	this.pageType = pageType;
-	this.closeEvent = new Event<PageWidget>("page.close");
+	this.closeEvent = new Event<PageView>("page.close");
 	this.header = new HeaderWidget(this, closeable);
-	this.statusAction = new Event<PageWidget>("page.status");
-	this.openEvent = new Event<PageWidget>("page.open");
+	this.statusAction = new Event<PageView>("page.status");
+	this.openEvent = new Event<PageView>("page.open");
 	this.visibility = visibility;
     }
 
@@ -54,15 +54,15 @@ public abstract class PageWidget extends Composite implements PageView {
 	return visibility;
     }
 
-    public void onClose(final Listener<PageWidget> listener) {
+    public void onClose(final Listener<PageView> listener) {
 	closeEvent.add(listener);
     }
 
-    public void onStatusMessageChanged(final Listener<PageWidget> listener) {
+    public void onStatusMessageChanged(final Listener<PageView> listener) {
 	statusAction.add(listener);
     }
 
-    public void onVisibilityChanged(final Listener<PageWidget> listener) {
+    public void onVisibilityChanged(final Listener<PageView> listener) {
 	openEvent.add(listener);
     }
 

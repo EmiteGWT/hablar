@@ -8,27 +8,37 @@ import com.calclab.hablar.basic.client.ui.pages.Pages;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 
 public class HablarRoster implements EntryPoint {
 
-    public static void install(final HablarView hablar, boolean isDocked) {
+    public static void createLoginPage(final HablarView hablar, boolean isDocked, Session session) {
+	boolean isReady = session.getState() == State.ready;
+	Visibility visibility = isReady ? Visibility.open : Visibility.closed;
+	final RosterView rosterPage = new RosterPageWidget(visibility);
+
 	final Pages pages = hablar.getPages();
-	final RosterView rosterPage = new RosterPageWidget(Visibility.open);
 	if (isDocked) {
 	    hablar.setDocked(rosterPage, 200);
 	} else {
 	    hablar.getPages().add(rosterPage);
 	}
-	Session session = Suco.get(Session.class);
+
 	session.onStateChanged(new Listener<Session>() {
 
 	    @Override
 	    public void onEvent(Session session) {
 		if (session.getState() == State.ready) {
+		    GWT.log("SHOW ROSTER", null);
 		    pages.open(rosterPage);
 		}
 	    }
 	});
+    }
+
+    public static void install(final HablarView hablar, boolean isDocked) {
+	Session session = Suco.get(Session.class);
+	createLoginPage(hablar, isDocked, session);
     }
 
     @Override

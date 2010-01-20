@@ -32,21 +32,21 @@ public interface PageView {
      * 
      * @param closeListener
      */
-    void onClose(Listener<PageWidget> closeListener);
+    void onClose(Listener<PageView> closeListener);
 
     /**
      * Add a listener to know when the status message of this page has changed
      * 
      * @param statusListener
      */
-    void onStatusMessageChanged(Listener<PageWidget> statusListener);
+    void onStatusMessageChanged(Listener<PageView> statusListener);
 
     /**
      * Add a listener to know when this page is open
      * 
      * @param openListener
      */
-    void onVisibilityChanged(Listener<PageWidget> openListener);
+    void onVisibilityChanged(Listener<PageView> openListener);
 
     /**
      * Change the icon class of the header
