@@ -97,6 +97,13 @@ public class PagesLogicTest {
     }
 
     @Test
+    public void shouldSetOpenIfClosedPageAddedAsFirstPage() {
+	PageView pageView = createPageView(Visibility.closed);
+	logic.add(pageView);
+	verify(pageView).setVisibility(Visibility.open);
+    }
+
+    @Test
     public void shouldShowHiddenPageIfWhenStatus() {
 	PageView page = createPageView(Visibility.hidden);
 	logic.add(page);

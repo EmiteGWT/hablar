@@ -77,7 +77,6 @@ public class ChatManagerLogic {
     }
 
     private void createChat(Chat chat, Visibility visibility) {
-	GWT.log("HABLAR ChatManager - CREATE", null);
 	ChatView chatPage = factory.create(chat, Visibility.closed);
 	chatPages.put(chat, chatPage);
 	pages.add(chatPage);

@@ -62,7 +62,8 @@ public class PagesLogic implements Pages {
 	    pageView.onClose(closeListener);
 
 	    Visibility visibility = pageView.getVisibility();
-	    if (visibility == Visibility.open) {
+	    GWT.log("ADD: " + visibility, null);
+	    if (visibility == Visibility.open || (visibility == visibility.closed) && visiblePages.size() == 0) {
 		view.addPageView(pageView);
 		visiblePages.add(pageView);
 		open(pageView);
@@ -167,7 +168,6 @@ public class PagesLogic implements Pages {
     public void open(PageView pageView) {
 	boolean isHidden = hiddenPages.contains(pageView);
 	if (view.hasPageView(pageView) || isHidden) {
-	    GWT.log("Show page (hidden " + isHidden + ")", null);
 	    if (currentPageView != pageView) {
 		this.previouslyVisiblePageView = currentPageView;
 		if (currentPageView != null) {
@@ -182,6 +182,7 @@ public class PagesLogic implements Pages {
 		currentPageView = pageView;
 		pageView.setVisibility(Visibility.open);
 	    }
+	    GWT.log("OPEN OPEN", null);
 	    onOpened.fire(pageView);
 	}
     }

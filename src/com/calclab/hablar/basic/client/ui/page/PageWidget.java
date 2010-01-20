@@ -17,6 +17,7 @@ public abstract class PageWidget extends Composite implements PageView {
 	this.pageType = pageType;
 	logic = new PageLogic(this, visibility);
 	this.header = new HeaderWidget(logic, closeable);
+	header.setVisibility(visibility);
     }
 
     public void fireOpen() {
