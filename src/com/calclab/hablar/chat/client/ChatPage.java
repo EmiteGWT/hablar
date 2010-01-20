@@ -42,9 +42,11 @@ public class ChatPage extends PageWidget implements ChatView {
     ScrollPanel scroll;
 
     private final ChatLogic logic;
+    private final Chat chat;
 
     public ChatPage(final Chat chat, Visibility visibility) {
 	super(TYPE, visibility, true);
+	this.chat = chat;
 	super.setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
 	talkBox.ensureDebugId(TALKBOX_DEB_ID);
@@ -56,6 +58,10 @@ public class ChatPage extends PageWidget implements ChatView {
     public void clearAndFocus() {
 	talkBox.setText("");
 	talkBox.setFocus(true);
+    }
+
+    public Chat getChat() {
+	return chat;
     }
 
     @UiHandler("talkBox")

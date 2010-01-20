@@ -1,8 +1,8 @@
 package com.calclab.hablar.signals.client;
 
-import com.calclab.hablar.basic.client.login.LoginPage;
 import com.calclab.hablar.basic.client.ui.HablarWidget;
 import com.calclab.hablar.basic.client.ui.page.PageView;
+import com.calclab.hablar.chat.client.ChatPage;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -21,8 +21,11 @@ public class HablarSignals implements EntryPoint {
 	    @Override
 	    public void onEvent(PageView page) {
 		String pageType = page.getPageType();
-		if (pageType == LoginPage.TYPE)
+		if (pageType == ChatPage.TYPE) {
 		    GWT.log("GROWL: " + page.getStatusMessage(), null);
+		    ChatPage chatPage = (ChatPage) page;
+		    chatPage.getChat().getURI();
+		}
 	    }
 	});
 
