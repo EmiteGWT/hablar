@@ -45,18 +45,6 @@ public class ChatSignalsLogicVisibUnFocusTest {
     }
 
     @Test
-    public void testOneUnnattededFirstNewMsgEvent() {
-	logic.onNewMsg(chat1);
-	logic.onNewMsg(chat1);
-	logic.onChatOpened(chat1);
-	assertEquals(1, newUnattendedChatListener.getCalledTimes());
-	assertTrue(newUnattendedChatListener.getValue(0).equals(chat1));
-	assertEquals(1, chatsUnattendedListener.getCalledTimes());
-	final Set<PageView> set = chatsUnattendedListener.getValue(0);
-	assertEquals(1, set.size());
-    }
-
-    @Test
     public void testThereTalking() {
 	logic.onChatOpened(chat1);
 	logic.onChatOpened(chat2);

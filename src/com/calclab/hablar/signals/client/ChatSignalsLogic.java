@@ -9,8 +9,6 @@ import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Listener;
 
 public class ChatSignalsLogic {
-
-    private PageView currentChat;
     private final Set<PageView> set;
     private final Event<Set<PageView>> chatsUnattendedChanged;
     private final Event<PageView> newUnattendedChat;
@@ -31,28 +29,21 @@ public class ChatSignalsLogic {
 
     public void onChatClosed(final PageView chatPage) {
 	if (set.remove(chatPage)) {
-	    if (set.size() == 0) {
-		currentChat = null;
-	    }
 	    fire();
 	}
     }
 
     public void onChatOpened(final PageView chatPage) {
-	currentChat = chatPage;
+	if (chatPage.getVisibility() == Visibility.focused && set.remove(chatPage)) {
+	    fire();
+	}
     }
 
     public void onNewMsg(final PageView chatPage) {
-	if (chatPage.getVisibility() != Visibility.focused) {
-	    if (set.add(chatPage)) {
-		if (currentChat == null) {
-		    // Maybe I can remove this
-		    currentChat = chatPage;
-		}
-		fire();
-		// This chat it's new
-		newUnattendedChat.fire(chatPage);
-	    }
+	if (chatPage.getVisibility() != Visibility.focused && set.add(chatPage)) {
+	    fire();
+	    // This chat it's new
+	    newUnattendedChat.fire(chatPage);
 	}
     }
 
