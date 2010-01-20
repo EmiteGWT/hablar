@@ -1,8 +1,7 @@
-package com.calclab.hablar.basic.client;
+package com.calclab.hablar.basic.client.ui;
 
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.session.Session.State;
-import com.calclab.hablar.basic.client.ui.HablarView;
 import com.calclab.hablar.basic.client.ui.pages.Pages;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;

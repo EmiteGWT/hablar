@@ -2,7 +2,6 @@ package com.calclab.hablar.basic.client.ui;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
-import com.calclab.hablar.basic.client.HablarLogic;
 import com.calclab.hablar.basic.client.login.LoginPage;
 import com.calclab.hablar.basic.client.login.LoginView;
 import com.calclab.hablar.basic.client.roster.RosterPageWidget;
