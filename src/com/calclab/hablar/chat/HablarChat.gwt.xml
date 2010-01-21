@@ -6,6 +6,7 @@
 	<inherits name='com.calclab.emite.core.EmiteCore' />
 	<inherits name='com.calclab.emite.im.EmiteIM' />
 	<inherits name='com.calclab.emite.browser.EmiteBrowser' />
+	<inherits name='com.calclab.hablar.basic.HablarBasic' />
 
 	<source path="client" />
 	<entry-point class="com.calclab.hablar.chat.client.HablarChat" />

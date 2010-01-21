@@ -3,6 +3,7 @@
 <module rename-to="HablarSearch">
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name='com.calclab.hablar.basic.HablarBasic' />
+	<inherits name='com.calclab.hablar.roster.HablarRoster' />
 	<inherits name='com.calclab.emite.core.EmiteCore' />
 	<inherits name='com.calclab.emite.browser.EmiteBrowser' />
 	<inherits name='com.calclab.emite.xep.search.EmiteSearch' />
