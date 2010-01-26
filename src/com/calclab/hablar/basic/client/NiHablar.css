@@ -3,6 +3,11 @@
 	border: 3px solid #E9E9E9;
 }
 
+.list {
+    width: 100%;
+    overflow: hidden;
+}
+
 .contents {
 	background-color: white;
 	height: 100%;
@@ -21,10 +26,6 @@
 	border: 1px solid #BBBBBB;
 }
 
-.list {
-	width: 100%;
-	overflow: hidden;
-}
 
 .scroll {
 	background-color: white;

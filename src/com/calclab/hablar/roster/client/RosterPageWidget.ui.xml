@@ -2,7 +2,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
     xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
-<ui:style src="../../basic/client/Hablar.css" field="hablar" />
+<ui:style src="NiHablar.css" field="hablar" />
 
     <ui:style type="com.calclab.hablar.roster.client.RosterPageWidget.Style">
         .action {
