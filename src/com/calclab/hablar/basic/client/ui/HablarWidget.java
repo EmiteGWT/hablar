@@ -7,11 +7,15 @@ import com.calclab.hablar.basic.client.ui.page.PageHeader;
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.hablar.basic.client.ui.pages.Pages;
+import com.calclab.hablar.basic.client.ui.pages.PagesPanel;
 import com.calclab.hablar.basic.client.ui.pages.PagesWidget;
+import com.calclab.hablar.basic.client.ui.pages.panel.AccordionPages;
+import com.calclab.hablar.basic.client.ui.pages.panel.TabPages;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
@@ -23,6 +27,10 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  */
 public class HablarWidget extends Composite implements HablarView {
+
+    public static enum Layout {
+	accordion, tabs
+    }
 
     interface ChatPanelUiBinder extends UiBinder<Widget, HablarWidget> {
     }
@@ -45,6 +53,16 @@ public class HablarWidget extends Composite implements HablarView {
     private final Pages pages;
     private PageView dockedPageView;
 
+    @UiConstructor
+    public HablarWidget(Layout layout) {
+	this(layout == Layout.accordion ? new AccordionPages() : new TabPages());
+    }
+
+    public HablarWidget(PagesPanel panel) {
+	this(new PagesWidget(panel));
+    }
+
+    @Deprecated
     public HablarWidget(PagesWidget pages) {
 	initWidget(uiBinder.createAndBindUi(this));
 	this.pages = pages;
