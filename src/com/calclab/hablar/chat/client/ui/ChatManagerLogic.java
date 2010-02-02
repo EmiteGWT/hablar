@@ -44,8 +44,8 @@ public class ChatManagerLogic {
 	roster = Suco.get(Roster.class);
 	final ChatManager chatManager = Suco.get(ChatManager.class);
 
-	if (config.uri != null) {
-	    chatManager.open(config.uri);
+	if (config.openChat != null) {
+	    chatManager.open(config.openChat);
 	}
 
 	chatManager.onChatCreated(new Listener<Chat>() {

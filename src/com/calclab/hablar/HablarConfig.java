@@ -38,6 +38,7 @@ public class HablarConfig {
 	return config;
     }
 
+    // FIXME: implemented in PageAssist
     private static boolean isTrueMeta(String id) {
 	return !"false".equals(PageAssist.getMeta(id));
     }
