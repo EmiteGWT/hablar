@@ -16,6 +16,7 @@ import com.calclab.hablar.chat.client.ChatConfig;
 import com.calclab.hablar.chat.client.ui.ChatManagerLogic;
 import com.calclab.hablar.chat.client.ui.ChatPageView;
 import com.calclab.hablar.chat.client.ui.ChatManagerLogic.ChatPageFactory;
+import com.calclab.hablar.testing.EmiteTester;
 
 public class ChatManagerLogicTest {
 

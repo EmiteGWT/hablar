@@ -19,7 +19,7 @@ import org.mockito.stubbing.Answer;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
-import com.calclab.hablar.chat.client.EmiteTester;
+import com.calclab.hablar.testing.EmiteTester;
 import com.calclab.hablar.testing.display.DisplayMocker;
 import com.calclab.hablar.testing.display.PopupMenuViewStub;
 

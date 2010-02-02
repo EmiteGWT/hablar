@@ -11,7 +11,7 @@ import org.mockito.Mockito;
 
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
-import com.calclab.hablar.chat.client.EmiteTester;
+import com.calclab.hablar.testing.EmiteTester;
 import com.calclab.suco.testing.events.MockedListener;
 
 public class ChatSignalsLogicVisibUnFocusTest {

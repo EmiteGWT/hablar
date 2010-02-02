@@ -2,10 +2,11 @@ package com.calclab.hablar.basic.client.ui.page;
 
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -39,14 +40,30 @@ class HeaderWidget extends Composite implements PageHeader {
 
     private Visibility visibility;
 
-    private PageLogic logic;
-
     public HeaderWidget(final boolean closeable) {
 	final Widget element = uiBinder.createAndBindUi(this);
 	initWidget(element);
 	close.setVisible(closeable);
 	this.currentStyles = defaultStyles;
 	// UIUtils.setTextSelectionEnabled(title.getElement(), false);
+    }
+
+    @Override
+    public HandlerRegistration addClickHandler(ClickHandler handler) {
+	final HandlerRegistration titleRegistration = title.addClickHandler(handler);
+	final HandlerRegistration iconRegistration = icon.addClickHandler(handler);
+	return new HandlerRegistration() {
+	    @Override
+	    public void removeHandler() {
+		titleRegistration.removeHandler();
+		iconRegistration.removeHandler();
+	    }
+	};
+    }
+
+    @Override
+    public HasClickHandlers getCloseIcon() {
+	return close;
     }
 
     @Override
@@ -70,11 +87,6 @@ class HeaderWidget extends Composite implements PageHeader {
 	title.ensureDebugId(id);
     }
 
-    @Override
-    public void setLogic(PageLogic logic) {
-	this.logic = logic;
-    }
-
     public void setStyles(final HeaderStyles styles) {
 	this.currentStyles = styles;
 	applyStyles();
@@ -95,21 +107,6 @@ class HeaderWidget extends Composite implements PageHeader {
 	    header.getElement().removeClassName(currentStyles.open());
 	    header.getElement().addClassName(currentStyles.closed());
 	}
-    }
-
-    @UiHandler("title")
-    void handleActivateTitle(final ClickEvent event) {
-	logic.fireOpen();
-    }
-
-    @UiHandler("close")
-    void handleClose(final ClickEvent event) {
-	logic.fireClose();
-    }
-
-    @UiHandler("icon")
-    void onIconClicked(final ClickEvent event) {
-	logic.fireOpen();
     }
 
     void setHeaderTitle(final String title) {

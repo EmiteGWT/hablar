@@ -17,8 +17,8 @@ import org.junit.Test;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.xep.search.client.SearchResultItem;
-import com.calclab.hablar.chat.client.EmiteTester;
 import com.calclab.hablar.search.client.SearchPageView.Level;
+import com.calclab.hablar.testing.EmiteTester;
 import com.calclab.hablar.testing.display.DisplayMocker;
 import com.calclab.hablar.testing.display.HasClickHandlersStub;
 import com.calclab.hablar.testing.display.PopupMenuViewStub;

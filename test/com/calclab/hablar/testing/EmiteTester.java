@@ -1,6 +1,8 @@
-package com.calclab.hablar.chat.client;
+package com.calclab.hablar.testing;
 
 import static org.mockito.Mockito.mock;
+
+import org.mockito.Mockito;
 
 import com.calclab.emite.core.client.EmiteCoreModule;
 import com.calclab.emite.core.client.xmpp.session.Session;
@@ -13,8 +15,12 @@ import com.calclab.emite.xtesting.SessionTester;
 import com.calclab.hablar.basic.client.i18n.Msg;
 import com.calclab.hablar.basic.client.ui.DefaultEventBus;
 import com.calclab.hablar.basic.client.ui.EventBus;
+import com.calclab.hablar.chat.client.ChatManagerTester;
+import com.calclab.hablar.chat.client.PresenceManagerTester;
 import com.calclab.hablar.roster.client.RosterTester;
 import com.calclab.hablar.search.client.SearchManagerTester;
+import com.calclab.hablar.testing.display.DisplayStubFactory;
+import com.calclab.hablar.testing.display.ReturnsSingletonMocks;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.SucoCoreModule;
 import com.calclab.suco.client.ioc.Container;
@@ -23,6 +29,8 @@ import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.ioc.decorator.NoDecoration;
 
 public class EmiteTester {
+    private static DisplayStubFactory factory = DisplayStubFactory.instance;
+
     public final SessionTester session;
 
     public final ChatManagerTester chatManager;
@@ -58,6 +66,11 @@ public class EmiteTester {
 
 	presenceManager = new PresenceManagerTester();
 	install(container, PresenceManager.class, presenceManager);
+    }
+
+    public <T> T mockDisplay(Class<T> classToMock) {
+	T mock = Mockito.mock(classToMock, new ReturnsSingletonMocks(factory));
+	return mock;
     }
 
     public void setSessionReady(String uri) {
