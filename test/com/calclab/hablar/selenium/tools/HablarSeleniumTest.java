@@ -6,36 +6,31 @@ import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 
+import com.calclab.hablar.selenium.chat.ChatPageObject;
+import com.calclab.hablar.selenium.login.LoginPageObject;
+import com.calclab.hablar.selenium.openchat.OpenChatPageObject;
+import com.calclab.hablar.selenium.roster.RosterPageObject;
+import com.calclab.hablar.selenium.search.SearchPageObject;
 import com.calclab.suco.client.Suco;
 
 public abstract class HablarSeleniumTest {
     public static boolean mustCloseFinally = true;
+    protected LoginPageObject login;
+    protected RosterPageObject roster;
+    protected OpenChatPageObject openChat;
+    protected ChatPageObject chat;
+    protected SearchPageObject search;
+    protected GenericWebTester webtester;
 
     @AfterSuite
-    public void AfterSuite() {
+    public void closeBrowser() {
 	// We try to only open one window for all our selenium tests
 	if (mustCloseFinally) {
-	    closeBrowser();
+	    webtester.close();
 	}
-    }
-
-    @BeforeMethod
-    public void beforeMethod() {
-	// This reload the baseUrl and then "starts" the GWT page to test, in
-	// every test method
-	goHome();
-    }
-
-    @BeforeSuite
-    public void beforeSuite(final ITestContext context) {
-	Suco.install(new SeleniumModule());
-    }
-
-    public void closeBrowser() {
-	getWebTester().close();
     }
 
     @DataProvider(name = "correctlogin")
@@ -51,12 +46,24 @@ public abstract class HablarSeleniumTest {
 		{ "test1@localhost", "test" }, { "", "" } };
     }
 
+    @BeforeMethod
     public void goHome() {
-	getWebTester().home();
+	webtester.home();
     }
 
     public void moveMouseAt(final Point point) {
-	getWebTester().moveMouseAt(point);
+	webtester.moveMouseAt(point);
+    }
+
+    @BeforeTest
+    public void setupSeleniumModule(final ITestContext context) {
+	Suco.install(new SeleniumModule());
+	webtester = Suco.get(GenericWebTester.class);
+	login = Suco.get(LoginPageObject.class);
+	roster = Suco.get(RosterPageObject.class);
+	openChat = Suco.get(OpenChatPageObject.class);
+	search = Suco.get(SearchPageObject.class);
+	chat = Suco.get(ChatPageObject.class);
     }
 
     public void sleep(final int milliseconds) {
@@ -65,10 +72,6 @@ public abstract class HablarSeleniumTest {
 	} catch (final InterruptedException e) {
 	    Assert.fail("Exception in sleep method", e);
 	}
-    }
-
-    private GenericWebTester getWebTester() {
-	return Suco.get(GenericWebTester.class);
     }
 
 }

@@ -40,15 +40,11 @@ public class RosterPageObject extends PageObject {
 	return findElement(new ByIdOrName(DebugId.getFromJid(RosterItemLogic.ROSTERITEM_MENU_DEB_ID, jid)));
     }
 
-    public RenderedWebElement Header() {
-	return getHeader();
-    }
-
     public WebElement OpenChatIcon() {
 	return openChatIcon;
     }
 
-    public WebElement SearchIcon() {
+    public WebElement getSearchIcon() {
 	return searchIcon;
     }
 }

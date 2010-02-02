@@ -3,29 +3,17 @@ package com.calclab.hablar.selenium.search;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.calclab.hablar.selenium.chat.ChatPageObject;
-import com.calclab.hablar.selenium.login.LoginPageObject;
-import com.calclab.hablar.selenium.roster.RosterPageObject;
 import com.calclab.hablar.selenium.tools.HablarSeleniumTest;
 import com.calclab.hablar.selenium.tools.I18nHelper;
-import com.calclab.hablar.selenium.tools.Lorem;
 import com.calclab.hablar.selenium.tools.SeleniumConstants;
 import com.calclab.suco.client.Suco;
 
 public class SearchTest extends HablarSeleniumTest {
-    private LoginPageObject login;
-    private RosterPageObject roster;
-    private SearchPageObject search;
     private I18nHelper i18n;
-    private ChatPageObject chat;
 
     @BeforeClass
     public void beforeClass() {
-	login = Suco.get(LoginPageObject.class);
-	roster = Suco.get(RosterPageObject.class);
-	search = Suco.get(SearchPageObject.class);
 	i18n = Suco.get(I18nHelper.class);
-	chat = Suco.get(ChatPageObject.class);
     }
 
     @Test()
@@ -56,23 +44,14 @@ public class SearchTest extends HablarSeleniumTest {
 	search.waitForResult(i18n.get("searchResultsFor", "IMPOSSIBLE XXXXZZZÑÑÑ", 0));
     }
 
-    @Test()
-    public void testChatLoremPaste() {
-	loginSearchTestUserAndChat();
-	chat.TalkBox().sendKeys(Lorem.latin);
-	chat.TalkBox().sendKeys(Lorem.chinese);
-	chat.TalkBox().sendKeys(":P\n");
-	chat.waitFor(":P\n");
-    }
-
     private void loginAndSearchClick() {
 	login.signInDefUser();
 	login.assertIsConnectedAs(SeleniumConstants.USERNODE);
-	roster.Header().click();
-	roster.SearchIcon().click();
+	roster.getHeader().click();
+	roster.getSearchIcon().click();
 	// Only to test accordion
-	roster.Header().click();
-	search.Header().click();
+	roster.getHeader().click();
+	search.getHeader().click();
     }
 
     private void loginSearchTestUserAndChat() {

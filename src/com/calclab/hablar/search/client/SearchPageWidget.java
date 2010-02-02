@@ -67,16 +67,20 @@ public class SearchPageWidget extends PageWidget implements SearchPageView {
     Label message;
     @UiField
     Button search;
+
     private final SearchPageLogic logic;
 
     public SearchPageWidget(HablarEventBus hablarEventBus, Visibility visibility, boolean closeable) {
 	super(hablarEventBus, TYPE, visibility, closeable);
 	super.setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
+
 	final Msg i18n = Suco.get(Msg.class);
+
 	term.ensureDebugId(TERM_DEB_ID);
-	term.setText(i18n.typeToSearchUsers());
 	message.ensureDebugId(MESSAGE_DEB_ID);
+	search.ensureDebugId("SearchPageWidget-search");
+	term.setText(i18n.typeToSearchUsers());
 	setHeaderTitle("Search users");
 	setHeaderIconClass(HablarIcons.get(HablarIcons.IconType.search));
 	logic = new SearchPageLogic(hablarEventBus, this);

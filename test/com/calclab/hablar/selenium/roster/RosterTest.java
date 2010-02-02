@@ -36,8 +36,8 @@ public class RosterTest extends HablarSeleniumTest {
     private void loginAndSearchClick() {
 	login.signInDefUser();
 	login.assertIsConnectedAs(SeleniumConstants.USERNODE);
-	roster.Header().click();
-	roster.SearchIcon().click();
+	roster.getHeader().click();
+	roster.getSearchIcon().click();
     }
 
 }

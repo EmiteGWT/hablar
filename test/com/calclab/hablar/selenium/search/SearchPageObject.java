@@ -20,6 +20,9 @@ public class SearchPageObject extends PageObject {
     @FindBy(id = DebugId.PRE + SearchPageWidget.MESSAGE_DEB_ID)
     private RenderedWebElement message;
 
+    @FindBy(id = "gwt-debug-SearchPageWidget-search")
+    private RenderedWebElement searchButton;
+
     public RenderedWebElement ChatMenuItem() {
 	return findElement(new ByIdOrName(DebugId.getGwtId(SearchPageLogic.CHAT_DEB_ID)));
     }
@@ -36,12 +39,12 @@ public class SearchPageObject extends PageObject {
 	return findJid(SearchResultItemWidget.SEARCHRESULT_ITEM_NAME_DEB_ID, jid);
     }
 
-    public RenderedWebElement getTerm() {
-	return term;
+    public RenderedWebElement getSearchButton() {
+	return searchButton;
     }
 
-    public RenderedWebElement Header() {
-	return getHeader();
+    public RenderedWebElement getTerm() {
+	return term;
     }
 
     public RenderedWebElement Message() {
