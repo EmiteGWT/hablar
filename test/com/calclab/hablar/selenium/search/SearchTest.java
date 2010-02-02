@@ -3,7 +3,7 @@ package com.calclab.hablar.selenium.search;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.calclab.hablar.selenium.tools.HablarSeleniumTest;
+import com.calclab.hablar.selenium.HablarSeleniumTest;
 import com.calclab.hablar.selenium.tools.I18nHelper;
 import com.calclab.hablar.selenium.tools.SeleniumConstants;
 import com.calclab.suco.client.Suco;
@@ -28,8 +28,8 @@ public class SearchTest extends HablarSeleniumTest {
     @Test()
     public void testBasicSearchAndChat() {
 	loginSearchTestUserAndChat();
-	chat.TalkBox().sendKeys("Hi ;)\n");
-	chat.TalkBox().sendKeys("some echo tests\n");
+	chat.getTalkBox().sendKeys("Hi ;)\n");
+	chat.getTalkBox().sendKeys("some echo tests\n");
 	// Uncomment to don't close the window
 	// mustCloseFinally = false;
     }

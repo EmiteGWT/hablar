@@ -9,7 +9,7 @@ import com.calclab.hablar.basic.client.ui.HablarLogic;
 import com.calclab.hablar.basic.client.ui.utils.DebugId;
 import com.calclab.hablar.roster.client.RosterItemLogic;
 import com.calclab.hablar.roster.client.RosterPageWidget;
-import com.calclab.hablar.selenium.tools.PageObject;
+import com.calclab.hablar.selenium.PageObject;
 
 public class RosterPageObject extends PageObject {
 

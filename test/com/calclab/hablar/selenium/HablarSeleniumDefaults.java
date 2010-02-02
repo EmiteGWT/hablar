@@ -1,4 +1,4 @@
-package com.calclab.hablar.selenium.tools;
+package com.calclab.hablar.selenium;
 
 import java.awt.Point;
 
@@ -14,9 +14,12 @@ import com.calclab.hablar.selenium.login.LoginPageObject;
 import com.calclab.hablar.selenium.openchat.OpenChatPageObject;
 import com.calclab.hablar.selenium.roster.RosterPageObject;
 import com.calclab.hablar.selenium.search.SearchPageObject;
+import com.calclab.hablar.selenium.tools.GenericWebTester;
+import com.calclab.hablar.selenium.tools.SeleniumConstants;
+import com.calclab.hablar.selenium.tools.SeleniumModule;
 import com.calclab.suco.client.Suco;
 
-public abstract class HablarSeleniumTest {
+public class HablarSeleniumDefaults {
     public static boolean mustCloseFinally = true;
     protected LoginPageObject login;
     protected RosterPageObject roster;
@@ -73,5 +76,4 @@ public abstract class HablarSeleniumTest {
 	    Assert.fail("Exception in sleep method", e);
 	}
     }
-
 }

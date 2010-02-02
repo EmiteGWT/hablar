@@ -3,7 +3,7 @@ package com.calclab.hablar.selenium.openchat;
 import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.calclab.hablar.selenium.tools.PageObject;
+import com.calclab.hablar.selenium.PageObject;
 
 public class OpenChatPageObject extends PageObject {
 

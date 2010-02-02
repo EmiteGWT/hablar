@@ -2,7 +2,7 @@ package com.calclab.hablar.selenium.search;
 
 import org.testng.annotations.Test;
 
-import com.calclab.hablar.selenium.tools.HablarSeleniumTest;
+import com.calclab.hablar.selenium.HablarSeleniumTest;
 
 public class SearchPageButtonTest extends HablarSeleniumTest {
 

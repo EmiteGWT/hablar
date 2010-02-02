@@ -1,4 +1,4 @@
-package com.calclab.hablar.selenium.tools;
+package com.calclab.hablar.selenium;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.RenderedWebElement;
@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import com.calclab.hablar.selenium.tools.I18nHelper;
 import com.calclab.suco.client.Suco;
 
 public abstract class PageObject {

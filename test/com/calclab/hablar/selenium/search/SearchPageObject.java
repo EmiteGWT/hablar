@@ -8,7 +8,7 @@ import com.calclab.hablar.basic.client.ui.utils.DebugId;
 import com.calclab.hablar.search.client.SearchPageLogic;
 import com.calclab.hablar.search.client.SearchPageWidget;
 import com.calclab.hablar.search.client.SearchResultItemWidget;
-import com.calclab.hablar.selenium.tools.PageObject;
+import com.calclab.hablar.selenium.PageObject;
 
 public class SearchPageObject extends PageObject {
     @FindBy(id = DebugId.PRE + SearchPageWidget.TERM_DEB_ID)

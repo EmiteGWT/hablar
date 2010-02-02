@@ -5,7 +5,7 @@ import org.openqa.selenium.support.FindBy;
 
 import com.calclab.hablar.basic.client.ui.utils.DebugId;
 import com.calclab.hablar.chat.client.ui.ChatPageWidget;
-import com.calclab.hablar.selenium.tools.PageObject;
+import com.calclab.hablar.selenium.PageObject;
 
 public class ChatPageObject extends PageObject {
     @FindBy(id = DebugId.PRE + ChatPageWidget.ID)
@@ -36,10 +36,6 @@ public class ChatPageObject extends PageObject {
 
     public RenderedWebElement Header() {
 	return getHeader();
-    }
-
-    public RenderedWebElement TalkBox() {
-	return getTalkBox();
     }
 
     public void waitFor(final String text) {
