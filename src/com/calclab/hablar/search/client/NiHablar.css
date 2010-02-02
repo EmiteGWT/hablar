@@ -1,12 +1,6 @@
-.page {
-	background-color: #E9E9E9;
-	border: 3px solid #E9E9E9;
-}
 
-.list {
-    width: 100%;
-    overflow: hidden;
-}
+
+
 
 .contents {
 	background-color: white;
@@ -14,11 +8,7 @@
 	overflow: auto;
 }
 
-.panel {
-	width: 100%;
-	overflow: hidden;
-	background-color: #E9E9E9;
-}
+
 
 .textBox {
 	width: 98%;
@@ -26,13 +16,6 @@
 	border: 1px solid #BBBBBB;
 }
 
-
-.scroll {
-	background-color: white;
-	border-left: 1px solid #BBBBBB;
-	/* This border affects scroll visibility */
-	border-top: 1px solid #BBBBBB;
-}
 
 .icon {
 	display: block;

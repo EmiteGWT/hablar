@@ -2,8 +2,6 @@
 
 Hablar emite widget
 
-A skeleton for a new emite ui widget.
-
 LPGL v3
 
 = Pre-requisites =
@@ -21,10 +19,5 @@ NOTES:
 (*) Each of the url are the same module running with different configurations 
 using meta html parameters (see *.html files in war folder)
 
-- HablarComplete: all the developed pages shown. Not autologin.
-- HablarNoLogin: configured without login page and autologin feature
-- HablarRosterOnly: only roster and ability to open chats. Autologin.
-- HablarChatOnly: only a chat with one buddy. Autologin.
-
-
 You can open two (or more) browser windows to chat with different users.
+

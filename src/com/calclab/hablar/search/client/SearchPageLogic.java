@@ -13,8 +13,15 @@ import com.calclab.hablar.basic.client.ui.lists.ListItemView;
 import com.calclab.hablar.basic.client.ui.lists.ListLogic;
 import com.calclab.hablar.basic.client.ui.menu.MenuAction;
 import com.calclab.hablar.basic.client.ui.menu.PopupMenuView;
+import com.calclab.hablar.basic.client.ui.page.PageView;
+import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.hablar.search.client.SearchPageView.Level;
 import com.calclab.suco.client.Suco;
+import com.calclab.suco.client.events.Listener;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.UIObject;
 
@@ -38,6 +45,7 @@ public class SearchPageLogic implements ListLogic {
 	roster = Suco.get(Roster.class);
 	i18n = Suco.get(Msg.class);
 	createMenus();
+	bind();
     }
 
     @Override
@@ -59,23 +67,24 @@ public class SearchPageLogic implements ListLogic {
 	view.setMenuVisible(over);
     }
 
-    public void search(final String text) {
-	view.clearResults();
-	view.showMessage("Searching " + text + "...", Level.info);
-	final HashMap<String, String> query = new HashMap<String, String>();
-	query.put("nick", text + "*");
-
-	manager.search(query, new ResultListener<List<SearchResultItem>>() {
+    private void bind() {
+	view.getSearchButton().addClickHandler(new ClickHandler() {
 	    @Override
-	    public void onFailure(final String message) {
-		view.showMessage("Couldn't retrieve results", Level.error);
+	    public void onClick(ClickEvent event) {
+		search();
 	    }
-
+	});
+	view.getSearchChange().addChangeHandler(new ChangeHandler() {
 	    @Override
-	    public void onSuccess(final List<SearchResultItem> items) {
-		view.showMessage(i18n.searchResultsFor(text, items.size()), Level.success);
-		for (final SearchResultItem item : items) {
-		    view.addResult(item);
+	    public void onChange(ChangeEvent event) {
+		search();
+	    }
+	});
+	view.onVisibilityChanged(new Listener<PageView>() {
+	    @Override
+	    public void onEvent(PageView pageView) {
+		if (pageView.getVisibility() == Visibility.focused) {
+		    view.getSearchFocus().setFocus(true);
 		}
 	    }
 	});
@@ -111,6 +120,33 @@ public class SearchPageLogic implements ListLogic {
 	    }
 	});
 
+    }
+
+    private void search() {
+	final String text = view.getSearchTerm().getText().trim();
+	if (text.length() > 0) {
+	    view.clearResults();
+	    view.showMessage("Searching " + text + "...", Level.info);
+	    final HashMap<String, String> query = new HashMap<String, String>();
+	    query.put("nick", text + "*");
+
+	    manager.search(query, new ResultListener<List<SearchResultItem>>() {
+		@Override
+		public void onFailure(final String message) {
+		    view.showMessage("Couldn't retrieve results", Level.error);
+		}
+
+		@Override
+		public void onSuccess(final List<SearchResultItem> items) {
+		    view.showMessage(i18n.searchResultsFor(text, items.size()), Level.success);
+		    for (final SearchResultItem item : items) {
+			view.addResult(item);
+		    }
+		}
+	    });
+	    view.getSearchTerm().setText("");
+	    view.getSearchFocus().setFocus(true);
+	}
     }
 
     void onChatWith(final SearchResultItemView result) {

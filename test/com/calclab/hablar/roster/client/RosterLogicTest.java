@@ -11,6 +11,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.Collection;
 
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
@@ -20,9 +21,8 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
 import com.calclab.hablar.chat.client.EmiteTester;
-import com.calclab.hablar.roster.client.RosterItemView;
-import com.calclab.hablar.roster.client.RosterLogic;
-import com.calclab.hablar.roster.client.RosterView;
+import com.calclab.hablar.testing.display.DisplayMocker;
+import com.calclab.hablar.testing.display.PopupMenuViewStub;
 
 public class RosterLogicTest {
 
@@ -34,7 +34,9 @@ public class RosterLogicTest {
 	HablarIcons.setStyles(new HablarIcons());
 	tester = new EmiteTester();
 	AbstractLogicTest.registerI18n();
-	view = mock(RosterView.class);
+	view = DisplayMocker.mock(RosterView.class);
+	when(view.getItemMenu()).thenReturn(new PopupMenuViewStub<RosterItem>());
+
 	when(view.createItemView()).thenAnswer(new Answer<RosterItemView>() {
 	    @Override
 	    public RosterItemView answer(final InvocationOnMock invocation) throws Throwable {

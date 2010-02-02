@@ -10,13 +10,17 @@ import com.calclab.hablar.basic.client.ui.menu.PopupMenuView;
 import com.calclab.hablar.basic.client.ui.page.PageWidget;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.dom.client.HasChangeHandlers;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Focusable;
+import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
@@ -47,25 +51,22 @@ public class SearchPageWidget extends PageWidget implements SearchPageView {
     public static final String TYPE = "Search";
 
     private static SearchPageUiBinder uiBinder = GWT.create(SearchPageUiBinder.class);
-    private final SearchPageLogic logic;
 
     @UiField
     LayoutPanel self;
-
     @UiField
     ScrollPanel scroll;
-
     @UiField
     FlowPanel results, messagePanel;
-
     @UiField
     public Styles style;
-
     @UiField
     TextBox term;
-
     @UiField
     Label message;
+    @UiField
+    Button search;
+    private final SearchPageLogic logic;
 
     public SearchPageWidget(Visibility visibility, boolean closeable) {
 	super(TYPE, visibility, closeable);
@@ -75,9 +76,9 @@ public class SearchPageWidget extends PageWidget implements SearchPageView {
 	term.ensureDebugId(TERM_DEB_ID);
 	term.setText(i18n.typeToSearchUsers());
 	message.ensureDebugId(MESSAGE_DEB_ID);
-	logic = new SearchPageLogic(this);
 	setHeaderTitle("Search users");
 	setHeaderIconClass(HablarIcons.get(HablarIcons.IconType.search));
+	logic = new SearchPageLogic(this);
     }
 
     public void addResult(final SearchResultItem item) {
@@ -94,17 +95,31 @@ public class SearchPageWidget extends PageWidget implements SearchPageView {
 	return popupMenu;
     }
 
+    @Override
+    public HasClickHandlers getSearchButton() {
+	return search;
+    }
+
+    @Override
+    public HasChangeHandlers getSearchChange() {
+	return term;
+    }
+
+    @Override
+    public Focusable getSearchFocus() {
+	return term;
+    }
+
+    @Override
+    public HasText getSearchTerm() {
+	return term;
+    }
+
     @UiHandler("term")
     public void onFocus(final FocusEvent evt) {
 	term.setText("");
 	term.getElement().removeClassName(style.unfocus());
 	term.getElement().addClassName(style.focus());
-    }
-
-    @UiHandler("term")
-    public void onSearch(final ChangeEvent evt) {
-	logic.search(term.getText());
-	term.setText("");
     }
 
     @Override

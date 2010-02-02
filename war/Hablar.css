@@ -1,4 +1,42 @@
 
+/** HABLAR PAGE COMMON **/
+
+.hablar-Page {
+    background-color: #E9E9E9;
+    border: 3px solid #E9E9E9;
+}
+
+.hablar-Page .panel {
+    width: 100%;
+    overflow: hidden;
+    background-color: #E9E9E9;
+}
+.hablar-Page .scroll {
+    background-color: white;
+    border-left: 1px solid #BBBBBB;
+    /* This border affects scroll visibility */
+    border-top: 1px solid #BBBBBB;
+}
+
+.hablar-Page .list {
+    width: 100%;
+    overflow: hidden;
+}
+
+/** SEARCH PAGE **/
+.hablar-SearchPage .searchBox {
+	width: 78%;
+    padding: 3px;
+    border: 1px solid #BBBBBB;
+    margin-right: 1%;
+}
+.hablar-searchPage .gwt-Button {
+	font-size: 75%;
+	width: 20%;
+}
+
+
+/** OVERLAY **/
 
 .hablar-Overlay {
 	background-color: black;
@@ -10,6 +48,8 @@
 .hablar-Overlay .form {
 	margin: 10px;
 }
+
+/** FORMS **/
 
 .form p {
 	width: 100%;
