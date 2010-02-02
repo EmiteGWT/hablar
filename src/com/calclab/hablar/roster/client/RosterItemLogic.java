@@ -4,6 +4,7 @@ import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
 import com.calclab.hablar.basic.client.ui.utils.DebugId;
+import com.google.gwt.core.client.GWT;
 
 public class RosterItemLogic {
     public static final String ROSTERITEM_MENU_DEB_ID = "RosterItemLogic-item-menu-";
@@ -11,6 +12,7 @@ public class RosterItemLogic {
 
     public static HablarIcons.IconType getIcon(final RosterItem item) {
 	final Show show = item.getShow();
+	GWT.log("ROSTER PRESENCE: " + show, null);
 	if (show == Show.dnd) {
 	    return HablarIcons.IconType.buddyDnd;
 	} else if (show == Show.xa) {

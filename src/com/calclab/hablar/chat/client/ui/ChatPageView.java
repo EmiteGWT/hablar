@@ -11,11 +11,11 @@ public interface ChatPageView extends PageView {
 
     void clearAndFocus();
 
+    void setControlsVisible(boolean visible);
+
     void setHeaderTitle(String name);
 
-    void setPresence(Show show);
-
-    void setControlsVisible(boolean visible);
+    void setPresence(boolean available, Show show);
 
     void showMessage(String name, String body, MessageType type);
 

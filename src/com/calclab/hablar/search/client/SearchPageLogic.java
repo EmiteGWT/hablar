@@ -8,8 +8,8 @@ import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.xep.search.client.SearchManager;
 import com.calclab.emite.xep.search.client.SearchResultItem;
+import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.basic.client.i18n.Msg;
-import com.calclab.hablar.basic.client.ui.EventBus;
 import com.calclab.hablar.basic.client.ui.lists.ListItemView;
 import com.calclab.hablar.basic.client.ui.lists.ListLogic;
 import com.calclab.hablar.basic.client.ui.menu.MenuAction;
@@ -40,10 +40,10 @@ public class SearchPageLogic implements ListLogic {
     private PopupMenuView<SearchResultItemView> addToRosterMenu;
     private PopupMenuView<SearchResultItemView> removeFromRosterMenu;
     private final Msg i18n;
-    private final EventBus eventBus;
+    private final HablarEventBus hablarEventBus;
 
-    public SearchPageLogic(EventBus eventBus, final SearchPageView view) {
-	this.eventBus = eventBus;
+    public SearchPageLogic(HablarEventBus hablarEventBus, final SearchPageView view) {
+	this.hablarEventBus = hablarEventBus;
 	this.view = view;
 	manager = Suco.get(SearchManager.class);
 	roster = Suco.get(Roster.class);
@@ -85,7 +85,7 @@ public class SearchPageLogic implements ListLogic {
 	    }
 	});
 
-	eventBus.addHandler(VisibilityChangedEvent.TYPE, new VisibilityChangedHandler() {
+	hablarEventBus.addHandler(VisibilityChangedEvent.TYPE, new VisibilityChangedHandler() {
 	    @Override
 	    public void onVisibilityChanged(VisibilityChangedEvent event) {
 		PageLogic page = event.getPage();

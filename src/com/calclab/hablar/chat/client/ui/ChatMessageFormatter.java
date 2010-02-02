@@ -11,12 +11,15 @@ public class ChatMessageFormatter {
 	return text.length() > length ? text.substring(0, length - 3) + "..." : text;
     }
 
-    public static String format(final String messageOrig) {
-	String message = messageOrig;
-	message = TextUtils.escape(message);
-	message = message.replaceAll("\n", "<br>\n");
-	message = formatUrls(message);
-	return message;
+    public static String format(final String message) {
+	if (message != null) {
+	    String formatted = TextUtils.escape(message);
+	    formatted = formatted.replaceAll("\n", "<br>\n");
+	    formatted = formatUrls(formatted);
+	    return formatted;
+	} else {
+	    return null;
+	}
     }
 
     private static String formatUrls(String message) {

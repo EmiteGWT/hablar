@@ -1,8 +1,8 @@
 package com.calclab.hablar.roster.client;
 
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.basic.client.i18n.Msg;
-import com.calclab.hablar.basic.client.ui.EventBus;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
 import com.calclab.hablar.basic.client.ui.menu.PopupMenu;
 import com.calclab.hablar.basic.client.ui.menu.PopupMenuView;
@@ -54,8 +54,8 @@ public class RosterPageWidget extends PageWidget implements RosterView {
 
     private PopupMenu<RosterItem> itemMenu;
 
-    public RosterPageWidget(EventBus eventBus, Visibility visibility) {
-	super(eventBus, RosterView.TYPE, visibility, false);
+    public RosterPageWidget(HablarEventBus hablarEventBus, Visibility visibility) {
+	super(hablarEventBus, RosterView.TYPE, visibility, false);
 	setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
 	final Msg i18n = Suco.get(Msg.class);

@@ -3,7 +3,7 @@ package com.calclab.hablar.search.client;
 import java.util.List;
 
 import com.calclab.hablar.basic.client.Hablar;
-import com.calclab.hablar.basic.client.ui.EventBus;
+import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.basic.client.ui.page.PageView;
@@ -18,11 +18,11 @@ public class HablarSearch {
 
     public static void install(Hablar view) {
 
-	installSearch(view.getEventBus(), view.getPages());
+	installSearch(view.getHablarEventBus(), view.getPages());
 
     }
 
-    private static void installSearch(EventBus eventBus, final Pages pages) {
+    private static void installSearch(HablarEventBus hablarEventBus, final Pages pages) {
 	GWT.log("INSTALL SEARCH", null);
 
 	List<PageView> rosters = pages.getPagesOfType(RosterView.TYPE);
@@ -31,7 +31,7 @@ public class HablarSearch {
 	String iconStyle = HablarIcons.get(IconType.search);
 	String debugId = "HablarLogic-searchAction";
 	Visibility visibility = isRoster ? Visibility.closed : Visibility.notFocused;
-	final SearchPageWidget searchPage = new SearchPageWidget(eventBus, visibility, isRoster);
+	final SearchPageWidget searchPage = new SearchPageWidget(hablarEventBus, visibility, isRoster);
 	pages.add(searchPage);
 
 	for (PageView page : rosters) {

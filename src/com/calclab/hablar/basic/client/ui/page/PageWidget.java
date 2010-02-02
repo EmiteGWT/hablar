@@ -1,6 +1,6 @@
 package com.calclab.hablar.basic.client.ui.page;
 
-import com.calclab.hablar.basic.client.ui.EventBus;
+import com.calclab.hablar.basic.client.HablarEventBus;
 import com.google.gwt.user.client.ui.Composite;
 
 /**
@@ -13,10 +13,10 @@ public abstract class PageWidget extends Composite implements PageView {
     private final PageLogic logic;
     private final String pageType;
 
-    public PageWidget(EventBus eventBus, String pageType, Visibility visibility, final boolean closeable) {
+    public PageWidget(HablarEventBus hablarEventBus, String pageType, Visibility visibility, final boolean closeable) {
 	this.pageType = pageType;
 	this.header = new HeaderWidget(closeable);
-	logic = new PageLogic(eventBus, this, visibility);
+	logic = new PageLogic(hablarEventBus, this, visibility);
     }
 
     public PageHeader getHeader() {

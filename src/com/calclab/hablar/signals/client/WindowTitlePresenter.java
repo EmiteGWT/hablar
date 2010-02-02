@@ -1,15 +1,15 @@
 package com.calclab.hablar.signals.client;
 
+import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.basic.client.i18n.Msg;
-import com.calclab.hablar.basic.client.ui.EventBus;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.user.client.ui.HasText;
 
 public class WindowTitlePresenter {
-    public WindowTitlePresenter(EventBus eventBus, final HasText display) {
+    public WindowTitlePresenter(HablarEventBus hablarEventBus, final HasText display) {
 	final Msg i18n = Suco.get(Msg.class);
 
-	eventBus.addHandler(UnattendedChatsChangedEvent.TYPE, new UnattendedMessageHandler() {
+	hablarEventBus.addHandler(UnattendedChatsChangedEvent.TYPE, new UnattendedMessageHandler() {
 	    @Override
 	    public void handleUnattendedMessage(UnattendedChatsChangedEvent event) {
 		final int size = event.getUnattendedChatPages().getSize();

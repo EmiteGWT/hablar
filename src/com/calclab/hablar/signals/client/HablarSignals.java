@@ -1,6 +1,6 @@
 package com.calclab.hablar.signals.client;
 
-import com.calclab.hablar.basic.client.ui.EventBus;
+import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.basic.client.ui.HablarWidget;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Window;
@@ -21,9 +21,9 @@ public class HablarSignals implements EntryPoint {
 	    }
 	};
 
-	EventBus eventBus = hablar.getEventBus();
-	new UnattendedChatPages(eventBus);
-	new WindowTitlePresenter(eventBus, titleDisplay);
+	HablarEventBus hablarEventBus = hablar.getHablarEventBus();
+	new UnattendedChatPages(hablarEventBus);
+	new WindowTitlePresenter(hablarEventBus, titleDisplay);
 
     }
 

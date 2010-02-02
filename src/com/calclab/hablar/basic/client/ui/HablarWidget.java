@@ -3,7 +3,9 @@ package com.calclab.hablar.basic.client.ui;
 import static com.google.gwt.dom.client.Style.Unit.PCT;
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
+import com.calclab.hablar.basic.client.DefaultEventBus;
 import com.calclab.hablar.basic.client.Hablar;
+import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.basic.client.ui.page.HeaderStyles;
 import com.calclab.hablar.basic.client.ui.page.PageHeader;
 import com.calclab.hablar.basic.client.ui.page.PageView;
@@ -101,7 +103,7 @@ public class HablarWidget extends Composite implements Hablar {
 	overlay.clear();
     }
 
-    public EventBus getEventBus() {
+    public HablarEventBus getHablarEventBus() {
 	return eventBus;
     }
 

@@ -1,6 +1,6 @@
 package com.calclab.hablar.testing;
 
-import com.calclab.hablar.basic.client.ui.DefaultEventBus;
+import com.calclab.hablar.basic.client.DefaultEventBus;
 import com.google.gwt.event.shared.GwtEvent;
 
 public class EventBusTester extends DefaultEventBus {

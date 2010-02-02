@@ -12,9 +12,9 @@ import com.calclab.emite.im.client.presence.PresenceManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.xep.search.client.SearchManager;
 import com.calclab.emite.xtesting.SessionTester;
+import com.calclab.hablar.basic.client.DefaultEventBus;
+import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.basic.client.i18n.Msg;
-import com.calclab.hablar.basic.client.ui.DefaultEventBus;
-import com.calclab.hablar.basic.client.ui.EventBus;
 import com.calclab.hablar.chat.client.ChatManagerTester;
 import com.calclab.hablar.chat.client.PresenceManagerTester;
 import com.calclab.hablar.roster.client.RosterTester;
@@ -50,7 +50,7 @@ public class EmiteTester {
 	install(container, Msg.class, mock(Msg.class));
 
 	eventBus = new DefaultEventBus();
-	install(container, EventBus.class, eventBus);
+	install(container, HablarEventBus.class, eventBus);
 
 	session = new SessionTester();
 	install(container, Session.class, session);

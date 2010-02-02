@@ -1,11 +1,11 @@
-package com.calclab.hablar.basic.client.ui;
+package com.calclab.hablar.basic.client;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
-public interface EventBus {
+public interface HablarEventBus {
     <H extends EventHandler> HandlerRegistration addHandler(Type<H> type, H handler);
 
     void fireEvent(GwtEvent<?> event);

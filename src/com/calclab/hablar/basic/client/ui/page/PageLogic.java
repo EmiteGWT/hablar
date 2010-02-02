@@ -1,6 +1,6 @@
 package com.calclab.hablar.basic.client.ui.page;
 
-import com.calclab.hablar.basic.client.ui.EventBus;
+import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.hablar.basic.client.ui.page.events.ClosePageEvent;
 import com.calclab.hablar.basic.client.ui.page.events.OpenPageEvent;
@@ -11,11 +11,11 @@ import com.google.gwt.event.dom.client.ClickHandler;
 public class PageLogic {
     private String status;
     private Visibility visibility;
-    private final EventBus eventBus;
+    private final HablarEventBus hablarEventBus;
     private final PageView view;
 
-    public PageLogic(EventBus eventBus, PageView view, Visibility visibility) {
-	this.eventBus = eventBus;
+    public PageLogic(HablarEventBus hablarEventBus, PageView view, Visibility visibility) {
+	this.hablarEventBus = hablarEventBus;
 	this.view = view;
 	this.visibility = visibility;
 	bind(view.getHeader());
@@ -35,7 +35,7 @@ public class PageLogic {
 
     public void setStatusMessage(String status) {
 	this.status = status;
-	eventBus.fireEvent(new UserMessageEvent(status, this));
+	hablarEventBus.fireEvent(new UserMessageEvent(status, this));
 	if (visibility != Visibility.focused) {
 	    view.getHeader().requestFocus();
 	}
@@ -50,13 +50,13 @@ public class PageLogic {
 	header.addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(ClickEvent event) {
-		eventBus.fireEvent(new OpenPageEvent(PageLogic.this));
+		hablarEventBus.fireEvent(new OpenPageEvent(PageLogic.this));
 	    }
 	});
 	header.getCloseIcon().addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(ClickEvent event) {
-		eventBus.fireEvent(new ClosePageEvent(PageLogic.this));
+		hablarEventBus.fireEvent(new ClosePageEvent(PageLogic.this));
 	    }
 	});
     }

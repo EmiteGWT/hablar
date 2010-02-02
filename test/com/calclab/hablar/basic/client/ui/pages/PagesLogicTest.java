@@ -13,7 +13,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.calclab.hablar.basic.client.ui.DefaultEventBus;
+import com.calclab.hablar.basic.client.DefaultEventBus;
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 

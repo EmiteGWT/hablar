@@ -3,7 +3,7 @@ package com.calclab.hablar.signals.client;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.calclab.hablar.basic.client.ui.EventBus;
+import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.hablar.basic.client.ui.page.events.UserMessageEvent;
@@ -22,10 +22,10 @@ import com.calclab.hablar.chat.client.ui.ChatPageWidget;
 public class UnattendedChatPages {
     private final Set<PageView> unattendedChatPages;
 
-    private final EventBus eventBus;
+    private final HablarEventBus hablarEventBus;
 
-    public UnattendedChatPages(EventBus eventBus) {
-	this.eventBus = eventBus;
+    public UnattendedChatPages(HablarEventBus hablarEventBus) {
+	this.hablarEventBus = hablarEventBus;
 	unattendedChatPages = new HashSet<PageView>();
 	bind();
     }
@@ -36,24 +36,24 @@ public class UnattendedChatPages {
 
     public void onChatClosed(final PageView chatPage) {
 	if (unattendedChatPages.remove(chatPage)) {
-	    eventBus.fireEvent(new UnattendedChatsChangedEvent(this));
+	    hablarEventBus.fireEvent(new UnattendedChatsChangedEvent(this));
 	}
     }
 
     public void onChatOpened(final PageView chatPage) {
 	if (chatPage.getVisibility() == Visibility.focused && unattendedChatPages.remove(chatPage)) {
-	    eventBus.fireEvent(new UnattendedChatsChangedEvent(this));
+	    hablarEventBus.fireEvent(new UnattendedChatsChangedEvent(this));
 	}
     }
 
     public void onNewMsg(final PageView chatPage) {
 	if (chatPage.getVisibility() != Visibility.focused && unattendedChatPages.add(chatPage)) {
-	    eventBus.fireEvent(new UnattendedChatsChangedEvent(this));
+	    hablarEventBus.fireEvent(new UnattendedChatsChangedEvent(this));
 	}
     }
 
     private void bind() {
-	eventBus.addHandler(UserMessageEvent.TYPE, new UserMessageHandler() {
+	hablarEventBus.addHandler(UserMessageEvent.TYPE, new UserMessageHandler() {
 	    @Override
 	    public void onUserMessage(UserMessageEvent event) {
 		PageView page = event.getPage().getView();
@@ -63,7 +63,7 @@ public class UnattendedChatPages {
 	    }
 	});
 
-	eventBus.addHandler(PageClosedEvent.TYPE, new PageClosedHandler() {
+	hablarEventBus.addHandler(PageClosedEvent.TYPE, new PageClosedHandler() {
 	    @Override
 	    public void onPageClosed(PageView page) {
 		if (isChatPage(page)) {
@@ -72,7 +72,7 @@ public class UnattendedChatPages {
 	    }
 	});
 
-	eventBus.addHandler(PageOpenedEvent.TYPE, new PageOpenedHandler() {
+	hablarEventBus.addHandler(PageOpenedEvent.TYPE, new PageOpenedHandler() {
 	    @Override
 	    public void onPageOpened(PageView page) {
 		if (isChatPage(page)) {

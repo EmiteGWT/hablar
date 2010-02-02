@@ -2,7 +2,7 @@ package com.calclab.hablar.basic.client.ui.pages;
 
 import java.util.List;
 
-import com.calclab.hablar.basic.client.ui.EventBus;
+import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
@@ -10,8 +10,8 @@ import com.google.gwt.user.client.ui.Widget;
 public class PagesWidget extends Composite implements Pages {
     private final PagesLogic logic;
 
-    public PagesWidget(EventBus eventBus, PagesPanel panel) {
-	logic = new PagesLogic(eventBus, panel);
+    public PagesWidget(HablarEventBus hablarEventBus, PagesPanel panel) {
+	logic = new PagesLogic(hablarEventBus, panel);
 	initWidget((Widget) panel);
     }
 

@@ -4,7 +4,7 @@ import static com.google.gwt.dom.client.Style.Unit.PX;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.chat.Chat;
-import com.calclab.hablar.basic.client.ui.EventBus;
+import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
 import com.calclab.hablar.basic.client.ui.page.PageWidget;
 import com.google.gwt.core.client.GWT;
@@ -47,8 +47,9 @@ public class ChatPageWidget extends PageWidget implements ChatPageView {
     private final Chat chat;
     private final int controlsHeight;
 
-    public ChatPageWidget(EventBus eventBus, final Chat chat, Visibility visibility, boolean sendButtonVisible) {
-	super(eventBus, TYPE, visibility, true);
+    public ChatPageWidget(HablarEventBus hablarEventBus, final Chat chat, Visibility visibility,
+	    boolean sendButtonVisible) {
+	super(hablarEventBus, TYPE, visibility, true);
 	this.chat = chat;
 	super.setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
@@ -96,8 +97,8 @@ public class ChatPageWidget extends PageWidget implements ChatPageView {
     }
 
     @Override
-    public void setPresence(final Show show) {
-	logic.setPresence(show);
+    public void setPresence(boolean isAvailable, final Show show) {
+	logic.setPresence(isAvailable, show);
     }
 
     public void showMessage(final String name, final String body, final MessageType type) {
