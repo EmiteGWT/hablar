@@ -1,4 +1,4 @@
-package com.calclab.hablar.chat.client;
+package com.calclab.hablar.chat.client.ui;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
@@ -7,19 +7,21 @@ import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
 import com.calclab.hablar.basic.client.ui.page.PageWidget;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 
-public class ChatPage extends PageWidget implements ChatView {
+public class ChatPageWidget extends PageWidget implements ChatPageView {
 
-    interface ChatWidgetUiBinder extends UiBinder<Widget, ChatPage> {
+    interface ChatWidgetUiBinder extends UiBinder<Widget, ChatPageWidget> {
     }
 
     public static final String ID = "ChatPage";
@@ -31,28 +33,29 @@ public class ChatPage extends PageWidget implements ChatView {
 
     @UiField
     TextArea talkBox;
-
     @UiField
     LayoutPanel page;
-
     @UiField
-    FlowPanel list;
-
+    FlowPanel list, controls;
     @UiField
     ScrollPanel scroll;
+    @UiField
+    Button send;
 
-    private final ChatLogic logic;
+    private final ChatPageLogic logic;
     private final Chat chat;
+    private final int controlsHeight;
 
-    public ChatPage(final Chat chat, Visibility visibility) {
+    public ChatPageWidget(final Chat chat, Visibility visibility, boolean sendButtonVisible) {
 	super(TYPE, visibility, true);
 	this.chat = chat;
 	super.setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
 	talkBox.ensureDebugId(TALKBOX_DEB_ID);
 	list.ensureDebugId(LIST_DEB_ID);
-	logic = new ChatLogic(chat, this);
+	logic = new ChatPageLogic(chat, this);
 	setHeaderIconClass(HablarIcons.get(HablarIcons.IconType.buddy));
+	controlsHeight = sendButtonVisible ? 64 + 30 : 64;
     }
 
     public void clearAndFocus() {
@@ -74,21 +77,26 @@ public class ChatPage extends PageWidget implements ChatView {
 	}
     }
 
-    @Override
-    public void setPresence(final Show show) {
-	logic.setPresence(show);
+    @UiHandler("send")
+    public void handleSend(ClickEvent event) {
+	logic.onTalk(talkBox.getText());
     }
 
     @Override
-    public void setTextBoxVisible(final boolean visible) {
+    public void setControlsVisible(final boolean visible) {
 	if (visible) {
-	    page.setWidgetTopBottom(scroll, 0, PX, 64, PX);
-	    page.setWidgetBottomHeight(talkBox, 0, PX, 61, PX);
+	    page.setWidgetTopBottom(scroll, 0, PX, controlsHeight, PX);
+	    page.setWidgetBottomHeight(controls, 0, PX, controlsHeight - 3, PX);
 	} else {
 	    page.setWidgetTopBottom(scroll, 0, PX, 0, PX);
-	    page.setWidgetBottomHeight(talkBox, 0, PX, 0, PX);
+	    page.setWidgetBottomHeight(controls, 0, PX, 0, PX);
 	}
 	page.animate(500);
+    }
+
+    @Override
+    public void setPresence(final Show show) {
+	logic.setPresence(show);
     }
 
     public void showMessage(final String name, final String body, final MessageType type) {

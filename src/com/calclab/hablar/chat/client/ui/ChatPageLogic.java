@@ -1,4 +1,4 @@
-package com.calclab.hablar.chat.client;
+package com.calclab.hablar.chat.client.ui;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
@@ -10,25 +10,24 @@ import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 
-public class ChatLogic {
+public class ChatPageLogic {
     private final Chat chat;
-    private final ChatView view;
+    private final ChatPageView view;
 
-    public ChatLogic(final Chat chat, final ChatView view) {
+    public ChatPageLogic(final Chat chat, final ChatPageView view) {
 	this.chat = chat;
 	this.view = view;
 	final Msg i18n = Suco.get(Msg.class);
 	final XmppURI fromURI = chat.getURI();
-	// FIXME: I think this should be in a emite-lib.XmppURI.getShortName()
-	// method and use it in other situations to avoid the same bug
-	final String name = fromURI.getNode() == null ? fromURI.getHost() : fromURI.getNode();
+	final String name = fromURI.getShortName();
+
 	view.setHeaderTitle(name);
 	chat.onMessageReceived(new Listener<Message>() {
 	    @Override
 	    public void onEvent(final Message message) {
 		final String body = ChatMessageFormatter.format(message.getBody());
-		view.showMessage(name, body, ChatPage.MessageType.incoming);
-		view.setStatusMessage(i18n.newChatFrom(name, ellipsis(body, 25)));
+		view.showMessage(name, body, ChatPageView.MessageType.incoming);
+		view.setStatusMessage(i18n.newChatFrom(name, ChatMessageFormatter.ellipsis(body, 25)));
 	    }
 	});
 	chat.onStateChanged(new Listener<State>() {
@@ -43,7 +42,7 @@ public class ChatLogic {
     public void onTalk(final String text) {
 	if (!text.isEmpty()) {
 	    final String body = ChatMessageFormatter.format(text);
-	    view.showMessage("me", body, ChatPage.MessageType.sent);
+	    view.showMessage("me", body, ChatPageView.MessageType.sent);
 	    chat.send(new Message(text));
 	    view.clearAndFocus();
 	}
@@ -61,13 +60,8 @@ public class ChatLogic {
 	}
     }
 
-    private String ellipsis(final String text, final int length) {
-	// FIXME this must go in emite-lib.TextUtils
-	return text.length() > length ? text.substring(0, length - 3) + "..." : text;
-    }
-
     private void setState(final State state) {
 	final boolean visible = state == State.ready;
-	view.setTextBoxVisible(visible);
+	view.setControlsVisible(visible);
     }
 }

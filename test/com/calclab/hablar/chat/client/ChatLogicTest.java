@@ -11,28 +11,28 @@ import org.junit.Test;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
 import com.calclab.emite.im.client.chat.Chat.State;
-import com.calclab.hablar.chat.client.ChatLogic;
-import com.calclab.hablar.chat.client.ChatMessageFormatter;
-import com.calclab.hablar.chat.client.ChatView;
-import com.calclab.hablar.chat.client.ChatView.MessageType;
+import com.calclab.hablar.chat.client.ui.ChatMessageFormatter;
+import com.calclab.hablar.chat.client.ui.ChatPageLogic;
+import com.calclab.hablar.chat.client.ui.ChatPageView;
+import com.calclab.hablar.chat.client.ui.ChatPageView.MessageType;
 
 public class ChatLogicTest {
 
-    private ChatView view;
+    private ChatPageView view;
     private ChatTester chat;
-    private ChatLogic logic;
+    private ChatPageLogic logic;
 
     @Before
     public void before() {
-	view = mock(ChatView.class);
+	view = mock(ChatPageView.class);
 	chat = new ChatTester("friend@host", "me@host");
-	logic = new ChatLogic(chat, view);
+	logic = new ChatPageLogic(chat, view);
     }
 
     @Test
     public void shouldHideTextBoxWhenChatLocked() {
 	chat.setState(State.locked);
-	verify(view).setTextBoxVisible(false);
+	verify(view).setControlsVisible(false);
     }
 
     @Test

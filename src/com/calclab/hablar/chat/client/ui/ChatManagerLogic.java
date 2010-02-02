@@ -1,4 +1,4 @@
-package com.calclab.hablar.chat.client;
+package com.calclab.hablar.chat.client.ui;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -11,25 +11,27 @@ import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.hablar.basic.client.ui.pages.Pages;
+import com.calclab.hablar.chat.client.ChatConfig;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
 
 public class ChatManagerLogic {
     public static interface ChatPageFactory {
-	ChatView create(Chat chat, Visibility visibility);
+	ChatPageView create(Chat chat, Visibility visibility, boolean sendButtonVisible);
     }
-    private final HashMap<Chat, ChatView> chatPages;
+    private final HashMap<Chat, ChatPageView> chatPages;
     private final Pages pages;
 
     private final Roster roster;
     private final ChatPageFactory factory;
+    private final boolean sendButtonVisible;
 
     public ChatManagerLogic(ChatConfig config, final Pages pages) {
 	this(config, pages, new ChatPageFactory() {
 	    @Override
-	    public ChatView create(Chat chat, Visibility visibility) {
-		return new ChatPage(chat, visibility);
+	    public ChatPageView create(Chat chat, Visibility visibility, boolean sendButtonVisible) {
+		return new ChatPageWidget(chat, visibility, sendButtonVisible);
 	    }
 	});
     }
@@ -37,7 +39,7 @@ public class ChatManagerLogic {
     public ChatManagerLogic(ChatConfig config, final Pages pages, ChatPageFactory factory) {
 	this.pages = pages;
 	this.factory = factory;
-	this.chatPages = new HashMap<Chat, ChatView>();
+	this.chatPages = new HashMap<Chat, ChatPageView>();
 
 	roster = Suco.get(Roster.class);
 	final ChatManager chatManager = Suco.get(ChatManager.class);
@@ -57,7 +59,7 @@ public class ChatManagerLogic {
 	    @Override
 	    public void onEvent(Chat chat) {
 		GWT.log("HABLAR ChatManager - OPEN", null);
-		ChatView widget = chatPages.get(chat);
+		ChatPageView widget = chatPages.get(chat);
 		assert widget != null;
 		pages.open(widget);
 	    }
@@ -74,10 +76,13 @@ public class ChatManagerLogic {
 	    }
 	});
 
+	sendButtonVisible = config.sendButtonVisible;
+
     }
 
     private void createChat(Chat chat, Visibility visibility) {
-	ChatView chatPage = factory.create(chat, Visibility.notFocused);
+	ChatPageView chatPage = factory.create(chat, Visibility.notFocused, sendButtonVisible);
+	chatPage.setControlsVisible(true);
 	chatPages.put(chat, chatPage);
 	pages.add(chatPage);
 	RosterItem item = roster.getItemByJID(chat.getURI().getJID());

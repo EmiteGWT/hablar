@@ -3,7 +3,7 @@ package com.calclab.hablar.signals.client;
 import com.calclab.hablar.basic.client.ui.HablarWidget;
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.pages.Pages;
-import com.calclab.hablar.chat.client.ChatPage;
+import com.calclab.hablar.chat.client.ui.ChatPageWidget;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.EntryPoint;
 
@@ -60,7 +60,7 @@ public class HablarSignals implements EntryPoint {
 
     protected static void ifChat(final PageView page, final Listener<PageView> listener) {
 	final String pageType = page.getPageType();
-	if (pageType == ChatPage.TYPE) {
+	if (pageType == ChatPageWidget.TYPE) {
 	    listener.onEvent(page);
 	}
     }

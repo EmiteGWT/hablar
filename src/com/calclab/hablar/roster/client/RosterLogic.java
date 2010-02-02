@@ -29,7 +29,6 @@ public class RosterLogic implements ListLogic {
     public static final String CHAT_START_DEB_ID = "RosterLogic-chatStart-Action";
     public static final String CHAT_DEB_ID = "RosterLogic-chat";
     public static final String REMOVE_ROSTERITEM_DEB_ID = "RosterLogic-remove-rosteritem";
-    private static final String CHANGE_NICKNAME_DEB_ID = "RosterLogic-change-nick-name";
 
     private final Roster roster;
     private final ChatManager chatManager;

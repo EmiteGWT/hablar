@@ -1,9 +1,9 @@
-package com.calclab.hablar.chat.client;
+package com.calclab.hablar.chat.client.ui;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.hablar.basic.client.ui.page.PageView;
 
-public interface ChatView extends PageView {
+public interface ChatPageView extends PageView {
 
     enum MessageType {
 	incoming, sent
@@ -15,7 +15,7 @@ public interface ChatView extends PageView {
 
     void setPresence(Show show);
 
-    void setTextBoxVisible(boolean visible);
+    void setControlsVisible(boolean visible);
 
     void showMessage(String name, String body, MessageType type);
 

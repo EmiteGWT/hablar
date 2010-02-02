@@ -13,25 +13,25 @@ import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.hablar.basic.client.ui.pages.Pages;
 import com.calclab.hablar.chat.client.ChatConfig;
-import com.calclab.hablar.chat.client.ChatManagerLogic;
-import com.calclab.hablar.chat.client.ChatView;
-import com.calclab.hablar.chat.client.ChatManagerLogic.ChatPageFactory;
+import com.calclab.hablar.chat.client.ui.ChatManagerLogic;
+import com.calclab.hablar.chat.client.ui.ChatPageView;
+import com.calclab.hablar.chat.client.ui.ChatManagerLogic.ChatPageFactory;
 
 public class ChatManagerLogicTest {
 
     private Pages pages;
     private EmiteTester tester;
-    private ArrayList<ChatView> views;
+    private ArrayList<ChatPageView> views;
 
     @Before
     public void before() {
-	views = new ArrayList<ChatView>();
+	views = new ArrayList<ChatPageView>();
 	tester = new EmiteTester();
 	pages = mock(Pages.class);
 	new ChatManagerLogic(new ChatConfig(), pages, new ChatPageFactory() {
 	    @Override
-	    public ChatView create(Chat chat, Visibility visibility) {
-		ChatView view = mock(ChatView.class);
+	    public ChatPageView create(Chat chat, Visibility visibility, boolean sendButtonVisible) {
+		ChatPageView view = mock(ChatPageView.class);
 		when(view.getVisibility()).thenReturn(visibility);
 		views.add(view);
 		return view;

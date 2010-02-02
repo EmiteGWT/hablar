@@ -13,5 +13,6 @@ public class ChatConfig {
     }
 
     public XmppURI uri;
+    public boolean sendButtonVisible = true;
 
 }
