@@ -9,6 +9,7 @@ import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.hablar.basic.client.ui.EventBus;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.hablar.basic.client.ui.pages.Pages;
 import com.calclab.hablar.chat.client.ChatConfig;
@@ -26,15 +27,6 @@ public class ChatManagerLogic {
     private final Roster roster;
     private final ChatPageFactory factory;
     private final boolean sendButtonVisible;
-
-    public ChatManagerLogic(ChatConfig config, final Pages pages) {
-	this(config, pages, new ChatPageFactory() {
-	    @Override
-	    public ChatPageView create(Chat chat, Visibility visibility, boolean sendButtonVisible) {
-		return new ChatPageWidget(chat, visibility, sendButtonVisible);
-	    }
-	});
-    }
 
     public ChatManagerLogic(ChatConfig config, final Pages pages, ChatPageFactory factory) {
 	this.pages = pages;
@@ -78,6 +70,15 @@ public class ChatManagerLogic {
 
 	sendButtonVisible = config.sendButtonVisible;
 
+    }
+
+    public ChatManagerLogic(final EventBus eventBus, ChatConfig config, final Pages pages) {
+	this(config, pages, new ChatPageFactory() {
+	    @Override
+	    public ChatPageView create(Chat chat, Visibility visibility, boolean sendButtonVisible) {
+		return new ChatPageWidget(eventBus, chat, visibility, sendButtonVisible);
+	    }
+	});
     }
 
     private void createChat(Chat chat, Visibility visibility) {

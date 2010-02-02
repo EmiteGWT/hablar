@@ -1,5 +1,6 @@
 package com.calclab.hablar.login.client;
 
+import com.calclab.hablar.basic.client.ui.EventBus;
 import com.calclab.hablar.basic.client.ui.page.PageWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -37,8 +38,8 @@ public class LoginPage extends PageWidget implements LoginView {
 
     private final LoginLogic logic;
 
-    public LoginPage(Visibility visibility) {
-	super(TYPE, visibility, false);
+    public LoginPage(EventBus eventBus, Visibility visibility) {
+	super(eventBus, TYPE, visibility, false);
 	// FIXME: better this can go in the constructor
 	super.setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));

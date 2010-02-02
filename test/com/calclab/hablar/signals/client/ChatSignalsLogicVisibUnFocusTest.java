@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
+import com.calclab.hablar.chat.client.EmiteTester;
 import com.calclab.suco.testing.events.MockedListener;
 
 public class ChatSignalsLogicVisibUnFocusTest {
@@ -21,10 +22,12 @@ public class ChatSignalsLogicVisibUnFocusTest {
     private PageView chat2;
     private PageView chat3;
     private MockedListener<PageView> newUnattendedChatListener;
+    private EmiteTester tester;
 
     @Before
     public void before() {
-	logic = new ChatSignalsLogic();
+	tester = new EmiteTester();
+	logic = new ChatSignalsLogic(tester.eventBus);
 	chatsUnattendedListener = new MockedListener<Set<PageView>>();
 	newUnattendedChatListener = new MockedListener<PageView>();
 	logic.addChatsUnattendedChanged(chatsUnattendedListener);

@@ -1,6 +1,6 @@
 package com.calclab.hablar.basic.client.ui.page;
 
-import com.calclab.suco.client.events.Listener;
+import com.calclab.hablar.basic.client.ui.EventBus;
 import com.google.gwt.user.client.ui.Composite;
 
 /**
@@ -13,10 +13,10 @@ public abstract class PageWidget extends Composite implements PageView {
     private final PageLogic logic;
     private final String pageType;
 
-    public PageWidget(String pageType, Visibility visibility, final boolean closeable) {
+    public PageWidget(EventBus eventBus, String pageType, Visibility visibility, final boolean closeable) {
 	this.pageType = pageType;
 	this.header = new HeaderWidget(closeable);
-	logic = new PageLogic(this, header, visibility);
+	logic = new PageLogic(eventBus, this, header, visibility);
     }
 
     public void fireOpen() {
@@ -40,18 +40,6 @@ public abstract class PageWidget extends Composite implements PageView {
     @Override
     public Visibility getVisibility() {
 	return logic.getVisibility();
-    }
-
-    public void onClose(final Listener<PageView> listener) {
-	logic.onClose(listener);
-    }
-
-    public void onStatusMessageChanged(final Listener<PageView> listener) {
-	logic.onStatusMessageChanged(listener);
-    }
-
-    public void onVisibilityChanged(final Listener<PageView> listener) {
-	logic.onVisibilityChanged(listener);
     }
 
     @Override

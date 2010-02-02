@@ -13,17 +13,20 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.calclab.hablar.basic.client.ui.DefaultEventBus;
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 
 public class PagesLogicTest {
     private PagesPanel view;
     private PagesLogic logic;
+    private DefaultEventBus eventBus;
 
     @Before
     public void setup() {
+	eventBus = new DefaultEventBus();
 	view = new PagesPanelTester();
-	logic = new PagesLogic(view);
+	logic = new PagesLogic(eventBus, view);
     }
 
     @Test

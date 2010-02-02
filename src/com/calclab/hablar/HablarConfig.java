@@ -2,7 +2,6 @@ package com.calclab.hablar;
 
 import com.calclab.emite.browser.client.PageAssist;
 import com.calclab.hablar.basic.client.ui.HablarWidget;
-import com.calclab.hablar.basic.client.ui.HablarWidget.Layout;
 
 public class HablarConfig {
 
@@ -56,7 +55,7 @@ public class HablarConfig {
     /**
      * Choose a layout
      */
-    public Layout layout;
+    public HablarWidget.Layout layout;
 
     /**
      * Show or not login panel

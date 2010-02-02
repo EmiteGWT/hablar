@@ -2,7 +2,7 @@ package com.calclab.hablar.login.client;
 
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.session.Session.State;
-import com.calclab.hablar.basic.client.ui.HablarView;
+import com.calclab.hablar.basic.client.Hablar;
 import com.calclab.hablar.basic.client.ui.HablarWidget;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.hablar.basic.client.ui.pages.Pages;
@@ -17,10 +17,10 @@ public class HablarLogin implements EntryPoint {
 	createLoginPage(hablar, Suco.get(Session.class));
     }
 
-    private static void createLoginPage(HablarView hablar, Session session) {
+    private static void createLoginPage(Hablar hablar, Session session) {
 	boolean isDisconnected = session.getState() == State.disconnected;
 	Visibility visibility = isDisconnected ? Visibility.focused : Visibility.notFocused;
-	final LoginView login = new LoginPage(visibility);
+	final LoginView login = new LoginPage(hablar.getEventBus(), visibility);
 	final Pages pages = hablar.getPages();
 	pages.add(login);
 	session.onStateChanged(new Listener<Session>() {

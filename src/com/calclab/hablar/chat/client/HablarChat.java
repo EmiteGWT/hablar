@@ -11,7 +11,7 @@ public class HablarChat implements EntryPoint {
     }
 
     private static void install(HablarWidget hablar, ChatConfig config) {
-	new ChatManagerLogic(config, hablar.getPages());
+	new ChatManagerLogic(hablar.getEventBus(), config, hablar.getPages());
     }
 
     @Override

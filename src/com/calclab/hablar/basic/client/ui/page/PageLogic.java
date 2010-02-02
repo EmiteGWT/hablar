@@ -1,55 +1,46 @@
 package com.calclab.hablar.basic.client.ui.page;
 
+import com.calclab.hablar.basic.client.ui.EventBus;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
-import com.calclab.suco.client.events.Event;
-import com.calclab.suco.client.events.Listener;
+import com.calclab.hablar.basic.client.ui.page.events.ClosePageEvent;
+import com.calclab.hablar.basic.client.ui.page.events.OpenPageEvent;
+import com.calclab.hablar.basic.client.ui.page.events.UserMessageEvent;
 
 public class PageLogic {
-    private final Event<PageView> statusAction;
-    private final Event<PageView> closeEvent;
-    private final Event<PageView> openEvent;
-    private final PageView view;
     private final PageHeader header;
     private String status;
     private Visibility visibility;
+    private final EventBus eventBus;
+    private final PageView view;
 
-    public PageLogic(PageView view, PageHeader header, Visibility visibility) {
+    public PageLogic(EventBus eventBus, PageView view, PageHeader header, Visibility visibility) {
+	this.eventBus = eventBus;
 	this.view = view;
 	this.header = header;
 	this.visibility = visibility;
-	this.closeEvent = new Event<PageView>("page.close");
-	this.statusAction = new Event<PageView>("page.status");
-	this.openEvent = new Event<PageView>("page.open");
 	header.setLogic(this);
     }
 
     public void fireOpen() {
-	openEvent.fire(view);
+	eventBus.fireEvent(new OpenPageEvent(this));
+
     }
 
     public String getStatusMessage() {
 	return status;
     }
 
+    public PageView getView() {
+	return view;
+    }
+
     public Visibility getVisibility() {
 	return visibility;
     }
 
-    public void onClose(Listener<PageView> listener) {
-	closeEvent.add(listener);
-    }
-
-    public void onStatusMessageChanged(Listener<PageView> listener) {
-	statusAction.add(listener);
-    }
-
-    public void onVisibilityChanged(Listener<PageView> listener) {
-	openEvent.add(listener);
-    }
-
     public void setStatusMessage(String status) {
 	this.status = status;
-	statusAction.fire(view);
+	eventBus.fireEvent(new UserMessageEvent(status, this));
 	if (visibility != Visibility.focused) {
 	    header.requestFocus();
 	}
@@ -61,7 +52,7 @@ public class PageLogic {
     }
 
     protected void fireClose() {
-	closeEvent.fire(view);
+	eventBus.fireEvent(new ClosePageEvent(this));
     }
 
 }

@@ -1,5 +1,7 @@
 package com.calclab.hablar.chat.client;
 
+import static org.mockito.Mockito.mock;
+
 import com.calclab.emite.core.client.EmiteCoreModule;
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.im.client.InstantMessagingModule;
@@ -8,6 +10,9 @@ import com.calclab.emite.im.client.presence.PresenceManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.xep.search.client.SearchManager;
 import com.calclab.emite.xtesting.SessionTester;
+import com.calclab.hablar.basic.client.i18n.Msg;
+import com.calclab.hablar.basic.client.ui.DefaultEventBus;
+import com.calclab.hablar.basic.client.ui.EventBus;
 import com.calclab.hablar.roster.client.RosterTester;
 import com.calclab.hablar.search.client.SearchManagerTester;
 import com.calclab.suco.client.Suco;
@@ -25,12 +30,19 @@ public class EmiteTester {
     public final SearchManagerTester searchManager;
     public final PresenceManagerTester presenceManager;
 
+    public DefaultEventBus eventBus;
+
     public EmiteTester() {
 	// FIXME: Add setContainer to Suco (switch context)
 	HashMapContainer container = (HashMapContainer) Suco.getComponents();
 	container.clear();
 	new SucoCoreModule().onInstall(container);
 	Suco.install(new EmiteCoreModule(), new InstantMessagingModule());
+
+	install(container, Msg.class, mock(Msg.class));
+
+	eventBus = new DefaultEventBus();
+	install(container, EventBus.class, eventBus);
 
 	session = new SessionTester();
 	install(container, Session.class, session);

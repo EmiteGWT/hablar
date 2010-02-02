@@ -1,6 +1,8 @@
 package com.calclab.hablar.signals.client;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
 
@@ -10,6 +12,7 @@ import org.mockito.Mockito;
 
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
+import com.calclab.hablar.chat.client.EmiteTester;
 import com.calclab.suco.testing.events.MockedListener;
 
 public class ChatSignalsLogicTestVisFocus {
@@ -20,10 +23,12 @@ public class ChatSignalsLogicTestVisFocus {
     private PageView chat2;
     private PageView chat3;
     private MockedListener<PageView> newUnreadMessagesListener;
+    private EmiteTester tester;
 
     @Before
     public void before() {
-	logic = new ChatSignalsLogic();
+	tester = new EmiteTester();
+	logic = new ChatSignalsLogic(tester.eventBus);
 	chatsUnattendedListener = new MockedListener<Set<PageView>>();
 	newUnreadMessagesListener = new MockedListener<PageView>();
 	logic.addChatsUnattendedChanged(chatsUnattendedListener);

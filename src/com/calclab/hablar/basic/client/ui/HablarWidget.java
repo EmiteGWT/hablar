@@ -3,16 +3,18 @@ package com.calclab.hablar.basic.client.ui;
 import static com.google.gwt.dom.client.Style.Unit.PCT;
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
+import com.calclab.hablar.basic.client.Hablar;
 import com.calclab.hablar.basic.client.ui.page.HeaderStyles;
 import com.calclab.hablar.basic.client.ui.page.PageHeader;
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
+import com.calclab.hablar.basic.client.ui.page.events.UserMessageEvent;
+import com.calclab.hablar.basic.client.ui.page.events.UserMessageHandler;
 import com.calclab.hablar.basic.client.ui.pages.Pages;
 import com.calclab.hablar.basic.client.ui.pages.PagesPanel;
 import com.calclab.hablar.basic.client.ui.pages.PagesWidget;
 import com.calclab.hablar.basic.client.ui.pages.panel.AccordionPages;
 import com.calclab.hablar.basic.client.ui.pages.panel.TabPages;
-import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -28,7 +30,7 @@ import com.google.gwt.user.client.ui.Widget;
  * The main HablarWidget
  * 
  */
-public class HablarWidget extends Composite implements HablarView {
+public class HablarWidget extends Composite implements Hablar {
 
     public static enum Layout {
 	accordion, tabs
@@ -59,34 +61,35 @@ public class HablarWidget extends Composite implements HablarView {
 
     private SimplePanel overlay;
 
+    private final DefaultEventBus eventBus;
+
     @UiConstructor
-    public HablarWidget(Layout layout) {
-	this(layout == Layout.accordion ? new AccordionPages() : new TabPages());
+    public HablarWidget(HablarWidget.Layout layout) {
+	this(layout == HablarWidget.Layout.accordion ? new AccordionPages() : new TabPages());
     }
 
-    public HablarWidget(PagesPanel panel) {
-	this(new PagesWidget(panel));
-    }
-
-    private HablarWidget(PagesWidget pages) {
+    private HablarWidget(PagesPanel panel) {
+	this.eventBus = new DefaultEventBus();
+	this.pages = new PagesWidget(eventBus, panel);
 	initWidget(uiBinder.createAndBindUi(this));
-	this.pages = pages;
-	Widget center = pages;
+	Widget center = (Widget) pages;
 	container.add(center);
 	container.setWidgetLeftWidth(center, 0, Unit.PX, 100, Unit.PCT);
 	container.setWidgetTopBottom(center, 20, Unit.PX, 20, Unit.PX);
 	container.forceLayout();
 
-	pages.onStatusMessageChanged(new Listener<PageView>() {
+	eventBus.addHandler(UserMessageEvent.TYPE, new UserMessageHandler() {
 	    @Override
-	    public void onEvent(PageView pageView) {
-		status.setText(pageView.getStatusMessage());
+	    public void onUserMessage(UserMessageEvent event) {
+		status.setText(event.getMessage());
 	    }
 	});
+
 	new HablarLogic(this);
     }
 
     /**
+     * FIXME Problem with animation
      * http://code.google.com/p/google-web-toolkit/issues/detail?id=4360
      */
     @Override
@@ -94,7 +97,12 @@ public class HablarWidget extends Composite implements HablarView {
 	getOverlay();
 	container.setWidgetTopHeight(overlay, 0, PX, 0, PCT);
 	container.forceLayout();
+	// container.animate(ANIMATION_TIME);
 	overlay.clear();
+    }
+
+    public EventBus getEventBus() {
+	return eventBus;
     }
 
     @Override

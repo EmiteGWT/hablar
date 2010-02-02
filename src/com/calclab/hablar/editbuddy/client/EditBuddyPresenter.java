@@ -2,8 +2,8 @@ package com.calclab.hablar.editbuddy.client;
 
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.hablar.basic.client.Hablar;
 import com.calclab.hablar.basic.client.i18n.Msg;
-import com.calclab.hablar.basic.client.ui.HablarView;
 import com.calclab.hablar.basic.client.ui.menu.MenuAction;
 import com.calclab.hablar.editbuddy.client.ui.EditBuddyDisplay;
 import com.calclab.suco.client.Suco;
@@ -18,14 +18,14 @@ import com.google.gwt.event.dom.client.ClickHandler;
 public class EditBuddyPresenter {
     private static final String DEBUGID_EDITBUDDY = "Action-EditBuddy";
     protected static final String[] EMPTY_ARRAY = new String[0];
-    private final HablarView hablar;
+    private final Hablar hablar;
     private final Msg i18n;
     private final MenuAction<RosterItem> action;
     private final EditBuddyDisplay display;
     private final Roster roster;
     private RosterItem currentItem;
 
-    public EditBuddyPresenter(HablarView hablar, EditBuddyDisplay display) {
+    public EditBuddyPresenter(Hablar hablar, EditBuddyDisplay display) {
 	this.hablar = hablar;
 	this.display = display;
 	i18n = Suco.get(Msg.class);

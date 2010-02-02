@@ -12,14 +12,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
 import org.junit.Before;
 import org.junit.Test;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.xep.search.client.SearchResultItem;
 import com.calclab.hablar.chat.client.EmiteTester;
-import com.calclab.hablar.roster.client.AbstractLogicTest;
 import com.calclab.hablar.search.client.SearchPageView.Level;
 import com.calclab.hablar.testing.display.DisplayMocker;
 import com.calclab.hablar.testing.display.HasClickHandlersStub;
@@ -35,8 +33,7 @@ public class SearchLogicTest {
 	tester = new EmiteTester();
 	view = DisplayMocker.mock(SearchPageView.class);
 	when(view.createMenu(anyString())).thenReturn(new PopupMenuViewStub<SearchResultItemView>());
-	AbstractLogicTest.registerI18n();
-	logic = new SearchPageLogic(view);
+	logic = new SearchPageLogic(tester.eventBus, view);
     }
 
     @Test

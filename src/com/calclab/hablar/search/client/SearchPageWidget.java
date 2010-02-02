@@ -4,6 +4,7 @@ import static com.google.gwt.dom.client.Style.Unit.PX;
 
 import com.calclab.emite.xep.search.client.SearchResultItem;
 import com.calclab.hablar.basic.client.i18n.Msg;
+import com.calclab.hablar.basic.client.ui.EventBus;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
 import com.calclab.hablar.basic.client.ui.menu.PopupMenu;
 import com.calclab.hablar.basic.client.ui.menu.PopupMenuView;
@@ -68,8 +69,8 @@ public class SearchPageWidget extends PageWidget implements SearchPageView {
     Button search;
     private final SearchPageLogic logic;
 
-    public SearchPageWidget(Visibility visibility, boolean closeable) {
-	super(TYPE, visibility, closeable);
+    public SearchPageWidget(EventBus eventBus, Visibility visibility, boolean closeable) {
+	super(eventBus, TYPE, visibility, closeable);
 	super.setId(ID);
 	initWidget(uiBinder.createAndBindUi(this));
 	final Msg i18n = Suco.get(Msg.class);
@@ -78,7 +79,7 @@ public class SearchPageWidget extends PageWidget implements SearchPageView {
 	message.ensureDebugId(MESSAGE_DEB_ID);
 	setHeaderTitle("Search users");
 	setHeaderIconClass(HablarIcons.get(HablarIcons.IconType.search));
-	logic = new SearchPageLogic(this);
+	logic = new SearchPageLogic(eventBus, this);
     }
 
     public void addResult(final SearchResultItem item) {

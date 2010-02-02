@@ -11,7 +11,6 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.Collection;
 
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
@@ -33,7 +32,6 @@ public class RosterLogicTest {
     public void before() {
 	HablarIcons.setStyles(new HablarIcons());
 	tester = new EmiteTester();
-	AbstractLogicTest.registerI18n();
 	view = DisplayMocker.mock(RosterView.class);
 	when(view.getItemMenu()).thenReturn(new PopupMenuViewStub<RosterItem>());
 

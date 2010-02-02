@@ -3,53 +3,56 @@ package com.calclab.hablar.basic.client.ui.pages;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.calclab.hablar.basic.client.ui.EventBus;
+import com.calclab.hablar.basic.client.ui.page.PageLogic;
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
-import com.calclab.suco.client.events.Event;
-import com.calclab.suco.client.events.Listener;
+import com.calclab.hablar.basic.client.ui.page.events.ClosePageEvent;
+import com.calclab.hablar.basic.client.ui.page.events.ClosePageHandler;
+import com.calclab.hablar.basic.client.ui.page.events.UserMessageEvent;
+import com.calclab.hablar.basic.client.ui.page.events.UserMessageHandler;
+import com.calclab.hablar.basic.client.ui.page.events.VisibilityChangedEvent;
+import com.calclab.hablar.basic.client.ui.page.events.VisibilityChangedHandler;
+import com.calclab.hablar.basic.client.ui.pages.events.PageClosedEvent;
+import com.calclab.hablar.basic.client.ui.pages.events.PageOpenedEvent;
 import com.google.gwt.core.client.GWT;
 
 public class PagesLogic implements Pages {
-    protected final Listener<PageView> statusListener;
-    protected final Listener<PageView> visibilityChangedListener;
     private PageView currentPageView;
 
-    private final Event<PageView> onStatus;
-    private final Listener<PageView> closeListener;
     private PageView previouslyVisiblePageView;
     private final ArrayList<PageView> hiddenPages;
     private final PagesPanel view;
-    private final Event<PageView> onOpened;
-    private final Event<PageView> onClosed;
     private final ArrayList<PageView> visiblePages;
+    private final EventBus eventBus;
 
-    public PagesLogic(PagesPanel view) {
+    public PagesLogic(EventBus eventBus, PagesPanel view) {
+	this.eventBus = eventBus;
 	this.view = view;
-	this.onStatus = new Event<PageView>("pages.onStatus");
-	this.onOpened = new Event<PageView>("pages.onOpen");
-	this.onClosed = new Event<PageView>("pages.onOpen");
 	this.hiddenPages = new ArrayList<PageView>();
 	this.visiblePages = new ArrayList<PageView>();
 
-	statusListener = new Listener<PageView>() {
+	eventBus.addHandler(UserMessageEvent.TYPE, new UserMessageHandler() {
 	    @Override
-	    public void onEvent(PageView page) {
-		whenStatus(page);
+	    public void onUserMessage(UserMessageEvent event) {
+		// whenStatus();
 	    }
-	};
-	visibilityChangedListener = new Listener<PageView>() {
-	    @Override
-	    public void onEvent(PageView page) {
-		whenVisibilityChanged(page);
-	    }
-	};
+	});
 
-	closeListener = new Listener<PageView>() {
+	eventBus.addHandler(VisibilityChangedEvent.TYPE, new VisibilityChangedHandler() {
 	    @Override
-	    public void onEvent(PageView page) {
+	    public void onVisibilityChanged(VisibilityChangedEvent event) {
+		whenVisibilityChanged(event.getPage());
+	    }
+	});
+
+	eventBus.addHandler(ClosePageEvent.TYPE, new ClosePageHandler() {
+	    @Override
+	    public void onPageClosed(PageLogic page) {
 		whenPageClosed(page);
 	    }
-	};
+	});
+
     }
 
     /**
@@ -57,9 +60,6 @@ public class PagesLogic implements Pages {
      */
     public void add(PageView pageView) {
 	if (!view.hasPageView(pageView)) {
-	    pageView.onStatusMessageChanged(statusListener);
-	    pageView.onVisibilityChanged(visibilityChangedListener);
-	    pageView.onClose(closeListener);
 
 	    Visibility visibility = pageView.getVisibility();
 	    GWT.log("ADD: " + visibility, null);
@@ -145,21 +145,7 @@ public class PagesLogic implements Pages {
 	hiddenPages.add(pageView);
 	pageView.setVisibility(Visibility.closed);
 	view.removePageView(pageView);
-	onClosed.fire(pageView);
-    }
-
-    @Override
-    public void onPageClosed(Listener<PageView> listener) {
-	onClosed.add(listener);
-    }
-
-    @Override
-    public void onPageOpened(Listener<PageView> listener) {
-	onOpened.add(listener);
-    }
-
-    public void onStatusMessageChanged(Listener<PageView> listener) {
-	onStatus.add(listener);
+	eventBus.fireEvent(new PageClosedEvent(pageView));
     }
 
     /**
@@ -183,7 +169,7 @@ public class PagesLogic implements Pages {
 		pageView.setVisibility(Visibility.focused);
 	    }
 	    GWT.log("OPEN OPEN", null);
-	    onOpened.fire(pageView);
+	    eventBus.fireEvent(new PageOpenedEvent(pageView));
 	}
     }
 
@@ -205,8 +191,8 @@ public class PagesLogic implements Pages {
 	view.addPageView(pageView);
     }
 
-    void whenPageClosed(PageView page) {
-	hide(page);
+    void whenPageClosed(PageLogic page) {
+	hide(page.getView());
     }
 
     /**
@@ -218,15 +204,14 @@ public class PagesLogic implements Pages {
 	if (page.getVisibility() == Visibility.closed) {
 	    close(page);
 	}
-	onStatus.fire(page);
     }
 
-    void whenVisibilityChanged(PageView page) {
+    void whenVisibilityChanged(PageLogic page) {
 	Visibility visibility = page.getVisibility();
 	if (visibility == Visibility.focused)
 	    showPreviousPage();
 	else
-	    open(page);
+	    open(page.getView());
 
     }
 

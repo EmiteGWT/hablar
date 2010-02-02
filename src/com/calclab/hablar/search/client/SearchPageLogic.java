@@ -9,15 +9,17 @@ import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.xep.search.client.SearchManager;
 import com.calclab.emite.xep.search.client.SearchResultItem;
 import com.calclab.hablar.basic.client.i18n.Msg;
+import com.calclab.hablar.basic.client.ui.EventBus;
 import com.calclab.hablar.basic.client.ui.lists.ListItemView;
 import com.calclab.hablar.basic.client.ui.lists.ListLogic;
 import com.calclab.hablar.basic.client.ui.menu.MenuAction;
 import com.calclab.hablar.basic.client.ui.menu.PopupMenuView;
-import com.calclab.hablar.basic.client.ui.page.PageView;
+import com.calclab.hablar.basic.client.ui.page.PageLogic;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
+import com.calclab.hablar.basic.client.ui.page.events.VisibilityChangedEvent;
+import com.calclab.hablar.basic.client.ui.page.events.VisibilityChangedHandler;
 import com.calclab.hablar.search.client.SearchPageView.Level;
 import com.calclab.suco.client.Suco;
-import com.calclab.suco.client.events.Listener;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -38,8 +40,10 @@ public class SearchPageLogic implements ListLogic {
     private PopupMenuView<SearchResultItemView> addToRosterMenu;
     private PopupMenuView<SearchResultItemView> removeFromRosterMenu;
     private final Msg i18n;
+    private final EventBus eventBus;
 
-    public SearchPageLogic(final SearchPageView view) {
+    public SearchPageLogic(EventBus eventBus, final SearchPageView view) {
+	this.eventBus = eventBus;
 	this.view = view;
 	manager = Suco.get(SearchManager.class);
 	roster = Suco.get(Roster.class);
@@ -80,14 +84,17 @@ public class SearchPageLogic implements ListLogic {
 		search();
 	    }
 	});
-	view.onVisibilityChanged(new Listener<PageView>() {
+
+	eventBus.addHandler(VisibilityChangedEvent.TYPE, new VisibilityChangedHandler() {
 	    @Override
-	    public void onEvent(PageView pageView) {
-		if (pageView.getVisibility() == Visibility.focused) {
+	    public void onVisibilityChanged(VisibilityChangedEvent event) {
+		PageLogic page = event.getPage();
+		if (page.getVisibility() == Visibility.focused) {
 		    view.getSearchFocus().setFocus(true);
 		}
 	    }
 	});
+
     }
 
     private void createMenus() {

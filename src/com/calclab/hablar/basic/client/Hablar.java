@@ -1,11 +1,15 @@
-package com.calclab.hablar.basic.client.ui;
+package com.calclab.hablar.basic.client;
 
+import com.calclab.hablar.basic.client.ui.Display;
+import com.calclab.hablar.basic.client.ui.EventBus;
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.pages.Pages;
 
-public interface HablarView {
+public interface Hablar {
 
     void closeOverlay();
+
+    EventBus getEventBus();
 
     Pages getPages();
 
