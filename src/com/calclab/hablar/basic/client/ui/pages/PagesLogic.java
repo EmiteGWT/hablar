@@ -9,6 +9,8 @@ import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.hablar.basic.client.ui.page.events.ClosePageEvent;
 import com.calclab.hablar.basic.client.ui.page.events.ClosePageHandler;
+import com.calclab.hablar.basic.client.ui.page.events.OpenPageEvent;
+import com.calclab.hablar.basic.client.ui.page.events.OpenPageHandler;
 import com.calclab.hablar.basic.client.ui.page.events.UserMessageEvent;
 import com.calclab.hablar.basic.client.ui.page.events.UserMessageHandler;
 import com.calclab.hablar.basic.client.ui.page.events.VisibilityChangedEvent;
@@ -50,6 +52,13 @@ public class PagesLogic implements Pages {
 	    @Override
 	    public void onPageClosed(PageLogic page) {
 		whenPageClosed(page);
+	    }
+	});
+
+	eventBus.addHandler(OpenPageEvent.TYPE, new OpenPageHandler() {
+	    @Override
+	    public void onOpenPage(OpenPageEvent event) {
+		open(event.getPage().getView());
 	    }
 	});
 

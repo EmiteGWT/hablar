@@ -15,7 +15,7 @@ public class WindowTitlePresenter {
 		final int size = event.getUnattendedChatPages().getSize();
 		String message = size == 0 ? "" : i18n.unreadChats(size);
 		String oldTitle = display.getText();
-		String newTitle = WindowTextHelper.updateTitle(message, oldTitle);
+		String newTitle = WindowTextHelper.updateTitle(oldTitle, message);
 		display.setText(newTitle);
 	    }
 	});
