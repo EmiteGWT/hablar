@@ -11,7 +11,7 @@ import org.testng.annotations.DataProvider;
 
 import com.calclab.suco.client.Suco;
 
-public class AbstractSeleniumTest {
+public abstract class HablarSeleniumTest {
     public static boolean mustCloseFinally = true;
 
     @AfterSuite

@@ -6,6 +6,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
+import com.calclab.hablar.selenium.chat.ChatPageObject;
+import com.calclab.hablar.selenium.login.LoginPageObject;
+import com.calclab.hablar.selenium.openchat.OpenChatPageObject;
+import com.calclab.hablar.selenium.roster.RosterPageObject;
+import com.calclab.hablar.selenium.search.SearchPageObject;
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
@@ -63,6 +68,15 @@ public class SeleniumModule extends AbstractModule {
 		final SearchPageObject search = new SearchPageObject();
 		PageFactory.initElements($(ElementLocatorFactory.class), search);
 		return search;
+	    }
+	});
+
+	register(Singleton.class, new Factory<OpenChatPageObject>(OpenChatPageObject.class) {
+	    @Override
+	    public OpenChatPageObject create() {
+		OpenChatPageObject page = new OpenChatPageObject();
+		PageFactory.initElements($(ElementLocatorFactory.class), page);
+		return page;
 	    }
 	});
 

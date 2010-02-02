@@ -89,8 +89,8 @@ public class ChatManagerLogic {
 	pages.add(chatPage);
 	RosterItem item = roster.getItemByJID(chat.getURI().getJID());
 	Show show = item != null ? item.getShow() : Show.unknown;
-	GWT.log("CHAT INITIAL PRESENCE: " + show, null);
-	chatPage.setPresence(item.isAvailable(), show);
+	boolean available = item != null ? item.isAvailable() : false;
+	chatPage.setPresence(available, show);
     }
 
 }

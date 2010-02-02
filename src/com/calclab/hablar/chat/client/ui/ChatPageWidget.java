@@ -55,6 +55,7 @@ public class ChatPageWidget extends PageWidget implements ChatPageView {
 	initWidget(uiBinder.createAndBindUi(this));
 	talkBox.ensureDebugId(TALKBOX_DEB_ID);
 	list.ensureDebugId(LIST_DEB_ID);
+	send.ensureDebugId("ChatPageWidget-send");
 	logic = new ChatPageLogic(chat, this);
 	setHeaderIconClass(HablarIcons.get(HablarIcons.IconType.buddy));
 	controlsHeight = sendButtonVisible ? 64 + 30 : 64;

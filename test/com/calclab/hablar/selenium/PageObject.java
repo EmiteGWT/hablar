@@ -8,7 +8,7 @@ import org.testng.Assert;
 
 import com.calclab.suco.client.Suco;
 
-public class AbstractPageObject {
+public abstract class PageObject {
 
     private static final long[] POLL_INTERVALS = { 10, 20, 30, 40, 50, 50, 50, 50, 100 };
 
@@ -18,8 +18,14 @@ public class AbstractPageObject {
 	return (RenderedWebElement) Suco.get(WebDriver.class).findElement(by);
     }
 
-    // Thanks to:
-    // http://groups.google.com/group/webdriver/browse_frm/thread/6e705242cc6d75ed/f5f8dca438397254?lnk=gst#f5f8dca438397254
+    /**
+     * Thanks to:
+     * http://groups.google.com/group/webdriver/browse_frm/thread/6e705242
+     * cc6d75ed/f5f8dca438397254?lnk=gst#f5f8dca438397254
+     * 
+     * @param waitForWhat
+     * @param runnable
+     */
     protected void waitFor(final String waitForWhat, final Runnable runnable) {
 	int i = 0;
 	boolean success = false;

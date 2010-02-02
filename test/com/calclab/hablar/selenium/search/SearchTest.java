@@ -1,11 +1,18 @@
-package com.calclab.hablar.selenium;
+package com.calclab.hablar.selenium.search;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.calclab.hablar.selenium.HablarSeleniumTest;
+import com.calclab.hablar.selenium.I18nHelper;
+import com.calclab.hablar.selenium.Lorem;
+import com.calclab.hablar.selenium.SeleniumConstants;
+import com.calclab.hablar.selenium.chat.ChatPageObject;
+import com.calclab.hablar.selenium.login.LoginPageObject;
+import com.calclab.hablar.selenium.roster.RosterPageObject;
 import com.calclab.suco.client.Suco;
 
-public class SearchTest extends AbstractSeleniumTest {
+public class SearchTest extends HablarSeleniumTest {
     private LoginPageObject login;
     private RosterPageObject roster;
     private SearchPageObject search;

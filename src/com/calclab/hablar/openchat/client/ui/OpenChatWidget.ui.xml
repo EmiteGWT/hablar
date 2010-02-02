@@ -1,0 +1,18 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		
+	</ui:style>
+    <g:HTMLPanel styleName="form">
+        <h2>Open a new chat</h2>
+        <p>
+            <label>Jabber ID:</label>
+            <g:TextBox ui:field="jabberID"></g:TextBox>
+        </p>
+        <div class="actions">
+            <g:Button ui:field="open">Open Chat</g:Button>
+            <g:Button ui:field="cancel">Cancel</g:Button>
+        </div>
+    </g:HTMLPanel>
+</ui:UiBinder> 

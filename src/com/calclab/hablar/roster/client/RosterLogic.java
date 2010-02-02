@@ -10,7 +10,6 @@ import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.basic.client.i18n.Msg;
-import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
 import com.calclab.hablar.basic.client.ui.lists.ListItemView;
 import com.calclab.hablar.basic.client.ui.lists.ListLogic;
 import com.calclab.hablar.basic.client.ui.menu.MenuAction;
@@ -18,10 +17,7 @@ import com.calclab.hablar.basic.client.ui.menu.PopupMenuView;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.UIObject;
 
 public class RosterLogic implements ListLogic {
@@ -48,14 +44,6 @@ public class RosterLogic implements ListLogic {
 
 	addRosterListeners();
 	addSessionListeners();
-
-	view.addAction(HablarIcons.get(HablarIcons.IconType.chatAdd), CHAT_START_DEB_ID, new ClickHandler() {
-	    @Override
-	    public void onClick(final ClickEvent event) {
-		final String jid = Window.prompt("Write the JID of the person you want to chat with", "");
-		chatManager.open(XmppURI.jid(jid));
-	    }
-	});
 
     }
 

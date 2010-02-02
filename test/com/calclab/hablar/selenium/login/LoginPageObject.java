@@ -1,12 +1,14 @@
-package com.calclab.hablar.selenium;
+package com.calclab.hablar.selenium.login;
 
 import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.calclab.hablar.basic.client.ui.utils.DebugId;
 import com.calclab.hablar.login.client.LoginPage;
+import com.calclab.hablar.selenium.PageObject;
+import com.calclab.hablar.selenium.SeleniumConstants;
 
-public class LoginPageObject extends AbstractPageObject {
+public class LoginPageObject extends PageObject {
     @FindBy(id = DebugId.PRE + LoginPage.ID)
     private RenderedWebElement header;
     @FindBy(id = DebugId.PRE + LoginPage.URI)

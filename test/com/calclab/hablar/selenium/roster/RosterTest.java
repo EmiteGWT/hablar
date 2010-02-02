@@ -1,12 +1,16 @@
-package com.calclab.hablar.selenium;
+package com.calclab.hablar.selenium.roster;
 
 import org.openqa.selenium.RenderedWebElement;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.calclab.hablar.selenium.HablarSeleniumTest;
+import com.calclab.hablar.selenium.SeleniumConstants;
+import com.calclab.hablar.selenium.login.LoginPageObject;
+import com.calclab.hablar.selenium.search.SearchPageObject;
 import com.calclab.suco.client.Suco;
 
-public class RosterTest extends AbstractSeleniumTest {
+public class RosterTest extends HablarSeleniumTest {
     private LoginPageObject login;
     private RosterPageObject roster;
     private SearchPageObject search;

@@ -4,6 +4,7 @@ import com.calclab.hablar.basic.client.ui.HablarWidget;
 import com.calclab.hablar.chat.client.HablarChat;
 import com.calclab.hablar.editbuddy.client.HablarEditBuddy;
 import com.calclab.hablar.login.client.HablarLogin;
+import com.calclab.hablar.openchat.client.HablarOpenChat;
 import com.calclab.hablar.roster.client.HablarRoster;
 import com.calclab.hablar.search.client.HablarSearch;
 import com.calclab.hablar.signals.client.HablarSignals;
@@ -28,6 +29,7 @@ public class HablarEntryPoint implements EntryPoint {
 	if (config.hasRoster) {
 	    boolean isDocked = "left".equals(config.dockRoster);
 	    HablarRoster.install(hablar, isDocked);
+	    HablarOpenChat.install(hablar);
 	    HablarEditBuddy.install(hablar);
 	}
 

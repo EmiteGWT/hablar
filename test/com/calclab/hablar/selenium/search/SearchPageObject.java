@@ -1,4 +1,4 @@
-package com.calclab.hablar.selenium;
+package com.calclab.hablar.selenium.search;
 
 import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.support.ByIdOrName;
@@ -8,8 +8,9 @@ import com.calclab.hablar.basic.client.ui.utils.DebugId;
 import com.calclab.hablar.search.client.SearchPageLogic;
 import com.calclab.hablar.search.client.SearchPageWidget;
 import com.calclab.hablar.search.client.SearchResultItemWidget;
+import com.calclab.hablar.selenium.PageObject;
 
-public class SearchPageObject extends AbstractPageObject {
+public class SearchPageObject extends PageObject {
     @FindBy(id = DebugId.PRE + SearchPageWidget.TERM_DEB_ID)
     private RenderedWebElement term;
 
