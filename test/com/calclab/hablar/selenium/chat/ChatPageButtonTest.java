@@ -3,11 +3,11 @@ package com.calclab.hablar.selenium.chat;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.calclab.hablar.selenium.HablarSeleniumTest;
-import com.calclab.hablar.selenium.SeleniumConstants;
 import com.calclab.hablar.selenium.login.LoginPageObject;
 import com.calclab.hablar.selenium.openchat.OpenChatPageObject;
 import com.calclab.hablar.selenium.roster.RosterPageObject;
+import com.calclab.hablar.selenium.tools.HablarSeleniumTest;
+import com.calclab.hablar.selenium.tools.SeleniumConstants;
 import com.calclab.suco.client.Suco;
 
 public class ChatPageButtonTest extends HablarSeleniumTest {

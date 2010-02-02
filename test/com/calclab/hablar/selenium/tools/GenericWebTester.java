@@ -1,4 +1,4 @@
-package com.calclab.hablar.selenium;
+package com.calclab.hablar.selenium.tools;
 
 import org.openqa.selenium.WebDriver;
 

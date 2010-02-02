@@ -3,13 +3,13 @@ package com.calclab.hablar.selenium.search;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.calclab.hablar.selenium.HablarSeleniumTest;
-import com.calclab.hablar.selenium.I18nHelper;
-import com.calclab.hablar.selenium.Lorem;
-import com.calclab.hablar.selenium.SeleniumConstants;
 import com.calclab.hablar.selenium.chat.ChatPageObject;
 import com.calclab.hablar.selenium.login.LoginPageObject;
 import com.calclab.hablar.selenium.roster.RosterPageObject;
+import com.calclab.hablar.selenium.tools.HablarSeleniumTest;
+import com.calclab.hablar.selenium.tools.I18nHelper;
+import com.calclab.hablar.selenium.tools.Lorem;
+import com.calclab.hablar.selenium.tools.SeleniumConstants;
 import com.calclab.suco.client.Suco;
 
 public class SearchTest extends HablarSeleniumTest {
@@ -29,9 +29,10 @@ public class SearchTest extends HablarSeleniumTest {
     }
 
     @Test()
-    public void testBasicSearch() {
+    public void shouldShowSearchResults() {
 	loginAndSearchClick();
-	search.term("test1");
+	search.getTerm().clear();
+	search.getTerm().sendKeys("test1\n");
 	sleep(5000);
 	search.waitForResult(i18n.get("searchResultsFor", "test1", 1));
     }
@@ -48,10 +49,11 @@ public class SearchTest extends HablarSeleniumTest {
     @Test()
     public void testBasicSearchNoResult() {
 	loginAndSearchClick();
-	search.term("Something difficult to search");
+	search.getTerm().clear();
+	search.getTerm().sendKeys("IMPOSSIBLE XXXXZZZÑÑÑ\n");
 	sleep(5000);
 	// zero it's plural in English
-	search.waitForResult(i18n.get("searchResultsFor", "Something difficult to search", 0));
+	search.waitForResult(i18n.get("searchResultsFor", "IMPOSSIBLE XXXXZZZÑÑÑ", 0));
     }
 
     @Test()
@@ -75,7 +77,8 @@ public class SearchTest extends HablarSeleniumTest {
 
     private void loginSearchTestUserAndChat() {
 	loginAndSearchClick();
-	search.term("test1");
+	search.getTerm().clear();
+	search.getTerm().sendKeys("test1\n");
 	sleep(7000);
 	// The menu it's not visible then we need to show it
 	search.getResultName(SeleniumConstants.USERJID).click();

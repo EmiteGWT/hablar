@@ -3,7 +3,7 @@ package com.calclab.hablar.selenium.login;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.calclab.hablar.selenium.HablarSeleniumTest;
+import com.calclab.hablar.selenium.tools.HablarSeleniumTest;
 import com.calclab.suco.client.Suco;
 
 public class LoginTest extends HablarSeleniumTest {

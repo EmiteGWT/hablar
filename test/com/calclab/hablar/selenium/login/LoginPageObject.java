@@ -5,8 +5,8 @@ import org.openqa.selenium.support.FindBy;
 
 import com.calclab.hablar.basic.client.ui.utils.DebugId;
 import com.calclab.hablar.login.client.LoginPage;
-import com.calclab.hablar.selenium.PageObject;
-import com.calclab.hablar.selenium.SeleniumConstants;
+import com.calclab.hablar.selenium.tools.PageObject;
+import com.calclab.hablar.selenium.tools.SeleniumConstants;
 
 public class LoginPageObject extends PageObject {
     @FindBy(id = DebugId.PRE + LoginPage.ID)

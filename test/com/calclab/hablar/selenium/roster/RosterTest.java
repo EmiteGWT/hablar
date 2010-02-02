@@ -1,13 +1,12 @@
 package com.calclab.hablar.selenium.roster;
 
-import org.openqa.selenium.RenderedWebElement;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.calclab.hablar.selenium.HablarSeleniumTest;
-import com.calclab.hablar.selenium.SeleniumConstants;
 import com.calclab.hablar.selenium.login.LoginPageObject;
 import com.calclab.hablar.selenium.search.SearchPageObject;
+import com.calclab.hablar.selenium.tools.HablarSeleniumTest;
+import com.calclab.hablar.selenium.tools.SeleniumConstants;
 import com.calclab.suco.client.Suco;
 
 public class RosterTest extends HablarSeleniumTest {
@@ -22,18 +21,16 @@ public class RosterTest extends HablarSeleniumTest {
 	search = Suco.get(SearchPageObject.class);
     }
 
-    @Test(enabled = false)
+    @Test
     public void testRosteritemMenu() {
 	loginAndSearchClick();
-	search.term("test1");
-	search.term("test1");
-	final RenderedWebElement resultName = search.getResultName(SeleniumConstants.USERJID);
-	final RenderedWebElement resultMenu = search.getResultMenu(SeleniumConstants.USERJID);
-	// This doesn't works
-	moveMouseAt(resultName.getLocation());
-	resultMenu.click();
-	// This Fails because the menu it's not visible (some workaround in
-	// SearchTest)
+	search.getTerm().clear();
+	search.getTerm().sendKeys("test");
+	search.getTerm().sendKeys("\n");
+	// final RenderedWebElement resultName =
+	// search.getResultName(SeleniumConstants.USERJID);
+	// final RenderedWebElement resultMenu =
+	// search.getResultMenu(SeleniumConstants.USERJID);
     }
 
     private void loginAndSearchClick() {

@@ -1,4 +1,4 @@
-package com.calclab.hablar.selenium;
+package com.calclab.hablar.selenium.tools;
 
 import java.lang.reflect.Method;
 import java.text.MessageFormat;
