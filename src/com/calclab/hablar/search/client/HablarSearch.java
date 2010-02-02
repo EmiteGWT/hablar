@@ -34,7 +34,6 @@ public class HablarSearch {
 	pages.add(searchPage);
 
 	for (PageView page : rosters) {
-	    GWT.log("INSTALL ON ROSTER", null);
 	    RosterView rosterView = (RosterView) page;
 	    rosterView.addAction(iconStyle, debugId, new ClickHandler() {
 		@Override

@@ -5,7 +5,10 @@
     <inherits name='com.calclab.hablar.roster.HablarRoster' />
     <inherits name='com.calclab.hablar.search.HablarSearch' />
     <inherits name='com.calclab.hablar.signals.HablarSignals' />
+    <inherits name='com.calclab.hablar.signals.HablarSignals' />
+    <inherits name='com.calclab.hablar.editbuddy.HablarEditBuddy' />
 	<inherits name='com.google.gwt.user.theme.chrome.Chrome' />
+	
 	<!-- <inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
 	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
 

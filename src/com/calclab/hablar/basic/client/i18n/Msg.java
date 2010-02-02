@@ -25,6 +25,12 @@ public interface Msg extends Messages {
     @DefaultMessage("Add to Contacts")
     String addToContacts();
 
+    @DefaultMessage("Change nick name")
+    String changeNickName();
+
+    @DefaultMessage("Write the new nick name:")
+    String changeNickNameMessage();
+
     @DefaultMessage("Chat")
     String chat();
 

@@ -35,7 +35,7 @@
 		}
 	</ui:style>
 
-	<g:LayoutPanel ui:field="container">
+	<g:LayoutPanel ui:field="container" styleName="hablar-Hablar">
 		<g:layer left="0" top="0" right="0" height="20">
 			<hablar:PresenceWidget></hablar:PresenceWidget>
 		</g:layer>

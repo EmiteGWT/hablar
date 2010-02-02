@@ -1,7 +1,6 @@
 package com.calclab.hablar.roster.client;
 
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.hablar.basic.client.ui.menu.MenuAction;
 import com.calclab.hablar.basic.client.ui.menu.PopupMenuView;
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -13,7 +12,7 @@ public interface RosterView extends PageView {
 
     RosterItemView createItemView();
 
-    PopupMenuView<RosterItem> createMenu(String debugId, MenuAction<RosterItem>... actions);
+    PopupMenuView<RosterItem> getItemMenu();
 
     void removeItemView(RosterItemView view);
 

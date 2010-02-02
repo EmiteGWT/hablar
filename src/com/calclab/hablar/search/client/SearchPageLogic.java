@@ -81,6 +81,38 @@ public class SearchPageLogic implements ListLogic {
 	});
     }
 
+    private void createMenus() {
+	addToRosterMenu = view.createMenu(ADD_ROSTER_MENU_DEB_ID);
+	addToRosterMenu.addAction(new MenuAction<SearchResultItemView>(i18n.addToContacts(), ADD_ROSTERITEM_DEB_ID) {
+	    @Override
+	    public void execute(final SearchResultItemView target) {
+		onResultToRoster(target);
+	    }
+	});
+	addToRosterMenu.addAction(new MenuAction<SearchResultItemView>(i18n.chat(), CHAT_DEB_ID) {
+	    @Override
+	    public void execute(final SearchResultItemView target) {
+		onChatWith(target);
+	    }
+	});
+
+	removeFromRosterMenu = view.createMenu(REMOVE_ROSTER_MENU_DEB_ID);
+	removeFromRosterMenu.addAction(new MenuAction<SearchResultItemView>("Remove from roster",
+		REMOVE_ROSTERITEM_DEB_ID) {
+	    @Override
+	    public void execute(final SearchResultItemView target) {
+		onRemoveFromRoster(target);
+	    }
+	});
+	removeFromRosterMenu.addAction(new MenuAction<SearchResultItemView>("Chat", CHAT_DEB_ID) {
+	    @Override
+	    public void execute(final SearchResultItemView target) {
+		onChatWith(target);
+	    }
+	});
+
+    }
+
     void onChatWith(final SearchResultItemView result) {
 	Suco.get(ChatManager.class).open(result.getItem().getJid());
     }
@@ -92,34 +124,5 @@ public class SearchPageLogic implements ListLogic {
     void onResultToRoster(final SearchResultItemView result) {
 	final SearchResultItem item = result.getItem();
 	roster.requestAddItem(item.getJid(), item.getNick());
-    }
-
-    @SuppressWarnings("unchecked")
-    private void createMenus() {
-	addToRosterMenu = view.createMenu(ADD_ROSTER_MENU_DEB_ID, new MenuAction<SearchResultItemView>(
-		i18n.addToContacts(), ADD_ROSTERITEM_DEB_ID) {
-	    @Override
-	    public void execute(final SearchResultItemView target) {
-		onResultToRoster(target);
-	    }
-	}, new MenuAction<SearchResultItemView>(i18n.chat(), CHAT_DEB_ID) {
-	    @Override
-	    public void execute(final SearchResultItemView target) {
-		onChatWith(target);
-	    }
-	});
-	removeFromRosterMenu = view.createMenu(REMOVE_ROSTER_MENU_DEB_ID, new MenuAction<SearchResultItemView>(
-		"Remove from roster", REMOVE_ROSTERITEM_DEB_ID) {
-	    @Override
-	    public void execute(final SearchResultItemView target) {
-		onRemoveFromRoster(target);
-	    }
-	}, new MenuAction<SearchResultItemView>("Chat", CHAT_DEB_ID) {
-	    @Override
-	    public void execute(final SearchResultItemView target) {
-		onChatWith(target);
-	    }
-	});
-
     }
 }

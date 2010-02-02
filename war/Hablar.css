@@ -1,54 +1,45 @@
-html,body {
-    background-color: #e9e9e9;
+
+
+.hablar-Overlay {
+	background-color: black;
+	opacity: 0.8;
+	z-index: 3000;
+	color: white;
 }
 
-#center {
-    position: absolute;
-    left: 50%;
-    top: 50%;
+.hablar-Overlay .form {
+	margin: 10px;
 }
 
-#playground {
-    position: absolute;
-    width: 900px;
-    height: 500px;
-    left: -450px;
-    top: -250px;
-    background-color: #e9e9e9;
-    border: 1px solid #bbbbbb;
-    padding: 5px;
+.form p {
+	width: 100%;
+	overflow: hidden;
+}
+.form p label {
+	display: block;
+	float: left;
+	margin-right: 10px;
+	width: 6em;
+	margin-right: 0.5em;
+	text-align: right;
+}
+.form p .gwt-Label {
+	float: left;
+	font-weight: bold;
+}
+.form .actions {
+	margin-top: 10px;
+	border-top: 1px solid #BBBBBB;
+	padding-top: 10px;
+}
+.form .gwt-TextBox {
+	border: 0px;
+	padding: 2px;
 }
 
-.hablar {
-    padding: 1px;
-    background-color: #bBBBBB;
-}
 
-#vertical_div {
-    position: absolute;
-    left: -150px;
-    width: 300px;
-    top: 5%;
-    height: 90%;
-}
 
-#vertical_dock_div {
-    position: absolute;
-    left: -250px;
-    width: 500px;
-    top: 5%;
-    height: 90%;
-}
-
-#horizontal_div {
-    position: absolute;
-    left: -350px;
-    width: 700px;
-    top: 15%;
-    height: 70%;
-}
-
-.def-PopupPanel {
+.hablar-PopupPanel {
     background-color: #E9E9E9;
     border: 1px solid #BBBBBB;
     -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);

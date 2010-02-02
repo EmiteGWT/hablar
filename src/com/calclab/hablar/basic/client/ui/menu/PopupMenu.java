@@ -11,24 +11,25 @@ public class PopupMenu<T> extends PopupPanel implements PopupMenuView<T> {
     private T target;
     private boolean visible;
 
-    public PopupMenu(final String debugId, final MenuAction<T>... actions) {
+    public PopupMenu(final String debugId) {
 	super(true);
 	super.ensureDebugId(debugId);
-	setStyleName("def-PopupPanel");
+	setStyleName("hablar-PopupPanel");
 	bar = new MenuBar(true);
-	for (final MenuAction<T> a : actions) {
-	    final MenuAction<T> action = a;
-	    final MenuItem addedItem = bar.addItem(action.getHTML(), true, new Command() {
-		@Override
-		public void execute() {
-		    PopupMenu.this.hide();
-		    action.execute(target);
-		}
-	    });
-	    addedItem.ensureDebugId(action.getId());
-	}
 	setWidget(bar);
 	visible = false;
+    }
+
+    @Override
+    public void addAction(final MenuAction<T> action) {
+	final MenuItem addedItem = bar.addItem(action.getHTML(), true, new Command() {
+	    @Override
+	    public void execute() {
+		PopupMenu.this.hide();
+		action.execute(target);
+	    }
+	});
+	addedItem.ensureDebugId(action.getId());
     }
 
     @Override

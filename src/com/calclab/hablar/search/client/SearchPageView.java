@@ -1,7 +1,6 @@
 package com.calclab.hablar.search.client;
 
 import com.calclab.emite.xep.search.client.SearchResultItem;
-import com.calclab.hablar.basic.client.ui.menu.MenuAction;
 import com.calclab.hablar.basic.client.ui.menu.PopupMenuView;
 import com.calclab.hablar.basic.client.ui.page.PageView;
 
@@ -15,7 +14,7 @@ public interface SearchPageView extends PageView {
 
     void clearResults();
 
-    PopupMenuView<SearchResultItemView> createMenu(String debugId, MenuAction<SearchResultItemView>... actions);
+    PopupMenuView<SearchResultItemView> createMenu(String debugId);
 
     void showMessage(String body, Level level);
 

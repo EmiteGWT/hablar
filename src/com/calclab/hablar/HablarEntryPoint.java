@@ -1,11 +1,8 @@
 package com.calclab.hablar;
 
-import com.calclab.hablar.HablarConfig.Layout;
 import com.calclab.hablar.basic.client.ui.HablarWidget;
-import com.calclab.hablar.basic.client.ui.pages.PagesWidget;
-import com.calclab.hablar.basic.client.ui.pages.panel.AccordionPages;
-import com.calclab.hablar.basic.client.ui.pages.panel.TabPages;
 import com.calclab.hablar.chat.client.HablarChat;
+import com.calclab.hablar.editbuddy.client.HablarEditBuddy;
 import com.calclab.hablar.login.client.HablarLogin;
 import com.calclab.hablar.roster.client.HablarRoster;
 import com.calclab.hablar.search.client.HablarSearch;
@@ -20,7 +17,7 @@ public class HablarEntryPoint implements EntryPoint {
     @Override
     public void onModuleLoad() {
 	final HablarConfig config = HablarConfig.getFromMeta();
-	final HablarWidget hablar = createWidget(config, config);
+	final HablarWidget hablar = new HablarWidget(config.layout);
 
 	HablarChat.install(hablar);
 
@@ -31,6 +28,7 @@ public class HablarEntryPoint implements EntryPoint {
 	if (config.hasRoster) {
 	    boolean isDocked = "left".equals(config.dockRoster);
 	    HablarRoster.install(hablar, isDocked);
+	    HablarEditBuddy.install(hablar);
 	}
 
 	if (config.hasSearch) {
@@ -66,20 +64,6 @@ public class HablarEntryPoint implements EntryPoint {
 	dialog.show();
 	dialog.center();
 	return dialog;
-    }
-
-    private HablarWidget createWidget(final HablarConfig config, HablarConfig config2) {
-	PagesWidget pages = null;
-	if (config.layout == Layout.accordion) {
-	    pages = new PagesWidget(new AccordionPages());
-	} else if (config.layout == Layout.tabs) {
-	    pages = new PagesWidget(new TabPages());
-	} else {
-	    throw new RuntimeException("Layout not configured.");
-	}
-	HablarWidget hablar = new HablarWidget(pages);
-
-	return hablar;
     }
 
     private void setSize(final Widget widget, final HablarConfig config) {

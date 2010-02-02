@@ -63,7 +63,7 @@ public class PagesLogic implements Pages {
 
 	    Visibility visibility = pageView.getVisibility();
 	    GWT.log("ADD: " + visibility, null);
-	    if (visibility == Visibility.focused || (visibility == visibility.notFocused) && visiblePages.size() == 0) {
+	    if (visibility == Visibility.focused || (visibility == Visibility.notFocused) && visiblePages.size() == 0) {
 		view.addPageView(pageView);
 		visiblePages.add(pageView);
 		open(pageView);

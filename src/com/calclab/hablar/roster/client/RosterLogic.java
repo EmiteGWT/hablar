@@ -29,7 +29,7 @@ public class RosterLogic implements ListLogic {
     public static final String CHAT_START_DEB_ID = "RosterLogic-chatStart-Action";
     public static final String CHAT_DEB_ID = "RosterLogic-chat";
     public static final String REMOVE_ROSTERITEM_DEB_ID = "RosterLogic-remove-rosteritem";
-    public static final String ROSTERITEM_MENU_DEB_ID = "RosterLogic-remove-menu";
+    private static final String CHANGE_NICKNAME_DEB_ID = "RosterLogic-change-nick-name";
 
     private final Roster roster;
     private final ChatManager chatManager;
@@ -87,37 +87,13 @@ public class RosterLogic implements ListLogic {
 	chatManager.open(uri);
     }
 
-    /**
-     * Returns a roster item view ALWAYS
-     * 
-     * @param item
-     * @return
-     */
-    RosterItemView getOrCreateWidget(final RosterItem item) {
-	RosterItemView itemWidget = items.get(item.getJID());
-	if (itemWidget == null) {
-	    itemWidget = view.createItemView();
-	    items.put(item.getJID(), itemWidget);
-	}
-	RosterItemLogic.setItem(item, itemWidget);
-	return itemWidget;
-    }
-
-    void onChatWith(final RosterItem item) {
-	chatManager.open(item.getJID());
-    }
-
-    void onRemoveItem(final RosterItem item) {
-	roster.removeItem(item.getJID());
-    }
-
     private void addRosterListeners() {
 	roster.onRosterRetrieved(new Listener<Collection<RosterItem>>() {
 	    @Override
 	    public void onEvent(final Collection<RosterItem> items) {
 		GWT.log("Retrieved roster", null);
 		for (final RosterItem item : items) {
-		    getOrCreateWidget(item);
+		    getOrCreateRosterItemView(item);
 		}
 	    }
 
@@ -126,7 +102,7 @@ public class RosterLogic implements ListLogic {
 	roster.onItemAdded(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
-		getOrCreateWidget(item);
+		getOrCreateRosterItemView(item);
 		view.setStatusMessage(item.getName() + " has been added to Contacts.");
 	    }
 	});
@@ -134,14 +110,14 @@ public class RosterLogic implements ListLogic {
 	roster.onItemChanged(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
-		getOrCreateWidget(item);
+		getOrCreateRosterItemView(item);
 	    }
 	});
 
 	roster.onItemRemoved(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
-		view.removeItemView(getOrCreateWidget(item));
+		view.removeItemView(getOrCreateRosterItemView(item));
 		// item.getName() returns null in a removed item
 		view.setStatusMessage(item.getJID().getNode() + " has been removed from Contacts.");
 	    }
@@ -165,19 +141,46 @@ public class RosterLogic implements ListLogic {
 	view.setActive(active);
     }
 
-    @SuppressWarnings("unchecked")
     private void createMenu() {
-	menu = view.createMenu(ROSTERITEM_MENU_DEB_ID, new MenuAction<RosterItem>(i18n.chat(), CHAT_DEB_ID) {
+
+	menu = view.getItemMenu();
+
+	menu.addAction(new MenuAction<RosterItem>(i18n.chat(), CHAT_DEB_ID) {
 	    @Override
 	    public void execute(final RosterItem target) {
 		onChatWith(target);
 	    }
-	}, new MenuAction<RosterItem>(i18n.removeFromContacts(), REMOVE_ROSTERITEM_DEB_ID) {
+	});
+	menu.addAction(new MenuAction<RosterItem>(i18n.removeFromContacts(), REMOVE_ROSTERITEM_DEB_ID) {
 	    @Override
 	    public void execute(final RosterItem target) {
 		onRemoveItem(target);
 	    }
 	});
+    }
+
+    /**
+     * Returns a roster item view ALWAYS
+     * 
+     * @param item
+     * @return
+     */
+    private RosterItemView getOrCreateRosterItemView(final RosterItem item) {
+	RosterItemView itemWidget = items.get(item.getJID());
+	if (itemWidget == null) {
+	    itemWidget = view.createItemView();
+	    items.put(item.getJID(), itemWidget);
+	}
+	RosterItemLogic.setItem(item, itemWidget);
+	return itemWidget;
+    }
+
+    void onChatWith(final RosterItem item) {
+	chatManager.open(item.getJID());
+    }
+
+    void onRemoveItem(final RosterItem item) {
+	roster.removeItem(item.getJID());
     }
 
 }

@@ -3,7 +3,6 @@ package com.calclab.hablar.roster.client;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.basic.client.i18n.Msg;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
-import com.calclab.hablar.basic.client.ui.menu.MenuAction;
 import com.calclab.hablar.basic.client.ui.menu.PopupMenu;
 import com.calclab.hablar.basic.client.ui.menu.PopupMenuView;
 import com.calclab.hablar.basic.client.ui.page.PageWidget;
@@ -29,6 +28,8 @@ public class RosterPageWidget extends PageWidget implements RosterView {
     interface RosterWidgetUiBinder extends UiBinder<Widget, RosterPageWidget> {
     }
 
+    public static final String DEBUGID_ROSTER_MENU = "Roster-ItemMenu";
+
     public static final String ID = "RosterPage";
     public static final String DISABLED_LABEL = "RosterPage-DisableLabel";
     private static RosterWidgetUiBinder uiBinder = GWT.create(RosterWidgetUiBinder.class);
@@ -49,6 +50,8 @@ public class RosterPageWidget extends PageWidget implements RosterView {
     ScrollPanel scroll;
 
     private final RosterLogic logic;
+
+    private PopupMenu<RosterItem> itemMenu;
 
     public RosterPageWidget(Visibility visibility) {
 	super(RosterView.TYPE, visibility, false);
@@ -81,8 +84,11 @@ public class RosterPageWidget extends PageWidget implements RosterView {
     }
 
     @Override
-    public PopupMenuView<RosterItem> createMenu(final String debugId, final MenuAction<RosterItem>... actions) {
-	return new PopupMenu<RosterItem>(debugId, actions);
+    public PopupMenuView<RosterItem> getItemMenu() {
+	if (itemMenu == null) {
+	    itemMenu = new PopupMenu<RosterItem>(DEBUGID_ROSTER_MENU);
+	}
+	return itemMenu;
     }
 
     @Override

@@ -1,12 +1,10 @@
 package com.calclab.hablar;
 
 import com.calclab.emite.browser.client.PageAssist;
+import com.calclab.hablar.basic.client.ui.HablarWidget;
+import com.calclab.hablar.basic.client.ui.HablarWidget.Layout;
 
 public class HablarConfig {
-
-    public static enum Layout {
-	accordion, tabs
-    }
 
     /**
      * Retrieve Hablar configuration from meta tags in html
@@ -26,9 +24,9 @@ public class HablarConfig {
 
 	String layout = PageAssist.getMeta("hablar.layout");
 	if ("tabs".equals(layout))
-	    config.layout = HablarConfig.Layout.tabs;
+	    config.layout = HablarWidget.Layout.tabs;
 	else
-	    config.layout = HablarConfig.Layout.accordion;
+	    config.layout = HablarWidget.Layout.accordion;
 
 	config.inline = PageAssist.getMeta("hablar.inline");
 	config.width = PageAssist.getMeta("hablar.width");

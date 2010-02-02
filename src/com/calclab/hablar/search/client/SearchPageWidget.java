@@ -5,7 +5,6 @@ import static com.google.gwt.dom.client.Style.Unit.PX;
 import com.calclab.emite.xep.search.client.SearchResultItem;
 import com.calclab.hablar.basic.client.i18n.Msg;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
-import com.calclab.hablar.basic.client.ui.menu.MenuAction;
 import com.calclab.hablar.basic.client.ui.menu.PopupMenu;
 import com.calclab.hablar.basic.client.ui.menu.PopupMenuView;
 import com.calclab.hablar.basic.client.ui.page.PageWidget;
@@ -90,9 +89,8 @@ public class SearchPageWidget extends PageWidget implements SearchPageView {
     }
 
     @Override
-    public PopupMenuView<SearchResultItemView> createMenu(final String debugId,
-	    final MenuAction<SearchResultItemView>... actions) {
-	final PopupMenu<SearchResultItemView> popupMenu = new PopupMenu<SearchResultItemView>(debugId, actions);
+    public PopupMenuView<SearchResultItemView> createMenu(final String debugId) {
+	final PopupMenu<SearchResultItemView> popupMenu = new PopupMenu<SearchResultItemView>(debugId);
 	return popupMenu;
     }
 

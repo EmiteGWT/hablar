@@ -3,6 +3,8 @@ package com.calclab.hablar.basic.client.ui.menu;
 import com.google.gwt.user.client.ui.UIObject;
 
 public interface PopupMenuView<T> {
+    void addAction(MenuAction<T> action);
+
     void hide();
 
     boolean isVisible();

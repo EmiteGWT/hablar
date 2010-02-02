@@ -1,5 +1,6 @@
 package com.calclab.hablar.basic.client.ui;
 
+import static com.google.gwt.dom.client.Style.Unit.PCT;
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
 import com.calclab.hablar.basic.client.ui.page.HeaderStyles;
@@ -20,6 +21,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -39,6 +41,8 @@ public class HablarWidget extends Composite implements HablarView {
 
     }
 
+    private static final int ANIMATION_TIME = 250;
+
     private static ChatPanelUiBinder uiBinder = GWT.create(ChatPanelUiBinder.class);
 
     @UiField
@@ -53,6 +57,8 @@ public class HablarWidget extends Composite implements HablarView {
     private final Pages pages;
     private PageView dockedPageView;
 
+    private SimplePanel overlay;
+
     @UiConstructor
     public HablarWidget(Layout layout) {
 	this(layout == Layout.accordion ? new AccordionPages() : new TabPages());
@@ -62,8 +68,7 @@ public class HablarWidget extends Composite implements HablarView {
 	this(new PagesWidget(panel));
     }
 
-    @Deprecated
-    public HablarWidget(PagesWidget pages) {
+    private HablarWidget(PagesWidget pages) {
 	initWidget(uiBinder.createAndBindUi(this));
 	this.pages = pages;
 	Widget center = pages;
@@ -79,6 +84,17 @@ public class HablarWidget extends Composite implements HablarView {
 	    }
 	});
 	new HablarLogic(this);
+    }
+
+    /**
+     * http://code.google.com/p/google-web-toolkit/issues/detail?id=4360
+     */
+    @Override
+    public void closeOverlay() {
+	getOverlay();
+	container.setWidgetTopHeight(overlay, 0, PX, 0, PCT);
+	container.forceLayout();
+	overlay.clear();
     }
 
     @Override
@@ -107,7 +123,28 @@ public class HablarWidget extends Composite implements HablarView {
 	container.setWidgetLeftWidth(docked, 0, PX, size, PX);
 
 	container.setWidgetLeftRight((Widget) pages, size + 3, PX, 0, PX);
-	container.animate(250);
+	container.animate(ANIMATION_TIME);
+    }
+
+    @Override
+    public void showOverlay(Display display) {
+	getOverlay();
+	overlay.clear();
+	overlay.setWidget(display.asWidget());
+	container.setWidgetTopHeight(overlay, 0, PX, 100, PCT);
+	container.forceLayout();
+    }
+
+    private SimplePanel getOverlay() {
+	if (overlay == null) {
+	    overlay = new SimplePanel();
+	    overlay.setStyleName("hablar-Overlay");
+	    container.add(overlay);
+	    container.setWidgetTopHeight(overlay, 0, PX, 0, PX);
+	    container.setWidgetLeftRight(overlay, 0, PX, 0, PX);
+	    container.forceLayout();
+	}
+	return overlay;
     }
 
 }
