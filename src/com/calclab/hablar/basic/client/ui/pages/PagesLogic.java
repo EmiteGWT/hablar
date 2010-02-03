@@ -28,6 +28,8 @@ public class PagesLogic implements Pages {
     private final ArrayList<PageView> visiblePages;
     private final HablarEventBus hablarEventBus;
 
+    private PageView ghostPage;
+
     public PagesLogic(HablarEventBus hablarEventBus, PagesPanel view) {
 	this.hablarEventBus = hablarEventBus;
 	this.view = view;
@@ -87,6 +89,11 @@ public class PagesLogic implements Pages {
     }
 
     @Override
+    public void addGhost(PageView pageView) {
+	ghostPage = pageView;
+    }
+
+    @Override
     public boolean close(PageView pageView) {
 	if (pageView.getVisibility() == Visibility.focused) {
 	    pageView.setVisibility(Visibility.notFocused);
@@ -123,6 +130,10 @@ public class PagesLogic implements Pages {
 	    if (pageType.equals(pageView.getPageType())) {
 		list.add(pageView);
 	    }
+	}
+
+	if (pageType.equals(ghostPage.getPageType())) {
+	    list.add(ghostPage);
 	}
 
 	return list;

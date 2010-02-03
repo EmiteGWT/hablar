@@ -9,6 +9,13 @@ public interface Pages {
     void add(PageView pageView);
 
     /**
+     * FIXME: just to work with docked.
+     * 
+     * @param pageView
+     */
+    void addGhost(PageView pageView);
+
+    /**
      * Close the given page.
      * 
      * @param pageView

@@ -21,6 +21,11 @@ public class PagesWidget extends Composite implements Pages {
     }
 
     @Override
+    public void addGhost(PageView pageView) {
+	logic.addGhost(pageView);
+    }
+
+    @Override
     public boolean close(PageView pageView) {
 	return logic.close(pageView);
     }

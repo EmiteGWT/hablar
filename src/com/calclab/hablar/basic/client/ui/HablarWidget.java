@@ -134,6 +134,7 @@ public class HablarWidget extends Composite implements Hablar {
 
 	container.setWidgetLeftRight((Widget) pages, size + 3, PX, 0, PX);
 	container.animate(ANIMATION_TIME);
+	pages.addGhost(pageView);
     }
 
     @Override
