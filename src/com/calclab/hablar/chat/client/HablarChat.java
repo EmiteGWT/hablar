@@ -6,6 +6,10 @@ import com.google.gwt.core.client.EntryPoint;
 
 public class HablarChat implements EntryPoint {
 
+    public static void install(Hablar hablar) {
+	install(hablar, ChatConfig.getFromMeta());
+    }
+
     public static void install(Hablar hablarPresenter, ChatConfig config) {
 	new ChatManagerController(hablarPresenter, config);
     }

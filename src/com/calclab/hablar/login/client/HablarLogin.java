@@ -11,14 +11,14 @@ import com.google.gwt.core.client.EntryPoint;
 
 public class HablarLogin implements EntryPoint {
 
-    public static void install(HablarWidget widget) {
-	LoginConfig config = LoginConfig.getFromMeta();
-	createLoginPage(widget.getHablar(), config, Suco.get(Session.class));
+    public static void install(Hablar hablar) {
+	install(hablar, LoginConfig.getFromMeta());
     }
 
-    private static void createLoginPage(Hablar hablarPresenter, LoginConfig config, Session session) {
-	final LoginPresenter login = new LoginPresenter(hablarPresenter.getEventBus(), new LoginWidget());
-	hablarPresenter.addPage(login);
+    public static void install(Hablar hablar, LoginConfig config) {
+	Session session = Suco.get(Session.class);
+	final LoginPresenter login = new LoginPresenter(hablar.getEventBus(), new LoginWidget());
+	hablar.addPage(login);
 	session.onStateChanged(new Listener<Session>() {
 	    @Override
 	    public void onEvent(Session session) {
@@ -28,6 +28,10 @@ public class HablarLogin implements EntryPoint {
 	setState(login, session);
 	login.getDisplay().getUser().setText(config.userName);
 	login.getDisplay().getPassword().setText(config.password);
+    }
+
+    public static void install(HablarWidget widget) {
+	install(widget.getHablar(), LoginConfig.getFromMeta());
     }
 
     private static void setState(final Page<?> login, Session session) {

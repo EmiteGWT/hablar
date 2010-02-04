@@ -9,11 +9,7 @@ import com.google.gwt.user.client.ui.HasText;
 
 public class HablarSignals implements EntryPoint {
 
-    public static void install(final HablarWidget widget) {
-	install(widget.getHablar());
-    }
-
-    private static void install(Hablar hablarPresenter) {
+    public static void install(Hablar hablarPresenter) {
 	HablarEventBus eventBus = hablarPresenter.getEventBus();
 	HasText titleDisplay = new HasText() {
 	    @Override
@@ -29,6 +25,10 @@ public class HablarSignals implements EntryPoint {
 
 	new UnattendedChatPages(eventBus);
 	new WindowTitlePresenter(eventBus, titleDisplay);
+    }
+
+    public static void install(final HablarWidget widget) {
+	install(widget.getHablar());
     }
 
     @Override

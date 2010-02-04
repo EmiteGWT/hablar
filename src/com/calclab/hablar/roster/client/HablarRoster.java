@@ -11,11 +11,13 @@ import com.google.gwt.core.client.EntryPoint;
 
 public class HablarRoster implements EntryPoint {
 
-    public static void createLoginPage(final Hablar hablarPresenter, Session session) {
+    public static void install(final Hablar hablarPresenter) {
+
 	final RosterPresenter roster = new RosterPresenter(hablarPresenter.getEventBus(), new RosterWidget());
 	roster.setVisibility(Visibility.notFocused);
 	hablarPresenter.addPage(roster);
 
+	Session session = Suco.get(Session.class);
 	session.onStateChanged(new Listener<Session>() {
 
 	    @Override
@@ -27,7 +29,7 @@ public class HablarRoster implements EntryPoint {
     }
 
     public static void install(HablarWidget widget) {
-	createLoginPage(widget.getHablar(), Suco.get(Session.class));
+	install(widget.getHablar());
     }
 
     private static void setState(final RosterPresenter roster, State state) {

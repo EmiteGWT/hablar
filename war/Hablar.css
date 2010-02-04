@@ -105,6 +105,11 @@
     border-bottom: 1px solid #E9E9E9;
 }
 
+.hablar-Header.DockHeaderWidget-top {
+	background-color: #BBB;
+	border: 1px solid #BBB;
+}
+
 /** LOGIN **/
 .hablar-Login .output {
 	padding: 3px;

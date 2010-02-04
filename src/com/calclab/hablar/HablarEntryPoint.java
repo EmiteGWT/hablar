@@ -1,16 +1,6 @@
 package com.calclab.hablar;
 
-import com.calclab.hablar.chat.client.HablarChat;
 import com.calclab.hablar.core.client.HablarWidget;
-import com.calclab.hablar.dock.client.DockConfig;
-import com.calclab.hablar.dock.client.HablarDock;
-import com.calclab.hablar.editbuddy.client.HablarEditBuddy;
-import com.calclab.hablar.login.client.HablarLogin;
-import com.calclab.hablar.openchat.client.HablarOpenChat;
-import com.calclab.hablar.roster.client.HablarRoster;
-import com.calclab.hablar.roster.client.RosterPresenter;
-import com.calclab.hablar.search.client.HablarSearch;
-import com.calclab.hablar.signals.client.HablarSignals;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -23,33 +13,7 @@ public class HablarEntryPoint implements EntryPoint {
 	final HablarConfig config = HablarConfig.getFromMeta();
 	final HablarWidget widget = new HablarWidget(config.layout);
 
-	HablarChat.install(widget);
-
-	if ("left".equals(config.dockRoster)) {
-	    DockConfig dock = new DockConfig(RosterPresenter.TYPE, 250, null, 0);
-	    HablarDock.install(widget, dock);
-	} else if ("right".equals(config.dockRoster)) {
-	    DockConfig dock = new DockConfig(null, 0, RosterPresenter.TYPE, 250);
-	    HablarDock.install(widget, dock);
-	}
-
-	if (config.hasLogin) {
-	    HablarLogin.install(widget);
-	}
-
-	if (config.hasRoster) {
-	    HablarRoster.install(widget);
-	    HablarOpenChat.install(widget);
-	    HablarEditBuddy.install(widget);
-	}
-
-	if (config.hasSearch) {
-	    HablarSearch.install(widget);
-	}
-
-	if (config.hasSignals) {
-	    HablarSignals.install(widget);
-	}
+	HablarComplete.install(widget, config);
 
 	if (config.inline == null) {
 	    createDialog(widget, config);

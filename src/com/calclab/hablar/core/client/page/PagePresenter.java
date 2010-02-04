@@ -14,14 +14,14 @@ public class PagePresenter<T extends Display> implements Page<T> {
     private final String pageType;
     private final String id;
 
-    private final PageState state;
+    protected final PageState model;
 
     public PagePresenter(String pageType, String id, HablarEventBus eventBus, T display) {
 	this.pageType = pageType;
 	this.eventBus = eventBus;
 	this.display = display;
 	this.id = pageType + "-" + id;
-	state = new PageState(eventBus, this);
+	model = new PageState(eventBus, this);
     }
 
     @Override
@@ -33,13 +33,13 @@ public class PagePresenter<T extends Display> implements Page<T> {
 	return id;
     }
 
-    public String getType() {
-	return pageType;
-    }
-
     @Override
     public PageState getState() {
-	return state;
+	return model;
+    }
+
+    public String getType() {
+	return pageType;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class PagePresenter<T extends Display> implements Page<T> {
 
     @Override
     public void setVisibility(Visibility visibility) {
-	state.setVisibility(visibility);
+	model.setVisibility(visibility);
     }
 
 }

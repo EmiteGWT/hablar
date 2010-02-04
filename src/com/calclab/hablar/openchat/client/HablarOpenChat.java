@@ -25,11 +25,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
  */
 public class HablarOpenChat implements EntryPoint {
 
-    public static void install(final HablarWidget widget) {
-	install(widget.getHablar());
-    }
-
-    private static void install(final Hablar hablar) {
+    public static void install(final Hablar hablar) {
 	final OpenChatPresenter openChat = new OpenChatPresenter(hablar.getEventBus(), new OpenChatWidget());
 	hablar.addPage(openChat, OverlayContainer.TYPE);
 
@@ -43,6 +39,10 @@ public class HablarOpenChat implements EntryPoint {
 		}
 	    });
 	}
+    }
+
+    public static void install(final HablarWidget widget) {
+	install(widget.getHablar());
     }
 
     @Override
