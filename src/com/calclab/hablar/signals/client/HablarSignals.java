@@ -1,14 +1,20 @@
 package com.calclab.hablar.signals.client;
 
-import com.calclab.hablar.basic.client.HablarEventBus;
-import com.calclab.hablar.basic.client.ui.HablarWidget;
+import com.calclab.hablar.core.client.Hablar;
+import com.calclab.hablar.core.client.HablarWidget;
+import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasText;
 
 public class HablarSignals implements EntryPoint {
 
-    public static void install(final HablarWidget hablar) {
+    public static void install(final HablarWidget widget) {
+	install(widget.getHablar());
+    }
+
+    private static void install(Hablar hablarPresenter) {
+	HablarEventBus eventBus = hablarPresenter.getEventBus();
 	HasText titleDisplay = new HasText() {
 	    @Override
 	    public String getText() {
@@ -21,10 +27,8 @@ public class HablarSignals implements EntryPoint {
 	    }
 	};
 
-	HablarEventBus hablarEventBus = hablar.getHablarEventBus();
-	new UnattendedChatPages(hablarEventBus);
-	new WindowTitlePresenter(hablarEventBus, titleDisplay);
-
+	new UnattendedChatPages(eventBus);
+	new WindowTitlePresenter(eventBus, titleDisplay);
     }
 
     @Override

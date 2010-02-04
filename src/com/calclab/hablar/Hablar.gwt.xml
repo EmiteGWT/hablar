@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module rename-to='hablar'>
-	<inherits name='com.calclab.hablar.basic.HablarBasic' />
+<module rename-to='Hablar'>
+    <inherits name='com.calclab.hablar.core.HablarCore' />
     <inherits name='com.calclab.hablar.login.HablarLogin' />
     <inherits name='com.calclab.hablar.roster.HablarRoster' />
     <inherits name='com.calclab.hablar.search.HablarSearch' />
@@ -8,6 +8,7 @@
     <inherits name='com.calclab.hablar.signals.HablarSignals' />
     <inherits name='com.calclab.hablar.editbuddy.HablarEditBuddy' />
     <inherits name='com.calclab.hablar.openchat.HablarOpenChat' />
+    <inherits name='com.calclab.hablar.dock.HablarDock' />
 	<inherits name='com.google.gwt.user.theme.chrome.Chrome' />
 	
 	<!-- <inherits name='com.google.gwt.user.theme.standard.Standard' /> -->

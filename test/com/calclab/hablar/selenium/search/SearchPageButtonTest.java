@@ -11,7 +11,7 @@ public class SearchPageButtonTest extends HablarSeleniumTest {
 	login.signIn("test1@localhost", "test1");
 	login.assertIsConnectedAs("test1");
 	roster.getHeader().click();
-	roster.getSearchIcon().click();
+	search.getAction().click();
 	search.getSearchButton();
     }
 }

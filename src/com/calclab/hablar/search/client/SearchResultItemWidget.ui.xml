@@ -1,33 +1,18 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+    <ui:style>
+        @sprite .userAdd {
+            gwt-image: 'buddy';
+        }
+    </ui:style>
 
-    <ui:style src="NiHablar.css" field="hablar" />
-		
-	<ui:style>
-		.resultName {
-			display: block;
-			float: left;
-			margin: 0 10px;
-		}
-		.jid {
-			display: block;
-			float: left;
-			color: gray;
-		}
-	</ui:style>
-
-	<ui:style field="icons">
-		@sprite .userAdd {
-			gwt-image: 'buddy';
-		}
-	</ui:style>
-
-	<ui:image field="buddy" src="buddy-small.png"></ui:image>
-	<g:HTMLPanel styleName="{hablar.listItemWidget}">
-		<span class="{hablar.icon} {icons.userAdd}" ui:field="span"></span>
-		<g:Label ui:field="name" styleName="{style.resultName}">Result</g:Label>
-		<g:Label ui:field="jid" styleName="{style.jid}">JID</g:Label>
-		<g:Label ui:field="menu" styleName="{hablar.listItemMenu}"></g:Label>
-	</g:HTMLPanel>
+    <ui:image field="buddy" src="buddy-small.png"></ui:image>
+    
+    <g:HTMLPanel styleName="hablar-SearchResultItemWidget">
+        <span class="icon {style.userAdd}" ui:field="span"></span>
+        <g:Label ui:field="name" styleName="name">Result</g:Label>
+        <g:Label ui:field="jid" styleName="jid">JID</g:Label>
+        <g:Label ui:field="menu" styleName="menu"></g:Label>
+    </g:HTMLPanel>
 </ui:UiBinder> 

@@ -1,83 +1,79 @@
 package com.calclab.hablar.roster.client;
 
-import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
-import com.calclab.hablar.basic.client.ui.lists.ListItemWidget;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FocusPanel;
+import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
-class RosterItemWidget extends ListItemWidget implements RosterItemView {
+public class RosterItemWidget extends Composite implements RosterItemDisplay {
 
     interface RosterItemWidgetUiBinder extends UiBinder<Widget, RosterItemWidget> {
     }
 
-    private static RosterItemWidgetUiBinder uiBinder = GWT.create(RosterItemWidgetUiBinder.class);
+    @UiField
+    FocusPanel self;
 
     @UiField
-    Label name, status, icon, jid, menu;
+    Label icon, name, jid, menu, status;
 
-    private RosterItem item;
+    private String currentStyle;
 
-    private String iconStyle;
+    private static RosterItemWidgetUiBinder uiBinder = GWT.create(RosterItemWidgetUiBinder.class);
 
-    public RosterItemWidget(final RosterLogic logic) {
-	super(logic);
+    public RosterItemWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
-	menu.addStyleName(HablarIcons.get(HablarIcons.IconType.menu));
-	super.setMenu(menu);
-	setMenuVisible(false);
+	menu.addStyleName(HablarIcons.get(IconType.menu));
     }
 
     @Override
-    public RosterItem getItem() {
-	return item;
+    public Widget asWidget() {
+	return this;
     }
 
     @Override
-    public void setIcon(final HablarIcons.IconType iconType) {
-	if (this.iconStyle != null) {
+    public HasClickHandlers getAction() {
+	return self;
+    }
+
+    @Override
+    public HasText getJid() {
+	return jid;
+    }
+
+    @Override
+    public HasClickHandlers getMenuAction() {
+	return menu;
+    }
+
+    @Override
+    public HasText getName() {
+	return name;
+    }
+
+    @Override
+    public HasText getStatus() {
+	return status;
+    }
+
+    @Override
+    public void setIcon(String iconStyle) {
+	if (currentStyle != null) {
 	    icon.removeStyleName(iconStyle);
 	}
-	this.iconStyle = HablarIcons.get(iconType);
-	icon.getElement().addClassName(iconStyle);
+	currentStyle = iconStyle;
 	icon.addStyleName(iconStyle);
     }
 
     @Override
-    public void setItem(final RosterItem item) {
-	this.item = item;
+    public void setStatusVisible(boolean visible) {
+	status.setVisible(visible);
     }
 
-    @Override
-    public void setJID(final String jidString) {
-	jid.setText(jidString);
-    }
-
-    @Override
-    public void setMenuDebugId(final String debugId) {
-	menu.ensureDebugId(debugId);
-    }
-
-    @Override
-    public void setName(final String nameString) {
-	name.setText(nameString);
-    }
-
-    @Override
-    public void setNameDebugId(final String debugId) {
-	name.ensureDebugId(debugId);
-    }
-
-    @Override
-    public void setStatus(final String status) {
-	this.status.setText(status);
-    }
-
-    @Override
-    public void setStatusVisible(final boolean visible) {
-	this.status.setVisible(visible);
-    }
 }

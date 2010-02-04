@@ -1,7 +1,7 @@
 package com.calclab.hablar;
 
 import com.calclab.emite.browser.client.PageAssist;
-import com.calclab.hablar.basic.client.ui.HablarWidget;
+import com.calclab.hablar.core.client.HablarDisplay;
 
 public class HablarConfig {
 
@@ -23,9 +23,9 @@ public class HablarConfig {
 
 	String layout = PageAssist.getMeta("hablar.layout");
 	if ("tabs".equals(layout))
-	    config.layout = HablarWidget.Layout.tabs;
+	    config.layout = HablarDisplay.Layout.tabs;
 	else
-	    config.layout = HablarWidget.Layout.accordion;
+	    config.layout = HablarDisplay.Layout.accordion;
 
 	config.inline = PageAssist.getMeta("hablar.inline");
 	config.width = PageAssist.getMeta("hablar.width");
@@ -55,7 +55,7 @@ public class HablarConfig {
     /**
      * Choose a layout
      */
-    public HablarWidget.Layout layout;
+    public HablarDisplay.Layout layout;
 
     /**
      * Show or not login panel

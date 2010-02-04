@@ -2,46 +2,54 @@ package com.calclab.hablar.search.client;
 
 import java.util.List;
 
-import com.calclab.hablar.basic.client.Hablar;
-import com.calclab.hablar.basic.client.HablarEventBus;
-import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
-import com.calclab.hablar.basic.client.ui.icon.HablarIcons.IconType;
-import com.calclab.hablar.basic.client.ui.page.PageView;
-import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
-import com.calclab.hablar.basic.client.ui.pages.Pages;
-import com.calclab.hablar.roster.client.RosterView;
+import com.calclab.hablar.core.client.Hablar;
+import com.calclab.hablar.core.client.HablarWidget;
+import com.calclab.hablar.core.client.page.Page;
+import com.calclab.hablar.core.client.page.PagePresenter;
+import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
+import com.calclab.hablar.roster.client.RosterPresenter;
+import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
-public class HablarSearch {
+/**
+ * Adds Search support to Hablar
+ * 
+ */
+public class HablarSearch implements EntryPoint {
 
-    public static void install(Hablar view) {
-
-	installSearch(view.getHablarEventBus(), view.getPages());
-
-    }
-
-    private static void installSearch(HablarEventBus hablarEventBus, final Pages pages) {
-	GWT.log("INSTALL SEARCH", null);
-
-	List<PageView> rosters = pages.getPagesOfType(RosterView.TYPE);
-	boolean isRoster = rosters.size() > 0;
+    public static void install(Hablar hablar) {
+	final SearchPresenter search = new SearchPresenter(hablar.getEventBus(), new SearchWidget());
+	List<PagePresenter<?>> rosters = hablar.getPagePresentersOfType(RosterPresenter.TYPE);
+	boolean visible = rosters.size() == 0;
+	Visibility visibility = visible ? Visibility.notFocused : Visibility.hidden;
+	search.setVisibility(visibility);
+	search.getState().setCloseable(!visible);
+	hablar.addPage(search);
 
 	String iconStyle = HablarIcons.get(IconType.search);
 	String debugId = "HablarLogic-searchAction";
-	Visibility visibility = isRoster ? Visibility.closed : Visibility.notFocused;
-	final SearchPageWidget searchPage = new SearchPageWidget(hablarEventBus, visibility, isRoster);
-	pages.add(searchPage);
 
-	for (PageView page : rosters) {
-	    RosterView rosterView = (RosterView) page;
-	    rosterView.addAction(iconStyle, debugId, new ClickHandler() {
+	for (Page<?> roster : rosters) {
+	    ((RosterPresenter) roster).addAction(iconStyle, debugId, new ClickHandler() {
 		@Override
 		public void onClick(ClickEvent event) {
-		    pages.open(searchPage);
+		    GWT.log("Show search", null);
+		    search.requestOpen();
 		}
 	    });
 	}
     }
+
+    public static void install(HablarWidget widget) {
+	install(widget.getHablar());
+    }
+
+    @Override
+    public void onModuleLoad() {
+    }
+
 }

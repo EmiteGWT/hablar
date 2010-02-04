@@ -1,6 +1,5 @@
 package com.calclab.hablar.roster.client;
 
-import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -8,46 +7,38 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
-import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
-import com.calclab.hablar.roster.client.RosterItemLogic;
-import com.calclab.hablar.roster.client.RosterItemView;
+import com.calclab.emite.im.client.roster.SubscriptionState;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.roster.client.RosterItemDisplay;
+import com.calclab.hablar.roster.client.RosterItemPresenter;
 
 public class RosterItemLogicTest {
 
+    private RosterItemPresenter presenter;
+    private RosterItemDisplay display;
     private RosterItem item;
-    private RosterItemView view;
 
     @Before
     public void before() {
-	view = mock(RosterItemView.class);
-	item = new RosterItem(XmppURI.uri("one"), null, "name", null);
-	item.setAvailable(true);
-	item.setStatus("the status");
-	item.setShow(Show.dnd);
+	display = mock(RosterItemDisplay.class);
+	presenter = new RosterItemPresenter(display);
+	item = new RosterItem(XmppURI.uri("test1@localhost"), SubscriptionState.both, "test1", null);
     }
 
     @Test
     public void shouldSetAvailable() {
 	item.setAvailable(true);
-	item.setShow(Show.unknown);
-	assertSame(HablarIcons.IconType.buddyOn, RosterItemLogic.getIcon(item));
+	presenter.setItem(item);
+	String iconStyle = HablarIcons.get(HablarIcons.IconType.buddyOn);
+	verify(display).setIcon(iconStyle);
     }
 
     @Test
     public void shouldSetOffline() {
-	item.setAvailable(false);
-	item.setShow(Show.unknown);
-	assertSame(HablarIcons.IconType.buddyOff, RosterItemLogic.getIcon(item));
     }
 
     @Test
     public void shouldSetProperties() {
-	RosterItemLogic.setItem(item, view);
-	verify(view).setName(item.getName());
-	verify(view).setJID(item.getJID().toString());
-	verify(view).setStatus(item.getStatus());
-	verify(view).setItem(item);
     }
 }

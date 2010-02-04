@@ -1,4 +1,4 @@
-war/hablar
+war/Hablar
 war/WEB-INF/classes
 icons/
 test-output/
@@ -9,4 +9,9 @@ war/HablarSignals/
 war/HablarRoster/
 war/HablarLogin/
 war/HablarEditBuddy/
+war/HablarOpenChat/
+war/HablarCore/
+war/HablarStatus/
+war/HablarDock/
+
 

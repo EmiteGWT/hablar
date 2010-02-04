@@ -3,19 +3,17 @@ package com.calclab.hablar.selenium.login;
 import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.calclab.hablar.basic.client.ui.utils.DebugId;
-import com.calclab.hablar.login.client.LoginPage;
 import com.calclab.hablar.selenium.PageObject;
 import com.calclab.hablar.selenium.tools.SeleniumConstants;
 
 public class LoginPageObject extends PageObject {
-    @FindBy(id = DebugId.PRE + LoginPage.ID)
+    @FindBy(id = "gwt-debug-AccordionHeaderWidget-Login-1")
     private RenderedWebElement header;
-    @FindBy(id = DebugId.PRE + LoginPage.URI)
-    private RenderedWebElement login;
-    @FindBy(id = DebugId.PRE + LoginPage.PASSWD)
+    @FindBy(id = "gwt-debug-LoginWidget-user")
+    private RenderedWebElement user;
+    @FindBy(id = "gwt-debug-LoginWidget-password")
     private RenderedWebElement passwd;
-    @FindBy(id = DebugId.PRE + LoginPage.BTN)
+    @FindBy(id = "gwt-debug-LoginWidget-button")
     private RenderedWebElement button;
 
     public LoginPageObject() {
@@ -39,10 +37,10 @@ public class LoginPageObject extends PageObject {
 
     public void signIn(final String username, final String password) {
 	header.click();
-	login.clear();
+	user.clear();
 	passwd.clear();
 	assertIsDisconnected();
-	login.sendKeys(username);
+	user.sendKeys(username);
 	passwd.sendKeys(password);
 	button.click();
     }

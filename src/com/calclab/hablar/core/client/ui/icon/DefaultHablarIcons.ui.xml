@@ -1,0 +1,80 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+	<ui:style type="com.calclab.hablar.core.client.ui.icon.DefaultHablarIcons.Styles">
+		.active {
+			background-color: #EEEEEE;
+		}
+		
+		.inactive {
+			background-color: white;
+		}
+	</ui:style>
+
+	<ui:style field="icons"
+		type="com.calclab.hablar.core.client.ui.icon.DefaultHablarIcons.StyleIcons">
+			@sprite .buddyIcon {
+				gwt-image: 'buddy';
+			}
+			
+			@sprite .buddyIconOn {
+				gwt-image: 'buddyOn';
+			}
+			
+			@sprite .buddyIconOff {
+				gwt-image: 'buddyOff';
+			}
+			
+			@sprite .buddyIconDnd {
+				gwt-image: 'buddyDnd';
+			}
+			
+			@sprite .buddyIconWait {
+				gwt-image: 'buddyWait';
+			}
+			
+			@sprite .rosterIcon {
+				gwt-image: 'rosterIcon';
+			}
+			
+			@sprite .menuIcon {
+				gwt-image: 'menuIcon';
+			}
+			
+			@sprite .chatIcon {
+				gwt-image: 'chatIcon';
+			}
+			
+			@sprite .chatAddIcon {
+				gwt-image: 'chatAddIcon';
+			}
+			
+			@sprite .searchIcon {
+				gwt-image: 'searchIcon';
+			}
+
+            @sprite .onIcon {
+                gwt-image: 'onIcon';
+            }
+
+            @sprite .offIcon {
+                gwt-image: 'offIcon';
+            }
+		</ui:style>
+
+    <ui:image field="onIcon" src="png/on.png"></ui:image>
+    <ui:image field="offIcon" src="png/off.png"></ui:image>
+	<ui:image field="rosterIcon" src="png/roster.png"></ui:image>
+	<ui:image field="buddy" src="png/buddy-small.png"></ui:image>
+	<ui:image field="buddyOn" src="png/buddy-small-on.png"></ui:image>
+	<ui:image field="buddyOff" src="png/buddy-small-off.png"></ui:image>
+	<ui:image field="buddyDnd" src="png/buddy-small-dnd.png"></ui:image>
+	<ui:image field="buddyWait" src="png/buddy-small-wait.png"></ui:image>
+	<ui:image field="menuIcon" src="png/menu2.png"></ui:image>
+	<ui:image field="chatIcon" src="png/chat.png"></ui:image>
+	<ui:image field="chatAddIcon" src="png/chat_add.png"></ui:image>
+	<ui:image field="searchIcon" src="png/search2.png"></ui:image>
+
+	<g:SimplePanel></g:SimplePanel>
+</ui:UiBinder> 

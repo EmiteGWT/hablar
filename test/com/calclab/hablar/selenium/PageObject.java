@@ -15,8 +15,12 @@ public abstract class PageObject {
 
     protected static final I18nHelper i18n = Suco.get(I18nHelper.class);
 
+    private WebDriver getWebDriver() {
+	return Suco.get(WebDriver.class);
+    }
+
     protected RenderedWebElement findElement(final By by) {
-	return (RenderedWebElement) Suco.get(WebDriver.class).findElement(by);
+	return (RenderedWebElement) getWebDriver().findElement(by);
     }
 
     /**

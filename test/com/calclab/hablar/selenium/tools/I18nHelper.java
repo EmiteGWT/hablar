@@ -5,7 +5,7 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.calclab.hablar.basic.client.i18n.Msg;
+import com.calclab.hablar.core.client.i18n.HablarMessages;
 import com.google.gwt.i18n.client.Messages.DefaultMessage;
 import com.google.gwt.i18n.client.Messages.PluralText;
 
@@ -18,7 +18,7 @@ public class I18nHelper {
 		final Class<? extends Object> class1 = params[i].getClass();
 		classes[i] = class1 == Integer.class ? int.class : class1;
 	    }
-	    final Method method = Msg.class.getMethod(methodName, classes);
+	    final Method method = HablarMessages.class.getMethod(methodName, classes);
 	    final String defaultValue = i18nDefaultValue(method, classes);
 	    final String pluralOrDefValue = getPlural(method, getFirstInt(params), defaultValue);
 	    return MessageFormat.format(pluralOrDefValue, params);

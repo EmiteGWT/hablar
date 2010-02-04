@@ -1,44 +1,44 @@
 package com.calclab.hablar.selenium.chat;
 
 import org.openqa.selenium.RenderedWebElement;
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ByIdOrName;
 
-import com.calclab.hablar.basic.client.ui.utils.DebugId;
-import com.calclab.hablar.chat.client.ui.ChatPageWidget;
+import com.calclab.hablar.chat.client.ui.ChatPresenter;
 import com.calclab.hablar.selenium.PageObject;
 
 public class ChatPageObject extends PageObject {
-    @FindBy(id = DebugId.PRE + ChatPageWidget.ID)
-    private RenderedWebElement header;
-    @FindBy(id = DebugId.PRE + ChatPageWidget.TALKBOX_DEB_ID)
-    private RenderedWebElement talkbox;
-    @FindBy(id = DebugId.PRE + ChatPageWidget.LIST_DEB_ID)
-    private RenderedWebElement list;
 
-    @FindBy(id = "ChatPageWidget-send")
-    private RenderedWebElement sendButton;
-
-    public RenderedWebElement getHeader() {
-	return header;
+    public RenderedWebElement getHeader(String uri) {
+	String pageId = ChatPresenter.createId(uri);
+	String headerId = "gwt-debug-AccordionHeaderWidget-Chat-" + pageId;
+	return findElement(new ByIdOrName(headerId));
     }
 
-    public RenderedWebElement getList() {
-	return list;
+    public RenderedWebElement getList(String uri) {
+	String pageId = ChatPresenter.createId(uri);
+	String id = "gwt-debug-ChatWidget-list-Chat-" + pageId;
+	return findElement(new ByIdOrName(id));
     }
 
-    public RenderedWebElement getSendButton() {
-	return sendButton;
+    public RenderedWebElement getPage(String uri) {
+	String pageId = ChatPresenter.createId(uri);
+	String headerId = "gwt-debug-ChatWidget-Chat-" + pageId;
+	return findElement(new ByIdOrName(headerId));
     }
 
-    public RenderedWebElement getTalkBox() {
-	return talkbox;
+    public RenderedWebElement getSend(String uri) {
+	String pageId = ChatPresenter.createId(uri);
+	String id = "gwt-debug-ChatWidget-send-Chat-" + pageId;
+	return findElement(new ByIdOrName(id));
     }
 
-    public RenderedWebElement Header() {
-	return getHeader();
+    public RenderedWebElement getTalkBox(String uri) {
+	String pageId = ChatPresenter.createId(uri);
+	String id = "gwt-debug-ChatWidget-talkBox-Chat-" + pageId;
+	return findElement(new ByIdOrName(id));
     }
 
-    public void waitFor(final String text) {
-	waitFor(list, text);
+    public void waitFor(String uri, final String text) {
+	waitFor(getList(uri), text);
     }
 }

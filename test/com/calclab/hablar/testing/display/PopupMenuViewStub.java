@@ -1,8 +1,7 @@
 package com.calclab.hablar.testing.display;
 
-import com.calclab.hablar.basic.client.ui.menu.MenuAction;
-import com.calclab.hablar.basic.client.ui.menu.PopupMenuView;
-import com.google.gwt.user.client.ui.UIObject;
+import com.calclab.hablar.core.client.ui.menu.MenuAction;
+import com.calclab.hablar.core.client.ui.menu.PopupMenuView;
 
 public class PopupMenuViewStub<T> implements PopupMenuView<T> {
 
@@ -26,10 +25,6 @@ public class PopupMenuViewStub<T> implements PopupMenuView<T> {
 
     @Override
     public void show(int left, int top) {
-    }
-
-    @Override
-    public void showRelativeToMenu(UIObject ui) {
     }
 
 }

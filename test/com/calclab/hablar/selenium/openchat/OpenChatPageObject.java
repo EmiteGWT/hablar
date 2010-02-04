@@ -16,6 +16,16 @@ public class OpenChatPageObject extends PageObject {
     @FindBy(id = "gwt-debug-OpenChatWidget-cancel")
     private RenderedWebElement cancel;
 
+    @FindBy(id = "gwt-debug-HablarOpenChat-openAction")
+    private RenderedWebElement action;
+
+    @FindBy(className = "hablar-OpenChatWidget")
+    private RenderedWebElement widget;
+
+    public RenderedWebElement getAction() {
+	return action;
+    }
+
     public RenderedWebElement getCancel() {
 	return cancel;
     }
@@ -26,5 +36,9 @@ public class OpenChatPageObject extends PageObject {
 
     public RenderedWebElement getOpen() {
 	return open;
+    }
+
+    public RenderedWebElement getWidget() {
+	return widget;
     }
 }

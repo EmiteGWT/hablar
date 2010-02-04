@@ -4,15 +4,17 @@
 	<ui:style>
 		
 	</ui:style>
-    <g:HTMLPanel styleName="form">
-        <h2>Open a new chat</h2>
-        <p>
-            <label>Jabber ID:</label>
-            <g:TextBox ui:field="jabberID"></g:TextBox>
-        </p>
-        <div class="actions">
-            <g:Button ui:field="open">Open Chat</g:Button>
-            <g:Button ui:field="cancel">Cancel</g:Button>
-        </div>
-    </g:HTMLPanel>
+	<g:HTMLPanel styleName="hablar-OpenChatWidget">
+		<div class="form">
+			<h2>Open a new chat</h2>
+			<p>
+				<label>Jabber ID:</label>
+				<g:TextBox ui:field="jabberID"></g:TextBox>
+			</p>
+			<div class="actions">
+				<g:Button ui:field="open">Open Chat</g:Button>
+				<g:Button ui:field="cancel">Cancel</g:Button>
+			</div>
+		</div>
+	</g:HTMLPanel>
 </ui:UiBinder> 

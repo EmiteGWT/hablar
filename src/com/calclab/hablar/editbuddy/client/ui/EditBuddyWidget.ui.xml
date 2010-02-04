@@ -4,19 +4,21 @@
 	<ui:style>
 		
 	</ui:style>
-	<g:HTMLPanel styleName="form">
-		<h2>Change buddy nickname</h2>
-		<p>
-			<label>Change from:</label>
-			<g:Label ui:field="oldNickName">oldNickName</g:Label>
-		</p>
-		<p>
-			<label>To:</label>
-			<g:TextBox ui:field="newNickName">newNickName</g:TextBox>
-		</p>
-		<div class="actions">
-			<g:Button ui:field="save">Change</g:Button>
-			<g:Button ui:field="cancel">Cancel</g:Button>
+	<g:HTMLPanel styleName="hablar-EditBuddyWidget">
+		<div class="form">
+			<h2>Change buddy nickname</h2>
+			<p>
+				<label>Change from:</label>
+				<g:Label ui:field="oldNickName">oldNickName</g:Label>
+			</p>
+			<p>
+				<label>To:</label>
+				<g:TextBox ui:field="newNickName">newNickName</g:TextBox>
+			</p>
+			<div class="actions">
+				<g:Button ui:field="save">Change</g:Button>
+				<g:Button ui:field="cancel">Cancel</g:Button>
+			</div>
 		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

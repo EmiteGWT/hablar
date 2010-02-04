@@ -1,6 +1,6 @@
 package com.calclab.hablar.editbuddy.client.ui;
 
-import com.calclab.hablar.basic.client.ui.Display;
+import com.calclab.hablar.core.client.mvp.Display;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Focusable;

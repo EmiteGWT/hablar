@@ -1,0 +1,31 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		
+	</ui:style>
+	<g:DockLayoutPanel styleName="hablar-Login hablar-Page" unit="EM">
+		<g:north size="9">
+			<g:HTMLPanel styleName="form">
+				<p>
+					<label>
+						<ui:msg description="User field">User:</ui:msg>
+					</label>
+					<g:TextBox  ui:field="user" />
+				</p>
+				<p>
+					<label>
+						<ui:msg description="Password field">Password:</ui:msg>
+					</label>
+					<g:PasswordTextBox ui:field="password" />
+				</p>
+				<div styleName="actions">
+					<g:Button ui:field="button">Login</g:Button>
+				</div>
+			</g:HTMLPanel>
+		</g:north>
+		<g:center>
+			<g:FlowPanel ui:field="output" styleName="output"></g:FlowPanel>
+		</g:center>
+	</g:DockLayoutPanel>
+</ui:UiBinder> 

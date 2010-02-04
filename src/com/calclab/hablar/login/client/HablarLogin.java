@@ -2,40 +2,43 @@ package com.calclab.hablar.login.client;
 
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.session.Session.State;
-import com.calclab.hablar.basic.client.Hablar;
-import com.calclab.hablar.basic.client.ui.HablarWidget;
-import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
-import com.calclab.hablar.basic.client.ui.pages.Pages;
+import com.calclab.hablar.core.client.Hablar;
+import com.calclab.hablar.core.client.HablarWidget;
+import com.calclab.hablar.core.client.page.Page;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
 
 public class HablarLogin implements EntryPoint {
 
-    public static void install(HablarWidget hablar) {
-	createLoginPage(hablar, Suco.get(Session.class));
+    public static void install(HablarWidget widget) {
+	LoginConfig config = LoginConfig.getFromMeta();
+	createLoginPage(widget.getHablar(), config, Suco.get(Session.class));
     }
 
-    private static void createLoginPage(Hablar hablar, Session session) {
-	boolean isDisconnected = session.getState() == State.disconnected;
-	Visibility visibility = isDisconnected ? Visibility.focused : Visibility.notFocused;
-	final LoginView login = new LoginPage(hablar.getHablarEventBus(), visibility);
-	final Pages pages = hablar.getPages();
-	pages.add(login);
+    private static void createLoginPage(Hablar hablarPresenter, LoginConfig config, Session session) {
+	final LoginPresenter login = new LoginPresenter(hablarPresenter.getEventBus(), new LoginWidget());
+	hablarPresenter.addPage(login);
 	session.onStateChanged(new Listener<Session>() {
 	    @Override
 	    public void onEvent(Session session) {
-		if (session.getState() == State.disconnected) {
-		    GWT.log("SHOW LOGIN", null);
-		    pages.open(login);
-		}
+		setState(login, session);
 	    }
 	});
+	setState(login, session);
+	login.getDisplay().getUser().setText(config.userName);
+	login.getDisplay().getPassword().setText(config.password);
+    }
+
+    private static void setState(final Page<?> login, Session session) {
+	if (session.getState() == State.disconnected) {
+	    login.requestOpen();
+	}
     }
 
     @Override
     public void onModuleLoad() {
+
     }
 
 }

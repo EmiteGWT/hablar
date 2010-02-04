@@ -1,17 +1,17 @@
 package com.calclab.hablar.chat.client;
 
-import com.calclab.hablar.basic.client.ui.HablarWidget;
-import com.calclab.hablar.chat.client.ui.ChatManagerLogic;
+import com.calclab.hablar.core.client.Hablar;
+import com.calclab.hablar.core.client.HablarWidget;
 import com.google.gwt.core.client.EntryPoint;
 
 public class HablarChat implements EntryPoint {
 
-    public static void install(HablarWidget hablar) {
-	install(hablar, ChatConfig.getFromMeta());
+    public static void install(Hablar hablarPresenter, ChatConfig config) {
+	new ChatManagerController(hablarPresenter, config);
     }
 
-    private static void install(HablarWidget hablar, ChatConfig config) {
-	new ChatManagerLogic(hablar.getHablarEventBus(), config, hablar.getPages());
+    public static void install(HablarWidget widget) {
+	install(widget.getHablar(), ChatConfig.getFromMeta());
     }
 
     @Override

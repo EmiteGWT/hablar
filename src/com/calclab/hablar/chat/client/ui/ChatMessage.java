@@ -1,6 +1,5 @@
 package com.calclab.hablar.chat.client.ui;
 
-import com.calclab.hablar.chat.client.ui.ChatPageView.MessageType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -20,7 +19,7 @@ public class ChatMessage extends Composite {
     @UiField
     SpanElement body;
 
-    public ChatMessage(final String name, final String body, final MessageType type) {
+    public ChatMessage(final String name, final String body, final ChatDisplay.MessageType type) {
 	initWidget(uiBinder.createAndBindUi(this));
 	this.author.setInnerText(name + ": ");
 	this.body.setInnerHTML(body);
