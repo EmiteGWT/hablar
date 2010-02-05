@@ -29,6 +29,11 @@ public class VisibilityChangedEvent extends GwtEvent<VisibilityChangedHandler> {
     }
 
     @Override
+    public String toDebugString() {
+	return super.toDebugString() + page.getVisibility() + "(" + page.getId() + ")";
+    }
+
+    @Override
     protected void dispatch(VisibilityChangedHandler handler) {
 	handler.onVisibilityChanged(this);
     }

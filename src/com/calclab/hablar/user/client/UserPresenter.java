@@ -19,7 +19,7 @@ public class UserPresenter extends PagePresenter<UserDisplay> {
     private final Session session;
     private final PresenceManager manager;
 
-    public UserPresenter(HablarEventBus eventBus, UserDisplay display) {
+    public UserPresenter(HablarEventBus eventBus, final UserDisplay display) {
 	super(TYPE, "" + (++index), eventBus, display);
 	session = Suco.get(Session.class);
 	manager = Suco.get(PresenceManager.class);
@@ -27,7 +27,7 @@ public class UserPresenter extends PagePresenter<UserDisplay> {
 	session.onStateChanged(new Listener<Session>() {
 	    @Override
 	    public void onEvent(final Session session) {
-		setState(session, manager.getOwnPresence());
+		setState(manager.getOwnPresence());
 	    }
 	});
 
@@ -39,8 +39,24 @@ public class UserPresenter extends PagePresenter<UserDisplay> {
 	});
 
 	Presence currentPresence = manager.getOwnPresence();
-	setState(session, currentPresence);
+	setState(currentPresence);
 	model.setPageIcon(HablarIcons.get(IconType.buddyOff));
+    }
+
+    @Override
+    public void requestFocus() {
+	model.setCloseable(true);
+	super.requestFocus();
+    }
+
+    @Override
+    public void requestHide() {
+	final Presence presence = manager.getOwnPresence();
+	presence.setStatus(display.getStatus().getText());
+	manager.changeOwnPresence(presence);
+	model.setCloseable(false);
+	setState(presence);
+	super.requestHide();
     }
 
     private void setShow(final Show show) {
@@ -53,7 +69,7 @@ public class UserPresenter extends PagePresenter<UserDisplay> {
 	}
     }
 
-    private void setState(final Session session, Presence presence) {
+    private void setState(Presence presence) {
 	String userStatus = presence != null ? presence.getStatus() : "";
 	userStatus = (userStatus == null || userStatus.isEmpty()) ? "Click here to change status" : userStatus;
 	final State s = session.getState();

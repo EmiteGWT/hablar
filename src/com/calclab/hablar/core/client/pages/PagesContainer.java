@@ -16,4 +16,6 @@ public interface PagesContainer {
     boolean hide(Page<?> page);
 
     boolean remove(Page<?> page);
+
+    boolean unfocus(Page<?> page);
 }

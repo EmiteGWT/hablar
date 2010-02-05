@@ -35,7 +35,7 @@ public class HablarOpenChat implements EntryPoint {
 	    ((RosterPresenter) roster).addAction(iconStyle, "HablarOpenChat-openAction", new ClickHandler() {
 		@Override
 		public void onClick(ClickEvent event) {
-		    openChat.requestOpen();
+		    openChat.requestFocus();
 		}
 	    });
 	}

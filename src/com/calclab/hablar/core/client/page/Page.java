@@ -19,10 +19,16 @@ public interface Page<T extends Display> extends Presenter<T> {
 
     public String getType();
 
+    public Visibility getVisibility();
+
+    @Deprecated
+    public void requestFocus();
+
+    @Deprecated
     public void requestHide();
 
-    public void requestOpen();
-
     public void setVisibility(Visibility closed);
+
+    void requestVisibility(Visibility newVisibility);
 
 }

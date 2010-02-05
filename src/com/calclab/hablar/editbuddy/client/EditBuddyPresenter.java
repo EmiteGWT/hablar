@@ -69,7 +69,7 @@ public class EditBuddyPresenter extends PagePresenter<EditBuddyDisplay> {
 	String nickName = target.getName();
 	display.getOldNickName().setText(nickName);
 	display.getNewNickName().setText(nickName);
-	requestOpen();
+	requestFocus();
 	display.getFirstFocusable().setFocus(true);
     }
 

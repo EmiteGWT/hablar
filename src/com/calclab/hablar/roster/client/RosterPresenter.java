@@ -30,7 +30,7 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> {
     private final Roster roster;
     private final HashMap<XmppURI, RosterItemPresenter> items;
     private final ChatManager manager;
-    private PopupMenu<RosterItem> itemMenu;
+    private final PopupMenu<RosterItem> itemMenu;
 
     public RosterPresenter(HablarEventBus eventBus, RosterDisplay display) {
 	super(TYPE, "" + (++index), eventBus, display);
@@ -38,6 +38,7 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> {
 	roster = Suco.get(Roster.class);
 	items = new HashMap<XmppURI, RosterItemPresenter>();
 	active = true;
+	itemMenu = new PopupMenu<RosterItem>("hablar-RosterPresenterMenu");
 
 	getState().init(HablarIcons.get(IconType.roster), i18n().contacts());
 
@@ -51,9 +52,6 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> {
     }
 
     public PopupMenu<RosterItem> getItemMenu() {
-	if (itemMenu == null) {
-	    itemMenu = new PopupMenu<RosterItem>("hablar-RosterPresenterMenu");
-	}
 	return itemMenu;
     }
 
@@ -127,7 +125,8 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> {
 		event.preventDefault();
 		Element element = event.getRelativeElement();
 		int width = element.getClientWidth();
-		getItemMenu().show(element.getAbsoluteLeft() - width, element.getAbsoluteTop());
+		itemMenu.setTarget(item);
+		itemMenu.show(element.getAbsoluteLeft() - width, element.getAbsoluteTop());
 	    }
 	});
 	return presenter;

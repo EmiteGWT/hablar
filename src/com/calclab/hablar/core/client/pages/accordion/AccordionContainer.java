@@ -8,9 +8,20 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class AccordionContainer extends MainContainer {
     private static final double SIZE_HEADER = 24;
+    private Widget lastFocusWidget;
 
     public AccordionContainer(LayoutPanel parent) {
 	super(new AccordionPanel(), parent);
+    }
+
+    @Override
+    public boolean unfocus(Page<?> page) {
+	if (lastFocusWidget != null) {
+	    ((AccordionPanel) container).showWidget(lastFocusWidget);
+	    focus(container, lastFocusWidget);
+	    return true;
+	}
+	return false;
     }
 
     @Override
@@ -25,7 +36,7 @@ public class AccordionContainer extends MainContainer {
 
     @Override
     protected void focus(Widget container, Widget pageWidget) {
+	lastFocusWidget = pageWidget;
 	((AccordionPanel) container).showWidget(pageWidget);
     }
-
 }

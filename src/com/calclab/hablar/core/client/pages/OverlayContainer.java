@@ -91,4 +91,9 @@ public class OverlayContainer implements PagesContainer {
 	return pages.remove(page);
     }
 
+    @Override
+    public boolean unfocus(Page<?> page) {
+	return false;
+    }
+
 }

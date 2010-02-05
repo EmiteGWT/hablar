@@ -17,6 +17,11 @@ public class TabsContainer extends MainContainer {
     }
 
     @Override
+    public boolean unfocus(Page<?> page) {
+	return false;
+    }
+
+    @Override
     protected void add(Widget container, Widget pageWidget, Widget headerWidget) {
 	((TabLayoutPanel) container).add(pageWidget, headerWidget);
     }

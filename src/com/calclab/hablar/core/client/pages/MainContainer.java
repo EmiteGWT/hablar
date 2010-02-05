@@ -23,7 +23,7 @@ public abstract class MainContainer implements PagesContainer {
     }
 
     public static final String ROL = "Main";
-    private final Widget container;
+    protected final Widget container;
 
     private final HashMap<Page<?>, PageAndHead> pages;
 
@@ -39,7 +39,7 @@ public abstract class MainContainer implements PagesContainer {
     @Override
     public boolean add(Page<?> page) {
 	HeaderDisplay headerDisplay = createHeaderDisplay(page);
-	HeaderPresenter header = new HeaderPresenter(page.getState(), headerDisplay);
+	HeaderPresenter header = new HeaderPresenter(page, headerDisplay);
 	Widget pageWidget = page.getDisplay().asWidget();
 	Widget headWidget = header.getDisplay().asWidget();
 	pages.put(page, new PageAndHead(pageWidget, headWidget));

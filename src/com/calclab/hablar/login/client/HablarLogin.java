@@ -36,7 +36,7 @@ public class HablarLogin implements EntryPoint {
 
     private static void setState(final Page<?> login, Session session) {
 	if (session.getState() == State.disconnected) {
-	    login.requestOpen();
+	    login.requestFocus();
 	}
     }
 

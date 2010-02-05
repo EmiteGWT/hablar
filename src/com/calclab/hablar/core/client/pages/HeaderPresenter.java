@@ -1,6 +1,7 @@
 package com.calclab.hablar.core.client.pages;
 
 import com.calclab.hablar.core.client.mvp.Presenter;
+import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PageInfoChangedEvent;
 import com.calclab.hablar.core.client.page.PageInfoChangedHandler;
 import com.calclab.hablar.core.client.page.PageState;
@@ -15,13 +16,18 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
     private final HeaderDisplay display;
     private String currentStyle, currentIconStyle;
 
-    public HeaderPresenter(final PageState state, final HeaderDisplay display) {
+    public HeaderPresenter(final Page<?> page, final HeaderDisplay display) {
 	this.display = display;
 
+	final PageState state = page.getState();
 	display.getOpen().addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(ClickEvent event) {
-		state.getPage().requestOpen();
+		if (page.getVisibility() == Visibility.focused) {
+		    page.requestVisibility(Visibility.notFocused);
+		} else {
+		    page.requestVisibility(Visibility.focused);
+		}
 	    }
 	});
 
@@ -29,15 +35,14 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 	    @Override
 	    public void onClick(ClickEvent event) {
 		event.preventDefault();
-		state.getPage().requestHide();
+		page.requestVisibility(Visibility.hidden);
 	    }
 	});
 
 	state.addVisibilityChangedHandler(new VisibilityChangedHandler() {
 	    @Override
 	    public void onVisibilityChanged(VisibilityChangedEvent event) {
-		Visibility visibility = state.getVisibility();
-		visibilityChanged(visibility);
+		visibilityChanged(state.getVisibility());
 	    }
 
 	});
@@ -48,6 +53,7 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 	    public void onPageInfoChanged(PageInfoChangedEvent event) {
 		setIconStyle(state.getPageIcon());
 		display.getHeaderTitle().setText(state.getPageTitle());
+		display.setCloseIconVisible(state.isCloseable());
 	    }
 	});
 

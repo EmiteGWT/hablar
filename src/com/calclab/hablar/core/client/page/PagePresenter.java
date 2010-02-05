@@ -2,8 +2,7 @@ package com.calclab.hablar.core.client.page;
 
 import com.calclab.hablar.core.client.mvp.Display;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
-import com.calclab.hablar.core.client.page.events.FocusPageRequestEvent;
-import com.calclab.hablar.core.client.page.events.HidePageRequestEvent;
+import com.calclab.hablar.core.client.page.events.VisibilityChangeRequestEvent;
 
 public class PagePresenter<T extends Display> implements Page<T> {
     public static enum Visibility {
@@ -43,12 +42,22 @@ public class PagePresenter<T extends Display> implements Page<T> {
     }
 
     @Override
-    public void requestHide() {
-	eventBus.fireEvent(new HidePageRequestEvent(this));
+    public Visibility getVisibility() {
+	return model.getVisibility();
     }
 
-    public void requestOpen() {
-	eventBus.fireEvent(new FocusPageRequestEvent(this));
+    public void requestFocus() {
+	requestVisibility(Visibility.focused);
+    }
+
+    @Override
+    public void requestHide() {
+	requestVisibility(Visibility.hidden);
+    }
+
+    @Override
+    public void requestVisibility(Visibility newVisibility) {
+	eventBus.fireEvent(new VisibilityChangeRequestEvent(this, newVisibility));
     }
 
     @Override

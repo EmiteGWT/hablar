@@ -87,4 +87,14 @@ public class ContainerAggregator implements PagesContainer {
 	return false;
     }
 
+    @Override
+    public boolean unfocus(Page<?> page) {
+	for (PagesContainer container : containers) {
+	    if (container.unfocus(page)) {
+		return true;
+	    }
+	}
+	return false;
+    }
+
 }

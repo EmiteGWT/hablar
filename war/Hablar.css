@@ -65,19 +65,22 @@
 
 .hablar-Header .title {
 	display: block;
-	float: left;
 	margin: 0 3px;
 }
 
 .hablar-Header .close {
 	float: right;
-	margin: 2px 3px 0 0;
+	margin: -16px 3px 0 0;
 }
 
 .hablar-AccordionHeader .icon {
 }
 .hablar-AccordionHeader .title {
 	display: block;
+}
+
+.hablar-AccordionHeader .close {
+	   margin: 2px 3px 0 0;
 }
 
 .hablar-AccordionHeaderWidget.notFocused {
@@ -88,6 +91,11 @@
 .hablar-AccordionHeaderWidget.focused {
 	border-top: 1px solid white;
 	border-bottom: 1px solid #BBB;
+}
+
+.hablar-TabsHeaderWidget .title {
+	display: inline;
+	margin-right: 20px;
 }
 
 .hablar-TabsHeaderWidget.notFocused {
@@ -103,6 +111,12 @@
     border-left: 1px solid white;
     border-right: 1px solid white;
     border-bottom: 1px solid #E9E9E9;
+}
+
+/** DOCKS **/
+.hablar-RosterDockContainer-top {
+	background-color: #BBB;
+	z-index: 300;
 }
 
 .hablar-Header.DockHeaderWidget-top {
@@ -128,6 +142,11 @@
 	cursor: pointer;
 }
 
+/** USER **/
+.hablar-UserWidget {
+	padding: 0px 10px;
+}
+
 /** ROSTER **/
 .hablar-RosterWidget .item {
 	width: 100%;
@@ -147,7 +166,6 @@
 }
 
 .hablar-RosterWidget .actions div.gwt-Label:hover {
-	background-color: #BBB;
 }
 
 div.hablar-RosterItemWidget:hover {
@@ -244,6 +262,7 @@ div.hablar-RosterItemWidget:hover {
 .form p {
 	width: 100%;
 	overflow: hidden;
+	margin: 3px 0;
 }
 
 .form p label {
@@ -261,9 +280,10 @@ div.hablar-RosterItemWidget:hover {
 }
 
 .form .actions {
-	margin-top: 10px;
+	padding-left: 6.5em;
+	margin-top: 5px;
 	border-top: 1px solid #BBBBBB;
-	padding-top: 10px;
+	padding-top: 5px;
 }
 
 .form .gwt-TextBox,.form .gwt-PasswordTextBox {

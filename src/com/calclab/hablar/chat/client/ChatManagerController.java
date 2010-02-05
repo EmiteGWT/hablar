@@ -64,7 +64,7 @@ public class ChatManagerController {
 	    public void onEvent(Chat chat) {
 		ChatPresenter page = chatPages.get(chat.getURI());
 		assert page != null;
-		page.requestOpen();
+		page.requestFocus();
 	    }
 	});
 	roster.onItemChanged(new Listener<RosterItem>() {

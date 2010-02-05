@@ -17,6 +17,8 @@ public class HablarRoster implements EntryPoint {
 	roster.setVisibility(Visibility.notFocused);
 	hablarPresenter.addPage(roster);
 
+	new RosterBasicActions(roster);
+
 	Session session = Suco.get(Session.class);
 	session.onStateChanged(new Listener<Session>() {
 
@@ -34,7 +36,7 @@ public class HablarRoster implements EntryPoint {
 
     private static void setState(final RosterPresenter roster, State state) {
 	if (state == State.ready) {
-	    roster.requestOpen();
+	    roster.requestFocus();
 	}
     }
 

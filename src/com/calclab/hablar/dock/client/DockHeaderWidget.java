@@ -3,10 +3,7 @@ package com.calclab.hablar.dock.client;
 import com.calclab.hablar.core.client.pages.HeaderDisplay;
 import com.calclab.hablar.dock.client.DockConfig.Position;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -20,31 +17,12 @@ public class DockHeaderWidget extends Composite implements HeaderDisplay {
     interface DockHeaderWidgetUiBinder extends UiBinder<Widget, DockHeaderWidget> {
     }
 
-    static class EmptyClick implements HasClickHandlers {
-
-	@Override
-	public HandlerRegistration addClickHandler(ClickHandler handler) {
-	    return new HandlerRegistration() {
-		@Override
-		public void removeHandler() {
-		}
-	    };
-	}
-
-	@Override
-	public void fireEvent(GwtEvent<?> event) {
-
-	}
-    }
-    public static HasClickHandlers emptyClick = new EmptyClick();;
-
     private static DockHeaderWidgetUiBinder uiBinder = GWT.create(DockHeaderWidgetUiBinder.class);
     @UiField
     FlowPanel self;
 
     @UiField
-    Label title, icon;
-    private final HasClickHandlers close = emptyClick;
+    Label title, icon, close;
 
     public DockHeaderWidget(String pageId, Position position) {
 	initWidget(uiBinder.createAndBindUi(this));
@@ -94,6 +72,7 @@ public class DockHeaderWidget extends Composite implements HeaderDisplay {
 
     @Override
     public void setCloseIconVisible(boolean visible) {
+	close.setVisible(visible);
     }
 
 }

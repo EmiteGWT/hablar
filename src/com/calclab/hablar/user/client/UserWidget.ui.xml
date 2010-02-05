@@ -5,5 +5,14 @@
 		
 	</ui:style>
 	<g:HTMLPanel>
+	   <g:HTMLPanel styleName="hablar-UserWidget">
+        <div class="form">
+            <p>
+                <label>Status:</label>
+                <g:TextBox ui:field="status"></g:TextBox>
+            </p>
+        </div>
+    </g:HTMLPanel>
+	
 	</g:HTMLPanel>
 </ui:UiBinder> 
