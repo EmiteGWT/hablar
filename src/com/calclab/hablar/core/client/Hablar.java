@@ -2,6 +2,7 @@ package com.calclab.hablar.core.client;
 
 import java.util.List;
 
+import com.calclab.hablar.core.client.container.PageAddedHandler;
 import com.calclab.hablar.core.client.container.PagesContainer;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.mvp.Presenter;
@@ -47,6 +48,8 @@ public interface Hablar extends Presenter<HablarDisplay> {
      *            the Rol name of the container to use
      */
     public void addPage(Page<?> page, String containerRol);
+
+    public void addPageAddedHandler(PageAddedHandler handler);
 
     public PagesContainer getContainer(String rol);
 

@@ -1,5 +1,7 @@
 package com.calclab.hablar.core.client.container;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
@@ -21,9 +23,7 @@ public class ContainerAggregatorTests {
     @Before
     public void setup() {
 	tester = new HablarTester();
-
-	aggregator = new ContainerAggregator();
-
+	aggregator = new ContainerAggregator(tester.eventBus);
     }
 
     @Test
@@ -35,6 +35,16 @@ public class ContainerAggregatorTests {
 	assertTrue(aggregator.add(page2));
 	assertTrue(aggregator.hasPage(page1));
 	assertTrue(aggregator.hasPage(page2));
+    }
+
+    @Test
+    public void shouldFireEventWhenAddPage() {
+	addDefaultContainer();
+	Page<?> page = newPage(Visibility.focused, "page");
+	aggregator.add(page);
+	assertEquals(PageAddedEvent.class, tester.eventBus.getLastEventClass());
+	PageAddedEvent event = (PageAddedEvent) tester.eventBus.getLastEvent();
+	assertSame(page, event.getPage());
     }
 
     private void addDefaultContainer() {

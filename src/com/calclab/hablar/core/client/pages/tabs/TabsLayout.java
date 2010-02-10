@@ -6,16 +6,15 @@ import com.calclab.hablar.core.client.HablarDisplay;
 import com.calclab.hablar.core.client.container.main.MainLayout;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.pages.HeaderDisplay;
-import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class TabsLayout extends MainLayout {
 
     private static final double BAR_SIZE = 24;
-    private static TabLayoutPanel tabs;
+    private static TabsPanel tabs;
 
     public TabsLayout(HablarDisplay parent) {
-	super(tabs = new TabLayoutPanel(BAR_SIZE, PX), parent);
+	super(tabs = new TabsPanel(BAR_SIZE, PX), parent);
     }
 
     @Override

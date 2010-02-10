@@ -20,7 +20,7 @@
 			</p>
 			<p>
 				<label>Surname:</label>
-				<g:TextBox ui:field="surnameName"></g:TextBox>
+				<g:TextBox ui:field="surname"></g:TextBox>
 			</p>
 			<p>
 				<label>Organization:</label>

@@ -14,6 +14,7 @@ import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
+import com.calclab.hablar.roster.client.RosterPresenter;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -72,6 +73,16 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> {
 		}
 	    }
 	});
+    }
+
+    /**
+     * Add a action button to this chat panel
+     * 
+     * @see RosterPresenter.addAction
+     */
+    // FIXME
+    public void addAction() {
+
     }
 
     public void setPresence(boolean available, Show show) {

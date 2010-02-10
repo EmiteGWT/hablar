@@ -1,6 +1,5 @@
 package com.calclab.hablar.roster.client;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
@@ -10,8 +9,7 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emite.im.client.roster.SubscriptionState;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
-import com.calclab.hablar.roster.client.RosterItemDisplay;
-import com.calclab.hablar.roster.client.RosterItemPresenter;
+import com.calclab.hablar.testing.HablarTester;
 
 public class RosterItemLogicTest {
 
@@ -21,7 +19,8 @@ public class RosterItemLogicTest {
 
     @Before
     public void before() {
-	display = mock(RosterItemDisplay.class);
+	HablarTester tester = new HablarTester();
+	display = tester.newDisplay(RosterItemDisplay.class);
 	presenter = new RosterItemPresenter(display);
 	item = new RosterItem(XmppURI.uri("test1@localhost"), SubscriptionState.both, "test1", null);
     }

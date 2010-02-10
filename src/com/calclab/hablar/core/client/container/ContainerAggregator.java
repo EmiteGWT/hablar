@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.calclab.hablar.core.client.Hablar.Chain;
+import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.Page;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Widget;
@@ -12,8 +13,10 @@ public class ContainerAggregator implements PagesContainer {
     private static final String ROL = "Aggregator";
     private final ArrayList<PagesContainer> containers;
     private final ArrayList<Page<?>> pages;
+    private final HablarEventBus eventBus;
 
-    public ContainerAggregator() {
+    public ContainerAggregator(HablarEventBus eventBus) {
+	this.eventBus = eventBus;
 	this.containers = new ArrayList<PagesContainer>();
 	this.pages = new ArrayList<Page<?>>();
     }
@@ -21,8 +24,7 @@ public class ContainerAggregator implements PagesContainer {
     @Override
     public boolean add(Page<?> page) {
 	for (PagesContainer container : containers) {
-	    if (container.add(page)) {
-		pages.add(page);
+	    if (addPage(page, container)) {
 		return true;
 	    }
 	}
@@ -40,9 +42,11 @@ public class ContainerAggregator implements PagesContainer {
 
     public void addPage(Page<?> page, String containerType) {
 	PagesContainer container = getContainer(containerType);
-	if (container.add(page)) {
-	    pages.add(page);
-	}
+	addPage(page, container);
+    }
+
+    public void addPageAddedHandler(PageAddedHandler handler) {
+	eventBus.addHandler(PageAddedEvent.TYPE, handler);
     }
 
     public PagesContainer getContainer(String type) {
@@ -81,6 +85,15 @@ public class ContainerAggregator implements PagesContainer {
 
     public boolean hasPage(Page<?> page) {
 	return pages.contains(page);
+    }
+
+    private boolean addPage(Page<?> page, PagesContainer container) {
+	if (container.add(page)) {
+	    pages.add(page);
+	    eventBus.fireEvent(new PageAddedEvent(page, container));
+	    return true;
+	}
+	return false;
     }
 
 }

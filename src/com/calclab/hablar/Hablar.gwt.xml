@@ -5,12 +5,13 @@
     <inherits name='com.calclab.hablar.roster.HablarRoster' />
     <inherits name='com.calclab.hablar.search.HablarSearch' />
     <inherits name='com.calclab.hablar.signals.HablarSignals' />
-    <inherits name='com.calclab.hablar.signals.HablarSignals' />
     <inherits name='com.calclab.hablar.editbuddy.HablarEditBuddy' />
     <inherits name='com.calclab.hablar.openchat.HablarOpenChat' />
     <inherits name='com.calclab.hablar.dock.HablarDock' />
     <inherits name='com.calclab.hablar.user.HablarUser' />
 	<inherits name='com.google.gwt.user.theme.chrome.Chrome' />
+    <inherits name='com.calclab.hablar.vcard.HablarVCard' />
+    <inherits name='com.calclab.hablar.groupchat.HablarGroupChat' />
 	
 	<!-- <inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
 	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->

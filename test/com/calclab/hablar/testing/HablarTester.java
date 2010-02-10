@@ -7,6 +7,7 @@ import org.mockito.Mockito;
 import com.calclab.hablar.core.client.mvp.Display;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.mock.HablarMocks;
 import com.calclab.hablar.testing.display.DisplayMocker;
 import com.google.gwt.event.shared.GwtEvent;
@@ -16,6 +17,7 @@ public class HablarTester {
     public EventBusTester eventBus;
 
     public HablarTester() {
+	HablarIcons.setStyles(new HablarIcons());
 	HablarMocks.disarm();
 	this.eventBus = new EventBusTester();
     }
