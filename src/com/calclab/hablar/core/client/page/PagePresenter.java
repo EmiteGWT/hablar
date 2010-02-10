@@ -46,15 +46,6 @@ public class PagePresenter<T extends Display> implements Page<T> {
 	return model.getVisibility();
     }
 
-    public void requestFocus() {
-	requestVisibility(Visibility.focused);
-    }
-
-    @Override
-    public void requestHide() {
-	requestVisibility(Visibility.hidden);
-    }
-
     @Override
     public void requestVisibility(Visibility newVisibility) {
 	eventBus.fireEvent(new VisibilityChangeRequestEvent(this, newVisibility));

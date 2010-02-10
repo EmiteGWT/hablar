@@ -24,7 +24,7 @@ public class OpenChatPresenter extends PagePresenter<OpenChatDisplay> {
 	display.getCancel().addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(ClickEvent event) {
-		requestHide();
+		requestVisibility(Visibility.hidden);
 	    }
 	});
 
@@ -39,7 +39,7 @@ public class OpenChatPresenter extends PagePresenter<OpenChatDisplay> {
 		if (display.getAddToRoster().getValue()) {
 		    addToRoster(userJid);
 		}
-		requestHide();
+		requestVisibility(Visibility.hidden);
 	    }
 	});
     }

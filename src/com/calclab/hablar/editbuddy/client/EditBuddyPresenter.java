@@ -47,7 +47,7 @@ public class EditBuddyPresenter extends PagePresenter<EditBuddyDisplay> {
 	    @Override
 	    public void onClick(ClickEvent event) {
 		GWT.log("Close!", null);
-		requestHide();
+		requestVisibility(Visibility.hidden);
 	    }
 	});
 	display.getSave().addClickHandler(new ClickHandler() {
@@ -72,7 +72,7 @@ public class EditBuddyPresenter extends PagePresenter<EditBuddyDisplay> {
 	String nickName = target.getName();
 	display.getOldNickName().setText(nickName);
 	display.getNewNickName().setText(nickName);
-	requestFocus();
+	requestVisibility(Visibility.focused);
 	display.getFirstFocusable().setFocus(true);
     }
 
@@ -82,6 +82,6 @@ public class EditBuddyPresenter extends PagePresenter<EditBuddyDisplay> {
 	if (!currentItem.getName().equals(newName)) {
 	    roster.updateItem(currentItem.getJID(), newName, currentItem.getGroups().toArray(EMPTY_ARRAY));
 	}
-	requestHide();
+	requestVisibility(Visibility.hidden);
     }
 }

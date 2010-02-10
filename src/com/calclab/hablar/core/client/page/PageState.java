@@ -90,7 +90,7 @@ public class PageState {
 
     public void setUserMessage(String userMessage) {
 	this.userMessage = userMessage;
-	eventBus.fireEvent(new UserMessageChangedEvent(page, this));
+	eventBus.fireEvent(new UserMessageChangedEvent(page));
     }
 
     public void setVisibility(Visibility visibility) {

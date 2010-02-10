@@ -6,6 +6,7 @@ import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.core.client.container.overlay.OverlayContainer;
 import com.calclab.hablar.core.client.page.Page;
+import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.openchat.client.ui.OpenChatPresenter;
@@ -34,7 +35,7 @@ public class HablarOpenChat implements EntryPoint {
 	    ((RosterPresenter) roster).addAction(iconStyle, "HablarOpenChat-openAction", new ClickHandler() {
 		@Override
 		public void onClick(ClickEvent event) {
-		    openChat.requestFocus();
+		    openChat.requestVisibility(Visibility.focused);
 		}
 	    });
 	}

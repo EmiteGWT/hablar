@@ -27,30 +27,24 @@ public class UnattendedChatPages {
 	bind();
     }
 
+    public boolean contains(Page<?> page) {
+	return unattendedChatPages.contains(page);
+    }
+
     public int getSize() {
 	return unattendedChatPages.size();
     }
 
-    public void onChatClosed(final Page<?> chatPage) {
-	if (unattendedChatPages.remove(chatPage)) {
-	}
-    }
-
-    public void onNewMsg(final Page<?> chatPage) {
-	Visibility visibility = chatPage.getState().getVisibility();
-	if (visibility != Visibility.focused && unattendedChatPages.add(chatPage)) {
-	    eventBus.fireEvent(new UnattendedChatsChangedEvent(this));
-	}
-    }
-
     private void bind() {
 	eventBus.addHandler(UserMessageChangedEvent.TYPE, new UserMessageChangedHandler() {
-
 	    @Override
 	    public void onUserMessageChanged(UserMessageChangedEvent event) {
 		Page<?> page = event.getPage();
 		if (isChatPage(page)) {
-		    onNewMsg(page);
+		    Visibility visibility = page.getVisibility();
+		    if (visibility != Visibility.focused && unattendedChatPages.add(page)) {
+			eventBus.fireEvent(new UnattendedChatsChangedEvent(UnattendedChatPages.this));
+		    }
 		}
 	    }
 	});
@@ -68,12 +62,12 @@ public class UnattendedChatPages {
 
     }
 
-    private boolean isChatPage(final Page<?> page) {
+    private final boolean isChatPage(final Page<?> page) {
 	return page.getType() == ChatPresenter.TYPE;
     }
 
     private void onChatVisibilityChanged(Page<?> page) {
-	Visibility visibility = page.getState().getVisibility();
+	Visibility visibility = page.getVisibility();
 	if (visibility == Visibility.focused && unattendedChatPages.remove(page)) {
 	    eventBus.fireEvent(new UnattendedChatsChangedEvent(this));
 	} else if (unattendedChatPages.remove(page)) {

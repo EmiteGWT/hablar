@@ -36,7 +36,7 @@ public class HablarRoster implements EntryPoint {
 
     private static void setState(final RosterPresenter roster, State state) {
 	if (state == State.ready) {
-	    roster.requestFocus();
+	    roster.requestVisibility(Visibility.focused);
 	}
     }
 

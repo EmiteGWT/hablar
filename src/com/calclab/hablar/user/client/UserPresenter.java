@@ -57,12 +57,6 @@ public class UserPresenter extends PagePresenter<UserDisplay> implements UserPag
 	model.setCloseable(true);
     }
 
-    @Override
-    public void requestFocus() {
-	model.setCloseable(true);
-	super.requestFocus();
-    }
-
     private void setShow(final Show show) {
 	if (show == Show.notSpecified || show == Show.chat) {
 	    model.setPageIcon(HablarIcons.get(HablarIcons.IconType.buddyOn));

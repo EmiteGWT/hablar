@@ -37,7 +37,7 @@ public class HablarSearch implements EntryPoint {
 		@Override
 		public void onClick(ClickEvent event) {
 		    GWT.log("Show search", null);
-		    search.requestFocus();
+		    search.requestVisibility(Visibility.focused);
 		}
 	    });
 	}
