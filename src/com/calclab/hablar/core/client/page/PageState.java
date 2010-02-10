@@ -95,7 +95,7 @@ public class PageState {
 
     public void setVisibility(Visibility visibility) {
 	this.visibility = visibility;
-	eventBus.fireEvent(new VisibilityChangedEvent(page, this));
+	eventBus.fireEvent(new VisibilityChangedEvent(page, getVisibility()));
     }
 
     private void fireChanged() {

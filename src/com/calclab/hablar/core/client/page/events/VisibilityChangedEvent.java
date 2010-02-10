@@ -1,18 +1,18 @@
 package com.calclab.hablar.core.client.page.events;
 
 import com.calclab.hablar.core.client.page.Page;
-import com.calclab.hablar.core.client.page.PageState;
+import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.google.gwt.event.shared.GwtEvent;
 
 public class VisibilityChangedEvent extends GwtEvent<VisibilityChangedHandler> {
 
     public static final Type<VisibilityChangedHandler> TYPE = new Type<VisibilityChangedHandler>();
     private final Page<?> page;
-    private final PageState pageState;
+    private final Visibility visibility;
 
-    public VisibilityChangedEvent(Page<?> page, PageState pageState) {
+    public VisibilityChangedEvent(Page<?> page, Visibility visibility) {
 	this.page = page;
-	this.pageState = pageState;
+	this.visibility = visibility;
     }
 
     @Override
@@ -24,8 +24,8 @@ public class VisibilityChangedEvent extends GwtEvent<VisibilityChangedHandler> {
 	return page;
     }
 
-    public PageState getPageState() {
-	return pageState;
+    public Visibility getVisibility() {
+	return visibility;
     }
 
     @Override

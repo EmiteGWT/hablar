@@ -32,7 +32,7 @@ public class EditBuddyPresenter extends PagePresenter<EditBuddyDisplay> {
 	this.action = new MenuAction<RosterItem>(i18n().changeNickName(), "EditBuddy-editAction") {
 	    @Override
 	    public void execute(RosterItem target) {
-		onChangeNickName(target);
+		showEditBuddyPanel(target);
 	    }
 	};
 	bind();
@@ -64,7 +64,10 @@ public class EditBuddyPresenter extends PagePresenter<EditBuddyDisplay> {
 	});
     }
 
-    private void onChangeNickName(RosterItem target) {
+    private void showEditBuddyPanel(RosterItem target) {
+	GWT.log("SHOW EDIT", null);
+	GWT.log("EDIT:" + target, null);
+
 	this.currentItem = target;
 	String nickName = target.getName();
 	display.getOldNickName().setText(nickName);

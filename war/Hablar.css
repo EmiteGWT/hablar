@@ -147,6 +147,10 @@
 	padding: 0px 10px;
 }
 
+.hablar-UserWidget .hablar-Header {
+	background-color: #BBB;
+}
+
 /** ROSTER **/
 .hablar-RosterWidget .item {
 	width: 100%;

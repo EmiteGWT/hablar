@@ -11,6 +11,7 @@ public class HablarWidget extends Composite implements HablarDisplay {
 
     public HablarWidget(HablarDisplay.Layout layout) {
 	initWidget(panel = new LayoutPanel());
+	addStyleName("hablar-HablarWidget");
 	hablar = new HablarPresenter(new LoggerEventBus(), layout, this);
     }
 

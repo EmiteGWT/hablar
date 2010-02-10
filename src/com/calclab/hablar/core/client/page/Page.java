@@ -21,13 +21,16 @@ public interface Page<T extends Display> extends Presenter<T> {
 
     public Visibility getVisibility();
 
+    /**
+     * request visibility
+     */
     @Deprecated
     public void requestFocus();
 
     @Deprecated
     public void requestHide();
 
-    public void setVisibility(Visibility closed);
+    public void setVisibility(Visibility visibility);
 
     void requestVisibility(Visibility newVisibility);
 

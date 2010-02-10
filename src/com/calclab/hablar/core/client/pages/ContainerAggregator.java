@@ -2,6 +2,7 @@ package com.calclab.hablar.core.client.pages;
 
 import java.util.ArrayList;
 
+import com.calclab.hablar.core.client.Hablar.Priority;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.google.gwt.core.client.GWT;
@@ -27,9 +28,13 @@ public class ContainerAggregator implements PagesContainer {
 	return false;
     }
 
-    public void addContainer(PagesContainer container) {
-	GWT.log("Insert container: " + container.getRol(), null);
-	containers.add(0, container);
+    public void addContainer(PagesContainer container, Priority priority) {
+	GWT.log("Add container: " + container.getRol() + " (" + priority + ")", null);
+	if (priority == Priority.highest) {
+	    containers.add(0, container);
+	} else {
+	    containers.add(container);
+	}
     }
 
     public void addPage(PagePresenter<?> page, String containerType) {

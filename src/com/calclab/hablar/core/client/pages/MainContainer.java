@@ -33,7 +33,6 @@ public abstract class MainContainer implements PagesContainer {
 	parent.add(container);
 	parent.setWidgetLeftRight(container, 0, PX, 0, PX);
 	parent.setWidgetTopBottom(container, 0, PX, 0, PX);
-	parent.forceLayout();
     }
 
     @Override

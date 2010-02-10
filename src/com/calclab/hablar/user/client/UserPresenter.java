@@ -12,7 +12,7 @@ import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 
-public class UserPresenter extends PagePresenter<UserDisplay> {
+public class UserPresenter extends PagePresenter<UserDisplay> implements UserPage<UserDisplay> {
 
     private static int index = 0;
     public static final String TYPE = "User";
@@ -27,7 +27,7 @@ public class UserPresenter extends PagePresenter<UserDisplay> {
 	session.onStateChanged(new Listener<Session>() {
 	    @Override
 	    public void onEvent(final Session session) {
-		setState(manager.getOwnPresence());
+		updatePresence();
 	    }
 	});
 
@@ -38,25 +38,29 @@ public class UserPresenter extends PagePresenter<UserDisplay> {
 	    }
 	});
 
-	Presence currentPresence = manager.getOwnPresence();
-	setState(currentPresence);
+	updatePresence();
 	model.setPageIcon(HablarIcons.get(IconType.buddyOff));
+    }
+
+    public void addPage(UserPage<?> page) {
+	display.addPage(page);
+    }
+
+    @Override
+    public void afterClosed() {
+	updatePresence();
+	model.setCloseable(false);
+    }
+
+    @Override
+    public void beforeOpen() {
+	model.setCloseable(true);
     }
 
     @Override
     public void requestFocus() {
 	model.setCloseable(true);
 	super.requestFocus();
-    }
-
-    @Override
-    public void requestHide() {
-	final Presence presence = manager.getOwnPresence();
-	presence.setStatus(display.getStatus().getText());
-	manager.changeOwnPresence(presence);
-	model.setCloseable(false);
-	setState(presence);
-	super.requestHide();
     }
 
     private void setShow(final Show show) {
@@ -80,6 +84,10 @@ public class UserPresenter extends PagePresenter<UserDisplay> {
 	    model.setPageTitle(session.getCurrentUser().getShortName() + " - " + userStatus);
 	    model.setPageIcon(HablarIcons.get(HablarIcons.IconType.buddyOn));
 	}
+    }
+
+    private void updatePresence() {
+	setState(manager.getOwnPresence());
     }
 
 }

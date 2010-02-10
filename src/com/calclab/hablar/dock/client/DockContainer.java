@@ -21,7 +21,6 @@ public class DockContainer implements PagesContainer {
     private final DockConfig config;
     private final LayoutPanel parent;
     private final Widget center;
-    private boolean isTopFocused;
 
     public DockContainer(DockConfig config, Widget center, LayoutPanel parent) {
 	this.config = config;
@@ -113,7 +112,6 @@ public class DockContainer implements PagesContainer {
 	parent.forceLayout();
 	parent.setWidgetTopHeight(panel, 0, PX, dock.size, dock.unit);
 	parent.animate(500);
-	isTopFocused = false;
 
     }
 
@@ -161,7 +159,6 @@ public class DockContainer implements PagesContainer {
 	parent.forceLayout();
 	parent.setWidgetTopHeight(panel, 0, PX, 100, PCT);
 	parent.animate(500);
-	isTopFocused = true;
     }
 
 }

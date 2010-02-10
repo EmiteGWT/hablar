@@ -30,11 +30,11 @@ public class HablarPresenter implements Hablar {
 	this.pages = new ArrayList<PagePresenter<?>>();
 	this.aggregator = new ContainerAggregator();
 
-	aggregator.addContainer(new OverlayContainer(display.getContainer()));
+	addContainer(new OverlayContainer(display.getContainer()), Priority.lowest);
 	if (layout == HablarDisplay.Layout.accordion) {
-	    aggregator.addContainer(new AccordionContainer(display.getContainer()));
+	    addContainer(new AccordionContainer(display.getContainer()), Priority.highest);
 	} else if (layout == HablarDisplay.Layout.tabs) {
-	    aggregator.addContainer(new TabsContainer(display.getContainer()));
+	    addContainer(new TabsContainer(display.getContainer()), Priority.highest);
 	}
 
 	eventBus.addHandler(VisibilityChangeRequestEvent.TYPE, new VisibilityChangeRequestHandler() {
@@ -47,8 +47,8 @@ public class HablarPresenter implements Hablar {
     }
 
     @Override
-    public void addContainer(PagesContainer container) {
-	aggregator.addContainer(container);
+    public void addContainer(PagesContainer container, Priority priority) {
+	aggregator.addContainer(container, priority);
     }
 
     public void addPage(PagePresenter<?> page) {

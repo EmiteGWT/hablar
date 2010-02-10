@@ -5,6 +5,7 @@ import com.calclab.emite.core.client.xmpp.session.Session.State;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.core.client.page.Page;
+import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.EntryPoint;
@@ -36,7 +37,7 @@ public class HablarLogin implements EntryPoint {
 
     private static void setState(final Page<?> login, Session session) {
 	if (session.getState() == State.disconnected) {
-	    login.requestFocus();
+	    login.requestVisibility(Visibility.focused);
 	}
     }
 

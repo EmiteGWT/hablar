@@ -27,7 +27,7 @@ public class HablarOpenChat implements EntryPoint {
 
     public static void install(final Hablar hablar) {
 	final OpenChatPresenter openChat = new OpenChatPresenter(hablar.getEventBus(), new OpenChatWidget());
-	hablar.addPage(openChat, OverlayContainer.TYPE);
+	hablar.addPage(openChat, OverlayContainer.ROL);
 
 	String iconStyle = HablarIcons.get(IconType.chatAdd);
 	List<PagePresenter<?>> rosters = hablar.getPagePresentersOfType(RosterPresenter.TYPE);
