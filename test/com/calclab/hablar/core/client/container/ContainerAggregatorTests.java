@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import com.calclab.hablar.core.client.Hablar.Chain;
 import com.calclab.hablar.core.client.page.Page;
+import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.testing.HablarTester;
 
 public class ContainerAggregatorTests {
@@ -28,9 +29,9 @@ public class ContainerAggregatorTests {
     @Test
     public void shouldAddPages() {
 	addDefaultContainer();
-	Page<?> page1 = newPage("page");
+	Page<?> page1 = newPage(Visibility.focused, "page");
 	assertTrue(aggregator.add(page1));
-	Page<?> page2 = newPage("page");
+	Page<?> page2 = newPage(Visibility.focused, "page");
 	assertTrue(aggregator.add(page2));
 	assertTrue(aggregator.hasPage(page1));
 	assertTrue(aggregator.hasPage(page2));
@@ -42,8 +43,8 @@ public class ContainerAggregatorTests {
 	aggregator.addContainer(container, Chain.after);
     }
 
-    private Page<?> newPage(String type) {
-	Page<?> page = tester.getPage();
+    private Page<?> newPage(Visibility visibility, String type) {
+	Page<?> page = tester.newPage(visibility);
 	when(page.getType()).thenReturn(type);
 	return page;
     }

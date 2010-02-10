@@ -29,7 +29,7 @@ public class MainContainer implements PagesContainer {
 
     private final MainLayout layout;
 
-    private Page<?> focusedPage;
+    protected Page<?> focusedPage;
 
     public MainContainer(HablarEventBus eventBus, MainLayout layout) {
 	this.layout = layout;
@@ -90,30 +90,8 @@ public class MainContainer implements PagesContainer {
 	return false;
     }
 
-    private void focus(Page<?> page) {
-	PageAndHead widgets = getWidgets(page);
-	if (widgets != null) {
-	    if (page != focusedPage) {
-		unfocus(focusedPage);
-		if (page.getState().getVisibility() == Visibility.hidden) {
-		    layout.add(widgets.pageWidget, widgets.headWidget);
-		}
-		page.setVisibility(Visibility.focused);
-		focusedPage = page;
-	    }
-	    layout.focus(widgets.pageWidget);
-	}
-    }
-
     private PageAndHead getWidgets(Page<?> page) {
 	return pages.get(page);
-    }
-
-    private void unfocus(Page<?> page) {
-	if (focusedPage != null && focusedPage == page) {
-	    page.setVisibility(Visibility.notFocused);
-	    focusedPage = null;
-	}
     }
 
     protected void changeVisibility(Page<?> page, Visibility newVisibility) {
@@ -128,8 +106,31 @@ public class MainContainer implements PagesContainer {
 	}
     }
 
+    protected void focus(Page<?> page) {
+	PageAndHead widgets = getWidgets(page);
+	if (widgets != null) {
+	    if (page != focusedPage) {
+		unfocus(focusedPage);
+		if (page.getState().getVisibility() == Visibility.hidden) {
+		    layout.add(widgets.pageWidget, widgets.headWidget);
+		}
+		if (page.getVisibility() != Visibility.focused)
+		    page.setVisibility(Visibility.focused);
+		focusedPage = page;
+	    }
+	    layout.focus(widgets.pageWidget);
+	}
+    }
+
     protected void toggle(Page<?> page) {
 
+    }
+
+    protected void unfocus(Page<?> page) {
+	if (focusedPage != null && focusedPage == page) {
+	    page.setVisibility(Visibility.notFocused);
+	    focusedPage = null;
+	}
     }
 
 }
