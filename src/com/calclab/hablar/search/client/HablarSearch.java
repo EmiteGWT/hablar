@@ -5,7 +5,6 @@ import java.util.List;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.core.client.page.Page;
-import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
@@ -23,7 +22,7 @@ public class HablarSearch implements EntryPoint {
 
     public static void install(Hablar hablar) {
 	final SearchPresenter search = new SearchPresenter(hablar.getEventBus(), new SearchWidget());
-	List<PagePresenter<?>> rosters = hablar.getPagePresentersOfType(RosterPresenter.TYPE);
+	List<Page<?>> rosters = hablar.getPagesOfType(RosterPresenter.TYPE);
 	boolean visible = rosters.size() == 0;
 	Visibility visibility = visible ? Visibility.notFocused : Visibility.hidden;
 	search.setVisibility(visibility);

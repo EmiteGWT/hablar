@@ -2,11 +2,10 @@ package com.calclab.hablar.core.client;
 
 import java.util.List;
 
+import com.calclab.hablar.core.client.container.PagesContainer;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.page.Page;
-import com.calclab.hablar.core.client.page.PagePresenter;
-import com.calclab.hablar.core.client.pages.PagesContainer;
 
 /**
  * Hablar interface used to interact with HablarWidget<br/>
@@ -17,27 +16,27 @@ import com.calclab.hablar.core.client.pages.PagesContainer;
  */
 public interface Hablar extends Presenter<HablarDisplay> {
 
-    public static enum Priority {
-	highest, lowest
+    public static enum Chain {
+	before, after
     }
 
     /**
      * Add a container to Hablar
      * 
      * @param container
-     * @param priority
+     * @param chain
      *            The priority indicates the position of the container in the
      *            chain.
      * 
      */
-    public void addContainer(PagesContainer container, Priority priority);
+    public void addContainer(PagesContainer container, Chain chain);
 
     /**
      * Add a page to hablar.
      * 
      * @param page
      */
-    public void addPage(PagePresenter<?> page);
+    public void addPage(Page<?> page);
 
     /**
      * Add a page to hablar using the specified container
@@ -47,7 +46,7 @@ public interface Hablar extends Presenter<HablarDisplay> {
      * @param containerRol
      *            the Rol name of the container to use
      */
-    public void addPage(PagePresenter<?> page, String containerRol);
+    public void addPage(Page<?> page, String containerRol);
 
     public PagesContainer getContainer(String rol);
 
@@ -55,8 +54,6 @@ public interface Hablar extends Presenter<HablarDisplay> {
 
     public HablarEventBus getEventBus();
 
-    public List<PagePresenter<?>> getPagePresentersOfType(String type);
-
-    public void removePage(Page<?> page);
+    public List<Page<?>> getPagesOfType(String type);
 
 }

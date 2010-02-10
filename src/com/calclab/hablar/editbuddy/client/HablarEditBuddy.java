@@ -4,9 +4,8 @@ import java.util.List;
 
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
+import com.calclab.hablar.core.client.container.overlay.OverlayContainer;
 import com.calclab.hablar.core.client.page.Page;
-import com.calclab.hablar.core.client.page.PagePresenter;
-import com.calclab.hablar.core.client.pages.OverlayContainer;
 import com.calclab.hablar.editbuddy.client.ui.EditBuddyWidget;
 import com.calclab.hablar.roster.client.RosterPresenter;
 import com.google.gwt.core.client.EntryPoint;
@@ -19,7 +18,7 @@ public class HablarEditBuddy implements EntryPoint {
     public static void install(Hablar hablar) {
 	EditBuddyPresenter editBuddy = new EditBuddyPresenter(hablar.getEventBus(), new EditBuddyWidget());
 	hablar.addPage(editBuddy, OverlayContainer.ROL);
-	List<PagePresenter<?>> rosters = hablar.getPagePresentersOfType(RosterPresenter.TYPE);
+	List<Page<?>> rosters = hablar.getPagesOfType(RosterPresenter.TYPE);
 	for (Page<?> page : rosters) {
 	    RosterPresenter roster = (RosterPresenter) page;
 	    roster.getItemMenu().addAction(editBuddy.getAction());

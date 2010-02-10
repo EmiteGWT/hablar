@@ -2,12 +2,12 @@ package com.calclab.hablar.user.client;
 
 import java.util.ArrayList;
 
+import com.calclab.hablar.core.client.container.PagesContainer;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedHandler;
-import com.calclab.hablar.core.client.pages.PagesContainer;
 import com.google.gwt.user.client.ui.Widget;
 
 public class UserContainer implements PagesContainer {
@@ -34,10 +34,10 @@ public class UserContainer implements PagesContainer {
 	UserPage<?> toAdd = (UserPage<?>) page;
 	userPage.addPage(toAdd);
 	pages.add(toAdd);
+	page.setVisibility(Visibility.hidden);
 	return true;
     }
 
-    @Override
     public boolean focus(Page<?> page) {
 	return pages.contains(page);
     }
@@ -52,17 +52,10 @@ public class UserContainer implements PagesContainer {
 	return userPage.getDisplay().asWidget();
     }
 
-    @Override
     public boolean hide(Page<?> page) {
 	return false;
     }
 
-    @Override
-    public boolean remove(Page<?> page) {
-	return false;
-    }
-
-    @Override
     public boolean unfocus(Page<?> page) {
 	return pages.contains(page);
     }
@@ -70,11 +63,13 @@ public class UserContainer implements PagesContainer {
     protected void userPageVisibilityChanged(Visibility visibility) {
 	if (visibility == Visibility.notFocused) {
 	    for (UserPage<?> page : pages) {
+		page.setVisibility(Visibility.hidden);
 		page.afterClosed();
 	    }
 	    userPage.afterClosed();
 	} else if (visibility == Visibility.focused) {
 	    for (UserPage<?> page : pages) {
+		page.setVisibility(Visibility.focused);
 		page.beforeOpen();
 	    }
 	    userPage.beforeOpen();

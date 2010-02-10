@@ -16,13 +16,8 @@ public class ChatConfig {
 	ChatConfig config = new ChatConfig();
 	String chatURI = PageAssist.getMeta("hablar.chatWidget");
 	config.openChat = XmppURI.uri(chatURI);
-	config.sendButtonVisible = isTrueMeta("hablar.sendButton");
+	config.sendButtonVisible = PageAssist.isMetaTrue("hablar.sendButton");
 	return config;
-    }
-
-    // FIXME: implemented in PageAssist
-    private static boolean isTrueMeta(String id) {
-	return !"false".equals(PageAssist.getMeta(id));
     }
 
     /**

@@ -1,63 +1,50 @@
 package com.calclab.hablar.core.client;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.calclab.hablar.core.client.HablarDisplay.Layout;
+import com.calclab.hablar.core.client.container.ContainerAggregator;
+import com.calclab.hablar.core.client.container.PagesContainer;
+import com.calclab.hablar.core.client.container.overlay.OverlayContainer;
+import com.calclab.hablar.core.client.container.overlay.OverlayLayout;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.Page;
-import com.calclab.hablar.core.client.page.PagePresenter;
-import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
-import com.calclab.hablar.core.client.page.events.VisibilityChangeRequestEvent;
-import com.calclab.hablar.core.client.page.events.VisibilityChangeRequestHandler;
-import com.calclab.hablar.core.client.pages.ContainerAggregator;
-import com.calclab.hablar.core.client.pages.OverlayContainer;
-import com.calclab.hablar.core.client.pages.PagesContainer;
 import com.calclab.hablar.core.client.pages.accordion.AccordionContainer;
+import com.calclab.hablar.core.client.pages.accordion.AccordionLayout;
 import com.calclab.hablar.core.client.pages.tabs.TabsContainer;
-import com.google.gwt.core.client.GWT;
+import com.calclab.hablar.core.client.pages.tabs.TabsLayout;
 
 public class HablarPresenter implements Hablar {
     private final HablarDisplay display;
     private final HablarEventBus eventBus;
-    private final ArrayList<PagePresenter<?>> pages;
-    private Page<?> currentPage;
     private final ContainerAggregator aggregator;
 
     public HablarPresenter(HablarEventBus eventBus, Layout layout, HablarDisplay display) {
 	this.eventBus = eventBus;
 	this.display = display;
-	this.pages = new ArrayList<PagePresenter<?>>();
 	this.aggregator = new ContainerAggregator();
 
-	addContainer(new OverlayContainer(display.getContainer()), Priority.lowest);
+	OverlayLayout overlayLayout = new OverlayLayout(display);
+	OverlayContainer overlayContainer = new OverlayContainer(eventBus, overlayLayout);
+	addContainer(overlayContainer, Chain.after);
 	if (layout == HablarDisplay.Layout.accordion) {
-	    addContainer(new AccordionContainer(display.getContainer()), Priority.highest);
+	    addContainer(new AccordionContainer(eventBus, new AccordionLayout(display)), Chain.before);
 	} else if (layout == HablarDisplay.Layout.tabs) {
-	    addContainer(new TabsContainer(display.getContainer()), Priority.highest);
+	    addContainer(new TabsContainer(eventBus, new TabsLayout(display)), Chain.before);
 	}
-
-	eventBus.addHandler(VisibilityChangeRequestEvent.TYPE, new VisibilityChangeRequestHandler() {
-	    @Override
-	    public void onVisibilityChangeRequest(VisibilityChangeRequestEvent event) {
-		changeVisibility(event.getNewVisibility(), event.getPage());
-	    }
-	});
 
     }
 
     @Override
-    public void addContainer(PagesContainer container, Priority priority) {
-	aggregator.addContainer(container, priority);
+    public void addContainer(PagesContainer container, Chain chain) {
+	aggregator.addContainer(container, chain);
     }
 
-    public void addPage(PagePresenter<?> page) {
-	if (aggregator.add(page)) {
-	    pages.add(page);
-	}
+    public void addPage(Page<?> page) {
+	aggregator.add(page);
     }
 
-    public void addPage(PagePresenter<?> page, String containerType) {
+    public void addPage(Page<?> page, String containerType) {
 	aggregator.addPage(page, containerType);
     }
 
@@ -75,54 +62,7 @@ public class HablarPresenter implements Hablar {
 	return eventBus;
     }
 
-    public List<PagePresenter<?>> getPagePresentersOfType(String type) {
-	ArrayList<PagePresenter<?>> list = new ArrayList<PagePresenter<?>>();
-	for (PagePresenter<?> page : pages) {
-	    if (type.equals(page.getType())) {
-		list.add(page);
-	    }
-	}
-	return list;
-    }
-
-    public void removePage(Page<?> page) {
-	aggregator.remove(page);
-    }
-
-    private void changeVisibility(Visibility newVisibility, Page<?> page) {
-	if (newVisibility == Visibility.focused) {
-	    focusPage(page);
-	} else if (newVisibility == Visibility.hidden) {
-	    hidePage(page);
-	} else if (newVisibility == Visibility.notFocused) {
-	    unfocus(page);
-	}
-    }
-
-    protected void focusPage(Page<?> page) {
-	if (page.getVisibility() != Visibility.focused) {
-	    if (aggregator.focus(page)) {
-		if (currentPage != null) {
-		    currentPage.setVisibility(Visibility.notFocused);
-		}
-		GWT.log("CURRENT PAGE: " + page.getId(), null);
-		currentPage = page;
-		page.setVisibility(Visibility.focused);
-	    }
-	}
-    }
-
-    protected void hidePage(Page<?> page) {
-	if (page.getVisibility() != Visibility.hidden) {
-	    if (aggregator.hide(page)) {
-		page.setVisibility(Visibility.hidden);
-	    }
-	}
-    }
-
-    protected void unfocus(Page<?> page) {
-	if (aggregator.unfocus(page)) {
-	    page.setVisibility(Visibility.notFocused);
-	}
+    public List<Page<?>> getPagesOfType(String type) {
+	return aggregator.getPagesOfType(type);
     }
 }

@@ -149,7 +149,15 @@
 
 .hablar-UserWidget .hablar-Header {
 	background-color: #BBB;
+	margin-top: 15px;
 }
+
+.hablar-UserWidget .hablar-Header.focused, .hablar-UserWidget .hablar-Header.notFocused  {
+    background-color: #BBB;
+    border-bottom: 1px solid #EFEFEF;
+    border-top: 1px solid #BBB;
+}
+
 
 /** ROSTER **/
 .hablar-RosterWidget .item {
@@ -272,6 +280,7 @@ div.hablar-RosterItemWidget:hover {
 .form p label {
 	display: block;
 	float: left;
+	margin-top: 2px;
 	margin-right: 10px;
 	width: 6em;
 	margin-right: 0.5em;

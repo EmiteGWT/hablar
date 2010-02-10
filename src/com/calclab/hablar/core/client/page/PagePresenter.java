@@ -6,7 +6,7 @@ import com.calclab.hablar.core.client.page.events.VisibilityChangeRequestEvent;
 
 public class PagePresenter<T extends Display> implements Page<T> {
     public static enum Visibility {
-	focused, notFocused, hidden
+	focused, notFocused, hidden, toggle
     }
     protected final T display;
     protected final HablarEventBus eventBus;

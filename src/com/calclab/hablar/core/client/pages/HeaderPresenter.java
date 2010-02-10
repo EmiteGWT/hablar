@@ -23,11 +23,7 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 	display.getOpen().addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(ClickEvent event) {
-		if (page.getVisibility() == Visibility.focused) {
-		    page.requestVisibility(Visibility.notFocused);
-		} else {
-		    page.requestVisibility(Visibility.focused);
-		}
+		page.requestVisibility(Visibility.toggle);
 	    }
 	});
 

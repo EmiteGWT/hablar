@@ -15,6 +15,7 @@ import com.calclab.hablar.search.client.HablarSearch;
 import com.calclab.hablar.signals.client.HablarSignals;
 import com.calclab.hablar.user.client.HablarUser;
 import com.calclab.hablar.user.client.UserPresenter;
+import com.calclab.hablar.vcard.client.HablarVCard;
 
 public class HablarComplete {
 
@@ -31,6 +32,7 @@ public class HablarComplete {
 	HablarDock.install(hablar, dock);
 
 	HablarUser.install(hablar);
+	HablarVCard.install(hablar);
 
 	if (config.hasLogin) {
 	    HablarLogin.install(hablar);
