@@ -1,7 +1,8 @@
 package com.calclab.hablar.search.client;
 
+import com.calclab.emite.xep.search.client.SearchResultItem;
 import com.calclab.hablar.core.client.mvp.Display;
-import com.calclab.hablar.core.client.ui.menu.PopupMenuView;
+import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Focusable;
@@ -17,7 +18,7 @@ public interface SearchDisplay extends Display {
 
     void clearResults();
 
-    PopupMenuView<SearchResultItemPresenter> createMenu(String debugId);
+    MenuDisplay<SearchResultItem> createMenu(String debugId);
 
     HasClickHandlers getSearchButton();
 

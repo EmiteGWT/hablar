@@ -38,7 +38,7 @@ public class ChatWidget extends Composite implements ChatDisplay {
 
     private final int controlsHeight;
 
-    public ChatWidget(boolean sendButtonVisible) {
+    public ChatWidget(final boolean sendButtonVisible) {
 	initWidget(uiBinder.createAndBindUi(this));
 	controlsHeight = sendButtonVisible ? 64 + 30 : 64;
     }
@@ -52,6 +52,14 @@ public class ChatWidget extends Composite implements ChatDisplay {
     public void clearAndFocus() {
 	talkBox.setText("");
 	talkBox.setFocus(true);
+    }
+
+    @Override
+    public HasClickHandlers createAction(final Action<ChatPage> action) {
+	final Label label = new Label();
+	label.addStyleName(action.getIconStyle());
+	actions.add(label);
+	return label;
     }
 
     @Override
@@ -70,7 +78,7 @@ public class ChatWidget extends Composite implements ChatDisplay {
     }
 
     @Override
-    public void setControlsVisible(boolean visible) {
+    public void setControlsVisible(final boolean visible) {
 	if (visible) {
 	    page.setWidgetTopBottom(scroll, 0, PX, controlsHeight, PX);
 	    page.setWidgetBottomHeight(controls, 0, PX, controlsHeight - 3, PX);
@@ -82,7 +90,7 @@ public class ChatWidget extends Composite implements ChatDisplay {
     }
 
     @Override
-    public void setId(String id) {
+    public void setId(final String id) {
 	page.ensureDebugId("ChatWidget-" + id);
 	talkBox.ensureDebugId("ChatWidget-talkBox-" + id);
 	send.ensureDebugId("ChatWidget-send-" + id);
@@ -91,18 +99,10 @@ public class ChatWidget extends Composite implements ChatDisplay {
     }
 
     @Override
-    public void showMessage(String name, String body, ChatDisplay.MessageType messageType) {
+    public void showMessage(final String name, final String body, final ChatDisplay.MessageType messageType) {
 	final ChatMessage message = new ChatMessage(name, body, messageType);
 	list.add(message);
 	scroll.ensureVisible(message);
-    }
-
-    @Override
-    public HasClickHandlers createAction(Action<ChatPage> action) {
-	Label label = new Label();
-	label.addStyleName(action.getIconStyle());
-	actions.add(label);
-	return label;
     }
 
 }

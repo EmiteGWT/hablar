@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module rename-to='Hablar'>
+    <inherits name='com.calclab.emite.core.EmiteCore' />
+    <inherits name='com.calclab.emite.im.EmiteIM' />
     <inherits name='com.calclab.hablar.core.HablarCore' />
     <inherits name='com.calclab.hablar.login.HablarLogin' />
     <inherits name='com.calclab.hablar.roster.HablarRoster' />

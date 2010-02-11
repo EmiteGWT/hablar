@@ -7,6 +7,7 @@ import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.ui.menu.Action;
+import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.editbuddy.client.ui.EditBuddyDisplay;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.core.client.GWT;
@@ -21,55 +22,55 @@ import com.google.gwt.event.dom.client.ClickHandler;
 public class EditBuddyPage extends PagePresenter<EditBuddyDisplay> {
     private static int index = 0;
     protected static final String[] EMPTY_ARRAY = new String[0];
-    private final Action<RosterItem> action;
+    private final SimpleAction<RosterItem> action;
     private final Roster roster;
     private RosterItem currentItem;
 
-    public EditBuddyPage(HablarEventBus eventBus, EditBuddyDisplay display) {
-	super("EditButty", "" + (++index), eventBus, display);
+    public EditBuddyPage(final HablarEventBus eventBus, final EditBuddyDisplay display) {
+	super("EditButty", "" + ++index, eventBus, display);
 	roster = Suco.get(Roster.class);
 
-	this.action = new Action<RosterItem>(i18n().changeNickName(), "EditBuddy-editAction") {
+	action = new SimpleAction<RosterItem>(i18n().changeNickName(), "EditBuddy-editAction") {
 	    @Override
-	    public void execute(RosterItem target) {
+	    public void execute(final RosterItem target) {
 		showEditBuddyPanel(target);
 	    }
 	};
 	bind();
     }
 
-    public Action<RosterItem> getAction() {
-	return action;
-    }
-
     private void bind() {
 	display.getCancel().addClickHandler(new ClickHandler() {
 	    @Override
-	    public void onClick(ClickEvent event) {
+	    public void onClick(final ClickEvent event) {
 		GWT.log("Close!", null);
 		requestVisibility(Visibility.hidden);
 	    }
 	});
 	display.getSave().addClickHandler(new ClickHandler() {
 	    @Override
-	    public void onClick(ClickEvent event) {
+	    public void onClick(final ClickEvent event) {
 		updateCurrentItem();
 	    }
 	});
 	display.getEnterAction().addChangeHandler(new ChangeHandler() {
 	    @Override
-	    public void onChange(ChangeEvent event) {
+	    public void onChange(final ChangeEvent event) {
 		updateCurrentItem();
 	    }
 	});
     }
 
-    private void showEditBuddyPanel(RosterItem target) {
+    public Action<RosterItem> getAction() {
+	return action;
+    }
+
+    private void showEditBuddyPanel(final RosterItem target) {
 	GWT.log("SHOW EDIT", null);
 	GWT.log("EDIT:" + target, null);
 
-	this.currentItem = target;
-	String nickName = target.getName();
+	currentItem = target;
+	final String nickName = target.getName();
 	display.getOldNickName().setText(nickName);
 	display.getNewNickName().setText(nickName);
 	requestVisibility(Visibility.focused);
@@ -78,7 +79,7 @@ public class EditBuddyPage extends PagePresenter<EditBuddyDisplay> {
 
     private void updateCurrentItem() {
 	assert currentItem != null;
-	String newName = display.getNewNickName().getText();
+	final String newName = display.getNewNickName().getText();
 	if (!currentItem.getName().equals(newName)) {
 	    roster.updateItem(currentItem.getJID(), newName, currentItem.getGroups().toArray(EMPTY_ARRAY));
 	}

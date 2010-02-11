@@ -8,6 +8,8 @@ import com.calclab.hablar.core.client.mvp.Display;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.menu.Menu;
+import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
 import com.calclab.hablar.core.mock.HablarMocks;
 import com.calclab.hablar.testing.display.DisplayMocker;
 import com.google.gwt.event.shared.GwtEvent;
@@ -19,10 +21,10 @@ public class HablarTester {
     public HablarTester() {
 	HablarIcons.setStyles(new HablarIcons());
 	HablarMocks.disarm();
-	this.eventBus = new EventBusTester();
+	eventBus = new EventBusTester();
     }
 
-    public void fire(GwtEvent<?> event) {
+    public void fire(final GwtEvent<?> event) {
 	eventBus.fireEvent(event);
     }
 
@@ -30,16 +32,22 @@ public class HablarTester {
 	return eventBus;
     }
 
-    public <T> T mock(Class<T> classToMock) {
+    public <T> T mock(final Class<T> classToMock) {
 	return Mockito.mock(classToMock);
     }
 
-    public <T extends Display> T newDisplay(Class<T> displayClass) {
+    public <T extends Display> T newDisplay(final Class<T> displayClass) {
 	return DisplayMocker.mock(displayClass);
     }
 
-    public Page<?> newPage(Visibility visibility) {
-	Page<Display> mock = HablarMocks.getPage(eventBus);
+    @SuppressWarnings("unchecked")
+    public <T> Menu<T> newMenu() {
+	final MenuDisplay<T> display = newDisplay(MenuDisplay.class);
+	return new Menu<T>(display);
+    }
+
+    public Page<?> newPage(final Visibility visibility) {
+	final Page<Display> mock = HablarMocks.getPage(eventBus);
 	when(mock.getVisibility()).thenReturn(visibility);
 	return mock;
     }

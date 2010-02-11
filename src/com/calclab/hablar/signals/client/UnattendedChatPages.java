@@ -21,27 +21,19 @@ public class UnattendedChatPages {
     private final HablarEventBus eventBus;
     private final HashSet<Page<?>> unattendedChatPages;
 
-    public UnattendedChatPages(HablarEventBus hablarEventBus) {
-	this.eventBus = hablarEventBus;
+    public UnattendedChatPages(final HablarEventBus hablarEventBus) {
+	eventBus = hablarEventBus;
 	unattendedChatPages = new HashSet<Page<?>>();
 	bind();
-    }
-
-    public boolean contains(Page<?> page) {
-	return unattendedChatPages.contains(page);
-    }
-
-    public int getSize() {
-	return unattendedChatPages.size();
     }
 
     private void bind() {
 	eventBus.addHandler(UserMessageChangedEvent.TYPE, new UserMessageChangedHandler() {
 	    @Override
-	    public void onUserMessageChanged(UserMessageChangedEvent event) {
-		Page<?> page = event.getPage();
-		if (isChatPage(page)) {
-		    Visibility visibility = page.getVisibility();
+	    public void onUserMessageChanged(final UserMessageChangedEvent event) {
+		final Page<?> page = event.getPage();
+		if (ChatPage.isChat(page)) {
+		    final Visibility visibility = page.getVisibility();
 		    if (visibility != Visibility.focused && unattendedChatPages.add(page)) {
 			eventBus.fireEvent(new UnattendedChatsChangedEvent(UnattendedChatPages.this));
 		    }
@@ -51,9 +43,9 @@ public class UnattendedChatPages {
 
 	eventBus.addHandler(VisibilityChangedEvent.TYPE, new VisibilityChangedHandler() {
 	    @Override
-	    public void onVisibilityChanged(VisibilityChangedEvent event) {
-		Page<?> page = event.getPage();
-		if (isChatPage(page)) {
+	    public void onVisibilityChanged(final VisibilityChangedEvent event) {
+		final Page<?> page = event.getPage();
+		if (ChatPage.isChat(page)) {
 		    onChatVisibilityChanged(page);
 		}
 	    }
@@ -62,12 +54,16 @@ public class UnattendedChatPages {
 
     }
 
-    private final boolean isChatPage(final Page<?> page) {
-	return page.getType() == ChatPage.TYPE;
+    public boolean contains(final Page<?> page) {
+	return unattendedChatPages.contains(page);
     }
 
-    private void onChatVisibilityChanged(Page<?> page) {
-	Visibility visibility = page.getVisibility();
+    public int getSize() {
+	return unattendedChatPages.size();
+    }
+
+    private void onChatVisibilityChanged(final Page<?> page) {
+	final Visibility visibility = page.getVisibility();
 	if (visibility == Visibility.focused && unattendedChatPages.remove(page)) {
 	    eventBus.fireEvent(new UnattendedChatsChangedEvent(this));
 	} else if (unattendedChatPages.remove(page)) {

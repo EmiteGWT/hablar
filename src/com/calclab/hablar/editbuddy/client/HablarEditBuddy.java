@@ -7,7 +7,7 @@ import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.core.client.container.overlay.OverlayContainer;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.editbuddy.client.ui.EditBuddyWidget;
-import com.calclab.hablar.roster.client.RosterPage;
+import com.calclab.hablar.roster.client.page.RosterPage;
 import com.google.gwt.core.client.EntryPoint;
 
 /**

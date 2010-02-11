@@ -14,7 +14,7 @@ import com.calclab.hablar.openchat.client.HablarOpenChat;
 import com.calclab.hablar.openroom.client.HablarOpenRoom;
 import com.calclab.hablar.rooms.client.HablarRooms;
 import com.calclab.hablar.roster.client.HablarRoster;
-import com.calclab.hablar.roster.client.RosterPage;
+import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.search.client.HablarSearch;
 import com.calclab.hablar.signals.client.HablarSignals;
 import com.calclab.hablar.user.client.HablarUser;

@@ -14,6 +14,8 @@ public interface ChatDisplay extends Display {
 
     void clearAndFocus();
 
+    HasClickHandlers createAction(Action<ChatPage> action);
+
     HasClickHandlers getAction();
 
     HasText getBody();
@@ -28,7 +30,5 @@ public interface ChatDisplay extends Display {
     void setId(String id);
 
     void showMessage(String name, String body, ChatDisplay.MessageType messageType);
-
-    HasClickHandlers createAction(Action<ChatPage> action);
 
 }

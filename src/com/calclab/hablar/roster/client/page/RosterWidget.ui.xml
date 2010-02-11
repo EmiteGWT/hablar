@@ -1,6 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:r="urn:import:com.calclab.hablar.roster.client.page">
 	<ui:style>
 		
 	</ui:style>
@@ -14,7 +15,8 @@
 		<g:layer left="0" top="20px" width="100%" bottom="0px">
 			<g:ScrollPanel ui:field="scroll" height="100%"
 				styleName="scroll">
-				<g:FlowPanel styleName="list" ui:field="list"></g:FlowPanel>
+				<r:RosterListWidget styleName="list" ui:field="list" height="100%">
+				</r:RosterListWidget>
 			</g:ScrollPanel>
 		</g:layer>
 		<!-- Inactive -->

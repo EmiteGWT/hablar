@@ -1,31 +1,15 @@
 package com.calclab.hablar.core.client.ui.menu;
 
-public abstract class Action<T> {
-    private final String name;
-    private final String id;
-    private final String iconStyle;
+public interface Action<T> {
 
-    public Action(final String name, final String id, String iconStyle) {
-	this.name = name;
-	this.id = id;
-	this.iconStyle = iconStyle;
-    }
+    void execute(T target);
 
-    public Action(String name, String id) {
-	this(name, id, null);
-    }
+    String getIconStyle();
 
-    public abstract void execute(T target);
+    String getId();
 
-    public String getName() {
-	return name;
-    }
+    String getName();
 
-    public String getId() {
-	return id;
-    }
+    boolean isApplicable(T target);
 
-    public String getIconStyle() {
-	return iconStyle;
-    }
 }

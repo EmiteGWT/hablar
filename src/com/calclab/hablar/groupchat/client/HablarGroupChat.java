@@ -6,7 +6,7 @@ import com.calclab.hablar.core.client.container.PageAddedEvent;
 import com.calclab.hablar.core.client.container.PageAddedHandler;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
-import com.calclab.hablar.core.client.ui.menu.Action;
+import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 
@@ -29,8 +29,8 @@ public class HablarGroupChat implements EntryPoint {
     public void onModuleLoad() {
     }
 
-    public static Action<ChatPage> createAction() {
-	return new Action<ChatPage>("Convert to group", ACTION_ID, HablarIcons.get(IconType.buddyWait)) {
+    public static SimpleAction<ChatPage> createAction() {
+	return new SimpleAction<ChatPage>("Convert to group", ACTION_ID, HablarIcons.get(IconType.buddyWait)) {
 	    @Override
 	    public void execute(ChatPage target) {
 		GWT.log("GROUP CHAT ACTION");

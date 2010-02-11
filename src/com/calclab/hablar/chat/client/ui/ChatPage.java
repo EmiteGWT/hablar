@@ -26,11 +26,22 @@ import com.google.gwt.event.dom.client.KeyDownHandler;
 public class ChatPage extends PagePresenter<ChatDisplay> {
     public static final String TYPE = "Chat";
 
-    public static String createId(String uri) {
+    public static ChatPage asChat(final Page<?> page) {
+	if (isChat(page)) {
+	    return (ChatPage) page;
+	}
+	return null;
+    }
+
+    public static String createId(final String uri) {
 	return uri.replace("@", "-").replace("/", "-");
     }
 
-    public ChatPage(HablarEventBus eventBus, final Chat chat, final ChatDisplay display) {
+    public static boolean isChat(final Page<?> page) {
+	return ChatPage.TYPE.equals(page.getType());
+    }
+
+    public ChatPage(final HablarEventBus eventBus, final Chat chat, final ChatDisplay display) {
 	super(TYPE, createId(chat.getURI().toString()), eventBus, display);
 	display.setId(getId());
 	final XmppURI fromURI = chat.getURI();
@@ -60,14 +71,14 @@ public class ChatPage extends PagePresenter<ChatDisplay> {
 
 	display.getAction().addClickHandler(new ClickHandler() {
 	    @Override
-	    public void onClick(ClickEvent event) {
+	    public void onClick(final ClickEvent event) {
 		sendMessage(chat, display);
 	    }
 
 	});
 	display.getTextBox().addKeyDownHandler(new KeyDownHandler() {
 	    @Override
-	    public void onKeyDown(KeyDownEvent event) {
+	    public void onKeyDown(final KeyDownEvent event) {
 		if (event.getNativeKeyCode() == 13) {
 		    event.stopPropagation();
 		    event.preventDefault();
@@ -80,20 +91,16 @@ public class ChatPage extends PagePresenter<ChatDisplay> {
     public void addAction(final Action<ChatPage> action) {
 	display.createAction(action).addClickHandler(new ClickHandler() {
 	    @Override
-	    public void onClick(ClickEvent event) {
+	    public void onClick(final ClickEvent event) {
 		action.execute(ChatPage.this);
 	    }
 	});
     }
 
-    public void setPresence(boolean available, Show show) {
-	getState().setPageIcon(PresenceIcon.getIcon(available, show));
-    }
-
     private String getName(final XmppURI fromURI) {
 	final String name;
-	Roster roster = Suco.get(Roster.class);
-	RosterItem itemByJID = roster.getItemByJID(fromURI);
+	final Roster roster = Suco.get(Roster.class);
+	final RosterItem itemByJID = roster.getItemByJID(fromURI);
 	if (itemByJID != null) {
 	    name = itemByJID.getName();
 	} else {
@@ -103,7 +110,7 @@ public class ChatPage extends PagePresenter<ChatDisplay> {
     }
 
     private void sendMessage(final Chat chat, final ChatDisplay display) {
-	String text = display.getBody().getText().trim();
+	final String text = display.getBody().getText().trim();
 	if (!text.isEmpty()) {
 	    final String body = ChatMessageFormatter.format(text);
 	    display.showMessage("me", body, ChatDisplay.MessageType.sent);
@@ -112,16 +119,13 @@ public class ChatPage extends PagePresenter<ChatDisplay> {
 	}
     }
 
+    public void setPresence(final boolean available, final Show show) {
+	getState().setPageIcon(PresenceIcon.getIcon(available, show));
+    }
+
     private void setState(final State state) {
 	final boolean visible = state == State.ready;
 	display.setControlsVisible(visible);
-    }
-
-    public static ChatPage asChat(Page<?> page) {
-	if (ChatPage.TYPE.equals(page.getType())) {
-	    return (ChatPage) page;
-	}
-	return null;
     }
 
 }

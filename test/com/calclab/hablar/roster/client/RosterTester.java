@@ -13,7 +13,7 @@ public class RosterTester extends AbstractRoster {
 	public final String name;
 	public final String[] groups;
 
-	public Modification(XmppURI jid, String name, String[] groups) {
+	public Modification(final XmppURI jid, final String name, final String[] groups) {
 	    this.jid = jid;
 	    this.name = name;
 	    this.groups = groups;
@@ -32,9 +32,9 @@ public class RosterTester extends AbstractRoster {
      * @see RosterTester.install
      */
     public RosterTester() {
-	this.added = new ArrayList<Modification>();
-	this.updated = new ArrayList<Modification>();
-	this.removed = new ArrayList<XmppURI>();
+	added = new ArrayList<Modification>();
+	updated = new ArrayList<Modification>();
+	removed = new ArrayList<XmppURI>();
     }
 
     /**
@@ -43,27 +43,28 @@ public class RosterTester extends AbstractRoster {
      * @param jid
      * @param name
      */
-    public void addItem(XmppURI jid, String name) {
-	super.storeItem(new RosterItem(jid, null, name, null));
+    public void addItem(final XmppURI jid, final String name, final String group) {
+	final RosterItem item = new RosterItem(jid, null, name, null);
+	super.storeItem(item);
     }
 
     @Override
-    public void fireItemAdded(RosterItem item) {
+    public void fireItemAdded(final RosterItem item) {
 	super.fireItemAdded(item);
     }
 
     @Override
-    public void fireItemChanged(RosterItem item) {
+    public void fireItemChanged(final RosterItem item) {
 	super.fireItemChanged(item);
     }
 
     @Override
-    public void fireItemRemoved(RosterItem item) {
+    public void fireItemRemoved(final RosterItem item) {
 	super.fireItemRemoved(item);
     }
 
     @Override
-    public void fireRosterReady(Collection<RosterItem> collection) {
+    public void fireRosterReady(final Collection<RosterItem> collection) {
 	super.fireRosterReady(collection);
     }
 
@@ -74,8 +75,8 @@ public class RosterTester extends AbstractRoster {
      *            the jid
      * @return true if has been requested, false otherwise
      */
-    public boolean hasRequestedToAdd(XmppURI jid) {
-	for (Modification m : added) {
+    public boolean hasRequestedToAdd(final XmppURI jid) {
+	for (final Modification m : added) {
 	    if (m.jid.equals(jid)) {
 		return true;
 	    }
@@ -84,17 +85,17 @@ public class RosterTester extends AbstractRoster {
     }
 
     @Override
-    public void removeItem(XmppURI jid) {
+    public void removeItem(final XmppURI jid) {
 	removed.add(jid);
     }
 
     @Override
-    public void requestAddItem(XmppURI jid, String name, String... groups) {
+    public void requestAddItem(final XmppURI jid, final String name, final String... groups) {
 	added.add(new Modification(jid, name, groups));
     }
 
     @Override
-    public void updateItem(XmppURI jid, String name, String... groups) {
+    public void updateItem(final XmppURI jid, final String name, final String... groups) {
 	updated.add(new Modification(jid, name, groups));
     }
 

@@ -1,5 +1,12 @@
-package com.calclab.hablar.roster.client;
+package com.calclab.hablar.roster.client.page;
 
+import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
+import com.calclab.hablar.core.client.ui.menu.PopupMenu;
+import com.calclab.hablar.roster.client.ui.groups.RosterGroupDisplay;
+import com.calclab.hablar.roster.client.ui.groups.RosterGroupPresenter;
+import com.calclab.hablar.roster.client.ui.groups.RosterGroupWidget;
+import com.calclab.hablar.roster.client.ui.groups.RosterItemDisplay;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -23,23 +30,22 @@ public class RosterWidget extends Composite implements RosterDisplay {
     @UiField
     ScrollPanel scroll;
     @UiField
-    FlowPanel list, actions, disabledPanel;
+    FlowPanel actions, disabledPanel;
+
+    @UiField
+    RosterListWidget list;
 
     @UiField
     Label disabledLabel;
+    private final RosterListPresenter groups;
 
     public RosterWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
 	roster.ensureDebugId("RosterWidget-roster");
 	scroll.ensureDebugId("RosterWidget-scroll");
-	list.ensureDebugId("RosterWidget-list");
 	actions.ensureDebugId("RosterWidget-actions");
 	disabledLabel.ensureDebugId("RosterWidget-disabledPanel");
-    }
-
-    @Override
-    public void add(RosterItemDisplay itemDisplay) {
-	list.add(itemDisplay.asWidget());
+	groups = new RosterListPresenter(list);
     }
 
     @Override
@@ -52,17 +58,27 @@ public class RosterWidget extends Composite implements RosterDisplay {
     }
 
     @Override
+    public void addGroup(final RosterGroupPresenter group) {
+	groups.add(group);
+    }
+
+    @Override
     public Widget asWidget() {
 	return this;
     }
 
     @Override
-    public RosterItemDisplay newRosterItemDisplay() {
-	return new RosterItemWidget();
+    public RosterGroupDisplay newRosterGroupDisplay() {
+	return new RosterGroupWidget();
     }
 
     @Override
-    public void remove(RosterItemDisplay itemDisplay) {
+    public MenuDisplay<RosterItem> newRosterItemMenuDisplay(final String menuId) {
+	return new PopupMenu<RosterItem>(menuId);
+    }
+
+    @Override
+    public void remove(final RosterItemDisplay itemDisplay) {
 	list.remove(itemDisplay.asWidget());
     }
 

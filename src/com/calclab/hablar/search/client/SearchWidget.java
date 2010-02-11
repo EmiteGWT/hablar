@@ -2,8 +2,9 @@ package com.calclab.hablar.search.client;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
+import com.calclab.emite.xep.search.client.SearchResultItem;
+import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
 import com.calclab.hablar.core.client.ui.menu.PopupMenu;
-import com.calclab.hablar.core.client.ui.menu.PopupMenuView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
@@ -56,7 +57,7 @@ public class SearchWidget extends Composite implements SearchDisplay {
     }
 
     @Override
-    public void addResult(SearchResultItemDisplay item) {
+    public void addResult(final SearchResultItemDisplay item) {
 	results.add(item.asWidget());
     }
 
@@ -70,9 +71,8 @@ public class SearchWidget extends Composite implements SearchDisplay {
     }
 
     @Override
-    public PopupMenuView<SearchResultItemPresenter> createMenu(final String debugId) {
-	final PopupMenu<SearchResultItemPresenter> popupMenu = new PopupMenu<SearchResultItemPresenter>(debugId);
-	return popupMenu;
+    public MenuDisplay<SearchResultItem> createMenu(final String debugId) {
+	return new PopupMenu<SearchResultItem>(debugId);
     }
 
     @Override

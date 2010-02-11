@@ -1,55 +1,50 @@
 package com.calclab.hablar.core.client.ui.menu;
 
+import java.util.HashMap;
+
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.gwt.user.client.ui.Widget;
 
-public class PopupMenu<T> extends PopupPanel implements PopupMenuView<T> {
+public class PopupMenu<T> extends PopupPanel implements MenuDisplay<T> {
     private final MenuBar bar;
-    private T target;
-    private boolean visible;
+    private final HashMap<Action<T>, MenuItem> items;
 
     public PopupMenu(final String debugId) {
 	super(true);
 	super.ensureDebugId(debugId);
 	setStyleName("hablar-PopupPanel");
+	this.items = new HashMap<Action<T>, MenuItem>();
 	bar = new MenuBar(true);
 	setWidget(bar);
-	visible = false;
     }
 
     @Override
-    public void addAction(final Action<T> action) {
-	final MenuItem addedItem = bar.addItem(action.getName(), true, new Command() {
-	    @Override
-	    public void execute() {
-		PopupMenu.this.hide();
-		action.execute(target);
-	    }
-	});
-	addedItem.ensureDebugId(action.getId());
+    public void addAction(final Action<T> action, final Command command) {
+	final MenuItem menuItem = bar.addItem(action.getName(), true, command);
+	menuItem.ensureDebugId(action.getId());
+	items.put(action, menuItem);
     }
 
     @Override
-    public void hide() {
-	visible = false;
-	super.hide();
+    public Widget asWidget() {
+	return this;
     }
 
     @Override
     public boolean isVisible() {
-	return visible;
+	return isShowing();
     }
 
     @Override
-    public void setTarget(final T target) {
-	this.target = target;
+    public void setActionVisible(final Action<T> action, final boolean visible) {
+	items.get(action).setVisible(visible);
     }
 
     @Override
     public void show(final int left, final int top) {
-	this.visible = true;
 	setPopupPosition(left, top);
 	show();
     }

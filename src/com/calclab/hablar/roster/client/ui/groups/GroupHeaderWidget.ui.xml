@@ -1,0 +1,11 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		
+	</ui:style>
+	<g:HTMLPanel styleName="hablar-GroupHeaderWidget">
+	<g:Label ui:field="menu" styleName="menu"></g:Label>
+	<g:Label ui:field="name" styleName="name">name</g:Label>
+	</g:HTMLPanel>
+</ui:UiBinder> 

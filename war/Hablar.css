@@ -190,6 +190,26 @@
 	
 }
 
+.hablar-GroupHeaderWidget {
+	width: 100%;
+	overflow: hidden;
+	background-color: #E9E9E9;
+	padding: 3px;
+	cursor: pointer;
+	border-bottom: 1px solid #BBBBBB;
+}
+div.hablar-GroupHeaderWidget:hover {
+	background-color: #BBBBBB;
+}
+.hablar-GroupHeaderWidget .label {
+	display: block;
+	margin: 3px;
+}
+.hablar-GroupHeaderWidget .menu {
+	float: right;
+	margin-right: 3px;
+}
+
 div.hablar-RosterItemWidget:hover {
 	background-color: #E9E9E9;
 }

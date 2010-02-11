@@ -1,4 +1,4 @@
-package com.calclab.hablar.roster.client;
+package com.calclab.hablar.roster.client.page;
 
 import static com.calclab.hablar.core.client.i18n.Translator.i18n;
 
@@ -7,8 +7,6 @@ import java.util.HashMap;
 
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.session.Session.State;
-import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
-import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
@@ -17,17 +15,23 @@ import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.Action;
-import com.calclab.hablar.core.client.ui.menu.PopupMenu;
+import com.calclab.hablar.core.client.ui.menu.Menu;
+import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
+import com.calclab.hablar.roster.client.ui.groups.RosterGroupDisplay;
+import com.calclab.hablar.roster.client.ui.groups.RosterGroupPresenter;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
-public class RosterPage extends PagePresenter<RosterDisplay> {
+/**
+ * The roster page presenter.
+ * 
+ * @see RosterPage
+ */
+public class RosterPresenter extends PagePresenter<RosterDisplay> implements RosterPage {
     private static int index = 0;
-    public static final String TYPE = "Roster";
 
     public static RosterPage asRoster(final Page<?> page) {
 	if (TYPE.equals(page.getType())) {
@@ -38,50 +42,39 @@ public class RosterPage extends PagePresenter<RosterDisplay> {
     }
     private boolean active;
     private final Roster roster;
-    private final HashMap<XmppURI, RosterItemPresenter> items;
-    private final ChatManager manager;
+    private final Menu<RosterItem> itemMenu;
+    private final HashMap<String, RosterGroupPresenter> groups;
 
-    private final PopupMenu<RosterItem> itemMenu;
-
-    public RosterPage(final HablarEventBus eventBus, final RosterDisplay display) {
+    public RosterPresenter(final HablarEventBus eventBus, final RosterDisplay display) {
 	super(TYPE, "" + ++index, eventBus, display);
-	manager = Suco.get(ChatManager.class);
 	roster = Suco.get(Roster.class);
-	items = new HashMap<XmppURI, RosterItemPresenter>();
+
+	groups = new HashMap<String, RosterGroupPresenter>();
 	active = true;
-	itemMenu = new PopupMenu<RosterItem>("hablar-RosterPresenterMenu");
+
+	final MenuDisplay<RosterItem> menuDisplay = display.newRosterItemMenuDisplay("hablar-RosterPresenterMenu");
+	itemMenu = new Menu<RosterItem>(menuDisplay);
 
 	addRosterListeners();
 	addSessionListeners();
 	getState().init(HablarIcons.get(IconType.roster), i18n().contacts());
     }
 
+    @Override
     public void addAction(final Action<RosterPage> action) {
 	display.addAction(action.getIconStyle(), action.getId(), new ClickHandler() {
 	    @Override
 	    public void onClick(final ClickEvent event) {
-		action.execute(RosterPage.this);
+		action.execute(RosterPresenter.this);
 	    }
 	});
-    }
-
-    /**
-     * Use addAction(Action ...)
-     * 
-     * @param iconStyle
-     * @param debugId
-     * @param clickHandler
-     */
-    @Deprecated
-    public void addAction(final String iconStyle, final String debugId, final ClickHandler clickHandler) {
-	display.addAction(iconStyle, debugId, clickHandler);
     }
 
     private void addRosterListeners() {
 	roster.onRosterRetrieved(new Listener<Collection<RosterItem>>() {
 	    @Override
 	    public void onEvent(final Collection<RosterItem> items) {
-		loadRoster(items);
+		loadRoster();
 	    }
 
 	});
@@ -89,8 +82,7 @@ public class RosterPage extends PagePresenter<RosterDisplay> {
 	roster.onItemAdded(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
-		getPresenter(item);
-		// FIXME: i18n
+		// getPresenter(item);
 		final String msg = item.getName() + " has been added to Contacts.";
 		getState().setUserMessage(msg);
 	    }
@@ -99,23 +91,22 @@ public class RosterPage extends PagePresenter<RosterDisplay> {
 	roster.onItemChanged(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
-		getPresenter(item).setItem(item);
+		// getPresenter(item).setItem(item);
 	    }
 	});
 
 	roster.onItemRemoved(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
-		display.remove(getPresenter(item).getDisplay());
+		// display.remove(getPresenter(item).getDisplay());
 		// FIXME: i18n
 		final String msg = item.getJID().getNode() + " has been removed from Contacts.";
 		getState().setUserMessage(msg);
 	    }
 	});
 
-	GWT.log("ROSTER READY: " + roster.isRosterReady());
 	if (roster.isRosterReady()) {
-	    loadRoster(roster.getItems());
+	    loadRoster();
 	}
     }
 
@@ -132,47 +123,22 @@ public class RosterPage extends PagePresenter<RosterDisplay> {
 	setSessionState(session.getState());
     }
 
-    private RosterItemPresenter createRosterItem(final RosterItem item) {
-	final RosterItemDisplay itemDisplay = display.newRosterItemDisplay();
-	final RosterItemPresenter presenter = new RosterItemPresenter(itemDisplay);
-	display.add(itemDisplay);
-	items.put(item.getJID(), presenter);
-	itemDisplay.getAction().addClickHandler(new ClickHandler() {
-	    @Override
-	    public void onClick(final ClickEvent event) {
-		manager.open(item.getJID());
-	    }
-	});
-	itemDisplay.getMenuAction().addClickHandler(new ClickHandler() {
-	    @Override
-	    public void onClick(final ClickEvent event) {
-		event.preventDefault();
-		final Element element = event.getRelativeElement();
-		final int width = element.getClientWidth();
-		itemMenu.setTarget(item);
-		itemMenu.show(element.getAbsoluteLeft() - width, element.getAbsoluteTop());
-	    }
-	});
-	return presenter;
-    }
-
-    public PopupMenu<RosterItem> getItemMenu() {
+    @Override
+    public Menu<RosterItem> getItemMenu() {
 	return itemMenu;
     }
 
-    private RosterItemPresenter getPresenter(final RosterItem item) {
-	RosterItemPresenter presenter = items.get(item.getJID());
-	if (presenter == null) {
-	    presenter = createRosterItem(item);
-	}
-	presenter.setItem(item);
-	return presenter;
-    }
-
-    private void loadRoster(final Collection<RosterItem> items) {
-	GWT.log("ROSTER LOAD!");
-	for (final RosterItem item : items) {
-	    getPresenter(item);
+    private void loadRoster() {
+	GWT.log("LOAD ROSTER");
+	groups.clear();
+	final RosterGroupPresenter all = new RosterGroupPresenter("", itemMenu, display.newRosterGroupDisplay());
+	groups.put("", all);
+	display.addGroup(all);
+	for (final String groupName : roster.getGroups()) {
+	    final RosterGroupDisplay groupDisplay = display.newRosterGroupDisplay();
+	    final RosterGroupPresenter group = new RosterGroupPresenter(groupName, itemMenu, groupDisplay);
+	    groups.put(groupName, group);
+	    display.addGroup(group);
 	}
     }
 

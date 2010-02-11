@@ -22,7 +22,6 @@ public class HablarRoomManager {
     private final Hablar hablar;
     private final RoomPageFactory factory;
     private final HashMap<XmppURI, RoomPage> roomPages;
-    private final HablarRoomsConfig config;
 
     public HablarRoomManager(final Hablar hablar, final HablarRoomsConfig config) {
 	this(hablar, config, new RoomPageFactory() {
@@ -35,7 +34,6 @@ public class HablarRoomManager {
 
     public HablarRoomManager(final Hablar hablar, final HablarRoomsConfig config, final RoomPageFactory factory) {
 	this.hablar = hablar;
-	this.config = config;
 	this.factory = factory;
 	roomPages = new HashMap<XmppURI, RoomPage>();
 	final RoomManager rooms = Suco.get(RoomManager.class);
