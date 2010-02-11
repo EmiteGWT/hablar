@@ -10,6 +10,7 @@
 	<inherits name="com.calclab.emite.xep.muc.EmiteMUC" />
 	<inherits name='com.calclab.emite.browser.EmiteBrowser' />
 	<inherits name='com.calclab.hablar.core.HablarCore' />
+	<inherits name='com.calclab.hablar.chat.HablarChat' />
 	<inherits name='com.calclab.hablar.roster.HablarRoster' />
 	<source path="client" />
 	<entry-point class="com.calclab.hablar.groupchat.client.HablarGroupChat" />

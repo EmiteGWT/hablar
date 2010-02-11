@@ -9,7 +9,7 @@
 				<g:TextBox ui:field="roomName"></g:TextBox>
 			</p>
 			<div class="actions">
-				<g:Button ui:field="open">Open Chat</g:Button>
+				<g:Button ui:field="open">Open Room</g:Button>
 				<g:Button ui:field="cancel">Cancel</g:Button>
 			</div>
 		</div>

@@ -6,6 +6,7 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.xep.muc.client.RoomManager;
 import com.calclab.hablar.core.client.Hablar;
+import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.rooms.client.ui.RoomDisplay;
 import com.calclab.hablar.rooms.client.ui.RoomPage;
 import com.calclab.hablar.rooms.client.ui.RoomWidget;
@@ -43,6 +44,15 @@ public class HablarRoomManager {
 	    @Override
 	    public void onEvent(final Chat chat) {
 		createRoom(chat);
+	    }
+	});
+
+	rooms.onChatOpened(new Listener<Chat>() {
+	    @Override
+	    public void onEvent(final Chat chat) {
+		final RoomPage page = roomPages.get(chat.getURI());
+		assert page != null;
+		page.requestVisibility(Visibility.focused);
 	    }
 	});
     }
