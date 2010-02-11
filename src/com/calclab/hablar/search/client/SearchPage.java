@@ -22,7 +22,7 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
-public class SearchPresenter extends PagePresenter<SearchDisplay> {
+public class SearchPage extends PagePresenter<SearchDisplay> {
     public static final String ADD_ROSTER_MENU_DEB_ID = "SearchLogic-add-menu";
     public static final String REMOVE_ROSTER_MENU_DEB_ID = "SearchLogic-remove-menu";
     public static final String CHAT_DEB_ID = "SearchLogic-chat";
@@ -36,7 +36,7 @@ public class SearchPresenter extends PagePresenter<SearchDisplay> {
     private PopupMenuView<SearchResultItemPresenter> addToRosterMenu;
     private PopupMenuView<SearchResultItemPresenter> removeFromRosterMenu;
 
-    public SearchPresenter(HablarEventBus eventBus, SearchWidget display) {
+    public SearchPage(HablarEventBus eventBus, SearchWidget display) {
 	super("HablarSearch", "" + (++index), eventBus, display);
 	manager = Suco.get(SearchManager.class);
 	roster = Suco.get(Roster.class);

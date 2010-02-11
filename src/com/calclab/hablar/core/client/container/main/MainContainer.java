@@ -27,12 +27,12 @@ public class MainContainer implements PagesContainer {
 
     private final HashMap<Page<?>, PageAndHead> pages;
 
-    private final MainLayout layout;
+    private final MainLayout display;
 
     protected Page<?> focusedPage;
 
     public MainContainer(HablarEventBus eventBus, MainLayout layout) {
-	this.layout = layout;
+	this.display = layout;
 	this.pages = new HashMap<Page<?>, PageAndHead>();
 	eventBus.addHandler(VisibilityChangeRequestEvent.TYPE, new VisibilityChangeRequestHandler() {
 	    @Override
@@ -48,7 +48,7 @@ public class MainContainer implements PagesContainer {
 
     @Override
     public boolean add(Page<?> page) {
-	HeaderDisplay headerDisplay = layout.createHeaderDisplay(page);
+	HeaderDisplay headerDisplay = display.createHeaderDisplay(page);
 	HeaderPresenter header = new HeaderPresenter(page, headerDisplay);
 	Widget pageWidget = page.getDisplay().asWidget();
 	Widget headWidget = header.getDisplay().asWidget();
@@ -57,10 +57,10 @@ public class MainContainer implements PagesContainer {
 	Visibility initialVisibility = page.getVisibility();
 	if (initialVisibility == Visibility.hidden) {
 	} else if (initialVisibility == Visibility.focused) {
-	    layout.add(pageWidget, headWidget);
+	    display.add(pageWidget, headWidget);
 	    focus(page);
 	} else if (initialVisibility == Visibility.notFocused) {
-	    layout.add(pageWidget, headWidget);
+	    display.add(pageWidget, headWidget);
 	    if (focusedPage == null) {
 		// first page, can't be notFocused
 		focus(page);
@@ -78,13 +78,17 @@ public class MainContainer implements PagesContainer {
 
     @Override
     public Widget getWidget() {
-	return layout.getWidget();
+	return display.getWidget();
     }
 
-    public boolean hide(Page<?> page) {
+    protected boolean hide(Page<?> page) {
 	PageAndHead widgets = getWidgets(page);
 	if (widgets != null) {
-	    // ((HasWidgets) container).remove(widgets.pageWidget);
+	    display.remove(widgets.pageWidget);
+	    page.setVisibility(Visibility.hidden);
+	    if (page == focusedPage) {
+		focusedPage = null;
+	    }
 	    return true;
 	}
 	return false;
@@ -111,14 +115,13 @@ public class MainContainer implements PagesContainer {
 	if (widgets != null) {
 	    if (page != focusedPage) {
 		unfocus(focusedPage);
-		if (page.getState().getVisibility() == Visibility.hidden) {
-		    layout.add(widgets.pageWidget, widgets.headWidget);
+		if (page.getVisibility() == Visibility.hidden) {
+		    display.add(widgets.pageWidget, widgets.headWidget);
 		}
-		if (page.getVisibility() != Visibility.focused)
-		    page.setVisibility(Visibility.focused);
+		page.setVisibility(Visibility.focused);
 		focusedPage = page;
 	    }
-	    layout.focus(widgets.pageWidget);
+	    display.focus(widgets.pageWidget);
 	}
     }
 

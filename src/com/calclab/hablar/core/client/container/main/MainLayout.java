@@ -27,4 +27,6 @@ public abstract class MainLayout {
 	return container;
     }
 
+    public abstract void remove(Widget pageWidget);
+
 }

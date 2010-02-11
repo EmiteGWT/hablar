@@ -12,12 +12,12 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class UserContainer implements PagesContainer {
     public static final String ROL = "User";
-    private final ArrayList<UserPage<?>> pages;
-    private final UserPresenter userPage;
+    private final ArrayList<EditorPage<?>> pages;
+    private final UserPage userPage;
 
-    public UserContainer(HablarEventBus eventBus, final UserPresenter userPage) {
+    public UserContainer(HablarEventBus eventBus, final UserPage userPage) {
 	this.userPage = userPage;
-	this.pages = new ArrayList<UserPage<?>>();
+	this.pages = new ArrayList<EditorPage<?>>();
 
 	eventBus.addHandler(VisibilityChangedEvent.TYPE, new VisibilityChangedHandler() {
 	    @Override
@@ -31,7 +31,7 @@ public class UserContainer implements PagesContainer {
 
     @Override
     public boolean add(Page<?> page) {
-	UserPage<?> toAdd = (UserPage<?>) page;
+	EditorPage<?> toAdd = (EditorPage<?>) page;
 	userPage.addPage(toAdd);
 	pages.add(toAdd);
 	page.setVisibility(Visibility.hidden);
@@ -62,17 +62,17 @@ public class UserContainer implements PagesContainer {
 
     protected void userPageVisibilityChanged(Visibility visibility) {
 	if (visibility == Visibility.notFocused) {
-	    for (UserPage<?> page : pages) {
+	    for (EditorPage<?> page : pages) {
 		page.setVisibility(Visibility.hidden);
-		page.afterClosed();
+		page.saveData();
 	    }
-	    userPage.afterClosed();
+	    userPage.saveData();
 	} else if (visibility == Visibility.focused) {
-	    for (UserPage<?> page : pages) {
+	    for (EditorPage<?> page : pages) {
 		page.setVisibility(Visibility.focused);
-		page.beforeOpen();
+		page.showData();
 	    }
-	    userPage.beforeOpen();
+	    userPage.showData();
 	}
     }
 

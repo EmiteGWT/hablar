@@ -14,7 +14,7 @@ import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
-import com.calclab.hablar.roster.client.RosterPresenter;
+import com.calclab.hablar.roster.client.RosterPage;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -22,22 +22,23 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 
-public class ChatPresenter extends PagePresenter<ChatDisplay> {
+public class ChatPage extends PagePresenter<ChatDisplay> {
     public static final String TYPE = "Chat";
 
     public static String createId(String uri) {
 	return uri.replace("@", "-").replace("/", "-");
     }
 
-    public ChatPresenter(HablarEventBus eventBus, final Chat chat, final ChatDisplay display) {
+    public ChatPage(HablarEventBus eventBus, final Chat chat, final ChatDisplay display) {
 	super(TYPE, createId(chat.getURI().toString()), eventBus, display);
 	display.setId(getId());
 	final XmppURI fromURI = chat.getURI();
 	final String name = getName(fromURI);
 
-	getState().setPageTitle(name);
-	getState().setPageIcon(HablarIcons.get(IconType.buddyOff));
-	getState().setCloseable(true);
+	model.init(HablarIcons.get(IconType.buddyOff), name);
+	setVisibility(Visibility.notFocused);
+	model.setCloseable(true);
+	
 	chat.onMessageReceived(new Listener<Message>() {
 	    @Override
 	    public void onEvent(final Message message) {
@@ -78,7 +79,7 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> {
     /**
      * Add a action button to this chat panel
      * 
-     * @see RosterPresenter.addAction
+     * @see RosterPage.addAction
      */
     // FIXME
     public void addAction() {

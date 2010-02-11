@@ -31,5 +31,10 @@ public class TabsLayout extends MainLayout {
     public void focus(Widget pageWidget) {
 	tabs.selectTab(pageWidget);
     }
+    
+    @Override
+    public void remove(Widget pageWidget) {
+	tabs.remove(pageWidget);
+    }
 
 }

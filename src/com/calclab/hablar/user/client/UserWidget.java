@@ -24,7 +24,7 @@ public class UserWidget extends Composite implements UserDisplay {
     }
 
     @Override
-    public void addPage(UserPage<?> page) {
+    public void addPage(EditorPage<?> page) {
 	HeaderPresenter head = new HeaderPresenter(page, new AccordionHeaderWidget(page.getId()));
 	container.add(head.getDisplay().asWidget());
 	container.add(page.getDisplay().asWidget());

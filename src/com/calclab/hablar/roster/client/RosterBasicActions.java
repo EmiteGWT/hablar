@@ -7,7 +7,7 @@ import com.calclab.suco.client.Suco;
 
 public class RosterBasicActions {
 
-    public RosterBasicActions(RosterPresenter rosterPage) {
+    public RosterBasicActions(RosterPage rosterPage) {
 	final Roster roster = Suco.get(Roster.class);
 	String id = "HablarRoster-removeAction";
 	rosterPage.getItemMenu().addAction(new MenuAction<RosterItem>("Remove from roster", id) {

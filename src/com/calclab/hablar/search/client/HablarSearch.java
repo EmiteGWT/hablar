@@ -8,7 +8,7 @@ import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
-import com.calclab.hablar.roster.client.RosterPresenter;
+import com.calclab.hablar.roster.client.RosterPage;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -21,8 +21,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 public class HablarSearch implements EntryPoint {
 
     public static void install(Hablar hablar) {
-	final SearchPresenter search = new SearchPresenter(hablar.getEventBus(), new SearchWidget());
-	List<Page<?>> rosters = hablar.getPagesOfType(RosterPresenter.TYPE);
+	final SearchPage search = new SearchPage(hablar.getEventBus(), new SearchWidget());
+	List<Page<?>> rosters = hablar.getPagesOfType(RosterPage.TYPE);
 	boolean visible = rosters.size() == 0;
 	Visibility visibility = visible ? Visibility.notFocused : Visibility.hidden;
 	search.setVisibility(visibility);
@@ -33,7 +33,7 @@ public class HablarSearch implements EntryPoint {
 	String debugId = "HablarLogic-searchAction";
 
 	for (Page<?> roster : rosters) {
-	    ((RosterPresenter) roster).addAction(iconStyle, debugId, new ClickHandler() {
+	    ((RosterPage) roster).addAction(iconStyle, debugId, new ClickHandler() {
 		@Override
 		public void onClick(ClickEvent event) {
 		    GWT.log("Show search", null);

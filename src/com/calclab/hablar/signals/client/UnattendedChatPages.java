@@ -2,7 +2,7 @@ package com.calclab.hablar.signals.client;
 
 import java.util.HashSet;
 
-import com.calclab.hablar.chat.client.ui.ChatPresenter;
+import com.calclab.hablar.chat.client.ui.ChatPage;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
@@ -63,7 +63,7 @@ public class UnattendedChatPages {
     }
 
     private final boolean isChatPage(final Page<?> page) {
-	return page.getType() == ChatPresenter.TYPE;
+	return page.getType() == ChatPage.TYPE;
     }
 
     private void onChatVisibilityChanged(Page<?> page) {

@@ -70,23 +70,32 @@
 
 .hablar-Header .close {
 	float: right;
+}
+
+.hablar-AccordionHeaderWidget .close {
 	margin: -16px 3px 0 0;
+}
+.hablar-TabsHeaderWidget .close {
+	margin: 2px 3px;
+}
+.hablar-AccordionHeader .close {
+	margin: 2px 3px 0 0;
 }
 
 .hablar-AccordionHeader .icon {
+	
 }
+
 .hablar-AccordionHeader .title {
 	display: block;
 }
 
-.hablar-AccordionHeader .close {
-	   margin: 2px 3px 0 0;
-}
 
 .hablar-AccordionHeaderWidget.notFocused {
 	border-top: 1px solid #E9E9E9;
 	border-bottom: 1px solid #BBB;
 }
+
 
 .hablar-AccordionHeaderWidget.focused {
 	border-top: 1px solid white;
@@ -99,18 +108,18 @@
 }
 
 .hablar-TabsHeaderWidget.notFocused {
-    border-top: 1px solid #E9E9E9;
-    border-left: 1px solid #BBB;
-    border-right: 1px solid #BBB;
-    border-bottom: 1px solid #BBB;
-    margin-right: -1px;
+	border-top: 1px solid #E9E9E9;
+	border-left: 1px solid #BBB;
+	border-right: 1px solid #BBB;
+	border-bottom: 1px solid #BBB;
+	margin-right: -1px;
 }
 
 .hablar-TabsHeaderWidget.focused {
-    border-top: 1px solid white;
-    border-left: 1px solid white;
-    border-right: 1px solid white;
-    border-bottom: 1px solid #E9E9E9;
+	border-top: 1px solid white;
+	border-left: 1px solid white;
+	border-right: 1px solid white;
+	border-bottom: 1px solid #E9E9E9;
 }
 
 /** DOCKS **/
@@ -152,12 +161,12 @@
 	margin-top: 15px;
 }
 
-.hablar-UserWidget .hablar-Header.focused, .hablar-UserWidget .hablar-Header.notFocused  {
-    background-color: #BBB;
-    border-bottom: 1px solid #EFEFEF;
-    border-top: 1px solid #BBB;
+.hablar-UserWidget .hablar-Header.focused,.hablar-UserWidget .hablar-Header.notFocused
+	{
+	background-color: #BBB;
+	border-bottom: 1px solid #EFEFEF;
+	border-top: 1px solid #BBB;
 }
-
 
 /** ROSTER **/
 .hablar-RosterWidget .item {
@@ -178,6 +187,7 @@
 }
 
 .hablar-RosterWidget .actions div.gwt-Label:hover {
+	
 }
 
 div.hablar-RosterItemWidget:hover {
@@ -256,6 +266,29 @@ div.hablar-RosterItemWidget:hover {
 
 .hablar-Search .gwt-Button {
 	width: 20%;
+}
+
+/** LOGGER **/
+.hablar-Logger {
+	border: 3px solid #E9E9E9;
+}
+
+.hablar-Logger .gwt-Label {
+	border-bottom: 1px solid #E9E9E9;
+	background-color: white;
+	opacity: 0.5;
+}
+
+.hablar-Logger .gwt-Label.ready {
+	opacity: 1;
+}
+
+.hablar-Logger .output {
+	color: blue;
+}
+
+.hablar-Logger .input {
+	color: #0c0;
 }
 
 /** OVERLAY **/

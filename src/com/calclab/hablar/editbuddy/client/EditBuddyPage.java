@@ -18,14 +18,14 @@ import com.google.gwt.event.dom.client.ClickHandler;
 /**
  * Presenter in MVP pattern. Controls the EditBuddy form
  */
-public class EditBuddyPresenter extends PagePresenter<EditBuddyDisplay> {
+public class EditBuddyPage extends PagePresenter<EditBuddyDisplay> {
     private static int index = 0;
     protected static final String[] EMPTY_ARRAY = new String[0];
     private final MenuAction<RosterItem> action;
     private final Roster roster;
     private RosterItem currentItem;
 
-    public EditBuddyPresenter(HablarEventBus eventBus, EditBuddyDisplay display) {
+    public EditBuddyPage(HablarEventBus eventBus, EditBuddyDisplay display) {
 	super("EditButty", "" + (++index), eventBus, display);
 	roster = Suco.get(Roster.class);
 

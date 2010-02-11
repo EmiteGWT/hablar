@@ -4,5 +4,5 @@ import com.calclab.hablar.core.client.mvp.Display;
 
 public interface UserDisplay extends Display {
 
-    void addPage(UserPage<?> page);
+    void addPage(EditorPage<?> page);
 }

@@ -10,7 +10,7 @@ import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.chat.client.ui.ChatDisplay;
-import com.calclab.hablar.chat.client.ui.ChatPresenter;
+import com.calclab.hablar.chat.client.ui.ChatPage;
 import com.calclab.hablar.chat.client.ui.ChatWidget;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
@@ -23,7 +23,7 @@ public class ChatManagerController {
 
 	ChatDisplay create(boolean sendButtonVisible);
     }
-    private final HashMap<XmppURI, ChatPresenter> chatPages;
+    private final HashMap<XmppURI, ChatPage> chatPages;
 
     private final Roster roster;
     private final ChatPageFactory factory;
@@ -43,7 +43,7 @@ public class ChatManagerController {
     public ChatManagerController(Hablar hablarPresenter, ChatConfig config, ChatPageFactory factory) {
 	this.hablarPresenter = hablarPresenter;
 	this.factory = factory;
-	this.chatPages = new HashMap<XmppURI, ChatPresenter>();
+	this.chatPages = new HashMap<XmppURI, ChatPage>();
 
 	roster = Suco.get(Roster.class);
 	final ChatManager chatManager = Suco.get(ChatManager.class);
@@ -62,7 +62,7 @@ public class ChatManagerController {
 	chatManager.onChatOpened(new Listener<Chat>() {
 	    @Override
 	    public void onEvent(Chat chat) {
-		ChatPresenter page = chatPages.get(chat.getURI());
+		ChatPage page = chatPages.get(chat.getURI());
 		assert page != null;
 		page.requestVisibility(Visibility.focused);
 	    }
@@ -73,7 +73,7 @@ public class ChatManagerController {
 		Set<XmppURI> chats = chatPages.keySet();
 		for (XmppURI chatURI : chats) {
 		    if (chatURI.equalsNoResource(jid)) {
-			ChatPresenter page = chatPages.get(chatURI);
+			ChatPage page = chatPages.get(chatURI);
 			page.setPresence(item.isAvailable(), item.getShow());
 		    }
 		}
@@ -86,7 +86,7 @@ public class ChatManagerController {
 
     private void createChat(Chat chat, Visibility visibility) {
 	ChatDisplay display = factory.create(sendButtonVisible);
-	ChatPresenter presenter = new ChatPresenter(hablarPresenter.getEventBus(), chat, display);
+	ChatPage presenter = new ChatPage(hablarPresenter.getEventBus(), chat, display);
 	chatPages.put(chat.getURI(), presenter);
 	hablarPresenter.addPage(presenter);
 

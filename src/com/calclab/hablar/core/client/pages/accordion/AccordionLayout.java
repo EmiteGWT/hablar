@@ -28,4 +28,9 @@ public class AccordionLayout extends MainLayout {
     public void focus(Widget pageWidget) {
 	accordion.showWidget(pageWidget);
     }
+
+    @Override
+    public void remove(Widget pageWidget) {
+	accordion.remove(pageWidget);
+    }
 }

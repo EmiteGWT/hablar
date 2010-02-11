@@ -7,7 +7,7 @@ import com.google.gwt.core.client.EntryPoint;
 public class HablarVCard implements EntryPoint {
 
     public static void install(Hablar hablar) {
-	VCardPresenter vcardPage = new VCardPresenter(hablar.getEventBus(), new VCardWidget());
+	VCardPage vcardPage = new VCardPage(hablar.getEventBus(), new VCardWidget());
 	hablar.addPage(vcardPage, UserContainer.ROL);
     }
 

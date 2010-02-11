@@ -49,7 +49,7 @@ public interface Hablar extends Presenter<HablarDisplay> {
      */
     public void addPage(Page<?> page, String containerRol);
 
-    public void addPageAddedHandler(PageAddedHandler handler);
+    public void addPageAddedHandler(PageAddedHandler handler, boolean fireAlreadyAdded);
 
     public PagesContainer getContainer(String rol);
 

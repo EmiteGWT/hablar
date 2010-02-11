@@ -14,11 +14,11 @@ import com.calclab.suco.client.events.Listener;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
-public class LoginPresenter extends PagePresenter<LoginDisplay> {
+public class LoginPage extends PagePresenter<LoginDisplay> {
     private static int index = 0;
     private final Session session;
 
-    public LoginPresenter(HablarEventBus eventBus, LoginDisplay display) {
+    public LoginPage(HablarEventBus eventBus, LoginDisplay display) {
 	super("Login", "" + (++index), eventBus, display);
 	this.session = Suco.get(Session.class);
 	getState().setPageIcon(HablarIcons.get(IconType.off));

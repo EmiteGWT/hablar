@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.calclab.hablar.core.client.HablarDisplay.Layout;
 import com.calclab.hablar.core.client.container.ContainerAggregator;
+import com.calclab.hablar.core.client.container.PageAddedEvent;
 import com.calclab.hablar.core.client.container.PageAddedHandler;
 import com.calclab.hablar.core.client.container.PagesContainer;
 import com.calclab.hablar.core.client.container.overlay.OverlayContainer;
@@ -50,8 +51,14 @@ public class HablarPresenter implements Hablar {
     }
 
     @Override
-    public void addPageAddedHandler(PageAddedHandler handler) {
+    public void addPageAddedHandler(PageAddedHandler handler, boolean fireAlreadyAdded) {
 	aggregator.addPageAddedHandler(handler);
+	if (fireAlreadyAdded) {
+	    for (Page<?> page : aggregator.getPages()) {
+		handler.onPageAdded(new PageAddedEvent(page, null));
+	    }
+	}
+	    
     }
 
     @Override
