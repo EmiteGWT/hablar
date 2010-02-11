@@ -1,42 +1,40 @@
-package com.calclab.hablar.chat.client.ui;
+package com.calclab.hablar.rooms.client.ui;
 
 import static com.calclab.hablar.core.client.i18n.Translator.i18n;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
-import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
-import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.chat.Chat.State;
-import com.calclab.emite.im.client.roster.Roster;
-import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.hablar.chat.client.ui.ChatDisplay;
+import com.calclab.hablar.chat.client.ui.ChatMessageFormatter;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
-import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
-import com.calclab.hablar.core.client.ui.menu.Action;
-import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 
-public class ChatPage extends PagePresenter<ChatDisplay> {
-    public static final String TYPE = "Chat";
+public class RoomPage extends PagePresenter<RoomDisplay> {
+    private static final String TYPE = "Room";
+    private static int id = 0;
 
-    public static String createId(String uri) {
-	return uri.replace("@", "-").replace("/", "-");
+    public static RoomPage asRoom(final Page<?> page) {
+	if (RoomPage.TYPE.equals(page.getType())) {
+	    return (RoomPage) page;
+	}
+	return null;
     }
 
-    public ChatPage(HablarEventBus eventBus, final Chat chat, final ChatDisplay display) {
-	super(TYPE, createId(chat.getURI().toString()), eventBus, display);
+    public RoomPage(final HablarEventBus eventBus, final Chat chat, final RoomDisplay display) {
+	super(TYPE, "" + ++id, eventBus, display);
 	display.setId(getId());
-	final XmppURI fromURI = chat.getURI();
-	final String name = getName(fromURI);
 
-	model.init(HablarIcons.get(IconType.buddyOff), name);
+	final String name = chat.getURI().getNode();
+	model.init(HablarIcons.get(IconType.roster), name);
 	setVisibility(Visibility.notFocused);
 	model.setCloseable(true);
 
@@ -60,14 +58,14 @@ public class ChatPage extends PagePresenter<ChatDisplay> {
 
 	display.getAction().addClickHandler(new ClickHandler() {
 	    @Override
-	    public void onClick(ClickEvent event) {
+	    public void onClick(final ClickEvent event) {
 		sendMessage(chat, display);
 	    }
 
 	});
 	display.getTextBox().addKeyDownHandler(new KeyDownHandler() {
 	    @Override
-	    public void onKeyDown(KeyDownEvent event) {
+	    public void onKeyDown(final KeyDownEvent event) {
 		if (event.getNativeKeyCode() == 13) {
 		    event.stopPropagation();
 		    event.preventDefault();
@@ -75,35 +73,11 @@ public class ChatPage extends PagePresenter<ChatDisplay> {
 		}
 	    }
 	});
-    }
 
-    public void addAction(final Action<ChatPage> action) {
-	display.createAction(action).addClickHandler(new ClickHandler() {
-	    @Override
-	    public void onClick(ClickEvent event) {
-		action.execute(ChatPage.this);
-	    }
-	});
-    }
-
-    public void setPresence(boolean available, Show show) {
-	getState().setPageIcon(PresenceIcon.getIcon(available, show));
-    }
-
-    private String getName(final XmppURI fromURI) {
-	final String name;
-	Roster roster = Suco.get(Roster.class);
-	RosterItem itemByJID = roster.getItemByJID(fromURI);
-	if (itemByJID != null) {
-	    name = itemByJID.getName();
-	} else {
-	    name = fromURI.getShortName();
-	}
-	return name;
     }
 
     private void sendMessage(final Chat chat, final ChatDisplay display) {
-	String text = display.getBody().getText().trim();
+	final String text = display.getBody().getText().trim();
 	if (!text.isEmpty()) {
 	    final String body = ChatMessageFormatter.format(text);
 	    display.showMessage("me", body, ChatDisplay.MessageType.sent);
@@ -115,13 +89,6 @@ public class ChatPage extends PagePresenter<ChatDisplay> {
     private void setState(final State state) {
 	final boolean visible = state == State.ready;
 	display.setControlsVisible(visible);
-    }
-
-    public static ChatPage asChat(Page<?> page) {
-	if (ChatPage.TYPE.equals(page.getType())) {
-	    return (ChatPage) page;
-	}
-	return null;
     }
 
 }

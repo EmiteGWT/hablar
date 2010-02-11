@@ -17,7 +17,7 @@ import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 
-public class ChatManagerController {
+public class HablarChatManager {
 
     public static interface ChatPageFactory {
 
@@ -29,21 +29,21 @@ public class ChatManagerController {
     private final ChatPageFactory factory;
     private final boolean sendButtonVisible;
 
-    private final Hablar hablarPresenter;
+    private final Hablar hablar;
 
-    public ChatManagerController(Hablar hablarPresenter, ChatConfig config) {
-	this(hablarPresenter, config, new ChatPageFactory() {
+    public HablarChatManager(final Hablar hablar, final ChatConfig config) {
+	this(hablar, config, new ChatPageFactory() {
 	    @Override
-	    public ChatDisplay create(boolean sendButtonVisible) {
+	    public ChatDisplay create(final boolean sendButtonVisible) {
 		return new ChatWidget(sendButtonVisible);
 	    }
 	});
     }
 
-    public ChatManagerController(Hablar hablarPresenter, ChatConfig config, ChatPageFactory factory) {
-	this.hablarPresenter = hablarPresenter;
+    public HablarChatManager(final Hablar hablarPresenter, final ChatConfig config, final ChatPageFactory factory) {
+	hablar = hablarPresenter;
 	this.factory = factory;
-	this.chatPages = new HashMap<XmppURI, ChatPage>();
+	chatPages = new HashMap<XmppURI, ChatPage>();
 
 	roster = Suco.get(Roster.class);
 	final ChatManager chatManager = Suco.get(ChatManager.class);
@@ -54,26 +54,26 @@ public class ChatManagerController {
 
 	chatManager.onChatCreated(new Listener<Chat>() {
 	    @Override
-	    public void onEvent(Chat chat) {
+	    public void onEvent(final Chat chat) {
 		createChat(chat, Visibility.notFocused);
 	    }
 	});
 
 	chatManager.onChatOpened(new Listener<Chat>() {
 	    @Override
-	    public void onEvent(Chat chat) {
-		ChatPage page = chatPages.get(chat.getURI());
+	    public void onEvent(final Chat chat) {
+		final ChatPage page = chatPages.get(chat.getURI());
 		assert page != null;
 		page.requestVisibility(Visibility.focused);
 	    }
 	});
 	roster.onItemChanged(new Listener<RosterItem>() {
-	    public void onEvent(RosterItem item) {
-		XmppURI jid = item.getJID();
-		Set<XmppURI> chats = chatPages.keySet();
-		for (XmppURI chatURI : chats) {
+	    public void onEvent(final RosterItem item) {
+		final XmppURI jid = item.getJID();
+		final Set<XmppURI> chats = chatPages.keySet();
+		for (final XmppURI chatURI : chats) {
 		    if (chatURI.equalsNoResource(jid)) {
-			ChatPage page = chatPages.get(chatURI);
+			final ChatPage page = chatPages.get(chatURI);
 			page.setPresence(item.isAvailable(), item.getShow());
 		    }
 		}
@@ -84,15 +84,15 @@ public class ChatManagerController {
 
     }
 
-    private void createChat(Chat chat, Visibility visibility) {
-	ChatDisplay display = factory.create(sendButtonVisible);
-	ChatPage presenter = new ChatPage(hablarPresenter.getEventBus(), chat, display);
+    private void createChat(final Chat chat, final Visibility visibility) {
+	final ChatDisplay display = factory.create(sendButtonVisible);
+	final ChatPage presenter = new ChatPage(hablar.getEventBus(), chat, display);
 	chatPages.put(chat.getURI(), presenter);
-	hablarPresenter.addPage(presenter);
+	hablar.addPage(presenter);
 
-	RosterItem item = roster.getItemByJID(chat.getURI().getJID());
-	Show show = item != null ? item.getShow() : Show.unknown;
-	boolean available = item != null ? item.isAvailable() : false;
+	final RosterItem item = roster.getItemByJID(chat.getURI().getJID());
+	final Show show = item != null ? item.getShow() : Show.unknown;
+	final boolean available = item != null ? item.isAvailable() : false;
 	presenter.setPresence(available, show);
     }
 

@@ -20,8 +20,8 @@ public class PopupMenu<T> extends PopupPanel implements PopupMenuView<T> {
     }
 
     @Override
-    public void addAction(final MenuAction<T> action) {
-	final MenuItem addedItem = bar.addItem(action.getHTML(), true, new Command() {
+    public void addAction(final Action<T> action) {
+	final MenuItem addedItem = bar.addItem(action.getName(), true, new Command() {
 	    @Override
 	    public void execute() {
 		PopupMenu.this.hide();

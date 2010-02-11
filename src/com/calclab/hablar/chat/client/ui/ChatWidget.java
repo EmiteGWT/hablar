@@ -2,6 +2,7 @@ package com.calclab.hablar.chat.client.ui;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
+import com.calclab.hablar.core.client.ui.menu.Action;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
@@ -11,6 +12,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextArea;
@@ -28,7 +30,7 @@ public class ChatWidget extends Composite implements ChatDisplay {
     @UiField
     LayoutPanel page;
     @UiField
-    FlowPanel list, controls;
+    FlowPanel list, controls, actions;
     @UiField
     ScrollPanel scroll;
     @UiField
@@ -93,6 +95,14 @@ public class ChatWidget extends Composite implements ChatDisplay {
 	final ChatMessage message = new ChatMessage(name, body, messageType);
 	list.add(message);
 	scroll.ensureVisible(message);
+    }
+
+    @Override
+    public HasClickHandlers createAction(Action<ChatPage> action) {
+	Label label = new Label();
+	label.addStyleName(action.getIconStyle());
+	actions.add(label);
+	return label;
     }
 
 }

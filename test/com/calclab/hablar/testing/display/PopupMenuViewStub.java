@@ -1,12 +1,12 @@
 package com.calclab.hablar.testing.display;
 
-import com.calclab.hablar.core.client.ui.menu.MenuAction;
+import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.PopupMenuView;
 
 public class PopupMenuViewStub<T> implements PopupMenuView<T> {
 
     @Override
-    public void addAction(MenuAction<T> action) {
+    public void addAction(Action<T> action) {
 
     }
 

@@ -256,6 +256,11 @@ div.hablar-RosterItemWidget:hover {
 	float: left;
 }
 
+.hablar-ChatWidget .actions div {
+	float: right;
+}
+
+
 /** SEARCH PAGE **/
 .hablar-Search .searchBox {
 	width: 78%;

@@ -11,7 +11,7 @@ public class HablarChat implements EntryPoint {
     }
 
     public static void install(Hablar hablarPresenter, ChatConfig config) {
-	new ChatManagerController(hablarPresenter, config);
+	new HablarChatManager(hablarPresenter, config);
     }
 
     public static void install(HablarWidget widget) {

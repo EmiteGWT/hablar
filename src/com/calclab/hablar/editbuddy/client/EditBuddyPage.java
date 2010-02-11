@@ -6,7 +6,7 @@ import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
-import com.calclab.hablar.core.client.ui.menu.MenuAction;
+import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.editbuddy.client.ui.EditBuddyDisplay;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.core.client.GWT;
@@ -21,7 +21,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 public class EditBuddyPage extends PagePresenter<EditBuddyDisplay> {
     private static int index = 0;
     protected static final String[] EMPTY_ARRAY = new String[0];
-    private final MenuAction<RosterItem> action;
+    private final Action<RosterItem> action;
     private final Roster roster;
     private RosterItem currentItem;
 
@@ -29,7 +29,7 @@ public class EditBuddyPage extends PagePresenter<EditBuddyDisplay> {
 	super("EditButty", "" + (++index), eventBus, display);
 	roster = Suco.get(Roster.class);
 
-	this.action = new MenuAction<RosterItem>(i18n().changeNickName(), "EditBuddy-editAction") {
+	this.action = new Action<RosterItem>(i18n().changeNickName(), "EditBuddy-editAction") {
 	    @Override
 	    public void execute(RosterItem target) {
 		showEditBuddyPanel(target);
@@ -38,7 +38,7 @@ public class EditBuddyPage extends PagePresenter<EditBuddyDisplay> {
 	bind();
     }
 
-    public MenuAction<RosterItem> getAction() {
+    public Action<RosterItem> getAction() {
 	return action;
     }
 

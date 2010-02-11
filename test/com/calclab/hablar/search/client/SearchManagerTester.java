@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.calclab.emite.core.client.xmpp.session.ResultListener;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
+import com.calclab.emite.xep.dataforms.client.Form;
 import com.calclab.emite.xep.search.client.SearchFields;
 import com.calclab.emite.xep.search.client.SearchManager;
 import com.calclab.emite.xep.search.client.SearchResultItem;
@@ -41,6 +42,16 @@ public class SearchManagerTester implements SearchManager {
     @Override
     public void setHost(XmppURI host) {
 	this.host = host;
+    }
+
+    @Override
+    public void requestSearchForm(ResultListener<Form> listener) {
+
+    }
+
+    @Override
+    public void search(Form searchForm, ResultListener<Form> listener) {
+
     }
 
 }

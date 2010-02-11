@@ -13,6 +13,8 @@
     <inherits name='com.calclab.hablar.vcard.HablarVCard' />
     <inherits name='com.calclab.hablar.groupchat.HablarGroupChat' />
     <inherits name='com.calclab.hablar.logger.HablarLogger' />
+    <inherits name='com.calclab.hablar.rooms.HablarRooms' />
+    <inherits name='com.calclab.hablar.openroom.HablarOpenRoom' />
 	
 	<!-- <inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
 	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->

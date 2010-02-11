@@ -1,0 +1,17 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:HTMLPanel styleName="hablar-OpenChatWidget">
+		<div class="form">
+			<h2>Open a new instant room</h2>
+			<p>
+				<label>Room name:</label>
+				<g:TextBox ui:field="roomName"></g:TextBox>
+			</p>
+			<div class="actions">
+				<g:Button ui:field="open">Open Chat</g:Button>
+				<g:Button ui:field="cancel">Cancel</g:Button>
+			</div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

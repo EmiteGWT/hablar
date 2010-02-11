@@ -13,7 +13,7 @@ import com.calclab.emite.xep.search.client.SearchResultItem;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
-import com.calclab.hablar.core.client.ui.menu.MenuAction;
+import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.PopupMenuView;
 import com.calclab.hablar.search.client.SearchDisplay.Level;
 import com.calclab.suco.client.Suco;
@@ -64,14 +64,14 @@ public class SearchPage extends PagePresenter<SearchDisplay> {
 
     private void createMenus() {
 	addToRosterMenu = display.createMenu(ADD_ROSTER_MENU_DEB_ID);
-	addToRosterMenu.addAction(new MenuAction<SearchResultItemPresenter>(i18n().addToContacts(),
+	addToRosterMenu.addAction(new Action<SearchResultItemPresenter>(i18n().addToContacts(),
 		ADD_ROSTERITEM_DEB_ID) {
 	    @Override
 	    public void execute(final SearchResultItemPresenter target) {
 		onResultToRoster(target);
 	    }
 	});
-	addToRosterMenu.addAction(new MenuAction<SearchResultItemPresenter>(i18n().chat(), CHAT_DEB_ID) {
+	addToRosterMenu.addAction(new Action<SearchResultItemPresenter>(i18n().chat(), CHAT_DEB_ID) {
 	    @Override
 	    public void execute(final SearchResultItemPresenter target) {
 		onChatWith(target);
@@ -79,14 +79,14 @@ public class SearchPage extends PagePresenter<SearchDisplay> {
 	});
 
 	removeFromRosterMenu = display.createMenu(REMOVE_ROSTER_MENU_DEB_ID);
-	removeFromRosterMenu.addAction(new MenuAction<SearchResultItemPresenter>("Remove from roster",
+	removeFromRosterMenu.addAction(new Action<SearchResultItemPresenter>("Remove from roster",
 		REMOVE_ROSTERITEM_DEB_ID) {
 	    @Override
 	    public void execute(final SearchResultItemPresenter target) {
 		onRemoveFromRoster(target);
 	    }
 	});
-	removeFromRosterMenu.addAction(new MenuAction<SearchResultItemPresenter>("Chat", CHAT_DEB_ID) {
+	removeFromRosterMenu.addAction(new Action<SearchResultItemPresenter>("Chat", CHAT_DEB_ID) {
 	    @Override
 	    public void execute(final SearchResultItemPresenter target) {
 		onChatWith(target);

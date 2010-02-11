@@ -11,6 +11,8 @@ import com.calclab.hablar.groupchat.client.HablarGroupChat;
 import com.calclab.hablar.logger.client.HablarLogger;
 import com.calclab.hablar.login.client.HablarLogin;
 import com.calclab.hablar.openchat.client.HablarOpenChat;
+import com.calclab.hablar.openroom.client.HablarOpenRoom;
+import com.calclab.hablar.rooms.client.HablarRooms;
 import com.calclab.hablar.roster.client.HablarRoster;
 import com.calclab.hablar.roster.client.RosterPage;
 import com.calclab.hablar.search.client.HablarSearch;
@@ -21,13 +23,12 @@ import com.calclab.hablar.vcard.client.HablarVCard;
 
 public class HablarComplete {
 
-    public static void install(Hablar hablar, HablarConfig config) {
+    public static void install(final Hablar hablar, final HablarConfig config) {
 	HablarChat.install(hablar);
+	HablarRooms.install(hablar);
 	HablarGroupChat.install(hablar);
 
-
-	
-	DockConfig dock = new DockConfig();
+	final DockConfig dock = new DockConfig();
 	dock.set(Position.top, UserPage.TYPE, 24);
 	if ("left".equals(config.dockRoster)) {
 	    dock.set(Position.left, RosterPage.TYPE, 250);
@@ -38,7 +39,7 @@ public class HablarComplete {
 
 	HablarUser.install(hablar);
 	HablarVCard.install(hablar);
-	
+
 	HablarLogger.install(hablar);
 
 	if (config.hasLogin) {
@@ -48,6 +49,7 @@ public class HablarComplete {
 	if (config.hasRoster) {
 	    HablarRoster.install(hablar);
 	    HablarOpenChat.install(hablar);
+	    HablarOpenRoom.install(hablar);
 	    HablarEditBuddy.install(hablar);
 	}
 
@@ -60,8 +62,8 @@ public class HablarComplete {
 	}
     }
 
-    public static void install(HablarWidget widget, HablarConfig config) {
-	Hablar hablar = widget.getHablar();
+    public static void install(final HablarWidget widget, final HablarConfig config) {
+	final Hablar hablar = widget.getHablar();
 	install(hablar, config);
 
     }
