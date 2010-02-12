@@ -23,9 +23,10 @@ import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 
 public class RoomPage extends PagePresenter<RoomDisplay> {
-    private static final String TYPE = "Room";
+    public static final String TYPE = "Room";
     private static int id = 0;
 
+    @Deprecated
     public static RoomPage asRoom(final Page<?> page) {
 	if (RoomPage.TYPE.equals(page.getType())) {
 	    return (RoomPage) page;

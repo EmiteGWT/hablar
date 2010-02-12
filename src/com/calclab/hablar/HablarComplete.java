@@ -9,7 +9,6 @@ import com.calclab.hablar.dock.client.DockConfig.Position;
 import com.calclab.hablar.editbuddy.client.HablarEditBuddy;
 import com.calclab.hablar.groupchat.client.HablarGroupChat;
 import com.calclab.hablar.openchat.client.HablarOpenChat;
-import com.calclab.hablar.openroom.client.HablarOpenRoom;
 import com.calclab.hablar.rooms.client.HablarRooms;
 import com.calclab.hablar.roster.client.HablarRoster;
 import com.calclab.hablar.roster.client.page.RosterPage;
@@ -23,8 +22,8 @@ public class HablarComplete {
 
     public static void install(final Hablar hablar, final HablarConfig config) {
 	HablarChat.install(hablar);
-	HablarRooms.install(hablar);
-	HablarGroupChat.install(hablar);
+	HablarRooms.install(hablar, config.roomsConfig);
+	HablarGroupChat.install(hablar, config.roomsConfig);
 
 	final DockConfig dock = new DockConfig();
 	dock.set(Position.top, UserPage.TYPE, 24);
@@ -41,7 +40,6 @@ public class HablarComplete {
 	if (config.hasRoster) {
 	    HablarRoster.install(hablar);
 	    HablarOpenChat.install(hablar);
-	    HablarOpenRoom.install(hablar);
 	    HablarEditBuddy.install(hablar);
 	}
 

@@ -4,16 +4,23 @@
 	<ui:style>
 		
 	</ui:style>
-	<g:HTMLPanel styleName="hablar-InviteToRoomWidget">
+	<g:HTMLPanel styleName="hablar-OpenRoomWidget">
 		<div class="form">
-				<p>
+			<h2>
+				<span ui:field='title' />
+			</h2>
+			<p>
+				<label>Room name:</label>
+				<g:TextBox ui:field="roomName"></g:TextBox>
+			</p>
+			<p>
 				<label>Invitation message:</label>
 				<g:TextBox ui:field="message"></g:TextBox>
 			</p>
-			<h2>Invite people to the group chat</h2>
+			<label>Participants:</label>
 			<g:FlowPanel ui:field="list" styleName="list"></g:FlowPanel>
 			<div class="actions">
-				<g:Button ui:field="invite">Invite</g:Button>
+				<g:Button ui:field="accept">Accept</g:Button>
 				<g:Button ui:field="cancel">Cancel</g:Button>
 			</div>
 		</div>

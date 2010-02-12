@@ -316,7 +316,7 @@ div.hablar-RosterItemWidget:hover {
 }
 
 /** ROOM INVITATION **/
-.hablar-InviteToRoomWidget .list {
+.hablar-OpenRoomWidget .list {
 	background-color: #E9E9E9;
 	padding: 5px;
 }
@@ -365,7 +365,7 @@ div.hablar-RosterItemWidget:hover {
 /** OVERLAY **/
 .hablar-Overlay {
 	background-color: black;
-	opacity: 0.8;
+	opacity: 0.85;
 	z-index: 3000;
 	color: white;
 }
@@ -383,22 +383,18 @@ div.hablar-RosterItemWidget:hover {
 
 .form p label {
 	display: block;
-	float: left;
-	margin-top: 2px;
+	margin-top: 5px;
 	margin-right: 10px;
-	width: 6em;
 	margin-right: 0.5em;
-	text-align: right;
 }
 
 .form p .gwt-Label {
-	float: left;
 	font-weight: bold;
 }
 
 .form .actions {
-	padding-left: 6.5em;
-	margin-top: 5px;
+	padding-left: 5px;
+	margin-top: 15px;
 	border-top: 1px solid #BBBBBB;
 	padding-top: 5px;
 }
@@ -406,6 +402,7 @@ div.hablar-RosterItemWidget:hover {
 .form .gwt-TextBox,.form .gwt-PasswordTextBox {
 	border: 0px;
 	padding: 2px;
+	width: 100%;
 }
 
 .hablar-PopupPanel {

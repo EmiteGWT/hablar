@@ -6,7 +6,7 @@ public class HablarRoomsConfig {
 
     public static HablarRoomsConfig getFromMeta() {
 	final HablarRoomsConfig config = new HablarRoomsConfig();
-	config.roomService = PageAssist.getMeta("hablar.roomService");
+	config.roomsService = PageAssist.getMeta("hablar.roomService");
 	config.sendButtonVisible = PageAssist.isMetaTrue("hablar.sendButton");
 	return config;
     }
@@ -19,6 +19,6 @@ public class HablarRoomsConfig {
     /**
      * The room service name
      */
-    public String roomService;
+    public String roomsService;
 
 }

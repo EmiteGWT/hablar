@@ -2,6 +2,7 @@ package com.calclab.hablar;
 
 import com.calclab.emite.browser.client.PageAssist;
 import com.calclab.hablar.core.client.HablarDisplay;
+import com.calclab.hablar.rooms.client.HablarRoomsConfig;
 
 public class HablarConfig {
 
@@ -25,8 +26,11 @@ public class HablarConfig {
 	    config.layout = HablarDisplay.Layout.accordion;
 	}
 
+	config.roomsConfig = HablarRoomsConfig.getFromMeta();
 	return config;
     }
+
+    HablarRoomsConfig roomsConfig = new HablarRoomsConfig();
 
     /**
      * Has ChatModule

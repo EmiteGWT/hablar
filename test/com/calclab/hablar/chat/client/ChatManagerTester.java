@@ -7,32 +7,32 @@ import com.calclab.emite.im.client.chat.Chat;
 
 public class ChatManagerTester extends AbstractChatManager {
 
-    public ChatManagerTester(Session session) {
+    public ChatManagerTester(final Session session) {
 	super(session);
     }
 
     @Override
-    public void fireChatClosed(Chat chat) {
+    public void fireChatClosed(final Chat chat) {
 	super.fireChatClosed(chat);
     }
 
     @Override
-    public void fireChatCreated(Chat chat) {
+    public void fireChatCreated(final Chat chat) {
 	super.fireChatCreated(chat);
     }
 
     @Override
-    public void fireChatOpened(Chat chat) {
+    public void fireChatOpened(final Chat chat) {
 	super.fireChatOpened(chat);
     }
 
     @Override
-    protected Chat createChat(XmppURI uri, XmppURI currentUser) {
-	return new ChatTester(uri, currentUser);
+    public Chat getChat(final XmppURI uri) {
+	return null;
     }
 
     @Override
-    protected Chat findChat(XmppURI uri) {
-	return null;
+    protected Chat createChat(final XmppURI uri, final XmppURI currentUser) {
+	return new ChatTester(uri, currentUser);
     }
 }

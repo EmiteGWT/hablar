@@ -1,4 +1,4 @@
-package com.calclab.hablar.rooms.client.ui.invite;
+package com.calclab.hablar.rooms.client.ui.open;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -45,6 +45,11 @@ public class SelectRosterItemWidget extends Composite implements SelectRosterIte
     @Override
     public void setIconStyle(final String style) {
 	icon.addStyleName(style);
+    }
+
+    @Override
+    public void setSelectVisible(final boolean visible) {
+	select.setVisible(visible);
     }
 
 }

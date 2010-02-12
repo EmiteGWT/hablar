@@ -8,7 +8,7 @@ public class PageAddedEvent extends GwtEvent<PageAddedHandler> {
     private final Page<?> page;
     private final PagesContainer container;
 
-    public PageAddedEvent(Page<?> page, PagesContainer container) {
+    public PageAddedEvent(final Page<?> page, final PagesContainer container) {
 	this.page = page;
 	this.container = container;
     }
@@ -26,8 +26,12 @@ public class PageAddedEvent extends GwtEvent<PageAddedHandler> {
 	return page;
     }
 
+    public boolean isType(final String type) {
+	return page.getType().equals(type);
+    }
+
     @Override
-    protected void dispatch(PageAddedHandler handler) {
+    protected void dispatch(final PageAddedHandler handler) {
 	handler.onPageAdded(this);
     }
 
