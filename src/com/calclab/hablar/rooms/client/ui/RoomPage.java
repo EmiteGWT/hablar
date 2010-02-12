@@ -12,6 +12,7 @@ import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
+import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -73,7 +74,15 @@ public class RoomPage extends PagePresenter<RoomDisplay> {
 		}
 	    }
 	});
+    }
 
+    public void addAction(final Action<RoomPage> action) {
+	display.createAction(action).addClickHandler(new ClickHandler() {
+	    @Override
+	    public void onClick(final ClickEvent event) {
+		action.execute(RoomPage.this);
+	    }
+	});
     }
 
     private void sendMessage(final Chat chat, final ChatDisplay display) {

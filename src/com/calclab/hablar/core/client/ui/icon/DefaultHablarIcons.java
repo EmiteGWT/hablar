@@ -13,6 +13,8 @@ public class DefaultHablarIcons extends HablarIcons {
 
     interface StyleIcons extends CssResource {
 
+	String buddyAddIcon();
+
 	String buddyIcon();
 
 	String buddyIconDnd();
@@ -86,6 +88,8 @@ public class DefaultHablarIcons extends HablarIcons {
 	    return icons.offIcon();
 	case close:
 	    return icons.closeIcon();
+	case buddyAdd:
+	    return icons.buddyAddIcon();
 	}
 	return null;
     }

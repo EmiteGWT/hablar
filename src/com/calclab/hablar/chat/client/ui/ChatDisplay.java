@@ -14,7 +14,7 @@ public interface ChatDisplay extends Display {
 
     void clearAndFocus();
 
-    HasClickHandlers createAction(Action<ChatPage> action);
+    HasClickHandlers createAction(Action<?> action);
 
     HasClickHandlers getAction();
 

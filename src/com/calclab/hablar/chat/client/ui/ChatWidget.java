@@ -55,7 +55,7 @@ public class ChatWidget extends Composite implements ChatDisplay {
     }
 
     @Override
-    public HasClickHandlers createAction(final Action<ChatPage> action) {
+    public HasClickHandlers createAction(final Action<?> action) {
 	final Label label = new Label();
 	label.addStyleName(action.getIconStyle());
 	actions.add(label);

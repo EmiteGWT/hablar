@@ -5,9 +5,12 @@ import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.events.VisibilityChangeRequestEvent;
 
 public class PagePresenter<T extends Display> implements Page<T> {
+
     public static enum Visibility {
 	focused, notFocused, hidden, toggle
     }
+
+    private static int index = 0;
     protected final T display;
     protected final HablarEventBus eventBus;
     private final String pageType;
@@ -15,7 +18,11 @@ public class PagePresenter<T extends Display> implements Page<T> {
 
     protected final PageState model;
 
-    public PagePresenter(String pageType, String id, HablarEventBus eventBus, T display) {
+    public PagePresenter(final String pageType, final HablarEventBus eventBus, final T display) {
+	this(pageType, "" + ++index, eventBus, display);
+    }
+
+    public PagePresenter(final String pageType, final String id, final HablarEventBus eventBus, final T display) {
 	this.pageType = pageType;
 	this.eventBus = eventBus;
 	this.display = display;
@@ -47,12 +54,12 @@ public class PagePresenter<T extends Display> implements Page<T> {
     }
 
     @Override
-    public void requestVisibility(Visibility newVisibility) {
+    public void requestVisibility(final Visibility newVisibility) {
 	eventBus.fireEvent(new VisibilityChangeRequestEvent(this, newVisibility));
     }
 
     @Override
-    public void setVisibility(Visibility visibility) {
+    public void setVisibility(final Visibility visibility) {
 	model.setVisibility(visibility);
     }
 
