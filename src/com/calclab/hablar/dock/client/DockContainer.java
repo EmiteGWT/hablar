@@ -25,7 +25,7 @@ public class DockContainer implements PagesContainer {
     private final DockConfig config;
     private final DockLayout layout;
 
-    public DockContainer(HablarEventBus eventBus, DockConfig config, DockLayout layout) {
+    public DockContainer(final HablarEventBus eventBus, final DockConfig config, final DockLayout layout) {
 	this.config = config;
 	this.layout = layout;
 	panels = new HashMap<Position, LayoutPanel>();
@@ -33,14 +33,14 @@ public class DockContainer implements PagesContainer {
 
 	layoutCenter();
 
-	for (Position pos : DockConfig.Position.values()) {
+	for (final Position pos : DockConfig.Position.values()) {
 	    addDock(pos, config.get(pos));
 	}
 
 	eventBus.addHandler(VisibilityChangeRequestEvent.TYPE, new VisibilityChangeRequestHandler() {
 	    @Override
-	    public void onVisibilityChangeRequest(VisibilityChangeRequestEvent event) {
-		Page<?> page = event.getPage();
+	    public void onVisibilityChangeRequest(final VisibilityChangeRequestEvent event) {
+		final Page<?> page = event.getPage();
 		if (pages.containsValue(page)) {
 		    changeVisibility(page, event.getNewVisibility());
 		}
@@ -49,8 +49,8 @@ public class DockContainer implements PagesContainer {
     }
 
     @Override
-    public boolean add(Page<?> page) {
-	for (Position position : DockConfig.Position.values()) {
+    public boolean add(final Page<?> page) {
+	for (final Position position : DockConfig.Position.values()) {
 	    if (page.getType().equals(config.get(position).pageType)) {
 		pages.put(position, page);
 		setPage(panels.get(position), page, position);
@@ -65,6 +65,28 @@ public class DockContainer implements PagesContainer {
 	return false;
     }
 
+    private void addDock(final Position position, final Dock dock) {
+	final LayoutPanel panel = layout.addNewPanel("hablar-RosterDockContainer-" + position);
+	panels.put(position, panel);
+
+	panel.addStyleName("hablar-RosterDockContainer-" + position);
+
+	final Dock top = config.get(Position.top);
+	final Dock bottom = config.get(Position.bottom);
+
+	layout.layoutPanel(panel, position, dock, top, bottom);
+    }
+
+    protected void changeVisibility(final Page<?> page, final Visibility newVisibility) {
+	if (page == (Page<?>) pages.get(Position.top)) {
+	    if (newVisibility == Visibility.toggle && page.getVisibility() == Visibility.notFocused) {
+		showTopPage(page);
+	    } else if (newVisibility == Visibility.hidden || newVisibility == Visibility.notFocused) {
+		hideTopPage(page);
+	    }
+	}
+    }
+
     @Override
     public String getRol() {
 	return ROL;
@@ -75,38 +97,26 @@ public class DockContainer implements PagesContainer {
 	return null;
     }
 
-    private void addDock(Position position, Dock dock) {
-	LayoutPanel panel = layout.addNewPanel("hablar-RosterDockContainer-" + position);
-	panels.put(position, panel);
-
-	panel.addStyleName("hablar-RosterDockContainer-" + position);
-
-	Dock top = config.get(Position.top);
-	Dock bottom = config.get(Position.bottom);
-
-	layout.layoutPanel(panel, position, dock, top, bottom);
-    }
-
-    private void hideTopPage(Page<?> page) {
-	Dock dock = config.get(Position.top);
-	LayoutPanel panel = panels.get(Position.top);
+    private void hideTopPage(final Page<?> page) {
+	final Dock dock = config.get(Position.top);
+	final LayoutPanel panel = panels.get(Position.top);
 	layout.slideUp(panel, dock);
 	page.setVisibility(Visibility.notFocused);
     }
 
     private void layoutCenter() {
-	Dock top = config.get(Position.top);
-	Dock bottom = config.get(Position.bottom);
-	Dock left = config.get(Position.left);
-	Dock right = config.get(Position.right);
+	final Dock top = config.get(Position.top);
+	final Dock bottom = config.get(Position.bottom);
+	final Dock left = config.get(Position.left);
+	final Dock right = config.get(Position.right);
 	layout.setCenterPosition(left, top, right, bottom);
     }
 
-    private void setPage(LayoutPanel panel, Page<?> page, Position position) {
-	Widget widget = page.getDisplay().asWidget();
-	HeaderDisplay headerDisplay = layout.createHeaderWidget(page, position);
+    private void setPage(final LayoutPanel panel, final Page<?> page, final Position position) {
+	final Widget widget = page.getDisplay().asWidget();
+	final HeaderDisplay headerDisplay = layout.createHeaderWidget(page, position);
 	new HeaderPresenter(page, headerDisplay);
-	Widget headerWidget = headerDisplay.asWidget();
+	final Widget headerWidget = headerDisplay.asWidget();
 	panel.add(headerWidget);
 	panel.setWidgetTopHeight(headerWidget, 0, PX, HEADER_SIZE, PX);
 	panel.setWidgetLeftRight(headerWidget, 0, PX, 0, PX);
@@ -115,21 +125,11 @@ public class DockContainer implements PagesContainer {
 	panel.setWidgetLeftRight(widget, 0, PX, 0, PX);
     }
 
-    private void showTopPage(Page<?> page) {
-	Dock dock = config.get(Position.top);
-	LayoutPanel panel = panels.get(Position.top);
+    private void showTopPage(final Page<?> page) {
+	final Dock dock = config.get(Position.top);
+	final LayoutPanel panel = panels.get(Position.top);
 	layout.slideDown(panel, dock);
 	page.setVisibility(Visibility.focused);
-    }
-
-    protected void changeVisibility(Page<?> page, Visibility newVisibility) {
-	if (newVisibility == Visibility.toggle && page == pages.get(Position.top)) {
-	    if (page.getVisibility() == Visibility.notFocused) {
-		showTopPage(page);
-	    } else if (page.getVisibility() == Visibility.focused) {
-		hideTopPage(page);
-	    }
-	}
     }
 
 }

@@ -152,7 +152,7 @@
 }
 
 /** USER **/
-.hablar-UserWidget {
+.hablar-UserWidget .container {
 	padding: 0px 10px;
 }
 
@@ -166,6 +166,10 @@
 	background-color: #BBB;
 	border-bottom: 1px solid #EFEFEF;
 	border-top: 1px solid #BBB;
+}
+
+.hablar-UserWidget .actions {
+	padding: 5px 0 0 10px;
 }
 
 /** ROSTER **/
