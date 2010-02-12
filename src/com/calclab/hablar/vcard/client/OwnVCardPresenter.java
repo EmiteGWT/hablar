@@ -48,11 +48,4 @@ public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisp
 	});
     }
 
-    private void update(final VCardResponse response) {
-	if (response.hasVCard()) {
-	    final VCard vcard = response.getVCard();
-	    setVCard(vcard);
-	}
-    }
-
 }

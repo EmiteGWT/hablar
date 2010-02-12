@@ -1,6 +1,7 @@
 package com.calclab.hablar.vcard.client;
 
 import com.calclab.emite.xep.vcard.client.VCard;
+import com.calclab.emite.xep.vcard.client.VCardResponse;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 
@@ -11,7 +12,14 @@ public abstract class VCardPage extends PagePresenter<VCardDisplay> {
 	super(TYPE, eventBus, display);
     }
 
-    protected void setVCard(final VCard vcard) {
+    protected void update(final VCardResponse response) {
+	if (response.hasVCard()) {
+	    final VCard vcard = response.getVCard();
+	    setVCard(vcard);
+	}
+    }
+
+    private void setVCard(final VCard vcard) {
 	display.getEmail().setText(vcard.getJabberID());
 	display.getFirstName().setText(vcard.getGivenName());
 	display.getMiddleName().setText(vcard.getMiddleName());
@@ -19,5 +27,4 @@ public abstract class VCardPage extends PagePresenter<VCardDisplay> {
 	display.getOrganizationName().setText(vcard.getOrganization().getName());
 	display.getSurname().setText(vcard.getFamilyName());
     }
-
 }
