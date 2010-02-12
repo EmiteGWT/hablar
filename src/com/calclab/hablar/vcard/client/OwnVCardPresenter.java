@@ -1,0 +1,58 @@
+package com.calclab.hablar.vcard.client;
+
+import com.calclab.emite.xep.vcard.client.VCard;
+import com.calclab.emite.xep.vcard.client.VCardManager;
+import com.calclab.emite.xep.vcard.client.VCardResponse;
+import com.calclab.hablar.core.client.mvp.HablarEventBus;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
+import com.calclab.hablar.user.client.EditorPage;
+import com.calclab.suco.client.Suco;
+import com.calclab.suco.client.events.Listener;
+
+public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisplay> {
+
+    public OwnVCardPresenter(final HablarEventBus eventBus, final VCardDisplay display) {
+	super(eventBus, display);
+	// FIXME: create a button
+	model.init(HablarIcons.get(IconType.buddyWait), "User profile");
+    }
+
+    @Override
+    public void saveData() {
+	final VCardManager manager = Suco.get(VCardManager.class);
+	manager.requestOwnVCard(new Listener<VCardResponse>() {
+	    @Override
+	    public void onEvent(final VCardResponse response) {
+		if (response.hasVCard()) {
+		    final VCard vcard = response.getVCard();
+		    manager.updateOwnVCard(vcard, new Listener<VCardResponse>() {
+			@Override
+			public void onEvent(final VCardResponse response) {
+			    update(response);
+			}
+		    });
+		}
+	    }
+	});
+    }
+
+    @Override
+    public void showData() {
+	final VCardManager manager = Suco.get(VCardManager.class);
+	manager.requestOwnVCard(new Listener<VCardResponse>() {
+	    @Override
+	    public void onEvent(final VCardResponse response) {
+		update(response);
+	    }
+	});
+    }
+
+    private void update(final VCardResponse response) {
+	if (response.hasVCard()) {
+	    final VCard vcard = response.getVCard();
+	    setVCard(vcard);
+	}
+    }
+
+}
