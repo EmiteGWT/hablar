@@ -10,22 +10,12 @@ import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.rooms.client.ui.RoomPage;
-import com.calclab.hablar.rooms.client.ui.invite.InviteToRoomPage;
+import com.calclab.hablar.rooms.client.ui.invite.InviteToRoomPresenter;
 import com.calclab.hablar.rooms.client.ui.invite.InviteToRoomWidget;
 import com.google.gwt.core.client.EntryPoint;
 
 public class HablarRooms implements EntryPoint {
     private static final String ACTION_ID_INVITE = "HablarRooms-inviteAction";
-
-    protected static Action<RoomPage> createInviteAction(final InviteToRoomPage invitePage) {
-	final String icon = HablarIcons.get(IconType.buddyAdd);
-	return new SimpleAction<RoomPage>("Invite to this room", ACTION_ID_INVITE, icon) {
-	    @Override
-	    public void execute(final RoomPage target) {
-		invitePage.requestVisibility(Visibility.focused);
-	    }
-	};
-    }
 
     public static void install(final Hablar hablar) {
 	install(hablar, HablarRoomsConfig.getFromMeta());
@@ -34,7 +24,7 @@ public class HablarRooms implements EntryPoint {
     public static void install(final Hablar hablar, final HablarRoomsConfig config) {
 	new HablarRoomManager(hablar, config);
 
-	final InviteToRoomPage invitePage = new InviteToRoomPage(hablar.getEventBus(), new InviteToRoomWidget());
+	final InviteToRoomPresenter invitePage = new InviteToRoomPresenter(hablar.getEventBus(), new InviteToRoomWidget());
 	hablar.addPage(invitePage, OverlayContainer.ROL);
 
 	hablar.addPageAddedHandler(new PageAddedHandler() {
@@ -46,6 +36,17 @@ public class HablarRooms implements EntryPoint {
 		}
 	    }
 	}, true);
+    }
+
+    protected static Action<RoomPage> createInviteAction(final InviteToRoomPresenter invitePage) {
+	final String icon = HablarIcons.get(IconType.buddyAdd);
+	return new SimpleAction<RoomPage>("Invite to this room", ACTION_ID_INVITE, icon) {
+	    @Override
+	    public void execute(final RoomPage target) {
+		invitePage.setRoom(target.getRoom());
+		invitePage.requestVisibility(Visibility.focused);
+	    }
+	};
     }
 
     @Override

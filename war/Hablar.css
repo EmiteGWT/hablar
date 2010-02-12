@@ -75,9 +75,11 @@
 .hablar-AccordionHeaderWidget .close {
 	margin: -16px 3px 0 0;
 }
+
 .hablar-TabsHeaderWidget .close {
 	margin: 2px 3px;
 }
+
 .hablar-AccordionHeader .close {
 	margin: 2px 3px 0 0;
 }
@@ -90,12 +92,10 @@
 	display: block;
 }
 
-
 .hablar-AccordionHeaderWidget.notFocused {
 	border-top: 1px solid #E9E9E9;
 	border-bottom: 1px solid #BBB;
 }
-
 
 .hablar-AccordionHeaderWidget.focused {
 	border-top: 1px solid white;
@@ -202,13 +202,16 @@
 	cursor: pointer;
 	border-bottom: 1px solid #BBBBBB;
 }
+
 div.hablar-GroupHeaderWidget:hover {
 	background-color: #BBBBBB;
 }
+
 .hablar-GroupHeaderWidget .label {
 	display: block;
 	margin: 3px;
 }
+
 .hablar-GroupHeaderWidget .menu {
 	float: right;
 	margin-right: 3px;
@@ -284,6 +287,21 @@ div.hablar-RosterItemWidget:hover {
 	float: right;
 }
 
+.chatMessage .body.incoming {
+	
+}
+
+.chatMessage .body.sent {
+	color: #808080;
+}
+
+.chatMessage .body.info {
+	color: #808080;
+	font-style: italic;
+}
+.chatMessage .body.alert {
+	color: #c00;
+}
 
 /** SEARCH PAGE **/
 .hablar-Search .searchBox {
@@ -295,6 +313,30 @@ div.hablar-RosterItemWidget:hover {
 
 .hablar-Search .gwt-Button {
 	width: 20%;
+}
+
+/** ROOM INVITATION **/
+.hablar-InviteToRoomWidget .list {
+	background-color: #E9E9E9;
+	padding: 5px;
+}
+
+.hablar-SelectRosterItemWidget {
+	width: 100%;
+	overflow: hidden;
+}
+
+.hablar-SelectRosterItemWidget .select {
+	float: left;
+}
+
+.hablar-SelectRosterItemWidget .icon {
+	float: left;
+}
+
+.hablar-SelectRosterItemWidget .name {
+	float: left;
+	color: black;
 }
 
 /** LOGGER **/
@@ -323,7 +365,7 @@ div.hablar-RosterItemWidget:hover {
 /** OVERLAY **/
 .hablar-Overlay {
 	background-color: black;
-	opacity: 0.7;
+	opacity: 0.8;
 	z-index: 3000;
 	color: white;
 }
@@ -372,12 +414,4 @@ div.hablar-RosterItemWidget:hover {
 	-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 	padding: 3px;
-}
-
-.chat-message-body-incoming {
-	
-}
-
-.chat-message-body-sent {
-	color: #808080;
 }

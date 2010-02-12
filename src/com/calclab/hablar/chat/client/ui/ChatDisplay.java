@@ -9,7 +9,7 @@ import com.google.gwt.user.client.ui.HasText;
 public interface ChatDisplay extends Display {
 
     enum MessageType {
-	incoming, sent
+	incoming, sent, info, alert
     }
 
     void clearAndFocus();

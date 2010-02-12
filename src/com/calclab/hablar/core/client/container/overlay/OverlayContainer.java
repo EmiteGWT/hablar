@@ -16,20 +16,20 @@ public class OverlayContainer implements PagesContainer {
     private final ArrayList<Page<?>> pages;
     private final OverlayLayout layout;
 
-    public OverlayContainer(HablarEventBus eventBus, OverlayLayout layout) {
+    public OverlayContainer(final HablarEventBus eventBus, final OverlayLayout layout) {
 	this.layout = layout;
-	this.pages = new ArrayList<Page<?>>();
+	pages = new ArrayList<Page<?>>();
 	layout.setVisible(false);
 	eventBus.addHandler(VisibilityChangeRequestEvent.TYPE, new VisibilityChangeRequestHandler() {
 	    @Override
-	    public void onVisibilityChangeRequest(VisibilityChangeRequestEvent event) {
+	    public void onVisibilityChangeRequest(final VisibilityChangeRequestEvent event) {
 		changeVisibility(event.getNewVisibility(), event.getPage());
 	    }
 	});
     }
 
     @Override
-    public boolean add(Page<?> page) {
+    public boolean add(final Page<?> page) {
 	pages.add(page);
 	if (page.getVisibility() == Visibility.focused) {
 	    focus(page);
@@ -47,7 +47,7 @@ public class OverlayContainer implements PagesContainer {
 	return layout.getWidget();
     }
 
-    private void changeVisibility(Visibility newVisibility, Page<?> page) {
+    private void changeVisibility(final Visibility newVisibility, final Page<?> page) {
 	if (pages.contains(page)) {
 	    if (newVisibility == Visibility.focused) {
 		focus(page);
@@ -59,18 +59,20 @@ public class OverlayContainer implements PagesContainer {
 	}
     }
 
-    private void focus(Page<?> page) {
+    private void focus(final Page<?> page) {
 	assert currentPagePresenter == null : "Only one page in overlay";
-	this.currentPagePresenter = page;
-	Widget widget = currentPagePresenter.getDisplay().asWidget();
+	currentPagePresenter = page;
+	final Widget widget = currentPagePresenter.getDisplay().asWidget();
+	page.setVisibility(Visibility.focused);
 	layout.add(widget);
     }
 
-    private void hide(Page<?> page) {
+    private void hide(final Page<?> page) {
 	if (currentPagePresenter == page) {
 	    final Widget widget = currentPagePresenter.getDisplay().asWidget();
 	    layout.remove(widget);
 	    currentPagePresenter = null;
+	    page.setVisibility(Visibility.hidden);
 	}
     }
 

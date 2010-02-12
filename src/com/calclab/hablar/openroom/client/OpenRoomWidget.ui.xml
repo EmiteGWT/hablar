@@ -6,7 +6,7 @@
 			<h2>Open a new instant room</h2>
 			<p>
 				<label>Room name:</label>
-				<g:TextBox ui:field="roomName"></g:TextBox>
+				<g:TextBox ui:field="roomName">roomName</g:TextBox>
 			</p>
 			<div class="actions">
 				<g:Button ui:field="open">Open Room</g:Button>

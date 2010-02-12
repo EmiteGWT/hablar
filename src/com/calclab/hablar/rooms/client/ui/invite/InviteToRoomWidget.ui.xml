@@ -4,6 +4,18 @@
 	<ui:style>
 		
 	</ui:style>
-	<g:HTMLPanel>
+	<g:HTMLPanel styleName="hablar-InviteToRoomWidget">
+		<div class="form">
+				<p>
+				<label>Invitation message:</label>
+				<g:TextBox ui:field="message"></g:TextBox>
+			</p>
+			<h2>Invite people to the group chat</h2>
+			<g:FlowPanel ui:field="list" styleName="list"></g:FlowPanel>
+			<div class="actions">
+				<g:Button ui:field="invite">Invite</g:Button>
+				<g:Button ui:field="cancel">Cancel</g:Button>
+			</div>
+		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

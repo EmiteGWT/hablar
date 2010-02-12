@@ -7,6 +7,10 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * A chat message
+ */
+// FIXME: probably UIBinder is too much
 public class ChatMessage extends Composite {
 
     interface ChatMessageUiBinder extends UiBinder<Widget, ChatMessage> {
@@ -19,11 +23,15 @@ public class ChatMessage extends Composite {
     @UiField
     SpanElement body;
 
-    public ChatMessage(final String name, final String body, final ChatDisplay.MessageType type) {
+    public ChatMessage(final String name, final String body, ChatDisplay.MessageType type) {
 	initWidget(uiBinder.createAndBindUi(this));
-	this.author.setInnerText(name + ": ");
+	if (name != null && name.length() > 0) {
+	    author.setInnerText(name + ": ");
+	} else {
+	    type = ChatDisplay.MessageType.info;
+	}
 	this.body.setInnerHTML(body);
-	this.body.addClassName("chat-message-body-" + type.toString());
+	this.body.addClassName(type.toString());
     }
 
 }
