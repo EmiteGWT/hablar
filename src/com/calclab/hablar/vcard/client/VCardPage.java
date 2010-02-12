@@ -23,7 +23,8 @@ public class VCardPage extends PagePresenter<VCardDisplay> implements EditorPage
     @Override
     public void saveData() {
 	final VCardManager manager = Suco.get(VCardManager.class);
-	// It's a update, then first of all we get the current own vcard
+	// It's an update, then first of all we get the current own vcard, and
+	// we only update some fields
 	manager.requestOwnVCard(new Listener<VCardResponse>() {
 	    @Override
 	    public void onEvent(final VCardResponse response) {
