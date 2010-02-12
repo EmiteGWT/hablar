@@ -63,16 +63,16 @@ public class RosterItemWidget extends Composite implements RosterItemDisplay {
     }
 
     @Override
-    public void setIcon(String iconStyle) {
+    public void setIcon(final String iconStyle) {
 	if (currentStyle != null) {
-	    icon.removeStyleName(iconStyle);
+	    icon.removeStyleName(currentStyle);
 	}
 	currentStyle = iconStyle;
 	icon.addStyleName(iconStyle);
     }
 
     @Override
-    public void setStatusVisible(boolean visible) {
+    public void setStatusVisible(final boolean visible) {
 	status.setVisible(visible);
     }
 

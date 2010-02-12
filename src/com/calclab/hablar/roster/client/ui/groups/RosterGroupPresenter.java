@@ -9,6 +9,7 @@ import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.suco.client.Suco;
+import com.calclab.suco.client.events.Listener;
 
 public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
     private final RosterGroupDisplay display;
@@ -30,14 +31,13 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	for (final RosterItem item : items) {
 	    getPresenter(item);
 	}
-    }
 
-    private RosterItemPresenter createRosterItem(final RosterItem item) {
-	final RosterItemDisplay itemDisplay = display.newRosterItemDisplay();
-	final RosterItemPresenter presenter = new RosterItemPresenter(groupName, itemMenu, itemDisplay);
-	display.add(itemDisplay);
-	items.put(item.getJID(), presenter);
-	return presenter;
+	roster.onItemChanged(new Listener<RosterItem>() {
+	    @Override
+	    public void onEvent(final RosterItem item) {
+		getPresenter(item).setItem(item);
+	    }
+	});
     }
 
     @Override
@@ -53,6 +53,22 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	return groupName;
     }
 
+    public boolean isAllContacts() {
+	return groupName.length() == 0;
+    }
+
+    public void toggleVisibility() {
+	display.setVisible(!display.isVisible());
+    }
+
+    private RosterItemPresenter createRosterItem(final RosterItem item) {
+	final RosterItemDisplay itemDisplay = display.newRosterItemDisplay();
+	final RosterItemPresenter presenter = new RosterItemPresenter(groupName, itemMenu, itemDisplay);
+	display.add(itemDisplay);
+	items.put(item.getJID(), presenter);
+	return presenter;
+    }
+
     private RosterItemPresenter getPresenter(final RosterItem item) {
 	RosterItemPresenter presenter = items.get(item.getJID());
 	if (presenter == null) {
@@ -60,14 +76,6 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	}
 	presenter.setItem(item);
 	return presenter;
-    }
-
-    public boolean isAllContacts() {
-	return groupName.length() == 0;
-    }
-
-    public void toggleVisibility() {
-	display.setVisible(!display.isVisible());
     }
 
 }
