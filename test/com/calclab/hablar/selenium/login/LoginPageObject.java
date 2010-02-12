@@ -7,7 +7,7 @@ import com.calclab.hablar.selenium.PageObject;
 import com.calclab.hablar.selenium.tools.SeleniumConstants;
 
 public class LoginPageObject extends PageObject {
-    @FindBy(id = "gwt-debug-AccordionHeaderWidget-Login-1")
+    @FindBy(id = "gwt-debug-HeaderWidget-Login-1")
     private RenderedWebElement header;
     @FindBy(id = "gwt-debug-LoginWidget-user")
     private RenderedWebElement user;

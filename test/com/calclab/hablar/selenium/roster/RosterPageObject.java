@@ -10,7 +10,7 @@ public class RosterPageObject extends PageObject {
     @FindBy(id = "gwt-debug-RosterWidget-disabledPanel")
     private RenderedWebElement disabledLabel;
 
-    @FindBy(id = "gwt-debug-AccordionHeaderWidget-Roster-1")
+    @FindBy(id = "gwt-debug-HeaderWidget-Roster-1")
     private RenderedWebElement header;
 
     public RosterPageObject() {
