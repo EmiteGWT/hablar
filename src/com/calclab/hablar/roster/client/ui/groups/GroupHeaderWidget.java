@@ -3,6 +3,7 @@ package com.calclab.hablar.roster.client.ui.groups;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -35,6 +36,21 @@ public class GroupHeaderWidget extends Composite implements GroupHeaderDisplay {
     @Override
     public HasText getName() {
 	return name;
+    }
+
+    @Override
+    public HasClickHandlers getOpenMenu() {
+	return menu;
+    }
+
+    @Override
+    public HasClickHandlers getToggleVisibility() {
+	return name;
+    }
+
+    @Override
+    public void setMenuVisible(final boolean visible) {
+	menu.setVisible(visible);
     }
 
 }

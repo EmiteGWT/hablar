@@ -6,6 +6,10 @@ public interface RosterGroupDisplay extends Display {
 
     void add(RosterItemDisplay itemDisplay);
 
+    boolean isVisible();
+
     RosterItemDisplay newRosterItemDisplay();
+
+    void setVisible(boolean visible);
 
 }

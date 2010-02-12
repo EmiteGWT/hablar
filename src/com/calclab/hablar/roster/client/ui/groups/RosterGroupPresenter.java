@@ -14,20 +14,19 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
     private final RosterGroupDisplay display;
     private final String groupLabel;
     private final HashMap<XmppURI, RosterItemPresenter> items;
-    private final Menu<RosterItem> itemMenu;
+    private final Menu<RosterItemPresenter> itemMenu;
     private final String groupName;
 
-    public RosterGroupPresenter(final String groupName, final Menu<RosterItem> itemMenu,
+    public RosterGroupPresenter(final String groupName, final Menu<RosterItemPresenter> itemMenu,
 	    final RosterGroupDisplay display) {
 	this.groupName = groupName;
 	this.itemMenu = itemMenu;
 	this.display = display;
-	final boolean isGroup = groupName.length() > 0;
-	groupLabel = isGroup ? "Group: " + groupName : "All contacts";
+	groupLabel = isAllContacts() ? "All contacts" : "Group: " + groupName;
 	items = new HashMap<XmppURI, RosterItemPresenter>();
 
 	final Roster roster = Suco.get(Roster.class);
-	final Collection<RosterItem> items = isGroup ? roster.getItemsByGroup(groupName) : roster.getItems();
+	final Collection<RosterItem> items = isAllContacts() ? roster.getItems() : roster.getItemsByGroup(groupName);
 	for (final RosterItem item : items) {
 	    getPresenter(item);
 	}
@@ -35,7 +34,7 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 
     private RosterItemPresenter createRosterItem(final RosterItem item) {
 	final RosterItemDisplay itemDisplay = display.newRosterItemDisplay();
-	final RosterItemPresenter presenter = new RosterItemPresenter(itemMenu, itemDisplay);
+	final RosterItemPresenter presenter = new RosterItemPresenter(groupName, itemMenu, itemDisplay);
 	display.add(itemDisplay);
 	items.put(item.getJID(), presenter);
 	return presenter;
@@ -61,6 +60,14 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	}
 	presenter.setItem(item);
 	return presenter;
+    }
+
+    public boolean isAllContacts() {
+	return groupName.length() == 0;
+    }
+
+    public void toggleVisibility() {
+	display.setVisible(!display.isVisible());
     }
 
 }

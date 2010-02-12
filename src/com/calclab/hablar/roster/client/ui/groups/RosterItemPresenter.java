@@ -14,8 +14,11 @@ public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
 
     private final RosterItemDisplay display;
     private RosterItem item;
+    private final String groupName;
 
-    public RosterItemPresenter(final Menu<RosterItem> itemMenu, final RosterItemDisplay display) {
+    public RosterItemPresenter(final String groupName, final Menu<RosterItemPresenter> itemMenu,
+	    final RosterItemDisplay display) {
+	this.groupName = groupName;
 	this.display = display;
 
 	final ChatManager manager = Suco.get(ChatManager.class);
@@ -32,7 +35,7 @@ public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
 		event.preventDefault();
 		final Element element = event.getRelativeElement();
 		final int width = element.getClientWidth();
-		itemMenu.setTarget(item);
+		itemMenu.setTarget(RosterItemPresenter.this);
 		itemMenu.show(element.getAbsoluteLeft() - width, element.getAbsoluteTop());
 	    }
 	});
@@ -42,6 +45,14 @@ public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
     @Override
     public RosterItemDisplay getDisplay() {
 	return display;
+    }
+
+    public String getGroupName() {
+	return groupName;
+    }
+
+    public RosterItem getItem() {
+	return item;
     }
 
     public void setItem(final RosterItem item) {

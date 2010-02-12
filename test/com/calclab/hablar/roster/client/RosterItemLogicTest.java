@@ -20,13 +20,12 @@ public class RosterItemLogicTest {
     private RosterItemDisplay display;
     private RosterItem item;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void before() {
 	final HablarTester tester = new HablarTester();
 	display = tester.newDisplay(RosterItemDisplay.class);
-	final Menu<RosterItem> menu = tester.newMenu();
-	presenter = new RosterItemPresenter(menu, display);
+	final Menu<RosterItemPresenter> menu = tester.newMenu();
+	presenter = new RosterItemPresenter("group", menu, display);
 	item = new RosterItem(XmppURI.uri("test1@localhost"), SubscriptionState.both, "test1", null);
     }
 

@@ -1,12 +1,13 @@
 package com.calclab.hablar.roster.client.page;
 
-import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
 import com.calclab.hablar.core.client.ui.menu.PopupMenu;
 import com.calclab.hablar.roster.client.ui.groups.RosterGroupDisplay;
 import com.calclab.hablar.roster.client.ui.groups.RosterGroupPresenter;
 import com.calclab.hablar.roster.client.ui.groups.RosterGroupWidget;
 import com.calclab.hablar.roster.client.ui.groups.RosterItemDisplay;
+import com.calclab.hablar.roster.client.ui.groups.RosterItemPresenter;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -58,8 +59,8 @@ public class RosterWidget extends Composite implements RosterDisplay {
     }
 
     @Override
-    public void addGroup(final RosterGroupPresenter group) {
-	groups.add(group);
+    public void addGroup(final RosterGroupPresenter group, final Menu<RosterGroupPresenter> menu) {
+	groups.add(group, menu);
     }
 
     @Override
@@ -73,8 +74,13 @@ public class RosterWidget extends Composite implements RosterDisplay {
     }
 
     @Override
-    public MenuDisplay<RosterItem> newRosterItemMenuDisplay(final String menuId) {
-	return new PopupMenu<RosterItem>(menuId);
+    public MenuDisplay<RosterGroupPresenter> newRosterGroupMenuDisplay(final String menuId) {
+	return new PopupMenu<RosterGroupPresenter>(menuId);
+    }
+
+    @Override
+    public MenuDisplay<RosterItemPresenter> newRosterItemMenuDisplay(final String menuId) {
+	return new PopupMenu<RosterItemPresenter>(menuId);
     }
 
     @Override

@@ -12,9 +12,7 @@ public class RosterListWidget extends FlowPanel implements RosterListDisplay {
     }
 
     @Override
-    public void add(final String groupName, final String groupId, final RosterGroupDisplay groupDisplay) {
-	final GroupHeaderDisplay headerDisplay = new GroupHeaderWidget(groupId);
-	headerDisplay.getName().setText(groupName);
+    public void add(final GroupHeaderDisplay headerDisplay, final RosterGroupDisplay groupDisplay) {
 	add(headerDisplay.asWidget());
 	add(groupDisplay.asWidget());
     }
@@ -22,6 +20,11 @@ public class RosterListWidget extends FlowPanel implements RosterListDisplay {
     @Override
     public Widget asWidget() {
 	return this;
+    }
+
+    @Override
+    public GroupHeaderDisplay createGroupHeader(final String groupId) {
+	return new GroupHeaderWidget(groupId);
     }
 
 }

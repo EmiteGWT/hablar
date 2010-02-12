@@ -16,9 +16,9 @@ import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.Menu;
-import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
 import com.calclab.hablar.roster.client.ui.groups.RosterGroupDisplay;
 import com.calclab.hablar.roster.client.ui.groups.RosterGroupPresenter;
+import com.calclab.hablar.roster.client.ui.groups.RosterItemPresenter;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
@@ -42,8 +42,9 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
     }
     private boolean active;
     private final Roster roster;
-    private final Menu<RosterItem> itemMenu;
+    private final Menu<RosterItemPresenter> itemMenu;
     private final HashMap<String, RosterGroupPresenter> groups;
+    private final Menu<RosterGroupPresenter> groupMenu;
 
     public RosterPresenter(final HablarEventBus eventBus, final RosterDisplay display) {
 	super(TYPE, "" + ++index, eventBus, display);
@@ -52,8 +53,8 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 	groups = new HashMap<String, RosterGroupPresenter>();
 	active = true;
 
-	final MenuDisplay<RosterItem> menuDisplay = display.newRosterItemMenuDisplay("hablar-RosterPresenterMenu");
-	itemMenu = new Menu<RosterItem>(menuDisplay);
+	itemMenu = new Menu<RosterItemPresenter>(display.newRosterItemMenuDisplay("hablar-RosterItemMenu"));
+	groupMenu = new Menu<RosterGroupPresenter>(display.newRosterGroupMenuDisplay("hablar-RosterGroupMenu"));
 
 	addRosterListeners();
 	addSessionListeners();
@@ -124,7 +125,12 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
     }
 
     @Override
-    public Menu<RosterItem> getItemMenu() {
+    public Menu<RosterGroupPresenter> getGroupMenu() {
+	return groupMenu;
+    }
+
+    @Override
+    public Menu<RosterItemPresenter> getItemMenu() {
 	return itemMenu;
     }
 
@@ -133,12 +139,12 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 	groups.clear();
 	final RosterGroupPresenter all = new RosterGroupPresenter("", itemMenu, display.newRosterGroupDisplay());
 	groups.put("", all);
-	display.addGroup(all);
+	display.addGroup(all, groupMenu);
 	for (final String groupName : roster.getGroups()) {
 	    final RosterGroupDisplay groupDisplay = display.newRosterGroupDisplay();
 	    final RosterGroupPresenter group = new RosterGroupPresenter(groupName, itemMenu, groupDisplay);
 	    groups.put(groupName, group);
-	    display.addGroup(group);
+	    display.addGroup(group, groupMenu);
 	}
     }
 
