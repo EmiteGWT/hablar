@@ -19,7 +19,8 @@ public class RosterGroupPresenterTests {
 	emiteTester.roster.addItem(XmppURI.uri("u1@d"), "u1", "group");
 	emiteTester.roster.addItem(XmppURI.uri("u1@d"), "u1", "group");
 	final Menu<RosterItem> menu = hablarTester.newMenu();
-	final RosterGroupPresenter presenter = new RosterGroupPresenter("group", menu, display);
+	// final RosterGroupPresenter presenter = new
+	// RosterGroupPresenter("group", menu, display);
     }
 
     @Test

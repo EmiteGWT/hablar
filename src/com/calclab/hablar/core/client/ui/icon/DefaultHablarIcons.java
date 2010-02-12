@@ -27,6 +27,8 @@ public class DefaultHablarIcons extends HablarIcons {
 
 	String chatIcon();
 
+	String closeIcon();
+
 	String menuIcon();
 
 	String offIcon();
@@ -56,7 +58,7 @@ public class DefaultHablarIcons extends HablarIcons {
     }
 
     @Override
-    public String getIconStyle(HablarIcons.IconType iconType) {
+    public String getIconStyle(final HablarIcons.IconType iconType) {
 	switch (iconType) {
 	case buddy:
 	    return icons.buddyIcon();
@@ -82,12 +84,14 @@ public class DefaultHablarIcons extends HablarIcons {
 	    return icons.onIcon();
 	case off:
 	    return icons.offIcon();
+	case close:
+	    return icons.closeIcon();
 	}
 	return null;
     }
 
     @Override
-    public String getStyleOf(HablarIcons.StyleType type) {
+    public String getStyleOf(final HablarIcons.StyleType type) {
 	switch (type) {
 	case active:
 	    return style.active();

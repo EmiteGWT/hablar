@@ -7,89 +7,55 @@ public class HablarConfig {
 
     /**
      * Retrieve Hablar configuration from meta tags in html
-     * 
-     * @return
      */
     public static HablarConfig getFromMeta() {
-	HablarConfig config = new HablarConfig();
+	final HablarConfig config = new HablarConfig();
 
-	config.hasLogin = isTrueMeta("hablar.loginWidget");
-	config.hasRoster = isTrueMeta("hablar.rosterWidget");
-	config.hasSearch = isTrueMeta("hablar.searchWidget");
-	config.hasSignals = isTrueMeta("hablar.hasSignals");
-	config.hasChat = isTrueMeta("hablar.hasChats");
+	config.hasRoster = PageAssist.isMetaTrue("hablar.roster");
+	config.hasSearch = PageAssist.isMetaTrue("hablar.search");
+	config.hasSignals = PageAssist.isMetaTrue("hablar.hasSignals");
+	config.hasChat = PageAssist.isMetaTrue("hablar.hasChats");
 
 	config.dockRoster = PageAssist.getMeta("hablar.dockRoster");
 
-	String layout = PageAssist.getMeta("hablar.layout");
-	if ("tabs".equals(layout))
+	final String layout = PageAssist.getMeta("hablar.layout");
+	if ("tabs".equals(layout)) {
 	    config.layout = HablarDisplay.Layout.tabs;
-	else
+	} else {
 	    config.layout = HablarDisplay.Layout.accordion;
+	}
 
-	config.inline = PageAssist.getMeta("hablar.inline");
-	config.width = PageAssist.getMeta("hablar.width");
-	config.height = PageAssist.getMeta("hablar.height");
-	if (config.width == null)
-	    config.width = "400px";
-	if (config.height == null)
-	    config.height = "400px";
 	return config;
-    }
-
-    // FIXME: implemented in PageAssist
-    private static boolean isTrueMeta(String id) {
-	return !"false".equals(PageAssist.getMeta(id));
     }
 
     /**
      * Has ChatModule
      */
-    public boolean hasChat;
+    public boolean hasChat = true;
 
     /**
-     * Dock the roster
+     * Dock the roster: "left" or "right"
      */
-    public String dockRoster;
+    public String dockRoster = "left";
 
     /**
      * Choose a layout
      */
-    public HablarDisplay.Layout layout;
+    public HablarDisplay.Layout layout = HablarDisplay.Layout.tabs;
 
     /**
-     * Show or not login panel
+     * Install Roster module
      */
-    public boolean hasLogin;
+    public boolean hasRoster = true;
 
     /**
-     * Show or not roster panel
+     * Install Search module
      */
-    public boolean hasRoster;
+    public boolean hasSearch = true;
 
     /**
-     * Show or not search panel
+     * Install signals module
      */
-    public boolean hasSearch;
-
-    /**
-     * If not null, show 'hablar' inside the div with the id given
-     */
-    public String inline;
-
-    /**
-     * Width
-     */
-    public String width;
-
-    /**
-     * Height
-     */
-    public String height;
-
-    /**
-     * Has SignalModule
-     */
-    public boolean hasSignals;
+    public boolean hasSignals = true;
 
 }

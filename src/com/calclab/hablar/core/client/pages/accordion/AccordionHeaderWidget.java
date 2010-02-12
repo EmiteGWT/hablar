@@ -1,6 +1,8 @@
 package com.calclab.hablar.core.client.pages.accordion;
 
 import com.calclab.hablar.core.client.pages.HeaderDisplay;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -24,18 +26,20 @@ public class AccordionHeaderWidget extends Composite implements HeaderDisplay {
     @UiField
     Label title, icon, close;
 
-    public AccordionHeaderWidget(String pageId) {
+    public AccordionHeaderWidget(final String pageId) {
 	initWidget(uiBinder.createAndBindUi(this));
 	ensureDebugId("HeaderWidget-" + pageId);
+	close.ensureDebugId("HeaderWidget-" + pageId + "-" + close);
+	close.addStyleName(HablarIcons.get(IconType.close));
     }
 
     @Override
-    public void addIconStyle(String iconStyle) {
+    public void addIconStyle(final String iconStyle) {
 	icon.addStyleName(iconStyle);
     }
 
     @Override
-    public void addStyle(String styleName) {
+    public void addStyle(final String styleName) {
 	self.addStyleName(styleName);
     }
 
@@ -60,17 +64,17 @@ public class AccordionHeaderWidget extends Composite implements HeaderDisplay {
     }
 
     @Override
-    public void removeIconStyle(String iconStyle) {
+    public void removeIconStyle(final String iconStyle) {
 	icon.removeStyleName(iconStyle);
     }
 
     @Override
-    public void removeStyle(String styleName) {
+    public void removeStyle(final String styleName) {
 	self.removeStyleName(styleName);
     }
 
     @Override
-    public void setCloseIconVisible(boolean visible) {
+    public void setCloseIconVisible(final boolean visible) {
 	close.setVisible(visible);
     }
 

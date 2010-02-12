@@ -8,8 +8,6 @@ import com.calclab.hablar.dock.client.HablarDock;
 import com.calclab.hablar.dock.client.DockConfig.Position;
 import com.calclab.hablar.editbuddy.client.HablarEditBuddy;
 import com.calclab.hablar.groupchat.client.HablarGroupChat;
-import com.calclab.hablar.logger.client.HablarLogger;
-import com.calclab.hablar.login.client.HablarLogin;
 import com.calclab.hablar.openchat.client.HablarOpenChat;
 import com.calclab.hablar.openroom.client.HablarOpenRoom;
 import com.calclab.hablar.rooms.client.HablarRooms;
@@ -39,12 +37,6 @@ public class HablarComplete {
 
 	HablarUser.install(hablar);
 	HablarVCard.install(hablar);
-
-	HablarLogger.install(hablar);
-
-	if (config.hasLogin) {
-	    HablarLogin.install(hablar);
-	}
 
 	if (config.hasRoster) {
 	    HablarRoster.install(hablar);

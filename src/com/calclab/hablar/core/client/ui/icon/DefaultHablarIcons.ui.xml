@@ -61,6 +61,9 @@
             @sprite .offIcon {
                 gwt-image: 'offIcon';
             }
+            @sprite .closeIcon {
+                gwt-image: 'closeIcon';
+            }
 		</ui:style>
 
     <ui:image field="onIcon" src="png/on.png"></ui:image>
@@ -75,6 +78,7 @@
 	<ui:image field="chatIcon" src="png/chat.png"></ui:image>
 	<ui:image field="chatAddIcon" src="png/chat_add.png"></ui:image>
 	<ui:image field="searchIcon" src="png/search2.png"></ui:image>
+	<ui:image field="closeIcon" src="png/close.png"></ui:image>
 
 	<g:SimplePanel></g:SimplePanel>
 </ui:UiBinder> 
