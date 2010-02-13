@@ -24,15 +24,15 @@ public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisp
 	manager.requestOwnVCard(new Listener<VCardResponse>() {
 	    @Override
 	    public void onEvent(final VCardResponse response) {
-		if (response.hasVCard()) {
-		    final VCard vcard = response.getVCard();
-		    manager.updateOwnVCard(vcard, new Listener<VCardResponse>() {
-			@Override
-			public void onEvent(final VCardResponse response) {
-			    update(response);
-			}
-		    });
-		}
+		final VCard vCard = response.hasVCard() ? response.getVCard() : new VCard();
+		update(vCard);
+		manager.updateOwnVCard(vCard, new Listener<VCardResponse>() {
+		    @Override
+		    public void onEvent(final VCardResponse response) {
+			update(response);
+		    }
+		});
+
 	    }
 	});
     }
