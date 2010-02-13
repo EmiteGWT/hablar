@@ -29,6 +29,8 @@ public interface ChatDisplay extends Display {
      */
     void setId(String id);
 
+    void setStatusVisible(boolean visible);
+
     void showMessage(String name, String body, ChatDisplay.MessageType messageType);
 
 }

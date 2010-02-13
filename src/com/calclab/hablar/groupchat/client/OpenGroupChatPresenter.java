@@ -13,6 +13,7 @@ import com.calclab.hablar.rooms.client.ui.open.OpenRoomPresenter;
 import com.calclab.hablar.rooms.client.ui.open.SelectRosterItemPresenter;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
+import com.google.gwt.core.client.GWT;
 
 public class OpenGroupChatPresenter extends OpenRoomPresenter {
 
@@ -40,19 +41,22 @@ public class OpenGroupChatPresenter extends OpenRoomPresenter {
 	final XmppURI roomUri = XmppURI.uri(roomName, roomsService, name);
 	rooms.open(roomUri);
 	final Room room = (Room) rooms.getChat(roomUri);
+	GWT.log("WE HAVE ROOM: " + room.getURI());
 	room.onStateChanged(new Listener<State>() {
 	    @Override
 	    public void onEvent(final State state) {
+		GWT.log("ROOM CHANGE");
 		if (state == Chat.State.ready) {
-		    for (final SelectRosterItemPresenter item : getItems()) {
-			if (item.isSelected()) {
-			    room.sendInvitationTo(item.getItem().getJID(), reasonText);
+		    GWT.log("ROOM READY");
+		    for (final SelectRosterItemPresenter itemPresenter : getItems()) {
+			if (itemPresenter.isSelected()) {
+			    GWT.log("INVITING: " + itemPresenter.getItem().getJID());
+			    room.sendInvitationTo(itemPresenter.getItem().getJID(), reasonText);
 			}
 		    }
 		}
 	    }
 	});
-
     }
 
     @Override

@@ -6,13 +6,13 @@
 	</ui:style>
 	<g:LayoutPanel styleName="hablar-Logger">
 		<!--  Actions -->
-		<g:layer left="0" top="0" width="100%" height="20px">
+		<g:layer left="0" top="0" width="100%" height="25px">
 			<g:FlowPanel ui:field="actions" styleName="actions">
 				<g:Anchor ui:field="clear">Clear</g:Anchor>
 			</g:FlowPanel>
 		</g:layer>
 		<!-- Results -->
-		<g:layer left="0" top="20px" width="100%" bottom="0px">
+		<g:layer left="0" top="25px" width="100%" bottom="0px">
 			<g:ScrollPanel ui:field="scroll" height="100%"
 				styleName="scroll">
 				<g:FlowPanel ui:field="output">

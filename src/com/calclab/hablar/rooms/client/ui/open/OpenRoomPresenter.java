@@ -7,7 +7,6 @@ import java.util.List;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
@@ -29,6 +28,7 @@ public abstract class OpenRoomPresenter extends PagePresenter<OpenRoomDisplay> {
 	    @Override
 	    public void onClick(final ClickEvent event) {
 		onAccept();
+		requestVisibility(Visibility.notFocused);
 	    }
 	});
     }
@@ -41,7 +41,6 @@ public abstract class OpenRoomPresenter extends PagePresenter<OpenRoomDisplay> {
 	display.clearList();
 	selectItems.clear();
 	for (final RosterItem item : items) {
-	    GWT.log("select roster item");
 	    final SelectRosterItemDisplay itemDisplay = display.createItem();
 	    final SelectRosterItemPresenter selectItem = new SelectRosterItemPresenter(item, itemDisplay, selectable);
 	    display.addItem(itemDisplay);

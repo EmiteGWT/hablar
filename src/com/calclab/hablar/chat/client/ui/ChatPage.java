@@ -97,6 +97,10 @@ public class ChatPage extends PagePresenter<ChatDisplay> {
 	});
     }
 
+    public void setPresence(final boolean available, final Show show) {
+	getState().setPageIcon(PresenceIcon.getIcon(available, show));
+    }
+
     private String getName(final XmppURI fromURI) {
 	final String name;
 	final Roster roster = Suco.get(Roster.class);
@@ -119,13 +123,10 @@ public class ChatPage extends PagePresenter<ChatDisplay> {
 	}
     }
 
-    public void setPresence(final boolean available, final Show show) {
-	getState().setPageIcon(PresenceIcon.getIcon(available, show));
-    }
-
     private void setState(final State state) {
 	final boolean visible = state == State.ready;
 	display.setControlsVisible(visible);
+	display.setStatusVisible(visible);
     }
 
 }

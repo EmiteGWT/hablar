@@ -51,7 +51,7 @@ public class OverlayContainer implements PagesContainer {
 	if (pages.contains(page)) {
 	    if (newVisibility == Visibility.focused) {
 		focus(page);
-	    } else if (newVisibility == Visibility.hidden) {
+	    } else if (newVisibility == Visibility.hidden || newVisibility == Visibility.notFocused) {
 		hide(page);
 	    } else if (newVisibility == Visibility.toggle && page.getVisibility() == Visibility.focused) {
 		hide(page);

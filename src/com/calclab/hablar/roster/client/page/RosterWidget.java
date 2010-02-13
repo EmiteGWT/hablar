@@ -1,5 +1,6 @@
 package com.calclab.hablar.roster.client.page;
 
+import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
 import com.calclab.hablar.core.client.ui.menu.PopupMenu;
@@ -10,7 +11,7 @@ import com.calclab.hablar.roster.client.ui.groups.RosterItemDisplay;
 import com.calclab.hablar.roster.client.ui.groups.RosterItemPresenter;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -50,15 +51,6 @@ public class RosterWidget extends Composite implements RosterDisplay {
     }
 
     @Override
-    public void addAction(final String iconStyle, final String id, final ClickHandler clickHandler) {
-	final Label label = new Label();
-	label.addStyleName(iconStyle);
-	label.addClickHandler(clickHandler);
-	label.ensureDebugId(id);
-	actions.add(label);
-    }
-
-    @Override
     public void addGroup(final RosterGroupPresenter group, final Menu<RosterGroupPresenter> menu) {
 	groups.add(group, menu);
     }
@@ -66,6 +58,17 @@ public class RosterWidget extends Composite implements RosterDisplay {
     @Override
     public Widget asWidget() {
 	return this;
+    }
+
+    @Override
+    public HasClickHandlers createAction(final Action<?> action) {
+	final Label label = new Label();
+	label.addStyleName(action.getIconStyle());
+	label.ensureDebugId(action.getId());
+	label.setTitle(action.getName());
+	actions.add(label);
+	return label;
+
     }
 
     @Override

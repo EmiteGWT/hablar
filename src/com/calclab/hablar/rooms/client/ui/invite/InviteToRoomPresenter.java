@@ -30,7 +30,6 @@ public class InviteToRoomPresenter extends OpenRoomPresenter {
 		room.sendInvitationTo(selectItem.getItem().getJID(), reasonText);
 	    }
 	}
-	requestVisibility(Visibility.hidden);
     }
 
     @Override

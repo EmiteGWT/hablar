@@ -6,6 +6,9 @@
 	</ui:style>
 	<g:LayoutPanel styleName="hablar-ChatWidget hablar-Page"
 		ui:field="page">
+		<g:layer top="0px" left="0px" right="0px" height="0px">
+			<g:FlowPanel ui:field="actions" styleName="actions"></g:FlowPanel>
+		</g:layer>
 		<g:layer top='0px' left='0px' right='0px' bottom='69px'>
 			<g:ScrollPanel ui:field="scroll" height="100%"
 				styleName="scroll">
@@ -15,9 +18,7 @@
 		<g:layer left="0" right="0" bottom="0" height="0">
 			<g:FlowPanel ui:field="controls" styleName="panel">
 				<g:TextArea styleName="talkBox" ui:field="talkBox"></g:TextArea>
-				<g:FlowPanel ui:field="actions" styleName="actions">
-					<g:Button ui:field="send">Send</g:Button>
-				</g:FlowPanel>
+				<g:Button ui:field="send">Send</g:Button>
 			</g:FlowPanel>
 		</g:layer>
 	</g:LayoutPanel>

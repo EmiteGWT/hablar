@@ -342,6 +342,7 @@ div.hablar-RosterItemWidget:hover {
 /** LOGGER **/
 .hablar-Logger {
 	border: 3px solid #E9E9E9;
+	background-color: #E9E9E9;
 }
 
 .hablar-Logger .gwt-Label {
@@ -349,6 +350,26 @@ div.hablar-RosterItemWidget:hover {
 	background-color: white;
 	opacity: 0.5;
 }
+
+.hablar-Logger .actions {
+	border-bottom: 1px solid #BBBBBB;
+}
+
+.hablar-Logger .gwt-Anchor {
+	display: block;
+	float: left;
+	padding: 2px 5px;
+	color: black;
+	margin-left: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	background-color: #E9E9E9;
+}
+.hablar-Logger a.gwt-Anchor:hover {
+	color: white;
+	background-color: #BBBBBB;
+}
+
 
 .hablar-Logger .gwt-Label.ready {
 	opacity: 1;

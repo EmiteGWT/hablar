@@ -110,7 +110,7 @@ public class RoomPage extends PagePresenter<RoomDisplay> {
     private void sendMessage(final Chat chat, final ChatDisplay display) {
 	final String text = display.getBody().getText().trim();
 	if (!text.isEmpty()) {
-	    final String body = ChatMessageFormatter.format(text);
+	    // final String body = ChatMessageFormatter.format(text);
 	    // display.showMessage("me", body, ChatDisplay.MessageType.sent);
 	    chat.send(new Message(text));
 	    display.clearAndFocus();
@@ -120,6 +120,7 @@ public class RoomPage extends PagePresenter<RoomDisplay> {
     private void setState(final State state) {
 	final boolean visible = state == State.ready;
 	display.setControlsVisible(visible);
+	display.setStatusVisible(visible);
     }
 
 }

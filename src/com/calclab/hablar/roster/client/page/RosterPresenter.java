@@ -63,12 +63,24 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 
     @Override
     public void addAction(final Action<RosterPage> action) {
-	display.addAction(action.getIconStyle(), action.getId(), new ClickHandler() {
+
+	display.createAction(action).addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(final ClickEvent event) {
 		action.execute(RosterPresenter.this);
 	    }
 	});
+
+    }
+
+    @Override
+    public Menu<RosterGroupPresenter> getGroupMenu() {
+	return groupMenu;
+    }
+
+    @Override
+    public Menu<RosterItemPresenter> getItemMenu() {
+	return itemMenu;
     }
 
     private void addRosterListeners() {
@@ -122,16 +134,6 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 
 	});
 	setSessionState(session.getState());
-    }
-
-    @Override
-    public Menu<RosterGroupPresenter> getGroupMenu() {
-	return groupMenu;
-    }
-
-    @Override
-    public Menu<RosterItemPresenter> getItemMenu() {
-	return itemMenu;
     }
 
     private void loadRoster() {

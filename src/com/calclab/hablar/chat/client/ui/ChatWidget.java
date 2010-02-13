@@ -23,6 +23,9 @@ public class ChatWidget extends Composite implements ChatDisplay {
     interface ChatWidgetUiBinder extends UiBinder<Widget, ChatWidget> {
     }
 
+    private static final int CONTROLS_HEIGHT = 94;
+    private static final int STATUS_HEIGHT = 24;
+
     private static ChatWidgetUiBinder uiBinder = GWT.create(ChatWidgetUiBinder.class);
 
     @UiField
@@ -36,11 +39,13 @@ public class ChatWidget extends Composite implements ChatDisplay {
     @UiField
     Button send;
 
-    private final int controlsHeight;
+    private int controlsHeight;
+    private int statusHeight;
 
     public ChatWidget(final boolean sendButtonVisible) {
 	initWidget(uiBinder.createAndBindUi(this));
-	controlsHeight = sendButtonVisible ? 64 + 30 : 64;
+	controlsHeight = 0;
+	statusHeight = 0;
     }
 
     @Override
@@ -58,6 +63,7 @@ public class ChatWidget extends Composite implements ChatDisplay {
     public HasClickHandlers createAction(final Action<?> action) {
 	final Label label = new Label();
 	label.addStyleName(action.getIconStyle());
+	label.setTitle(action.getName());
 	actions.add(label);
 	return label;
     }
@@ -79,13 +85,10 @@ public class ChatWidget extends Composite implements ChatDisplay {
 
     @Override
     public void setControlsVisible(final boolean visible) {
-	if (visible) {
-	    page.setWidgetTopBottom(scroll, 0, PX, controlsHeight, PX);
-	    page.setWidgetBottomHeight(controls, 0, PX, controlsHeight - 3, PX);
-	} else {
-	    page.setWidgetTopBottom(scroll, 0, PX, 0, PX);
-	    page.setWidgetBottomHeight(controls, 0, PX, 0, PX);
-	}
+	layoutControls();
+	page.forceLayout();
+	controlsHeight = visible ? CONTROLS_HEIGHT : 0;
+	layoutControls();
 	page.animate(500);
     }
 
@@ -96,6 +99,17 @@ public class ChatWidget extends Composite implements ChatDisplay {
 	send.ensureDebugId("ChatWidget-send-" + id);
 	list.ensureDebugId("ChatWidget-list-" + id);
 	scroll.ensureDebugId("ChatWidget-srcoll-" + id);
+	actions.ensureDebugId("ChatWidget-status-" + id);
+
+    }
+
+    @Override
+    public void setStatusVisible(final boolean visible) {
+	layoutStatus();
+	page.forceLayout();
+	statusHeight = visible ? STATUS_HEIGHT : 0;
+	layoutStatus();
+	page.animate(500);
     }
 
     @Override
@@ -103,6 +117,17 @@ public class ChatWidget extends Composite implements ChatDisplay {
 	final ChatMessage message = new ChatMessage(name, body, messageType);
 	list.add(message);
 	scroll.ensureVisible(message);
+    }
+
+    private void layoutControls() {
+	page.setWidgetTopBottom(scroll, statusHeight, PX, controlsHeight + 3, PX);
+	page.setWidgetBottomHeight(controls, 0, PX, controlsHeight, PX);
+    }
+
+    private void layoutStatus() {
+	page.setWidgetTopBottom(scroll, statusHeight, PX, controlsHeight + 3, PX);
+	page.setWidgetTopHeight(actions, 0, PX, statusHeight, PX);
+
     }
 
 }

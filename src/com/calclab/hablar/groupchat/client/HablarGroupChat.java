@@ -23,13 +23,16 @@ public class HablarGroupChat implements EntryPoint {
 	final OpenGroupChatPresenter openGroupPage = new OpenGroupChatPresenter(config.roomsService, hablar
 		.getEventBus(), new OpenRoomWidget());
 	hablar.addPage(openGroupPage, OverlayContainer.ROL);
+	final ConvertToGroupChatPresenter convertToGroupPage = new ConvertToGroupChatPresenter(config.roomsService,
+		hablar.getEventBus(), new OpenRoomWidget());
+	hablar.addPage(convertToGroupPage, OverlayContainer.ROL);
 
 	hablar.addPageAddedHandler(new PageAddedHandler() {
 	    @Override
 	    public void onPageAdded(final PageAddedEvent event) {
 		if (event.isType(ChatPage.TYPE)) {
 		    final ChatPage chatPage = (ChatPage) event.getPage();
-		    chatPage.addAction(createConvertToGroupChatAction());
+		    chatPage.addAction(createConvertToGroupChatAction(convertToGroupPage));
 		} else if (event.isType(RosterPage.TYPE)) {
 		    final RosterPage roster = (RosterPage) event.getPage();
 		    roster.getGroupMenu().addAction(openGroupChatAction(openGroupPage));
@@ -38,10 +41,12 @@ public class HablarGroupChat implements EntryPoint {
 	}, true);
     }
 
-    private static SimpleAction<ChatPage> createConvertToGroupChatAction() {
-	return new SimpleAction<ChatPage>("Convert to group", ACTION_ID_CONVERT, HablarIcons.get(IconType.off)) {
+    private static SimpleAction<ChatPage> createConvertToGroupChatAction(
+	    final ConvertToGroupChatPresenter convertToGroupPage) {
+	return new SimpleAction<ChatPage>("Convert to group", ACTION_ID_CONVERT, HablarIcons.get(IconType.buddyAdd)) {
 	    @Override
 	    public void execute(final ChatPage target) {
+		convertToGroupPage.requestVisibility(Visibility.focused);
 	    }
 	};
     }
