@@ -62,4 +62,9 @@ public class HablarConfig {
      */
     public boolean hasSignals = true;
 
+    /**
+     * Show user page docked on top
+     */
+    public boolean dockUser = true;
+
 }

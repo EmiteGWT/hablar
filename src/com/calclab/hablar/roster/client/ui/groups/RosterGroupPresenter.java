@@ -23,19 +23,25 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	this.groupName = groupName;
 	this.itemMenu = itemMenu;
 	this.display = display;
-	groupLabel = isAllContacts() ? "All contacts" : "Group: " + groupName;
+
 	items = new HashMap<XmppURI, RosterItemPresenter>();
+	final boolean isAllContacts = isAllContacts();
+	display.setVisible(isAllContacts);
 
 	final Roster roster = Suco.get(Roster.class);
-	final Collection<RosterItem> items = isAllContacts() ? roster.getItems() : roster.getItemsByGroup(groupName);
-	for (final RosterItem item : items) {
+	final Collection<RosterItem> rosterItems = isAllContacts ? roster.getItems() : roster
+		.getItemsByGroup(groupName);
+	for (final RosterItem item : rosterItems) {
 	    getPresenter(item);
 	}
+	groupLabel = isAllContacts ? "All contacts" : "Group: " + groupName + " (" + items.size() + ")";
 
 	roster.onItemChanged(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
-		getPresenter(item).setItem(item);
+		if (items.containsKey(item.getJID())) {
+		    getPresenter(item).setItem(item);
+		}
 	    }
 	});
     }

@@ -2,6 +2,7 @@ package com.calclab.hablar;
 
 import com.calclab.hablar.chat.client.HablarChat;
 import com.calclab.hablar.core.client.Hablar;
+import com.calclab.hablar.core.client.HablarDisplay;
 import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.dock.client.DockConfig;
 import com.calclab.hablar.dock.client.HablarDock;
@@ -26,7 +27,11 @@ public class HablarComplete {
 	HablarGroupChat.install(hablar, config.roomsConfig);
 
 	final DockConfig dock = new DockConfig();
-	dock.set(Position.top, UserPage.TYPE, 24);
+	config.dockUser = config.layout == HablarDisplay.Layout.tabs;
+	if (config.dockUser) {
+	    dock.set(Position.top, UserPage.TYPE, 24);
+	}
+
 	if ("left".equals(config.dockRoster)) {
 	    dock.set(Position.left, RosterPage.TYPE, 250);
 	} else if ("right".equals(config.dockRoster)) {

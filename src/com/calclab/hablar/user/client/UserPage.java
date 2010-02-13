@@ -31,6 +31,8 @@ public class UserPage extends PagePresenter<UserDisplay> {
 	manager = Suco.get(PresenceManager.class);
 	pages = new ArrayList<EditorPage<?>>();
 
+	setVisibility(Visibility.notFocused);
+
 	session.onStateChanged(new Listener<Session>() {
 	    @Override
 	    public void onEvent(final Session session) {
@@ -52,13 +54,13 @@ public class UserPage extends PagePresenter<UserDisplay> {
 	    @Override
 	    public void onClick(final ClickEvent event) {
 		saveData();
-		requestVisibility(Visibility.hidden);
+		requestVisibility(Visibility.notFocused);
 	    }
 	});
 	display.getCancel().addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(final ClickEvent event) {
-		requestVisibility(Visibility.hidden);
+		requestVisibility(Visibility.notFocused);
 	    }
 	});
     }
@@ -70,6 +72,18 @@ public class UserPage extends PagePresenter<UserDisplay> {
 
     public boolean contains(final Page<?> page) {
 	return pages.contains(page);
+    }
+
+    @Override
+    public void setVisibility(final Visibility visibility) {
+	if (visibility == Visibility.focused) {
+	    showData();
+	} else {
+	    for (final EditorPage<?> page : pages) {
+		page.setVisibility(visibility);
+	    }
+	}
+	super.setVisibility(visibility);
     }
 
     private void saveData() {
@@ -101,18 +115,6 @@ public class UserPage extends PagePresenter<UserDisplay> {
 	    model.setPageTitle(session.getCurrentUser().getShortName() + " - " + userStatus);
 	    model.setPageIcon(HablarIcons.get(HablarIcons.IconType.buddyOn));
 	}
-    }
-
-    @Override
-    public void setVisibility(final Visibility visibility) {
-	if (visibility == Visibility.focused) {
-	    showData();
-	} else {
-	    for (final EditorPage<?> page : pages) {
-		page.setVisibility(visibility);
-	    }
-	}
-	super.setVisibility(visibility);
     }
 
     private void showData() {
