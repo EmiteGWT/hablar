@@ -17,8 +17,9 @@ public class VCardWidget extends Composite implements VCardDisplay {
     @UiField
     TextBox nickName, firstName, middleName, surname, email, organizationName;
 
-    public VCardWidget() {
+    public VCardWidget(final boolean readOnly) {
 	initWidget(uiBinder.createAndBindUi(this));
+	setReadOnly(readOnly);
     }
 
     @Override
@@ -54,6 +55,15 @@ public class VCardWidget extends Composite implements VCardDisplay {
     @Override
     public TextBox getSurname() {
 	return surname;
+    }
+
+    public void setReadOnly(final boolean readOnly) {
+	nickName.setReadOnly(readOnly);
+	firstName.setReadOnly(readOnly);
+	middleName.setReadOnly(readOnly);
+	surname.setReadOnly(readOnly);
+	email.setReadOnly(readOnly);
+	organizationName.setReadOnly(readOnly);
     }
 
 }

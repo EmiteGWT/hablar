@@ -6,7 +6,6 @@ import com.calclab.emite.xep.vcard.client.VCardResponse;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
-import com.google.gwt.core.client.GWT;
 
 public class OthersVCardPresenter extends VCardPage {
 
@@ -15,7 +14,6 @@ public class OthersVCardPresenter extends VCardPage {
     }
 
     public void setUser(final XmppURI jid) {
-	GWT.log(jid.toString(), null);
 	final VCardManager manager = Suco.get(VCardManager.class);
 	manager.getUserVCard(jid, new Listener<VCardResponse>() {
 	    @Override
