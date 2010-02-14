@@ -2,6 +2,8 @@ package com.calclab.hablar.logger.client;
 
 import com.calclab.hablar.core.client.mvp.Display;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.dom.client.HasKeyDownHandlers;
+import com.google.gwt.user.client.ui.HasText;
 
 public interface LoggerDisplay extends Display {
 
@@ -9,6 +11,12 @@ public interface LoggerDisplay extends Display {
 
     void clear();
 
+    HasText getInputText();
+
     HasClickHandlers getClear();
+
+    HasKeyDownHandlers getInput();
+
+    void setInputCursorPos(int pos);
 
 }
