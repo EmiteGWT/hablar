@@ -16,6 +16,9 @@ public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisp
 	super(eventBus, display);
 	// FIXME: create a button
 	model.init(HablarIcons.get(IconType.buddyWait), "User profile");
+	display.setAcceptVisible(false);
+	display.setCancelVisible(false);
+	display.setPageTitle("Your profile");
     }
 
     @Override

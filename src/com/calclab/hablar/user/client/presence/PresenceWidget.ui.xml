@@ -5,6 +5,7 @@
 		
 	</ui:style>
        <g:HTMLPanel styleName="hablar-PresenceWidget">
+       <h2>Your status</h2>
         <div class="form">
             <p>
                 <label>Status:</label>

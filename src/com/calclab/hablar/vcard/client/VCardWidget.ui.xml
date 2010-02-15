@@ -6,6 +6,9 @@
 	</ui:style>
 	<g:HTMLPanel styleName="hablar-VCardWidget">
 		<div class="form">
+			<h2>
+				<span ui:field='title' />
+			</h2>
 			<p>
 				<label>Nickname:</label>
 				<g:TextBox ui:field="nickName"></g:TextBox>
@@ -26,11 +29,14 @@
 				<label>Organization:</label>
 				<g:TextBox ui:field="organizationName"></g:TextBox>
 			</p>
-            <p>
-                <label>Email:</label>
-                <g:TextBox ui:field="email"></g:TextBox>
-            </p>
-
+			<p>
+				<label>Email:</label>
+				<g:TextBox ui:field="email"></g:TextBox>
+			</p>
+			<div class="actions">
+				<g:Button ui:field="accept">Accept</g:Button>
+				<g:Button ui:field="cancel">Cancel</g:Button>
+			</div>
 		</div>
 	</g:HTMLPanel>
 

@@ -168,6 +168,11 @@
 	border-top: 1px solid #BBB;
 }
 
+.hablar-UserWidget h2 {
+	margin: 15px 0 5px 0;
+	border-bottom: 1px solid #EFEFEF;
+}
+
 .hablar-UserWidget .actions {
 	padding: 5px 0 0 10px;
 }
@@ -299,6 +304,7 @@ div.hablar-RosterItemWidget:hover {
 	color: #808080;
 	font-style: italic;
 }
+
 .chatMessage .body.alert {
 	color: #c00;
 }
@@ -365,11 +371,11 @@ div.hablar-RosterItemWidget:hover {
 	-webkit-border-radius: 5px;
 	background-color: #E9E9E9;
 }
+
 .hablar-Logger a.gwt-Anchor:hover {
 	color: white;
 	background-color: #BBBBBB;
 }
-
 
 .hablar-Logger .gwt-Label.ready {
 	opacity: 1;
