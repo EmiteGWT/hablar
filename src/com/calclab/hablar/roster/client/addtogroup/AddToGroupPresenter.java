@@ -1,4 +1,4 @@
-package com.calclab.hablar.roster.client.ui.move;
+package com.calclab.hablar.roster.client.addtogroup;
 
 import java.util.List;
 
@@ -10,14 +10,14 @@ import com.calclab.suco.client.Suco;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
-public class MoveToGroupPresenter extends PagePresenter<MoveToGroupDisplay> {
+public class AddToGroupPresenter extends PagePresenter<AddToGroupDisplay> {
 
     private static final String TYPE = "MoveToGroup";
     private static final String[] EMPTY_STRING_ARRAY = new String[0];
     private static int id = 0;
     private RosterItem item;
 
-    public MoveToGroupPresenter(final HablarEventBus eventBus, final MoveToGroupDisplay display) {
+    public AddToGroupPresenter(final HablarEventBus eventBus, final AddToGroupDisplay display) {
 	super(TYPE, "" + ++id, eventBus, display);
 
 	display.getCancel().addClickHandler(new ClickHandler() {

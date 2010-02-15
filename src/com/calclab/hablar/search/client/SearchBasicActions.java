@@ -28,6 +28,11 @@ public class SearchBasicActions {
 	    public void execute(final SearchResultItem item) {
 		roster.requestAddItem(item.getJid(), item.getNick());
 	    }
+
+	    @Override
+	    public boolean isApplicable(final SearchResultItem item) {
+		return roster.getItemByJID(item.getJid()) == null;
+	    }
 	});
 
 	menu.addAction(new SimpleAction<SearchResultItem>(i18n().chat(), CHAT_DEB_ID) {
@@ -41,6 +46,11 @@ public class SearchBasicActions {
 	    @Override
 	    public void execute(final SearchResultItem item) {
 		roster.removeItem(item.getJid());
+	    }
+
+	    @Override
+	    public boolean isApplicable(final SearchResultItem item) {
+		return roster.getItemByJID(item.getJid()) != null;
 	    }
 	});
 

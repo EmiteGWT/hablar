@@ -1,4 +1,4 @@
-package com.calclab.hablar.roster.client.ui.groups;
+package com.calclab.hablar.roster.client.groups;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -39,8 +39,35 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	roster.onItemChanged(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
-		if (items.containsKey(item.getJID())) {
-		    getPresenter(item).setItem(item);
+		final XmppURI itemJid = item.getJID();
+		if (items.containsKey(itemJid)) {
+		    final RosterItemPresenter presenter = getPresenter(item);
+		    if (isAllContacts || item.isInGroup(groupName)) {
+			presenter.setItem(item);
+		    } else {
+			remove(itemJid, presenter);
+		    }
+		} else if (item.isInGroup(groupName)) {
+		    getPresenter(item);
+		}
+	    }
+	});
+
+	roster.onItemAdded(new Listener<RosterItem>() {
+	    @Override
+	    public void onEvent(final RosterItem item) {
+		if (isInGroup(item)) {
+		    getPresenter(item);
+		}
+	    }
+	});
+
+	roster.onItemRemoved(new Listener<RosterItem>() {
+	    @Override
+	    public void onEvent(final RosterItem item) {
+		final XmppURI jid = item.getJID();
+		if (items.containsKey(jid)) {
+		    remove(jid, items.get(jid));
 		}
 	    }
 	});
@@ -82,6 +109,24 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	}
 	presenter.setItem(item);
 	return presenter;
+    }
+
+    private boolean isInGroup(final RosterItem item) {
+	if (isAllContacts()) {
+	    return true;
+	} else {
+	    for (final String name : item.getGroups()) {
+		if (name.equals(groupName)) {
+		    return true;
+		}
+	    }
+	}
+	return false;
+    }
+
+    protected void remove(final XmppURI itemJid, final RosterItemPresenter presenter) {
+	display.remove(presenter.getDisplay());
+	items.remove(itemJid);
     }
 
 }

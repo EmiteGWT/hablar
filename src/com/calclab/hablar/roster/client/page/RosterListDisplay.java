@@ -1,8 +1,8 @@
 package com.calclab.hablar.roster.client.page;
 
 import com.calclab.hablar.core.client.mvp.Display;
-import com.calclab.hablar.roster.client.ui.groups.GroupHeaderDisplay;
-import com.calclab.hablar.roster.client.ui.groups.RosterGroupDisplay;
+import com.calclab.hablar.roster.client.groups.GroupHeaderDisplay;
+import com.calclab.hablar.roster.client.groups.RosterGroupDisplay;
 
 public interface RosterListDisplay extends Display {
 

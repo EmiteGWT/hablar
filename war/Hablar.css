@@ -310,15 +310,47 @@ div.hablar-RosterItemWidget:hover {
 }
 
 /** SEARCH PAGE **/
-.hablar-Search .searchBox {
+.hablar-SearchWidget .searchBox {
 	width: 78%;
 	padding: 3px;
 	border: 1px solid #BBBBBB;
 	margin-right: 1%;
 }
 
-.hablar-Search .gwt-Button {
+.hablar-SearchWidget .gwt-Button {
 	width: 20%;
+}
+
+.hablar-SearchResultItemWidget {
+	width: 100%;
+	overflow: hidden;
+	padding: 2px 0;
+	border-bottom: 1px solid #E9E9E9;
+	cursor: pointer;
+}
+
+div.hablar-SearchResultItemWidget:hover {
+	background-color: #e9e9e9;
+}
+
+
+.hablar-SearchResultItemWidget div {
+	float: left;
+	margin-right: 5px;
+}
+
+.hablar-SearchResultItemWidget div.icon {
+	margin: 0 5px;
+}
+
+.hablar-SearchResultItemWidget div.jid {
+	color: gray;
+}
+
+.hablar-SearchResultItemWidget div.menu {
+	float: right;
+	margin-right: 0;
+	margin-left: 5px;
 }
 
 /** ROOM INVITATION **/

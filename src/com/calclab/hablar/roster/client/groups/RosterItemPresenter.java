@@ -1,4 +1,4 @@
-package com.calclab.hablar.roster.client.ui.groups;
+package com.calclab.hablar.roster.client.groups;
 
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.RosterItem;

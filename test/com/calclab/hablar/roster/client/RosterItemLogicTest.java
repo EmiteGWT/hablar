@@ -10,8 +10,8 @@ import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emite.im.client.roster.SubscriptionState;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.menu.Menu;
-import com.calclab.hablar.roster.client.ui.groups.RosterItemDisplay;
-import com.calclab.hablar.roster.client.ui.groups.RosterItemPresenter;
+import com.calclab.hablar.roster.client.groups.RosterItemDisplay;
+import com.calclab.hablar.roster.client.groups.RosterItemPresenter;
 import com.calclab.hablar.testing.HablarTester;
 
 public class RosterItemLogicTest {

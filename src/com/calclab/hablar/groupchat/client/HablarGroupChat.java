@@ -11,8 +11,8 @@ import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.rooms.client.HablarRoomsConfig;
 import com.calclab.hablar.rooms.client.ui.open.OpenRoomWidget;
+import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
-import com.calclab.hablar.roster.client.ui.groups.RosterGroupPresenter;
 import com.google.gwt.core.client.EntryPoint;
 
 public class HablarGroupChat implements EntryPoint {

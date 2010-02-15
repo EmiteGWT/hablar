@@ -3,6 +3,7 @@ package com.calclab.hablar;
 import com.calclab.emite.browser.client.PageAssist;
 import com.calclab.hablar.core.client.HablarDisplay;
 import com.calclab.hablar.rooms.client.HablarRoomsConfig;
+import com.calclab.hablar.search.client.SearchConfig;
 
 public class HablarConfig {
 
@@ -27,10 +28,14 @@ public class HablarConfig {
 	}
 
 	config.roomsConfig = HablarRoomsConfig.getFromMeta();
+	config.searchConfig = SearchConfig.getFromMeta();
 	return config;
     }
 
-    HablarRoomsConfig roomsConfig = new HablarRoomsConfig();
+    /**
+     * The Rooms configuration
+     */
+    public HablarRoomsConfig roomsConfig = new HablarRoomsConfig();
 
     /**
      * Has ChatModule
@@ -66,5 +71,10 @@ public class HablarConfig {
      * Show user page docked on top
      */
     public boolean dockUser = true;
+
+    /**
+     * The Search module configuration
+     */
+    public SearchConfig searchConfig = new SearchConfig();
 
 }

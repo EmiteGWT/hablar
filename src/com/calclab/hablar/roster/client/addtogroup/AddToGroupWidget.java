@@ -1,4 +1,4 @@
-package com.calclab.hablar.roster.client.ui.move;
+package com.calclab.hablar.roster.client.addtogroup;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -8,9 +8,9 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
-public class MoveToGroupWidget extends Composite implements MoveToGroupDisplay {
+public class AddToGroupWidget extends Composite implements AddToGroupDisplay {
 
-    interface MoveToGroupWidgetUiBinder extends UiBinder<Widget, MoveToGroupWidget> {
+    interface MoveToGroupWidgetUiBinder extends UiBinder<Widget, AddToGroupWidget> {
     }
 
     private static MoveToGroupWidgetUiBinder uiBinder = GWT.create(MoveToGroupWidgetUiBinder.class);
@@ -21,7 +21,7 @@ public class MoveToGroupWidget extends Composite implements MoveToGroupDisplay {
     @UiField
     TextBox newGroupName;
 
-    public MoveToGroupWidget() {
+    public AddToGroupWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
     }
 

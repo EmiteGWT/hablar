@@ -9,7 +9,7 @@ import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.editbuddy.client.ui.EditBuddyDisplay;
-import com.calclab.hablar.roster.client.ui.groups.RosterItemPresenter;
+import com.calclab.hablar.roster.client.groups.RosterItemPresenter;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;

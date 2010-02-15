@@ -1,4 +1,4 @@
-package com.calclab.hablar.roster.client.ui.groups;
+package com.calclab.hablar.roster.client.groups;
 
 import com.calclab.hablar.core.client.mvp.Display;
 import com.google.gwt.event.dom.client.HasClickHandlers;

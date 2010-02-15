@@ -16,9 +16,9 @@ import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.Menu;
-import com.calclab.hablar.roster.client.ui.groups.RosterGroupDisplay;
-import com.calclab.hablar.roster.client.ui.groups.RosterGroupPresenter;
-import com.calclab.hablar.roster.client.ui.groups.RosterItemPresenter;
+import com.calclab.hablar.roster.client.groups.RosterGroupDisplay;
+import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
+import com.calclab.hablar.roster.client.groups.RosterItemPresenter;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
@@ -95,7 +95,11 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 	roster.onItemAdded(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
-		// getPresenter(item);
+		for (final String name : item.getGroups()) {
+		    if (groups.get(name) == null) {
+			createGroup(name);
+		    }
+		}
 		final String msg = item.getName() + " has been added to Contacts.";
 		getState().setUserMessage(msg);
 	    }
@@ -136,6 +140,13 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 	setSessionState(session.getState());
     }
 
+    private void createGroup(final String groupName) {
+	final RosterGroupDisplay groupDisplay = display.newRosterGroupDisplay();
+	final RosterGroupPresenter group = new RosterGroupPresenter(groupName, itemMenu, groupDisplay);
+	groups.put(groupName, group);
+	display.addGroup(group, groupMenu);
+    }
+
     private void loadRoster() {
 	GWT.log("LOAD ROSTER");
 	groups.clear();
@@ -143,10 +154,7 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 	groups.put("", all);
 	display.addGroup(all, groupMenu);
 	for (final String groupName : roster.getGroups()) {
-	    final RosterGroupDisplay groupDisplay = display.newRosterGroupDisplay();
-	    final RosterGroupPresenter group = new RosterGroupPresenter(groupName, itemMenu, groupDisplay);
-	    groups.put(groupName, group);
-	    display.addGroup(group, groupMenu);
+	    createGroup(groupName);
 	}
     }
 

@@ -4,7 +4,7 @@
 	<ui:style>
 		
 	</ui:style>
-    <g:LayoutPanel ui:field="self" styleName="hablar-Page hablar-Search">
+    <g:LayoutPanel ui:field="self" styleName="hablar-Page hablar-SearchWidget">
         <g:layer left="0" top="0" width="100%" height="0">
             <g:FlowPanel ui:field="messagePanel">
                 <g:Label ui:field="message" styleName="panel messadge">

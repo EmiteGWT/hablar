@@ -1,21 +1,18 @@
 package com.calclab.hablar.roster.client;
 
-import java.util.List;
-
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
+import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
+import com.calclab.hablar.roster.client.groups.RosterItemPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
-import com.calclab.hablar.roster.client.ui.groups.RosterGroupPresenter;
-import com.calclab.hablar.roster.client.ui.groups.RosterItemPresenter;
 import com.calclab.suco.client.Suco;
 
 public class RosterBasicActions {
 
     private static final String ACTION_ID_REMOVE_FROM_ROSTER = "HablarRoster-removeFromRosterAction";
     private static final String ID_ACTION_REMOVE_FROM_GROUP = "HablarRoster-removeFromGroupAction";
-    private static final String[] EMPTY_ARRAY = new String[0];
     private static final String ID_ACTION_DELETE_GROUP = "HablarRoster-deleteGroupAction";
 
     private final SimpleAction<RosterItemPresenter> removeFromRoster = new SimpleAction<RosterItemPresenter>(
@@ -64,13 +61,8 @@ public class RosterBasicActions {
 
     protected void removeFromGroup(final RosterItem item, final String groupName) {
 	final Roster roster = Suco.get(Roster.class);
-	final List<String> groups = item.getGroups();
-	for (final String name : groups) {
-	    if (name.equals(groupName)) {
-		groups.remove(name);
-	    }
-	}
-	roster.updateItem(item.getJID(), item.getName(), groups.toArray(EMPTY_ARRAY));
+	item.removeFromGroup(groupName);
+	roster.updateItem(item);
     }
 
     protected void removeFromRoster(final RosterItem item) {

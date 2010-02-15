@@ -1,8 +1,8 @@
 package com.calclab.hablar.roster.client.page;
 
-import com.calclab.hablar.roster.client.ui.groups.GroupHeaderDisplay;
-import com.calclab.hablar.roster.client.ui.groups.GroupHeaderWidget;
-import com.calclab.hablar.roster.client.ui.groups.RosterGroupDisplay;
+import com.calclab.hablar.roster.client.groups.GroupHeaderDisplay;
+import com.calclab.hablar.roster.client.groups.GroupHeaderWidget;
+import com.calclab.hablar.roster.client.groups.RosterGroupDisplay;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 

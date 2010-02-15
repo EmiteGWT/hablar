@@ -49,7 +49,7 @@ public class HablarComplete {
 	}
 
 	if (config.hasSearch) {
-	    HablarSearch.install(hablar);
+	    HablarSearch.install(hablar, config.searchConfig);
 	}
 
 	if (config.hasSignals) {

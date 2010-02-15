@@ -29,14 +29,21 @@ public class SearchPage extends PagePresenter<SearchDisplay> {
 
     private final Menu<SearchResultItem> itemMenu;
 
-    public SearchPage(final HablarEventBus eventBus, final SearchWidget display) {
+    public SearchPage(final Visibility visibility, final boolean closeable, final HablarEventBus eventBus,
+	    final SearchWidget display) {
 	super("HablarSearch", "" + ++index, eventBus, display);
 	manager = Suco.get(SearchManager.class);
+	setVisibility(visibility);
+	model.setCloseable(closeable);
 
-	getState().init(HablarIcons.get(HablarIcons.IconType.search), i18n().searchUsers());
+	model.init(HablarIcons.get(HablarIcons.IconType.search), i18n().searchUsers());
 	final MenuDisplay<SearchResultItem> menuDisplay = display.createMenu(SEARCH_MENU);
 	itemMenu = new Menu<SearchResultItem>(menuDisplay);
 	bind();
+    }
+
+    public Menu<SearchResultItem> getItemMenu() {
+	return itemMenu;
     }
 
     private void bind() {
@@ -53,10 +60,6 @@ public class SearchPage extends PagePresenter<SearchDisplay> {
 	    }
 	});
 
-    }
-
-    public Menu<SearchResultItem> getItemMenu() {
-	return itemMenu;
     }
 
     private void search() {
@@ -78,7 +81,7 @@ public class SearchPage extends PagePresenter<SearchDisplay> {
 		    display.showMessage(i18n().searchResultsFor(text, items.size()), Level.success);
 		    for (final SearchResultItem item : items) {
 			final SearchResultItemDisplay itemDisplay = display.newSearchResultItemDisplay();
-			new SearchResultItemPresenter(item, itemDisplay);
+			new SearchResultItemPresenter(item, itemMenu, itemDisplay);
 			display.addResult(itemDisplay);
 		    }
 		}

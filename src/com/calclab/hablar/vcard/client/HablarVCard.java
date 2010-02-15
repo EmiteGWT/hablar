@@ -7,9 +7,9 @@ import com.calclab.hablar.core.client.container.overlay.OverlayContainer;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
+import com.calclab.hablar.roster.client.groups.RosterItemPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
-import com.calclab.hablar.roster.client.ui.groups.RosterItemPresenter;
 import com.calclab.hablar.user.client.UserContainer;
 import com.google.gwt.core.client.EntryPoint;
 
