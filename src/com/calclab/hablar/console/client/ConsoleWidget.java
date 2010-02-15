@@ -1,4 +1,4 @@
-package com.calclab.hablar.logger.client;
+package com.calclab.hablar.console.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -14,9 +14,9 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 
-public class LoggerWidget extends Composite implements LoggerDisplay {
+public class ConsoleWidget extends Composite implements ConsoleDisplay {
 
-    interface LoggerWidgetUiBinder extends UiBinder<Widget, LoggerWidget> {
+    interface LoggerWidgetUiBinder extends UiBinder<Widget, ConsoleWidget> {
     }
 
     private static LoggerWidgetUiBinder uiBinder = GWT.create(LoggerWidgetUiBinder.class);
@@ -29,7 +29,7 @@ public class LoggerWidget extends Composite implements LoggerDisplay {
     @UiField
     ScrollPanel scroll;
 
-    public LoggerWidget() {
+    public ConsoleWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
     }
 
@@ -53,17 +53,17 @@ public class LoggerWidget extends Composite implements LoggerDisplay {
     }
 
     @Override
-    public HasText getInputText() {
-	return input;
-    }
-
-    @Override
     public HasClickHandlers getClear() {
 	return clear;
     }
 
     @Override
     public HasKeyDownHandlers getInput() {
+	return input;
+    }
+
+    @Override
+    public HasText getInputText() {
 	return input;
     }
 

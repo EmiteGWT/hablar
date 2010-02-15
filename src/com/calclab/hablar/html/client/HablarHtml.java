@@ -2,9 +2,9 @@ package com.calclab.hablar.html.client;
 
 import com.calclab.hablar.HablarComplete;
 import com.calclab.hablar.HablarConfig;
+import com.calclab.hablar.console.client.HablarConsole;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
-import com.calclab.hablar.logger.client.HablarLogger;
 import com.calclab.hablar.login.client.HablarLogin;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -45,7 +45,7 @@ public class HablarHtml implements EntryPoint {
 	HablarComplete.install(hablar, config);
 
 	if (htmlConfig.hasLogger) {
-	    HablarLogger.install(hablar);
+	    HablarConsole.install(hablar);
 	}
 
 	if (htmlConfig.hasLogin) {

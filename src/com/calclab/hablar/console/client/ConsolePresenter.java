@@ -1,4 +1,4 @@
-package com.calclab.hablar.logger.client;
+package com.calclab.hablar.console.client;
 
 import com.calclab.emite.core.client.bosh.Connection;
 import com.calclab.emite.core.client.packet.IPacket;
@@ -17,12 +17,12 @@ import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.user.client.ui.HasText;
 
-public class LoggerPage extends PagePresenter<LoggerDisplay> {
+public class ConsolePresenter extends PagePresenter<ConsoleDisplay> {
     private static final String TYPE = "Logger";
 
-    public LoggerPage(final HablarEventBus eventBus, final LoggerDisplay display) {
+    public ConsolePresenter(final HablarEventBus eventBus, final ConsoleDisplay display) {
 	super(TYPE, eventBus, display);
-	model.init(HablarIcons.get(IconType.roster), "Console");
+	model.init(HablarIcons.get(IconType.console), "Console");
 	setVisibility(Visibility.notFocused);
 	model.setCloseable(true);
 

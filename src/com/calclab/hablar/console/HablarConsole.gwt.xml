@@ -8,5 +8,5 @@
 	<inherits name='com.calclab.hablar.roster.HablarRoster' />
 		
 	<source path="client" />
-	<entry-point class="com.calclab.hablar.logger.client.HablarLogger" />
+	<entry-point class="com.calclab.hablar.console.client.HablarConsole" />
 </module>

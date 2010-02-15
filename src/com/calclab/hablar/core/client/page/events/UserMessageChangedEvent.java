@@ -7,9 +7,11 @@ import com.google.gwt.event.shared.GwtEvent;
 public class UserMessageChangedEvent extends GwtEvent<UserMessageChangedHandler> {
     public static final Type<UserMessageChangedHandler> TYPE = new Type<UserMessageChangedHandler>();
     private final Page<?> page;
+    private final String userMessage;
 
-    public UserMessageChangedEvent(Page<?> page) {
+    public UserMessageChangedEvent(final Page<?> page, final String userMessage) {
 	this.page = page;
+	this.userMessage = userMessage;
     }
 
     @Override
@@ -25,8 +27,12 @@ public class UserMessageChangedEvent extends GwtEvent<UserMessageChangedHandler>
 	return page.getState();
     }
 
+    public String getUserMessage() {
+	return userMessage;
+    }
+
     @Override
-    protected void dispatch(UserMessageChangedHandler handler) {
+    protected void dispatch(final UserMessageChangedHandler handler) {
 	handler.onUserMessageChanged(this);
     }
 

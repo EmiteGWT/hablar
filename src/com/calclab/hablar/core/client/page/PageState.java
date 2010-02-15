@@ -3,6 +3,7 @@ package com.calclab.hablar.core.client.page;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.page.events.UserMessageChangedEvent;
+import com.calclab.hablar.core.client.page.events.UserMessageChangedHandler;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedHandler;
 
@@ -13,7 +14,7 @@ public class PageState {
     private final HablarEventBus eventBus;
     private final Page<?> page;
 
-    public PageState(HablarEventBus eventBus, Page<?> page) {
+    public PageState(final HablarEventBus eventBus, final Page<?> page) {
 	this.eventBus = eventBus;
 	this.page = page;
 	visibility = Visibility.hidden;
@@ -23,9 +24,20 @@ public class PageState {
     public void addInfoChangedHandler(final PageInfoChangedHandler handler) {
 	eventBus.addHandler(PageInfoChangedEvent.TYPE, new PageInfoChangedHandler() {
 	    @Override
-	    public void onPageInfoChanged(PageInfoChangedEvent event) {
+	    public void onPageInfoChanged(final PageInfoChangedEvent event) {
 		if (event.getPage() == page) {
 		    handler.onPageInfoChanged(event);
+		}
+	    }
+	});
+    }
+
+    public void addUserMessageChangedHandler(final UserMessageChangedHandler handler) {
+	eventBus.addHandler(UserMessageChangedEvent.TYPE, new UserMessageChangedHandler() {
+	    @Override
+	    public void onUserMessageChanged(final UserMessageChangedEvent event) {
+		if (event.getPageState() == PageState.this) {
+		    handler.onUserMessageChanged(event);
 		}
 	    }
 	});
@@ -34,7 +46,7 @@ public class PageState {
     public void addVisibilityChangedHandler(final VisibilityChangedHandler handler) {
 	eventBus.addHandler(VisibilityChangedEvent.TYPE, new VisibilityChangedHandler() {
 	    @Override
-	    public void onVisibilityChanged(VisibilityChangedEvent event) {
+	    public void onVisibilityChanged(final VisibilityChangedEvent event) {
 		if (event.getPage() == page) {
 		    handler.onVisibilityChanged(event);
 		}
@@ -62,7 +74,7 @@ public class PageState {
 	return visibility;
     }
 
-    public void init(String style, String title) {
+    public void init(final String style, final String title) {
 	pageIcon = style;
 	pageTitle = title;
 	fireChanged();
@@ -72,28 +84,30 @@ public class PageState {
 	return closeable;
     }
 
-    public void setCloseable(boolean closeable) {
+    public void setCloseable(final boolean closeable) {
 	this.closeable = closeable;
 	fireChanged();
     }
 
-    public void setPageIcon(String pageIcon) {
+    public void setPageIcon(final String pageIcon) {
 	this.pageIcon = pageIcon;
 	fireChanged();
 
     }
 
-    public void setPageTitle(String pageTitle) {
+    public void setPageTitle(final String pageTitle) {
 	this.pageTitle = pageTitle;
 	fireChanged();
     }
 
-    public void setUserMessage(String userMessage) {
-	this.userMessage = userMessage;
-	eventBus.fireEvent(new UserMessageChangedEvent(page));
+    public void setUserMessage(final String userMessage) {
+	if (userMessage != null && !userMessage.equals(this.userMessage)) {
+	    this.userMessage = userMessage;
+	    eventBus.fireEvent(new UserMessageChangedEvent(page, userMessage));
+	}
     }
 
-    public void setVisibility(Visibility visibility) {
+    public void setVisibility(final Visibility visibility) {
 	this.visibility = visibility;
 	eventBus.fireEvent(new VisibilityChangedEvent(page, getVisibility()));
     }

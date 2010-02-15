@@ -18,12 +18,13 @@ public class ConvertToGroupChatPresenter extends OpenRoomPresenter {
 
     @Override
     protected void onAccept() {
-	final Roster roster = Suco.get(Roster.class);
-	setItems(roster.getItems(), true);
+
     }
 
     @Override
     protected void onPageOpen() {
+	final Roster roster = Suco.get(Roster.class);
+	setItems(roster.getItems(), true);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.calclab.hablar.logger.client;
+package com.calclab.hablar.console.client;
 
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.container.PageAddedEvent;
@@ -11,12 +11,12 @@ import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
 import com.google.gwt.core.client.EntryPoint;
 
-public class HablarLogger implements EntryPoint {
+public class HablarConsole implements EntryPoint {
 
     protected static final String ACTION_ID = "hablar-LoggerAction";
 
     public static void install(final Hablar hablar) {
-	final LoggerPage loggerPage = new LoggerPage(hablar.getEventBus(), new LoggerWidget());
+	final ConsolePresenter loggerPage = new ConsolePresenter(hablar.getEventBus(), new ConsoleWidget());
 	hablar.addPage(loggerPage);
 
 	hablar.addPageAddedHandler(new PageAddedHandler() {
@@ -26,7 +26,7 @@ public class HablarLogger implements EntryPoint {
 		if (rosterPage != null) {
 
 		    final String name = "Open Logger Page";
-		    final String icon = HablarIcons.get(IconType.buddyWait);
+		    final String icon = HablarIcons.get(IconType.console);
 		    rosterPage.addAction(new SimpleAction<RosterPage>(name, ACTION_ID, icon) {
 			@Override
 			public void execute(final RosterPage page) {

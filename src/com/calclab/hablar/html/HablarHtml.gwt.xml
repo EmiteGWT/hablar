@@ -3,7 +3,7 @@
 <module rename-to="HablarHtml">
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="com.calclab.hablar.Hablar" />
-	<inherits name='com.calclab.hablar.logger.HablarLogger' />
+	<inherits name='com.calclab.hablar.console.HablarConsole' />
 	<inherits name='com.calclab.hablar.login.HablarLogin' />
 	<inherits name='com.google.gwt.user.theme.chrome.Chrome' />
 

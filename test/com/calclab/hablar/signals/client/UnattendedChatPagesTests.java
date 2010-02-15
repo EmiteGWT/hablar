@@ -28,23 +28,23 @@ public class UnattendedChatPagesTests {
 
     @Test
     public void shouldAddChatIfNewMessageAndNotFocused() {
-	Page<?> page = createChatPage(Visibility.notFocused);
+	final Page<?> page = createChatPage(Visibility.notFocused);
 	assertEquals(0, pages.getSize());
-	tester.fire(new UserMessageChangedEvent(page));
+	tester.fire(new UserMessageChangedEvent(page, "message"));
 	assertTrue(pages.contains(page));
     }
 
     @Test
     public void shouldRemoveChatIfFocused() {
-	Page<?> page = createChatPage(Visibility.notFocused);
-	tester.fire(new UserMessageChangedEvent(page));
+	final Page<?> page = createChatPage(Visibility.notFocused);
+	tester.fire(new UserMessageChangedEvent(page, "message"));
 	assertTrue(pages.contains(page));
 	tester.fire(new VisibilityChangedEvent(page, Visibility.focused));
 	assertFalse(pages.contains(page));
     }
 
-    private Page<?> createChatPage(Visibility visibility) {
-	Page<?> page = tester.newPage(visibility);
+    private Page<?> createChatPage(final Visibility visibility) {
+	final Page<?> page = tester.newPage(visibility);
 	when(page.getType()).thenReturn(ChatPage.TYPE);
 	return page;
     }
