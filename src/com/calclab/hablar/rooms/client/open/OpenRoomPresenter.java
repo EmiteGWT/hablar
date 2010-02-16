@@ -1,12 +1,14 @@
-package com.calclab.hablar.rooms.client.ui.open;
+package com.calclab.hablar.rooms.client.open;
 
 import java.util.Collection;
 import java.util.HashMap;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
@@ -35,6 +37,14 @@ public abstract class OpenRoomPresenter extends PagePresenter<OpenRoomDisplay> {
 
     public Collection<SelectRosterItemPresenter> getItems() {
 	return itemsByUri.values();
+    }
+
+    public void setItem(final XmppURI uri, final boolean enabled, final boolean selected) {
+	final SelectRosterItemPresenter item = itemsByUri.get(uri);
+	if (item != null) {
+	    item.setEnabled(enabled);
+	    item.setSelected(selected);
+	}
     }
 
     public void setItems(final Collection<RosterItem> items, final boolean selectable) {
@@ -68,5 +78,15 @@ public abstract class OpenRoomPresenter extends PagePresenter<OpenRoomDisplay> {
     protected abstract void onAccept();
 
     protected abstract void onPageOpen();
+
+    protected void sendInvitations(final Room room) {
+	final String reasonText = display.getMessage().getText();
+	for (final SelectRosterItemPresenter itemPresenter : getItems()) {
+	    if (itemPresenter.isSelected()) {
+		GWT.log("INVITING: " + itemPresenter.getItem().getJID());
+		room.sendInvitationTo(itemPresenter.getItem().getJID(), reasonText);
+	    }
+	}
+    }
 
 }

@@ -1,4 +1,4 @@
-package com.calclab.hablar.rooms.client.ui.open;
+package com.calclab.hablar.rooms.client.open;
 
 import com.calclab.hablar.core.client.mvp.Display;
 import com.google.gwt.user.client.ui.HasText;
@@ -13,7 +13,5 @@ public interface SelectRosterItemDisplay extends Display {
     void setIconStyle(String style);
 
     void setSelectEnabled(boolean enabled);
-
-    void setSelectVisible(boolean visible);
 
 }

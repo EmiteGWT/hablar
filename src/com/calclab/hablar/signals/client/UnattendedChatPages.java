@@ -10,6 +10,7 @@ import com.calclab.hablar.core.client.page.events.UserMessageChangedEvent;
 import com.calclab.hablar.core.client.page.events.UserMessageChangedHandler;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedHandler;
+import com.calclab.hablar.rooms.client.room.RoomPresenter;
 
 /**
  * A registry of unattended chat pages. It listen to events and tracks which
@@ -40,7 +41,7 @@ public class UnattendedChatPages {
 	    @Override
 	    public void onUserMessageChanged(final UserMessageChangedEvent event) {
 		final Page<?> page = event.getPage();
-		if (page.getType().equals(ChatPresenter.TYPE)) {
+		if (isChatPage(page)) {
 		    final Visibility visibility = page.getVisibility();
 		    if (visibility != Visibility.focused && unattendedChatPages.add(page)) {
 			eventBus.fireEvent(new UnattendedChatsChangedEvent(UnattendedChatPages.this));
@@ -53,13 +54,18 @@ public class UnattendedChatPages {
 	    @Override
 	    public void onVisibilityChanged(final VisibilityChangedEvent event) {
 		final Page<?> page = event.getPage();
-		if (page.getType().equals(ChatPresenter.TYPE)) {
+		if (isChatPage(page)) {
 		    onChatVisibilityChanged(page);
 		}
 	    }
 
 	});
 
+    }
+
+    private boolean isChatPage(final Page<?> page) {
+	final String pageType = page.getType();
+	return pageType.equals(ChatPresenter.TYPE) || pageType.equals(RoomPresenter.TYPE);
     }
 
     private void onChatVisibilityChanged(final Page<?> page) {

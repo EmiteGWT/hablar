@@ -68,6 +68,15 @@ public class HablarChatManager {
 		page.requestVisibility(Visibility.focused);
 	    }
 	});
+
+	chatManager.onChatClosed(new Listener<Chat>() {
+	    @Override
+	    public void onEvent(final Chat chat) {
+		final ChatPage page = chatPages.get(chat.getURI());
+		page.requestVisibility(Visibility.hidden);
+	    }
+	});
+
 	roster.onItemChanged(new Listener<RosterItem>() {
 	    public void onEvent(final RosterItem item) {
 		final XmppURI jid = item.getJID();

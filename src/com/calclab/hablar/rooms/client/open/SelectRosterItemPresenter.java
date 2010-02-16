@@ -1,4 +1,4 @@
-package com.calclab.hablar.rooms.client.ui.open;
+package com.calclab.hablar.rooms.client.open;
 
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
@@ -14,7 +14,7 @@ public class SelectRosterItemPresenter {
 	this.display = display;
 	display.getName().setText(item.getName());
 	display.getSelected().setValue(!selectable);
-	display.setSelectVisible(selectable);
+	display.setSelectEnabled(selectable);
 	display.setIconStyle(PresenceIcon.getIcon(item.isAvailable(), item.getShow()));
     }
 

@@ -4,6 +4,8 @@
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name='com.calclab.hablar.core.HablarCore' />
 	<inherits name='com.calclab.hablar.chat.HablarChat' />
+	<inherits name='com.calclab.hablar.rooms.HablarRooms' />
+	
 	<source path="client" />
 	<entry-point
 		class="com.calclab.hablar.signals.client.HablarSignals" />

@@ -29,15 +29,15 @@ public class ChatWidget extends Composite implements ChatDisplay {
     private static ChatWidgetUiBinder uiBinder = GWT.create(ChatWidgetUiBinder.class);
 
     @UiField
-    TextArea talkBox;
+    protected TextArea talkBox;
     @UiField
-    LayoutPanel page;
+    protected LayoutPanel page;
     @UiField
-    FlowPanel list, controls, actions;
+    protected FlowPanel list, controls, actions;
     @UiField
-    ScrollPanel scroll;
+    protected ScrollPanel scroll;
     @UiField
-    Button send;
+    protected Button send;
 
     private int controlsHeight;
     private int statusHeight;

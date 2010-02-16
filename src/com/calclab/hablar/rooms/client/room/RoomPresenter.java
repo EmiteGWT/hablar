@@ -1,4 +1,4 @@
-package com.calclab.hablar.rooms.client.ui;
+package com.calclab.hablar.rooms.client.room;
 
 import static com.calclab.hablar.core.client.i18n.Translator.i18n;
 
@@ -10,11 +10,11 @@ import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.hablar.chat.client.ui.ChatDisplay;
 import com.calclab.hablar.chat.client.ui.ChatMessageFormatter;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
-import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.Action;
+import com.calclab.hablar.rooms.client.occupant.OccupantsPresenter;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -22,33 +22,28 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 
-public class RoomPage extends PagePresenter<RoomDisplay> {
+public class RoomPresenter extends PagePresenter<RoomDisplay> {
     public static final String TYPE = "Room";
     private static int id = 0;
 
-    @Deprecated
-    public static RoomPage asRoom(final Page<?> page) {
-	if (RoomPage.TYPE.equals(page.getType())) {
-	    return (RoomPage) page;
-	}
-	return null;
-    }
-
     private final Room room;
+    private final OccupantsPresenter occupants;
 
-    public RoomPage(final HablarEventBus eventBus, final Room chat, final RoomDisplay display) {
+    public RoomPresenter(final HablarEventBus eventBus, final Room room, final RoomDisplay display) {
 	super(TYPE, "" + ++id, eventBus, display);
-	room = chat;
+	this.room = room;
 	display.setId(getId());
+
+	occupants = new OccupantsPresenter(room, display.createOccupantsDisplay(room.getID()));
 
 	final Session session = Suco.get(Session.class);
 	final String me = session.getCurrentUser().getNode();
-	final String name = chat.getURI().getNode();
+	final String name = room.getURI().getNode();
 	model.init(HablarIcons.get(IconType.roster), name);
 	setVisibility(Visibility.notFocused);
 	model.setCloseable(true);
 
-	chat.onMessageReceived(new Listener<Message>() {
+	room.onMessageReceived(new Listener<Message>() {
 	    @Override
 	    public void onEvent(final Message message) {
 		final String body = ChatMessageFormatter.format(message.getBody());
@@ -63,18 +58,19 @@ public class RoomPage extends PagePresenter<RoomDisplay> {
 		}
 	    }
 	});
-	chat.onStateChanged(new Listener<State>() {
+	room.onStateChanged(new Listener<State>() {
 	    @Override
 	    public void onEvent(final State state) {
 		setState(state);
 	    }
 	});
-	setState(chat.getState());
+
+	setState(room.getState());
 
 	display.getAction().addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(final ClickEvent event) {
-		sendMessage(chat, display);
+		sendMessage(room, display);
 	    }
 
 	});
@@ -84,17 +80,17 @@ public class RoomPage extends PagePresenter<RoomDisplay> {
 		if (event.getNativeKeyCode() == 13) {
 		    event.stopPropagation();
 		    event.preventDefault();
-		    sendMessage(chat, display);
+		    sendMessage(room, display);
 		}
 	    }
 	});
     }
 
-    public void addAction(final Action<RoomPage> action) {
+    public void addAction(final Action<RoomPresenter> action) {
 	display.createAction(action).addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(final ClickEvent event) {
-		action.execute(RoomPage.this);
+		action.execute(RoomPresenter.this);
 	    }
 	});
     }

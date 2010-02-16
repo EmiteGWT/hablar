@@ -1,4 +1,4 @@
-package com.calclab.hablar.rooms.client.ui.open;
+package com.calclab.hablar.rooms.client.open;
 
 import com.calclab.hablar.core.client.mvp.Display;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -23,5 +23,7 @@ public interface OpenRoomDisplay extends Display {
     void setAcceptText(String string);
 
     void setPageTitle(String text);
+
+    void setRoomNameEnabled(boolean enabled);
 
 }

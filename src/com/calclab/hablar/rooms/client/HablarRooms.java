@@ -9,15 +9,21 @@ import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
-import com.calclab.hablar.rooms.client.ui.RoomPage;
-import com.calclab.hablar.rooms.client.ui.invite.InviteToRoomPresenter;
-import com.calclab.hablar.rooms.client.ui.open.OpenRoomWidget;
+import com.calclab.hablar.rooms.client.invite.InviteToRoomPresenter;
+import com.calclab.hablar.rooms.client.open.OpenRoomWidget;
+import com.calclab.hablar.rooms.client.room.RoomPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 
 public class HablarRooms implements EntryPoint {
     private static final String ACTION_ID_INVITE = "HablarRooms-inviteAction";
     private static final String ACTION_ID_OPENROOM = "HablarRooms-openRoom";
+    private static RoomsMessages roomMessages;
+
+    public static RoomsMessages i18n() {
+	return roomMessages;
+    }
 
     public static void install(final Hablar hablar) {
 	install(hablar, HablarRoomsConfig.getFromMeta());
@@ -31,13 +37,14 @@ public class HablarRooms implements EntryPoint {
 
 	final OpenNewRoomPresenter openNewRoomPage = new OpenNewRoomPresenter(config.roomsService,
 		hablar.getEventBus(), new OpenRoomWidget());
+	hablar.addPage(openNewRoomPage, OverlayContainer.ROL);
 
 	hablar.addPageAddedHandler(new PageAddedHandler() {
 	    @Override
 	    public void onPageAdded(final PageAddedEvent event) {
 
-		if (event.isType(RoomPage.TYPE)) {
-		    final RoomPage roomPage = (RoomPage) event.getPage();
+		if (event.isType(RoomPresenter.TYPE)) {
+		    final RoomPresenter roomPage = (RoomPresenter) event.getPage();
 		    roomPage.addAction(createInviteAction(invitePage));
 		} else if (event.isType(RosterPage.TYPE)) {
 		    final RosterPage rosterPage = (RosterPage) event.getPage();
@@ -48,11 +55,15 @@ public class HablarRooms implements EntryPoint {
 	}, true);
     }
 
-    protected static Action<RoomPage> createInviteAction(final InviteToRoomPresenter invitePage) {
+    public static void setMessages(final RoomsMessages messages) {
+	roomMessages = messages;
+    }
+
+    protected static Action<RoomPresenter> createInviteAction(final InviteToRoomPresenter invitePage) {
 	final String icon = HablarIcons.get(IconType.buddyAdd);
-	return new SimpleAction<RoomPage>("Invite to this room", ACTION_ID_INVITE, icon) {
+	return new SimpleAction<RoomPresenter>("Invite to this room", ACTION_ID_INVITE, icon) {
 	    @Override
-	    public void execute(final RoomPage target) {
+	    public void execute(final RoomPresenter target) {
 		invitePage.setRoom(target.getRoom());
 		invitePage.requestVisibility(Visibility.focused);
 	    }
@@ -61,7 +72,7 @@ public class HablarRooms implements EntryPoint {
 
     protected static SimpleAction<RosterPage> createOpenRoomAction(final OpenNewRoomPresenter page) {
 	final String name = "Open new room";
-	final String icon = HablarIcons.get(IconType.buddyWait);
+	final String icon = HablarIcons.get(IconType.on);
 	final SimpleAction<RosterPage> action = new SimpleAction<RosterPage>(name, ACTION_ID_OPENROOM, icon) {
 	    @Override
 	    public void execute(final RosterPage target) {
@@ -73,6 +84,7 @@ public class HablarRooms implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
+	HablarRooms.setMessages((RoomsMessages) GWT.create(RoomsMessages.class));
     }
 
 }

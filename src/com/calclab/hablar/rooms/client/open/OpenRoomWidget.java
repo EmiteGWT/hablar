@@ -1,4 +1,4 @@
-package com.calclab.hablar.rooms.client.ui.open;
+package com.calclab.hablar.rooms.client.open;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.LabelElement;
@@ -87,6 +87,11 @@ public class OpenRoomWidget extends Composite implements OpenRoomDisplay {
     @Override
     public void setPageTitle(final String text) {
 	title.setInnerText(text);
+    }
+
+    @Override
+    public void setRoomNameEnabled(final boolean enabled) {
+	roomName.setEnabled(enabled);
     }
 
 }

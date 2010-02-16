@@ -10,9 +10,9 @@ import com.calclab.emite.xep.muc.client.RoomInvitation;
 import com.calclab.emite.xep.muc.client.RoomManager;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
-import com.calclab.hablar.rooms.client.ui.RoomDisplay;
-import com.calclab.hablar.rooms.client.ui.RoomPage;
-import com.calclab.hablar.rooms.client.ui.RoomWidget;
+import com.calclab.hablar.rooms.client.room.RoomDisplay;
+import com.calclab.hablar.rooms.client.room.RoomPresenter;
+import com.calclab.hablar.rooms.client.room.RoomWidget;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 
@@ -24,7 +24,7 @@ public class HablarRoomManager {
 
     private final Hablar hablar;
     private final RoomPageFactory factory;
-    private final HashMap<XmppURI, RoomPage> roomPages;
+    private final HashMap<XmppURI, RoomPresenter> roomPages;
     private final ArrayList<RoomInvitation> acceptedInvitations;
 
     public HablarRoomManager(final Hablar hablar, final HablarRoomsConfig config) {
@@ -40,7 +40,7 @@ public class HablarRoomManager {
 	this.hablar = hablar;
 	this.factory = factory;
 	acceptedInvitations = new ArrayList<RoomInvitation>();
-	roomPages = new HashMap<XmppURI, RoomPage>();
+	roomPages = new HashMap<XmppURI, RoomPresenter>();
 
 	final RoomManager rooms = Suco.get(RoomManager.class);
 
@@ -69,7 +69,7 @@ public class HablarRoomManager {
 
     protected void createRoom(final Room room) {
 	final RoomDisplay display = factory.create(true);
-	final RoomPage presenter = new RoomPage(hablar.getEventBus(), room, display);
+	final RoomPresenter presenter = new RoomPresenter(hablar.getEventBus(), room, display);
 	roomPages.put(room.getURI(), presenter);
 	hablar.addPage(presenter);
     }
@@ -84,7 +84,7 @@ public class HablarRoomManager {
     }
 
     protected void openRoom(final Chat room) {
-	final RoomPage roomPage = roomPages.get(room.getURI());
+	final RoomPresenter roomPage = roomPages.get(room.getURI());
 	assert roomPage != null;
 	final RoomInvitation invitation = getInvitation(room.getURI());
 	if (invitation != null) {

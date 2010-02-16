@@ -1,11 +1,14 @@
-package com.calclab.hablar.rooms.client.ui.invite;
+package com.calclab.hablar.rooms.client.invite;
+
+import static com.calclab.hablar.rooms.client.HablarRooms.i18n;
 
 import com.calclab.emite.im.client.roster.Roster;
+import com.calclab.emite.xep.muc.client.Occupant;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
-import com.calclab.hablar.rooms.client.ui.open.OpenRoomDisplay;
-import com.calclab.hablar.rooms.client.ui.open.OpenRoomPresenter;
-import com.calclab.hablar.rooms.client.ui.open.SelectRosterItemPresenter;
+import com.calclab.hablar.rooms.client.open.OpenRoomDisplay;
+import com.calclab.hablar.rooms.client.open.OpenRoomPresenter;
+import com.calclab.hablar.rooms.client.open.SelectRosterItemPresenter;
 import com.calclab.suco.client.Suco;
 
 public class InviteToRoomPresenter extends OpenRoomPresenter {
@@ -35,7 +38,12 @@ public class InviteToRoomPresenter extends OpenRoomPresenter {
     @Override
     protected void onPageOpen() {
 	final Roster roster = Suco.get(Roster.class);
-	display.setPageTitle("Invite people to group chat");
+	display.setPageTitle(i18n().invitePeopleToRoom());
+	display.getRoomName().setText(room.getURI().toString());
+	display.setRoomNameEnabled(false);
 	setItems(roster.getItems(), true);
+	for (final Occupant occupant : room.getOccupants()) {
+	    setItem(occupant.getURI(), false, true);
+	}
     }
 }
