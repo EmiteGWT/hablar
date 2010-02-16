@@ -8,6 +8,7 @@
 	<inherits name="com.calclab.emite.xep.muc.EmiteMUC"/>
 	<inherits name='com.calclab.emite.browser.EmiteBrowser' />
 	<inherits name='com.calclab.hablar.core.HablarCore' />
+	<inherits name='com.calclab.hablar.roster.HablarRoster' />
 	<inherits name='com.calclab.hablar.chat.HablarChat' />
 	<source path="client" />
 	<entry-point class="com.calclab.hablar.rooms.client.HablarRooms" />
