@@ -34,10 +34,10 @@ public class DockContainerTests {
 	config = new DockConfig();
 	config.set(Position.top, "top", 24);
 	config.set(Position.left, "left", 100);
-	DockLayout layout = mock(DockLayout.class);
-	LayoutPanel panel = HablarMocks.mock(LayoutPanel.class);
+	final DockLayout layout = mock(DockLayout.class);
+	final LayoutPanel panel = HablarMocks.mock(LayoutPanel.class);
 	when(layout.addNewPanel(anyString())).thenReturn(panel);
-	HeaderDisplay header = DisplayMocker.mock(HeaderDisplay.class);
+	final HeaderDisplay header = DisplayMocker.mock(HeaderDisplay.class);
 	when(layout.createHeaderWidget((Page<?>) anyObject(), (Position) anyObject())).thenReturn(header);
 	container = new DockContainer(eventBus, config, layout);
 
@@ -45,7 +45,7 @@ public class DockContainerTests {
 
     @Test
     public void shouldAddTop() {
-	Page<Display> page = HablarMocks.getPage(eventBus);
+	final Page<Display> page = HablarMocks.getPage(eventBus);
 	when(page.getType()).thenReturn("top");
 	container.add(page);
 	verify(page).setVisibility(Visibility.notFocused);
@@ -54,10 +54,10 @@ public class DockContainerTests {
 	verify(page).setVisibility(Visibility.focused);
 	setVisibility(page, Visibility.focused);
 	eventBus.fireEvent(new VisibilityChangeRequestEvent(page, Visibility.toggle));
-	verify(page, times(2)).setVisibility(Visibility.notFocused);
+	verify(page, times(1)).setVisibility(Visibility.notFocused);
     }
 
-    private void setVisibility(Page<Display> page, Visibility visibility) {
+    private void setVisibility(final Page<Display> page, final Visibility visibility) {
 	when(page.getVisibility()).thenReturn(visibility);
     }
 

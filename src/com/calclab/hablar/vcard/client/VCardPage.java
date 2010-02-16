@@ -48,7 +48,6 @@ public abstract class VCardPage extends PagePresenter<VCardDisplay> {
 
 	final String email = display.getField(Field.email).getText();
 	if (email.length() > 0) {
-	    vcard.clearEmails();
 	    vcard.addEmail(new VCardEmail(email, true));
 	}
     }

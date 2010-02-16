@@ -1,8 +1,10 @@
 package com.calclab.hablar.vcard.client;
 
+import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.xep.vcard.client.VCard;
 import com.calclab.emite.xep.vcard.client.VCardManager;
 import com.calclab.emite.xep.vcard.client.VCardResponse;
+import com.calclab.emite.xep.vcard.client.VCard.Data;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
@@ -22,12 +24,16 @@ public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisp
 
     @Override
     public void saveData() {
+	final Session session = Suco.get(Session.class);
 	final VCardManager manager = Suco.get(VCardManager.class);
 	manager.requestOwnVCard(new Listener<VCardResponse>() {
 	    @Override
 	    public void onEvent(final VCardResponse response) {
 		final VCard vCard = response.hasVCard() ? response.getVCard() : new VCard();
 		updateVCard(vCard);
+		final String jabberId = session.getCurrentUser().getJID().toString();
+		vCard.setValue(Data.JABBERID, jabberId);
+		vCard.setValue(Data.DESC, "Created with hablar");
 		manager.updateOwnVCard(vCard, new Listener<VCardResponse>() {
 		    @Override
 		    public void onEvent(final VCardResponse response) {
