@@ -1,8 +1,10 @@
 package com.calclab.hablar.vcard.client;
 
 import com.calclab.emite.xep.vcard.client.VCard;
+import com.calclab.emite.xep.vcard.client.VCardEmail;
 import com.calclab.emite.xep.vcard.client.VCardManager;
 import com.calclab.emite.xep.vcard.client.VCardResponse;
+import com.calclab.emite.xep.vcard.client.VCardOrganization.Data;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
@@ -14,7 +16,6 @@ public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisp
 
     public OwnVCardPresenter(final HablarEventBus eventBus, final VCardDisplay display) {
 	super(eventBus, display);
-	// FIXME: create a button
 	model.init(HablarIcons.get(IconType.buddyWait), "User profile");
 	display.setAcceptVisible(false);
 	display.setCancelVisible(false);
@@ -28,7 +29,7 @@ public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisp
 	    @Override
 	    public void onEvent(final VCardResponse response) {
 		final VCard vCard = response.hasVCard() ? response.getVCard() : new VCard();
-		update(vCard);
+		setData(vCard);
 		manager.updateOwnVCard(vCard, new Listener<VCardResponse>() {
 		    @Override
 		    public void onEvent(final VCardResponse response) {
@@ -49,6 +50,19 @@ public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisp
 		update(response);
 	    }
 	});
+    }
+
+    private void setData(final VCard vcard) {
+	vcard.setGivenName(display.getFirstName().getText());
+	vcard.setMiddleName(display.getMiddleName().getText());
+	vcard.setNickName(display.getNickName().getText());
+	vcard.setFamilyName(display.getSurname().getText());
+	vcard.getOrganization().setData(Data.ORGNAME, display.getOrganizationName().getText());
+	final String email = display.getEmail().getText();
+	if (email.length() > 0) {
+	    vcard.clearEmails();
+	    vcard.addEmail(new VCardEmail(email, true));
+	}
     }
 
 }

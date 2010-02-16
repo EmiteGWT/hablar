@@ -16,30 +16,6 @@ public abstract class VCardPage extends PagePresenter<VCardDisplay> {
 	super(TYPE, eventBus, display);
     }
 
-    protected void update(final VCard vcard) {
-	vcard.setGivenName(display.getFirstName().getText());
-	vcard.setMiddleName(display.getMiddleName().getText());
-	vcard.setNickName(display.getNickName().getText());
-	vcard.setFamilyName(display.getSurname().getText());
-	vcard.getOrganization().setData(Data.ORGNAME, display.getOrganizationName().getText());
-	final String email = display.getEmail().getText();
-	if (email.length() > 0) {
-	    // We only set one email (currently)
-	    vcard.removeEmails();
-	    final VCardEmail vEmail = new VCardEmail();
-	    vEmail.set(email);
-	    vEmail.setPref();
-	    vcard.addEmail(vEmail);
-	}
-    }
-
-    protected void update(final VCardResponse response) {
-	if (response.hasVCard()) {
-	    final VCard vcard = response.getVCard();
-	    setVCard(vcard);
-	}
-    }
-
     private void setVCard(final VCard vcard) {
 	display.getFirstName().setText(vcard.getGivenName());
 	display.getMiddleName().setText(vcard.getMiddleName());
@@ -48,10 +24,17 @@ public abstract class VCardPage extends PagePresenter<VCardDisplay> {
 	display.getOrganizationName().setText(vcard.getOrganization().getData(Data.ORGNAME));
 	final List<VCardEmail> emails = vcard.getEmails();
 	for (final VCardEmail email : emails) {
-	    if (emails.size() == 1 || email.isPref()) {
-		display.getEmail().setText(email.get());
+	    if (emails.size() == 1 || email.isPreferred()) {
+		display.getEmail().setText(email.getUserId());
 		break;
 	    }
+	}
+    }
+
+    protected void update(final VCardResponse response) {
+	if (response.hasVCard()) {
+	    final VCard vcard = response.getVCard();
+	    setVCard(vcard);
 	}
     }
 }
