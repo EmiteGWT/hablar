@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.calclab.emite.core.client.packet.IPacket;
 import com.calclab.emite.core.client.packet.MatcherFactory;
-import com.calclab.emite.core.client.packet.NoPacket;
 import com.calclab.emite.xep.storage.client.IQResponse;
 import com.calclab.emite.xep.storage.client.SimpleStorageData;
 
@@ -17,9 +16,13 @@ public class StoredPresences extends SimpleStorageData {
     public static final StoredPresences empty = new StoredPresences();
 
     public static StoredPresences parse(final IQResponse response) {
-	final IPacket child = response.getFirstChildInDeep(MatcherFactory.byNameAndXMLNS(STORED_PRESENCES,
-		STORED_PRESENCES_XMLNS));
-	return child == NoPacket.INSTANCE ? new StoredPresences() : new StoredPresences(child);
+	final StoredPresences parsed = new StoredPresences();
+	for (final IPacket packet : (List<? extends IPacket>) response.getFirstChildInDeep(
+		MatcherFactory.byNameAndXMLNS(STORED_PRESENCES, STORED_PRESENCES_XMLNS)).getChildren(
+		MatcherFactory.byName(STORED_PRESENCE))) {
+	    parsed.add(new StoredPresence(packet));
+	}
+	return parsed;
     }
 
     private ArrayList<StoredPresence> presences;
@@ -36,7 +39,7 @@ public class StoredPresences extends SimpleStorageData {
 	parsePresences();
 	if (!presences.contains(presence)) {
 	    presences.add(presence);
-	    super.addChild(presence);
+	    addChild(presence);
 	    return true;
 	}
 	return false;
