@@ -1,7 +1,5 @@
 package com.calclab.hablar.user.client;
 
-import com.calclab.hablar.core.client.pages.HeaderPresenter;
-import com.calclab.hablar.core.client.pages.accordion.AccordionHeaderWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -29,7 +27,8 @@ public class UserWidget extends Composite implements UserDisplay {
 
     @Override
     public void addPage(final EditorPage<?> page) {
-	final HeaderPresenter head = new HeaderPresenter(page, new AccordionHeaderWidget(page.getId()));
+	// final HeaderPresenter head = new HeaderPresenter(page, new
+	// AccordionHeaderWidget(page.getId()));
 	// container.add(head.getDisplay().asWidget());
 	container.add(page.getDisplay().asWidget());
     }

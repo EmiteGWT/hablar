@@ -1,7 +1,8 @@
 package com.calclab.hablar.vcard.client;
 
+import java.util.HashMap;
+
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dev.util.collect.HashMap;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -30,7 +31,6 @@ public class VCardWidget extends Composite implements VCardDisplay {
 
     public VCardWidget(final boolean readOnly) {
 	initWidget(uiBinder.createAndBindUi(this));
-	setReadOnly(readOnly);
 	fields = new HashMap<Field, TextBox>();
 	fields.put(Field.name, name);
 	fields.put(Field.nickName, nickName);

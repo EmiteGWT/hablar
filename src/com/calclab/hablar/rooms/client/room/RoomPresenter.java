@@ -27,14 +27,13 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> {
     private static int id = 0;
 
     private final Room room;
-    private final OccupantsPresenter occupants;
 
     public RoomPresenter(final HablarEventBus eventBus, final Room room, final RoomDisplay display) {
 	super(TYPE, "" + ++id, eventBus, display);
 	this.room = room;
 	display.setId(getId());
 
-	occupants = new OccupantsPresenter(room, display.createOccupantsDisplay(room.getID()));
+	new OccupantsPresenter(room, display.createOccupantsDisplay(room.getID()));
 
 	final Session session = Suco.get(Session.class);
 	final String me = session.getCurrentUser().getNode();
