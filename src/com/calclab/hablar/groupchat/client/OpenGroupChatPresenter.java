@@ -57,7 +57,7 @@ public class OpenGroupChatPresenter extends OpenRoomPresenter {
 	display.setAcceptText("Open Group Chat");
 
 	final Roster roster = Suco.get(Roster.class);
-	setItems(roster.getItemsByGroup(groupName), false);
+	setItems(roster.getItemsByGroup(groupName), false, true);
     }
 
 }

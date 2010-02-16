@@ -47,7 +47,7 @@ public class OpenNewRoomPresenter extends OpenRoomPresenter {
 	final String roomName = "room" + roomNumber;
 	display.getRoomName().setText(roomName);
 	final Roster roster = Suco.get(Roster.class);
-	setItems(roster.getItems(), true);
+	setItems(roster.getItems(), true, false);
     }
 
 }

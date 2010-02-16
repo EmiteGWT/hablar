@@ -47,11 +47,11 @@ public abstract class OpenRoomPresenter extends PagePresenter<OpenRoomDisplay> {
 	}
     }
 
-    public void setItems(final Collection<RosterItem> items, final boolean selectable) {
+    public void setItems(final Collection<RosterItem> items, final boolean enabled, final boolean selected) {
 	display.clearList();
 	itemsByUri.clear();
 	for (final RosterItem item : items) {
-	    createItem(item, selectable, false);
+	    createItem(item, enabled, selected);
 	}
     }
 

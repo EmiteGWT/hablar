@@ -70,7 +70,7 @@ public class ConvertToGroupChatPresenter extends OpenRoomPresenter {
 	final String name = i18n().defaultRoomName(currentJid.getNode(), chatJid.getNode());
 	display.getRoomName().setText(name);
 
-	setItems(roster.getItems(), true);
+	setItems(roster.getItems(), true, false);
 	final SelectRosterItemPresenter other = getItem(chatJid);
 	if (other == null) {
 	} else {

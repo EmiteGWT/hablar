@@ -26,6 +26,20 @@
 	font-size: 75%;
 }
 
+div.hablar-ActionWidget {
+	padding: 2px 2px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	background-color: #E9E9E9;
+	cursor: pointer;
+	background-position: center;
+}
+
+div.hablar-ActionWidget:hover {
+	background-color: #BBBBBB;
+}
+
+
 /** DISABLED PANEL **/
 .hablar-Page .disabledPanel {
 	position: relative;
@@ -188,15 +202,9 @@
 	overflow: hidden;
 }
 
-.hablar-RosterWidget .actions .gwt-Label {
+.hablar-RosterWidget .actions .hablar-ActionWidget {
 	float: left;
-	padding: 1px;
-	border: 1px solid #E9E9E9;
-	margin-right: 3px;
-}
-
-.hablar-RosterWidget .actions div.gwt-Label:hover {
-	
+	margin-right: 1px;
 }
 
 .hablar-GroupHeaderWidget {
@@ -377,7 +385,6 @@ div.hablar-SearchResultItemWidget:hover {
 .gwt-PopupPanel.occupants {
 	
 }
-
 
 /** ROOM INVITATION **/
 .hablar-OpenRoomWidget .list {

@@ -41,7 +41,7 @@ public class InviteToRoomPresenter extends OpenRoomPresenter {
 	display.setPageTitle(i18n().invitePeopleToRoom());
 	display.getRoomName().setText(room.getURI().toString());
 	display.setRoomNameEnabled(false);
-	setItems(roster.getItems(), true);
+	setItems(roster.getItems(), true, false);
 	for (final Occupant occupant : room.getOccupants()) {
 	    setItem(occupant.getURI(), false, true);
 	}

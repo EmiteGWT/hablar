@@ -1,5 +1,6 @@
 package com.calclab.hablar.roster.client.page;
 
+import com.calclab.hablar.core.client.ui.actions.ActionWidget;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
@@ -62,12 +63,9 @@ public class RosterWidget extends Composite implements RosterDisplay {
 
     @Override
     public HasClickHandlers createAction(final Action<?> action) {
-	final Label label = new Label();
-	label.addStyleName(action.getIconStyle());
-	label.ensureDebugId(action.getId());
-	label.setTitle(action.getName());
-	actions.add(label);
-	return label;
+	final ActionWidget widget = new ActionWidget(action);
+	actions.add(widget);
+	return widget;
 
     }
 
