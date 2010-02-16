@@ -105,16 +105,14 @@ public class UserPage extends PagePresenter<UserDisplay> {
     }
 
     private void setState(final Presence presence) {
-	String userStatus = presence != null ? presence.getStatus() : "";
-	userStatus = userStatus == null || userStatus.isEmpty() ? "Click here to change status" : userStatus;
 	final State s = session.getState();
 	if (s == State.disconnected) {
-	    model.setPageTitle(userStatus);
-	    model.setPageTitleTooltip(userStatus);
 	    model.setPageIcon(HablarIcons.get(HablarIcons.IconType.buddyOff));
 	} else if (s == State.ready) {
-	    model.setPageTitle(session.getCurrentUser().getShortName());
-	    model.setPageTitleTooltip(userStatus);
+	    String userStatus = presence != null ? presence.getStatus() : "";
+	    userStatus = userStatus == null || userStatus.isEmpty() ? "" : " - " + userStatus;
+	    model.setPageTitle(session.getCurrentUser().getShortName() + userStatus);
+	    model.setPageTitleTooltip("Click here to change status");
 	    setShow(presence.getShow());
 	}
     }

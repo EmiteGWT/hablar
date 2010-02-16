@@ -25,6 +25,9 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.user.client.Window;
 
 public class PresencePage extends PagePresenter<PresenceDisplay> implements EditorPage<PresenceDisplay> {
     public static final String TYPE = "Presence";
@@ -56,11 +59,17 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 	display.getMenuAction().addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(final ClickEvent event) {
-		event.preventDefault();
-		final Element element = event.getRelativeElement();
-		final int width = element.getClientWidth();
-		statusMenu.setTarget(PresencePage.this);
-		statusMenu.show(element.getAbsoluteLeft() - width, element.getAbsoluteTop());
+		Window.alert("Click");
+		DeferredCommand.addCommand(new Command() {
+		    @Override
+		    public void execute() {
+			event.preventDefault();
+			final Element element = event.getRelativeElement();
+			final int width = element.getClientWidth();
+			statusMenu.setTarget(PresencePage.this);
+			statusMenu.show(element.getAbsoluteLeft() - width, element.getAbsoluteTop());
+		    }
+		});
 	    }
 	});
 	display.getStatus().addKeyDownHandler(new KeyDownHandler() {
@@ -86,8 +95,7 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 
     @Override
     public void saveData() {
-	// setPresence(display.getStatusText().getText(),
-	// manager.getOwnPresence().getShow());
+	setPresence(display.getStatusText().getText(), manager.getOwnPresence().getShow());
     }
 
     @Override
