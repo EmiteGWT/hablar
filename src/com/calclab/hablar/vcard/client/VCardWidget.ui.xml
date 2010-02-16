@@ -10,25 +10,33 @@
 				<span ui:field='title' />
 			</h2>
 			<p>
-				<label>Nickname:</label>
-				<g:TextBox ui:field="nickName"></g:TextBox>
+				<label>Name:</label>
+				<g:TextBox ui:field="name"></g:TextBox>
 			</p>
-			<p>
-				<label>First name:</label>
-				<g:TextBox ui:field="firstName"></g:TextBox>
-			</p>
+            <p>
+                <label>Nickname:</label>
+                <g:TextBox ui:field="nickName"></g:TextBox>
+            </p>
+            <p>
+                <label>Family name:</label>
+                <g:TextBox ui:field="familyName"></g:TextBox>
+            </p>
 			<p>
 				<label>Middle name:</label>
 				<g:TextBox ui:field="middleName"></g:TextBox>
 			</p>
-			<p>
-				<label>Surname:</label>
-				<g:TextBox ui:field="surname"></g:TextBox>
-			</p>
+            <p>
+                <label>Given name:</label>
+                <g:TextBox ui:field="givenName"></g:TextBox>
+            </p>
 			<p>
 				<label>Organization:</label>
 				<g:TextBox ui:field="organizationName"></g:TextBox>
 			</p>
+            <p>
+                <label>Homepage:</label>
+                <g:TextBox ui:field="homepage"></g:TextBox>
+            </p>
 			<p>
 				<label>Email:</label>
 				<g:TextBox ui:field="email"></g:TextBox>

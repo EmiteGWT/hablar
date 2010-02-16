@@ -1,12 +1,14 @@
 package com.calclab.hablar.vcard.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dev.util.collect.HashMap;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -18,15 +20,25 @@ public class VCardWidget extends Composite implements VCardDisplay {
     private static VCardWidgetUiBinder uiBinder = GWT.create(VCardWidgetUiBinder.class);
 
     @UiField
-    TextBox nickName, firstName, middleName, surname, email, organizationName;
+    TextBox name, nickName, givenName, middleName, familyName, email, organizationName, homepage;
     @UiField
     Button accept, cancel;
     @UiField
     SpanElement title;
 
+    private final HashMap<Field, TextBox> fields;
+
     public VCardWidget(final boolean readOnly) {
 	initWidget(uiBinder.createAndBindUi(this));
 	setReadOnly(readOnly);
+	fields = new HashMap<Field, TextBox>();
+	fields.put(Field.name, name);
+	fields.put(Field.nickName, nickName);
+	fields.put(Field.middleName, middleName);
+	fields.put(Field.givenName, givenName);
+	fields.put(Field.familyName, familyName);
+	fields.put(Field.email, email);
+	fields.put(Field.homepage, homepage);
     }
 
     @Override
@@ -40,33 +52,8 @@ public class VCardWidget extends Composite implements VCardDisplay {
     }
 
     @Override
-    public TextBox getEmail() {
-	return email;
-    }
-
-    @Override
-    public TextBox getFirstName() {
-	return firstName;
-    }
-
-    @Override
-    public TextBox getMiddleName() {
-	return middleName;
-    }
-
-    @Override
-    public TextBox getNickName() {
-	return nickName;
-    }
-
-    @Override
-    public TextBox getOrganizationName() {
-	return organizationName;
-    }
-
-    @Override
-    public TextBox getSurname() {
-	return surname;
+    public HasText getField(Field field) {
+	return fields.get(field);
     }
 
     @Override
@@ -90,12 +77,13 @@ public class VCardWidget extends Composite implements VCardDisplay {
     }
 
     public void setReadOnly(final boolean readOnly) {
-	nickName.setReadOnly(readOnly);
-	firstName.setReadOnly(readOnly);
-	middleName.setReadOnly(readOnly);
-	surname.setReadOnly(readOnly);
-	email.setReadOnly(readOnly);
-	organizationName.setReadOnly(readOnly);
+	for (TextBox textbox : fields.values()) {
+	    textbox.setEnabled(readOnly);
+	}
+	if (readOnly) {
+	    addStyleName("readOnly");
+	} else {
+	    removeStyleName("readOnly");
+	}
     }
-
 }

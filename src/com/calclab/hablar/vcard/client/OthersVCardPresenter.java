@@ -30,7 +30,7 @@ public class OthersVCardPresenter extends VCardPage {
 	manager.getUserVCard(jid, new Listener<VCardResponse>() {
 	    @Override
 	    public void onEvent(final VCardResponse response) {
-		update(response);
+		updateDisplay(response.getVCard());
 	    }
 	});
     }

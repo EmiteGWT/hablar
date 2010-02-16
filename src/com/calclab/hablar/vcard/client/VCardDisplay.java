@@ -6,19 +6,13 @@ import com.google.gwt.user.client.ui.HasText;
 
 public interface VCardDisplay extends Display {
 
+    public static enum Field {
+	name, nickName, familyName, givenName, middleName, homePage, email, homepage
+    }
+
     HasClickHandlers getCancel();
 
-    HasText getEmail();
-
-    HasText getFirstName();
-
-    HasText getMiddleName();
-
-    HasText getNickName();
-
-    HasText getOrganizationName();
-
-    HasText getSurname();
+    HasText getField(Field field);
 
     void setAcceptVisible(boolean visible);
 

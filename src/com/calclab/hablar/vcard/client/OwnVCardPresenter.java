@@ -1,10 +1,8 @@
 package com.calclab.hablar.vcard.client;
 
 import com.calclab.emite.xep.vcard.client.VCard;
-import com.calclab.emite.xep.vcard.client.VCardEmail;
 import com.calclab.emite.xep.vcard.client.VCardManager;
 import com.calclab.emite.xep.vcard.client.VCardResponse;
-import com.calclab.emite.xep.vcard.client.VCardOrganization.Data;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
@@ -29,11 +27,11 @@ public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisp
 	    @Override
 	    public void onEvent(final VCardResponse response) {
 		final VCard vCard = response.hasVCard() ? response.getVCard() : new VCard();
-		setData(vCard);
+		updateVCard(vCard);
 		manager.updateOwnVCard(vCard, new Listener<VCardResponse>() {
 		    @Override
 		    public void onEvent(final VCardResponse response) {
-			update(response);
+			updateDisplay(response.getVCard());
 		    }
 		});
 
@@ -47,22 +45,9 @@ public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisp
 	manager.requestOwnVCard(new Listener<VCardResponse>() {
 	    @Override
 	    public void onEvent(final VCardResponse response) {
-		update(response);
+		updateDisplay(response.getVCard());
 	    }
 	});
-    }
-
-    private void setData(final VCard vcard) {
-	vcard.setGivenName(display.getFirstName().getText());
-	vcard.setMiddleName(display.getMiddleName().getText());
-	vcard.setNickName(display.getNickName().getText());
-	vcard.setFamilyName(display.getSurname().getText());
-	vcard.getOrganization().setData(Data.ORGNAME, display.getOrganizationName().getText());
-	final String email = display.getEmail().getText();
-	if (email.length() > 0) {
-	    vcard.clearEmails();
-	    vcard.addEmail(new VCardEmail(email, true));
-	}
     }
 
 }
