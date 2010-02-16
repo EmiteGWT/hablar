@@ -60,9 +60,7 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
     @Override
     public void saveData() {
 	GWT.log("CHANGE PRESENCE!", null);
-	final Presence presence = manager.getOwnPresence();
-	presence.setStatus(display.getStatusText().getText());
-	manager.changeOwnPresence(presence);
+	setPresence(display.getStatusText().getText(), manager.getOwnPresence().getShow());
 	// TODO: Save custom presences
     }
 
@@ -70,18 +68,8 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
     public void showData() {
 	GWT.log("LOAD PRESENCE!", null);
 	final Presence presence = manager.getOwnPresence();
-	display.getStatusText().setText(presence.getStatus());
-	setShowIcon(presence.getShow());
+	showPresence(presence.getStatus(), presence.getShow());
 	// TODO: Restore custom presences
-    }
-
-    protected void setPresence(final String status, final Show show) {
-	setShowIcon(show);
-	display.getStatusText().setText(status);
-	final Presence presence = manager.getOwnPresence();
-	presence.setStatus(status);
-	presence.setShow(show);
-	manager.changeOwnPresence(presence);
     }
 
     private void addActions(final Menu<PresencePage> statusMenu) {
@@ -117,8 +105,21 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 	});
     }
 
+    private void setPresence(final String status, final Show show) {
+	showPresence(status, show);
+	final Presence presence = manager.getOwnPresence();
+	presence.setStatus(status);
+	presence.setShow(show);
+	manager.changeOwnPresence(presence);
+    }
+
     private void setShowIcon(final Show show) {
 	display.setStatusIcon(PresenceIcon.getIcon(true, show));
+    }
+
+    private void showPresence(final String status, final Show show) {
+	setShowIcon(show);
+	display.getStatusText().setText(status);
     }
 
 }

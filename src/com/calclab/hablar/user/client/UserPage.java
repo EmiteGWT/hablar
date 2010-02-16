@@ -43,7 +43,7 @@ public class UserPage extends PagePresenter<UserDisplay> {
 	manager.onOwnPresenceChanged(new Listener<Presence>() {
 	    @Override
 	    public void onEvent(final Presence presence) {
-		setShow(presence.getShow());
+		setState(presence);
 	    }
 	});
 
@@ -113,7 +113,7 @@ public class UserPage extends PagePresenter<UserDisplay> {
 	    model.setPageIcon(HablarIcons.get(HablarIcons.IconType.buddyOff));
 	} else if (s == State.ready) {
 	    model.setPageTitle(session.getCurrentUser().getShortName() + " - " + userStatus);
-	    model.setPageIcon(HablarIcons.get(HablarIcons.IconType.buddyOn));
+	    setShow(presence.getShow());
 	}
     }
 
