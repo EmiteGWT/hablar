@@ -23,18 +23,18 @@ public class TabsHeaderWidget extends Composite implements HeaderDisplay {
     @UiField
     Label title, icon, close;
 
-    public TabsHeaderWidget(String id) {
+    public TabsHeaderWidget(final String id) {
 	initWidget(uiBinder.createAndBindUi(this));
 	ensureDebugId("HeaderWidget-" + id);
     }
 
     @Override
-    public void addIconStyle(String iconStyle) {
+    public void addIconStyle(final String iconStyle) {
 	icon.addStyleName(iconStyle);
     }
 
     @Override
-    public void addStyle(String styleName) {
+    public void addStyle(final String styleName) {
 	self.addStyleName(styleName);
     }
 
@@ -59,18 +59,23 @@ public class TabsHeaderWidget extends Composite implements HeaderDisplay {
     }
 
     @Override
-    public void removeIconStyle(String iconStyle) {
+    public void removeIconStyle(final String iconStyle) {
 	icon.removeStyleName(iconStyle);
     }
 
     @Override
-    public void removeStyle(String styleName) {
+    public void removeStyle(final String styleName) {
 	self.removeStyleName(styleName);
     }
 
     @Override
-    public void setCloseIconVisible(boolean visible) {
+    public void setCloseIconVisible(final boolean visible) {
 	close.setVisible(visible);
     }
 
+    @Override
+    public void setHeaderTooltip(final String tooltip) {
+	title.setTitle(tooltip);
+	icon.setTitle(tooltip);
+    }
 }

@@ -110,9 +110,11 @@ public class UserPage extends PagePresenter<UserDisplay> {
 	final State s = session.getState();
 	if (s == State.disconnected) {
 	    model.setPageTitle(userStatus);
+	    model.setPageTitleTooltip(userStatus);
 	    model.setPageIcon(HablarIcons.get(HablarIcons.IconType.buddyOff));
 	} else if (s == State.ready) {
-	    model.setPageTitle(session.getCurrentUser().getShortName() + " - " + userStatus);
+	    model.setPageTitle(session.getCurrentUser().getShortName());
+	    model.setPageTitleTooltip(userStatus);
 	    setShow(presence.getShow());
 	}
     }

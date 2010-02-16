@@ -8,7 +8,7 @@ import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedHandler;
 
 public class PageState {
-    private String pageTitle, userMessage, pageIcon;
+    private String pageTitle, userMessage, pageIcon, pageTitleTooltip;
     private boolean closeable;
     private Visibility visibility;
     private final HablarEventBus eventBus;
@@ -66,6 +66,10 @@ public class PageState {
 	return pageTitle;
     }
 
+    public String getPageTitleTooltip() {
+	return pageTitleTooltip;
+    }
+
     public String getUserMessage() {
 	return userMessage;
     }
@@ -97,6 +101,11 @@ public class PageState {
 
     public void setPageTitle(final String pageTitle) {
 	this.pageTitle = pageTitle;
+	fireChanged();
+    }
+
+    public void setPageTitleTooltip(final String pageTitleTooltip) {
+	this.pageTitleTooltip = pageTitleTooltip;
 	fireChanged();
     }
 

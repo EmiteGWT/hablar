@@ -22,14 +22,14 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 	final PageState state = page.getState();
 	display.getOpen().addClickHandler(new ClickHandler() {
 	    @Override
-	    public void onClick(ClickEvent event) {
+	    public void onClick(final ClickEvent event) {
 		page.requestVisibility(Visibility.toggle);
 	    }
 	});
 
 	display.getClose().addClickHandler(new ClickHandler() {
 	    @Override
-	    public void onClick(ClickEvent event) {
+	    public void onClick(final ClickEvent event) {
 		event.preventDefault();
 		page.requestVisibility(Visibility.hidden);
 	    }
@@ -37,7 +37,7 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 
 	state.addVisibilityChangedHandler(new VisibilityChangedHandler() {
 	    @Override
-	    public void onVisibilityChanged(VisibilityChangedEvent event) {
+	    public void onVisibilityChanged(final VisibilityChangedEvent event) {
 		visibilityChanged(state.getVisibility());
 	    }
 
@@ -46,15 +46,18 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 
 	state.addInfoChangedHandler(new PageInfoChangedHandler() {
 	    @Override
-	    public void onPageInfoChanged(PageInfoChangedEvent event) {
+	    public void onPageInfoChanged(final PageInfoChangedEvent event) {
+		// FIXME: Duplicate code (see below)
 		setIconStyle(state.getPageIcon());
 		display.getHeaderTitle().setText(state.getPageTitle());
+		display.setHeaderTooltip(state.getPageTitleTooltip());
 		display.setCloseIconVisible(state.isCloseable());
 	    }
 	});
 
 	setIconStyle(state.getPageIcon());
 	display.getHeaderTitle().setText(state.getPageTitle());
+	display.setHeaderTooltip(state.getPageTitleTooltip());
 	display.setCloseIconVisible(state.isCloseable());
     }
 
@@ -62,7 +65,7 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 	return display;
     }
 
-    private void setIconStyle(String pageIcon) {
+    private void setIconStyle(final String pageIcon) {
 	if (currentIconStyle != null) {
 	    display.removeIconStyle(currentIconStyle);
 	}
@@ -70,10 +73,11 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 	display.addIconStyle(currentIconStyle);
     }
 
-    private void visibilityChanged(Visibility visibility) {
-	if (currentStyle != null)
+    private void visibilityChanged(final Visibility visibility) {
+	if (currentStyle != null) {
 	    display.removeStyle(currentStyle);
-	String newStyle = visibility.toString();
+	}
+	final String newStyle = visibility.toString();
 	display.addStyle(newStyle);
 	currentStyle = newStyle;
     }

@@ -78,4 +78,10 @@ public class AccordionHeaderWidget extends Composite implements HeaderDisplay {
 	close.setVisible(visible);
     }
 
+    @Override
+    public void setHeaderTooltip(final String tooltip) {
+	title.setTitle(tooltip);
+	icon.setTitle(tooltip);
+    }
+
 }

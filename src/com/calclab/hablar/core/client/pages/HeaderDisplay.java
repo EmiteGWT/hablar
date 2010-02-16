@@ -20,4 +20,6 @@ public interface HeaderDisplay extends Display {
     void removeStyle(String styleName);
 
     void setCloseIconVisible(boolean visible);
+
+    void setHeaderTooltip(String tooltip);
 }

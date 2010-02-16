@@ -24,19 +24,19 @@ public class DockHeaderWidget extends Composite implements HeaderDisplay {
     @UiField
     Label title, icon, close;
 
-    public DockHeaderWidget(String pageId, Position position) {
+    public DockHeaderWidget(final String pageId, final Position position) {
 	initWidget(uiBinder.createAndBindUi(this));
 	ensureDebugId("HeaderWidget-" + pageId);
 	addStyleName("DockHeaderWidget-" + position);
     }
 
     @Override
-    public void addIconStyle(String iconStyle) {
+    public void addIconStyle(final String iconStyle) {
 	icon.addStyleName(iconStyle);
     }
 
     @Override
-    public void addStyle(String styleName) {
+    public void addStyle(final String styleName) {
 	self.addStyleName(styleName);
     }
 
@@ -61,18 +61,23 @@ public class DockHeaderWidget extends Composite implements HeaderDisplay {
     }
 
     @Override
-    public void removeIconStyle(String iconStyle) {
+    public void removeIconStyle(final String iconStyle) {
 	icon.removeStyleName(iconStyle);
     }
 
     @Override
-    public void removeStyle(String styleName) {
+    public void removeStyle(final String styleName) {
 	self.removeStyleName(styleName);
     }
 
     @Override
-    public void setCloseIconVisible(boolean visible) {
+    public void setCloseIconVisible(final boolean visible) {
 	close.setVisible(visible);
     }
 
+    @Override
+    public void setHeaderTooltip(final String tooltip) {
+	title.setTitle(tooltip);
+	icon.setTitle(tooltip);
+    }
 }
