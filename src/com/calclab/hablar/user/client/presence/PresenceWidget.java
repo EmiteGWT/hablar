@@ -1,10 +1,17 @@
 package com.calclab.hablar.user.client.presence;
 
+import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
+import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
+import com.calclab.hablar.core.client.ui.menu.PopupMenu;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -17,11 +24,14 @@ public class PresenceWidget extends Composite implements PresenceDisplay {
 
     @UiField
     TextBox status;
+    @UiField
+    Label menu, icon;
+    private String currentStyle;
 
     public PresenceWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
 	status.ensureDebugId("PresenceWidget-status");
-
+	menu.addStyleName(HablarIcons.get(IconType.menu));
     }
 
     @Override
@@ -30,8 +40,37 @@ public class PresenceWidget extends Composite implements PresenceDisplay {
     }
 
     @Override
-    public HasText getStatus() {
+    public void focusInStatus() {
+	status.setFocus(true);
+    }
+
+    @Override
+    public HasClickHandlers getMenuAction() {
+	return menu;
+    }
+
+    @Override
+    public HasKeyDownHandlers getStatus() {
 	return status;
+    }
+
+    @Override
+    public HasText getStatusText() {
+	return status;
+    }
+
+    @Override
+    public MenuDisplay<PresencePage> newStatusMenuDisplay(final String menuId) {
+	return new PopupMenu<PresencePage>(menuId);
+    }
+
+    @Override
+    public void setStatusIcon(final String iconStyle) {
+	if (currentStyle != null) {
+	    icon.removeStyleName(currentStyle);
+	}
+	currentStyle = iconStyle;
+	icon.addStyleName(iconStyle);
     }
 
 }
