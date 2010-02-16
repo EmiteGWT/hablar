@@ -1,6 +1,7 @@
 package com.calclab.hablar.groupchat.client;
 
 import com.calclab.hablar.chat.client.ui.ChatPage;
+import com.calclab.hablar.chat.client.ui.ChatPresenter;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.container.PageAddedEvent;
 import com.calclab.hablar.core.client.container.PageAddedHandler;
@@ -14,10 +15,16 @@ import com.calclab.hablar.rooms.client.ui.open.OpenRoomWidget;
 import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 
 public class HablarGroupChat implements EntryPoint {
     private static final String ACTION_ID_CONVERT = "hablarGroupChat-convertToGroup";
     private static final String ACTION_ID_OPEN = "hablarGroupChat-openGroupChatAction";
+    private static GroupChatMessages messages;
+
+    public static GroupChatMessages i18n() {
+	return messages;
+    }
 
     public static void install(final Hablar hablar, final HablarRoomsConfig config) {
 	final OpenGroupChatPresenter openGroupPage = new OpenGroupChatPresenter(config.roomsService, hablar
@@ -30,7 +37,7 @@ public class HablarGroupChat implements EntryPoint {
 	hablar.addPageAddedHandler(new PageAddedHandler() {
 	    @Override
 	    public void onPageAdded(final PageAddedEvent event) {
-		if (event.isType(ChatPage.TYPE)) {
+		if (event.isType(ChatPresenter.TYPE)) {
 		    final ChatPage chatPage = (ChatPage) event.getPage();
 		    chatPage.addAction(createConvertToGroupChatAction(convertToGroupPage));
 		} else if (event.isType(RosterPage.TYPE)) {
@@ -41,18 +48,25 @@ public class HablarGroupChat implements EntryPoint {
 	}, true);
     }
 
+    public static void setMessages(final GroupChatMessages groupChatMessages) {
+	messages = groupChatMessages;
+    }
+
     private static SimpleAction<ChatPage> createConvertToGroupChatAction(
 	    final ConvertToGroupChatPresenter convertToGroupPage) {
-	return new SimpleAction<ChatPage>("Convert to group", ACTION_ID_CONVERT, HablarIcons.get(IconType.buddyAdd)) {
+	return new SimpleAction<ChatPage>(i18n().convertToGroupAction(), ACTION_ID_CONVERT, HablarIcons
+		.get(IconType.buddyAdd)) {
 	    @Override
-	    public void execute(final ChatPage target) {
+	    public void execute(final ChatPage chatPage) {
+		convertToGroupPage.setChat(chatPage.getChat());
 		convertToGroupPage.requestVisibility(Visibility.focused);
 	    }
 	};
     }
 
     private static SimpleAction<RosterGroupPresenter> openGroupChatAction(final OpenGroupChatPresenter openGroupPage) {
-	return new SimpleAction<RosterGroupPresenter>("Open group chat", ACTION_ID_OPEN, HablarIcons.get(IconType.off)) {
+	return new SimpleAction<RosterGroupPresenter>(i18n().openGroupChatAction(), ACTION_ID_OPEN, HablarIcons
+		.get(IconType.off)) {
 	    @Override
 	    public void execute(final RosterGroupPresenter target) {
 		openGroupPage.setGroupName(target.getGroupName());
@@ -63,6 +77,7 @@ public class HablarGroupChat implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
+	HablarGroupChat.setMessages((GroupChatMessages) GWT.create(GroupChatMessages.class));
     }
 
 }

@@ -48,6 +48,11 @@ public class SelectRosterItemWidget extends Composite implements SelectRosterIte
     }
 
     @Override
+    public void setSelectEnabled(final boolean enabled) {
+	select.setEnabled(enabled);
+    }
+
+    @Override
     public void setSelectVisible(final boolean visible) {
 	select.setVisible(visible);
     }

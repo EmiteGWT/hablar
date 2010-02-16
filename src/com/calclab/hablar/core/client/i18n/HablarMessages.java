@@ -51,7 +51,7 @@ public interface HablarMessages extends Messages {
     @DefaultMessage("Sign out")
     String logout();
 
-    @DefaultMessage("User `{0}` says «{1}»")
+    @DefaultMessage("User {0} says «{1}»")
     String newChatFrom(String user, String msg);
 
     @DefaultMessage("Remove from Contacts")

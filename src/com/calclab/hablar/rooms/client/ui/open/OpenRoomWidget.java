@@ -1,6 +1,7 @@
 package com.calclab.hablar.rooms.client.ui.open;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.LabelElement;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -22,9 +23,11 @@ public class OpenRoomWidget extends Composite implements OpenRoomDisplay {
     @UiField
     Button accept, cancel;
     @UiField
-    FlowPanel list;
+    FlowPanel occupantsList;
     @UiField
     TextBox message, roomName;
+    @UiField
+    LabelElement occupantsLabel;
 
     @UiField
     SpanElement title;
@@ -33,12 +36,12 @@ public class OpenRoomWidget extends Composite implements OpenRoomDisplay {
 	initWidget(uiBinder.createAndBindUi(this));
 	accept.ensureDebugId("InviteToRoomWidget-invite");
 	cancel.ensureDebugId("InviteToRoomWidget-cancel");
-	list.ensureDebugId("InviteToRoomWidget-list");
+	occupantsList.ensureDebugId("InviteToRoomWidget-list");
     }
 
     @Override
     public void addItem(final SelectRosterItemDisplay itemDisplay) {
-	list.add(itemDisplay.asWidget());
+	occupantsList.add(itemDisplay.asWidget());
     }
 
     @Override
@@ -48,7 +51,7 @@ public class OpenRoomWidget extends Composite implements OpenRoomDisplay {
 
     @Override
     public void clearList() {
-	list.clear();
+	occupantsList.clear();
     }
 
     @Override

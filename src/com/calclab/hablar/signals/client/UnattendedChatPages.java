@@ -2,7 +2,7 @@ package com.calclab.hablar.signals.client;
 
 import java.util.HashSet;
 
-import com.calclab.hablar.chat.client.ui.ChatPage;
+import com.calclab.hablar.chat.client.ui.ChatPresenter;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
@@ -27,12 +27,20 @@ public class UnattendedChatPages {
 	bind();
     }
 
+    public boolean contains(final Page<?> page) {
+	return unattendedChatPages.contains(page);
+    }
+
+    public int getSize() {
+	return unattendedChatPages.size();
+    }
+
     private void bind() {
 	eventBus.addHandler(UserMessageChangedEvent.TYPE, new UserMessageChangedHandler() {
 	    @Override
 	    public void onUserMessageChanged(final UserMessageChangedEvent event) {
 		final Page<?> page = event.getPage();
-		if (ChatPage.isChat(page)) {
+		if (page.getType().equals(ChatPresenter.TYPE)) {
 		    final Visibility visibility = page.getVisibility();
 		    if (visibility != Visibility.focused && unattendedChatPages.add(page)) {
 			eventBus.fireEvent(new UnattendedChatsChangedEvent(UnattendedChatPages.this));
@@ -45,21 +53,13 @@ public class UnattendedChatPages {
 	    @Override
 	    public void onVisibilityChanged(final VisibilityChangedEvent event) {
 		final Page<?> page = event.getPage();
-		if (ChatPage.isChat(page)) {
+		if (page.getType().equals(ChatPresenter.TYPE)) {
 		    onChatVisibilityChanged(page);
 		}
 	    }
 
 	});
 
-    }
-
-    public boolean contains(final Page<?> page) {
-	return unattendedChatPages.contains(page);
-    }
-
-    public int getSize() {
-	return unattendedChatPages.size();
     }
 
     private void onChatVisibilityChanged(final Page<?> page) {

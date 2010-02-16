@@ -1,9 +1,9 @@
 package com.calclab.hablar.rooms.client.ui.open;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashMap;
 
+import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
@@ -12,11 +12,11 @@ import com.google.gwt.event.dom.client.ClickHandler;
 
 public abstract class OpenRoomPresenter extends PagePresenter<OpenRoomDisplay> {
 
-    private final ArrayList<SelectRosterItemPresenter> selectItems;
+    private final HashMap<XmppURI, SelectRosterItemPresenter> itemsByUri;
 
     public OpenRoomPresenter(final String type, final HablarEventBus eventBus, final OpenRoomDisplay display) {
 	super(type, eventBus, display);
-	selectItems = new ArrayList<SelectRosterItemPresenter>();
+	itemsByUri = new HashMap<XmppURI, SelectRosterItemPresenter>();
 	display.getCancel().addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(final ClickEvent event) {
@@ -33,18 +33,15 @@ public abstract class OpenRoomPresenter extends PagePresenter<OpenRoomDisplay> {
 	});
     }
 
-    public List<SelectRosterItemPresenter> getItems() {
-	return selectItems;
+    public Collection<SelectRosterItemPresenter> getItems() {
+	return itemsByUri.values();
     }
 
     public void setItems(final Collection<RosterItem> items, final boolean selectable) {
 	display.clearList();
-	selectItems.clear();
+	itemsByUri.clear();
 	for (final RosterItem item : items) {
-	    final SelectRosterItemDisplay itemDisplay = display.createItem();
-	    final SelectRosterItemPresenter selectItem = new SelectRosterItemPresenter(item, itemDisplay, selectable);
-	    display.addItem(itemDisplay);
-	    selectItems.add(selectItem);
+	    createItem(item, selectable, false);
 	}
     }
 
@@ -54,6 +51,18 @@ public abstract class OpenRoomPresenter extends PagePresenter<OpenRoomDisplay> {
 	    onPageOpen();
 	}
 	super.setVisibility(visibility);
+    }
+
+    protected void createItem(final RosterItem item, final boolean selectable, final boolean selected) {
+	final SelectRosterItemDisplay itemDisplay = display.createItem();
+	final SelectRosterItemPresenter selectItem = new SelectRosterItemPresenter(item, itemDisplay, selectable);
+	selectItem.setSelected(selected);
+	display.addItem(itemDisplay);
+	itemsByUri.put(item.getJID(), selectItem);
+    }
+
+    protected SelectRosterItemPresenter getItem(final XmppURI uri) {
+	return itemsByUri.get(uri);
     }
 
     protected abstract void onAccept();

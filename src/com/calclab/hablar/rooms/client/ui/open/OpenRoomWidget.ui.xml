@@ -17,8 +17,8 @@
 				<label>Invitation message:</label>
 				<g:TextBox ui:field="message"></g:TextBox>
 			</p>
-			<label>Participants:</label>
-			<g:FlowPanel ui:field="list" styleName="list"></g:FlowPanel>
+			<label ui:field="occupantsLabel">Group Chat Participants:</label>
+			<g:FlowPanel ui:field="occupantsList" styleName="list"></g:FlowPanel>
 			<div class="actions">
 				<g:Button ui:field="accept">Accept</g:Button>
 				<g:Button ui:field="cancel">Cancel</g:Button>

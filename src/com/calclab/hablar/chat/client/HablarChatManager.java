@@ -11,6 +11,7 @@ import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.chat.client.ui.ChatDisplay;
 import com.calclab.hablar.chat.client.ui.ChatPage;
+import com.calclab.hablar.chat.client.ui.ChatPresenter;
 import com.calclab.hablar.chat.client.ui.ChatWidget;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
@@ -86,7 +87,7 @@ public class HablarChatManager {
 
     private void createChat(final Chat chat, final Visibility visibility) {
 	final ChatDisplay display = factory.create(sendButtonVisible);
-	final ChatPage presenter = new ChatPage(hablar.getEventBus(), chat, display);
+	final ChatPage presenter = new ChatPresenter(hablar.getEventBus(), chat, display);
 	chatPages.put(chat.getURI(), presenter);
 	hablar.addPage(presenter);
 

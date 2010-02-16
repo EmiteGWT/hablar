@@ -12,6 +12,8 @@ public interface SelectRosterItemDisplay extends Display {
 
     void setIconStyle(String style);
 
+    void setSelectEnabled(boolean enabled);
+
     void setSelectVisible(boolean visible);
 
 }

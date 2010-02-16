@@ -8,7 +8,7 @@ import static org.mockito.Mockito.when;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.calclab.hablar.chat.client.ui.ChatPage;
+import com.calclab.hablar.chat.client.ui.ChatPresenter;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.page.events.UserMessageChangedEvent;
@@ -45,7 +45,7 @@ public class UnattendedChatPagesTests {
 
     private Page<?> createChatPage(final Visibility visibility) {
 	final Page<?> page = tester.newPage(visibility);
-	when(page.getType()).thenReturn(ChatPage.TYPE);
+	when(page.getType()).thenReturn(ChatPresenter.TYPE);
 	return page;
     }
 }
