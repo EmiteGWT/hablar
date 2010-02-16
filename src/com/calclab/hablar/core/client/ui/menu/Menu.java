@@ -27,9 +27,19 @@ public class Menu<T> implements Presenter<MenuDisplay<T>> {
 	});
     }
 
+    public void clear() {
+	actions.clear();
+	display.clearActions();
+    }
+
     @Override
     public MenuDisplay<T> getDisplay() {
 	return display;
+    }
+
+    public void removeAction(final Action<T> action) {
+	actions.remove(action);
+	display.removeAction(action);
     }
 
     public void setTarget(final T item) {

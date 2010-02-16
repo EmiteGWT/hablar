@@ -9,12 +9,15 @@ public class PopupMenuViewStub<T> implements MenuDisplay<T> {
 
     @Override
     public void addAction(final Action<T> action, final Command command) {
-
     }
 
     @Override
     public Widget asWidget() {
 	return null;
+    }
+
+    @Override
+    public void clearActions() {
     }
 
     @Override
@@ -27,8 +30,11 @@ public class PopupMenuViewStub<T> implements MenuDisplay<T> {
     }
 
     @Override
-    public void setActionVisible(final Action<T> action, final boolean visible) {
+    public void removeAction(final Action<T> action) {
+    }
 
+    @Override
+    public void setActionVisible(final Action<T> action, final boolean visible) {
     }
 
     @Override

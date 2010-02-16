@@ -5,27 +5,46 @@ import java.util.List;
 
 import com.calclab.emite.core.client.packet.IPacket;
 import com.calclab.emite.core.client.packet.MatcherFactory;
+import com.calclab.emite.core.client.packet.NoPacket;
+import com.calclab.emite.xep.storage.client.IQResponse;
 import com.calclab.emite.xep.storage.client.SimpleStorageData;
 
 public class StoredPresences extends SimpleStorageData {
 
     public static final String STORED_PRESENCES = "storedpresences";
     public static final String STORED_PRESENCE = "storedpresence";
-    private static final String STORED_PRESENCE_XMLNS = "stored:presence";
+    public static final String STORED_PRESENCES_XMLNS = "stored:presence";
+    public static final StoredPresences empty = new StoredPresences();
+
+    public static StoredPresences parse(final IQResponse response) {
+	final IPacket child = response.getFirstChildInDeep(MatcherFactory.byNameAndXMLNS(STORED_PRESENCES,
+		STORED_PRESENCES_XMLNS));
+	return child == NoPacket.INSTANCE ? new StoredPresences() : new StoredPresences(child);
+    }
+
     private ArrayList<StoredPresence> presences;
 
     public StoredPresences() {
-	super(STORED_PRESENCES, STORED_PRESENCE_XMLNS);
+	super(STORED_PRESENCES, STORED_PRESENCES_XMLNS);
     }
 
     public StoredPresences(final IPacket delegate) {
 	super(delegate);
     }
 
-    public void add(final StoredPresence storedPresence) {
+    public boolean add(final StoredPresence presence) {
 	parsePresences();
-	presences.add(storedPresence);
-	addChild(STORED_PRESENCE);
+	if (!presences.contains(presence)) {
+	    presences.add(presence);
+	    super.addChild(presence);
+	    return true;
+	}
+	return false;
+    }
+
+    public boolean contains(final StoredPresence presence) {
+	parsePresences();
+	return presences.contains(presence);
     }
 
     public List<StoredPresence> get() {

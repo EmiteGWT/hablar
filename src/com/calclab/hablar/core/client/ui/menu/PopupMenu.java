@@ -34,8 +34,21 @@ public class PopupMenu<T> extends PopupPanel implements MenuDisplay<T> {
     }
 
     @Override
+    public void clearActions() {
+	bar.clearItems();
+	items.clear();
+    }
+
+    @Override
     public boolean isVisible() {
 	return isShowing();
+    }
+
+    @Override
+    public void removeAction(final Action<T> action) {
+	final MenuItem menuItem = items.get(action);
+	bar.removeItem(menuItem);
+	items.remove(action);
     }
 
     @Override

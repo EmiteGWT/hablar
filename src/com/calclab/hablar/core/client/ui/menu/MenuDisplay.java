@@ -7,9 +7,13 @@ public interface MenuDisplay<T> extends Display {
 
     void addAction(Action<T> action, Command command);
 
+    void clearActions();
+
     void hide();
 
     boolean isVisible();
+
+    void removeAction(Action<T> action);
 
     void setActionVisible(Action<T> action, boolean visible);
 

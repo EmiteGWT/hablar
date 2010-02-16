@@ -24,6 +24,24 @@ public class StoredPresence extends DelegatedPacket {
 	setShow(show);
     }
 
+    @Override
+    public boolean equals(final Object obj) {
+	if (this == obj) {
+	    return true;
+	}
+	if (obj == null) {
+	    return false;
+	}
+	if (getClass() != obj.getClass()) {
+	    return false;
+	}
+	final StoredPresence objPresence = (StoredPresence) obj;
+	if (objPresence.getShow().equals(this.getShow()) && (objPresence.getStatus().equals(this.getStatus()))) {
+	    return true;
+	}
+	return false;
+    }
+
     public Show getShow() {
 	// Duplicate code with Presence.java
 	final String value = getFirstChild(SHOW).getText();
@@ -36,6 +54,11 @@ public class StoredPresence extends DelegatedPacket {
 
     public String getStatus() {
 	return getFirstChild(STATUS).getText();
+    }
+
+    @Override
+    public int hashCode() {
+	return (getStatus() + getShow().toString()).hashCode();
     }
 
     public void setShow(final Show show) {
