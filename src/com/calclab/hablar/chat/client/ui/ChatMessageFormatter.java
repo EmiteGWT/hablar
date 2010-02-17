@@ -3,7 +3,6 @@ package com.calclab.hablar.chat.client.ui;
 import com.calclab.emite.core.client.packet.TextUtils;
 import com.calclab.hablar.core.client.ui.emoticons.EmoticonStyles;
 import com.calclab.hablar.core.client.ui.emoticons.Emoticons;
-import com.google.gwt.user.client.ui.Label;
 
 /**
  * Some formatting utilities
@@ -156,22 +155,14 @@ public class ChatMessageFormatter {
     }
 
     private static String getSpan(final String style) {
-	// FIXME: for now this creates a <div> but without float, because if we
-	// use float:left it changes the order of icons and texts. Other
-	// options:
-	// - If we use span it doesn't get the correct width/height
-	// - or insert a Image from the bundle (as we did before)
-	final Label label = new Label();
-	label.setStyleName(icons.css().base());
-	label.addStyleName(style);
-	return label.getElement().getString();
+	return "<span class=\"" + icons.css().base() + " " + style + "\"><span>";
     }
 
     private static String replace(String message, final String[] from, final String to) {
 	for (final String element : from) {
-	    message = message.replaceAll("(^|[\\s])" + element + "([\\s]|$)", "$1" + to + "$2");
+	    message = message.replaceAll("(^|[\\s])(" + element + ")([\\s]|$)", "$1" + to + "$2</span></span>$3");
 	    // two times for: :) :) :) :)
-	    message = message.replaceAll("(^|[\\s])" + element + "([\\s]|$)", "$1" + to + "$2");
+	    message = message.replaceAll("(^|[\\s])(" + element + ")([\\s]|$)", "$1" + to + "$2</span></span>$3");
 	}
 	return message;
     }

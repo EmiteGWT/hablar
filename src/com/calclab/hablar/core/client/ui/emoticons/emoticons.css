@@ -1,37 +1,73 @@
-.base { vertical-align: middle; }
-@sprite .alien { gwt-image: "alien";}
-@sprite .andy { gwt-image: "andy";}
-@sprite .angel { gwt-image: "angel";}
-@sprite .angry { gwt-image: "angry";}
-@sprite .bandit { gwt-image: "bandit";}
-@sprite .blushing { gwt-image: "blushing";}
-@sprite .bulletBlack { gwt-image: "bulletBlack";}
-@sprite .bulletStar { gwt-image: "bulletStar";}
-@sprite .cool { gwt-image: "cool";}
-@sprite .crying { gwt-image: "crying";}
-@sprite .devil { gwt-image: "devil";}
-@sprite .grin { gwt-image: "grin";}
-@sprite .happy { gwt-image: "happy";}
-@sprite .heart { gwt-image: "heart";}
-@sprite .joyful { gwt-image: "joyful";}
-@sprite .kissing { gwt-image: "kissing";}
-@sprite .lol { gwt-image: "lol";}
-@sprite .love { gwt-image: "love";}
-@sprite .ninja { gwt-image: "ninja";}
-@sprite .pinched { gwt-image: "pinched";}
-@sprite .policeman { gwt-image: "policeman";}
-@sprite .pouty { gwt-image: "pouty";}
-@sprite .sad { gwt-image: "sad";}
-@sprite .sick { gwt-image: "sick";}
-@sprite .sideways { gwt-image: "sideways";}
-@sprite .sleeping { gwt-image: "sleeping";}
-@sprite .smile { gwt-image: "smile";}
-@sprite .surprised { gwt-image: "surprised";}
-@sprite .tongue { gwt-image: "tongue";}
-@sprite .uncertain { gwt-image: "uncertain";}
-@sprite .unsure { gwt-image: "unsure";}
-@sprite .w00t { gwt-image: "w00t";}
-@sprite .whistling { gwt-image: "whistling";}
-@sprite .wink { gwt-image: "wink";}
-@sprite .wizard { gwt-image: "wizard";}
-@sprite .wondering { gwt-image: "wondering";}
+span.base { font-size:15px;padding:2px 12px 0px 10px;background-position:center center;}
+span.alien > span { display: none; }
+span.andy > span { display: none; }
+span.angel > span { display: none; }
+span.angry > span { display: none; }
+span.bandit > span { display: none; }
+span.blushing > span { display: none; }
+span.bulletBlack > span { display: none; }
+span.bulletStar > span { display: none; }
+span.cool > span { display: none; }
+span.crying > span { display: none; }
+span.devil > span { display: none; }
+span.grin > span { display: none; }
+span.happy > span { display: none; }
+span.heart > span { display: none; }
+span.joyful > span { display: none; }
+span.kissing > span { display: none; }
+span.lol > span { display: none; }
+span.love > span { display: none; }
+span.ninja > span { display: none; }
+span.pinched > span { display: none; }
+span.policeman > span { display: none; }
+span.pouty > span { display: none; }
+span.sad > span { display: none; }
+span.sick > span { display: none; }
+span.sideways > span { display: none; }
+span.sleeping > span { display: none; }
+span.smile > span { display: none; }
+span.surprised > span { display: none; }
+span.tongue > span { display: none; }
+span.uncertain > span { display: none; }
+span.unsure > span { display: none; }
+span.w00t > span { display: none; }
+span.whistling > span { display: none; }
+span.wink > span { display: none; }
+span.wizard > span { display: none; }
+span.wondering > span { display: none; }
+@sprite span.alien { gwt-image: "alien"; font-size: 25px;}
+@sprite span.andy { gwt-image: "andy";}
+@sprite span.angel { gwt-image: "angel"; font-size: 25px;}
+@sprite span.angry { gwt-image: "angry";}
+@sprite span.bandit { gwt-image: "bandit"; font-size: 25px;}
+@sprite span.blushing { gwt-image: "blushing";}
+@sprite span.bulletBlack { gwt-image: "bulletBlack";}
+@sprite span.bulletStar { gwt-image: "bulletStar";}
+@sprite span.cool { gwt-image: "cool";}
+@sprite span.crying { gwt-image: "crying";}
+@sprite span.devil { gwt-image: "devil"; font-size: 25px;}
+@sprite span.grin { gwt-image: "grin";}
+@sprite span.happy { gwt-image: "happy";}
+@sprite span.heart { gwt-image: "heart"; }
+@sprite span.joyful { gwt-image: "joyful";}
+@sprite span.kissing { gwt-image: "kissing";}
+@sprite span.lol { gwt-image: "lol";}
+@sprite span.love { gwt-image: "love"; font-size: 25px;}
+@sprite span.ninja { gwt-image: "ninja";}
+@sprite span.pinched { gwt-image: "pinched";}
+@sprite span.policeman { gwt-image: "policeman"; font-size: 25px;}
+@sprite span.pouty { gwt-image: "pouty";}
+@sprite span.sad { gwt-image: "sad";}
+@sprite span.sick { gwt-image: "sick";}
+@sprite span.sideways { gwt-image: "sideways";}
+@sprite span.sleeping { gwt-image: "sleeping"; font-size: 25px;}
+@sprite span.smile { gwt-image: "smile";}
+@sprite span.surprised { gwt-image: "surprised";}
+@sprite span.tongue { gwt-image: "tongue";}
+@sprite span.uncertain { gwt-image: "uncertain";}
+@sprite span.unsure { gwt-image: "unsure";}
+@sprite span.w00t { gwt-image: "w00t"; font-size: 25px;}
+@sprite span.whistling { gwt-image: "whistling"; font-size: 25px;}
+@sprite span.wink { gwt-image: "wink";}
+@sprite span.wizard { gwt-image: "wizard";font-size: 30px;}
+@sprite span.wondering { gwt-image: "wondering";}
