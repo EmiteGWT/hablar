@@ -31,7 +31,15 @@ public class OthersVCardPresenter extends VCardPage {
 	    @Override
 	    public void onEvent(final VCardResponse response) {
 		updateDisplay(response.getVCard());
+		display.setLoadingVisible(false);
+		display.setFormVisible(true);
 	    }
 	});
+    }
+
+    @Override
+    protected void onBeforeFocus() {
+	display.setLoadingVisible(true);
+	display.setFormVisible(false);
     }
 }

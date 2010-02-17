@@ -20,6 +20,10 @@ public interface VCardDisplay extends Display {
 
     void setCancelVisible(boolean visible);
 
+    void setFormVisible(boolean visible);
+
+    void setLoadingVisible(boolean visible);
+
     void setPageTitle(String title);
 
 }

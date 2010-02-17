@@ -9,38 +9,44 @@
 			<h2>
 				<span ui:field='title' />
 			</h2>
-			<p>
-				<label>Name:</label>
-				<g:TextBox ui:field="name"></g:TextBox>
-			</p>
-            <p>
-                <label>Nickname:</label>
-                <g:TextBox ui:field="nickName"></g:TextBox>
-            </p>
-            <p>
-                <label>Family name:</label>
-                <g:TextBox ui:field="familyName"></g:TextBox>
-            </p>
-			<p>
-				<label>Middle name:</label>
-				<g:TextBox ui:field="middleName"></g:TextBox>
-			</p>
-            <p>
-                <label>Given name:</label>
-                <g:TextBox ui:field="givenName"></g:TextBox>
-            </p>
-			<p>
-				<label>Organization:</label>
-				<g:TextBox ui:field="organizationName"></g:TextBox>
-			</p>
-            <p>
-                <label>Homepage:</label>
-                <g:TextBox ui:field="homepage"></g:TextBox>
-            </p>
-			<p>
-				<label>Email:</label>
-				<g:TextBox ui:field="email"></g:TextBox>
-			</p>
+			<div class="loading" ui:field="loading">
+				<span ui:field="icon" class="icon">&nbsp;</span>
+				<span ui:field="loadMessage">Loading profile. Please wait...</span>
+			</div>
+			<div ui:field="form">
+				<p>
+					<label>Name:</label>
+					<g:TextBox ui:field="name"></g:TextBox>
+				</p>
+				<p>
+					<label>Nickname:</label>
+					<g:TextBox ui:field="nickName"></g:TextBox>
+				</p>
+				<p>
+					<label>Family name:</label>
+					<g:TextBox ui:field="familyName"></g:TextBox>
+				</p>
+				<p>
+					<label>Middle name:</label>
+					<g:TextBox ui:field="middleName"></g:TextBox>
+				</p>
+				<p>
+					<label>Given name:</label>
+					<g:TextBox ui:field="givenName"></g:TextBox>
+				</p>
+				<p>
+					<label>Organization:</label>
+					<g:TextBox ui:field="organizationName"></g:TextBox>
+				</p>
+				<p>
+					<label>Homepage:</label>
+					<g:TextBox ui:field="homepage"></g:TextBox>
+				</p>
+				<p>
+					<label>Email:</label>
+					<g:TextBox ui:field="email"></g:TextBox>
+				</p>
+			</div>
 			<div class="actions">
 				<g:Button ui:field="accept">Accept</g:Button>
 				<g:Button ui:field="cancel">Cancel</g:Button>

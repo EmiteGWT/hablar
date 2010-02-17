@@ -2,7 +2,10 @@ package com.calclab.hablar.vcard.client;
 
 import java.util.HashMap;
 
+import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -25,12 +28,15 @@ public class VCardWidget extends Composite implements VCardDisplay {
     @UiField
     Button accept, cancel;
     @UiField
-    SpanElement title;
+    SpanElement title, icon;
+    @UiField
+    DivElement form, loading;
 
     private final HashMap<Field, TextBox> fields;
 
     public VCardWidget(final boolean readOnly) {
 	initWidget(uiBinder.createAndBindUi(this));
+	icon.addClassName(HablarIcons.get(IconType.loading));
 	fields = new HashMap<Field, TextBox>();
 	fields.put(Field.name, name);
 	fields.put(Field.nickName, nickName);
@@ -70,6 +76,16 @@ public class VCardWidget extends Composite implements VCardDisplay {
     @Override
     public void setCancelVisible(final boolean visible) {
 	cancel.setVisible(visible);
+    }
+
+    @Override
+    public void setFormVisible(final boolean visible) {
+	setVisible(form, visible);
+    }
+
+    @Override
+    public void setLoadingVisible(final boolean visible) {
+	setVisible(loading, visible);
     }
 
     @Override

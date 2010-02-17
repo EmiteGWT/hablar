@@ -33,6 +33,8 @@ public class DefaultHablarIcons extends HablarIcons {
 
 	String consoleIcon();
 
+	String loadingIcon();
+
 	String menuIcon();
 
 	String offIcon();
@@ -94,6 +96,8 @@ public class DefaultHablarIcons extends HablarIcons {
 	    return icons.buddyAddIcon();
 	case console:
 	    return icons.consoleIcon();
+	case loading:
+	    return icons.loadingIcon();
 	}
 	return null;
     }
