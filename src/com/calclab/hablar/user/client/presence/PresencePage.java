@@ -63,8 +63,7 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 		final Element element = event.getRelativeElement();
 		final int width = element.getClientWidth();
 		statusMenu.setTarget(PresencePage.this);
-		// FIXME (z-index issue in docks) (added 100 to show it)
-		statusMenu.show(element.getAbsoluteLeft() - width - 100, element.getAbsoluteTop());
+		statusMenu.show(element.getAbsoluteLeft() - width, element.getAbsoluteTop());
 	    }
 	};
 	display.getMenu().addClickHandler(handler);
@@ -167,7 +166,7 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
     }
 
     private void setNextPresence(final String status, final Show show) {
-	this.nextShow = show;
+	nextShow = show;
 	showPresence(status, show);
     }
 

@@ -5,7 +5,9 @@ import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.signals.client.notifications.JGrowlHablarNotifier;
 import com.calclab.hablar.signals.client.notifications.NotificationManager;
-import com.calclab.hablar.signals.client.notifications.NotificationPreferences;
+import com.calclab.hablar.signals.client.preferences.SignalsPreferencesPage;
+import com.calclab.hablar.signals.client.preferences.SignalsPreferencesWidget;
+import com.calclab.hablar.user.client.UserContainer;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasText;
@@ -25,11 +27,15 @@ public class HablarSignals implements EntryPoint {
 		Window.setTitle(text);
 	    }
 	};
+	final SignalPreferences preferences = new SignalPreferences();
 
-	final NotificationPreferences preferences = new NotificationPreferences();
 	new UnattendedChatPages(eventBus);
 	new WindowTitlePresenter(eventBus, titleDisplay);
 	new NotificationManager(eventBus, preferences, new JGrowlHablarNotifier());
+
+	final SignalsPreferencesPage preferencesPage = new SignalsPreferencesPage(eventBus, preferences,
+		new SignalsPreferencesWidget());
+	hablar.addPage(preferencesPage, UserContainer.ROL);
     }
 
     public static void install(final HablarWidget widget) {

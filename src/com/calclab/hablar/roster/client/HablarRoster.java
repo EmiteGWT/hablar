@@ -32,7 +32,7 @@ public class HablarRoster implements EntryPoint {
 	hablar.addPage(roster);
 
 	new RosterBasicActions(roster);
-	HablarMoveToGroup.install(roster, hablar);
+	HablarAddToGroup.install(roster, hablar);
 
 	final Session session = Suco.get(Session.class);
 	session.onStateChanged(new Listener<Session>() {

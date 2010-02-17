@@ -100,7 +100,7 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 			createGroup(name);
 		    }
 		}
-		final String msg = item.getName() + " has been added to Contacts.";
+		final String msg = i18n().userAdded(item.getName());
 		getState().setUserMessage(msg);
 	    }
 	});
@@ -108,16 +108,13 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 	roster.onItemChanged(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
-		// getPresenter(item).setItem(item);
 	    }
 	});
 
 	roster.onItemRemoved(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
-		// display.remove(getPresenter(item).getDisplay());
-		// FIXME: i18n
-		final String msg = item.getJID().getNode() + " has been removed from Contacts.";
+		final String msg = i18n().userRemoved(item.getName());
 		getState().setUserMessage(msg);
 	    }
 	});

@@ -9,7 +9,7 @@
 					existing group</g:RadioButton>
 				<span class="option">
 					<label>Select Group:</label>
-					<g:ListBox ui:field="groupList" visibleItemCount="1"></g:ListBox>
+					<g:ListBox ui:field="groupList" visibleItemCount="4"></g:ListBox>
 				</span>
 			</p>
 			<p>
