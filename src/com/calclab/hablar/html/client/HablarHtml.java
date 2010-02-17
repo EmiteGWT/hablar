@@ -7,6 +7,7 @@ import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.login.client.HablarLogin;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -15,6 +16,24 @@ import com.google.gwt.user.client.ui.Widget;
  * Use Hablar without using GWT.
  */
 public class HablarHtml implements EntryPoint {
+    @Override
+    public void onModuleLoad() {
+	final GWT.UncaughtExceptionHandler uncaughtExceptionHandler = new GWT.UncaughtExceptionHandler() {
+	    public void onUncaughtException(final Throwable e) {
+		GWT.log("UncaughtException in HablarHtml", e);
+	    }
+	};
+	// handle the unexpected after onModuleLoad()
+	GWT.setUncaughtExceptionHandler(uncaughtExceptionHandler);
+
+	try {
+	    onModuleLoadCont();
+	} catch (final RuntimeException ex) {
+	    // use our handler rather than duplicate code
+	    uncaughtExceptionHandler.onUncaughtException(ex);
+	}
+    }
+
     private void addHablarToDiv(final HablarWidget hablar, final HtmlConfig htmlConfig) {
 	setSize(hablar, htmlConfig);
 	final RootPanel rootPanel = RootPanel.get(htmlConfig.inline);
@@ -34,8 +53,7 @@ public class HablarHtml implements EntryPoint {
 	return dialog;
     }
 
-    @Override
-    public void onModuleLoad() {
+    private void onModuleLoadCont() {
 	final HablarConfig config = HablarConfig.getFromMeta();
 	final HtmlConfig htmlConfig = HtmlConfig.getFromMeta();
 	htmlConfig.hasLogger = true;
