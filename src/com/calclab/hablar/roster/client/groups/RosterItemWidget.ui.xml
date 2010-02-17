@@ -11,10 +11,10 @@
 					<g:Label styleName="icon" ui:field="icon"></g:Label>
 					<g:Label styleName="name" ui:field="name">name-here</g:Label>
 					<g:Label styleName="jid" ui:field="jid">jid</g:Label>
+					<g:Label styleName="status" ui:field="status" />
 				</g:FlowPanel>
 			</g:FocusPanel>
 			<g:Label ui:field="menu" styleName="menu"></g:Label>
 		</g:FlowPanel>
-		<g:Label styleName="status" ui:field="status" />
 	</g:FlowPanel>
 </ui:UiBinder> 

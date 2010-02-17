@@ -18,7 +18,7 @@ public interface GroupChatMessages extends Messages {
     @DefaultMessage("talk-{0}-{1}")
     String defaultRoomName(String user1, String user2);
 
-    @DefaultMessage("Open group chat")
+    @DefaultMessage("Chat with this group")
     String openGroupChatAction();
 
 }

@@ -11,6 +11,9 @@ import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener2;
 import com.google.gwt.user.client.ui.HasText;
 
+/**
+ * Sets the state of the room
+ */
 public class HablarRoomStateManager {
 
     public HablarRoomStateManager(final RoomPresenter roomPage) {
@@ -22,7 +25,7 @@ public class HablarRoomStateManager {
 	    @Override
 	    public void onEvent(final XmppURI uri, final ChatState state) {
 		final HasText stateDisplay = roomPage.getDisplay().getState();
-		stateDisplay.setText(HablarChatStateManager.getStateText(state, uri.getNode()));
+		stateDisplay.setText(HablarChatStateManager.getStateText(state, uri.getResource()));
 	    }
 	});
     }
