@@ -13,6 +13,8 @@ public interface OccupantsDisplay extends Display {
 
     HasText getLabel();
 
+    boolean isPanelVisible();
+
     void setPanelVisible(boolean visible);
 
 }

@@ -380,10 +380,26 @@ div.hablar-SearchResultItemWidget:hover {
 
 .gwt-PopupPanel.occupants {
     background-color: #E9E9E9;
+    border-top: 1px solid #E9E9E9;
+    border-left: 1px solid #BBBBBB;
+    border-right: 1px solid #BBBBBB;
+    border-bottom: 1px solid #BBBBBB;
 }
 
-.gwt-PopupPanel.occupants {
+.hablar-OccupantWidget {
+	width: 100%;
+	overflow: hidden;
+}
 
+.hablar-OccupantWidget .icon {
+	display: block;
+	float: left; 
+	margin-right: 5px;
+}
+
+.hablar-OccupantWidget .name {
+	display: block;
+	float: left;
 }
 
 /** ROOM INVITATION **/

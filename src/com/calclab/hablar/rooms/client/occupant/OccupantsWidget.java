@@ -18,6 +18,8 @@ public class OccupantsWidget extends Label implements OccupantsDisplay {
 	popup.addStyleName("occupants");
 	occupants = new FlowPanel();
 	popup.setWidget(occupants);
+	popup.setAnimationEnabled(false);
+	popup.addAutoHidePartner(getElement());
     }
 
     @Override
@@ -48,8 +50,17 @@ public class OccupantsWidget extends Label implements OccupantsDisplay {
     }
 
     @Override
+    public boolean isPanelVisible() {
+	return popup.isShowing();
+    }
+
+    @Override
     public void setPanelVisible(final boolean visible) {
-	popup.showRelativeTo(this);
+	if (visible) {
+	    popup.showRelativeTo(this);
+	} else {
+	    popup.hide();
+	}
     }
 
 }
