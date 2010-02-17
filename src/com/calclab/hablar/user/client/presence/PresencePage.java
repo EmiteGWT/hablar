@@ -42,6 +42,7 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
     private SimpleAction<PresencePage> busyAction;
     private SimpleAction<PresencePage> busyCustomAction;
     private SimpleAction<PresencePage> clearCustomsAction;
+    private Show nextShow;
 
     public PresencePage(final HablarEventBus eventBus, final PresenceDisplay display,
 	    final Menu<PresencePage> statusMenu) {
@@ -82,14 +83,14 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 	return new SimpleAction<PresencePage>(title, id, icon) {
 	    @Override
 	    public void execute(final PresencePage target) {
-		setPresence(status, show);
+		setNextPresence(status, show);
 	    }
 	};
     }
 
     @Override
     public void saveData() {
-	setPresence(display.getStatusText().getText(), manager.getOwnPresence().getShow());
+	setPresence(display.getStatusText().getText(), nextShow == null ? manager.getOwnPresence().getShow() : nextShow);
     }
 
     @Override
@@ -128,28 +129,28 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 		.get(IconType.buddyOn)) {
 	    @Override
 	    public void execute(final PresencePage target) {
-		setPresence("", Show.notSpecified);
+		setNextPresence("", Show.notSpecified);
 	    }
 	};
 	availableCustomAction = new SimpleAction<PresencePage>("Available with Custom Message...",
 		ACTION_ID_AVAILABLE_CUSTOM, HablarIcons.get(IconType.buddyOn)) {
 	    @Override
 	    public void execute(final PresencePage target) {
-		setPresence("", Show.notSpecified);
+		setNextPresence("", Show.notSpecified);
 		display.focusInStatus();
 	    }
 	};
 	busyAction = new SimpleAction<PresencePage>("Busy", ACTION_ID_BUSY, HablarIcons.get(IconType.buddyOff)) {
 	    @Override
 	    public void execute(final PresencePage target) {
-		setPresence("", Show.dnd);
+		setNextPresence("", Show.dnd);
 	    }
 	};
 	busyCustomAction = new SimpleAction<PresencePage>("Busy with Custom Message...", ACTION_ID_BUSY_CUSTOM,
 		HablarIcons.get(IconType.buddyOff)) {
 	    @Override
 	    public void execute(final PresencePage target) {
-		setPresence("", Show.dnd);
+		setNextPresence("", Show.dnd);
 		display.focusInStatus();
 	    }
 	};
@@ -163,8 +164,12 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 	};
     }
 
-    private void setPresence(final String status, final Show show) {
+    private void setNextPresence(final String status, final Show show) {
+	this.nextShow = show;
 	showPresence(status, show);
+    }
+
+    private void setPresence(final String status, final Show show) {
 	if (statusNotEmpty(status)) {
 	    storedPresenceManager.add(status, show, new Listener<IQResponse>() {
 		@Override
