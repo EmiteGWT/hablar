@@ -12,7 +12,7 @@
         <div class="controls">
           <g:Label ui:field="icon" styleName="icon" />
           <g:Label ui:field="menu" styleName="menu" />
-          <g:TextBox ui:field="status" styleName="status" />
+          <g:TextBox ui:field="status" addStyleNames="status gwt-TextBox" />
         </div>
       </p>
     </div>

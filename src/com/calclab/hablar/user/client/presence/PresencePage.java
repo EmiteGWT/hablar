@@ -76,7 +76,12 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 		}
 	    }
 	});
-
+	manager.onOwnPresenceChanged(new Listener<Presence>() {
+	    @Override
+	    public void onEvent(final Presence presence) {
+		showPresence(presence.getStatus(), presence.getShow());
+	    }
+	});
     }
 
     public SimpleAction<PresencePage> createCustomAction(final String title, final String id, final String icon,
