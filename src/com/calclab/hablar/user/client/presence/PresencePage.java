@@ -51,6 +51,7 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 	manager = Suco.get(PresenceManager.class);
 	final String style = HablarIcons.get(IconType.buddy);
 	model.init(style, "Your status");
+	nextShow = Show.notSpecified;
 	storedPresenceManager = new StoredPresenceManager(Suco.get(PrivateStorageManager.class));
 	createDefActions();
 	updateMenu();
@@ -90,7 +91,7 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 
     @Override
     public void saveData() {
-	setPresence(display.getStatusText().getText(), nextShow == null ? manager.getOwnPresence().getShow() : nextShow);
+	setPresence(display.getStatusText().getText(), nextShow);
     }
 
     @Override
