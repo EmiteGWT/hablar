@@ -9,11 +9,11 @@
     <div class="form">
       <p>
         <label>Status:</label>
-        <g:FlowPanel>
-          <g:Label styleName="icon" ui:field="icon" />
+        <div class="controls">
+          <g:Label ui:field="icon" styleName="icon" />
           <g:Label ui:field="menu" styleName="menu" />
-          <g:TextBox ui:field="status" addStyleNames="status gwt-TextBox" />
-        </g:FlowPanel>
+          <g:TextBox ui:field="status" styleName="status" />
+        </div>
       </p>
     </div>
   </g:HTMLPanel>

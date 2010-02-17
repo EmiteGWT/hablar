@@ -378,9 +378,6 @@ div.hablar-SearchResultItemWidget:hover {
     color: white;
 }
 
-.gwt-PopupPanel {
-	z-index: 5000;
-}
 
 .gwt-PopupPanel.occupants {
     background-color: #E9E9E9;
@@ -542,20 +539,37 @@ div.hablar-SearchResultItemWidget:hover {
 .hablar-PopupPanel {
     background-color: #E9E9E9;
     border: 1px solid #BBBBBB;
+   	z-index: 5000;
     -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     padding: 3px;
 }
 
-.hablar-PresenceWidget .menu {
-    float: left;
+.gwt-MenuItem {
 }
 
-.hablar-PresenceWidget .icon {
-    float: left;
+.gwt-MenuItem label {
+	display: block;
+	float: left;
+	margin-right: 3px;
 }
+
+
+
+
+.hablar-PresenceWidget .controls {
+	width: 100%;
+	overflow: hidden;
+}
+
+.hablar-PresenceWidget .menu, .hablar-PresenceWidget .icon  {
+    float: left;
+    margin-top: 4px;
+}
+
 
 .hablar-PresenceWidget .status {
     float: left;
     margin-top: 3px;
+    width: 80%;
 }

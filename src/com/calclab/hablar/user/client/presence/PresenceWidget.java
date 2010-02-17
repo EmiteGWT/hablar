@@ -40,11 +40,6 @@ public class PresenceWidget extends Composite implements PresenceDisplay {
     }
 
     @Override
-    public void focusInStatus() {
-	status.setFocus(true);
-    }
-
-    @Override
     public HasClickHandlers getIcon() {
 	return icon;
     }
@@ -67,6 +62,16 @@ public class PresenceWidget extends Composite implements PresenceDisplay {
     @Override
     public MenuDisplay<PresencePage> newStatusMenuDisplay(final String menuId) {
 	return new PopupMenu<PresencePage>(menuId);
+    }
+
+    @Override
+    public void setStatusEnabled(final boolean enabled) {
+	status.setEnabled(enabled);
+    }
+
+    @Override
+    public void setStatusFocused(final boolean focused) {
+	status.setFocus(focused);
     }
 
     @Override

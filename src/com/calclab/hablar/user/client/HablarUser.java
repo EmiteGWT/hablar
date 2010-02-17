@@ -7,8 +7,15 @@ import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.user.client.presence.PresencePage;
 import com.calclab.hablar.user.client.presence.PresenceWidget;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 
 public class HablarUser implements EntryPoint {
+
+    private static UserMessages userMessages;
+
+    public static UserMessages i18n() {
+	return userMessages;
+    }
 
     public static void install(final Hablar hablar) {
 	final HablarEventBus eventBus = hablar.getEventBus();
@@ -24,8 +31,13 @@ public class HablarUser implements EntryPoint {
 	hablar.addPage(presence, UserContainer.ROL);
     }
 
+    public static void setMessages(final UserMessages messages) {
+	userMessages = messages;
+    }
+
     @Override
     public void onModuleLoad() {
+	setMessages((UserMessages) GWT.create(UserMessages.class));
     }
 
 }

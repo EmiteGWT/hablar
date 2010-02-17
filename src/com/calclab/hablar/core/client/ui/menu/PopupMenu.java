@@ -23,7 +23,9 @@ public class PopupMenu<T> extends PopupPanel implements MenuDisplay<T> {
 
     @Override
     public void addAction(final Action<T> action, final Command command) {
-	final MenuItem menuItem = bar.addItem(action.getName(), true, command);
+	String html = "<label class='" + action.getIconStyle() + "'>&nbsp;</label>";
+	html += action.getName();
+	final MenuItem menuItem = bar.addItem(html, true, command);
 	menuItem.ensureDebugId(action.getId());
 	items.put(action, menuItem);
     }

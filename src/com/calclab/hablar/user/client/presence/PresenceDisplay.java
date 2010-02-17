@@ -8,7 +8,7 @@ import com.google.gwt.user.client.ui.HasText;
 
 public interface PresenceDisplay extends Display {
 
-    void focusInStatus();
+    void setStatusFocused(boolean focused);
 
     HasClickHandlers getIcon();
 
@@ -19,6 +19,8 @@ public interface PresenceDisplay extends Display {
     HasText getStatusText();
 
     MenuDisplay<PresencePage> newStatusMenuDisplay(String menuId);
+
+    void setStatusEnabled(boolean enabled);
 
     void setStatusIcon(String iconStyle);
 
