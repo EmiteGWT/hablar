@@ -39,6 +39,7 @@ public class VCardWidget extends Composite implements VCardDisplay {
 	fields.put(Field.familyName, familyName);
 	fields.put(Field.email, email);
 	fields.put(Field.homepage, homepage);
+	fields.put(Field.organizationName, organizationName);
     }
 
     @Override
@@ -52,7 +53,7 @@ public class VCardWidget extends Composite implements VCardDisplay {
     }
 
     @Override
-    public HasText getField(Field field) {
+    public HasText getField(final Field field) {
 	return fields.get(field);
     }
 
@@ -77,7 +78,7 @@ public class VCardWidget extends Composite implements VCardDisplay {
     }
 
     public void setReadOnly(final boolean readOnly) {
-	for (TextBox textbox : fields.values()) {
+	for (final TextBox textbox : fields.values()) {
 	    textbox.setEnabled(readOnly);
 	}
 	if (readOnly) {
