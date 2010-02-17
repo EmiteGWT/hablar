@@ -11,6 +11,8 @@ public interface ChatPage extends Page<ChatDisplay> {
 
     Chat getChat();
 
+    String getChatName();
+
     void setPresence(boolean available, Show show);
 
 }

@@ -295,6 +295,11 @@ div.hablar-RosterItemWidget:hover {
 	float: left;
 }
 
+.hablar-ChatWidget .state {
+	margin-left: 3px;
+	color: #999999;
+}
+
 .hablar-ChatWidget .actions div {
 	float: right;
 }
@@ -549,6 +554,8 @@ div.hablar-SearchResultItemWidget:hover {
 .gwt-MenuItem label {
 	display: block;
 	float: left;
+	width: 16px;
+	height: 16px;
 	margin-right: 3px;
 }
 

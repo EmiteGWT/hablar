@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextArea;
@@ -23,7 +24,7 @@ public class ChatWidget extends Composite implements ChatDisplay {
     interface ChatWidgetUiBinder extends UiBinder<Widget, ChatWidget> {
     }
 
-    private static final int CONTROLS_HEIGHT = 94;
+    private static final int CONTROLS_HEIGHT = 104;
     private static final int STATUS_HEIGHT = 24;
 
     private static ChatWidgetUiBinder uiBinder = GWT.create(ChatWidgetUiBinder.class);
@@ -38,6 +39,8 @@ public class ChatWidget extends Composite implements ChatDisplay {
     protected ScrollPanel scroll;
     @UiField
     protected Button send;
+    @UiField
+    protected Label state;
 
     private int controlsHeight;
     private int statusHeight;
@@ -74,6 +77,11 @@ public class ChatWidget extends Composite implements ChatDisplay {
     @Override
     public HasText getBody() {
 	return talkBox;
+    }
+
+    @Override
+    public HasText getState() {
+	return state;
     }
 
     @Override

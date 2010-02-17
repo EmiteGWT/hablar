@@ -12,6 +12,7 @@ import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.rooms.client.invite.InviteToRoomPresenter;
 import com.calclab.hablar.rooms.client.open.OpenRoomWidget;
 import com.calclab.hablar.rooms.client.room.RoomPresenter;
+import com.calclab.hablar.rooms.client.state.HablarRoomStateManager;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -46,6 +47,7 @@ public class HablarRooms implements EntryPoint {
 		if (event.isType(RoomPresenter.TYPE)) {
 		    final RoomPresenter roomPage = (RoomPresenter) event.getPage();
 		    roomPage.addAction(createInviteAction(invitePage));
+		    new HablarRoomStateManager(roomPage);
 		} else if (event.isType(RosterPage.TYPE)) {
 		    final RosterPage rosterPage = (RosterPage) event.getPage();
 		    rosterPage.addAction(createOpenRoomAction(openNewRoomPage));
@@ -53,6 +55,7 @@ public class HablarRooms implements EntryPoint {
 
 	    }
 	}, true);
+
     }
 
     public static void setMessages(final RoomsMessages messages) {

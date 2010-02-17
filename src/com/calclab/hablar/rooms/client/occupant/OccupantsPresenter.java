@@ -7,12 +7,17 @@ import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emite.xep.muc.client.Occupant;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.hablar.core.client.mvp.Presenter;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
+/**
+ * Shows the list of the occupants of the rooms
+ */
 public class OccupantsPresenter implements Presenter<OccupantsDisplay> {
 
     private final OccupantsDisplay display;
@@ -68,7 +73,8 @@ public class OccupantsPresenter implements Presenter<OccupantsDisplay> {
 	    ocDisplay.getName().setText(occupant.getNick());
 	    final RosterItem item = roster.getItemByJID(occupant.getURI());
 	    final boolean available = item != null && item.isAvailable();
-	    final String icon = PresenceIcon.getIcon(available, occupant.getShow());
+	    String icon = PresenceIcon.getIcon(available, occupant.getShow());
+	    icon = HablarIcons.get(IconType.buddyOn);
 	    ocDisplay.setIcon(icon);
 	}
     }

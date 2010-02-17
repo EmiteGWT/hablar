@@ -21,8 +21,8 @@ public class UserPage extends PagePresenter<UserDisplay> {
 
     private static int index = 0;
     public static final String TYPE = "User";
-    private final Session session;
-    private final PresenceManager manager;
+    protected final Session session;
+    protected final PresenceManager manager;
     private final ArrayList<EditorPage<?>> pages;
 
     public UserPage(final HablarEventBus eventBus, final UserDisplay display) {
@@ -110,14 +110,6 @@ public class UserPage extends PagePresenter<UserDisplay> {
 	    model.setPageTitle(session.getCurrentUser().getShortName() + userStatus);
 	    model.setPageTitleTooltip("Click here to change status");
 	    setShow(presence.getShow());
-	}
-    }
-
-    private void showData() {
-	model.setCloseable(true);
-	for (final EditorPage<?> editor : pages) {
-	    editor.showData();
-	    editor.setVisibility(Visibility.focused);
 	}
     }
 

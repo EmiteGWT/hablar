@@ -17,6 +17,7 @@
 		</g:layer>
 		<g:layer left="0" right="0" bottom="0" height="0">
 			<g:FlowPanel ui:field="controls" styleName="panel">
+				<g:Label ui:field="state" styleName="state">&nbsp;</g:Label>
 				<g:TextArea styleName="talkBox" ui:field="talkBox"></g:TextArea>
 				<g:Button ui:field="send">Send</g:Button>
 			</g:FlowPanel>

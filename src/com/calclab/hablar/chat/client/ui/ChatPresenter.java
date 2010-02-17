@@ -42,15 +42,16 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
     }
 
     private final Chat chat;
+    private final String userName;
 
     public ChatPresenter(final HablarEventBus eventBus, final Chat chat, final ChatDisplay display) {
 	super(TYPE, createId(chat.getURI().toString()), eventBus, display);
 	this.chat = chat;
 	display.setId(getId());
 	final XmppURI fromURI = chat.getURI();
-	final String name = getName(fromURI);
+	userName = getName(fromURI);
 
-	model.init(HablarIcons.get(IconType.buddyOff), name);
+	model.init(HablarIcons.get(IconType.buddyOff), userName);
 	setVisibility(Visibility.notFocused);
 	model.setCloseable(true);
 
@@ -59,8 +60,8 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
 	    public void onEvent(final Message message) {
 		final String body = ChatMessageFormatter.format(message.getBody());
 		if (body != null) {
-		    display.showMessage(name, body, ChatDisplay.MessageType.incoming);
-		    getState().setUserMessage(i18n().newChatFrom(name, ChatMessageFormatter.ellipsis(body, 25)));
+		    display.showMessage(userName, body, ChatDisplay.MessageType.incoming);
+		    getState().setUserMessage(i18n().newChatFrom(userName, ChatMessageFormatter.ellipsis(body, 25)));
 		}
 	    }
 	});
@@ -107,8 +108,18 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
     }
 
     @Override
+    public String getChatName() {
+	return userName;
+    }
+
+    @Override
     public void setPresence(final boolean available, final Show show) {
 	getState().setPageIcon(PresenceIcon.getIcon(available, show));
+	if (available) {
+	    display.getState().setText(i18n().stateAvailable());
+	} else {
+	    display.getState().setText(i18n().stateOffline(userName));
+	}
     }
 
     private String getName(final XmppURI fromURI) {

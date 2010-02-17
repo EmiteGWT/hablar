@@ -20,6 +20,8 @@ public interface ChatDisplay extends Display {
 
     HasText getBody();
 
+    HasText getState();
+
     HasKeyDownHandlers getTextBox();
 
     void setControlsVisible(boolean visible);
