@@ -113,8 +113,9 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 		    final List<StoredPresence> presences = StoredPresences.parse(response).get();
 		    if (presences.size() > 0) {
 			for (final StoredPresence presence : presences) {
-			    statusMenu.addAction(createCustomAction(presence.getStatus(), null, HablarIcons
-				    .get(IconType.buddyOn), presence.getStatus(), presence.getShow()));
+			    final Show show = presence.getShow();
+			    statusMenu.addAction(createCustomAction(presence.getStatus(), null, PresenceIcon.getIcon(
+				    true, show), presence.getStatus(), show));
 			}
 			statusMenu.addAction(clearCustomsAction);
 		    }
