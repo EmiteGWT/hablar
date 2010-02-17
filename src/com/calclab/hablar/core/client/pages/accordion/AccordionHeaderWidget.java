@@ -29,7 +29,7 @@ public class AccordionHeaderWidget extends Composite implements HeaderDisplay {
     public AccordionHeaderWidget(final String pageId) {
 	initWidget(uiBinder.createAndBindUi(this));
 	ensureDebugId("HeaderWidget-" + pageId);
-	close.ensureDebugId("HeaderWidget-" + pageId + "-" + close);
+	close.ensureDebugId("HeaderWidget-" + pageId + "-close");
 	close.addStyleName(HablarIcons.get(IconType.close));
     }
 

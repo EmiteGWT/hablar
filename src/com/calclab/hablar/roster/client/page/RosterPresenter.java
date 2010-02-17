@@ -108,6 +108,11 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 	roster.onItemChanged(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
+		for (final String name : item.getGroups()) {
+		    if (groups.get(name) == null) {
+			createGroup(name);
+		    }
+		}
 	    }
 	});
 

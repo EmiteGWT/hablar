@@ -5,6 +5,7 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.calclab.hablar.roster.client.RosterMessages;
 import com.google.gwt.i18n.client.Messages;
 import com.google.gwt.i18n.client.Messages.DefaultMessage;
 import com.google.gwt.i18n.client.Messages.PluralText;
@@ -27,6 +28,10 @@ public class I18nHelper {
 	    e.printStackTrace();
 	    return "Error: Inexistent i18n String definition for method: " + methodName;
 	}
+    }
+
+    public static String get(final Class<RosterMessages> classToMock, final Method method, final Object[] arguments) {
+	return get(classToMock, method.getName(), arguments);
     }
 
     private static int getFirstInt(final Object[] params) {

@@ -4,7 +4,7 @@
 	<g:FlowPanel styleName='hablar-AccordionHeaderWidget hablar-Header'
 		ui:field="self">
 		<g:Label styleName="icon" ui:field="icon"></g:Label>
-		<g:Label styleName="close"  ui:field="close" />
+		<g:Label styleName="close"  ui:field="close"></g:Label>
 		<g:Label styleName="title"  ui:field="title">Title</g:Label>
 	</g:FlowPanel>
 </ui:UiBinder> 

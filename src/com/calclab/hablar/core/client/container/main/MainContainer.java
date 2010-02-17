@@ -17,7 +17,7 @@ public class MainContainer implements PagesContainer {
 	public final Widget pageWidget;
 	public final Widget headWidget;
 
-	public PageAndHead(Widget pageWidget, Widget headWidget) {
+	public PageAndHead(final Widget pageWidget, final Widget headWidget) {
 	    this.pageWidget = pageWidget;
 	    this.headWidget = headWidget;
 	}
@@ -31,13 +31,13 @@ public class MainContainer implements PagesContainer {
 
     protected Page<?> focusedPage;
 
-    public MainContainer(HablarEventBus eventBus, MainLayout layout) {
-	this.display = layout;
-	this.pages = new HashMap<Page<?>, PageAndHead>();
+    public MainContainer(final HablarEventBus eventBus, final MainLayout layout) {
+	display = layout;
+	pages = new HashMap<Page<?>, PageAndHead>();
 	eventBus.addHandler(VisibilityChangeRequestEvent.TYPE, new VisibilityChangeRequestHandler() {
 	    @Override
-	    public void onVisibilityChangeRequest(VisibilityChangeRequestEvent event) {
-		Page<?> page = event.getPage();
+	    public void onVisibilityChangeRequest(final VisibilityChangeRequestEvent event) {
+		final Page<?> page = event.getPage();
 		if (pages.containsKey(page)) {
 		    changeVisibility(page, event.getNewVisibility());
 		}
@@ -47,14 +47,14 @@ public class MainContainer implements PagesContainer {
     }
 
     @Override
-    public boolean add(Page<?> page) {
-	HeaderDisplay headerDisplay = display.createHeaderDisplay(page);
-	HeaderPresenter header = new HeaderPresenter(page, headerDisplay);
-	Widget pageWidget = page.getDisplay().asWidget();
-	Widget headWidget = header.getDisplay().asWidget();
+    public boolean add(final Page<?> page) {
+	final HeaderDisplay headerDisplay = display.createHeaderDisplay(page);
+	final HeaderPresenter header = new HeaderPresenter(page, headerDisplay);
+	final Widget pageWidget = page.getDisplay().asWidget();
+	final Widget headWidget = header.getDisplay().asWidget();
 	pages.put(page, new PageAndHead(pageWidget, headWidget));
 
-	Visibility initialVisibility = page.getVisibility();
+	final Visibility initialVisibility = page.getVisibility();
 	if (initialVisibility == Visibility.hidden) {
 	} else if (initialVisibility == Visibility.focused) {
 	    display.add(pageWidget, headWidget);
@@ -81,24 +81,11 @@ public class MainContainer implements PagesContainer {
 	return display.getWidget();
     }
 
-    protected boolean hide(Page<?> page) {
-	PageAndHead widgets = getWidgets(page);
-	if (widgets != null) {
-	    display.remove(widgets.pageWidget);
-	    page.setVisibility(Visibility.hidden);
-	    if (page == focusedPage) {
-		focusedPage = null;
-	    }
-	    return true;
-	}
-	return false;
-    }
-
-    private PageAndHead getWidgets(Page<?> page) {
+    private PageAndHead getWidgets(final Page<?> page) {
 	return pages.get(page);
     }
 
-    protected void changeVisibility(Page<?> page, Visibility newVisibility) {
+    protected void changeVisibility(final Page<?> page, final Visibility newVisibility) {
 	if (newVisibility == Visibility.focused) {
 	    focus(page);
 	} else if (newVisibility == Visibility.notFocused) {
@@ -110,8 +97,8 @@ public class MainContainer implements PagesContainer {
 	}
     }
 
-    protected void focus(Page<?> page) {
-	PageAndHead widgets = getWidgets(page);
+    protected void focus(final Page<?> page) {
+	final PageAndHead widgets = getWidgets(page);
 	if (widgets != null) {
 	    if (page != focusedPage) {
 		unfocus(focusedPage);
@@ -125,11 +112,24 @@ public class MainContainer implements PagesContainer {
 	}
     }
 
-    protected void toggle(Page<?> page) {
+    protected boolean hide(final Page<?> page) {
+	final PageAndHead widgets = getWidgets(page);
+	if (widgets != null) {
+	    display.remove(widgets.pageWidget);
+	    page.setVisibility(Visibility.hidden);
+	    if (page == focusedPage) {
+		focusedPage = null;
+	    }
+	    return true;
+	}
+	return false;
+    }
+
+    protected void toggle(final Page<?> page) {
 
     }
 
-    protected void unfocus(Page<?> page) {
+    protected void unfocus(final Page<?> page) {
 	if (focusedPage != null && focusedPage == page) {
 	    page.setVisibility(Visibility.notFocused);
 	    focusedPage = null;

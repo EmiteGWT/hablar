@@ -38,7 +38,6 @@ public class RosterTester extends AbstractRoster {
 	added = new ArrayList<Modification>();
 	updated = new ArrayList<Modification>();
 	removed = new ArrayList<XmppURI>();
-	groupNames = new HashSet<String>();
     }
 
     @Override
@@ -56,6 +55,10 @@ public class RosterTester extends AbstractRoster {
 	super.fireItemRemoved(item);
     }
 
+    public void fireRosterReady() {
+	super.fireRosterReady(getItems());
+    }
+
     @Override
     public void fireRosterReady(final Collection<RosterItem> collection) {
 	super.fireRosterReady(collection);
@@ -63,7 +66,7 @@ public class RosterTester extends AbstractRoster {
 
     @Override
     public Set<String> getGroups() {
-	return groupNames;
+	return groupNames != null ? groupNames : super.getGroups();
     }
 
     /**
@@ -89,9 +92,11 @@ public class RosterTester extends AbstractRoster {
      * @param name
      * @return
      */
-    public RosterItem newItem(final String jid, final String name, final String group) {
+    public RosterItem newItem(final String jid, final String name, final String... groups) {
 	final RosterItem item = new RosterItem(XmppURI.uri(jid), null, name, null);
-	item.addToGroup(group);
+	for (final String group : groups) {
+	    item.addToGroup(group);
+	}
 	return item;
     }
 
