@@ -60,7 +60,17 @@ public class PagePresenter<T extends Display> implements Page<T> {
 
     @Override
     public void setVisibility(final Visibility visibility) {
+	if (visibility == Visibility.focused) {
+	    onBeforeFocus();
+	}
 	model.setVisibility(visibility);
+    }
+
+    /**
+     * Override this method
+     */
+    protected void onBeforeFocus() {
+
     }
 
 }

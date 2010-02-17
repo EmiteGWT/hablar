@@ -55,14 +55,6 @@ public abstract class OpenRoomPresenter extends PagePresenter<OpenRoomDisplay> {
 	}
     }
 
-    @Override
-    public void setVisibility(final PagePresenter.Visibility visibility) {
-	if (visibility == Visibility.focused) {
-	    onPageOpen();
-	}
-	super.setVisibility(visibility);
-    }
-
     protected void createItem(final RosterItem item, final boolean selectable, final boolean selected) {
 	final SelectRosterItemDisplay itemDisplay = display.createItem();
 	final SelectRosterItemPresenter selectItem = new SelectRosterItemPresenter(item, itemDisplay, selectable);
@@ -76,6 +68,11 @@ public abstract class OpenRoomPresenter extends PagePresenter<OpenRoomDisplay> {
     }
 
     protected abstract void onAccept();
+
+    @Override
+    protected void onBeforeFocus() {
+	onPageOpen();
+    }
 
     protected abstract void onPageOpen();
 

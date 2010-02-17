@@ -2,6 +2,7 @@ package com.calclab.hablar.openchat.client.ui;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.dom.client.HasKeyPressHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
@@ -20,7 +21,7 @@ public class OpenChatWidget extends Composite implements OpenChatDisplay {
     private static OpenChatWidgetUiBinder uiBinder = GWT.create(OpenChatWidgetUiBinder.class);
 
     @UiField
-    Button open, cancel;
+    Button accept, cancel;
     @UiField
     TextBox jabberID;
     @UiField
@@ -28,7 +29,7 @@ public class OpenChatWidget extends Composite implements OpenChatDisplay {
 
     public OpenChatWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
-	open.ensureDebugId("OpenChatWidget-open");
+	accept.ensureDebugId("OpenChatWidget-open");
 	cancel.ensureDebugId("OpenChatWidget-cancel");
 	jabberID.ensureDebugId("OpenChatWidget-jabberId");
 	addToRoster.ensureDebugId("OpenChatWidget-addToRoster");
@@ -55,8 +56,18 @@ public class OpenChatWidget extends Composite implements OpenChatDisplay {
     }
 
     @Override
+    public HasKeyPressHandlers getNameKeys() {
+	return jabberID;
+    }
+
+    @Override
     public HasClickHandlers getOpen() {
-	return open;
+	return accept;
+    }
+
+    @Override
+    public void setAcceptEnabled(final boolean enabled) {
+	accept.setEnabled(enabled);
     }
 
 }

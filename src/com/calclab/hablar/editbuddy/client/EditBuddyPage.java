@@ -30,14 +30,6 @@ public class EditBuddyPage extends PagePresenter<EditBuddyDisplay> {
 	currentItem = item;
     }
 
-    @Override
-    public void setVisibility(final Visibility visibility) {
-	if (visibility == Visibility.focused) {
-	    preparePage();
-	}
-	super.setVisibility(visibility);
-    }
-
     private void bind() {
 	display.getCancel().addClickHandler(new ClickHandler() {
 	    @Override
@@ -61,18 +53,19 @@ public class EditBuddyPage extends PagePresenter<EditBuddyDisplay> {
 	});
     }
 
-    private void preparePage() {
-	final String nickName = currentItem.getName();
-	display.getOldNickName().setText(nickName);
-	display.getNewNickName().setText(nickName);
-	display.getFirstFocusable().setFocus(true);
-    }
-
     private void updateCurrentItem() {
 	final String newName = display.getNewNickName().getText();
 	if (!currentItem.getName().equals(newName)) {
 	    currentItem.setName(newName);
 	    roster.updateItem(currentItem);
 	}
+    }
+
+    @Override
+    protected void onBeforeFocus() {
+	final String nickName = currentItem.getName();
+	display.getOldNickName().setText(nickName);
+	display.getNewNickName().setText(nickName);
+	display.getFirstFocusable().setFocus(true);
     }
 }

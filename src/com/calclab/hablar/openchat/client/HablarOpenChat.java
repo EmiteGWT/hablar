@@ -9,7 +9,7 @@ import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
-import com.calclab.hablar.openchat.client.ui.OpenChatPage;
+import com.calclab.hablar.openchat.client.ui.OpenChatPresenter;
 import com.calclab.hablar.openchat.client.ui.OpenChatWidget;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
@@ -27,7 +27,7 @@ public class HablarOpenChat implements EntryPoint {
     protected static final String ACTION_ID = "HablarOpenChat-openAction";
 
     public static void install(final Hablar hablar) {
-	final OpenChatPage openChat = new OpenChatPage(hablar.getEventBus(), new OpenChatWidget());
+	final OpenChatPresenter openChat = new OpenChatPresenter(hablar.getEventBus(), new OpenChatWidget());
 	hablar.addPage(openChat, OverlayContainer.ROL);
 
 	hablar.addPageAddedHandler(new PageAddedHandler() {

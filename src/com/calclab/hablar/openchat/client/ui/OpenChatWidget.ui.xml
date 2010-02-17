@@ -13,7 +13,7 @@
 			</p>
 			<p><g:CheckBox ui:field="addToRoster">Add to roster</g:CheckBox></p>
 			<div class="actions">
-				<g:Button ui:field="open">Open Chat</g:Button>
+				<g:Button ui:field="accept">Open Chat</g:Button>
 				<g:Button ui:field="cancel">Cancel</g:Button>
 			</div>
 		</div>

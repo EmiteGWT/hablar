@@ -2,6 +2,8 @@ package com.calclab.hablar.roster.client;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.AbstractRoster;
@@ -25,6 +27,7 @@ public class RosterTester extends AbstractRoster {
     private final ArrayList<Modification> updated;
 
     private final ArrayList<XmppURI> removed;
+    private Set<String> groupNames;
 
     /**
      * Generally you no need this.
@@ -35,6 +38,7 @@ public class RosterTester extends AbstractRoster {
 	added = new ArrayList<Modification>();
 	updated = new ArrayList<Modification>();
 	removed = new ArrayList<XmppURI>();
+	groupNames = new HashSet<String>();
     }
 
     @Override
@@ -55,6 +59,11 @@ public class RosterTester extends AbstractRoster {
     @Override
     public void fireRosterReady(final Collection<RosterItem> collection) {
 	super.fireRosterReady(collection);
+    }
+
+    @Override
+    public Set<String> getGroups() {
+	return groupNames;
     }
 
     /**
@@ -95,6 +104,18 @@ public class RosterTester extends AbstractRoster {
     public void requestAddItem(final XmppURI jid, final String name, final String... groups) {
 	added.add(new Modification(jid, name, groups));
     }
+
+    public void setGroups(final Set<String> groupNames) {
+	this.groupNames = groupNames;
+    }
+
+    public void setGroups(final String... names) {
+	final HashSet<String> groupNames = new HashSet<String>();
+	for (final String name : names) {
+	    groupNames.add(name);
+	}
+	setGroups(groupNames);
+    };
 
     @Override
     public void storeItem(final RosterItem item) {

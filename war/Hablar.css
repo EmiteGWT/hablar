@@ -489,6 +489,11 @@ div.hablar-SearchResultItemWidget:hover {
     margin: 3px 0;
 }
 
+.form span.option {
+	display: block;
+	margin: 0 0 15px 30px;
+}
+
 .form p label {
     display: block;
     margin-top: 5px;
@@ -513,17 +518,19 @@ div.hablar-SearchResultItemWidget:hover {
     width: 100%;
 }
 
-.form p .gwt-RadioButton {
+.form p .gwt-RadioButton, .form p .gwt-CheckBox {
 	display: block;
 	width: 100%; 
 	overflow: hidden;
 }
 
-.form p .gwt-RadioButton input {
+	
+
+.form p .gwt-RadioButton input, .form p .gwt-CheckBox input  {
 	float: left;
 	margin-right: 5px;
 }
-.form p .gwt-RadioButton label {
+.form p .gwt-RadioButton label, .form p .gwt-CheckBox label  {
 	float: left;
 	margin: 0;
 }
