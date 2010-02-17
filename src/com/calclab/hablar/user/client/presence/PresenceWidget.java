@@ -45,7 +45,12 @@ public class PresenceWidget extends Composite implements PresenceDisplay {
     }
 
     @Override
-    public HasClickHandlers getMenuAction() {
+    public HasClickHandlers getIcon() {
+	return icon;
+    }
+
+    @Override
+    public HasClickHandlers getMenu() {
 	return menu;
     }
 

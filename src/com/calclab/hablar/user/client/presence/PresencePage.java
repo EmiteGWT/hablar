@@ -25,9 +25,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
-import com.google.gwt.user.client.Window;
 
 public class PresencePage extends PagePresenter<PresenceDisplay> implements EditorPage<PresenceDisplay> {
     public static final String TYPE = "Presence";
@@ -56,22 +53,19 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 	storedPresenceManager = new StoredPresenceManager(Suco.get(PrivateStorageManager.class));
 	createDefActions();
 	updateMenu();
-	display.getMenuAction().addClickHandler(new ClickHandler() {
+	final ClickHandler handler = new ClickHandler() {
 	    @Override
 	    public void onClick(final ClickEvent event) {
-		Window.alert("Click");
-		DeferredCommand.addCommand(new Command() {
-		    @Override
-		    public void execute() {
-			event.preventDefault();
-			final Element element = event.getRelativeElement();
-			final int width = element.getClientWidth();
-			statusMenu.setTarget(PresencePage.this);
-			statusMenu.show(element.getAbsoluteLeft() - width, element.getAbsoluteTop());
-		    }
-		});
+		event.preventDefault();
+		final Element element = event.getRelativeElement();
+		final int width = element.getClientWidth();
+		statusMenu.setTarget(PresencePage.this);
+		// FIXME (z-index issue in docks) (added 100 to show it)
+		statusMenu.show(element.getAbsoluteLeft() - width - 100, element.getAbsoluteTop());
 	    }
-	});
+	};
+	display.getMenu().addClickHandler(handler);
+	display.getIcon().addClickHandler(handler);
 	display.getStatus().addKeyDownHandler(new KeyDownHandler() {
 	    @Override
 	    public void onKeyDown(final KeyDownEvent event) {

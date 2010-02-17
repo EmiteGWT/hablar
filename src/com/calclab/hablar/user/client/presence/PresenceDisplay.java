@@ -10,7 +10,9 @@ public interface PresenceDisplay extends Display {
 
     void focusInStatus();
 
-    HasClickHandlers getMenuAction();
+    HasClickHandlers getIcon();
+
+    HasClickHandlers getMenu();
 
     HasKeyDownHandlers getStatus();
 
