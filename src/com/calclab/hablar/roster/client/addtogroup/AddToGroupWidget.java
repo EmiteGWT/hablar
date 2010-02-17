@@ -81,6 +81,11 @@ public class AddToGroupWidget extends Composite implements AddToGroupDisplay {
     }
 
     @Override
+    public String getSelectedGroupName() {
+	return groupList.getItemText(groupList.getSelectedIndex());
+    }
+
+    @Override
     public HasFocusHandlers getSelectGroupFocus() {
 	return groupList;
     }
@@ -104,4 +109,5 @@ public class AddToGroupWidget extends Composite implements AddToGroupDisplay {
 	final RadioButton radio = action == Action.addToExisting ? existingGroup : newGroup;
 	return radio;
     }
+
 }

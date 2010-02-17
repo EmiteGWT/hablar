@@ -20,7 +20,7 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 
     public RosterGroupPresenter(final String groupName, final Menu<RosterItemPresenter> itemMenu,
 	    final RosterGroupDisplay display) {
-	this.groupName = groupName == null ? "" : groupName;
+	this.groupName = groupName;
 	this.itemMenu = itemMenu;
 	this.display = display;
 

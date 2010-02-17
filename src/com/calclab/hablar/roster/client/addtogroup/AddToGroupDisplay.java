@@ -12,6 +12,8 @@ public interface AddToGroupDisplay extends Display {
 	addToExisting, addToNew
     }
 
+    public String getSelectedGroupName();
+
     public void setAcceptEnabled(boolean enabled);
 
     public void setActionEnabled(Action action, boolean enabled);

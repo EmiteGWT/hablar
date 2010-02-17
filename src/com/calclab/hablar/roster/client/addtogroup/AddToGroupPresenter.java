@@ -1,7 +1,6 @@
 package com.calclab.hablar.roster.client.addtogroup;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
@@ -22,9 +21,7 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 
 public class AddToGroupPresenter extends PagePresenter<AddToGroupDisplay> {
-
     private static final String TYPE = "MoveToGroup";
-    private static final String[] EMPTY_STRING_ARRAY = new String[0];
     private static int id = 0;
     private RosterItem item;
 
@@ -41,8 +38,7 @@ public class AddToGroupPresenter extends PagePresenter<AddToGroupDisplay> {
 	display.getApply().addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(final ClickEvent event) {
-		final String groupName = display.getNewGroupName().getValue().trim();
-		moveToNewGroup(groupName);
+		moveToNewGroup();
 		requestVisibility(Visibility.hidden);
 	    }
 	});
@@ -58,6 +54,7 @@ public class AddToGroupPresenter extends PagePresenter<AddToGroupDisplay> {
 	    @Override
 	    public void onFocus(final FocusEvent event) {
 		display.getAddToNew().setValue(true, true);
+		updateAcceptButton();
 	    }
 	});
 
@@ -96,12 +93,18 @@ public class AddToGroupPresenter extends PagePresenter<AddToGroupDisplay> {
 	}
     }
 
-    protected void moveToNewGroup(final String groupName) {
+    protected void moveToNewGroup() {
 	final Roster roster = Suco.get(Roster.class);
-	final List<String> groups = item.getGroups();
-	groups.add(groupName);
-	final String[] newList = groups.toArray(EMPTY_STRING_ARRAY);
-	roster.updateItem(item.getJID(), item.getName(), newList);
+
+	final String groupName;
+	if (display.getAddToExisting().getValue() == true) {
+	    groupName = display.getSelectedGroupName();
+	} else {
+	    groupName = display.getNewGroupName().getValue();
+	}
+
+	item.addToGroup(groupName);
+	roster.updateItem(item);
     }
 
     @Override
