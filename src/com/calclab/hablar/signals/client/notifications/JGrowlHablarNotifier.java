@@ -1,5 +1,7 @@
 package com.calclab.hablar.signals.client.notifications;
 
+import com.google.gwt.core.client.GWT;
+
 public class JGrowlHablarNotifier implements HablarNotifier {
 
     private final boolean isJGrowlPresent;
@@ -12,6 +14,8 @@ public class JGrowlHablarNotifier implements HablarNotifier {
     public void show(final String userMessage) {
 	if (isJGrowlPresent) {
 	    showJGrowl(userMessage);
+	} else {
+	    GWT.log("JGrown is not pressent, message: " + userMessage);
 	}
     }
 
