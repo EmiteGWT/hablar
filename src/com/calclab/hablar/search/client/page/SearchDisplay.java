@@ -1,4 +1,4 @@
-package com.calclab.hablar.search.client;
+package com.calclab.hablar.search.client.page;
 
 import com.calclab.emite.xep.search.client.SearchResultItem;
 import com.calclab.hablar.core.client.mvp.Display;

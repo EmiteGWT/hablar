@@ -1,6 +1,6 @@
 package com.calclab.hablar.rooms.client.room;
 
-import static com.calclab.hablar.core.client.i18n.Translator.i18n;
+import static com.calclab.hablar.rooms.client.HablarRooms.i18n;
 
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
@@ -37,8 +37,8 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> {
 
 	final Session session = Suco.get(Session.class);
 	final String me = session.getCurrentUser().getNode();
-	final String name = room.getURI().getNode();
-	model.init(HablarIcons.get(IconType.roster), name);
+	final String roomName = room.getURI().getNode();
+	model.init(HablarIcons.get(IconType.roster), roomName);
 	setVisibility(Visibility.notFocused);
 	model.setCloseable(true);
 
@@ -52,7 +52,8 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> {
 			display.showMessage("me", body, ChatDisplay.MessageType.sent);
 		    } else {
 			display.showMessage(from, body, ChatDisplay.MessageType.incoming);
-			getState().setUserMessage(i18n().newChatFrom(name, ChatMessageFormatter.ellipsis(body, 25)));
+			getState().setUserMessage(
+				i18n().incommingMessage(roomName, from, ChatMessageFormatter.ellipsis(body, 25)));
 		    }
 		}
 	    }

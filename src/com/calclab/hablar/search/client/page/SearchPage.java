@@ -1,6 +1,6 @@
-package com.calclab.hablar.search.client;
+package com.calclab.hablar.search.client.page;
 
-import static com.calclab.hablar.core.client.i18n.Translator.i18n;
+import static com.calclab.hablar.search.client.HablarSearch.i18n;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +13,7 @@ import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
-import com.calclab.hablar.search.client.SearchDisplay.Level;
+import com.calclab.hablar.search.client.page.SearchDisplay.Level;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;

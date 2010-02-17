@@ -13,8 +13,15 @@ import com.calclab.hablar.roster.client.page.RosterWidget;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 
 public class HablarRoster implements EntryPoint {
+
+    private static RosterMessages rosterMessages;
+
+    public static RosterMessages i18n() {
+	return rosterMessages;
+    }
 
     public static void install(final Hablar hablar) {
 	final SubscriptionHandler subscriptionHandler = Suco.get(SubscriptionHandler.class);
@@ -42,6 +49,10 @@ public class HablarRoster implements EntryPoint {
 	install(widget.getHablar());
     }
 
+    public static void setMessages(final RosterMessages messages) {
+	rosterMessages = messages;
+    }
+
     private static void setState(final RosterPage roster, final State state) {
 	if (state == State.ready) {
 	    roster.requestVisibility(Visibility.focused);
@@ -50,7 +61,7 @@ public class HablarRoster implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-
+	setMessages((RosterMessages) GWT.create(RosterMessages.class));
     }
 
 }

@@ -6,14 +6,23 @@ import com.calclab.hablar.core.client.page.events.UserMessageChangedHandler;
 
 public class NotificationManager {
 
-    public NotificationManager(final HablarEventBus eventBus, final HablarNotifier notifier) {
+    private final NotificationPreferences preferences;
 
+    public NotificationManager(final HablarEventBus eventBus, final NotificationPreferences preferences,
+	    final HablarNotifier notifier) {
+
+	this.preferences = preferences;
 	eventBus.addHandler(UserMessageChangedEvent.TYPE, new UserMessageChangedHandler() {
 	    @Override
 	    public void onUserMessageChanged(final UserMessageChangedEvent event) {
-		notifier.show(event.getUserMessage());
+		if (isVisibleMessage(event.getPageType())) {
+		    notifier.show(event.getUserMessage());
+		}
 	    }
 	});
+    }
 
+    private boolean isVisibleMessage(final String pageType) {
+	return true;
     }
 }

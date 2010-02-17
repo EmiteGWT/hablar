@@ -1,6 +1,6 @@
 package com.calclab.hablar.chat.client.ui;
 
-import static com.calclab.hablar.core.client.i18n.Translator.i18n;
+import static com.calclab.hablar.chat.client.HablarChat.i18n;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;

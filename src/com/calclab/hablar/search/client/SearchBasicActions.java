@@ -1,12 +1,13 @@
 package com.calclab.hablar.search.client;
 
-import static com.calclab.hablar.core.client.i18n.Translator.i18n;
+import static com.calclab.hablar.search.client.HablarSearch.i18n;
 
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.xep.search.client.SearchResultItem;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
+import com.calclab.hablar.search.client.page.SearchPage;
 import com.calclab.suco.client.Suco;
 
 public class SearchBasicActions {

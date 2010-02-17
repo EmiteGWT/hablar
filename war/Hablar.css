@@ -513,6 +513,21 @@ div.hablar-SearchResultItemWidget:hover {
     width: 100%;
 }
 
+.form p .gwt-RadioButton {
+	display: block;
+	width: 100%; 
+	overflow: hidden;
+}
+
+.form p .gwt-RadioButton input {
+	float: left;
+	margin-right: 5px;
+}
+.form p .gwt-RadioButton label {
+	float: left;
+	margin: 0;
+}
+
 .hablar-PopupPanel {
     background-color: #E9E9E9;
     border: 1px solid #BBBBBB;

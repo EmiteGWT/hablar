@@ -12,8 +12,11 @@ import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
+import com.calclab.hablar.search.client.page.SearchPage;
+import com.calclab.hablar.search.client.page.SearchWidget;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 
 /**
  * Adds Search support to Hablar
@@ -22,6 +25,11 @@ import com.google.gwt.core.client.EntryPoint;
 public class HablarSearch implements EntryPoint {
 
     protected static final String ACTION_ID = "HablarLogic-searchAction";
+    private static SearchMessages searchMessages;
+
+    public static SearchMessages i18n() {
+	return searchMessages;
+    }
 
     public static void install(final Hablar hablar, final SearchConfig config) {
 	final SearchManager searchManager = Suco.get(SearchManager.class);
@@ -35,11 +43,14 @@ public class HablarSearch implements EntryPoint {
 	if (config.searchOnRoster) {
 	    addSearchActionToRoster(hablar, searchPage);
 	}
-
     }
 
     public static void install(final HablarWidget widget) {
 	install(widget.getHablar(), SearchConfig.getFromMeta());
+    }
+
+    public static void setMessages(final SearchMessages messages) {
+	searchMessages = messages;
     }
 
     private static void addSearchActionToRoster(final Hablar hablar, final SearchPage searchPage) {
@@ -63,6 +74,7 @@ public class HablarSearch implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
+	setMessages((SearchMessages) GWT.create(SearchMessages.class));
     }
 
 }

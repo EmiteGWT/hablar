@@ -10,7 +10,7 @@
 				<span ui:field='title' />
 			</h2>
 			<p>
-				<label>Room name:</label>
+				<label>Group Chat Name:</label>
 				<g:TextBox ui:field="roomName"></g:TextBox>
 			</p>
 			<p>

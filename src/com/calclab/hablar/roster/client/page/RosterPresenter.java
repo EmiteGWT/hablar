@@ -1,6 +1,6 @@
 package com.calclab.hablar.roster.client.page;
 
-import static com.calclab.hablar.core.client.i18n.Translator.i18n;
+import static com.calclab.hablar.roster.client.HablarRoster.i18n;
 
 import java.util.Collection;
 import java.util.HashMap;

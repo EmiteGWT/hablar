@@ -3,7 +3,7 @@ package com.calclab.hablar.selenium.search;
 import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.calclab.hablar.search.client.SearchResultItemWidget;
+import com.calclab.hablar.search.client.page.SearchResultItemWidget;
 import com.calclab.hablar.selenium.PageObject;
 
 public class SearchPageObject extends PageObject {

@@ -1,5 +1,7 @@
 package com.calclab.hablar.rooms.client;
 
+import static com.calclab.hablar.rooms.client.HablarRooms.i18n;
+
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.Chat.State;
@@ -21,6 +23,8 @@ public class OpenNewRoomPresenter extends OpenRoomPresenter {
     public OpenNewRoomPresenter(final String roomsService, final HablarEventBus eventBus, final OpenRoomDisplay display) {
 	super(TYPE, eventBus, display);
 	this.roomsService = roomsService;
+	display.setPageTitle(i18n().openNewRoom());
+	display.setAcceptText(i18n().openNewRoomAction());
     }
 
     @Override
@@ -44,7 +48,7 @@ public class OpenNewRoomPresenter extends OpenRoomPresenter {
 
     @Override
     protected void onPageOpen() {
-	final String roomName = "room" + roomNumber;
+	final String roomName = i18n().roomId(roomNumber);
 	display.getRoomName().setText(roomName);
 	final Roster roster = Suco.get(Roster.class);
 	setItems(roster.getItems(), true, false);

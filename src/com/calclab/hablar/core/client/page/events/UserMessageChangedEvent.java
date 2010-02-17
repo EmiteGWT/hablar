@@ -27,6 +27,10 @@ public class UserMessageChangedEvent extends GwtEvent<UserMessageChangedHandler>
 	return page.getState();
     }
 
+    public String getPageType() {
+	return page.getType();
+    }
+
     public String getUserMessage() {
 	return userMessage;
     }

@@ -22,25 +22,15 @@ import com.google.gwt.i18n.client.LocalizableResource.GenerateKeys;
 @GenerateKeys
 public interface HablarMessages extends Messages {
 
-    @DefaultMessage("Add to Contacts")
-    String addToContacts();
-
     @DefaultMessage("Change nick name")
     String changeNickName();
 
     @DefaultMessage("Write the new nick name:")
     String changeNickNameMessage();
 
-    @DefaultMessage("Chat")
-    String chat();
-
     @DefaultMessage("Connected as {0}")
     @Description("The specified user has connected")
     String connectedAs(@Example("john.doe") String userName);
-
-    @DefaultMessage("Contacts")
-    @Description("The roster panel title")
-    String contacts();
 
     @DefaultMessage("Disconnected")
     String disconnected();
@@ -51,22 +41,11 @@ public interface HablarMessages extends Messages {
     @DefaultMessage("Sign out")
     String logout();
 
-    @DefaultMessage("User {0} says «{1}»")
-    String newChatFrom(String user, String msg);
-
     @DefaultMessage("Remove from Contacts")
     String removeFromContacts();
 
     @DefaultMessage("Sign in to see the contacts")
     String rosterDisabled();
-
-    @DefaultMessage("Results for «{0}»: {1} users found.")
-    @Description("Results for a users search")
-    @PluralText( { "one", "Results for «{0}»: One user found." })
-    String searchResultsFor(String term, @PluralCount @Optional int count);
-
-    @DefaultMessage("Search users")
-    String searchUsers();
 
     @DefaultMessage("Type to search users")
     String typeToSearchUsers();

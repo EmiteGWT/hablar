@@ -1,4 +1,4 @@
-package com.calclab.hablar.search.client;
+package com.calclab.hablar.search.client.page;
 
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;

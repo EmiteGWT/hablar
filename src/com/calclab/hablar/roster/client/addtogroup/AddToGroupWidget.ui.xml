@@ -5,11 +5,17 @@
 		<div class="form">
 			<h2>Move contact to a group</h2>
 			<p>
-				<label>Group name:</label>
+				<g:RadioButton ui:field="existingGroup" name="groupAction">To a existing group</g:RadioButton>
+				<label>Select Group:</label>
+				<g:ListBox ui:field="groupList" visibleItemCount="1"></g:ListBox>
+			</p>
+			<p>
+				<g:RadioButton ui:field="newGroup" name="groupAction">To a new group</g:RadioButton>
+				<label>New Group name:</label>
 				<g:TextBox ui:field="newGroupName"></g:TextBox>
 			</p>
 			<div class="actions">
-				<g:Button ui:field="apply">Move</g:Button>
+				<g:Button ui:field="apply">Add to Group</g:Button>
 				<g:Button ui:field="cancel">Cancel</g:Button>
 			</div>
 		</div>
