@@ -5,20 +5,21 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.calclab.hablar.core.client.i18n.HablarMessages;
+import com.google.gwt.i18n.client.Messages;
 import com.google.gwt.i18n.client.Messages.DefaultMessage;
 import com.google.gwt.i18n.client.Messages.PluralText;
 
 public class I18nHelper {
 
-    public String get(final String methodName, final Object... params) {
+    public static String get(final Class<? extends Messages> messageType, final String methodName,
+	    final Object... params) {
 	try {
 	    final Class<?>[] classes = new Class<?>[params.length];
 	    for (int i = 0; i < params.length; i++) {
 		final Class<? extends Object> class1 = params[i].getClass();
 		classes[i] = class1 == Integer.class ? int.class : class1;
 	    }
-	    final Method method = HablarMessages.class.getMethod(methodName, classes);
+	    final Method method = messageType.getMethod(methodName, classes);
 	    final String defaultValue = i18nDefaultValue(method, classes);
 	    final String pluralOrDefValue = getPlural(method, getFirstInt(params), defaultValue);
 	    return MessageFormat.format(pluralOrDefValue, params);
@@ -28,7 +29,7 @@ public class I18nHelper {
 	}
     }
 
-    private int getFirstInt(final Object[] params) {
+    private static int getFirstInt(final Object[] params) {
 	for (final Object param : params) {
 	    final Class<? extends Object> class1 = param.getClass();
 	    if (class1 == Integer.class) {
@@ -38,7 +39,7 @@ public class I18nHelper {
 	return 0;
     }
 
-    private String getPlural(final Method method, final int value, final String def) {
+    private static String getPlural(final Method method, final int value, final String def) {
 	final PluralText pluralText = method.getAnnotation(PluralText.class);
 	if (pluralText != null) {
 	    final Map<String, String> pluralMap = new HashMap<String, String>();
@@ -61,7 +62,17 @@ public class I18nHelper {
 	return def;
     }
 
-    private String i18nDefaultValue(final Method method, final Class<?>... params) {
+    private static String i18nDefaultValue(final Method method, final Class<?>... params) {
 	return method.getAnnotation(DefaultMessage.class).value();
+    }
+
+    private final Class<? extends Messages> messagesClass;
+
+    public I18nHelper(final Class<? extends Messages> messagesClass) {
+	this.messagesClass = messagesClass;
+    }
+
+    public String get(final String methodName, final Object... params) {
+	return get(messagesClass, methodName, params);
     }
 }

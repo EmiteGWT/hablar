@@ -6,14 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import com.calclab.hablar.selenium.tools.I18nHelper;
 import com.calclab.suco.client.Suco;
 
 public abstract class PageObject {
 
     private static final long[] POLL_INTERVALS = { 10, 20, 30, 40, 50, 50, 50, 50, 100 };
-
-    protected static final I18nHelper i18n = Suco.get(I18nHelper.class);
 
     private WebDriver getWebDriver() {
 	return Suco.get(WebDriver.class);

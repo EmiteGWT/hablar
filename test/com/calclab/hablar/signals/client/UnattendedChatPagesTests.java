@@ -13,6 +13,7 @@ import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.page.events.UserMessageChangedEvent;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
+import com.calclab.hablar.signals.client.unattended.UnattendedChatPages;
 import com.calclab.hablar.testing.HablarTester;
 
 public class UnattendedChatPagesTests {

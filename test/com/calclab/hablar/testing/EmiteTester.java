@@ -1,7 +1,5 @@
 package com.calclab.hablar.testing;
 
-import static org.mockito.Mockito.mock;
-
 import org.mockito.Mockito;
 
 import com.calclab.emite.core.client.EmiteCoreModule;
@@ -14,7 +12,6 @@ import com.calclab.emite.xep.search.client.SearchManager;
 import com.calclab.emite.xtesting.SessionTester;
 import com.calclab.hablar.chat.client.ChatManagerTester;
 import com.calclab.hablar.chat.client.PresenceManagerTester;
-import com.calclab.hablar.core.client.i18n.HablarMessages;
 import com.calclab.hablar.core.client.mvp.DefaultEventBus;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.roster.client.RosterTester;
@@ -42,12 +39,10 @@ public class EmiteTester {
 
     public EmiteTester() {
 	// FIXME: Add setContainer to Suco (switch context)
-	HashMapContainer container = (HashMapContainer) Suco.getComponents();
+	final HashMapContainer container = (HashMapContainer) Suco.getComponents();
 	container.clear();
 	new SucoCoreModule().onInstall(container);
 	Suco.install(new EmiteCoreModule(), new InstantMessagingModule());
-
-	install(container, HablarMessages.class, mock(HablarMessages.class));
 
 	eventBus = new DefaultEventBus();
 	install(container, HablarEventBus.class, eventBus);
@@ -68,17 +63,17 @@ public class EmiteTester {
 	install(container, PresenceManager.class, presenceManager);
     }
 
-    public <T> T mockDisplay(Class<T> classToMock) {
-	T mock = Mockito.mock(classToMock, new ReturnsSingletonMocks(factory));
+    public <T> T mockDisplay(final Class<T> classToMock) {
+	final T mock = Mockito.mock(classToMock, new ReturnsSingletonMocks(factory));
 	return mock;
     }
 
-    public void setSessionReady(String uri) {
+    public void setSessionReady(final String uri) {
 	session.setLoggedIn(uri);
 	session.setReady();
     }
 
-    private <T> T install(Container container, Class<T> clazz, final T instance) {
+    private <T> T install(final Container container, final Class<T> clazz, final T instance) {
 	container.removeProvider(clazz);
 	container.registerProvider(NoDecoration.instance, clazz, new Provider<T>() {
 	    @Override

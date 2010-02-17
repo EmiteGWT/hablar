@@ -1,4 +1,4 @@
-package com.calclab.hablar.signals.client;
+package com.calclab.hablar.signals.client.unattended;
 
 import java.util.HashSet;
 

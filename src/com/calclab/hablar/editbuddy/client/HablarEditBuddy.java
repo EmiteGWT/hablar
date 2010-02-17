@@ -1,7 +1,5 @@
 package com.calclab.hablar.editbuddy.client;
 
-import static com.calclab.hablar.core.client.i18n.Translator.i18n;
-
 import java.util.List;
 
 import com.calclab.hablar.core.client.Hablar;
@@ -15,11 +13,18 @@ import com.calclab.hablar.editbuddy.client.ui.EditBuddyWidget;
 import com.calclab.hablar.roster.client.groups.RosterItemPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 
 /**
  * Adds the ability to edit a buddy in the roster
  */
 public class HablarEditBuddy implements EntryPoint {
+
+    private static EditBuddyMessages editBuddyMessages;
+
+    public static EditBuddyMessages i18n() {
+	return editBuddyMessages;
+    }
 
     public static void install(final Hablar hablar) {
 	final EditBuddyPage editBuddy = new EditBuddyPage(hablar.getEventBus(), new EditBuddyWidget());
@@ -35,6 +40,10 @@ public class HablarEditBuddy implements EntryPoint {
 	install(widget.getHablar());
     }
 
+    public static void setMessages(final EditBuddyMessages messages) {
+	editBuddyMessages = messages;
+    }
+
     private static Action<RosterItemPresenter> createEditBuddyAction(final EditBuddyPage editBuddy) {
 	return new SimpleAction<RosterItemPresenter>(i18n().changeNickName(), "EditBuddy-editAction") {
 	    @Override
@@ -47,6 +56,7 @@ public class HablarEditBuddy implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
+	setMessages((EditBuddyMessages) GWT.create(EditBuddyMessages.class));
     }
 
 }

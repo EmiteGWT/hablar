@@ -26,6 +26,7 @@ public class AddToGroupPresenterTests {
 	final EventBusTester eventBus = tester.eventBus;
 	display = tester.newDisplay(AddToGroupDisplay.class);
 	presenter = new AddToGroupPresenter(eventBus, display);
+	presenter.setItem(roster.newItem("test1", "test", "group"));
     }
 
     @Test

@@ -1,6 +1,6 @@
 package com.calclab.hablar.login.client;
 
-import static com.calclab.hablar.core.client.i18n.Translator.i18n;
+import static com.calclab.hablar.login.client.HablarLogin.i18n;
 
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.session.Session.State;
@@ -18,14 +18,14 @@ public class LoginPage extends PagePresenter<LoginDisplay> {
     private static int index = 0;
     private final Session session;
 
-    public LoginPage(HablarEventBus eventBus, LoginDisplay display) {
-	super("Login", "" + (++index), eventBus, display);
-	this.session = Suco.get(Session.class);
+    public LoginPage(final HablarEventBus eventBus, final LoginDisplay display) {
+	super("Login", "" + ++index, eventBus, display);
+	session = Suco.get(Session.class);
 	getState().setPageIcon(HablarIcons.get(IconType.off));
 
 	display.getAction().addClickHandler(new ClickHandler() {
 	    @Override
-	    public void onClick(ClickEvent event) {
+	    public void onClick(final ClickEvent event) {
 		if (session.getState() == State.disconnected) {
 		    login();
 		} else {
@@ -71,8 +71,8 @@ public class LoginPage extends PagePresenter<LoginDisplay> {
     }
 
     protected void login() {
-	String user = display.getUser().getText();
-	String password = display.getPassword().getText();
+	final String user = display.getUser().getText();
+	final String password = display.getPassword().getText();
 	session.login(XmppURI.uri(user), password);
     }
 

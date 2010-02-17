@@ -9,20 +9,27 @@ import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 
 public class HablarLogin implements EntryPoint {
 
-    public static void install(Hablar hablar) {
+    private static LoginMessages loginMessages;
+
+    public static LoginMessages i18n() {
+	return loginMessages;
+    }
+
+    public static void install(final Hablar hablar) {
 	install(hablar, LoginConfig.getFromMeta());
     }
 
-    public static void install(Hablar hablar, LoginConfig config) {
-	Session session = Suco.get(Session.class);
+    public static void install(final Hablar hablar, final LoginConfig config) {
+	final Session session = Suco.get(Session.class);
 	final LoginPage login = new LoginPage(hablar.getEventBus(), new LoginWidget());
 	hablar.addPage(login);
 	session.onStateChanged(new Listener<Session>() {
 	    @Override
-	    public void onEvent(Session session) {
+	    public void onEvent(final Session session) {
 		setState(login, session);
 	    }
 	});
@@ -31,11 +38,15 @@ public class HablarLogin implements EntryPoint {
 	login.getDisplay().getPassword().setText(config.password);
     }
 
-    public static void install(HablarWidget widget) {
+    public static void install(final HablarWidget widget) {
 	install(widget.getHablar(), LoginConfig.getFromMeta());
     }
 
-    private static void setState(final Page<?> login, Session session) {
+    public static void setMessages(final LoginMessages messages) {
+	loginMessages = messages;
+    }
+
+    private static void setState(final Page<?> login, final Session session) {
 	if (session.getState() == State.disconnected) {
 	    login.requestVisibility(Visibility.focused);
 	}
@@ -43,6 +54,7 @@ public class HablarLogin implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
+	setMessages((LoginMessages) GWT.create(LoginMessages.class));
 
     }
 

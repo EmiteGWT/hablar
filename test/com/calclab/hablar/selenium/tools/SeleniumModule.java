@@ -38,13 +38,6 @@ public class SeleniumModule extends AbstractModule {
 	    }
 	});
 
-	register(Singleton.class, new Factory<I18nHelper>(I18nHelper.class) {
-	    @Override
-	    public I18nHelper create() {
-		return new I18nHelper();
-	    }
-	});
-
 	register(Singleton.class, new Factory<ElementLocatorFactory>(ElementLocatorFactory.class) {
 	    @Override
 	    public ElementLocatorFactory create() {
