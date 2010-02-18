@@ -22,8 +22,6 @@ public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisp
 	display.setAcceptVisible(false);
 	display.setCancelVisible(false);
 	display.setPageTitle("Your profile");
-	// getVCard method response is slow , then we get the vcard a-priori
-	showData();
     }
 
     @Override

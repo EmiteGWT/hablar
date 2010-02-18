@@ -11,7 +11,7 @@ public class StoredPresence extends DelegatedPacket {
     private static final String SHOW = "show";
 
     public StoredPresence() {
-	super(new Packet(StoredPresences.STORED_PRESENCE));
+	super(new Packet(StoredPresences.HABLAR_PRESENCE));
     }
 
     public StoredPresence(final IPacket packet) {

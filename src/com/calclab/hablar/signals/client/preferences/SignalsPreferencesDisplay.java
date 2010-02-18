@@ -11,4 +11,8 @@ public interface SignalsPreferencesDisplay extends Display {
 
     HasValue<Boolean> getTitleSignals();
 
+    void setFormVisible(boolean visible);
+
+    void setLoadingVisible(boolean visible);
+
 }

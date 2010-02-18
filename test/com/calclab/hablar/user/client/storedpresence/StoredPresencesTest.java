@@ -12,12 +12,12 @@ import com.calclab.emite.xtesting.services.TigaseXMLService;
 
 public class StoredPresencesTest {
 
-    public static String sample = "<storedpresences xmlns=\"stored:presence\">"
-	    + "<storedpresence><status>Sleeping...</status><show>away</show></storedpresence>"
-	    + "<storedpresence><status>Cooking...</status><show>xa</show></storedpresence></storedpresences>";
+    public static String sample = "<hablarpresences xmlns=\"hablar:presence\">"
+	    + "<hablarpresence><status>Sleeping...</status><show>away</show></hablarpresence>"
+	    + "<hablarpresence><status>Cooking...</status><show>xa</show></hablarpresence></hablarpresences>";
 
-    private final String packet = "<iq to=\"test1@localhost/1266328938509\" id=\"priv_1\" type=\"result\"><query xmlns=\"jabber:iq:private\"><storedpresences xmlns=\"stored:presence\"><storedpresence><status>save1</status><show>dnd</show></storedpresence></storedpresences></query></iq>";
-    private final String empty = "<iq to=\"test1@localhost/1266332042249\" id=\"priv_4\" type=\"result\"><query xmlns=\"jabber:iq:private\"><storedpresences xmlns=\"stored:presence\" /></query></iq>";
+    private final String packet = "<iq to=\"test1@localhost/1266328938509\" id=\"priv_1\" type=\"result\"><query xmlns=\"jabber:iq:private\"><hablarpresences xmlns=\"hablar:presences\"><hablarpresence><status>save1</status><show>dnd</show></hablarpresence></hablarpresences></query></iq>";
+    private final String empty = "<iq to=\"test1@localhost/1266332042249\" id=\"priv_4\" type=\"result\"><query xmlns=\"jabber:iq:private\"><hablarpresences xmlns=\"hablar:presences\" /></query></iq>";
 
     @Test
     public void shouldAddtoEmptyResult() {

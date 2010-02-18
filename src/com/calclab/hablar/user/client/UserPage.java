@@ -78,6 +78,9 @@ public class UserPage extends PagePresenter<UserDisplay> {
     public void setVisibility(final Visibility visibility) {
 	for (final EditorPage<?> page : pages) {
 	    page.setVisibility(visibility);
+	    if (visibility == Visibility.focused) {
+		page.showData();
+	    }
 	}
 	super.setVisibility(visibility);
     }

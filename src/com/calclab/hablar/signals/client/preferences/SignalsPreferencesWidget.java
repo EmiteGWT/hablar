@@ -1,6 +1,10 @@
 package com.calclab.hablar.signals.client.preferences;
 
+import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.DivElement;
+import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.CheckBox;
@@ -18,8 +22,14 @@ public class SignalsPreferencesWidget extends Composite implements SignalsPrefer
     @UiField
     CheckBox titleSignals, incomingNotifications, rosterNotifications;
 
+    @UiField
+    SpanElement icon;
+    @UiField
+    DivElement form, loading;
+
     public SignalsPreferencesWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
+	icon.addClassName(HablarIcons.get(IconType.loading));
     }
 
     @Override
@@ -40,6 +50,16 @@ public class SignalsPreferencesWidget extends Composite implements SignalsPrefer
     @Override
     public HasValue<Boolean> getTitleSignals() {
 	return titleSignals;
+    }
+
+    @Override
+    public void setFormVisible(final boolean visible) {
+	setVisible(form, visible);
+    }
+
+    @Override
+    public void setLoadingVisible(final boolean visible) {
+	setVisible(loading, visible);
     }
 
 }

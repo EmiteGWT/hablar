@@ -1,17 +1,23 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	<ui:style>
-		
-	</ui:style>
-	<g:HTMLPanel styleName="hablar-VCardWidget">
-		<div class="form">
-			<h2>Notification preferences</h2>
-			<p>
-				<g:CheckBox ui:field="titleSignals">Show unread conversations in title</g:CheckBox>
-				<g:CheckBox ui:field="incomingNotifications">Show incomming message notifications</g:CheckBox>
-				<g:CheckBox ui:field="rosterNotifications">Show roster notifications</g:CheckBox>
-			</p>
-		</div>
-	</g:HTMLPanel>
-</ui:UiBinder> 
+    xmlns:g="urn:import:com.google.gwt.user.client.ui">
+    <ui:style>
+
+    </ui:style>
+    <g:HTMLPanel styleName="hablar-VCardWidget">
+        <div class="form">
+            <h2>Notification preferences</h2>
+            <div class="loading" ui:field="loading">
+            <span ui:field="icon" class="icon">&nbsp;</span>
+            <span ui:field="loadMessage">Loading preferences. Please wait...</span>
+            </div>
+            <div ui:field="form">
+            <p>
+                <g:CheckBox ui:field="titleSignals">Show unread conversations in title</g:CheckBox>
+                <g:CheckBox ui:field="incomingNotifications">Show incomming message notifications</g:CheckBox>
+                <g:CheckBox ui:field="rosterNotifications">Show roster notifications</g:CheckBox>
+            </p>
+            </div>
+        </div>
+    </g:HTMLPanel>
+</ui:UiBinder>

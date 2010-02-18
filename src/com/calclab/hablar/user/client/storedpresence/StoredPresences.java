@@ -10,16 +10,16 @@ import com.calclab.emite.xep.storage.client.SimpleStorageData;
 
 public class StoredPresences extends SimpleStorageData {
 
-    public static final String STORED_PRESENCES = "storedpresences";
-    public static final String STORED_PRESENCE = "storedpresence";
-    public static final String STORED_PRESENCES_XMLNS = "stored:presence";
+    public static final String HABLAR_PRESENCES = "hablarpresences";
+    public static final String HABLAR_PRESENCE = "hablarpresence";
+    public static final String HABLAR_PRESENCES_XMLNS = "hablar:presences";
     public static final StoredPresences empty = new StoredPresences();
 
     public static StoredPresences parse(final IQResponse response) {
 	final StoredPresences parsed = new StoredPresences();
 	for (final IPacket packet : (List<? extends IPacket>) response.getFirstChildInDeep(
-		MatcherFactory.byNameAndXMLNS(STORED_PRESENCES, STORED_PRESENCES_XMLNS)).getChildren(
-		MatcherFactory.byName(STORED_PRESENCE))) {
+		MatcherFactory.byNameAndXMLNS(HABLAR_PRESENCES, HABLAR_PRESENCES_XMLNS)).getChildren(
+		MatcherFactory.byName(HABLAR_PRESENCE))) {
 	    parsed.add(new StoredPresence(packet));
 	}
 	return parsed;
@@ -28,7 +28,7 @@ public class StoredPresences extends SimpleStorageData {
     private ArrayList<StoredPresence> presences;
 
     public StoredPresences() {
-	super(STORED_PRESENCES, STORED_PRESENCES_XMLNS);
+	super(HABLAR_PRESENCES, HABLAR_PRESENCES_XMLNS);
     }
 
     public StoredPresences(final IPacket delegate) {
@@ -58,7 +58,7 @@ public class StoredPresences extends SimpleStorageData {
     private void parsePresences() {
 	if (presences == null) {
 	    presences = new ArrayList<StoredPresence>();
-	    for (final IPacket child : getChildren(MatcherFactory.byName(STORED_PRESENCE))) {
+	    for (final IPacket child : getChildren(MatcherFactory.byName(HABLAR_PRESENCE))) {
 		presences.add(new StoredPresence(child));
 	    }
 	}
