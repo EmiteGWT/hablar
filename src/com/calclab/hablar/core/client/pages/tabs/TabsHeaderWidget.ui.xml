@@ -1,18 +1,18 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+    xmlns:g="urn:import:com.google.gwt.user.client.ui">
     <ui:style>
         @sprite .close {
             gwt-image: 'closeIcon';
         }
     </ui:style>
-    <ui:image field='closeIcon' src='../close.png' />
+    <ui:image field='closeIcon' src='close.png' />
 
-	<g:HTMLPanel ui:field="self" styleName='hablar-TabsHeaderWidget hablar-Header'>
-		<div>
-			<g:Label styleName="icon" ui:field="icon"></g:Label>
-			<g:Label styleName="title" ui:field="title">Title</g:Label>
-			<g:Label styleName="close {style.close}" ui:field="close" />
-		</div>
-	</g:HTMLPanel>
-</ui:UiBinder> 
+    <g:HTMLPanel ui:field="self" styleName='hablar-TabsHeaderWidget hablar-Header'>
+        <div>
+            <g:Label styleName="icon" ui:field="icon"></g:Label>
+            <g:Label styleName="title" ui:field="title">Title</g:Label>
+            <g:Label styleName="close {style.close}" ui:field="close" />
+        </div>
+    </g:HTMLPanel>
+</ui:UiBinder>
