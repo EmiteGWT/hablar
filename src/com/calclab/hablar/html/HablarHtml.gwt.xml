@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.0.1//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.0.1/distro-source/core/src/gwt-module.dtd">
 <module rename-to="HablarHtml">
-	<inherits name="com.google.gwt.user.User" />
-	<inherits name="com.calclab.hablar.Hablar" />
-	<inherits name='com.calclab.hablar.console.HablarConsole' />
-	<inherits name='com.calclab.hablar.login.HablarLogin' />
-	<inherits name='com.google.gwt.user.theme.chrome.Chrome' />
+    <inherits name="com.google.gwt.user.User" />
+    <inherits name="com.calclab.hablar.Hablar" />
+    <inherits name='com.calclab.hablar.console.HablarConsole' />
+    <inherits name='com.calclab.hablar.login.HablarLogin' />
 
-	<!-- <inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
-	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
+    <!--    <inherits name='com.google.gwt.user.theme.chrome.Chrome' />-->
+    <!-- <inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
+    <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
 
-	<!--
-		for add ensureDebugIds (debugId in UIBinder), remove/comment in
-		production see UIObject.ensureDebugId())
-	-->
-	<inherits name="com.google.gwt.user.Debug" />
-	
-	<source path="client" />
-	<entry-point class="com.calclab.hablar.html.client.HablarHtml" />
+    <!--
+        for add ensureDebugIds (debugId in UIBinder), remove/comment in
+        production see UIObject.ensureDebugId())
+    -->
+    <inherits name="com.google.gwt.user.Debug" />
+
+    <source path="client" />
+    <entry-point class="com.calclab.hablar.html.client.HablarHtml" />
 </module>
