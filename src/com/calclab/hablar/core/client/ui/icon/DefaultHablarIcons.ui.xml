@@ -76,6 +76,10 @@
             @sprite .loadingIcon {
                 gwt-image: 'loadingIcon';
             }
+            
+            @sprite .groupChatIcon {
+                gwt-image: 'groupChatIcon';
+            }
 		</ui:style>
 
     <ui:image field="onIcon" src="png/on.png"></ui:image>
@@ -94,6 +98,7 @@
 	<ui:image field="consoleIcon" src="png/console.png"></ui:image>
 	<ui:image field="buddyAddIcon" src="png/buddy-add.png"></ui:image>
 	<ui:image field="loadingIcon" src="png/loading.gif"></ui:image>
+	<ui:image field="groupChatIcon" src="png/group-chat.png"></ui:image>
 
 	<g:SimplePanel></g:SimplePanel>
 </ui:UiBinder> 

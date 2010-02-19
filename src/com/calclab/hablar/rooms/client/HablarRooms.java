@@ -75,7 +75,7 @@ public class HablarRooms implements EntryPoint {
 
     protected static SimpleAction<RosterPage> createOpenRoomAction(final OpenNewRoomPresenter page) {
 	final String name = "Open new room";
-	final String icon = HablarIcons.get(IconType.on);
+	final String icon = HablarIcons.get(IconType.groupChat);
 	final SimpleAction<RosterPage> action = new SimpleAction<RosterPage>(name, ACTION_ID_OPENROOM, icon) {
 	    @Override
 	    public void execute(final RosterPage target) {

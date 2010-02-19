@@ -34,7 +34,7 @@ public class SeleniumModule extends AbstractModule {
 	    @Override
 	    public GenericWebTester create() {
 		return new GenericWebTester($(WebDriver.class),
-			"http://localhost:8888/Hablar.html?gwt.codesvr=127.0.0.1:9997");
+			"http://localhost:8888/HablarDock.html?gwt.codesvr=127.0.0.1:9997");
 	    }
 	});
 

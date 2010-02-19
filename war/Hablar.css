@@ -1,3 +1,10 @@
+/** TRYING TO SOLVE THE TABS ISSUE IN... WINDOWS? **/
+.gwt-TabLayoutPanel .gwt-TabLayoutPanelTabs,.gwt-TabLayoutPanel .gwt-TabLayoutPanelTab,.gwt-TabLayoutPanel .gwt-TabLayoutPanelTabInner
+	{
+	margin: 0;
+	padding: 0;
+}
+
 /** HABLAR PAGE COMMON **/
 .hablar-Page {
 	background-color: #E9E9E9;

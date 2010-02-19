@@ -66,7 +66,7 @@ public class HablarGroupChat implements EntryPoint {
 
     private static SimpleAction<RosterGroupPresenter> openGroupChatAction(final OpenGroupChatPresenter openGroupPage) {
 	return new SimpleAction<RosterGroupPresenter>(i18n().openGroupChatAction(), ACTION_ID_OPEN, HablarIcons
-		.get(IconType.off)) {
+		.get(IconType.groupChat)) {
 	    @Override
 	    public void execute(final RosterGroupPresenter target) {
 		openGroupPage.setGroupName(target.getGroupName());
