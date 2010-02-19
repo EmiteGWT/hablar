@@ -21,7 +21,7 @@ public class VCardWidget extends Composite implements VCardDisplay {
     interface VCardWidgetUiBinder extends UiBinder<Widget, VCardWidget> {
     }
 
-    private static VCardWidgetUiBinder uiBinder = GWT.create(VCardWidgetUiBinder.class);
+    protected static VCardWidgetUiBinder uiBinder = GWT.create(VCardWidgetUiBinder.class);
 
     @UiField
     TextBox name, nickName, givenName, middleName, familyName, email, organizationName, homepage;
@@ -32,20 +32,14 @@ public class VCardWidget extends Composite implements VCardDisplay {
     @UiField
     DivElement form, loading;
 
-    private final HashMap<Field, TextBox> fields;
+    protected final HashMap<Field, TextBox> fields = new HashMap<Field, TextBox>();
+
+    public VCardWidget() {
+    }
 
     public VCardWidget(final boolean readOnly) {
 	initWidget(uiBinder.createAndBindUi(this));
-	icon.addClassName(HablarIcons.get(IconType.loading));
-	fields = new HashMap<Field, TextBox>();
-	fields.put(Field.name, name);
-	fields.put(Field.nickName, nickName);
-	fields.put(Field.middleName, middleName);
-	fields.put(Field.givenName, givenName);
-	fields.put(Field.familyName, familyName);
-	fields.put(Field.email, email);
-	fields.put(Field.homepage, homepage);
-	fields.put(Field.organizationName, organizationName);
+	init(readOnly);
     }
 
     @Override
@@ -95,12 +89,25 @@ public class VCardWidget extends Composite implements VCardDisplay {
 
     public void setReadOnly(final boolean readOnly) {
 	for (final TextBox textbox : fields.values()) {
-	    textbox.setEnabled(readOnly);
+	    textbox.setEnabled(!readOnly);
 	}
 	if (readOnly) {
 	    addStyleName("readOnly");
 	} else {
 	    removeStyleName("readOnly");
 	}
+    }
+
+    protected void init(final boolean readOnly) {
+	icon.addClassName(HablarIcons.get(IconType.loading));
+	fields.put(Field.name, name);
+	fields.put(Field.nickName, nickName);
+	fields.put(Field.middleName, middleName);
+	fields.put(Field.givenName, givenName);
+	fields.put(Field.familyName, familyName);
+	fields.put(Field.email, email);
+	fields.put(Field.homepage, homepage);
+	fields.put(Field.organizationName, organizationName);
+	setReadOnly(readOnly);
     }
 }

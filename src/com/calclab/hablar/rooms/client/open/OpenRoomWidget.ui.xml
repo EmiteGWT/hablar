@@ -1,28 +1,31 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	<ui:style>
-		
-	</ui:style>
-	<g:HTMLPanel styleName="hablar-OpenRoomWidget">
-		<div class="form">
-			<h2>
-				<span ui:field='title' />
-			</h2>
-			<p>
-				<label>Group Chat Name:</label>
-				<g:TextBox ui:field="roomName"></g:TextBox>
-			</p>
-			<p>
-				<label>Invitation message:</label>
-				<g:TextBox ui:field="message"></g:TextBox>
-			</p>
-			<label ui:field="occupantsLabel">Group Chat Participants:</label>
-			<g:FlowPanel ui:field="occupantsList" styleName="list"></g:FlowPanel>
-			<div class="actions">
-				<g:Button ui:field="accept">Accept</g:Button>
-				<g:Button ui:field="cancel">Cancel</g:Button>
-			</div>
-		</div>
-	</g:HTMLPanel>
-</ui:UiBinder> 
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:style>
+
+  </ui:style>
+  <g:ScrollPanel ui:field="scroll" height="100%"
+    styleName="scroll">
+    <g:HTMLPanel styleName="hablar-OpenRoomWidget">
+      <div class="form">
+        <h2>
+          <span ui:field='title' />
+        </h2>
+        <p>
+          <label>Group Chat Name:</label>
+          <g:TextBox ui:field="roomName"></g:TextBox>
+        </p>
+        <p>
+          <label>Invitation message:</label>
+          <g:TextBox ui:field="message"></g:TextBox>
+        </p>
+        <label ui:field="occupantsLabel">Group Chat Participants:</label>
+        <g:FlowPanel ui:field="occupantsList" styleName="list"></g:FlowPanel>
+        <div class="actions">
+          <g:Button ui:field="accept">Accept</g:Button>
+          <g:Button ui:field="cancel">Cancel</g:Button>
+        </div>
+      </div>
+    </g:HTMLPanel>
+  </g:ScrollPanel>
+</ui:UiBinder>

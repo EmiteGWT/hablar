@@ -21,8 +21,8 @@ public class HablarVCard implements EntryPoint {
 	final OwnVCardPresenter ownVCardPage = new OwnVCardPresenter(hablar.getEventBus(), new VCardWidget(false));
 	hablar.addPage(ownVCardPage, UserContainer.ROL);
 
-	final OthersVCardPresenter othersVCardPage = new OthersVCardPresenter(hablar.getEventBus(), new VCardWidget(
-		true));
+	final OthersVCardPresenter othersVCardPage = new OthersVCardPresenter(hablar.getEventBus(),
+		new OtherVCardWidget(true));
 	hablar.addPage(othersVCardPage, OverlayContainer.ROL);
 
 	hablar.addPageAddedHandler(new PageAddedHandler() {
