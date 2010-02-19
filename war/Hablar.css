@@ -5,6 +5,11 @@
 	padding: 0;
 }
 
+html {
+	font-family: Tahoma, sans-serif;
+	font-size: 80%;
+}
+
 /** HABLAR PAGE COMMON **/
 .hablar-Page {
 	background-color: #E9E9E9;
@@ -30,7 +35,7 @@
 }
 
 .hablar-Page .gwt-Button {
-	font-size: 75%;
+	font-size: 100%;
 }
 
 div.hablar-ActionWidget {
