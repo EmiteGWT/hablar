@@ -5,6 +5,7 @@
     <inherits name='com.calclab.hablar.core.HablarCore' />
     <inherits name='com.calclab.emite.core.EmiteCore' />
     <inherits name='com.calclab.emite.im.EmiteIM' />
+    <inherits name='com.calclab.emite.xep.storage.EmitePrivateStorage' />
 	<source path="client" />
 	<entry-point class="com.calclab.hablar.user.client.HablarUser" />
 </module>
