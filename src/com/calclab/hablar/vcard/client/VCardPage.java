@@ -38,6 +38,8 @@ public abstract class VCardPage extends PagePresenter<VCardDisplay> {
 		    break;
 		}
 	    }
+	} else {
+	    clearVCardDisplay();
 	}
     }
 
@@ -68,6 +70,12 @@ public abstract class VCardPage extends PagePresenter<VCardDisplay> {
 	if (emails.size() == 0) {
 	    final VCardEmail email = new VCardEmail(vcard.addChild(VCard.EMAIL));
 	    email.setUserId(newEmail);
+	}
+    }
+
+    private void clearVCardDisplay() {
+	for (final Field field : Field.values()) {
+	    display.getField(field).setText("");
 	}
     }
 }
