@@ -18,6 +18,9 @@ public interface LoginMessages extends Messages {
     @DefaultMessage("Sign out")
     String logout();
 
+    @DefaultMessage("Session state: {0}")
+    String sessionState(String state);
+
     @DefaultMessage("Wait...")
     String waitDots();
 }

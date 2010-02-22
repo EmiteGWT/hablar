@@ -11,7 +11,7 @@ import org.junit.Test;
 import com.calclab.hablar.chat.client.ui.ChatPresenter;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
-import com.calclab.hablar.core.client.page.events.UserMessageChangedEvent;
+import com.calclab.hablar.core.client.page.events.UserMessageEvent;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.signals.client.unattended.UnattendedChatPages;
 import com.calclab.hablar.testing.HablarTester;
@@ -31,14 +31,14 @@ public class UnattendedChatPagesTests {
     public void shouldAddChatIfNewMessageAndNotFocused() {
 	final Page<?> page = createChatPage(Visibility.notFocused);
 	assertEquals(0, pages.getSize());
-	tester.fire(new UserMessageChangedEvent(page, "message"));
+	tester.fire(new UserMessageEvent(page, "message", ChatPresenter.CHAT_MESSAGE));
 	assertTrue(pages.contains(page));
     }
 
     @Test
     public void shouldRemoveChatIfFocused() {
 	final Page<?> page = createChatPage(Visibility.notFocused);
-	tester.fire(new UserMessageChangedEvent(page, "message"));
+	tester.fire(new UserMessageEvent(page, "message", ChatPresenter.CHAT_MESSAGE));
 	assertTrue(pages.contains(page));
 	tester.fire(new VisibilityChangedEvent(page, Visibility.focused));
 	assertFalse(pages.contains(page));

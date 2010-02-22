@@ -10,7 +10,7 @@ public class SignalPreferences {
     /**
      * Show incoming messages (either in char or rooms) notifications
      */
-    public boolean incomingNotifications = true;
+    public boolean incomingMessages = true;
 
     /**
      * Show roster notifications

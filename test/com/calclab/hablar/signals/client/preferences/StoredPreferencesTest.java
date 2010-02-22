@@ -1,8 +1,7 @@
 package com.calclab.hablar.signals.client.preferences;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.HashMap;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -18,22 +17,21 @@ public class StoredPreferencesTest {
 
     @Test
     public void shouldCreatePref() {
-	final StoredPreferences presences = new StoredPreferences(TigaseXMLService.toPacket(sample));
-	checkPreferences(presences);
+	final StoredPreferences preferences = new StoredPreferences(TigaseXMLService.toPacket(sample));
+	shouldHaveCorrentPreferences(preferences);
     }
 
     @Test
-    public void shouldParseIq() {
-	final StoredPreferences presences = StoredPreferences.parse(new IQResponse(TigaseXMLService.toPacket(packet)));
-	checkPreferences(presences);
+    public void shouldParsePacket() {
+	final StoredPreferences preferences = StoredPreferences
+		.parse(new IQResponse(TigaseXMLService.toPacket(packet)));
+	shouldHaveCorrentPreferences(preferences);
     }
 
-    private void checkPreferences(final StoredPreferences presences) {
-	final HashMap<String, String> prefs = presences.get();
-	assertEquals(3, prefs.keySet().size());
-	assertEquals("true", prefs.get(PreferencesConstants.TITLE_NOTIF));
-	assertEquals("false", prefs.get(PreferencesConstants.INCOMING_NOTIF));
-	assertEquals("true", prefs.get(PreferencesConstants.ROSTER_NOTIF));
-	assertEquals(null, prefs.get("anything"));
+    private void shouldHaveCorrentPreferences(final StoredPreferences preferences) {
+	assertTrue(preferences.getTitleSignals());
+	assertFalse(preferences.getIncommingMessages());
+	assertTrue(preferences.getRosterNotifications());
     }
+
 }

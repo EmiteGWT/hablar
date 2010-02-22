@@ -11,6 +11,7 @@ import com.calclab.hablar.chat.client.ui.ChatDisplay;
 import com.calclab.hablar.chat.client.ui.ChatMessageFormatter;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
+import com.calclab.hablar.core.client.page.events.UserMessageEvent;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.Action;
@@ -24,6 +25,7 @@ import com.google.gwt.event.dom.client.KeyDownHandler;
 
 public class RoomPresenter extends PagePresenter<RoomDisplay> {
     public static final String TYPE = "Room";
+    public static final String ROOM_MESSAGE = "RoomMessage";
     private static int id = 0;
 
     private final Room room;
@@ -52,11 +54,11 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> {
 			display.showMessage("me", body, ChatDisplay.MessageType.sent);
 		    } else {
 			display.showMessage(from, body, ChatDisplay.MessageType.incoming);
-			getState().setUserMessage(
-				i18n().incommingMessage(roomName, from, ChatMessageFormatter.ellipsis(body, 25)));
+			fireUserMessage(roomName, from, body);
 		    }
 		}
 	    }
+
 	});
 	room.onStateChanged(new Listener<State>() {
 	    @Override
@@ -101,6 +103,11 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> {
 
     public void showMessage(final String text) {
 	display.showMessage(null, text, ChatDisplay.MessageType.info);
+    }
+
+    private void fireUserMessage(final String roomName, final String from, final String body) {
+	final String message = i18n().incommingMessage(roomName, from, ChatMessageFormatter.ellipsis(body, 25));
+	eventBus.fireEvent(new UserMessageEvent(this, message, ROOM_MESSAGE));
     }
 
     private void sendMessage(final Chat chat, final ChatDisplay display) {

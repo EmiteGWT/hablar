@@ -7,6 +7,7 @@ import com.calclab.emite.core.client.xmpp.session.Session.State;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
+import com.calclab.hablar.core.client.page.events.UserMessageEvent;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.suco.client.Suco;
@@ -15,6 +16,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
 public class LoginPage extends PagePresenter<LoginDisplay> {
+    public static final String LOGIN_MESSAGE = "LoginMessage";
     private static int index = 0;
     private final Session session;
 
@@ -43,6 +45,11 @@ public class LoginPage extends PagePresenter<LoginDisplay> {
 	setState(session.getState());
     }
 
+    private void fireUserMessage(final State state) {
+	final String message = i18n().sessionState(state.toString());
+	eventBus.fireEvent(new UserMessageEvent(this, message, LOGIN_MESSAGE));
+    }
+
     private void setState(final State state) {
 	String actionText, pageTitle, pageIcon;
 	boolean actionEnabled;
@@ -67,7 +74,7 @@ public class LoginPage extends PagePresenter<LoginDisplay> {
 	display.addMessage("Session: " + state.toString());
 	getState().setPageTitle(pageTitle);
 	getState().setPageIcon(pageIcon);
-	getState().setUserMessage("Session state: " + state);
+	fireUserMessage(state);
     }
 
     protected void login() {

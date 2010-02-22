@@ -12,6 +12,7 @@ import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter;
+import com.calclab.hablar.core.client.page.events.UserMessageEvent;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.Action;
@@ -31,6 +32,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
  * @see RosterPage
  */
 public class RosterPresenter extends PagePresenter<RosterDisplay> implements RosterPage {
+    public static final String ROSTER_MESSAGE = "RosterMessage";
     private static int index = 0;
 
     public static RosterPage asRoster(final Page<?> page) {
@@ -100,9 +102,10 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 			createGroup(name);
 		    }
 		}
-		final String msg = i18n().userAdded(item.getName());
-		getState().setUserMessage(msg);
+		final String message = i18n().userAdded(item.getName());
+		fireMessage(message);
 	    }
+
 	});
 
 	roster.onItemChanged(new Listener<RosterItem>() {
@@ -119,8 +122,8 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 	roster.onItemRemoved(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
-		final String msg = i18n().userRemoved(item.getName());
-		getState().setUserMessage(msg);
+		final String message = i18n().userRemoved(item.getName());
+		fireMessage(message);
 	    }
 	});
 
@@ -147,6 +150,10 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 	final RosterGroupPresenter group = new RosterGroupPresenter(groupName, itemMenu, groupDisplay);
 	groups.put(groupName, group);
 	display.addGroup(group, groupMenu);
+    }
+
+    private void fireMessage(final String message) {
+	eventBus.fireEvent(new UserMessageEvent(this, message, ROSTER_MESSAGE));
     }
 
     private void loadRoster() {

@@ -12,6 +12,7 @@ import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter;
+import com.calclab.hablar.core.client.page.events.UserMessageEvent;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
@@ -25,6 +26,7 @@ import com.google.gwt.event.dom.client.KeyDownHandler;
 
 public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPage {
     public static final String TYPE = "Chat";
+    public static final String CHAT_MESSAGE = "ChatMessage";
 
     public static ChatPresenter asChat(final Page<?> page) {
 	if (isChat(page)) {
@@ -61,9 +63,10 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
 		final String body = ChatMessageFormatter.format(message.getBody());
 		if (body != null) {
 		    display.showMessage(userName, body, ChatDisplay.MessageType.incoming);
-		    getState().setUserMessage(i18n().newChatFrom(userName, ChatMessageFormatter.ellipsis(body, 25)));
+		    fireUserMessage(body);
 		}
 	    }
+
 	});
 	chat.onStateChanged(new Listener<State>() {
 	    @Override
@@ -120,6 +123,11 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
 	} else {
 	    display.getState().setText(i18n().stateOffline(userName));
 	}
+    }
+
+    private void fireUserMessage(final String body) {
+	final String message = i18n().newChatFrom(userName, ChatMessageFormatter.ellipsis(body, 25));
+	eventBus.fireEvent(new UserMessageEvent(this, message, CHAT_MESSAGE));
     }
 
     private String getName(final XmppURI fromURI) {

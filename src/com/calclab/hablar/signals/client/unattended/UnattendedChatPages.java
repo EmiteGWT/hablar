@@ -6,8 +6,8 @@ import com.calclab.hablar.chat.client.ui.ChatPresenter;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
-import com.calclab.hablar.core.client.page.events.UserMessageChangedEvent;
-import com.calclab.hablar.core.client.page.events.UserMessageChangedHandler;
+import com.calclab.hablar.core.client.page.events.UserMessageEvent;
+import com.calclab.hablar.core.client.page.events.UserMessageHandler;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedHandler;
 import com.calclab.hablar.rooms.client.room.RoomPresenter;
@@ -37,11 +37,12 @@ public class UnattendedChatPages {
     }
 
     private void bind() {
-	eventBus.addHandler(UserMessageChangedEvent.TYPE, new UserMessageChangedHandler() {
+	eventBus.addHandler(UserMessageEvent.TYPE, new UserMessageHandler() {
 	    @Override
-	    public void onUserMessageChanged(final UserMessageChangedEvent event) {
-		final Page<?> page = event.getPage();
-		if (isChatPage(page)) {
+	    public void onUserMessage(final UserMessageEvent event) {
+		final String messageType = event.getMessageType();
+		if (isChatMessage(messageType)) {
+		    Page<?> page = event.getPage();
 		    final Visibility visibility = page.getVisibility();
 		    if (visibility != Visibility.focused && unattendedChatPages.add(page)) {
 			eventBus.fireEvent(new UnattendedChatsChangedEvent(UnattendedChatPages.this));
@@ -54,7 +55,7 @@ public class UnattendedChatPages {
 	    @Override
 	    public void onVisibilityChanged(final VisibilityChangedEvent event) {
 		final Page<?> page = event.getPage();
-		if (isChatPage(page)) {
+		if (isChatPage(page.getType())) {
 		    onChatVisibilityChanged(page);
 		}
 	    }
@@ -63,8 +64,11 @@ public class UnattendedChatPages {
 
     }
 
-    private boolean isChatPage(final Page<?> page) {
-	final String pageType = page.getType();
+    private boolean isChatMessage(final String messageType) {
+	return messageType.equals(ChatPresenter.CHAT_MESSAGE) || messageType.equals(RoomPresenter.ROOM_MESSAGE);
+    }
+
+    private boolean isChatPage(final String pageType) {
 	return pageType.equals(ChatPresenter.TYPE) || pageType.equals(RoomPresenter.TYPE);
     }
 

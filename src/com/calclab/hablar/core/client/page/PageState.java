@@ -2,13 +2,11 @@ package com.calclab.hablar.core.client.page;
 
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
-import com.calclab.hablar.core.client.page.events.UserMessageChangedEvent;
-import com.calclab.hablar.core.client.page.events.UserMessageChangedHandler;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedHandler;
 
 public class PageState {
-    private String pageTitle, userMessage, pageIcon, pageTitleTooltip;
+    private String pageTitle, pageIcon, pageTitleTooltip;
     private boolean closeable;
     private Visibility visibility;
     private final HablarEventBus eventBus;
@@ -27,17 +25,6 @@ public class PageState {
 	    public void onPageInfoChanged(final PageInfoChangedEvent event) {
 		if (event.getPage() == page) {
 		    handler.onPageInfoChanged(event);
-		}
-	    }
-	});
-    }
-
-    public void addUserMessageChangedHandler(final UserMessageChangedHandler handler) {
-	eventBus.addHandler(UserMessageChangedEvent.TYPE, new UserMessageChangedHandler() {
-	    @Override
-	    public void onUserMessageChanged(final UserMessageChangedEvent event) {
-		if (event.getPageState() == PageState.this) {
-		    handler.onUserMessageChanged(event);
 		}
 	    }
 	});
@@ -68,10 +55,6 @@ public class PageState {
 
     public String getPageTitleTooltip() {
 	return pageTitleTooltip;
-    }
-
-    public String getUserMessage() {
-	return userMessage;
     }
 
     public Visibility getVisibility() {
@@ -107,13 +90,6 @@ public class PageState {
     public void setPageTitleTooltip(final String pageTitleTooltip) {
 	this.pageTitleTooltip = pageTitleTooltip;
 	fireChanged();
-    }
-
-    public void setUserMessage(final String userMessage) {
-	if (userMessage != null && !userMessage.equals(this.userMessage)) {
-	    this.userMessage = userMessage;
-	    eventBus.fireEvent(new UserMessageChangedEvent(page, userMessage));
-	}
     }
 
     public void setVisibility(final Visibility visibility) {
