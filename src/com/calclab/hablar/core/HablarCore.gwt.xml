@@ -3,6 +3,22 @@
 <module rename-to="HablarCore">
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name='com.calclab.emite.core.EmiteCore' />
+
+	<!-- Fall through to this rule is the browser isn't IE6 -->
+	<replace-with
+		class="com.calclab.hablar.core.client.ui.icon.DefaultHablarIcons">
+		<when-type-is
+			class="com.calclab.hablar.core.client.ui.icon.DefaultHablarIcons" />
+	</replace-with>
+
+	<!-- IE has a completely different popup implementation -->
+	<replace-with
+		class="com.calclab.hablar.core.client.ui.icon.DefaultHablarIconsIE6">
+		<when-type-is
+			class="com.calclab.hablar.core.client.ui.icon.DefaultHablarIcons" />
+		<when-property-is name="user.agent" value="ie6" />
+	</replace-with>
+
 	<source path="client" />
 	<entry-point class="com.calclab.hablar.core.client.HablarCore" />
 </module>

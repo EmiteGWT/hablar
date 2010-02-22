@@ -16,6 +16,7 @@ import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.layout.client.Layout.Alignment;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasWidgets;
@@ -412,6 +413,7 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
 
 	Widget child = children.get(index);
 	Element container = panel.getWidgetContainerElement(child);
+	layoutChild(child);
 	container.getStyle().clearDisplay();
 	child.setVisible(true);
 	tabs.get(index).setSelected(true);

@@ -4,6 +4,7 @@ import static com.google.gwt.dom.client.Style.Unit.PCT;
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
 import com.calclab.hablar.core.client.HablarDisplay;
+import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.layout.client.Layout.AnimationCallback;
 import com.google.gwt.layout.client.Layout.Layer;
 import com.google.gwt.user.client.ui.LayoutPanel;
@@ -19,6 +20,8 @@ public class OverlayLayout {
 	display.add(panel);
 	display.setWidgetLeftRight(panel, 0, PX, 0, PX);
 	display.setWidgetTopBottom(panel, 0, PX, 0, PX);
+	
+	panel.getElement().getParentElement().addClassName("hablar-OverlayContainerOuter");
     }
 
     public void add(Widget widget) {
@@ -28,7 +31,8 @@ public class OverlayLayout {
 	panel.setWidgetTopHeight(widget, 0, PX, 0, PX);
 	panel.forceLayout();
 	setVisible(true);
-	panel.setWidgetTopHeight(widget, 0, PX, 100, PCT);
+	panel.setWidgetTopBottom(widget, 0, PX, 0, PX);
+	panel.getWidgetContainerElement(widget).getStyle().setOverflow(Overflow.VISIBLE);
 	panel.animate(500);
     }
 
@@ -57,6 +61,13 @@ public class OverlayLayout {
 
     public void setVisible(boolean visible) {
 	panel.setVisible(visible);
+	
+	// +++ Serious bodge for IE6
+	// Sets the z-index to 1 if visible, -1 if not 
+	if(panel.getElement().getParentElement() != null) {
+	    panel.getElement().getParentElement().getStyle().setZIndex(visible ? 1 : -1);
+	}
+	// ---
     }
 
 }
