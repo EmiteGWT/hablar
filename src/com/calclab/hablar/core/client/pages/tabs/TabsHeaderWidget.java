@@ -27,7 +27,7 @@ public class TabsHeaderWidget extends Composite implements HeaderDisplay {
 
     public TabsHeaderWidget(final String id) {
 	initWidget(uiBinder.createAndBindUi(this));
-	icon.addStyleName(HablarIcons.get(IconType.close));
+	close.addStyleName(HablarIcons.get(IconType.close));
 	ensureDebugId("HeaderWidget-" + id);
     }
 

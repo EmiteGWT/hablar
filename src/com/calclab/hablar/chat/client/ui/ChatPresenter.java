@@ -64,6 +64,9 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
 		if (body != null) {
 		    display.showMessage(userName, body, ChatDisplay.MessageType.incoming);
 		    fireUserMessage(body);
+		    if (getVisibility() == Visibility.hidden) {
+			requestVisibility(Visibility.notFocused);
+		    }
 		}
 	    }
 
