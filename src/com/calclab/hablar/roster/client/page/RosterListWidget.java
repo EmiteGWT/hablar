@@ -27,4 +27,10 @@ public class RosterListWidget extends FlowPanel implements RosterListDisplay {
 	return new GroupHeaderWidget(groupId);
     }
 
+    @Override
+    public void remove(final GroupHeaderDisplay headerDisplay, final RosterGroupDisplay groupDisplay) {
+	remove(headerDisplay.asWidget());
+	remove(groupDisplay.asWidget());
+    }
+
 }

@@ -57,7 +57,7 @@ public class EditBuddyPage extends PagePresenter<EditBuddyDisplay> {
 	final String newName = display.getNewNickName().getText();
 	if (!currentItem.getName().equals(newName)) {
 	    currentItem.setName(newName);
-	    roster.updateItem(currentItem);
+	    roster.requestUpdateItem(currentItem);
 	}
     }
 

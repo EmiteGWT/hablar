@@ -104,7 +104,7 @@ public class AddToGroupPresenter extends PagePresenter<AddToGroupDisplay> {
 	}
 
 	item.addToGroup(groupName);
-	roster.updateItem(item);
+	roster.requestUpdateItem(item);
     }
 
     @Override
@@ -114,9 +114,11 @@ public class AddToGroupPresenter extends PagePresenter<AddToGroupDisplay> {
 	final ArrayList<String> groups = new ArrayList<String>(roster.getGroups());
 	groups.removeAll(item.getGroups());
 	for (final String name : groups) {
-	    display.addToGroupList(name);
+	    if (name != null) {
+		display.addToGroupList(name);
+	    }
 	}
-	if (groups.size() == 0) {
+	if (groups.size() == 1) {
 	    display.setActiveAction(Action.addToNew);
 	    display.setActionEnabled(Action.addToExisting, false);
 	} else {

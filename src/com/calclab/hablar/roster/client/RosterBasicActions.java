@@ -1,5 +1,9 @@
 package com.calclab.hablar.roster.client;
 
+import static com.calclab.hablar.roster.client.HablarRoster.i18n;
+
+import java.util.Collection;
+
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.ui.menu.Action;
@@ -8,6 +12,7 @@ import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.roster.client.groups.RosterItemPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.suco.client.Suco;
+import com.google.gwt.user.client.Window;
 
 public class RosterBasicActions {
 
@@ -25,7 +30,7 @@ public class RosterBasicActions {
 
 	@Override
 	public boolean isApplicable(final RosterItemPresenter target) {
-	    return target.getGroupName().equals("");
+	    return isEntrieRoster(target);
 	};
     };
 
@@ -38,31 +43,51 @@ public class RosterBasicActions {
 
 	@Override
 	public boolean isApplicable(final RosterItemPresenter target) {
-	    return !target.getGroupName().equals("");
+	    return !isEntrieRoster(target);
 	};
     };
     private final Action<RosterGroupPresenter> deleteGroup = new SimpleAction<RosterGroupPresenter>("Delete group",
 	    ID_ACTION_DELETE_GROUP) {
 	@Override
 	public void execute(final RosterGroupPresenter target) {
+
+	    final String groupName = target.getGroupName();
+	    final Collection<RosterItem> items = roster.getItemsByGroup(groupName);
+	    final String message = i18n().confirmDeleteGroup(groupName, "" + items.size());
+	    if (Window.confirm(message)) {
+		deleteGroup(groupName, items);
+	    }
 	}
 
 	@Override
 	public boolean isApplicable(final RosterGroupPresenter target) {
-	    return !target.getGroupName().equals("");
+	    return target.getGroupName() != null;
 	};
     };
+    private final Roster roster;
 
     public RosterBasicActions(final RosterPage rosterPage) {
+	roster = Suco.get(Roster.class);
 	rosterPage.getItemMenu().addAction(removeFromRoster);
 	rosterPage.getItemMenu().addAction(removeFromGroup);
 	rosterPage.getGroupMenu().addAction(deleteGroup);
     }
 
+    private void deleteGroup(final String groupName, final Collection<RosterItem> items) {
+	for (final RosterItem item : items) {
+	    item.removeFromGroup(groupName);
+	}
+	roster.requestUpdateItems(items);
+    }
+
+    private boolean isEntrieRoster(final RosterItemPresenter target) {
+	return target.getGroupName() == null;
+    }
+
     protected void removeFromGroup(final RosterItem item, final String groupName) {
 	final Roster roster = Suco.get(Roster.class);
 	item.removeFromGroup(groupName);
-	roster.updateItem(item);
+	roster.requestUpdateItem(item);
     }
 
     protected void removeFromRoster(final RosterItem item) {

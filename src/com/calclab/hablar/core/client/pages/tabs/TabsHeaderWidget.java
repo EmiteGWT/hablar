@@ -1,6 +1,8 @@
 package com.calclab.hablar.core.client.pages.tabs;
 
 import com.calclab.hablar.core.client.pages.HeaderDisplay;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -25,6 +27,7 @@ public class TabsHeaderWidget extends Composite implements HeaderDisplay {
 
     public TabsHeaderWidget(final String id) {
 	initWidget(uiBinder.createAndBindUi(this));
+	icon.addStyleName(HablarIcons.get(IconType.close));
 	ensureDebugId("HeaderWidget-" + id);
     }
 

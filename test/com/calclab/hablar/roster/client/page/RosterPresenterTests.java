@@ -8,14 +8,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.emite.xtesting.RosterTester;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.ui.menu.Menu;
-import com.calclab.hablar.roster.client.RosterTester;
 import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.testing.EmiteTester;
 import com.calclab.hablar.testing.HablarTester;
 
-public class RosterPresenceTests {
+public class RosterPresenterTests {
 
     private HablarEventBus eventBus;
     private RosterDisplay display;
@@ -39,7 +39,8 @@ public class RosterPresenceTests {
 	final RosterItem item = roster.newItem("jid3", "name3", "group3");
 	roster.storeItem(item);
 	roster.fireItemAdded(item);
-	verify(display).addGroup((RosterGroupPresenter) anyObject(), (Menu<RosterGroupPresenter>) anyObject());
+	verify(display, times(4))
+		.addGroup((RosterGroupPresenter) anyObject(), (Menu<RosterGroupPresenter>) anyObject());
     }
 
     @SuppressWarnings("unchecked")

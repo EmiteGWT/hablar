@@ -6,7 +6,6 @@ import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
 import com.calclab.hablar.roster.client.groups.RosterGroupDisplay;
 import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
-import com.calclab.hablar.roster.client.groups.RosterItemDisplay;
 import com.calclab.hablar.roster.client.groups.RosterItemPresenter;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 
@@ -22,7 +21,7 @@ public interface RosterDisplay extends Display {
 
     MenuDisplay<RosterItemPresenter> newRosterItemMenuDisplay(String menuId);
 
-    void remove(RosterItemDisplay itemDisplay);
+    void remove(RosterGroupPresenter groupPresenter);
 
     void setActive(boolean active);
 

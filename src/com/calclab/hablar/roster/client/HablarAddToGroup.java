@@ -31,7 +31,7 @@ public class HablarAddToGroup {
 
 	    @Override
 	    public boolean isApplicable(final RosterItemPresenter target) {
-		return target.getGroupName().equals("");
+		return target.getGroupName() == null;
 	    }
 	};
 	roster.getItemMenu().addAction(addToGroup);

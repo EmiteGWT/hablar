@@ -2,12 +2,12 @@ package com.calclab.hablar.roster.client.page;
 
 import static com.calclab.hablar.roster.client.HablarRoster.i18n;
 
-import java.util.Collection;
 import java.util.HashMap;
 
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.session.Session.State;
 import com.calclab.emite.im.client.roster.Roster;
+import com.calclab.emite.im.client.roster.RosterGroup;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.Page;
@@ -45,14 +45,14 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
     private boolean active;
     private final Roster roster;
     private final Menu<RosterItemPresenter> itemMenu;
-    private final HashMap<String, RosterGroupPresenter> groups;
+    private final HashMap<String, RosterGroupPresenter> groupPresenters;
     private final Menu<RosterGroupPresenter> groupMenu;
 
     public RosterPresenter(final HablarEventBus eventBus, final RosterDisplay display) {
 	super(TYPE, "" + ++index, eventBus, display);
 	roster = Suco.get(Roster.class);
 
-	groups = new HashMap<String, RosterGroupPresenter>();
+	groupPresenters = new HashMap<String, RosterGroupPresenter>();
 	active = true;
 
 	itemMenu = new Menu<RosterItemPresenter>(display.newRosterItemMenuDisplay("hablar-RosterItemMenu"));
@@ -61,6 +61,20 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 	addRosterListeners();
 	addSessionListeners();
 	getState().init(HablarIcons.get(IconType.roster), i18n().contacts());
+
+	roster.onGroupAdded(new Listener<RosterGroup>() {
+	    @Override
+	    public void onEvent(final RosterGroup group) {
+		createGroup(group);
+	    }
+	});
+
+	roster.onGroupRemoved(new Listener<RosterGroup>() {
+	    @Override
+	    public void onEvent(final RosterGroup group) {
+		display.remove(groupPresenters.get(group.getName()));
+	    }
+	});
     }
 
     @Override
@@ -86,22 +100,17 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
     }
 
     private void addRosterListeners() {
-	roster.onRosterRetrieved(new Listener<Collection<RosterItem>>() {
-	    @Override
-	    public void onEvent(final Collection<RosterItem> items) {
-		loadRoster();
-	    }
-
-	});
+	// roster.onRosterRetrieved(new Listener<Collection<RosterItem>>() {
+	// @Override
+	// public void onEvent(final Collection<RosterItem> items) {
+	// loadRoster();
+	// }
+	//
+	// });
 
 	roster.onItemAdded(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
-		for (final String name : item.getGroups()) {
-		    if (groups.get(name) == null) {
-			createGroup(name);
-		    }
-		}
 		final String message = i18n().userAdded(item.getName());
 		fireMessage(message);
 	    }
@@ -111,11 +120,6 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 	roster.onItemChanged(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
-		for (final String name : item.getGroups()) {
-		    if (groups.get(name) == null) {
-			createGroup(name);
-		    }
-		}
 	    }
 	});
 
@@ -145,11 +149,11 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 	setSessionState(session.getState());
     }
 
-    private void createGroup(final String groupName) {
+    private void createGroup(final RosterGroup group) {
 	final RosterGroupDisplay groupDisplay = display.newRosterGroupDisplay();
-	final RosterGroupPresenter group = new RosterGroupPresenter(groupName, itemMenu, groupDisplay);
-	groups.put(groupName, group);
-	display.addGroup(group, groupMenu);
+	final RosterGroupPresenter presenter = new RosterGroupPresenter(group, itemMenu, groupDisplay);
+	groupPresenters.put(group.getName(), presenter);
+	display.addGroup(presenter, groupMenu);
     }
 
     private void fireMessage(final String message) {
@@ -158,12 +162,9 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 
     private void loadRoster() {
 	GWT.log("LOAD ROSTER");
-	groups.clear();
-	final RosterGroupPresenter all = new RosterGroupPresenter("", itemMenu, display.newRosterGroupDisplay());
-	groups.put("", all);
-	display.addGroup(all, groupMenu);
-	for (final String groupName : roster.getGroups()) {
-	    createGroup(groupName);
+	groupPresenters.clear();
+	for (final RosterGroup group : roster.getRosterGroups()) {
+	    createGroup(group);
 	}
     }
 

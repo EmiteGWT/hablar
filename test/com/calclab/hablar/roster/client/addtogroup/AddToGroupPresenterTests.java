@@ -5,8 +5,8 @@ import static org.mockito.Mockito.verify;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.calclab.emite.xtesting.RosterTester;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
-import com.calclab.hablar.roster.client.RosterTester;
 import com.calclab.hablar.roster.client.addtogroup.AddToGroupDisplay.Action;
 import com.calclab.hablar.testing.EmiteTester;
 import com.calclab.hablar.testing.EventBusTester;
@@ -31,7 +31,7 @@ public class AddToGroupPresenterTests {
 
     @Test
     public void shouldAddCurrentGroupsWhenShow() {
-	roster.setGroups("one", "two", "three");
+	roster.setGroupNames("one", "two", "three");
 	presenter.setVisibility(Visibility.focused);
 
 	verify(display).clearGroupList();
@@ -43,7 +43,7 @@ public class AddToGroupPresenterTests {
 
     @Test
     public void shouldDisableAddToExistingIfNoRosterGroups() {
-	roster.setGroups();
+	roster.setGroupNames("");
 	presenter.setVisibility(Visibility.focused);
 	verify(display).clearGroupList();
 	verify(display).setActionEnabled(Action.addToExisting, false);

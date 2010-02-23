@@ -10,4 +10,6 @@ public interface RosterListDisplay extends Display {
 
     GroupHeaderDisplay createGroupHeader(String groupId);
 
+    void remove(GroupHeaderDisplay headerDisplay, RosterGroupDisplay groupDisplay);
+
 }

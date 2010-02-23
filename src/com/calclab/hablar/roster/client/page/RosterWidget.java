@@ -8,7 +8,6 @@ import com.calclab.hablar.core.client.ui.menu.PopupMenu;
 import com.calclab.hablar.roster.client.groups.RosterGroupDisplay;
 import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.roster.client.groups.RosterGroupWidget;
-import com.calclab.hablar.roster.client.groups.RosterItemDisplay;
 import com.calclab.hablar.roster.client.groups.RosterItemPresenter;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
@@ -85,8 +84,8 @@ public class RosterWidget extends Composite implements RosterDisplay {
     }
 
     @Override
-    public void remove(final RosterItemDisplay itemDisplay) {
-	list.remove(itemDisplay.asWidget());
+    public void remove(final RosterGroupPresenter groupPresenter) {
+	groups.remove(groupPresenter);
     }
 
     public void setActive(final boolean active) {
