@@ -62,19 +62,6 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 	addSessionListeners();
 	getState().init(HablarIcons.get(IconType.roster), i18n().contacts());
 
-	roster.onGroupAdded(new Listener<RosterGroup>() {
-	    @Override
-	    public void onEvent(final RosterGroup group) {
-		createGroup(group);
-	    }
-	});
-
-	roster.onGroupRemoved(new Listener<RosterGroup>() {
-	    @Override
-	    public void onEvent(final RosterGroup group) {
-		display.remove(groupPresenters.get(group.getName()));
-	    }
-	});
     }
 
     @Override
@@ -100,34 +87,34 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
     }
 
     private void addRosterListeners() {
-	// roster.onRosterRetrieved(new Listener<Collection<RosterItem>>() {
-	// @Override
-	// public void onEvent(final Collection<RosterItem> items) {
-	// loadRoster();
-	// }
-	//
-	// });
-
 	roster.onItemAdded(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
-		final String message = i18n().userAdded(item.getName());
+		final String message = i18n().userAdded(item.getJID().toString());
 		fireMessage(message);
 	    }
 
-	});
-
-	roster.onItemChanged(new Listener<RosterItem>() {
-	    @Override
-	    public void onEvent(final RosterItem item) {
-	    }
 	});
 
 	roster.onItemRemoved(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
-		final String message = i18n().userRemoved(item.getName());
+		final String message = i18n().userRemoved(item.getJID().toString());
 		fireMessage(message);
+	    }
+	});
+
+	roster.onGroupAdded(new Listener<RosterGroup>() {
+	    @Override
+	    public void onEvent(final RosterGroup group) {
+		createGroup(group);
+	    }
+	});
+
+	roster.onGroupRemoved(new Listener<RosterGroup>() {
+	    @Override
+	    public void onEvent(final RosterGroup group) {
+		display.remove(groupPresenters.get(group.getName()));
 	    }
 	});
 
