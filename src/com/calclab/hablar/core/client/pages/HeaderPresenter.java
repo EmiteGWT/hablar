@@ -1,5 +1,6 @@
 package com.calclab.hablar.core.client.pages;
 
+import com.calclab.emite.core.client.packet.TextUtils;
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PageInfoChangedEvent;
@@ -47,18 +48,11 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 	state.addInfoChangedHandler(new PageInfoChangedHandler() {
 	    @Override
 	    public void onPageInfoChanged(final PageInfoChangedEvent event) {
-		// FIXME: Duplicate code (see below)
-		setIconStyle(state.getPageIcon());
-		display.getHeaderTitle().setText(state.getPageTitle());
-		display.setHeaderTooltip(state.getPageTitleTooltip());
-		display.setCloseIconVisible(state.isCloseable());
+		update(display, state);
 	    }
 	});
 
-	setIconStyle(state.getPageIcon());
-	display.getHeaderTitle().setText(state.getPageTitle());
-	display.setHeaderTooltip(state.getPageTitleTooltip());
-	display.setCloseIconVisible(state.isCloseable());
+	update(display, state);
     }
 
     public HeaderDisplay getDisplay() {
@@ -71,6 +65,13 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 	}
 	currentIconStyle = pageIcon;
 	display.addIconStyle(currentIconStyle);
+    }
+
+    private void update(final HeaderDisplay display, final PageState state) {
+	setIconStyle(state.getPageIcon());
+	display.getHeaderTitle().setText(TextUtils.ellipsis(state.getPageTitle(), state.getTitleTrim()));
+	display.setHeaderTooltip(state.getPageTitleTooltip());
+	display.setCloseIconVisible(state.isCloseable());
     }
 
     private void visibilityChanged(final Visibility visibility) {

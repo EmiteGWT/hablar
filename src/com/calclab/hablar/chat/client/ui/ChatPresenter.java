@@ -2,6 +2,7 @@ package com.calclab.hablar.chat.client.ui;
 
 import static com.calclab.hablar.chat.client.HablarChat.i18n;
 
+import com.calclab.emite.core.client.packet.TextUtils;
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
@@ -54,8 +55,12 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
 	userName = getName(fromURI);
 
 	model.init(HablarIcons.get(IconType.buddyOff), userName);
+	model.setPageTitleTooltip(userName);
 	setVisibility(Visibility.notFocused);
 	model.setCloseable(true);
+	// FIXME this works good for HablarDock/Tabs.html, but not necessary for
+	// Hablar.html: maybe must be configurable with a meta variable?
+	model.setTitleTrim(10);
 
 	chat.onMessageReceived(new Listener<Message>() {
 	    @Override
@@ -129,7 +134,7 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
     }
 
     private void fireUserMessage(final String body) {
-	final String message = i18n().newChatFrom(userName, ChatMessageFormatter.ellipsis(body, 25));
+	final String message = i18n().newChatFrom(userName, TextUtils.ellipsis(body, 25));
 	eventBus.fireEvent(new UserMessageEvent(this, message, CHAT_MESSAGE));
     }
 

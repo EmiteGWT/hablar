@@ -11,12 +11,14 @@ public class PageState {
     private Visibility visibility;
     private final HablarEventBus eventBus;
     private final Page<?> page;
+    private int trim;
 
     public PageState(final HablarEventBus eventBus, final Page<?> page) {
 	this.eventBus = eventBus;
 	this.page = page;
 	visibility = Visibility.hidden;
 	closeable = false;
+	trim = 0; // zero means not trim
     }
 
     public void addInfoChangedHandler(final PageInfoChangedHandler handler) {
@@ -57,6 +59,10 @@ public class PageState {
 	return pageTitleTooltip;
     }
 
+    public int getTitleTrim() {
+	return trim;
+    }
+
     public Visibility getVisibility() {
 	return visibility;
     }
@@ -90,6 +96,10 @@ public class PageState {
     public void setPageTitleTooltip(final String pageTitleTooltip) {
 	this.pageTitleTooltip = pageTitleTooltip;
 	fireChanged();
+    }
+
+    public void setTitleTrim(final int trim) {
+	this.trim = trim;
     }
 
     public void setVisibility(final Visibility visibility) {

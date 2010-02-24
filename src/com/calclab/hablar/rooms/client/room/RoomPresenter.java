@@ -2,6 +2,7 @@ package com.calclab.hablar.rooms.client.room;
 
 import static com.calclab.hablar.rooms.client.HablarRooms.i18n;
 
+import com.calclab.emite.core.client.packet.TextUtils;
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
 import com.calclab.emite.im.client.chat.Chat;
@@ -106,7 +107,7 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> {
     }
 
     private void fireUserMessage(final String roomName, final String from, final String body) {
-	final String message = i18n().incommingMessage(roomName, from, ChatMessageFormatter.ellipsis(body, 25));
+	final String message = i18n().incommingMessage(roomName, from, TextUtils.ellipsis(body, 25));
 	eventBus.fireEvent(new UserMessageEvent(this, message, ROOM_MESSAGE));
     }
 

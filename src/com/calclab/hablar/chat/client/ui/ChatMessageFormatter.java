@@ -44,10 +44,6 @@ public class ChatMessageFormatter {
     private static final String HEART = "EmiteProtIniHEARTEmiteProtEnd";
     private static Emoticons icons;
 
-    public static String ellipsis(final String text, final int length) {
-	return text.length() > length ? text.substring(0, length - 3) + "..." : text;
-    }
-
     public static String format(final String message) {
 	if (message != null) {
 	    String formatted = TextUtils.escape(message);

@@ -134,7 +134,7 @@ div.hablar-ActionWidget:hover {
 
 .hablar-TabsHeaderWidget .title {
     display: inline;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 .hablar-TabsHeaderWidget.notFocused {
