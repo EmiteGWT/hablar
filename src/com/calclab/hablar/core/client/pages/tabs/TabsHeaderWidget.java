@@ -23,12 +23,15 @@ public class TabsHeaderWidget extends Composite implements HeaderDisplay {
     @UiField
     HTMLPanel self;
     @UiField
-    Label title, icon, close;
+    TruncatedLabel title;
+    @UiField
+    Label icon, close;
 
     public TabsHeaderWidget(final String id) {
 	initWidget(uiBinder.createAndBindUi(this));
 	close.addStyleName(HablarIcons.get(IconType.close));
 	ensureDebugId("HeaderWidget-" + id);
+	title.setTrim(10);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.calclab.hablar.core.client.pages;
 
-import com.calclab.emite.core.client.packet.TextUtils;
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PageInfoChangedEvent;
@@ -69,7 +68,7 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 
     private void update(final HeaderDisplay display, final PageState state) {
 	setIconStyle(state.getPageIcon());
-	display.getHeaderTitle().setText(TextUtils.ellipsis(state.getPageTitle(), state.getTitleTrim()));
+	display.getHeaderTitle().setText(state.getPageTitle());
 	display.setHeaderTooltip(state.getPageTitleTooltip());
 	display.setCloseIconVisible(state.isCloseable());
     }

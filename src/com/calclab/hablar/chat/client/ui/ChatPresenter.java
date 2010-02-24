@@ -58,9 +58,6 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
 	model.setPageTitleTooltip(userName);
 	setVisibility(Visibility.notFocused);
 	model.setCloseable(true);
-	// FIXME this works good for HablarDock/Tabs.html, but not necessary for
-	// Hablar.html: maybe must be configurable with a meta variable?
-	model.setTitleTrim(10);
 
 	chat.onMessageReceived(new Listener<Message>() {
 	    @Override
