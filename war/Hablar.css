@@ -5,6 +5,11 @@
     padding: 0;
 }
 
+/** IE6 ZINDEX BUG **/
+.hablar-HablarWidget {
+	z-index: 1;
+}
+
 html {
     font-family: Tahoma, sans-serif;
     font-size: 80%;
@@ -148,10 +153,15 @@ div.hablar-ActionWidget:hover {
 }
 
 /** DOCKS **/
-.hablar-RosterDockContainer-top {
+.hablar-DockContainer-top {
     background-color: #BBB;
-    z-index: 300;
+    z-index: 6000;
 }
+.hablar-DockContainer-left, .hablar-DockContainer-right {
+	z-index: 1000;
+}
+
+	
 
 .hablar-Header.DockHeaderWidget-top {
     background-color: #BBB;
@@ -179,6 +189,7 @@ div.hablar-ActionWidget:hover {
 /** USER **/
 .hablar-UserWidget .container {
     padding: 0px 10px;
+    z-index: 8000;
 }
 
 .hablar-UserWidget .hablar-Header {

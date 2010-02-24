@@ -36,10 +36,10 @@ public class DockLayout {
     public void layoutPanel(LayoutPanel panel, Position position, Dock dock, Dock top, Dock bottom) {
 	if (position == Position.left) {
 	    display.setWidgetTopBottom(panel, top.size, top.unit, bottom.size, bottom.unit);
-	    display.setWidgetLeftWidth(panel, 0, PX, dock.size - 3, dock.unit);
+	    display.setWidgetLeftWidth(panel, 0, PX, Math.max(dock.size - 3, 0), dock.unit);
 	} else if (position == Position.right) {
 	    display.setWidgetTopBottom(panel, top.size, top.unit, bottom.size, bottom.unit);
-	    display.setWidgetRightWidth(panel, 0, PX, dock.size - 3, dock.unit);
+	    display.setWidgetRightWidth(panel, 0, PX, Math.max(dock.size - 3, 0), dock.unit);
 	} else if (position == Position.top) {
 	    display.setWidgetLeftRight(panel, 0, PX, 0, PX);
 	    display.setWidgetTopHeight(panel, 0, PX, dock.size, dock.unit);
@@ -55,17 +55,19 @@ public class DockLayout {
     }
 
     public void slideDown(Widget panel, Dock dock) {
-	display.setWidgetTopHeight(panel, 0, PX, dock.size, dock.unit);
-	display.forceLayout();
+	// FIXME: Animation
+	//display.setWidgetTopHeight(panel, 0, PX, dock.size, dock.unit);
+	//display.forceLayout();
 	display.setWidgetTopHeight(panel, 0, PX, 100, PCT);
-	display.animate(500);
+	//display.animate(500);
     }
 
     public void slideUp(Widget panel, Dock dock) {
-	display.setWidgetTopHeight(panel, 0, PX, 100, PCT);
-	display.forceLayout();
+	// FIXME: Animation
+	//display.setWidgetTopHeight(panel, 0, PX, 100, PCT);
+	//display.forceLayout();
 	display.setWidgetTopHeight(panel, 0, PX, dock.size, dock.unit);
-	display.animate(500);
+	//display.animate(500);
     }
 
 }

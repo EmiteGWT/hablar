@@ -20,7 +20,7 @@ public class HablarHtml implements EntryPoint {
     public void onModuleLoad() {
 	final GWT.UncaughtExceptionHandler uncaughtExceptionHandler = new GWT.UncaughtExceptionHandler() {
 	    public void onUncaughtException(final Throwable e) {
-		GWT.log("UncaughtException in HablarHtml", e);
+		GWT.log("UncaughtException: ", e);
 	    }
 	};
 	// handle the unexpected after onModuleLoad()

@@ -35,4 +35,8 @@ public class PageAddedEvent extends GwtEvent<PageAddedHandler> {
 	handler.onPageAdded(this);
     }
 
+    @Override
+    public String toDebugString() {
+        return super.toDebugString() + getPage().getId();
+    }
 }

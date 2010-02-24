@@ -92,7 +92,8 @@ public class ChatWidget extends Composite implements ChatDisplay {
     @Override
     public void setControlsVisible(final boolean visible) {
 	layoutControls();
-	page.forceLayout();
+	// FIXME: Animation
+	//page.forceLayout();
 	controlsHeight = visible ? CONTROLS_HEIGHT : 0;
 	layoutControls();
 	page.animate(500);
@@ -112,7 +113,8 @@ public class ChatWidget extends Composite implements ChatDisplay {
     @Override
     public void setStatusVisible(final boolean visible) {
 	layoutStatus();
-	page.forceLayout();
+	// FIXME: Animation
+	//page.forceLayout();
 	statusHeight = visible ? STATUS_HEIGHT : 0;
 	layoutStatus();
 	page.animate(500);

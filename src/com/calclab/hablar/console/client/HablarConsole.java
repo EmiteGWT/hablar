@@ -13,7 +13,7 @@ import com.google.gwt.core.client.EntryPoint;
 
 public class HablarConsole implements EntryPoint {
 
-    protected static final String ACTION_ID = "hablar-LoggerAction";
+    protected static final String ACTION_ID = "hablar-ConsoleAction";
 
     public static void install(final Hablar hablar) {
 	final ConsolePresenter loggerPage = new ConsolePresenter(hablar.getEventBus(), new ConsoleWidget());

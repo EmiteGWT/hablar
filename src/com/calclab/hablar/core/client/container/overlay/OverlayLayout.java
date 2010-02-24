@@ -27,9 +27,10 @@ public class OverlayLayout {
     public void add(Widget widget) {
 	widget.addStyleName(STYLE_OVERLAY);
 	panel.add(widget);
+	// FIXME: Animation
 	panel.setWidgetLeftRight(widget, 0, PX, 0, PX);
 	panel.setWidgetTopHeight(widget, 0, PX, 0, PX);
-	panel.forceLayout();
+	//panel.forceLayout();
 	setVisible(true);
 	panel.setWidgetTopBottom(widget, 0, PX, 0, PX);
 	panel.getWidgetContainerElement(widget).getStyle().setOverflow(Overflow.VISIBLE);
@@ -41,8 +42,9 @@ public class OverlayLayout {
     }
 
     public void remove(final Widget widget) {
+	// FIXME: Animation
 	panel.setWidgetTopHeight(widget, 0, PX, 100, PCT);
-	panel.forceLayout();
+	//panel.forceLayout();
 	panel.setWidgetTopHeight(widget, 0, PX, 0, PX);
 	panel.animate(250, new AnimationCallback() {
 	    @Override

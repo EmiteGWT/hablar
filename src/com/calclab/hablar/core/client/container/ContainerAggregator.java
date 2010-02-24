@@ -25,6 +25,7 @@ public class ContainerAggregator implements PagesContainer {
     public boolean add(Page<?> page) {
 	for (PagesContainer container : containers) {
 	    if (addPage(page, container)) {
+		GWT.log("Page added to: " + container);
 		return true;
 	    }
 	}

@@ -176,7 +176,8 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
 	    animate(250);
 	else {
 	    visibleWidget = null;
-	    layoutPanel.forceLayout();
+	    // FIXME: Animation
+	    //layoutPanel.forceLayout();
 	}
 
 	return true;

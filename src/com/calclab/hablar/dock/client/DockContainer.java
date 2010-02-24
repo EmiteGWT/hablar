@@ -66,10 +66,10 @@ public class DockContainer implements PagesContainer {
     }
 
     private void addDock(final Position position, final Dock dock) {
-	final LayoutPanel panel = layout.addNewPanel("hablar-RosterDockContainer-" + position);
+	final LayoutPanel panel = layout.addNewPanel("hablar-DockContainer-" + position);
 	panels.put(position, panel);
 
-	panel.addStyleName("hablar-RosterDockContainer-" + position);
+	panel.addStyleName("hablar-DockContainer-" + position);
 
 	final Dock top = config.get(Position.top);
 	final Dock bottom = config.get(Position.bottom);
@@ -101,6 +101,10 @@ public class DockContainer implements PagesContainer {
 	final Dock dock = config.get(Position.top);
 	final LayoutPanel panel = panels.get(Position.top);
 	layout.slideUp(panel, dock);
+	// TODO: IE z-index problem
+	panels.get(Position.right).setVisible(true);
+	panels.get(Position.left).setVisible(true);
+
 	page.setVisibility(Visibility.notFocused);
     }
 
@@ -128,6 +132,10 @@ public class DockContainer implements PagesContainer {
     private void showTopPage(final Page<?> page) {
 	final Dock dock = config.get(Position.top);
 	final LayoutPanel panel = panels.get(Position.top);
+	
+	// TODO: IE z-index problem
+	panels.get(Position.right).setVisible(false);
+	panels.get(Position.left).setVisible(false);
 	layout.slideDown(panel, dock);
 	page.setVisibility(Visibility.focused);
     }
