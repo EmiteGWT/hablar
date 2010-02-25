@@ -7,7 +7,7 @@
 
 /** IE6 ZINDEX BUG **/
 .hablar-HablarWidget {
-	z-index: 1;
+    z-index: 1;
 }
 
 html {
@@ -158,10 +158,10 @@ div.hablar-ActionWidget:hover {
     z-index: 6000;
 }
 .hablar-DockContainer-left, .hablar-DockContainer-right {
-	z-index: 1000;
+    z-index: 1000;
 }
 
-	
+
 
 .hablar-Header.DockHeaderWidget-top {
     background-color: #BBB;
@@ -745,4 +745,8 @@ div.hablar-SearchResultItemWidget:hover {
     display: block;
     float: left;
     margin-right: 5px;
+}
+
+.overflowhidden {
+    overflow: hidden;
 }

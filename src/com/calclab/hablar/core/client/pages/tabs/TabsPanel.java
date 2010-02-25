@@ -16,7 +16,7 @@ import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.layout.client.Layout.Alignment;
-import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasWidgets;
@@ -140,6 +140,8 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
     private final Unit barUnit;
     private final LayoutPanel panel;
     private int selectedIndex = -1;
+    private final ExtendedScrollPanel scroll;
+    private final TabsMenuWidget menu;
 
     /**
      * Creates an empty tab panel.
@@ -155,11 +157,17 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
 
 	panel = new LayoutPanel();
 	initWidget(panel);
+	menu = new TabsMenuWidget();
+	scroll = new ExtendedScrollPanel();
 
-	panel.add(tabBar);
-	panel.setWidgetLeftRight(tabBar, 0, Unit.PX, 0, Unit.PX);
-	panel.setWidgetTopHeight(tabBar, 0, Unit.PX, barHeight, barUnit);
-	panel.setWidgetVerticalPosition(tabBar, Alignment.END);
+	scroll.add(tabBar);
+	panel.add(scroll);
+	panel.add(menu);
+	panel.setWidgetLeftRight(scroll, 0, Unit.PX, 19, Unit.PX);
+	panel.setWidgetTopHeight(scroll, 0, Unit.PX, barHeight, barUnit);
+	panel.setWidgetRightWidth(menu, 0, Unit.PX, 19, Unit.PX);
+	panel.setWidgetVerticalPosition(scroll, Alignment.END);
+	panel.setWidgetHorizontalPosition(menu, Alignment.END);
 
 	// Make the tab bar extremely wide so that tabs themselves never wrap.
 	// (Its layout container is overflow:hidden)
@@ -167,6 +175,9 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
 
 	tabBar.setStyleName("gwt-TabLayoutPanelTabs");
 	setStyleName("gwt-TabLayoutPanel");
+
+	scroll.setStyleName("overflowhidden");
+	DOM.setStyleAttribute(scroll.getElement(), "overflow", "hidden");
     }
 
     public void add(Widget w) {
@@ -228,6 +239,10 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
 	    it.next();
 	    it.remove();
 	}
+    }
+
+    public TabsMenuWidget getMenu() {
+	return menu;
     }
 
     /**
@@ -416,7 +431,9 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
 	layoutChild(child);
 	container.getStyle().clearDisplay();
 	child.setVisible(true);
-	tabs.get(index).setSelected(true);
+	final Tab tab = tabs.get(index);
+	tab.setSelected(true);
+	scroll.ensureVisible(tab);
 	selectedIndex = index;
 
 	// Fire the selection event.
