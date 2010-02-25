@@ -38,7 +38,7 @@ public class TabsMenuWidget extends Composite implements TabsMenuDisplay {
     }
 
     @Override
-    public MenuDisplay<TabsMenuPage> newTabsMenu(final String menuId) {
-	return new PopupMenu<TabsMenuPage>(menuId);
+    public MenuDisplay<TabsMenuPresenter> newTabsMenu(final String menuId) {
+	return new PopupMenu<TabsMenuPresenter>(menuId);
     }
 }

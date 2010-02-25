@@ -8,7 +8,7 @@ public interface TabsMenuDisplay extends Display {
 
     HasClickHandlers getMenu();
 
-    MenuDisplay<TabsMenuPage> newTabsMenu(String menuId);
+    MenuDisplay<TabsMenuPresenter> newTabsMenu(String menuId);
 
     void setVisible(boolean visible);
 

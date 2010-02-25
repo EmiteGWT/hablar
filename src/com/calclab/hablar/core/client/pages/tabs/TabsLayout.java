@@ -13,11 +13,11 @@ public class TabsLayout extends MainLayout {
     private static final double BAR_SIZE = 24;
     private static TabsPanel tabs;
 
-    private final TabsMenuPage menuPage;
+    private final TabsMenuPresenter menuPage;
 
     public TabsLayout(final HablarDisplay parent) {
 	super(tabs = new TabsPanel(BAR_SIZE, PX), parent);
-	menuPage = new TabsMenuPage(tabs.getMenu(), this);
+	menuPage = new TabsMenuPresenter(tabs.getMenu(), this);
     }
 
     @Override
