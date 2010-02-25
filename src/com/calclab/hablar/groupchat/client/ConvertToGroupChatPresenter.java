@@ -3,11 +3,14 @@ package com.calclab.hablar.groupchat.client;
 import static com.calclab.hablar.groupchat.client.HablarGroupChat.i18n;
 
 import com.calclab.emite.core.client.xmpp.session.Session;
+import com.calclab.emite.core.client.xmpp.stanzas.Presence;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.chat.Chat.State;
+import com.calclab.emite.im.client.presence.PresenceManager;
 import com.calclab.emite.im.client.roster.Roster;
+import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.emite.xep.muc.client.RoomManager;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
@@ -81,6 +84,13 @@ public class ConvertToGroupChatPresenter extends EditRoomPresenter {
 	if (self != null) {
 	    self.setSelected(true);
 	    self.setEnabled(false);
+	} else {
+	    final PresenceManager presence = Suco.get(PresenceManager.class);
+	    final RosterItem item = new RosterItem(currentJid, null, currentJid.getNode(), null);
+	    final Presence ownPresence = presence.getOwnPresence();
+	    item.setShow(ownPresence.getShow());
+	    item.setStatus(ownPresence.getStatus());
+	    createItem(item, false, true);
 	}
     }
 }

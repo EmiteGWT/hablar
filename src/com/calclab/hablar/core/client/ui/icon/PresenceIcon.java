@@ -14,6 +14,8 @@ public class PresenceIcon {
 	    return HablarIcons.IconType.buddyWait;
 	} else if (show == Show.away) {
 	    return HablarIcons.IconType.buddyWait;
+	} else if (show == Show.chat) {
+	    return HablarIcons.IconType.buddyOn;
 	} else if (isAvailable) {
 	    return HablarIcons.IconType.buddyOn;
 	} else {

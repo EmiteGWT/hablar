@@ -13,6 +13,8 @@ public class SelectRosterItemPresenter {
 	this.item = item;
 	this.display = display;
 	display.getName().setText(item.getName());
+	display.getJid().setText(item.getJID().toString());
+	display.getStatus().setText(item.getStatus());
 	display.getSelected().setValue(!selectable);
 	display.setSelectEnabled(selectable);
 	display.setIconStyle(PresenceIcon.getIcon(item.isAvailable(), item.getShow()));

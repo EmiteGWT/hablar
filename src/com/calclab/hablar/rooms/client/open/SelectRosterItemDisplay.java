@@ -6,9 +6,13 @@ import com.google.gwt.user.client.ui.HasValue;
 
 public interface SelectRosterItemDisplay extends Display {
 
+    HasText getJid();
+
     HasText getName();
 
     HasValue<Boolean> getSelected();
+
+    HasText getStatus();
 
     void setIconStyle(String style);
 

@@ -19,7 +19,6 @@ public class InviteToRoomPresenter extends EditRoomPresenter {
 
     public InviteToRoomPresenter(final HablarEventBus eventBus, final EditRoomDisplay display) {
 	super(TYPE, eventBus, display);
-
     }
 
     public void setRoom(final Room room) {
@@ -38,14 +37,15 @@ public class InviteToRoomPresenter extends EditRoomPresenter {
 
     @Override
     protected void onPageOpen() {
-	final Roster roster = Suco.get(Roster.class);
 	display.setPageTitle(i18n().invitePeopleToRoom());
+
+	final Roster roster = Suco.get(Roster.class);
 	final String roomName = RoomName.decode(room.getURI().toString());
 	display.getRoomName().setText(roomName);
 	display.setRoomNameEnabled(false);
 	setItems(roster.getItems(), true, false);
 	for (final Occupant occupant : room.getOccupants()) {
-	    setItem(occupant.getURI(), false, true);
+	    setItem(occupant.getURI().getJID(), false, true);
 	}
     }
 }

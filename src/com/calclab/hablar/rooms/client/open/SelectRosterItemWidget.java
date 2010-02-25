@@ -18,7 +18,7 @@ public class SelectRosterItemWidget extends Composite implements SelectRosterIte
     private static SelectRosterItemWidgetUiBinder uiBinder = GWT.create(SelectRosterItemWidgetUiBinder.class);
 
     @UiField
-    Label name, icon;
+    Label name, icon, jid, status;
 
     @UiField
     CheckBox select;
@@ -33,6 +33,11 @@ public class SelectRosterItemWidget extends Composite implements SelectRosterIte
     }
 
     @Override
+    public HasText getJid() {
+	return jid;
+    }
+
+    @Override
     public HasText getName() {
 	return name;
     }
@@ -40,6 +45,11 @@ public class SelectRosterItemWidget extends Composite implements SelectRosterIte
     @Override
     public HasValue<Boolean> getSelected() {
 	return select;
+    }
+
+    @Override
+    public HasText getStatus() {
+	return status;
     }
 
     @Override

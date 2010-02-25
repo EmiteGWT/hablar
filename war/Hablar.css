@@ -418,6 +418,7 @@ div.hablar-SearchResultItemWidget:hover {
 .hablar-OccupantWidget {
     width: 100%;
     overflow: hidden;
+    margin: 2px 5px;
 }
 
 .hablar-OccupantWidget .icon {
@@ -441,17 +442,14 @@ div.hablar-SearchResultItemWidget:hover {
     width: 100%;
     overflow: hidden;
 }
-
-.hablar-SelectRosterItemWidget .select {
+.hablar-SelectRosterItemWidget .select, .hablar-SelectRosterItemWidget div {
     float: left;
+    color: gray;
+    margin-right: 3px;
 }
 
-.hablar-SelectRosterItemWidget .icon {
-    float: left;
-}
 
 .hablar-SelectRosterItemWidget .name {
-    float: left;
     color: black;
 }
 
@@ -516,6 +514,10 @@ div.hablar-SearchResultItemWidget:hover {
     width: 100%;
     overflow: hidden;
     margin: 3px 0;
+}
+
+.form h2 {
+	font-size: 200%;
 }
 
 .form span.option {
