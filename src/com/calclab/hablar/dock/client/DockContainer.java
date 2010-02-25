@@ -23,6 +23,8 @@ import com.google.gwt.user.client.ui.Widget;
 public class DockContainer implements PagesContainer {
     public static final String ROL = "RosterDock";
     private static final double HEADER_SIZE = 24;
+    private static final Dock EMPTY_DOCK = new Dock(null, 0, PX);
+    
     private final HashMap<Position, LayoutPanel> panels;
     private final HashMap<Position, Page<?>> pages;
     private final DockConfig config;
@@ -94,9 +96,12 @@ public class DockContainer implements PagesContainer {
 	final Dock dock = config.get(Position.top);
 	final LayoutPanel panel = panels.get(Position.top);
 	layout.slideUp(panel, dock);
-	// TODO: IE z-index problem
-	panels.get(Position.right).setVisible(true);
-	panels.get(Position.left).setVisible(true);
+	
+	// TODO: IE z-index hack (find a better way?)
+	final Dock top = config.get(Position.top);
+	final Dock bottom = config.get(Position.bottom);
+	layout.layoutPanel(panels.get(Position.right), Position.right, config.get(Position.right), top, bottom);
+	layout.layoutPanel(panels.get(Position.left), Position.left, config.get(Position.left), top, bottom);
 
 	page.setVisibility(Visibility.notFocused);
     }
@@ -126,9 +131,12 @@ public class DockContainer implements PagesContainer {
 	final Dock dock = config.get(Position.top);
 	final LayoutPanel panel = panels.get(Position.top);
 
-	// TODO: IE z-index problem. Find better solution
-	panels.get(Position.right).setVisible(false);
-	panels.get(Position.left).setVisible(false);
+	// TODO: IE z-index hack (find a better way?)
+	final Dock top = config.get(Position.top);
+	final Dock bottom = config.get(Position.bottom);
+	layout.layoutPanel(panels.get(Position.right), Position.right, EMPTY_DOCK, top, bottom);
+	layout.layoutPanel(panels.get(Position.left), Position.left, EMPTY_DOCK, top, bottom);
+
 	layout.slideDown(panel, dock);
 	page.setVisibility(Visibility.focused);
     }

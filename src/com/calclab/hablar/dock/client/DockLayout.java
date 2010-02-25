@@ -32,6 +32,7 @@ public class DockLayout {
 	DockHeaderWidget headerWidget = new DockHeaderWidget(page.getId(), position);
 	return headerWidget;
     }
+    
 
     public void layoutPanel(LayoutPanel panel, Position position, Dock dock, Dock top, Dock bottom) {
 	if (position == Position.left) {
@@ -55,19 +56,17 @@ public class DockLayout {
     }
 
     public void slideDown(Widget panel, Dock dock) {
-	// FIXME: Animation
-	//display.setWidgetTopHeight(panel, 0, PX, dock.size, dock.unit);
-	//display.forceLayout();
+	display.setWidgetTopHeight(panel, 0, PX, dock.size, dock.unit);
+	display.forceLayout();
 	display.setWidgetTopHeight(panel, 0, PX, 100, PCT);
 	//display.animate(500);
     }
 
     public void slideUp(Widget panel, Dock dock) {
-	// FIXME: Animation
-	//display.setWidgetTopHeight(panel, 0, PX, 100, PCT);
-	//display.forceLayout();
+	display.setWidgetTopHeight(panel, 0, PX, 100, PCT);
+	display.forceLayout();
 	display.setWidgetTopHeight(panel, 0, PX, dock.size, dock.unit);
-	//display.animate(500);
+	display.animate(500);
     }
 
 }
