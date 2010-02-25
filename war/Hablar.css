@@ -158,12 +158,6 @@ div.hablar-ActionWidget:hover {
     z-index: 6000;
 }
 
-.hablar-DockContainer-left, .hablar-DockContainer-right {
-    z-index: 1000;
-}
-
-
-
 .hablar-Header.DockHeaderWidget-top {
     background-color: #BBB;
     border: 1px solid #BBB;
@@ -190,7 +184,7 @@ div.hablar-ActionWidget:hover {
 /** USER **/
 .hablar-UserWidget .container {
     padding: 0px 10px;
-    z-index: 8000;
+    z-index: 3000;
 }
 
 .hablar-UserWidget .hablar-Header {
@@ -501,7 +495,7 @@ div.hablar-SearchResultItemWidget:hover {
 .hablar-Overlay {
     background-color: black;
     opacity: 0.85;
-    z-index: 3000;
+    z-index: 6000;
     color: white;
 }
 
