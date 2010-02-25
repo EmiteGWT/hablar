@@ -9,7 +9,8 @@
 			<h2>Open a new chat</h2>
 			<p>
 				<label>Jabber ID:</label>
-				<g:TextBox ui:field="jabberID"></g:TextBox>
+				<g:TextBox ui:field="jabberId"></g:TextBox>
+				<g:Label ui:field="jabberIdError" styleName="error"></g:Label>
 			</p>
 			<p><g:CheckBox ui:field="addToRoster">Add to roster</g:CheckBox></p>
 			<div class="actions">

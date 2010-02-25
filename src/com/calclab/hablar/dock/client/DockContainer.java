@@ -17,6 +17,9 @@ import com.calclab.hablar.dock.client.DockConfig.Position;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * A dock pages container
+ */
 public class DockContainer implements PagesContainer {
     public static final String ROL = "RosterDock";
     private static final double HEADER_SIZE = 24;
@@ -65,6 +68,16 @@ public class DockContainer implements PagesContainer {
 	return false;
     }
 
+    @Override
+    public String getRol() {
+	return ROL;
+    }
+
+    @Override
+    public Widget getWidget() {
+	return null;
+    }
+
     private void addDock(final Position position, final Dock dock) {
 	final LayoutPanel panel = layout.addNewPanel("hablar-DockContainer-" + position);
 	panels.put(position, panel);
@@ -75,26 +88,6 @@ public class DockContainer implements PagesContainer {
 	final Dock bottom = config.get(Position.bottom);
 
 	layout.layoutPanel(panel, position, dock, top, bottom);
-    }
-
-    protected void changeVisibility(final Page<?> page, final Visibility newVisibility) {
-	if (page == (Page<?>) pages.get(Position.top)) {
-	    if (newVisibility == Visibility.toggle && page.getVisibility() == Visibility.notFocused) {
-		showTopPage(page);
-	    } else if (newVisibility == Visibility.hidden || newVisibility == Visibility.notFocused) {
-		hideTopPage(page);
-	    }
-	}
-    }
-
-    @Override
-    public String getRol() {
-	return ROL;
-    }
-
-    @Override
-    public Widget getWidget() {
-	return null;
     }
 
     private void hideTopPage(final Page<?> page) {
@@ -132,12 +125,22 @@ public class DockContainer implements PagesContainer {
     private void showTopPage(final Page<?> page) {
 	final Dock dock = config.get(Position.top);
 	final LayoutPanel panel = panels.get(Position.top);
-	
+
 	// TODO: IE z-index problem
 	panels.get(Position.right).setVisible(false);
 	panels.get(Position.left).setVisible(false);
 	layout.slideDown(panel, dock);
 	page.setVisibility(Visibility.focused);
+    }
+
+    protected void changeVisibility(final Page<?> page, final Visibility newVisibility) {
+	if (page == (Page<?>) pages.get(Position.top)) {
+	    if (newVisibility == Visibility.toggle && page.getVisibility() == Visibility.notFocused) {
+		showTopPage(page);
+	    } else if (newVisibility == Visibility.hidden || newVisibility == Visibility.notFocused) {
+		hideTopPage(page);
+	    }
+	}
     }
 
 }

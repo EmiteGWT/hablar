@@ -10,7 +10,7 @@ import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.rooms.client.invite.InviteToRoomPresenter;
-import com.calclab.hablar.rooms.client.open.OpenRoomWidget;
+import com.calclab.hablar.rooms.client.open.EditRoomWidget;
 import com.calclab.hablar.rooms.client.room.RoomPresenter;
 import com.calclab.hablar.rooms.client.state.HablarRoomStateManager;
 import com.calclab.hablar.roster.client.page.RosterPage;
@@ -33,11 +33,11 @@ public class HablarRooms implements EntryPoint {
     public static void install(final Hablar hablar, final HablarRoomsConfig config) {
 	new HablarRoomManager(hablar, config);
 
-	final InviteToRoomPresenter invitePage = new InviteToRoomPresenter(hablar.getEventBus(), new OpenRoomWidget());
+	final InviteToRoomPresenter invitePage = new InviteToRoomPresenter(hablar.getEventBus(), new EditRoomWidget());
 	hablar.addPage(invitePage, OverlayContainer.ROL);
 
 	final OpenNewRoomPresenter openNewRoomPage = new OpenNewRoomPresenter(config.roomsService,
-		hablar.getEventBus(), new OpenRoomWidget());
+		hablar.getEventBus(), new EditRoomWidget());
 	hablar.addPage(openNewRoomPage, OverlayContainer.ROL);
 
 	hablar.addPageAddedHandler(new PageAddedHandler() {

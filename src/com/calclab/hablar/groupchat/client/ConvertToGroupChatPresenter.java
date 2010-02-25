@@ -11,20 +11,20 @@ import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.emite.xep.muc.client.RoomManager;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
-import com.calclab.hablar.rooms.client.open.OpenRoomPresenter;
-import com.calclab.hablar.rooms.client.open.OpenRoomWidget;
+import com.calclab.hablar.rooms.client.open.EditRoomPresenter;
+import com.calclab.hablar.rooms.client.open.EditRoomWidget;
 import com.calclab.hablar.rooms.client.open.SelectRosterItemPresenter;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 
-public class ConvertToGroupChatPresenter extends OpenRoomPresenter {
+public class ConvertToGroupChatPresenter extends EditRoomPresenter {
 
     private static final String TYPE = "ConvertToGroupChat";
     private Chat chat;
     private final String roomsService;
 
     public ConvertToGroupChatPresenter(final String roomsService, final HablarEventBus eventBus,
-	    final OpenRoomWidget openRoomWidget) {
+	    final EditRoomWidget openRoomWidget) {
 	super(TYPE, eventBus, openRoomWidget);
 	this.roomsService = roomsService;
 	display.setPageTitle(i18n().convertPageTitle());

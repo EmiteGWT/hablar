@@ -1,23 +1,24 @@
 package com.calclab.hablar.openchat.client.ui;
 
+import static com.calclab.hablar.openchat.client.HablarOpenChat.i18n;
+
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
+import com.calclab.hablar.core.client.validators.TextValidator;
+import com.calclab.hablar.core.client.validators.Validators;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyPressEvent;
-import com.google.gwt.event.dom.client.KeyPressHandler;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
 
 public class OpenChatPresenter extends PagePresenter<OpenChatDisplay> {
     private static int index = 0;
     public static final String TYPE = "OpenChat";
     private final ChatManager manager;
     private final Roster roster;
+    private final TextValidator nameValidator;
 
     public OpenChatPresenter(final HablarEventBus eventBus, final OpenChatDisplay display) {
 	super(TYPE, "" + ++index, eventBus, display);
@@ -47,18 +48,10 @@ public class OpenChatPresenter extends PagePresenter<OpenChatDisplay> {
 	    }
 	});
 
-	display.getNameKeys().addKeyPressHandler(new KeyPressHandler() {
-	    @Override
-	    public void onKeyPress(final KeyPressEvent event) {
-		DeferredCommand.addCommand(new Command() {
-		    @Override
-		    public void execute() {
-			final String value = display.getJabberId().getText().trim();
-			display.setAcceptEnabled(value.length() > 0);
-		    }
-		});
-	    }
-	});
+	nameValidator = new TextValidator(display.getNameKeys(), display.getJabberId(), display.getJabberIdError(),
+		display.getAcceptState());
+	nameValidator.add(Validators.notEmpty(i18n().jabberIdIsEmpty()));
+	nameValidator.add(Validators.isValidJid(i18n().jabberIdNotValid()));
     }
 
     protected void addToRoster(final XmppURI userJid) {
@@ -67,7 +60,8 @@ public class OpenChatPresenter extends PagePresenter<OpenChatDisplay> {
 
     @Override
     protected void onBeforeFocus() {
-	display.setAcceptEnabled(false);
+	display.getJabberId().setText("");
+	nameValidator.validate();
     }
 
 }

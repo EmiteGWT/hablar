@@ -157,6 +157,7 @@ div.hablar-ActionWidget:hover {
     background-color: #BBB;
     z-index: 6000;
 }
+
 .hablar-DockContainer-left, .hablar-DockContainer-right {
     z-index: 1000;
 }
@@ -560,6 +561,10 @@ div.hablar-SearchResultItemWidget:hover {
 .form p .gwt-RadioButton label,.form p .gwt-CheckBox label {
     float: left;
     margin: 0;
+}
+
+.form p .error {
+	color: #c00;
 }
 
 .hablar-PopupPanel {

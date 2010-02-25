@@ -2,7 +2,6 @@ package com.calclab.hablar.rooms.client.room;
 
 import static com.calclab.hablar.rooms.client.HablarRooms.i18n;
 
-import com.calclab.emite.core.client.packet.TextUtils;
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
 import com.calclab.emite.im.client.chat.Chat;
@@ -16,6 +15,7 @@ import com.calclab.hablar.core.client.page.events.UserMessageEvent;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.Action;
+import com.calclab.hablar.rooms.client.RoomName;
 import com.calclab.hablar.rooms.client.occupant.OccupantsPresenter;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
@@ -40,9 +40,9 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> {
 
 	final Session session = Suco.get(Session.class);
 	final String me = session.getCurrentUser().getNode();
-	final String roomName = room.getURI().getNode();
-	model.init(HablarIcons.get(IconType.roster), roomName);
+	final String roomName = RoomName.decode(room.getURI().getNode());
 	setVisibility(Visibility.notFocused);
+	model.init(HablarIcons.get(IconType.roster), roomName);
 	model.setCloseable(true);
 
 	room.onMessageReceived(new Listener<Message>() {
@@ -106,8 +106,14 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> {
 	display.showMessage(null, text, ChatDisplay.MessageType.info);
     }
 
-    private void fireUserMessage(final String roomName, final String from, final String body) {
-	final String message = i18n().incommingMessage(roomName, from, TextUtils.ellipsis(body, 25));
+    private void fireUserMessage(final String roomName, final String from, String body) {
+	final String message;
+	body = ChatMessageFormatter.ellipsis(body, 25);
+	if (from == null) {
+	    message = i18n().incommingAdminMessage(roomName, body);
+	} else {
+	    message = i18n().incommingMessage(roomName, from, body);
+	}
 	eventBus.fireEvent(new UserMessageEvent(this, message, ROOM_MESSAGE));
     }
 

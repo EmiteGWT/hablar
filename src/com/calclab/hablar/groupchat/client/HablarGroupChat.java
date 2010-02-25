@@ -11,7 +11,7 @@ import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.rooms.client.HablarRoomsConfig;
-import com.calclab.hablar.rooms.client.open.OpenRoomWidget;
+import com.calclab.hablar.rooms.client.open.EditRoomWidget;
 import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.google.gwt.core.client.EntryPoint;
@@ -28,10 +28,10 @@ public class HablarGroupChat implements EntryPoint {
 
     public static void install(final Hablar hablar, final HablarRoomsConfig config) {
 	final OpenGroupChatPresenter openGroupPage = new OpenGroupChatPresenter(config.roomsService, hablar
-		.getEventBus(), new OpenRoomWidget());
+		.getEventBus(), new EditRoomWidget());
 	hablar.addPage(openGroupPage, OverlayContainer.ROL);
 	final ConvertToGroupChatPresenter convertToGroupPage = new ConvertToGroupChatPresenter(config.roomsService,
-		hablar.getEventBus(), new OpenRoomWidget());
+		hablar.getEventBus(), new EditRoomWidget());
 	hablar.addPage(convertToGroupPage, OverlayContainer.ROL);
 
 	hablar.addPageAddedHandler(new PageAddedHandler() {

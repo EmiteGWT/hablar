@@ -1,89 +1,41 @@
 package com.calclab.hablar.rooms.client.open;
 
-import java.util.Collection;
-import java.util.HashMap;
-
+import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
-import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.emite.im.client.chat.Chat.State;
 import com.calclab.emite.xep.muc.client.Room;
+import com.calclab.emite.xep.muc.client.RoomManager;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
-import com.calclab.hablar.core.client.page.PagePresenter;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
+import com.calclab.hablar.rooms.client.RoomName;
+import com.calclab.suco.client.Suco;
+import com.calclab.suco.client.events.Listener;
 
-public abstract class OpenRoomPresenter extends PagePresenter<OpenRoomDisplay> {
+public abstract class OpenRoomPresenter extends EditRoomPresenter {
+    private final String roomsService;
 
-    private final HashMap<XmppURI, SelectRosterItemPresenter> itemsByUri;
-
-    public OpenRoomPresenter(final String type, final HablarEventBus eventBus, final OpenRoomDisplay display) {
+    public OpenRoomPresenter(final String type, final HablarEventBus eventBus, final EditRoomDisplay display,
+	    final String roomsService) {
 	super(type, eventBus, display);
-	itemsByUri = new HashMap<XmppURI, SelectRosterItemPresenter>();
-	display.getCancel().addClickHandler(new ClickHandler() {
-	    @Override
-	    public void onClick(final ClickEvent event) {
-		requestVisibility(Visibility.hidden);
-	    }
-	});
+	this.roomsService = roomsService;
 
-	display.getInvite().addClickHandler(new ClickHandler() {
-	    @Override
-	    public void onClick(final ClickEvent event) {
-		onAccept();
-		requestVisibility(Visibility.notFocused);
-	    }
-	});
     }
-
-    public Collection<SelectRosterItemPresenter> getItems() {
-	return itemsByUri.values();
-    }
-
-    public void setItem(final XmppURI uri, final boolean enabled, final boolean selected) {
-	final SelectRosterItemPresenter item = itemsByUri.get(uri);
-	if (item != null) {
-	    item.setEnabled(enabled);
-	    item.setSelected(selected);
-	}
-    }
-
-    public void setItems(final Collection<RosterItem> items, final boolean enabled, final boolean selected) {
-	display.clearList();
-	itemsByUri.clear();
-	for (final RosterItem item : items) {
-	    createItem(item, enabled, selected);
-	}
-    }
-
-    protected void createItem(final RosterItem item, final boolean selectable, final boolean selected) {
-	final SelectRosterItemDisplay itemDisplay = display.createItem();
-	final SelectRosterItemPresenter selectItem = new SelectRosterItemPresenter(item, itemDisplay, selectable);
-	selectItem.setSelected(selected);
-	display.addItem(itemDisplay);
-	itemsByUri.put(item.getJID(), selectItem);
-    }
-
-    protected SelectRosterItemPresenter getItem(final XmppURI uri) {
-	return itemsByUri.get(uri);
-    }
-
-    protected abstract void onAccept();
 
     @Override
-    protected void onBeforeFocus() {
-	onPageOpen();
-    }
-
-    protected abstract void onPageOpen();
-
-    protected void sendInvitations(final Room room) {
-	final String reasonText = display.getMessage().getText();
-	for (final SelectRosterItemPresenter itemPresenter : getItems()) {
-	    if (itemPresenter.isSelected()) {
-		GWT.log("INVITING: " + itemPresenter.getItem().getJID());
-		room.sendInvitationTo(itemPresenter.getItem().getJID(), reasonText);
+    protected void onAccept() {
+	final RoomManager rooms = Suco.get(RoomManager.class);
+	final Session session = Suco.get(Session.class);
+	final XmppURI user = session.getCurrentUser();
+	final String roomName = RoomName.encode(display.getRoomName().getText(), user.getResource());
+	final XmppURI roomUri = XmppURI.uri(roomName, roomsService, user.getNode());
+	final Room room = (Room) rooms.open(roomUri);
+	room.onStateChanged(new Listener<State>() {
+	    @Override
+	    public void onEvent(final State state) {
+		if (state == State.ready) {
+		    sendInvitations(room);
+		}
 	    }
-	}
+	});
     }
 
 }

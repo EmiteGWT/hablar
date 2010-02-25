@@ -14,6 +14,7 @@ import com.calclab.hablar.openchat.client.ui.OpenChatWidget;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 
 /**
  * Adds the ability to open a chat with any jabber id.<br/>
@@ -25,6 +26,11 @@ import com.google.gwt.core.client.EntryPoint;
 public class HablarOpenChat implements EntryPoint {
 
     protected static final String ACTION_ID = "HablarOpenChat-openAction";
+    private static OpenChatMessages openChatMessages;
+
+    public static OpenChatMessages i18n() {
+	return openChatMessages;
+    }
 
     public static void install(final Hablar hablar) {
 	final OpenChatPresenter openChat = new OpenChatPresenter(hablar.getEventBus(), new OpenChatWidget());
@@ -53,8 +59,13 @@ public class HablarOpenChat implements EntryPoint {
 	install(widget.getHablar());
     }
 
+    public static void setMessages(final OpenChatMessages messages) {
+	openChatMessages = messages;
+    }
+
     @Override
     public void onModuleLoad() {
+	HablarOpenChat.setMessages((OpenChatMessages) GWT.create(OpenChatMessages.class));
     }
 
 }
