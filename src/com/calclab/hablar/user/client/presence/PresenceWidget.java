@@ -5,6 +5,7 @@ import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
 import com.calclab.hablar.core.client.ui.menu.PopupMenu;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.HasBlurHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -51,6 +52,11 @@ public class PresenceWidget extends Composite implements PresenceDisplay {
 
     @Override
     public HasKeyDownHandlers getStatus() {
+	return status;
+    }
+
+    @Override
+    public HasBlurHandlers getStatusFocus() {
 	return status;
     }
 

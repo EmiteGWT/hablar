@@ -15,6 +15,7 @@ import com.calclab.suco.client.events.Listener;
 public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisplay> {
 
     private boolean loading;
+    private VCard currentVCard;
 
     public OwnVCardPresenter(final HablarEventBus eventBus, final VCardDisplay display) {
 	super(eventBus, display);
@@ -22,6 +23,7 @@ public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisp
 	display.setAcceptVisible(false);
 	display.setCancelVisible(false);
 	display.setPageTitle("Your profile");
+	requestVCard();
     }
 
     @Override
@@ -29,21 +31,15 @@ public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisp
 	final Session session = Suco.get(Session.class);
 	final VCardManager manager = Suco.get(VCardManager.class);
 	if (!loading) {
-	    manager.requestOwnVCard(new Listener<VCardResponse>() {
+	    final VCard newVCard = currentVCard != null ? currentVCard : new VCard();
+	    updateVCard(newVCard);
+	    final String jabberId = session.getCurrentUser().getJID().toString();
+	    newVCard.setValue(Data.JABBERID, jabberId);
+	    newVCard.setValue(Data.DESC, "Created with hablar");
+	    currentVCard = newVCard;
+	    manager.updateOwnVCard(newVCard, new Listener<VCardResponse>() {
 		@Override
 		public void onEvent(final VCardResponse response) {
-		    final VCard vCard = response.hasVCard() ? response.getVCard() : new VCard();
-		    updateVCard(vCard);
-		    final String jabberId = session.getCurrentUser().getJID().toString();
-		    vCard.setValue(Data.JABBERID, jabberId);
-		    vCard.setValue(Data.DESC, "Created with hablar");
-		    manager.updateOwnVCard(vCard, new Listener<VCardResponse>() {
-			@Override
-			public void onEvent(final VCardResponse response) {
-			    updateDisplay(response.getVCard());
-			}
-		    });
-
 		}
 	    });
 	}
@@ -51,13 +47,21 @@ public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisp
 
     @Override
     public void showData() {
+    }
+
+    protected void setCurrentVCard(final VCardResponse response) {
+	currentVCard = response.getVCard();
+	updateDisplay(currentVCard);
+    }
+
+    private void requestVCard() {
 	final VCardManager manager = Suco.get(VCardManager.class);
 	setLoading(true);
 
 	manager.requestOwnVCard(new Listener<VCardResponse>() {
 	    @Override
 	    public void onEvent(final VCardResponse response) {
-		updateDisplay(response.getVCard());
+		setCurrentVCard(response);
 		setLoading(false);
 	    }
 	});

@@ -19,7 +19,7 @@ public class UserWidget extends Composite implements UserDisplay {
     @UiField
     FlowPanel container;
     @UiField
-    Button update, discard;
+    Button close;
 
     public UserWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
@@ -39,12 +39,7 @@ public class UserWidget extends Composite implements UserDisplay {
     }
 
     @Override
-    public HasClickHandlers getCancel() {
-	return discard;
-    }
-
-    @Override
-    public HasClickHandlers getUpdate() {
-	return update;
+    public HasClickHandlers getClose() {
+	return close;
     }
 }

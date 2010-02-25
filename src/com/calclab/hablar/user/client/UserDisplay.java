@@ -7,7 +7,5 @@ public interface UserDisplay extends Display {
 
     void addPage(EditorPage<?> page);
 
-    HasClickHandlers getCancel();
-
-    HasClickHandlers getUpdate();
+    HasClickHandlers getClose();
 }

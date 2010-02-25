@@ -50,16 +50,10 @@ public class UserPage extends PagePresenter<UserDisplay> {
 	updatePresence();
 	model.setPageIcon(HablarIcons.get(IconType.buddyOff));
 
-	display.getUpdate().addClickHandler(new ClickHandler() {
+	display.getClose().addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(final ClickEvent event) {
 		saveData();
-		requestVisibility(Visibility.notFocused);
-	    }
-	});
-	display.getCancel().addClickHandler(new ClickHandler() {
-	    @Override
-	    public void onClick(final ClickEvent event) {
 		requestVisibility(Visibility.notFocused);
 	    }
 	});

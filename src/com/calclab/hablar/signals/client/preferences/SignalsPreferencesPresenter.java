@@ -20,6 +20,7 @@ public class SignalsPreferencesPresenter extends PagePresenter<SignalsPreference
     private final PrivateStorageManager storageManager;
     private final Listener<IQResponse> savingListener;
     private boolean loaded;
+    private StoredPreferences currentPreferences;
 
     public SignalsPreferencesPresenter(final HablarEventBus eventBus, final SignalPreferences preferences,
 	    final SignalsPreferencesDisplay display) {
@@ -45,7 +46,12 @@ public class SignalsPreferencesPresenter extends PagePresenter<SignalsPreference
 		}
 	    }
 	});
+    }
 
+    public boolean changed(final StoredPreferences stored, final SignalPreferences preferences) {
+	return preferences.incomingMessages != stored.getIncommingMessages()
+		|| preferences.rosterNotifications != stored.getRosterNotifications()
+		|| preferences.titleSignals != stored.getTitleSignals();
     }
 
     @Override
@@ -54,11 +60,12 @@ public class SignalsPreferencesPresenter extends PagePresenter<SignalsPreference
 	    preferences.titleSignals = display.getTitleSignals().getValue();
 	    preferences.incomingMessages = display.getIncomingNotifications().getValue();
 	    preferences.rosterNotifications = display.getRosterNotifications().getValue();
-	    final StoredPreferences store = new StoredPreferences();
-	    store.setTitleSignals(preferences.titleSignals);
-	    store.setIncomingMessages(preferences.incomingMessages);
-	    store.setRosterNotifications(preferences.rosterNotifications);
-	    storageManager.store(store, savingListener);
+	    if (changed(currentPreferences, preferences)) {
+		currentPreferences.setTitleSignals(preferences.titleSignals);
+		currentPreferences.setIncomingMessages(preferences.incomingMessages);
+		currentPreferences.setRosterNotifications(preferences.rosterNotifications);
+		storageManager.store(currentPreferences, savingListener);
+	    }
 	}
     }
 
@@ -75,15 +82,16 @@ public class SignalsPreferencesPresenter extends PagePresenter<SignalsPreference
     private void loadPreferences() {
 	GWT.log("PREFERENCES loading");
 	storageManager.retrieve(StoredPreferences.empty, new Listener<IQResponse>() {
+
 	    @Override
 	    public void onEvent(final IQResponse parameter) {
 		if (parameter.isSuccess()) {
 		    GWT.log("PREFERENCES retrieved");
 		    loaded = true;
-		    final StoredPreferences stored = StoredPreferences.parse(parameter);
-		    preferences.titleSignals = stored.getTitleSignals();
-		    preferences.incomingMessages = stored.getIncommingMessages();
-		    preferences.rosterNotifications = stored.getRosterNotifications();
+		    currentPreferences = StoredPreferences.parse(parameter);
+		    preferences.titleSignals = currentPreferences.getTitleSignals();
+		    preferences.incomingMessages = currentPreferences.getIncommingMessages();
+		    preferences.rosterNotifications = currentPreferences.getRosterNotifications();
 		    showData();
 		} else {
 		    GWT.log("PREFERENCES Error retrieving");

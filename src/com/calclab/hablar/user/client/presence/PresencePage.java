@@ -24,6 +24,8 @@ import com.calclab.hablar.user.client.storedpresence.StoredPresences;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
@@ -41,7 +43,6 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
     private final StoredPresenceManager storedPresenceManager;
     private final Menu<PresencePage> statusMenu;
     private final ArrayList<SimpleAction<PresencePage>> defaultActions;
-    private Show nextShow;
     private SimpleAction<PresencePage> clearCustomsAction;
 
     public PresencePage(final HablarEventBus eventBus, final PresenceDisplay display) {
@@ -53,7 +54,6 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 	manager = Suco.get(PresenceManager.class);
 	final String style = HablarIcons.get(IconType.buddy);
 	model.init(style, i18n().presencePageTitle());
-	nextShow = Show.notSpecified;
 	display.setStatusIcon(HablarIcons.get(IconType.buddyOff));
 	storedPresenceManager = new StoredPresenceManager(Suco.get(PrivateStorageManager.class));
 	createDefActions();
@@ -75,8 +75,15 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 	    @Override
 	    public void onKeyDown(final KeyDownEvent event) {
 		if (event.getNativeKeyCode() == 13) {
-		    saveData();
+		    updateStatus(display);
 		}
+	    }
+
+	});
+	display.getStatusFocus().addBlurHandler(new BlurHandler() {
+	    @Override
+	    public void onBlur(final BlurEvent event) {
+		updateStatus(display);
 	    }
 	});
 	manager.onOwnPresenceChanged(new Listener<Presence>() {
@@ -92,14 +99,13 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 	return new SimpleAction<PresencePage>(title, id, icon) {
 	    @Override
 	    public void execute(final PresencePage target) {
-		setNextPresence(status, show);
+		setPresence(status, show);
 	    }
 	};
     }
 
     @Override
     public void saveData() {
-	setPresence(display.getStatusText().getText(), nextShow);
     }
 
     @Override
@@ -134,7 +140,7 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 	return new SimpleAction<PresencePage>(label, actionId, HablarIcons.get(iconType)) {
 	    @Override
 	    public void execute(final PresencePage target) {
-		setNextPresence(status, show);
+		setPresence(status, show);
 		display.setStatusEnabled(hasStatus);
 		display.setStatusFocused(hasStatus);
 	    }
@@ -156,12 +162,8 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 	};
     }
 
-    private void setNextPresence(final String status, final Show show) {
-	nextShow = show;
-	showPresence(status, show);
-    }
-
     private void setPresence(final String status, final Show show) {
+	showPresence(status, show);
 	if (statusNotEmpty(status)) {
 	    storedPresenceManager.add(status, show, new Listener<IQResponse>() {
 		@Override
@@ -197,6 +199,10 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 	    statusMenu.addAction(action);
 	}
 	addCustomPresenceActions();
+    }
+
+    private void updateStatus(final PresenceDisplay display) {
+	setPresence(display.getStatusText().getText(), manager.getOwnPresence().getShow());
     }
 
 }
