@@ -1,8 +1,10 @@
 package com.calclab.hablar.editbuddy.client.ui;
 
+import com.calclab.hablar.core.client.validators.HasState;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
@@ -21,9 +23,9 @@ public class EditBuddyWidget extends Composite implements EditBuddyDisplay {
     @UiField
     Button cancel, save;
     @UiField
-    TextBox newNickName;
+    TextBox nickName;
     @UiField
-    Label oldNickName;
+    Label oldNickName, nickNameError;
 
     private static EditBuddyWidgetUiBinder uiBinder = GWT.create(EditBuddyWidgetUiBinder.class);
 
@@ -37,23 +39,43 @@ public class EditBuddyWidget extends Composite implements EditBuddyDisplay {
     }
 
     @Override
+    public HasState<Boolean> getAcceptState() {
+	return new HasState<Boolean>() {
+	    @Override
+	    public void setState(final Boolean state) {
+		save.setEnabled(state);
+	    }
+	};
+    }
+
+    @Override
     public HasClickHandlers getCancel() {
 	return cancel;
     }
 
     @Override
     public HasChangeHandlers getEnterAction() {
-	return newNickName;
+	return nickName;
     }
 
     @Override
     public Focusable getFirstFocusable() {
-	return newNickName;
+	return nickName;
     }
 
     @Override
-    public HasText getNewNickName() {
-	return newNickName;
+    public HasText getNickName() {
+	return nickName;
+    }
+
+    @Override
+    public HasText getNickNameError() {
+	return nickNameError;
+    }
+
+    @Override
+    public HasKeyDownHandlers getNickNameKeys() {
+	return nickName;
     }
 
     @Override

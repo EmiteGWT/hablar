@@ -13,7 +13,8 @@
 			</p>
 			<p>
 				<label>To:</label>
-				<g:TextBox ui:field="newNickName">newNickName</g:TextBox>
+				<g:TextBox ui:field="nickName">newNickName</g:TextBox>
+				<g:Label ui:field="nickNameError" styleName="error"></g:Label>
 			</p>
 			<div class="actions">
 				<g:Button ui:field="save">Change</g:Button>

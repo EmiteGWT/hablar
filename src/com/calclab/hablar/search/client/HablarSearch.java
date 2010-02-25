@@ -59,7 +59,7 @@ public class HablarSearch implements EntryPoint {
 	    public void onPageAdded(final PageAddedEvent event) {
 		final RosterPage rosterPage = RosterPresenter.asRoster(event.getPage());
 		if (rosterPage != null) {
-		    final String name = "Open Search Page";
+		    final String name = i18n().openSearchPage();
 		    final String icon = HablarIcons.get(IconType.search);
 		    rosterPage.addAction(new SimpleAction<RosterPage>(name, ACTION_ID, icon) {
 			@Override

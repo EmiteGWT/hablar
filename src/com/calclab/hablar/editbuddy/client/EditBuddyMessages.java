@@ -10,4 +10,7 @@ public interface EditBuddyMessages extends Messages {
 
     @DefaultMessage("Write the new nick name:")
     String changeNickNameMessage();
+
+    @DefaultMessage("Nick name can''t be empty")
+    String nickNameEmpty();
 }

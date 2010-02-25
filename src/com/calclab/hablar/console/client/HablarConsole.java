@@ -25,7 +25,7 @@ public class HablarConsole implements EntryPoint {
 		final RosterPage rosterPage = RosterPresenter.asRoster(event.getPage());
 		if (rosterPage != null) {
 
-		    final String name = "Open Logger Page";
+		    final String name = "Open Console";
 		    final String icon = HablarIcons.get(IconType.console);
 		    rosterPage.addAction(new SimpleAction<RosterPage>(name, ACTION_ID, icon) {
 			@Override

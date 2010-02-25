@@ -124,7 +124,7 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
     public void setPresence(final boolean available, final Show show) {
 	getState().setPageIcon(PresenceIcon.getIcon(available, show));
 	if (available) {
-	    display.getState().setText(i18n().stateAvailable());
+	    display.getState().setText(i18n().stateAvailable(userName));
 	} else {
 	    display.getState().setText(i18n().stateOffline(userName));
 	}

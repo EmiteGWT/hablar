@@ -39,6 +39,13 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	    }
 	});
 
+	group.onItemChanged(new Listener<RosterItem>() {
+	    @Override
+	    public void onEvent(final RosterItem item) {
+		getPresenter(item).setItem(item);
+	    }
+	});
+
 	group.onItemRemoved(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {

@@ -407,6 +407,7 @@ div.hablar-SearchResultItemWidget:hover {
     border-left: 1px solid #BBBBBB;
     border-right: 1px solid #BBBBBB;
     border-bottom: 1px solid #BBBBBB;
+    z-index: 10000;
 }
 
 .hablar-OccupantWidget {

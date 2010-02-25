@@ -11,8 +11,8 @@ public interface ChatMessages extends Messages {
     @DefaultMessage("{0} is active")
     String stateActive(String userName);
 
-    @DefaultMessage("  ")
-    String stateAvailable();
+    @DefaultMessage("{0} is available")
+    String stateAvailable(String userName);
 
     @DefaultMessage("{0} is writing...")
     String stateComposing(String userName);
