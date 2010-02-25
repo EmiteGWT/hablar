@@ -5,26 +5,25 @@ import java.util.HashMap;
 import com.calclab.emite.core.client.packet.TextUtils;
 import com.calclab.hablar.chat.client.ui.ChatPresenter;
 import com.calclab.hablar.core.client.mvp.Presenter;
+import com.calclab.hablar.core.client.page.Page;
+import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.ui.Widget;
 
 public class TabsMenuPresenter implements Presenter<TabsMenuDisplay> {
 
     public static final String TABS_MENU_PAGE_MENU_ITEM_ID_PREF = "TabsMenuPage-MenuItem-";
     private final Menu<TabsMenuPresenter> tabsMenu;
     private final TabsMenuDisplay display;
-    private final HashMap<Widget, Action<TabsMenuPresenter>> items;
-    private final TabsLayout tabsLayout;
+    private final HashMap<String, Action<TabsMenuPresenter>> items;
 
     public TabsMenuPresenter(final TabsMenuDisplay display, final TabsLayout tabsLayout) {
 	this.display = display;
-	this.tabsLayout = tabsLayout;
-	this.items = new HashMap<Widget, Action<TabsMenuPresenter>>();
+	items = new HashMap<String, Action<TabsMenuPresenter>>();
 	tabsMenu = new Menu<TabsMenuPresenter>(display.newTabsMenu("hablar-tabsChatMenu"));
 	display.setVisible(false);
 	final ClickHandler handler = new ClickHandler() {
@@ -39,18 +38,22 @@ public class TabsMenuPresenter implements Presenter<TabsMenuDisplay> {
 	display.getMenu().addClickHandler(handler);
     }
 
-    public void add(final Widget pageWidget, final Widget headWidget) {
-	display.setVisible(true);
-	final String title = headWidget.getElement().getInnerText();
-	final SimpleAction<TabsMenuPresenter> newAction = new SimpleAction<TabsMenuPresenter>(TextUtils.ellipsis(title,
-		20), TABS_MENU_PAGE_MENU_ITEM_ID_PREF + ChatPresenter.createId(title)) {
-	    @Override
-	    public void execute(final TabsMenuPresenter target) {
-		tabsLayout.focus(pageWidget);
-	    }
-	};
-	tabsMenu.addAction(newAction);
-	items.put(pageWidget, newAction);
+    public void add(final Page<?> page) {
+	if (items.get(page.getId()) == null) {
+	    display.setVisible(true);
+	    final String title = TextUtils.ellipsis(page.getState().getPageTitle(), 20);
+	    final String icon = page.getState().getPageIcon();
+	    final String actionId = TABS_MENU_PAGE_MENU_ITEM_ID_PREF
+		    + ChatPresenter.createId(page.getState().getPageTitle());
+	    final SimpleAction<TabsMenuPresenter> newAction = new SimpleAction<TabsMenuPresenter>(title, actionId, icon) {
+		@Override
+		public void execute(final TabsMenuPresenter target) {
+		    page.requestVisibility(Visibility.focused);
+		}
+	    };
+	    tabsMenu.addAction(newAction);
+	    items.put(page.getId(), newAction);
+	}
     }
 
     @Override
@@ -58,12 +61,10 @@ public class TabsMenuPresenter implements Presenter<TabsMenuDisplay> {
 	return display;
     }
 
-    public void remove(final Widget pageWidget) {
-	tabsMenu.removeAction(items.get(pageWidget));
-	items.remove(pageWidget);
-	if (items.size() < 1) {
-	    display.setVisible(false);
-	}
+    public void remove(final Page<?> page) {
+	final Action<TabsMenuPresenter> action = items.remove(page.getId());
+	tabsMenu.removeAction(action);
+	display.setVisible(items.size() > 0);
     }
 
 }

@@ -9,7 +9,6 @@ import static org.mockito.Mockito.when;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.calclab.hablar.core.client.container.main.MainLayout;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.page.events.VisibilityChangeRequestEvent;
@@ -21,24 +20,26 @@ import com.google.gwt.user.client.ui.Widget;
 public class TabsContainerTests {
 
     private TabsContainer container;
-    private MainLayout layout;
+    private TabsLayout tabsLayout;
     private HablarTester tester;
 
     @Before
     public void setup() {
 	tester = new HablarTester();
-	layout = mock(MainLayout.class);
-	HeaderDisplay headerDisplay = DisplayMocker.mock(HeaderDisplay.class);
-	when(layout.createHeaderDisplay((Page<?>) anyObject())).thenReturn(headerDisplay);
-	container = new TabsContainer(tester.eventBus, layout);
+	tabsLayout = mock(TabsLayout.class);
+	final TabsMenuPresenter presenter = mock(TabsMenuPresenter.class);
+	when(tabsLayout.getTabsMenuPresenter()).thenReturn(presenter);
+	final HeaderDisplay headerDisplay = DisplayMocker.mock(HeaderDisplay.class);
+	when(tabsLayout.createHeaderDisplay((Page<?>) anyObject())).thenReturn(headerDisplay);
+	container = new TabsContainer(tester.eventBus, tabsLayout);
     }
 
     @Test
     public void shouldHideCurrentWhenFocus() {
-	Page<?> current = tester.newPage(Visibility.focused);
+	final Page<?> current = tester.newPage(Visibility.focused);
 	container.add(current);
 
-	Page<?> page = tester.newPage(Visibility.notFocused);
+	final Page<?> page = tester.newPage(Visibility.notFocused);
 	container.add(page);
 
 	tester.fire(new VisibilityChangeRequestEvent(page, Visibility.focused));
@@ -48,22 +49,22 @@ public class TabsContainerTests {
 
     @Test
     public void shouldNotAddHiddenPages() {
-	Page<?> page = tester.newPage(Visibility.hidden);
+	final Page<?> page = tester.newPage(Visibility.hidden);
 	container.add(page);
-	verify(layout, times(0)).add((Widget) anyObject(), (Widget) anyObject());
+	verify(tabsLayout, times(0)).add((Widget) anyObject(), (Widget) anyObject());
     }
 
     @Test
     public void shouldSetFocusedFirstPage() {
-	Page<?> page = tester.newPage(Visibility.notFocused);
+	final Page<?> page = tester.newPage(Visibility.notFocused);
 	container.add(page);
 	verify(page).setVisibility(Visibility.focused);
     }
 
     @Test
     public void shouldToggleUnfocusedPages() {
-	Page<?> focused = tester.newPage(Visibility.focused);
-	Page<?> notFocused = tester.newPage(Visibility.notFocused);
+	final Page<?> focused = tester.newPage(Visibility.focused);
+	final Page<?> notFocused = tester.newPage(Visibility.notFocused);
 	container.add(focused);
 	container.add(notFocused);
 	tester.fire(new VisibilityChangeRequestEvent(notFocused, Visibility.toggle));

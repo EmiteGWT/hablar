@@ -13,17 +13,16 @@ public class TabsLayout extends MainLayout {
     private static final double BAR_SIZE = 24;
     private static TabsPanel tabs;
 
-    private final TabsMenuPresenter menuPage;
+    private final TabsMenuPresenter tabsMenuPresenter;
 
     public TabsLayout(final HablarDisplay parent) {
 	super(tabs = new TabsPanel(BAR_SIZE, PX), parent);
-	menuPage = new TabsMenuPresenter(tabs.getMenu(), this);
+	tabsMenuPresenter = new TabsMenuPresenter(tabs.getMenu(), this);
     }
 
     @Override
     public void add(final Widget pageWidget, final Widget headWidget) {
 	tabs.add(pageWidget, headWidget);
-	menuPage.add(pageWidget, headWidget);
     }
 
     @Override
@@ -36,10 +35,13 @@ public class TabsLayout extends MainLayout {
 	tabs.selectTab(pageWidget);
     }
 
+    public TabsMenuPresenter getTabsMenuPresenter() {
+	return tabsMenuPresenter;
+    }
+
     @Override
     public void remove(final Widget pageWidget) {
 	tabs.remove(pageWidget);
-	menuPage.remove(pageWidget);
     }
 
 }
