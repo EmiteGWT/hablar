@@ -3,7 +3,6 @@ package com.calclab.hablar.user.client;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.Hablar.Chain;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
-import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.user.client.presence.PresencePage;
 import com.calclab.hablar.user.client.presence.PresenceWidget;
 import com.google.gwt.core.client.EntryPoint;
@@ -26,8 +25,7 @@ public class HablarUser implements EntryPoint {
 	hablar.addContainer(container, Chain.after);
 
 	final PresenceWidget display = new PresenceWidget();
-	final Menu<PresencePage> menu = new Menu<PresencePage>(display.newStatusMenuDisplay("hablar-StatusItemMenu"));
-	final PresencePage presence = new PresencePage(eventBus, display, menu);
+	final PresencePage presence = new PresencePage(eventBus, display);
 	hablar.addPage(presence, UserContainer.ROL);
     }
 

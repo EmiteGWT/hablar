@@ -44,11 +44,12 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
     private Show nextShow;
     private SimpleAction<PresencePage> clearCustomsAction;
 
-    public PresencePage(final HablarEventBus eventBus, final PresenceDisplay display,
-	    final Menu<PresencePage> statusMenu) {
+    public PresencePage(final HablarEventBus eventBus, final PresenceDisplay display) {
 	super(TYPE, "" + ++id, eventBus, display);
+
 	defaultActions = new ArrayList<SimpleAction<PresencePage>>();
-	this.statusMenu = statusMenu;
+	statusMenu = new Menu<PresencePage>(display.newStatusMenuDisplay("hablar-StatusItemMenu"));
+
 	manager = Suco.get(PresenceManager.class);
 	final String style = HablarIcons.get(IconType.buddy);
 	model.init(style, i18n().presencePageTitle());
@@ -57,6 +58,7 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 	storedPresenceManager = new StoredPresenceManager(Suco.get(PrivateStorageManager.class));
 	createDefActions();
 	updateMenu();
+
 	final ClickHandler handler = new ClickHandler() {
 	    @Override
 	    public void onClick(final ClickEvent event) {
@@ -68,6 +70,7 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 	};
 	display.getMenu().addClickHandler(handler);
 	display.getIcon().addClickHandler(handler);
+
 	display.getStatus().addKeyDownHandler(new KeyDownHandler() {
 	    @Override
 	    public void onKeyDown(final KeyDownEvent event) {
