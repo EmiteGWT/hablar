@@ -126,7 +126,7 @@ public class DockContainer implements PagesContainer {
 	final Dock dock = config.get(Position.top);
 	final LayoutPanel panel = panels.get(Position.top);
 
-	// TODO: IE z-index problem
+	// TODO: IE z-index problem. Find better solution
 	panels.get(Position.right).setVisible(false);
 	panels.get(Position.left).setVisible(false);
 	layout.slideDown(panel, dock);

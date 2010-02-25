@@ -2,7 +2,10 @@ package com.calclab.hablar.core.client.validators;
 
 import java.util.ArrayList;
 
+import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.event.dom.client.HasKeyPressHandlers;
+import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.user.client.Command;
@@ -15,7 +18,7 @@ public class TextValidator {
     private final HasState<Boolean> acceptEnabled;
     private final HasText hasValue;
 
-    public TextValidator(final HasKeyPressHandlers keys, final HasText hasValue, final HasText errorText,
+    public TextValidator(final HasKeyDownHandlers keys, final HasText hasValue, final HasText errorText,
 	    final HasState<Boolean> acceptState) {
 	this.hasValue = hasValue;
 	this.errorText = errorText;
@@ -28,9 +31,9 @@ public class TextValidator {
 		validate();
 	    }
 	};
-	keys.addKeyPressHandler(new KeyPressHandler() {
+	keys.addKeyDownHandler(new KeyDownHandler() {
 	    @Override
-	    public void onKeyPress(final KeyPressEvent event) {
+	    public void onKeyDown(final KeyDownEvent event) {
 		DeferredCommand.addCommand(command);
 	    }
 	});

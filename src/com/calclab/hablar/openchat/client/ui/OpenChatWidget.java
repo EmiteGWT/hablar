@@ -3,7 +3,7 @@ package com.calclab.hablar.openchat.client.ui;
 import com.calclab.hablar.core.client.validators.HasState;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.event.dom.client.HasKeyPressHandlers;
+import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
@@ -75,7 +75,7 @@ public class OpenChatWidget extends Composite implements OpenChatDisplay {
     }
 
     @Override
-    public HasKeyPressHandlers getNameKeys() {
+    public HasKeyDownHandlers getNameKeys() {
 	return jabberId;
     }
 

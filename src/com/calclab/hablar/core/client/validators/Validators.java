@@ -5,7 +5,7 @@ public class Validators {
     // Original regexp from http://www.regular-expressions.info/email.html
     public static final String REGEXP_VALID_JID = "^(?:([^@/<>'\\\"]+)@)?([^@/<>'\\\"]+)(?:/([^<>'\\\"]*))?$";
     protected static final String REGEXP_VALID_ROOM = "^[-a-zA-Z0-9 ]+$";
-
+    public static final String EMAIL_REGEXP = "[-!#$%&\'*+/=?_`{|}~a-z0-9^]+(\\.[-!#$%&\'*+/=?_`{|}~a-z0-9^]+)*@(localhost|([a-z0-9]([-a-z0-9]*[a-z0-9])?\\.)+[a-z0-9]([-a-z0-9]*[a-z0-9]))?";
     public static Validator<String> hasNotSpaces(final String message) {
 	return new Validator<String>() {
 	    @Override
@@ -30,7 +30,7 @@ public class Validators {
 
 	    @Override
 	    public boolean isValid(final String value) {
-		return value.matches(REGEXP_VALID_JID);
+		return value.matches(EMAIL_REGEXP);
 	    }
 	};
     }
