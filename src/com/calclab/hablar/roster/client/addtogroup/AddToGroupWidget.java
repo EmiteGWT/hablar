@@ -2,12 +2,14 @@ package com.calclab.hablar.roster.client.addtogroup;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasFocusHandlers;
-import com.google.gwt.event.dom.client.HasKeyPressHandlers;
+import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HasValue;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
@@ -26,6 +28,8 @@ public class AddToGroupWidget extends Composite implements AddToGroupDisplay {
     RadioButton existingGroup, newGroup;
     @UiField
     TextBox newGroupName;
+    @UiField
+    Label groupNameError, contact;
     @UiField
     ListBox groupList;
 
@@ -67,17 +71,27 @@ public class AddToGroupWidget extends Composite implements AddToGroupDisplay {
     }
 
     @Override
+    public HasText getContact() {
+	return contact;
+    }
+
+    public TextBox getGroupName() {
+	return newGroupName;
+    }
+
+    @Override
     public HasFocusHandlers getNewGroupFocus() {
 	return newGroupName;
     }
 
     @Override
-    public HasKeyPressHandlers getNewGroupKeys() {
+    public HasKeyDownHandlers getNewGroupKeys() {
 	return newGroupName;
     }
 
-    public TextBox getNewGroupName() {
-	return newGroupName;
+    @Override
+    public HasText getNewGroupNameError() {
+	return groupNameError;
     }
 
     @Override

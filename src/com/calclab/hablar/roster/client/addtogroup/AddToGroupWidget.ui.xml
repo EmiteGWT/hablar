@@ -5,6 +5,10 @@
 		<div class="form">
 			<h2>Move contact to a group</h2>
 			<p>
+				<label>Contact:</label>
+				<g:Label ui:field="contact"></g:Label>
+			</p>
+			<p>
 				<g:RadioButton ui:field="existingGroup" name="groupAction">To a
 					existing group</g:RadioButton>
 				<span class="option">
@@ -17,6 +21,7 @@
 				<span class="option">
 					<label>New Group name:</label>
 					<g:TextBox ui:field="newGroupName"></g:TextBox>
+					<g:Label ui:field="groupNameError" styleName="error"></g:Label>
 				</span>
 			</p>
 			<div class="actions">
