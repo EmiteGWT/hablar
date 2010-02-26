@@ -13,6 +13,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -29,6 +30,8 @@ public class VCardWidget extends Composite implements VCardDisplay {
     Button accept, cancel;
     @UiField
     SpanElement title, icon;
+    @UiField
+    Label loadingMessage;
     @UiField
     DivElement form, loading;
 
@@ -55,6 +58,11 @@ public class VCardWidget extends Composite implements VCardDisplay {
     @Override
     public HasText getField(final Field field) {
 	return fields.get(field);
+    }
+
+    @Override
+    public HasText getLoading() {
+	return loadingMessage;
     }
 
     @Override

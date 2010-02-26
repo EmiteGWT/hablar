@@ -24,7 +24,7 @@ public class DockContainer implements PagesContainer {
     public static final String ROL = "RosterDock";
     private static final double HEADER_SIZE = 24;
     private static final Dock EMPTY_DOCK = new Dock(null, 0, PX);
-    
+
     private final HashMap<Position, LayoutPanel> panels;
     private final HashMap<Position, Page<?>> pages;
     private final DockConfig config;
@@ -96,7 +96,7 @@ public class DockContainer implements PagesContainer {
 	final Dock dock = config.get(Position.top);
 	final LayoutPanel panel = panels.get(Position.top);
 	layout.slideUp(panel, dock);
-	
+
 	// TODO: IE z-index hack (find a better way?)
 	final Dock top = config.get(Position.top);
 	final Dock bottom = config.get(Position.bottom);
@@ -145,6 +145,8 @@ public class DockContainer implements PagesContainer {
 	if (page == (Page<?>) pages.get(Position.top)) {
 	    if (newVisibility == Visibility.toggle && page.getVisibility() == Visibility.notFocused) {
 		showTopPage(page);
+	    } else if (newVisibility == Visibility.toggle && page.getVisibility() == Visibility.focused) {
+		hideTopPage(page);
 	    } else if (newVisibility == Visibility.hidden || newVisibility == Visibility.notFocused) {
 		hideTopPage(page);
 	    }

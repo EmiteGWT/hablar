@@ -39,7 +39,6 @@ public class HablarComplete {
 	HablarDock.install(hablar, dock);
 
 	HablarUser.install(hablar);
-	HablarVCard.install(hablar);
 
 	if (config.hasRoster) {
 	    HablarRoster.install(hablar);
@@ -54,6 +53,8 @@ public class HablarComplete {
 	if (config.hasSignals) {
 	    HablarSignals.install(hablar);
 	}
+	HablarVCard.install(hablar);
+
     }
 
     public static void install(final HablarWidget widget, final HablarConfig config) {

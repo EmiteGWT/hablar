@@ -30,7 +30,7 @@ public class OthersVCardPresenter extends VCardPage {
 	manager.getUserVCard(jid, new Listener<VCardResponse>() {
 	    @Override
 	    public void onEvent(final VCardResponse response) {
-		updateDisplay(response.getVCard());
+		modelToDisplay(response.getVCard());
 		display.setLoadingVisible(false);
 		display.setFormVisible(true);
 	    }

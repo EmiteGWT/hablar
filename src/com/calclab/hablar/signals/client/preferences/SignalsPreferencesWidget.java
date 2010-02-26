@@ -9,7 +9,9 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HasValue;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
 public class SignalsPreferencesWidget extends Composite implements SignalsPreferencesDisplay {
@@ -24,6 +26,8 @@ public class SignalsPreferencesWidget extends Composite implements SignalsPrefer
 
     @UiField
     SpanElement icon;
+    @UiField
+    Label loadingMessage;
     @UiField
     DivElement form, loading;
 
@@ -40,6 +44,11 @@ public class SignalsPreferencesWidget extends Composite implements SignalsPrefer
     @Override
     public HasValue<Boolean> getIncomingNotifications() {
 	return incomingNotifications;
+    }
+
+    @Override
+    public HasText getLoading() {
+	return loadingMessage;
     }
 
     @Override

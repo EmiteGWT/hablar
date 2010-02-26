@@ -14,6 +14,8 @@ public interface VCardDisplay extends Display {
 
     HasText getField(Field field);
 
+    HasText getLoading();
+
     void setAcceptVisible(boolean visible);
 
     void setCancelText(String text);

@@ -18,7 +18,7 @@ public abstract class VCardPage extends PagePresenter<VCardDisplay> {
 	super(TYPE, eventBus, display);
     }
 
-    protected void updateDisplay(final VCard vcard) {
+    protected void modelToDisplay(final VCard vcard) {
 	if (vcard != null) {
 	    display.getField(Field.name).setText(vcard.getDisplayName());
 	    display.getField(Field.nickName).setText(vcard.getNickName());
@@ -43,7 +43,7 @@ public abstract class VCardPage extends PagePresenter<VCardDisplay> {
 	}
     }
 
-    protected void updateVCard(final VCard vcard) {
+    protected void displayToModel(final VCard vcard) {
 	vcard.setDisplayName(display.getField(Field.name).getText());
 	vcard.setNickName(display.getField(Field.nickName).getText());
 

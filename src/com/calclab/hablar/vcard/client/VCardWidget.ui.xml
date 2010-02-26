@@ -5,14 +5,14 @@
 		
 	</ui:style>
 	<g:HTMLPanel styleName="hablar-VCardWidget">
+		<h2>
+			<span ui:field='title' />
+		</h2>
+		<div class="loading" ui:field="loading">
+			<span ui:field="icon" class="icon">&nbsp;</span>
+			<g:Label ui:field="loadingMessage">Loading profile. Please wait...</g:Label>
+		</div>
 		<div class="form">
-			<h2>
-				<span ui:field='title' />
-			</h2>
-			<div class="loading" ui:field="loading">
-				<span ui:field="icon" class="icon">&nbsp;</span>
-				<span ui:field="loadMessage">Loading profile. Please wait...</span>
-			</div>
 			<div ui:field="form">
 				<p>
 					<label>Name:</label>

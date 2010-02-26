@@ -16,12 +16,6 @@ import com.google.gwt.user.client.ui.HasText;
 
 public class HablarSignals implements EntryPoint {
 
-    private static SignalMessages signalMessages;
-
-    public static SignalMessages i18n() {
-	return signalMessages;
-    }
-
     public static void install(final Hablar hablar) {
 	final HablarEventBus eventBus = hablar.getEventBus();
 	final HasText titleDisplay = new HasText() {
@@ -50,13 +44,9 @@ public class HablarSignals implements EntryPoint {
 	install(widget.getHablar());
     }
 
-    public static void setMessages(final SignalMessages messages) {
-	signalMessages = messages;
-    }
-
     @Override
     public void onModuleLoad() {
-	setMessages((SignalMessages) GWT.create(SignalMessages.class));
+	I18nSignals.set((SignalMessages) GWT.create(SignalMessages.class));
     }
 
 }

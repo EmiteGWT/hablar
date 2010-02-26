@@ -12,6 +12,7 @@ import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
 import com.calclab.hablar.user.client.UserContainer;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 
 public class HablarVCard implements EntryPoint {
 
@@ -48,6 +49,8 @@ public class HablarVCard implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
+	final VCardMessages messages = GWT.create(VCardMessages.class);
+	I18nVCard.set(messages);
     }
 
 }
