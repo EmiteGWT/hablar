@@ -49,11 +49,6 @@ public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisp
     public void showData() {
     }
 
-    protected void setCurrentVCard(final VCardResponse response) {
-	currentVCard = response.getVCard();
-	updateDisplay(currentVCard);
-    }
-
     private void requestVCard() {
 	final VCardManager manager = Suco.get(VCardManager.class);
 	setLoading(true);
@@ -71,6 +66,11 @@ public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisp
 	this.loading = loading;
 	display.setLoadingVisible(loading);
 	display.setFormVisible(!loading);
+    }
+
+    protected void setCurrentVCard(final VCardResponse response) {
+	currentVCard = response.getVCard();
+	updateDisplay(currentVCard);
     }
 
 }

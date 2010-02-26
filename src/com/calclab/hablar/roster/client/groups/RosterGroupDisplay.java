@@ -12,6 +12,8 @@ public interface RosterGroupDisplay extends Display {
 
     void remove(RosterItemDisplay itemDisplay);
 
+    void removeAll();
+
     void setVisible(boolean visible);
 
 }

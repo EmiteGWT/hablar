@@ -1,6 +1,9 @@
 package com.calclab.hablar.roster.client.groups;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
@@ -31,11 +34,13 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	for (final RosterItem item : rosterItems) {
 	    getPresenter(item);
 	}
+	// reorder();
 
 	group.onItemAdded(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
 		getPresenter(item);
+		// reorder();
 	    }
 	});
 
@@ -43,6 +48,7 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	    @Override
 	    public void onEvent(final RosterItem item) {
 		getPresenter(item).setItem(item);
+		// reorder();
 	    }
 	});
 
@@ -50,6 +56,7 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	    @Override
 	    public void onEvent(final RosterItem item) {
 		remove(item.getJID());
+		// reorder();
 	    }
 	});
 
@@ -79,7 +86,6 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
     private RosterItemPresenter createRosterItem(final RosterItem item) {
 	final RosterItemDisplay itemDisplay = display.newRosterItemDisplay();
 	final RosterItemPresenter presenter = new RosterItemPresenter(group.getName(), itemMenu, itemDisplay);
-	display.add(itemDisplay);
 	itemPresenters.put(item.getJID(), presenter);
 	return presenter;
     }
@@ -88,9 +94,25 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	RosterItemPresenter presenter = itemPresenters.get(item.getJID());
 	if (presenter == null) {
 	    presenter = createRosterItem(item);
+	    display.add(presenter.getDisplay());
 	}
 	presenter.setItem(item);
 	return presenter;
+    }
+
+    private void reorder() {
+	final ArrayList<RosterItem> list = new ArrayList<RosterItem>(group.getItems());
+	Collections.sort(list, new Comparator<RosterItem>() {
+	    @Override
+	    public int compare(final RosterItem item1, final RosterItem item2) {
+		return item1.getJID().toString().compareTo(item2.getJID().toString());
+	    }
+	});
+	display.removeAll();
+	for (final RosterItem item : list) {
+	    final RosterItemPresenter presenter = itemPresenters.get(item.getJID());
+	    display.add(presenter.getDisplay());
+	}
     }
 
     protected void remove(final XmppURI itemJid) {
