@@ -3,20 +3,21 @@ package com.calclab.hablar.selenium.search;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.calclab.hablar.search.client.SearchMessages;
 import com.calclab.hablar.selenium.HablarSeleniumTest;
 import com.calclab.hablar.selenium.tools.I18nHelper;
 import com.calclab.hablar.selenium.tools.SeleniumConstants;
-import com.calclab.suco.client.Suco;
 
 public class SearchTest extends HablarSeleniumTest {
     private I18nHelper i18n;
 
     @BeforeClass
     public void beforeClass() {
-	i18n = Suco.get(I18nHelper.class);
+	i18n = new I18nHelper(SearchMessages.class);
+	mustCloseFinally = false;
     }
 
-    @Test()
+    @Test
     public void shouldShowSearchResults() {
 	loginAndSearchClick();
 	search.getTerm().clear();
@@ -25,7 +26,7 @@ public class SearchTest extends HablarSeleniumTest {
 	search.waitForResult(i18n.get("searchResultsFor", "test1", 1));
     }
 
-    @Test()
+    @Test
     public void testBasicSearchNoResult() {
 	loginAndSearchClick();
 	search.getTerm().clear();
@@ -35,6 +36,7 @@ public class SearchTest extends HablarSeleniumTest {
 	search.waitForResult(i18n.get("searchResultsFor", "IMPOSSIBLE XXXXZZZÑÑÑ", 0));
     }
 
+    @Test
     private void loginAndSearchClick() {
 	login.signInDefUser();
 	login.assertIsConnectedAs(SeleniumConstants.USERNODE);
@@ -45,6 +47,7 @@ public class SearchTest extends HablarSeleniumTest {
 	search.getHeader().click();
     }
 
+    @Test
     private void loginSearchTestUserAndChat() {
 	loginAndSearchClick();
 	search.getTerm().clear();

@@ -1,30 +1,35 @@
 package com.calclab.hablar.selenium.search;
 
 import org.openqa.selenium.RenderedWebElement;
+import org.openqa.selenium.support.ByIdOrName;
 import org.openqa.selenium.support.FindBy;
 
+import com.calclab.hablar.chat.client.ui.ChatPresenter;
 import com.calclab.hablar.search.client.page.SearchResultItemWidget;
 import com.calclab.hablar.selenium.PageObject;
 
 public class SearchPageObject extends PageObject {
-    @FindBy(id = "")
+    @FindBy(id = "gwt-debug-SearchWidget-term")
     private RenderedWebElement term;
 
-    @FindBy(id = "")
+    @FindBy(id = "gwt-debug-HeaderWidget-HablarSearch-1")
     private RenderedWebElement header;
 
-    @FindBy(id = "")
+    @FindBy(id = "gwt-debug-SearchWidget-message")
     private RenderedWebElement message;
 
-    @FindBy(id = "")
+    @FindBy(id = "gwt-debug-SearchWidget-search")
     private RenderedWebElement searchButton;
+
+    @FindBy(id = "gwt-debug-HablarLogic-searchAction")
+    private RenderedWebElement searchAction;
 
     public RenderedWebElement ChatMenuItem() {
 	return null;
     }
 
     public RenderedWebElement getAction() {
-	return null;
+	return searchAction;
     }
 
     public RenderedWebElement getHeader() {
@@ -56,7 +61,7 @@ public class SearchPageObject extends PageObject {
     }
 
     private RenderedWebElement findJid(final String prefix, final String jid) {
-	return null;
+	return findElement(new ByIdOrName("gwt-debug-" + prefix + ChatPresenter.createId(jid)));
     }
 
 }
