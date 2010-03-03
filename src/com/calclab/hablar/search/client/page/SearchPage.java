@@ -80,7 +80,8 @@ public class SearchPage extends PagePresenter<SearchDisplay> {
 		public void onSuccess(final List<SearchResultItem> items) {
 		    display.showMessage(i18n().searchResultsFor(text, items.size()), Level.success);
 		    for (final SearchResultItem item : items) {
-			final SearchResultItemDisplay itemDisplay = display.newSearchResultItemDisplay();
+			final SearchResultItemDisplay itemDisplay = display.newSearchResultItemDisplay(item.getJid()
+				.toDebugString());
 			new SearchResultItemPresenter(item, itemMenu, itemDisplay);
 			display.addResult(itemDisplay);
 		    }

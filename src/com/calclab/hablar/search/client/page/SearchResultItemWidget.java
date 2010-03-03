@@ -24,9 +24,10 @@ public class SearchResultItemWidget extends Composite implements SearchResultIte
     @UiField
     Label name, jid, menu;
 
-    public SearchResultItemWidget() {
+    public SearchResultItemWidget(final String itemId) {
 	initWidget(uiBinder.createAndBindUi(this));
 	menu.addStyleName(HablarIcons.get(IconType.menu));
+	menu.ensureDebugId(itemId + "-menu");
     }
 
     @Override

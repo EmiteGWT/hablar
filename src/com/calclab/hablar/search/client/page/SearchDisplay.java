@@ -28,7 +28,7 @@ public interface SearchDisplay extends Display {
 
     HasText getSearchTerm();
 
-    SearchResultItemDisplay newSearchResultItemDisplay();
+    SearchResultItemDisplay newSearchResultItemDisplay(String itemId);
 
     void showMessage(String body, Level level);
 }
