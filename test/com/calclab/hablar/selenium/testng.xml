@@ -1,24 +1,34 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Hablar" verbose="1">
-	<test name="Chat">
-		<packages>
-			<package name="com.calclab.hablar.selenium.chat" />
-		</packages>
-	</test>
-	<test name="Login">
-		<packages>
-			<package name="com.calclab.hablar.selenium.login" />
-		</packages>
-	</test>
-	<test name="Roster">
-		<packages>
-			<package name="com.calclab.hablar.selenium.roster" />
-		</packages>
-	</test>
-	<test name="Search">
-		<packages>
-			<package name="com.calclab.hablar.selenium.search" />
-		</packages>
-	</test>
+    <test name="Chat">
+        <packages>
+            <package name="com.calclab.hablar.selenium.chat" />
+        </packages>
+    </test>
+    <test name="Login">
+        <packages>
+            <package name="com.calclab.hablar.selenium.login" />
+        </packages>
+    </test>
+    <test name="Roster">
+        <packages>
+            <package name="com.calclab.hablar.selenium.roster" />
+        </packages>
+    </test>
+    <test name="OpenChat">
+        <packages>
+            <package name="com.calclab.hablar.selenium.openchat" />
+        </packages>
+    </test>
+        <test name="EditBuddy">
+        <packages>
+            <package name="com.calclab.hablar.selenium.editbuddy" />
+        </packages>
+    </test>
+    <test name="Search">
+        <packages>
+            <package name="com.calclab.hablar.selenium.search" />
+        </packages>
+    </test>
 
 </suite>

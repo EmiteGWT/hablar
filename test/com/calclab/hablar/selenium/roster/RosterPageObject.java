@@ -26,8 +26,9 @@ public class RosterPageObject extends PageObject {
 	return header;
     }
 
-    public RenderedWebElement getItemMenu(final String jid) {
-	return null;
+    public RenderedWebElement getItemMenu(final String groupId, final String jid) {
+	final String id = Idify.id("RosterItemWidget", groupId, Idify.uriId(jid), "roster-menu");
+	return findElement(new ByIdOrName("gwt-debug-" + id));
     }
 
     public RenderedWebElement getRosterItem(final String groupId, final String jid) {

@@ -32,7 +32,7 @@ public class RosterItemWidget extends Composite implements RosterItemDisplay {
 	initWidget(uiBinder.createAndBindUi(this));
 	self.ensureDebugId(Idify.id("RosterItemWidget", groupId, itemId));
 	menu.addStyleName(HablarIcons.get(IconType.menu));
-	menu.ensureDebugId(Idify.id(itemId, "roster-menu"));
+	menu.ensureDebugId(Idify.id("RosterItemWidget", groupId, itemId, "roster-menu"));
     }
 
     @Override
