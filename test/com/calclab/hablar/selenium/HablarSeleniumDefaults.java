@@ -2,6 +2,7 @@ package com.calclab.hablar.selenium;
 
 import java.awt.Point;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
@@ -60,7 +61,9 @@ public class HablarSeleniumDefaults {
 
     @BeforeTest
     public void setupSeleniumModule(final ITestContext context) {
-	Suco.install(new SeleniumModule());
+	if (!Suco.getComponents().hasProvider(WebDriver.class)) {
+	    Suco.install(new SeleniumModule());
+	}
 	webtester = Suco.get(GenericWebTester.class);
 	login = Suco.get(LoginPageObject.class);
 	roster = Suco.get(RosterPageObject.class);
