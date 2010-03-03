@@ -15,9 +15,6 @@ public class SearchResultItemWidget extends Composite implements SearchResultIte
 
     interface SearchResultItemWidgetUiBinder extends UiBinder<Widget, SearchResultItemWidget> {
     }
-    public static final String SEARCHRESULT_ITEM_MENU_DEB_ID = "SearchResultItemWidget-item-menu-";
-
-    public static final String SEARCHRESULT_ITEM_NAME_DEB_ID = "SearchResultItemWidget-item-name-";
 
     private static SearchResultItemWidgetUiBinder uiBinder = GWT.create(SearchResultItemWidgetUiBinder.class);
 

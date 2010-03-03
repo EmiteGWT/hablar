@@ -14,6 +14,7 @@ public class SearchTest extends HablarSeleniumTest {
     @BeforeClass
     public void beforeClass() {
 	i18n = new I18nHelper(SearchMessages.class);
+	// mustCloseFinally = false;
     }
 
     @Test
@@ -51,11 +52,9 @@ public class SearchTest extends HablarSeleniumTest {
 	loginAndSearchClick();
 	search.getTerm().clear();
 	search.getTerm().sendKeys("test1\n");
-	sleep(7000);
-	// The menu it's not visible then we need to show it
-	search.getResultName(SeleniumConstants.USERJID).click();
-	// Now we can click the menu
+	sleep(9000);
 	search.getResultMenu(SeleniumConstants.USERJID).click();
-	search.ChatMenuItem().click();
+	search.getChatAction().click();
+	search.getChat(SeleniumConstants.USERJID).click();
     }
 }

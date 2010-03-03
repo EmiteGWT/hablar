@@ -7,7 +7,6 @@ import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 
 import com.calclab.hablar.selenium.chat.ChatPageObject;
@@ -50,15 +49,11 @@ public class HablarSeleniumDefaults {
 		{ "test1@localhost", "test" }, { "", "" } };
     }
 
-    @BeforeMethod
-    public void goHome() {
-    }
-
     public void moveMouseAt(final Point point) {
 	webtester.moveMouseAt(point);
     }
 
-    @BeforeTest
+    @BeforeMethod
     public void setupSeleniumModule(final ITestContext context) {
 	if (!Suco.getComponents().hasProvider(WebDriver.class)) {
 	    Suco.install(new SeleniumModule());

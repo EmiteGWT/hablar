@@ -5,7 +5,6 @@ import org.openqa.selenium.support.ByIdOrName;
 import org.openqa.selenium.support.FindBy;
 
 import com.calclab.hablar.chat.client.ui.ChatPresenter;
-import com.calclab.hablar.search.client.page.SearchResultItemWidget;
 import com.calclab.hablar.selenium.PageObject;
 
 public class SearchPageObject extends PageObject {
@@ -24,12 +23,19 @@ public class SearchPageObject extends PageObject {
     @FindBy(id = "gwt-debug-HablarLogic-searchAction")
     private RenderedWebElement searchAction;
 
-    public RenderedWebElement ChatMenuItem() {
-	return null;
-    }
+    @FindBy(id = "gwt-debug-SearchLogic-chat")
+    private RenderedWebElement searchChatAction;
 
     public RenderedWebElement getAction() {
 	return searchAction;
+    }
+
+    public RenderedWebElement getChat(final String jid) {
+	return findElement(new ByIdOrName("gwt-debug-HeaderWidget-Chat-" + ChatPresenter.createId(jid)));
+    }
+
+    public RenderedWebElement getChatAction() {
+	return searchChatAction;
     }
 
     public RenderedWebElement getHeader() {
@@ -37,11 +43,7 @@ public class SearchPageObject extends PageObject {
     }
 
     public RenderedWebElement getResultMenu(final String jid) {
-	return findJid(SearchResultItemWidget.SEARCHRESULT_ITEM_MENU_DEB_ID, jid);
-    }
-
-    public RenderedWebElement getResultName(final String jid) {
-	return findJid(SearchResultItemWidget.SEARCHRESULT_ITEM_NAME_DEB_ID, jid);
+	return findJid(jid);
     }
 
     public RenderedWebElement getSearchButton() {
@@ -60,8 +62,8 @@ public class SearchPageObject extends PageObject {
 	waitFor(message, resultsMsg);
     }
 
-    private RenderedWebElement findJid(final String prefix, final String jid) {
-	return findElement(new ByIdOrName("gwt-debug-" + prefix + ChatPresenter.createId(jid)));
+    private RenderedWebElement findJid(final String jid) {
+	return findElement(new ByIdOrName("gwt-debug-" + ChatPresenter.createId(jid) + "-search-menu"));
     }
 
 }
