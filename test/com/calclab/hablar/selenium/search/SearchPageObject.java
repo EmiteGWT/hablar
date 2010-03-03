@@ -23,11 +23,21 @@ public class SearchPageObject extends PageObject {
     @FindBy(id = "gwt-debug-HablarLogic-searchAction")
     private RenderedWebElement searchAction;
 
+    @FindBy(id = "gwt-debug-SearchLogic-remove-item")
+    private RenderedWebElement searchRemoveBuddyAction;
+
+    @FindBy(id = "gwt-debug-SearchLogic-add-item")
+    private RenderedWebElement searchAddBuddyAction;
+
     @FindBy(id = "gwt-debug-SearchLogic-chat")
     private RenderedWebElement searchChatAction;
 
     public RenderedWebElement getAction() {
 	return searchAction;
+    }
+
+    public RenderedWebElement getAddBuddyAction() {
+	return searchAddBuddyAction;
     }
 
     public RenderedWebElement getChat(final String jid) {
@@ -40,6 +50,10 @@ public class SearchPageObject extends PageObject {
 
     public RenderedWebElement getHeader() {
 	return header;
+    }
+
+    public RenderedWebElement getRemoveBuddyAction() {
+	return searchRemoveBuddyAction;
     }
 
     public RenderedWebElement getResultMenu(final String jid) {
@@ -60,6 +74,10 @@ public class SearchPageObject extends PageObject {
 
     public void waitForResult(final String resultsMsg) {
 	waitFor(message, resultsMsg);
+    }
+
+    public void waitForResultMenu(final String jid) {
+	waitForId("gwt-debug-" + Idify.uriId(jid) + "-search-menu");
     }
 
     private RenderedWebElement findJid(final String jid) {

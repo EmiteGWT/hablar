@@ -43,7 +43,7 @@ public class SearchBasicActions {
 	    }
 	});
 
-	menu.addAction(new SimpleAction<SearchResultItem>("Remove from roster", REMOVE_ROSTERITEM_DEB_ID) {
+	menu.addAction(new SimpleAction<SearchResultItem>(i18n().removeFromContacts(), REMOVE_ROSTERITEM_DEB_ID) {
 	    @Override
 	    public void execute(final SearchResultItem item) {
 		roster.removeItem(item.getJid());

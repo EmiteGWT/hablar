@@ -15,6 +15,9 @@ public interface SearchMessages extends Messages {
     @DefaultMessage("Search users")
     String openSearchPage();
 
+    @DefaultMessage("Remove Contact")
+    String removeFromContacts();
+
     @DefaultMessage("Results for «{0}»: {1} users found.")
     @Description("Results for a users search")
     @PluralText( { "one", "Results for «{0}»: One user found." })
