@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterGroup;
@@ -23,12 +24,12 @@ public class RosterGroupPresenterTests {
 
     @Before
     public void setup() {
-	final EmiteTester emite = new EmiteTester();
+	new EmiteTester();
 	final HablarTester hablar = new HablarTester();
 	itemMenu = hablar.newMenu();
 	final RosterItemDisplay itemDisplay = hablar.newDisplay(RosterItemDisplay.class);
 	display = hablar.newDisplay(RosterGroupDisplay.class);
-	when(display.newRosterItemDisplay()).thenReturn(itemDisplay);
+	when(display.newRosterItemDisplay(Mockito.anyString())).thenReturn(itemDisplay);
 	group = new RosterGroup("mygroup");
 	group.add(RosterTester.createItem("test1", "name1", "mygroup"));
 	group.add(RosterTester.createItem("test2", "name2", "mygroup"));

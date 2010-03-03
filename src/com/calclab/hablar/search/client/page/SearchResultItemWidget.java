@@ -27,7 +27,7 @@ public class SearchResultItemWidget extends Composite implements SearchResultIte
     public SearchResultItemWidget(final String itemId) {
 	initWidget(uiBinder.createAndBindUi(this));
 	menu.addStyleName(HablarIcons.get(IconType.menu));
-	menu.ensureDebugId(itemId + "-menu");
+	menu.ensureDebugId(itemId + "-search-menu");
     }
 
     @Override

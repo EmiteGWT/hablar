@@ -84,7 +84,7 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
     }
 
     private RosterItemPresenter createRosterItem(final RosterItem item) {
-	final RosterItemDisplay itemDisplay = display.newRosterItemDisplay();
+	final RosterItemDisplay itemDisplay = display.newRosterItemDisplay(item.getJID().toDebugString());
 	final RosterItemPresenter presenter = new RosterItemPresenter(group.getName(), itemMenu, itemDisplay);
 	itemPresenters.put(item.getJID(), presenter);
 	return presenter;

@@ -27,9 +27,10 @@ public class RosterItemWidget extends Composite implements RosterItemDisplay {
 
     private static RosterItemWidgetUiBinder uiBinder = GWT.create(RosterItemWidgetUiBinder.class);
 
-    public RosterItemWidget() {
+    public RosterItemWidget(final String itemId) {
 	initWidget(uiBinder.createAndBindUi(this));
 	menu.addStyleName(HablarIcons.get(IconType.menu));
+	menu.ensureDebugId(itemId + "-roster-menu");
     }
 
     @Override

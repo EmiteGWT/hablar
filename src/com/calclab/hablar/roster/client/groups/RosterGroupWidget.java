@@ -20,8 +20,8 @@ public class RosterGroupWidget extends FlowPanel implements RosterGroupDisplay {
     }
 
     @Override
-    public RosterItemDisplay newRosterItemDisplay() {
-	return new RosterItemWidget();
+    public RosterItemDisplay newRosterItemDisplay(final String itemId) {
+	return new RosterItemWidget(itemId);
     }
 
     @Override
