@@ -2,12 +2,19 @@ package com.calclab.hablar.selenium.editbuddy;
 
 import org.testng.annotations.Test;
 
-import com.calclab.hablar.selenium.HablarSeleniumTest;
+import com.calclab.hablar.selenium.roster.AbstractRosterTests;
 
-public class EditBuddyPageSeleniumTests extends HablarSeleniumTest {
+public class EditBuddyPageSeleniumTests extends AbstractRosterTests {
 
     @Test
-    public void shouldEditBuddy() {
-	login("test1@localhost", "test1");
+    public void shouldEditRosterItem() {
+	addSeleniumBuddy();
+	login();
+	roster.getHeader().click();
+	roster.getItemMenu("", "selenium@localhost").click();
+	roster.getEditBuddyAction().click();
+	// mustCloseFinally = false;
+	logout();
     }
+
 }
