@@ -32,6 +32,7 @@ public class EditBuddyWidget extends Composite implements EditBuddyDisplay {
     public EditBuddyWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
 	nickName.ensureDebugId("EditBuddyWidget-nickname");
+	save.ensureDebugId("EditBuddyWidget-save");
     }
 
     @Override

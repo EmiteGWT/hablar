@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 
 import com.calclab.hablar.selenium.chat.ChatPageObject;
+import com.calclab.hablar.selenium.editbuddy.EditBuddyPageObject;
 import com.calclab.hablar.selenium.login.LoginPageObject;
 import com.calclab.hablar.selenium.openchat.OpenChatPageObject;
 import com.calclab.hablar.selenium.roster.RosterPageObject;
@@ -27,6 +28,7 @@ public class HablarSeleniumDefaults {
     protected ChatPageObject chat;
     protected SearchPageObject search;
     protected GenericWebTester webtester;
+    protected EditBuddyPageObject editBuddy;
 
     @AfterSuite
     public void closeBrowser() {
@@ -65,6 +67,7 @@ public class HablarSeleniumDefaults {
 	    openChat = Suco.get(OpenChatPageObject.class);
 	    search = Suco.get(SearchPageObject.class);
 	    chat = Suco.get(ChatPageObject.class);
+	    editBuddy = Suco.get(EditBuddyPageObject.class);
 	}
 	webtester.home();
     }

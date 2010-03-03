@@ -2,20 +2,19 @@ package com.calclab.hablar.selenium.tools;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
 import com.calclab.hablar.selenium.chat.ChatPageObject;
+import com.calclab.hablar.selenium.editbuddy.EditBuddyPageObject;
 import com.calclab.hablar.selenium.login.LoginPageObject;
 import com.calclab.hablar.selenium.openchat.OpenChatPageObject;
 import com.calclab.hablar.selenium.roster.RosterPageObject;
 import com.calclab.hablar.selenium.search.SearchPageObject;
 import com.calclab.suco.client.ioc.decorator.Singleton;
-import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
 
-public class SeleniumModule extends AbstractModule {
+public class SeleniumModule extends PageObjectModule {
 
     public SeleniumModule() {
     }
@@ -46,50 +45,12 @@ public class SeleniumModule extends AbstractModule {
 	    }
 	});
 
-	register(Singleton.class, new Factory<LoginPageObject>(LoginPageObject.class) {
-	    @Override
-	    public LoginPageObject create() {
-		final LoginPageObject login = new LoginPageObject();
-		PageFactory.initElements($(ElementLocatorFactory.class), login);
-		return login;
-	    }
-	});
-
-	register(Singleton.class, new Factory<SearchPageObject>(SearchPageObject.class) {
-	    @Override
-	    public SearchPageObject create() {
-		final SearchPageObject search = new SearchPageObject();
-		PageFactory.initElements($(ElementLocatorFactory.class), search);
-		return search;
-	    }
-	});
-
-	register(Singleton.class, new Factory<OpenChatPageObject>(OpenChatPageObject.class) {
-	    @Override
-	    public OpenChatPageObject create() {
-		final OpenChatPageObject page = new OpenChatPageObject();
-		PageFactory.initElements($(ElementLocatorFactory.class), page);
-		return page;
-	    }
-	});
-
-	register(Singleton.class, new Factory<RosterPageObject>(RosterPageObject.class) {
-	    @Override
-	    public RosterPageObject create() {
-		final RosterPageObject roster = new RosterPageObject();
-		PageFactory.initElements($(ElementLocatorFactory.class), roster);
-		return roster;
-	    }
-	});
-
-	register(Singleton.class, new Factory<ChatPageObject>(ChatPageObject.class) {
-	    @Override
-	    public ChatPageObject create() {
-		final ChatPageObject chat = new ChatPageObject();
-		PageFactory.initElements($(ElementLocatorFactory.class), chat);
-		return chat;
-	    }
-	});
+	registerPageObject(LoginPageObject.class, new LoginPageObject());
+	registerPageObject(SearchPageObject.class, new SearchPageObject());
+	registerPageObject(OpenChatPageObject.class, new OpenChatPageObject());
+	registerPageObject(RosterPageObject.class, new RosterPageObject());
+	registerPageObject(ChatPageObject.class, new ChatPageObject());
+	registerPageObject(EditBuddyPageObject.class, new EditBuddyPageObject());
 
     }
 }

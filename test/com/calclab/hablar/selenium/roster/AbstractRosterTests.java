@@ -14,6 +14,7 @@ public class AbstractRosterTests extends HablarSeleniumTest {
 	if (search.getRemoveBuddyAction().isDisplayed()) {
 	    search.getRemoveBuddyAction().click();
 	}
+	search.getResultMenu(jid).click();
 	while (!search.getAddBuddyAction().isDisplayed()) {
 	    search.getResultMenu(jid).click();
 	    sleep(1000);

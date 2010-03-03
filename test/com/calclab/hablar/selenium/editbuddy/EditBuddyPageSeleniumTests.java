@@ -13,9 +13,11 @@ public class EditBuddyPageSeleniumTests extends AbstractRosterTests {
 	roster.getHeader().click();
 	roster.getItemMenu("", "selenium@localhost").click();
 	roster.getEditBuddyAction().click();
-	// mustCloseFinally = false;
-	removeSeleniumBuddy();
+	editBuddy.getNewNickName().clear();
+	editBuddy.getNewNickName().sendKeys("othernick");
+	editBuddy.getSave().click();
 	logout();
+	removeSeleniumBuddy();
     }
 
 }
