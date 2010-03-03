@@ -52,7 +52,6 @@ public class HablarSeleniumDefaults {
 
     @BeforeMethod
     public void goHome() {
-	webtester.home();
     }
 
     public void moveMouseAt(final Point point) {
@@ -64,12 +63,15 @@ public class HablarSeleniumDefaults {
 	if (!Suco.getComponents().hasProvider(WebDriver.class)) {
 	    Suco.install(new SeleniumModule());
 	}
-	webtester = Suco.get(GenericWebTester.class);
-	login = Suco.get(LoginPageObject.class);
-	roster = Suco.get(RosterPageObject.class);
-	openChat = Suco.get(OpenChatPageObject.class);
-	search = Suco.get(SearchPageObject.class);
-	chat = Suco.get(ChatPageObject.class);
+	if (webtester == null) {
+	    webtester = Suco.get(GenericWebTester.class);
+	    login = Suco.get(LoginPageObject.class);
+	    roster = Suco.get(RosterPageObject.class);
+	    openChat = Suco.get(OpenChatPageObject.class);
+	    search = Suco.get(SearchPageObject.class);
+	    chat = Suco.get(ChatPageObject.class);
+	}
+	webtester.home();
     }
 
     public void sleep(final int milliseconds) {
