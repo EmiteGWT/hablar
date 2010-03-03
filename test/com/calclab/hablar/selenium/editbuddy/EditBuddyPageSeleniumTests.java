@@ -14,6 +14,7 @@ public class EditBuddyPageSeleniumTests extends AbstractRosterTests {
 	roster.getItemMenu("", "selenium@localhost").click();
 	roster.getEditBuddyAction().click();
 	// mustCloseFinally = false;
+	removeSeleniumBuddy();
 	logout();
     }
 
