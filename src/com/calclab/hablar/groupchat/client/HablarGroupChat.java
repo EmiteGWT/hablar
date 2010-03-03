@@ -1,8 +1,10 @@
 package com.calclab.hablar.groupchat.client;
 
+import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.hablar.chat.client.ui.ChatPage;
 import com.calclab.hablar.chat.client.ui.ChatPresenter;
 import com.calclab.hablar.core.client.Hablar;
+import com.calclab.hablar.core.client.Idify;
 import com.calclab.hablar.core.client.container.PageAddedEvent;
 import com.calclab.hablar.core.client.container.PageAddedHandler;
 import com.calclab.hablar.core.client.container.overlay.OverlayContainer;
@@ -18,8 +20,8 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 
 public class HablarGroupChat implements EntryPoint {
-    private static final String ACTION_ID_CONVERT = "hablarGroupChat-convertToGroup";
-    private static final String ACTION_ID_OPEN = "hablarGroupChat-openGroupChatAction";
+    public static final String ACTION_ID_CONVERT = "HablarGroupChat-convertToGroup-";
+    public static final String ACTION_ID_OPEN = "HablarGroupChat-openGroupChatAction-";
     private static GroupChatMessages messages;
 
     public static GroupChatMessages i18n() {
@@ -39,7 +41,8 @@ public class HablarGroupChat implements EntryPoint {
 	    public void onPageAdded(final PageAddedEvent event) {
 		if (event.isType(ChatPresenter.TYPE)) {
 		    final ChatPage chatPage = (ChatPage) event.getPage();
-		    chatPage.addAction(createConvertToGroupChatAction(convertToGroupPage));
+		    final XmppURI uri = chatPage.getChat().getURI();
+		    chatPage.addAction(createConvertToGroupChatAction(uri, convertToGroupPage));
 		} else if (event.isType(RosterPage.TYPE)) {
 		    final RosterPage roster = (RosterPage) event.getPage();
 		    roster.getGroupMenu().addAction(openGroupChatAction(openGroupPage));
@@ -52,10 +55,10 @@ public class HablarGroupChat implements EntryPoint {
 	messages = groupChatMessages;
     }
 
-    private static SimpleAction<ChatPage> createConvertToGroupChatAction(
+    private static SimpleAction<ChatPage> createConvertToGroupChatAction(final XmppURI uri,
 	    final ConvertToGroupChatPresenter convertToGroupPage) {
-	return new SimpleAction<ChatPage>(i18n().convertToGroupAction(), ACTION_ID_CONVERT, HablarIcons
-		.get(IconType.buddyAdd)) {
+	final String actionId = ACTION_ID_CONVERT + Idify.id(uri);
+	return new SimpleAction<ChatPage>(i18n().convertToGroupAction(), actionId, HablarIcons.get(IconType.buddyAdd)) {
 	    @Override
 	    public void execute(final ChatPage chatPage) {
 		convertToGroupPage.setChat(chatPage.getChat());
