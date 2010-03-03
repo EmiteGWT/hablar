@@ -9,7 +9,7 @@ public class ChatSeleniumTests extends HablarSeleniumTest {
 
     @Test
     public void shouldHaveSendButton() {
-	String uri = "test1@localhost";
+	final String uri = "test1@localhost";
 	login(uri, "test1");
 	openChat(uri);
 	chat.getSend(uri);
@@ -17,14 +17,14 @@ public class ChatSeleniumTests extends HablarSeleniumTest {
 
     @Test
     public void shouldSendText() {
-	String user = "test1@localhost";
+	final String user = "test1@localhost";
 	login(user, "test1");
 	openChat(user);
 	chat.getHeader(user);
 	chat.getTalkBox(user).sendKeys(Lorem.latin);
 	chat.getTalkBox(user).sendKeys(Lorem.chinese);
-	chat.getTalkBox(user).sendKeys(":P\n");
-	chat.waitFor(user, ":P\n");
+	chat.getTalkBox(user).sendKeys("what?\n");
+	chat.waitFor(user, "what?\n");
     }
 
 }
