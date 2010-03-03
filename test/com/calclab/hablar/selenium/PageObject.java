@@ -55,6 +55,7 @@ public abstract class PageObject {
     }
 
     protected void waitFor(final WebElement element, final String text) {
+	System.out.println("WAIT FOR: " + text);
 	waitFor(text, new Runnable() {
 	    @Override
 	    public void run() {

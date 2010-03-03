@@ -3,6 +3,7 @@ package com.calclab.hablar.selenium.login;
 import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.calclab.emite.core.client.packet.TextUtils;
 import com.calclab.hablar.login.client.LoginMessages;
 import com.calclab.hablar.selenium.PageObject;
 import com.calclab.hablar.selenium.tools.I18nHelper;
@@ -17,18 +18,18 @@ public class LoginPageObject extends PageObject {
     private RenderedWebElement passwd;
     @FindBy(id = "gwt-debug-LoginWidget-button")
     private RenderedWebElement button;
-    private I18nHelper i18n;
+    private final I18nHelper i18n;
 
     public LoginPageObject() {
 	i18n = new I18nHelper(LoginMessages.class);
     }
 
     public void assertIsConnectedAs(final String user) {
-	waitFor(header, i18n.get("connectedAs", user));
+	waitFor(header, TextUtils.ellipsis(i18n.get("connectedAs", user), 10));
     }
 
     public void assertIsDisconnected() {
-	waitFor(header, i18n.get("disconnected"));
+	waitFor(header, TextUtils.ellipsis(i18n.get("disconnected"), 10));
     }
 
     public RenderedWebElement getHeader() {
