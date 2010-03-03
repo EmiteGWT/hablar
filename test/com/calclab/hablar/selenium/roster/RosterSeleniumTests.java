@@ -8,7 +8,7 @@ public class RosterSeleniumTests extends HablarSeleniumTest {
 
     @Test
     public void shouldHaveRosterPage() {
-	login("test1@localhost", "test1");
+	login("selenium@localhost", "selenium");
 	roster.getHeader().click();
     }
 }
