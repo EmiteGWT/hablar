@@ -10,6 +10,7 @@ import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.chat.Chat.State;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.hablar.core.client.Idify;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter;
@@ -36,10 +37,6 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
 	return null;
     }
 
-    public static String createId(final String uri) {
-	return uri.replace("@", "-").replace("/", "-");
-    }
-
     public static boolean isChat(final Page<?> page) {
 	return ChatPresenter.TYPE.equals(page.getType());
     }
@@ -48,7 +45,7 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
     private final String userName;
 
     public ChatPresenter(final HablarEventBus eventBus, final Chat chat, final ChatDisplay display) {
-	super(TYPE, createId(chat.getURI().toString()), eventBus, display);
+	super(TYPE, Idify.uriId(chat.getURI().toString()), eventBus, display);
 	this.chat = chat;
 	display.setId(getId());
 	final XmppURI fromURI = chat.getURI();

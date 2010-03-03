@@ -1,13 +1,13 @@
 package com.calclab.hablar.roster.client.groups;
 
 import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterGroup;
@@ -29,7 +29,7 @@ public class RosterGroupPresenterTests {
 	itemMenu = hablar.newMenu();
 	final RosterItemDisplay itemDisplay = hablar.newDisplay(RosterItemDisplay.class);
 	display = hablar.newDisplay(RosterGroupDisplay.class);
-	when(display.newRosterItemDisplay(Mockito.anyString())).thenReturn(itemDisplay);
+	when(display.newRosterItemDisplay(anyString(), anyString())).thenReturn(itemDisplay);
 	group = new RosterGroup("mygroup");
 	group.add(RosterTester.createItem("test1", "name1", "mygroup"));
 	group.add(RosterTester.createItem("test2", "name2", "mygroup"));

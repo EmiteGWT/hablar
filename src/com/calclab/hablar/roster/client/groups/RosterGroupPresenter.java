@@ -9,6 +9,7 @@ import java.util.HashMap;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterGroup;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.hablar.core.client.Idify;
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.suco.client.events.Listener;
@@ -84,7 +85,9 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
     }
 
     private RosterItemPresenter createRosterItem(final RosterItem item) {
-	final RosterItemDisplay itemDisplay = display.newRosterItemDisplay(item.getJID().toDebugString());
+	// FIXME: no mola nada toda esta basura selenium
+	final RosterItemDisplay itemDisplay = display.newRosterItemDisplay(Idify.id(group.getName()), Idify.id(item
+		.getJID()));
 	final RosterItemPresenter presenter = new RosterItemPresenter(group.getName(), itemMenu, itemDisplay);
 	itemPresenters.put(item.getJID(), presenter);
 	return presenter;

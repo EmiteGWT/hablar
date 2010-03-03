@@ -1,8 +1,10 @@
 package com.calclab.hablar.selenium.roster;
 
 import org.openqa.selenium.RenderedWebElement;
+import org.openqa.selenium.support.ByIdOrName;
 import org.openqa.selenium.support.FindBy;
 
+import com.calclab.hablar.core.client.Idify;
 import com.calclab.hablar.selenium.PageObject;
 
 public class RosterPageObject extends PageObject {
@@ -28,4 +30,8 @@ public class RosterPageObject extends PageObject {
 	return null;
     }
 
+    public RenderedWebElement getRosterItem(final String groupId, final String jid) {
+	final String id = Idify.id("RosterItemWidget", groupId, Idify.uriId(jid));
+	return findElement(new ByIdOrName("gwt-debug-" + id));
+    }
 }

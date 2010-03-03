@@ -4,7 +4,7 @@ import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.support.ByIdOrName;
 import org.openqa.selenium.support.FindBy;
 
-import com.calclab.hablar.chat.client.ui.ChatPresenter;
+import com.calclab.hablar.core.client.Idify;
 import com.calclab.hablar.selenium.PageObject;
 
 public class SearchPageObject extends PageObject {
@@ -31,7 +31,7 @@ public class SearchPageObject extends PageObject {
     }
 
     public RenderedWebElement getChat(final String jid) {
-	return findElement(new ByIdOrName("gwt-debug-HeaderWidget-Chat-" + ChatPresenter.createId(jid)));
+	return findElement(new ByIdOrName("gwt-debug-HeaderWidget-Chat-" + Idify.uriId(jid)));
     }
 
     public RenderedWebElement getChatAction() {
@@ -63,7 +63,7 @@ public class SearchPageObject extends PageObject {
     }
 
     private RenderedWebElement findJid(final String jid) {
-	return findElement(new ByIdOrName("gwt-debug-" + ChatPresenter.createId(jid) + "-search-menu"));
+	return findElement(new ByIdOrName("gwt-debug-" + Idify.uriId(jid) + "-search-menu"));
     }
 
 }

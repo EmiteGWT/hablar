@@ -40,6 +40,13 @@ public class LoginPageObject extends PageObject {
 	return getHeader();
     }
 
+    public void logout() {
+	header.click();
+	waitFor(button, i18n.get("logout"));
+	button.click();
+	assertIsDisconnected();
+    }
+
     public void signIn(final String username, final String password) {
 	header.click();
 	user.clear();
@@ -54,10 +61,4 @@ public class LoginPageObject extends PageObject {
 	signIn(SeleniumConstants.USERJID, SeleniumConstants.PASSWD);
     }
 
-    public void signOut() {
-	header.click();
-	waitFor(button, i18n.get("logout"));
-	button.click();
-	assertIsDisconnected();
-    }
 }

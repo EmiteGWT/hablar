@@ -3,7 +3,7 @@ package com.calclab.hablar.core.client.pages.tabs;
 import java.util.HashMap;
 
 import com.calclab.emite.core.client.packet.TextUtils;
-import com.calclab.hablar.chat.client.ui.ChatPresenter;
+import com.calclab.hablar.core.client.Idify;
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
@@ -44,7 +44,7 @@ public class TabsMenuPresenter implements Presenter<TabsMenuDisplay> {
 	    final String title = TextUtils.ellipsis(page.getState().getPageTitle(), 20);
 	    final String icon = page.getState().getPageIcon();
 	    final String actionId = TABS_MENU_PAGE_MENU_ITEM_ID_PREF
-		    + ChatPresenter.createId(page.getState().getPageTitle());
+		    + Idify.uriId(page.getState().getPageTitle());
 	    final SimpleAction<TabsMenuPresenter> newAction = new SimpleAction<TabsMenuPresenter>(title, actionId, icon) {
 		@Override
 		public void execute(final TabsMenuPresenter target) {

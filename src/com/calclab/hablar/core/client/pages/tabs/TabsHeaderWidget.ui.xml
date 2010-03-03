@@ -3,11 +3,11 @@
     xmlns:h="urn:import:com.calclab.hablar.core.client.pages.tabs"
     xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
-    <g:HTMLPanel ui:field="self" styleName='hablar-TabsHeaderWidget hablar-Header'>
-        <div>
+    <g:FocusPanel ui:field="self" styleName='hablar-TabsHeaderWidget hablar-Header'>
+        <g:FlowPanel>
             <g:Label styleName="icon" ui:field="icon"></g:Label>
             <h:TruncatedLabel styleName="title" ui:field="title">Title</h:TruncatedLabel>
             <g:Label styleName="close" ui:field="close" />
-        </div>
-    </g:HTMLPanel>
+        </g:FlowPanel>
+    </g:FocusPanel>
 </ui:UiBinder>

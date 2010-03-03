@@ -8,7 +8,7 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -21,7 +21,7 @@ public class TabsHeaderWidget extends Composite implements HeaderDisplay {
     private static TabsHeaderWidgetUiBinder uiBinder = GWT.create(TabsHeaderWidgetUiBinder.class);
 
     @UiField
-    HTMLPanel self;
+    FocusPanel self;
     @UiField
     TruncatedLabel title;
     @UiField
@@ -31,6 +31,7 @@ public class TabsHeaderWidget extends Composite implements HeaderDisplay {
 	initWidget(uiBinder.createAndBindUi(this));
 	close.addStyleName(HablarIcons.get(IconType.close));
 	ensureDebugId("HeaderWidget-" + id);
+	// title.ensureDebugId(Idify.id("HeaderWidget", id, "title"));
 	title.setTrim(10);
     }
 
@@ -61,7 +62,7 @@ public class TabsHeaderWidget extends Composite implements HeaderDisplay {
 
     @Override
     public HasClickHandlers getOpen() {
-	return title;
+	return self;
     }
 
     @Override

@@ -10,11 +10,11 @@ public class LoginSeleniumTests extends HablarSeleniumTest {
     public void severalsSignInSingOut(final String user, final String passwd, final String userNode) {
 	login.signIn(user, passwd);
 	login.assertIsConnectedAs(userNode);
-	login.signOut();
+	login.logout();
 	login.assertIsDisconnected();
 	login.signIn(user, passwd);
 	login.assertIsConnectedAs(userNode);
-	login.signOut();
+	login.logout();
 	login.assertIsDisconnected();
     }
 
