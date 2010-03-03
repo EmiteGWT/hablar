@@ -13,6 +13,5 @@ public class RosterSeleniumTests extends AbstractRosterTests {
     public void shouldRemoveRosterItem() {
 	addSeleniumBuddy();
 	removeSeleniumBuddy();
-	mustCloseFinally = false;
     }
 }
