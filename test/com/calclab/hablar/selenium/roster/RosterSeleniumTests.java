@@ -5,13 +5,10 @@ import org.testng.annotations.Test;
 public class RosterSeleniumTests extends AbstractRosterTests {
 
     @Test
-    public void shouldAddRosterItem() {
-	addSeleniumBuddy();
-    }
-
-    @Test
-    public void shouldRemoveRosterItem() {
+    public void shouldAddAndRemoveRosterItem() {
+	login();
 	addSeleniumBuddy();
 	removeSeleniumBuddy();
+	logout();
     }
 }

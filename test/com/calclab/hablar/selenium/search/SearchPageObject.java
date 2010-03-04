@@ -8,6 +8,10 @@ import com.calclab.hablar.core.client.Idify;
 import com.calclab.hablar.selenium.PageObject;
 
 public class SearchPageObject extends PageObject {
+    public static final String GWT_DEBUG_SEARCH_LOGIC_REMOVE_ITEM = "gwt-debug-SearchLogic-remove-item";
+
+    public static final String GWT_DEBUG_SEARCH_LOGIC_ADD_ITEM = "gwt-debug-SearchLogic-add-item";
+
     @FindBy(id = "gwt-debug-SearchWidget-term")
     private RenderedWebElement term;
 
@@ -23,10 +27,10 @@ public class SearchPageObject extends PageObject {
     @FindBy(id = "gwt-debug-HablarLogic-searchAction")
     private RenderedWebElement searchAction;
 
-    @FindBy(id = "gwt-debug-SearchLogic-remove-item")
+    @FindBy(id = GWT_DEBUG_SEARCH_LOGIC_REMOVE_ITEM)
     private RenderedWebElement searchRemoveBuddyAction;
 
-    @FindBy(id = "gwt-debug-SearchLogic-add-item")
+    @FindBy(id = GWT_DEBUG_SEARCH_LOGIC_ADD_ITEM)
     private RenderedWebElement searchAddBuddyAction;
 
     @FindBy(id = "gwt-debug-SearchLogic-chat")
@@ -70,6 +74,14 @@ public class SearchPageObject extends PageObject {
 
     public RenderedWebElement Message() {
 	return message;
+    }
+
+    public void waitForMenuAddAction() {
+	waitForId(GWT_DEBUG_SEARCH_LOGIC_ADD_ITEM);
+    }
+
+    public void waitForMenuRemoveAction() {
+	waitForId(GWT_DEBUG_SEARCH_LOGIC_REMOVE_ITEM);
     }
 
     public void waitForResult(final String resultsMsg) {

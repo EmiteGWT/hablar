@@ -8,16 +8,16 @@ public class EditBuddyPageSeleniumTests extends AbstractRosterTests {
 
     @Test
     public void shouldEditRosterItem() {
-	addSeleniumBuddy();
 	login();
+	addSeleniumBuddy();
 	roster.getHeader().click();
 	roster.getItemMenu("", "selenium@localhost").click();
 	roster.getEditBuddyAction().click();
 	editBuddy.getNewNickName().clear();
 	editBuddy.getNewNickName().sendKeys("othernick");
 	editBuddy.getSave().click();
-	logout();
 	removeSeleniumBuddy();
+	logout();
     }
 
 }

@@ -63,4 +63,8 @@ public class RosterPageObject extends PageObject {
     public RenderedWebElement getSeeBuddyVCardAction() {
 	return seeBuddyVCardAction;
     }
+
+    public void waitForItemMenu(final String groupId, final String jid) {
+	waitForId("gwt-debug-" + Idify.id("RosterItemWidget", groupId, Idify.uriId(jid), "roster-menu"));
+    }
 }

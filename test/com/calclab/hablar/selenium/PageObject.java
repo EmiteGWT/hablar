@@ -67,7 +67,7 @@ public abstract class PageObject {
 	waitFor(id, new Runnable() {
 	    @Override
 	    public void run() {
-		getWebDriver().findElement(new ByIdOrName(id));
+		Assert.assertTrue(((RenderedWebElement) getWebDriver().findElement(new ByIdOrName(id))).isDisplayed());
 	    }
 	});
     }
