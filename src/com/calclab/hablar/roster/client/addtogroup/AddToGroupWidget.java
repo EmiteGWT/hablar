@@ -35,6 +35,8 @@ public class AddToGroupWidget extends Composite implements AddToGroupDisplay {
 
     public AddToGroupWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
+	newGroupName.ensureDebugId("AddToGroupWidget-newgroupname");
+	accept.ensureDebugId("AddToGroupWidget-accept");
     }
 
     @Override
