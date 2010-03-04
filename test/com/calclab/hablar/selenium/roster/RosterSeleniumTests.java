@@ -14,7 +14,6 @@ public class RosterSeleniumTests extends AbstractRosterTests {
 
     @Test
     public void shouldAddToGroup() {
-	mustCloseFinally = false;
 	login();
 	addSeleniumBuddy();
 	roster.getItemMenu("", "selenium@localhost").click();
