@@ -16,6 +16,17 @@ public class ChatSeleniumTests extends HablarSeleniumTest {
     }
 
     @Test
+    public void shouldSendAndReceiveText() {
+	final String user = "selenium@localhost";
+	login(user, "selenium");
+	openChat(user);
+	chat.getHeader(user);
+	chat.getTalkBox(user).sendKeys("hi!\n");
+	chat.waitFor(user, "hi!");
+	chat.waitFor(user, "selenium");
+    }
+
+    @Test
     public void shouldSendText() {
 	final String user = "test1@localhost";
 	login(user, "test1");
