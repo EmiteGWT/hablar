@@ -16,7 +16,7 @@ import com.calclab.suco.client.events.Listener;
 @SuppressWarnings("unchecked")
 public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
     private final static Comparator<RosterItem> ORDER = RosterItemsOrder.order(RosterItemsOrder.byAvailability,
-	    RosterItemsOrder.nonGroupedFirst, RosterItemsOrder.byName);
+	    RosterItemsOrder.groupedFirst, RosterItemsOrder.byName);
 
     private final RosterGroupDisplay display;
     private String groupLabel;
