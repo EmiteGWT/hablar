@@ -34,28 +34,15 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	itemPresenters = new HashMap<XmppURI, RosterItemPresenter>();
 	display.setVisible(group.isAllContacts());
 
-	group.onItemAdded(new Listener<RosterItem>() {
-	    @Override
-	    public void onEvent(final RosterItem item) {
-		updateRosterItemGroups();
-		// getPresenter(item);
-	    }
-	});
-
-	group.onItemChanged(new Listener<RosterItem>() {
+	final Listener<RosterItem> updateListener = new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
 		updateRosterItemGroups();
 	    }
-	});
-
-	group.onItemRemoved(new Listener<RosterItem>() {
-	    @Override
-	    public void onEvent(final RosterItem item) {
-		updateRosterItemGroups();
-		// remove(item.getJID());
-	    }
-	});
+	};
+	group.onItemAdded(updateListener);
+	group.onItemChanged(updateListener);
+	group.onItemRemoved(updateListener);
 	updateRosterItemGroups();
     }
 
@@ -106,11 +93,6 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	for (final RosterItem item : rosterItems) {
 	    getPresenter(item);
 	}
-    }
-
-    protected void remove(final XmppURI itemJid) {
-	final RosterItemPresenter presenter = itemPresenters.remove(itemJid);
-	display.remove(presenter.getDisplay());
     }
 
 }
