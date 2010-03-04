@@ -1,20 +1,23 @@
 package com.calclab.hablar.roster.client.groups;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterGroup;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.emite.im.client.roster.RosterItemsOrder;
 import com.calclab.hablar.core.client.Idify;
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.suco.client.events.Listener;
 
+@SuppressWarnings("unchecked")
 public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
+    private final static Comparator<RosterItem> ORDER = RosterItemsOrder.order(RosterItemsOrder.byAvailability,
+	    RosterItemsOrder.nonGroupedFirst, RosterItemsOrder.byName);
+
     private final RosterGroupDisplay display;
     private String groupLabel;
     private final HashMap<XmppURI, RosterItemPresenter> itemPresenters;
@@ -31,36 +34,29 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	itemPresenters = new HashMap<XmppURI, RosterItemPresenter>();
 	display.setVisible(group.isAllContacts());
 
-	final Collection<RosterItem> rosterItems = group.getItems();
-	for (final RosterItem item : rosterItems) {
-	    getPresenter(item);
-	}
-	// reorder();
-
 	group.onItemAdded(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
-		getPresenter(item);
-		// reorder();
+		updateRosterItemGroups();
+		// getPresenter(item);
 	    }
 	});
 
 	group.onItemChanged(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
-		getPresenter(item).setItem(item);
-		// reorder();
+		updateRosterItemGroups();
 	    }
 	});
 
 	group.onItemRemoved(new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem item) {
-		remove(item.getJID());
-		// reorder();
+		updateRosterItemGroups();
+		// remove(item.getJID());
 	    }
 	});
-
+	updateRosterItemGroups();
     }
 
     @Override
@@ -103,18 +99,12 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	return presenter;
     }
 
-    private void reorder() {
-	final ArrayList<RosterItem> list = new ArrayList<RosterItem>(group.getItems());
-	Collections.sort(list, new Comparator<RosterItem>() {
-	    @Override
-	    public int compare(final RosterItem item1, final RosterItem item2) {
-		return item1.getJID().toString().compareTo(item2.getJID().toString());
-	    }
-	});
+    private void updateRosterItemGroups() {
 	display.removeAll();
-	for (final RosterItem item : list) {
-	    final RosterItemPresenter presenter = itemPresenters.get(item.getJID());
-	    display.add(presenter.getDisplay());
+	itemPresenters.clear();
+	final Collection<RosterItem> rosterItems = group.getItemList(ORDER);
+	for (final RosterItem item : rosterItems) {
+	    getPresenter(item);
 	}
     }
 

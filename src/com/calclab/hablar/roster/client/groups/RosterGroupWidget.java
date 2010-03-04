@@ -31,7 +31,7 @@ public class RosterGroupWidget extends FlowPanel implements RosterGroupDisplay {
 
     @Override
     public void removeAll() {
-	removeAll();
+	clear();
     }
 
 }
