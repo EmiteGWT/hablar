@@ -15,6 +15,11 @@
             <package name="com.calclab.hablar.selenium.roster" />
         </packages>
     </test>
+    <test name="Groupchat">
+        <packages>
+            <package name="com.calclab.hablar.selenium.groupchat" />
+        </packages>
+    </test>
     <test name="OpenChat">
         <packages>
             <package name="com.calclab.hablar.selenium.openchat" />

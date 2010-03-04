@@ -14,6 +14,10 @@ public class RosterPageObject extends PageObject {
 
     @FindBy(id = "gwt-debug-HeaderWidget-Roster-1")
     private RenderedWebElement header;
+
+    @FindBy(id = "gwt-debug-HablarGroupChat-openGroupChatAction")
+    private RenderedWebElement openGroupChat;
+
     @FindBy(id = "gwt-debug-HablarRoster-removeFromGroupAction")
     private RenderedWebElement removeFromGroupAction;
 
@@ -35,6 +39,9 @@ public class RosterPageObject extends PageObject {
     @FindBy(id = "gwt-debug-AddToGroupWidget-accept")
     private RenderedWebElement addToGroupAccept;
 
+    @FindBy(id = "gwt-debug-HablarRoster-deleteGroupAction")
+    private RenderedWebElement deleteGroupAction;
+
     public RosterPageObject() {
     }
 
@@ -50,6 +57,10 @@ public class RosterPageObject extends PageObject {
 	return addToGroupNewGroupName;
     }
 
+    public RenderedWebElement getDeleteGroupAction() {
+	return deleteGroupAction;
+    }
+
     public RenderedWebElement getDisableLabel() {
 	return disabledLabel;
     }
@@ -63,6 +74,11 @@ public class RosterPageObject extends PageObject {
 	return findElement(new ByIdOrName("gwt-debug-" + id));
     }
 
+    public RenderedWebElement getGroupMenu(final String groupId) {
+	final String id = Idify.id("GroupHeaderWidget-menu", groupId);
+	return findElement(new ByIdOrName("gwt-debug-" + id));
+    }
+
     public RenderedWebElement getHeader() {
 	return header;
     }
@@ -70,6 +86,10 @@ public class RosterPageObject extends PageObject {
     public RenderedWebElement getItemMenu(final String groupId, final String jid) {
 	final String id = Idify.id("RosterItemWidget", groupId, Idify.uriId(jid), "roster-menu");
 	return findElement(new ByIdOrName("gwt-debug-" + id));
+    }
+
+    public RenderedWebElement getOpenGroupChat() {
+	return openGroupChat;
     }
 
     public RenderedWebElement getRemoveBuddyAction() {

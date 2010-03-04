@@ -16,15 +16,11 @@ public class RosterSeleniumTests extends AbstractRosterTests {
     public void shouldAddToGroup() {
 	login();
 	addSeleniumBuddy();
-	roster.getItemMenu("", "selenium@localhost").click();
-	roster.getAddToGroupAction().click();
-	roster.getAddToGroupNewGroupName().sendKeys("testgroup");
-	roster.getAddToGroupAccept().click();
-	sleep(1000);
-	roster.getGroup("testgroup").click();
-	roster.getItemMenu("testgroup", "selenium@localhost").click();
-	roster.getRemoveFromGroupAction().click();
+	addToGroup("testgroup");
+	sleep(2000);
+	removeFromGroup("testgroup");
 	removeSeleniumBuddy();
 	logout();
     }
+
 }

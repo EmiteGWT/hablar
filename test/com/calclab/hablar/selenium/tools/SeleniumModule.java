@@ -7,6 +7,7 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
 import com.calclab.hablar.selenium.chat.ChatPageObject;
 import com.calclab.hablar.selenium.editbuddy.EditBuddyPageObject;
+import com.calclab.hablar.selenium.groupchat.GroupChatPageObject;
 import com.calclab.hablar.selenium.login.LoginPageObject;
 import com.calclab.hablar.selenium.openchat.OpenChatPageObject;
 import com.calclab.hablar.selenium.roster.RosterPageObject;
@@ -48,6 +49,7 @@ public class SeleniumModule extends PageObjectModule {
 	registerPageObject(LoginPageObject.class, new LoginPageObject());
 	registerPageObject(SearchPageObject.class, new SearchPageObject());
 	registerPageObject(OpenChatPageObject.class, new OpenChatPageObject());
+	registerPageObject(GroupChatPageObject.class, new GroupChatPageObject());
 	registerPageObject(RosterPageObject.class, new RosterPageObject());
 	registerPageObject(ChatPageObject.class, new ChatPageObject());
 	registerPageObject(EditBuddyPageObject.class, new EditBuddyPageObject());

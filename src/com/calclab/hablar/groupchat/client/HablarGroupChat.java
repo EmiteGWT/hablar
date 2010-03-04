@@ -21,7 +21,7 @@ import com.google.gwt.core.client.GWT;
 
 public class HablarGroupChat implements EntryPoint {
     public static final String ACTION_ID_CONVERT = "HablarGroupChat-convertToGroup-";
-    public static final String ACTION_ID_OPEN = "HablarGroupChat-openGroupChatAction-";
+    public static final String ACTION_ID_OPEN = "HablarGroupChat-openGroupChatAction";
     private static GroupChatMessages messages;
 
     public static GroupChatMessages i18n() {

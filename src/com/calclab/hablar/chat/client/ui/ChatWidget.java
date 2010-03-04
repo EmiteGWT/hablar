@@ -93,7 +93,7 @@ public class ChatWidget extends Composite implements ChatDisplay {
     public void setControlsVisible(final boolean visible) {
 	layoutControls();
 	// FIXME: Animation
-	//page.forceLayout();
+	// page.forceLayout();
 	controlsHeight = visible ? CONTROLS_HEIGHT : 0;
 	layoutControls();
 	page.animate(500);
@@ -105,7 +105,7 @@ public class ChatWidget extends Composite implements ChatDisplay {
 	talkBox.ensureDebugId("ChatWidget-talkBox-" + id);
 	send.ensureDebugId("ChatWidget-send-" + id);
 	list.ensureDebugId("ChatWidget-list-" + id);
-	scroll.ensureDebugId("ChatWidget-srcoll-" + id);
+	scroll.ensureDebugId("ChatWidget-scroll-" + id);
 	actions.ensureDebugId("ChatWidget-status-" + id);
 
     }
@@ -114,7 +114,7 @@ public class ChatWidget extends Composite implements ChatDisplay {
     public void setStatusVisible(final boolean visible) {
 	layoutStatus();
 	// FIXME: Animation
-	//page.forceLayout();
+	// page.forceLayout();
 	statusHeight = visible ? STATUS_HEIGHT : 0;
 	layoutStatus();
 	page.animate(500);

@@ -17,10 +17,25 @@ public class AbstractRosterTests extends HablarSeleniumTest {
 	addBuddy("selenium@localhost");
     }
 
+    protected void addToGroup(final String group) {
+	roster.getHeader().click();
+	roster.getItemMenu("", "selenium@localhost").click();
+	roster.getAddToGroupAction().click();
+	roster.getAddToGroupNewGroupName().sendKeys(group);
+	roster.getAddToGroupAccept().click();
+    }
+
     protected void removeBuddy(final String groupId, final String jid) {
 	roster.getHeader().click();
 	roster.getItemMenu(groupId, jid).click();
 	roster.getRemoveBuddyAction().click();
+    }
+
+    protected void removeFromGroup(final String group) {
+	roster.getHeader().click();
+	roster.getGroup(group).click();
+	roster.getItemMenu(group, "selenium@localhost").click();
+	roster.getRemoveFromGroupAction().click();
     }
 
     protected void removeSeleniumBuddy() {
