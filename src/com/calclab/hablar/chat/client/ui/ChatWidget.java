@@ -138,4 +138,12 @@ public class ChatWidget extends Composite implements ChatDisplay {
 
     }
 
+    /**
+     * {@inheritDoc}.
+     */
+    @Override
+    public void addToActions(Widget widget) {
+	actions.add(widget);
+    }
+
 }

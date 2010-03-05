@@ -5,6 +5,7 @@ import com.calclab.hablar.core.client.ui.menu.Action;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.Widget;
 
 public interface ChatDisplay extends Display {
 
@@ -14,6 +15,12 @@ public interface ChatDisplay extends Display {
 
     void clearAndFocus();
 
+    /**
+     * Adds a widget to the action bar for this chat view
+     * @param widget the widget to add
+     */
+    void addToActions(Widget widget);
+    
     HasClickHandlers createAction(Action<?> action);
 
     HasClickHandlers getAction();
