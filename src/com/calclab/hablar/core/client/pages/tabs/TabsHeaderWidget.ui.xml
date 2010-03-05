@@ -5,7 +5,7 @@
 	<ui:style>
 	   .tab {
 	   	   width: 120px;
-	   	   height: 20px;
+	   	   height: 24px;
 	   	}
 	
 		.tabInner {
@@ -17,13 +17,13 @@
 	<g:FocusPanel ui:field="self" 
 		styleName='hablar-TabsHeaderWidget hablar-Header {style.tab}'>
 		<g:LayoutPanel styleName="{style.tabInner}">
-			<g:layer left="0" top="3px" width="20px" bottom="0">
+			<g:layer left="2px" top="3px" width="20px" bottom="0">
 				<g:Label styleName="icon" ui:field="icon"></g:Label>
 			</g:layer>
 			<g:layer left="20px" top="3px" right="20px" bottom="0">
 				<h:TruncatedLabel styleName="title" ui:field="title">Title</h:TruncatedLabel>
 			</g:layer>
-			<g:layer width="20px" top="3px" right="0" bottom="0">
+			<g:layer width="20px" top="1px" right="0" bottom="0">
 				<g:Label styleName="close" ui:field="close" />
 			</g:layer>
 		</g:LayoutPanel>

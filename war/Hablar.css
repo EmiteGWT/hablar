@@ -88,22 +88,28 @@ div.hablar-ActionWidget:hover {
     border-bottom: 1px solid #E9E9E9;
 }
 
-.hablar-Header .icon {
+.hablar-AccordionHeaderWidget  .icon {
     float: left;
     margin: 0 3px 0 3px;
 }
 
-.hablar-Header .title {
+.hablar-AccordionHeaderWidget  .title {
     display: block;
     margin: 0 3px;
 }
 
-.hablar-Header .close {
+.hablar-AccordionHeaderWidget  .close {
     float: right;
+    margin: 0px 3px 0 0;
 }
 
-.hablar-AccordionHeaderWidget .close {
-    margin: 0px 3px 0 0;
+.gwt-TabLayoutPanelTabs {
+	height: 24px;
+}
+
+.hablar-TabsHeaderWidget {
+	padding: 0;
+	margin: 0;
 }
 
 .hablar-TabsHeaderWidget .close {
@@ -161,6 +167,10 @@ div.hablar-ActionWidget:hover {
 .hablar-Header.DockHeaderWidget-top {
     background-color: #BBB;
     border: 1px solid #BBB;
+}
+
+.DockHeaderWidget-left .icon {
+	margin-left: 3px;
 }
 
 /** LOGIN **/

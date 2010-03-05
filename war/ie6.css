@@ -1,4 +1,4 @@
-.gwt-TabLayoutPanelTab .title {
+.nogwt-TabLayoutPanelTab .title {
 	float: left;
 	overflow: hidden;
 	white-space:nowrap;
@@ -8,6 +8,6 @@
 	margin-right: 5px;
 }
 
-.gwt-TabLayoutPanelTab {
+.nogwt-TabLayoutPanelTab {
 	width: 140px;
 }

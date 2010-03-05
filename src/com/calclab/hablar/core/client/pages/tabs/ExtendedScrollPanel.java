@@ -32,6 +32,6 @@ public class ExtendedScrollPanel extends ScrollPanel {
         }
 
         scroll.scrollTop = realOffset - scroll.offsetHeight / 2;
-        scroll.scrollLeft = realOffsetH - scroll.offsetWidth / 2;
+        scroll.scrollLeft = (realOffsetH - scroll.offsetWidth / 2) + 5;
     }-*/;
 }
