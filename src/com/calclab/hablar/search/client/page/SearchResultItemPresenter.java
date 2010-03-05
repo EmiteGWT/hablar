@@ -23,9 +23,8 @@ public class SearchResultItemPresenter implements Presenter<SearchResultItemDisp
 	    public void onClick(final ClickEvent event) {
 		event.preventDefault();
 		final Element element = event.getRelativeElement();
-		final int width = element.getClientWidth();
 		itemMenu.setTarget(item);
-		itemMenu.show(element.getAbsoluteLeft() - width, element.getAbsoluteTop());
+		itemMenu.show(element.getAbsoluteLeft(), element.getAbsoluteTop());
 	    }
 	});
     }

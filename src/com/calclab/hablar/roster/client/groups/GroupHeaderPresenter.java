@@ -33,9 +33,8 @@ public class GroupHeaderPresenter implements Presenter<GroupHeaderDisplay> {
 	    public void onClick(final ClickEvent event) {
 		event.preventDefault();
 		final Element element = event.getRelativeElement();
-		final int width = element.getClientWidth();
 		groupMenu.setTarget(groupPresenter);
-		groupMenu.show(element.getAbsoluteLeft() - width, element.getAbsoluteTop());
+		groupMenu.show(element.getAbsoluteLeft(), element.getAbsoluteTop());
 	    }
 	});
 

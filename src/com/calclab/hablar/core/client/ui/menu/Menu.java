@@ -7,6 +7,8 @@ import com.google.gwt.user.client.Command;
 
 public class Menu<T> implements Presenter<MenuDisplay<T>> {
 
+    private static final int WIDTH = 149;
+    private static final int Y_OFFSET = 8;
     private final MenuDisplay<T> display;
     private T target;
     private final ArrayList<Action<T>> actions;
@@ -51,7 +53,7 @@ public class Menu<T> implements Presenter<MenuDisplay<T>> {
 	for (final Action<T> action : actions) {
 	    display.setActionVisible(action, action.isApplicable(target));
 	}
-	display.show(left, top);
+	display.show(left - WIDTH, top + Y_OFFSET);
     }
 
 }

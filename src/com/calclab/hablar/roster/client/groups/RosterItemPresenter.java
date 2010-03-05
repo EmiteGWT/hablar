@@ -34,9 +34,8 @@ public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
 	    public void onClick(final ClickEvent event) {
 		event.preventDefault();
 		final Element element = event.getRelativeElement();
-		final int width = element.getClientWidth();
 		itemMenu.setTarget(RosterItemPresenter.this);
-		itemMenu.show(element.getAbsoluteLeft() - width, element.getAbsoluteTop());
+		itemMenu.show(element.getAbsoluteLeft(), element.getAbsoluteTop());
 	    }
 	});
 

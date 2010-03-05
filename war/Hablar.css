@@ -581,6 +581,8 @@ div.hablar-SearchResultItemWidget:hover {
     -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     padding: 3px;
+    width: 150px;
+    overflow: hidden;
 }
 
 .gwt-MenuBar {
@@ -622,6 +624,7 @@ div.hablar-SearchResultItemWidget:hover {
 }
 .gwt-MenuBar-vertical table {
   border-collapse: collapse;
+  width: 100%;
 }
 .gwt-MenuBar-vertical .gwt-MenuItem {
   padding: 4px 14px 4px 1px;
