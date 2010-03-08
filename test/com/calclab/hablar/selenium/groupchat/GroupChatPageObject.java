@@ -32,8 +32,16 @@ public class GroupChatPageObject extends PageObject {
 	return findElement(new ByIdOrName("gwt-debug-ChatWidget-scroll-Room-" + id));
     }
 
+    public RenderedWebElement getRoomStatus(final String id) {
+	return findElement(new ByIdOrName("gwt-debug-ChatWidget-status-Room-" + id));
+    }
+
     public RenderedWebElement getRoomTextBox(final String id) {
 	return findElement(new ByIdOrName("gwt-debug-ChatWidget-talkBox-Room-" + id));
+    }
+
+    public void waitForStatus(final String id, final String text) {
+	waitFor(getRoomStatus(id), text);
     }
 
     public void waitForTextInRoom(final String id, final String text) {

@@ -60,7 +60,7 @@ public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisp
     }
 
     private boolean hasChanges(final VCard original, final VCard changed) {
-	if (!changed.getName().equals(original.getName())) {
+	if (original == null || !changed.getName().equals(original.getName())) {
 	    return true;
 	} else if (!changed.getNickName().equals(original.getNickName())) {
 	    return true;

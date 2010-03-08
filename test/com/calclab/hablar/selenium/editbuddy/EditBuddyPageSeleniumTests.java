@@ -2,9 +2,9 @@ package com.calclab.hablar.selenium.editbuddy;
 
 import org.testng.annotations.Test;
 
-import com.calclab.hablar.selenium.roster.AbstractRosterTests;
+import com.calclab.hablar.selenium.HablarSeleniumTest;
 
-public class EditBuddyPageSeleniumTests extends AbstractRosterTests {
+public class EditBuddyPageSeleniumTests extends HablarSeleniumTest {
 
     @Test
     public void shouldEditRosterItem() {

@@ -35,5 +35,9 @@
             <package name="com.calclab.hablar.selenium.search" />
         </packages>
     </test>
-
+        <test name="UserPage">
+        <packages>
+            <package name="com.calclab.hablar.selenium.userpage" />
+        </packages>
+    </test>
 </suite>

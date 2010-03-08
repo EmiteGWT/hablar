@@ -34,6 +34,9 @@ public class SignalsPreferencesWidget extends Composite implements SignalsPrefer
     public SignalsPreferencesWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
 	icon.addClassName(HablarIcons.get(IconType.loading));
+	titleSignals.ensureDebugId("SignalsPreferencesWidget-titleSignals");
+	incomingNotifications.ensureDebugId("SignalsPreferencesWidget-incomingNotifications");
+	rosterNotifications.ensureDebugId("SignalsPreferencesWidget-rosterNotifications");
     }
 
     @Override

@@ -23,6 +23,7 @@ public class UserWidget extends Composite implements UserDisplay {
 
     public UserWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
+	close.ensureDebugId("UserWidget-close");
     }
 
     @Override

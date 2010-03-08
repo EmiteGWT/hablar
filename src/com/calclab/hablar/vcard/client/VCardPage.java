@@ -18,6 +18,35 @@ public abstract class VCardPage extends PagePresenter<VCardDisplay> {
 	super(TYPE, eventBus, display);
     }
 
+    protected void displayToModel(final VCard vcard) {
+	vcard.setDisplayName(display.getField(Field.name).getText());
+	vcard.setNickName(display.getField(Field.nickName).getText());
+
+	vcard.setFamilyName(display.getField(Field.familyName).getText());
+	vcard.setGivenName(display.getField(Field.givenName).getText());
+	vcard.setMiddleName(display.getField(Field.middleName).getText());
+	vcard.setURL(display.getField(Field.homepage).getText());
+
+	final String newOrg = display.getField(Field.organizationName).getText();
+	if (vcard.getFirstChild(MatcherFactory.byName(VCard.ORG)) == NoPacket.INSTANCE) {
+	    new VCardOrganization(vcard.addChild(VCard.ORG));
+	}
+	vcard.getOrganization().setData(VCardOrganization.Data.ORGNAME, newOrg);
+
+	final String newEmail = display.getField(Field.email).getText();
+	final List<VCardEmail> emails = vcard.getEmails();
+	for (final VCardEmail email : emails) {
+	    if (emails.size() == 1 || email.isPreferred()) {
+		email.setUserId(newEmail);
+		break;
+	    }
+	}
+	if (emails.size() == 0) {
+	    final VCardEmail email = new VCardEmail(vcard.addChild(VCard.EMAIL));
+	    email.setUserId(newEmail);
+	}
+    }
+
     protected void modelToDisplay(final VCard vcard) {
 	if (vcard != null) {
 	    display.getField(Field.name).setText(vcard.getDisplayName());
@@ -40,36 +69,6 @@ public abstract class VCardPage extends PagePresenter<VCardDisplay> {
 	    }
 	} else {
 	    clearVCardDisplay();
-	}
-    }
-
-    protected void displayToModel(final VCard vcard) {
-	vcard.setDisplayName(display.getField(Field.name).getText());
-	vcard.setNickName(display.getField(Field.nickName).getText());
-
-	vcard.setFamilyName(display.getField(Field.familyName).getText());
-	vcard.setGivenName(display.getField(Field.givenName).getText());
-	vcard.setMiddleName(display.getField(Field.middleName).getText());
-	vcard.setURL(display.getField(Field.homepage).getText());
-
-	final String newOrg = display.getField(Field.organizationName).getText();
-	if (vcard.getFirstChild(MatcherFactory.byName(VCard.ORG)) == NoPacket.INSTANCE) {
-	    new VCardOrganization(vcard.addChild(VCard.ORG));
-	} else {
-	    vcard.getOrganization().setData(VCardOrganization.Data.ORGNAME, newOrg);
-	}
-
-	final String newEmail = display.getField(Field.email).getText();
-	final List<VCardEmail> emails = vcard.getEmails();
-	for (final VCardEmail email : emails) {
-	    if (emails.size() == 1 || email.isPreferred()) {
-		email.setUserId(newEmail);
-		break;
-	    }
-	}
-	if (emails.size() == 0) {
-	    final VCardEmail email = new VCardEmail(vcard.addChild(VCard.EMAIL));
-	    email.setUserId(newEmail);
 	}
     }
 

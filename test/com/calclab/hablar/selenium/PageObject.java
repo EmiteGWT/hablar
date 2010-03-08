@@ -13,6 +13,17 @@ public abstract class PageObject {
 
     private static final long[] POLL_INTERVALS = { 10, 20, 30, 40, 50, 50, 50, 50, 100 };
 
+    public void waitFor(final RenderedWebElement element) {
+	final String id = element.getAttribute("id");
+	System.out.println("WAIT FOR: " + id);
+	waitFor(id, new Runnable() {
+	    @Override
+	    public void run() {
+		Assert.assertTrue(element.isDisplayed());
+	    }
+	});
+    }
+
     protected RenderedWebElement findElement(final By by) {
 	return (RenderedWebElement) getWebDriver().findElement(by);
     }

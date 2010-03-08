@@ -9,6 +9,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -21,7 +22,10 @@ public class AccordionHeaderWidget extends Composite implements HeaderDisplay {
     private static AccordionHeaderWidgetUiBinder uiBinder = GWT.create(AccordionHeaderWidgetUiBinder.class);
 
     @UiField
-    FlowPanel self;
+    FlowPanel flow;
+
+    @UiField
+    FocusPanel self;
 
     @UiField
     Label title, icon, close;
@@ -40,7 +44,7 @@ public class AccordionHeaderWidget extends Composite implements HeaderDisplay {
 
     @Override
     public void addStyle(final String styleName) {
-	self.addStyleName(styleName);
+	flow.addStyleName(styleName);
     }
 
     @Override
@@ -60,7 +64,7 @@ public class AccordionHeaderWidget extends Composite implements HeaderDisplay {
 
     @Override
     public HasClickHandlers getOpen() {
-	return title;
+	return self;
     }
 
     @Override
@@ -70,7 +74,7 @@ public class AccordionHeaderWidget extends Composite implements HeaderDisplay {
 
     @Override
     public void removeStyle(final String styleName) {
-	self.removeStyleName(styleName);
+	flow.removeStyleName(styleName);
     }
 
     @Override

@@ -2,7 +2,9 @@ package com.calclab.hablar.selenium.roster;
 
 import org.testng.annotations.Test;
 
-public class RosterSeleniumTests extends AbstractRosterTests {
+import com.calclab.hablar.selenium.HablarSeleniumTest;
+
+public class RosterSeleniumTests extends HablarSeleniumTest {
 
     @Test
     public void shouldAddAndRemoveRosterItem() {
@@ -16,9 +18,10 @@ public class RosterSeleniumTests extends AbstractRosterTests {
     public void shouldAddToGroup() {
 	login();
 	addSeleniumBuddy();
-	addToGroup("testgroup");
+	final String newGroupName = "testgroup" + getTempString();
+	addToGroup(newGroupName);
 	sleep(2000);
-	removeFromGroup("testgroup");
+	removeFromGroup(newGroupName);
 	removeSeleniumBuddy();
 	logout();
     }

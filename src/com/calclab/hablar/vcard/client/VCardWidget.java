@@ -40,9 +40,9 @@ public class VCardWidget extends Composite implements VCardDisplay {
     public VCardWidget() {
     }
 
-    public VCardWidget(final boolean readOnly) {
+    public VCardWidget(final boolean readOnly, final String idPrefix) {
 	initWidget(uiBinder.createAndBindUi(this));
-	init(readOnly);
+	init(readOnly, idPrefix);
     }
 
     @Override
@@ -106,7 +106,7 @@ public class VCardWidget extends Composite implements VCardDisplay {
 	}
     }
 
-    protected void init(final boolean readOnly) {
+    protected void init(final boolean readOnly, final String idPrefix) {
 	icon.addClassName(HablarIcons.get(IconType.loading));
 	fields.put(Field.name, name);
 	fields.put(Field.nickName, nickName);
@@ -116,6 +116,10 @@ public class VCardWidget extends Composite implements VCardDisplay {
 	fields.put(Field.email, email);
 	fields.put(Field.homepage, homepage);
 	fields.put(Field.organizationName, organizationName);
+	for (final Field field : fields.keySet()) {
+	    fields.get(field).ensureDebugId(idPrefix + "-" + field.toString());
+	}
+
 	setReadOnly(readOnly);
     }
 }

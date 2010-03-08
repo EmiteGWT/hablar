@@ -12,6 +12,8 @@ import com.calclab.hablar.selenium.login.LoginPageObject;
 import com.calclab.hablar.selenium.openchat.OpenChatPageObject;
 import com.calclab.hablar.selenium.roster.RosterPageObject;
 import com.calclab.hablar.selenium.search.SearchPageObject;
+import com.calclab.hablar.selenium.userpage.UserPageObject;
+import com.calclab.hablar.selenium.vcard.OtherVCardPageObject;
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.Factory;
 
@@ -53,6 +55,7 @@ public class SeleniumModule extends PageObjectModule {
 	registerPageObject(RosterPageObject.class, new RosterPageObject());
 	registerPageObject(ChatPageObject.class, new ChatPageObject());
 	registerPageObject(EditBuddyPageObject.class, new EditBuddyPageObject());
-
+	registerPageObject(UserPageObject.class, new UserPageObject());
+	registerPageObject(OtherVCardPageObject.class, new OtherVCardPageObject());
     }
 }

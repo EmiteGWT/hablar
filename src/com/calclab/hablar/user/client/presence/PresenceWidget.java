@@ -32,6 +32,7 @@ public class PresenceWidget extends Composite implements PresenceDisplay {
     public PresenceWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
 	status.ensureDebugId("PresenceWidget-status");
+	menu.addStyleName("PresenceWidget-menu");
 	menu.addStyleName(HablarIcons.get(IconType.menu));
     }
 

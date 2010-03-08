@@ -14,7 +14,6 @@ public class SearchTest extends HablarSeleniumTest {
     @BeforeClass
     public void beforeClass() {
 	i18n = new I18nHelper(SearchMessages.class);
-	// mustCloseFinally = false;
     }
 
     @Test

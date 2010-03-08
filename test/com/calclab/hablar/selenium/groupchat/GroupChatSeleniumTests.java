@@ -1,10 +1,19 @@
 package com.calclab.hablar.selenium.groupchat;
 
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.calclab.hablar.selenium.roster.AbstractRosterTests;
+import com.calclab.hablar.rooms.client.RoomsMessages;
+import com.calclab.hablar.selenium.HablarSeleniumTest;
+import com.calclab.hablar.selenium.tools.I18nHelper;
 
-public class GroupChatSeleniumTests extends AbstractRosterTests {
+public class GroupChatSeleniumTests extends HablarSeleniumTest {
+    private I18nHelper i18n;
+
+    @BeforeClass
+    public void beforeClass() {
+	i18n = new I18nHelper(RoomsMessages.class);
+    }
 
     @Test
     public void shouldInstallActionOnChats() {
@@ -19,15 +28,17 @@ public class GroupChatSeleniumTests extends AbstractRosterTests {
     public void shouldSendMessagesToGroups() {
 	login();
 	addSeleniumBuddy();
-	addToGroup("testgroup");
-	roster.getGroupMenu("testgroup").click();
+	final String newtestgroup = "testgroup" + getTempString();
+	addToGroup(newtestgroup);
+	roster.getGroupMenu(newtestgroup).click();
 	roster.getOpenGroupChat().click();
 	groupChat.getOpenGroupChatAccept().click();
 	groupChat.getRoomHeader("1").click();
 	groupChat.waitForTextInRoom("1", "This room is now unlocked");
 	groupChat.getRoomTextBox("1").sendKeys("hi!\n");
 	groupChat.waitForTextInRoom("1", "hi!");
-	removeFromGroup("testgroup");
+	groupChat.waitForStatus("1", i18n.get("occupants", Integer.valueOf(1)));
+	removeFromGroup(newtestgroup);
 	removeSeleniumBuddy();
 	logout();
     }

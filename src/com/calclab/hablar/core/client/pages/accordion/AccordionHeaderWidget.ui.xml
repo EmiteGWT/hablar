@@ -1,10 +1,12 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	<g:FlowPanel styleName='hablar-AccordionHeaderWidget hablar-Header'
-		ui:field="self">
-		<g:Label styleName="icon" ui:field="icon"></g:Label>
-		<g:Label styleName="close"  ui:field="close"></g:Label>
-		<g:Label styleName="title"  ui:field="title">Title</g:Label>
-	</g:FlowPanel>
-</ui:UiBinder> 
+    xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <g:FocusPanel ui:field="self">
+    <g:FlowPanel styleName='hablar-AccordionHeaderWidget hablar-Header'
+        ui:field="flow">
+        <g:Label styleName="icon" ui:field="icon"></g:Label>
+        <g:Label styleName="close"  ui:field="close"></g:Label>
+        <g:Label styleName="title"  ui:field="title">Title</g:Label>
+    </g:FlowPanel>
+  </g:FocusPanel>
+</ui:UiBinder>
