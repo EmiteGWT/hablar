@@ -79,7 +79,6 @@ public class PageState {
     public void setPageIcon(final String pageIcon) {
 	this.pageIcon = pageIcon;
 	fireChanged();
-
     }
 
     public void setPageTitle(final String pageTitle) {

@@ -8,6 +8,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -19,7 +20,10 @@ public class DockHeaderWidget extends Composite implements HeaderDisplay {
 
     private static DockHeaderWidgetUiBinder uiBinder = GWT.create(DockHeaderWidgetUiBinder.class);
     @UiField
-    FlowPanel self;
+    FlowPanel flow;
+
+    @UiField
+    FocusPanel self;
 
     @UiField
     Label title, icon, close;
@@ -27,7 +31,7 @@ public class DockHeaderWidget extends Composite implements HeaderDisplay {
     public DockHeaderWidget(final String pageId, final Position position) {
 	initWidget(uiBinder.createAndBindUi(this));
 	ensureDebugId("HeaderWidget-" + pageId);
-	addStyleName("DockHeaderWidget-" + position);
+	flow.addStyleName("DockHeaderWidget-" + position);
     }
 
     @Override
@@ -37,7 +41,7 @@ public class DockHeaderWidget extends Composite implements HeaderDisplay {
 
     @Override
     public void addStyle(final String styleName) {
-	self.addStyleName(styleName);
+	flow.addStyleName(styleName);
     }
 
     @Override
@@ -57,7 +61,7 @@ public class DockHeaderWidget extends Composite implements HeaderDisplay {
 
     @Override
     public HasClickHandlers getOpen() {
-	return title;
+	return self;
     }
 
     @Override
@@ -67,7 +71,7 @@ public class DockHeaderWidget extends Composite implements HeaderDisplay {
 
     @Override
     public void removeStyle(final String styleName) {
-	self.removeStyleName(styleName);
+	flow.removeStyleName(styleName);
     }
 
     @Override
