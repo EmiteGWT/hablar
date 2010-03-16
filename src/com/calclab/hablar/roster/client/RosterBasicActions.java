@@ -21,7 +21,7 @@ public class RosterBasicActions {
     private static final String ID_ACTION_DELETE_GROUP = "HablarRoster-deleteGroupAction";
 
     private final SimpleAction<RosterItemPresenter> removeFromRoster = new SimpleAction<RosterItemPresenter>(
-	    "Remove from roster", ACTION_ID_REMOVE_FROM_ROSTER) {
+	    "Remove contact", ACTION_ID_REMOVE_FROM_ROSTER) {
 	@Override
 	public void execute(final RosterItemPresenter target) {
 	    final RosterItem item = target.getItem();
@@ -46,8 +46,8 @@ public class RosterBasicActions {
 	    return !isEntrieRoster(target);
 	};
     };
-    private final Action<RosterGroupPresenter> deleteGroup = new SimpleAction<RosterGroupPresenter>("Delete group",
-	    ID_ACTION_DELETE_GROUP) {
+    private final Action<RosterGroupPresenter> deleteGroup = new SimpleAction<RosterGroupPresenter>(
+	    "Delete this group", ID_ACTION_DELETE_GROUP) {
 	@Override
 	public void execute(final RosterGroupPresenter target) {
 
@@ -73,17 +73,6 @@ public class RosterBasicActions {
 	rosterPage.getGroupMenu().addAction(deleteGroup);
     }
 
-    private void deleteGroup(final String groupName, final Collection<RosterItem> items) {
-	for (final RosterItem item : items) {
-	    item.removeFromGroup(groupName);
-	}
-	roster.requestUpdateItems(items);
-    }
-
-    private boolean isEntrieRoster(final RosterItemPresenter target) {
-	return target.getGroupName() == null;
-    }
-
     protected void removeFromGroup(final RosterItem item, final String groupName) {
 	final Roster roster = Suco.get(Roster.class);
 	item.removeFromGroup(groupName);
@@ -93,5 +82,16 @@ public class RosterBasicActions {
     protected void removeFromRoster(final RosterItem item) {
 	final Roster roster = Suco.get(Roster.class);
 	roster.removeItem(item.getJID());
+    }
+
+    private void deleteGroup(final String groupName, final Collection<RosterItem> items) {
+	for (final RosterItem item : items) {
+	    item.removeFromGroup(groupName);
+	}
+	roster.requestUpdateItems(items);
+    }
+
+    private boolean isEntrieRoster(final RosterItemPresenter target) {
+	return target.getGroupName() == null;
     }
 }

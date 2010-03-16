@@ -64,7 +64,7 @@ public class HablarRooms implements EntryPoint {
 
     protected static Action<RoomPresenter> createInviteAction(final InviteToRoomPresenter invitePage) {
 	final String icon = HablarIcons.get(IconType.buddyAdd);
-	return new SimpleAction<RoomPresenter>("Invite to this room", ACTION_ID_INVITE, icon) {
+	return new SimpleAction<RoomPresenter>(i18n().inviteToThisGroupChat(), ACTION_ID_INVITE, icon) {
 	    @Override
 	    public void execute(final RoomPresenter target) {
 		invitePage.setRoom(target.getRoom());

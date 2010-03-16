@@ -41,9 +41,9 @@ public abstract class EditRoomPresenter extends PagePresenter<EditRoomDisplay> {
 
 	roomNameValidator = new TextValidator(display.getRoomNameKeys(), display.getRoomName(), display
 		.getRoomNameError(), display.getAcceptEnabled());
-	roomNameValidator.add(Validators.notEmpty(i18n().emptyRoomName()));
+	roomNameValidator.add(Validators.notEmpty(i18n().emptyGroupChatName()));
 	// roomNameValidator.add(Validators.hasNotSpaces(i18n().spacesInRoomName()));
-	roomNameValidator.add(Validators.isValidRoomName(i18n().notValidRoomName()));
+	roomNameValidator.add(Validators.isValidRoomName(i18n().notValidGroupChatName()));
 
     }
 

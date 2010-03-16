@@ -14,8 +14,8 @@ public class OpenNewRoomPresenter extends OpenRoomPresenter {
 
     public OpenNewRoomPresenter(final String roomsService, final HablarEventBus eventBus, final EditRoomDisplay display) {
 	super(TYPE, eventBus, display, roomsService);
-	display.setPageTitle(i18n().openNewRoom());
-	display.setAcceptText(i18n().openNewRoomAction());
+	display.setPageTitle(i18n().openNewGroupChat());
+	display.setAcceptText(i18n().openNewGroupChatAction());
     }
 
     @Override
@@ -26,7 +26,7 @@ public class OpenNewRoomPresenter extends OpenRoomPresenter {
 
     @Override
     protected void onPageOpen() {
-	final String roomName = i18n().roomId(roomNumber);
+	final String roomName = i18n().groupChatId(roomNumber);
 	display.getRoomName().setText(roomName);
 	final Roster roster = Suco.get(Roster.class);
 	setItems(roster.getItems(), true, false);

@@ -9,32 +9,36 @@ import com.google.gwt.i18n.client.LocalizableResource.GenerateKeys;
 public interface RoomsMessages extends Messages {
 
     @DefaultMessage("The group name can''t be empty")
-    String emptyRoomName();
+    String emptyGroupChatName();
 
-    @DefaultMessage("At room ''{0}'': {1}")
-    String incommingAdminMessage(String roomName, String body);
+    @DefaultMessage("groupChat-{0}")
+    String groupChatId(int groupChatNumber);
 
-    @DefaultMessage("At room ''{0}'', {1} says «{2}»")
-    String incommingMessage(String roomName, String user, String msg);
+    @DefaultMessage("At group chat ''{0}'': {1}")
+    String incommingAdminMessage(String groupChatName, String body);
+
+    @DefaultMessage("At group chat ''{0}'', {1} says «{2}»")
+    String incommingMessage(String groupChatName, String user, String msg);
 
     @DefaultMessage("Invite more people to this group chat")
-    String invitePeopleToRoom();
+    String invitePeopleToGroupChat();
+
+    @DefaultMessage("Invite to this group chat")
+    String inviteToThisGroupChat();
 
     @DefaultMessage("The group name has not valid characters")
-    String notValidRoomName();
+    String notValidGroupChatName();
 
     @DefaultMessage("{0} Occupants")
     String occupants(int numberOfOccupants);
 
     @DefaultMessage("Create a new group chat")
-    String openNewRoom();
+    String openNewGroupChat();
 
     @DefaultMessage("Create Group Chat")
-    String openNewRoomAction();
-
-    @DefaultMessage("groupChat-{0}")
-    String roomId(int roomNumber);
+    String openNewGroupChatAction();
 
     @DefaultMessage("Group chat name can''t have white spaces")
-    String spacesInRoomName();
+    String spacesInGroupChatName();
+
 }

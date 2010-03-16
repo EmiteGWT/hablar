@@ -37,7 +37,7 @@ public class InviteToRoomPresenter extends EditRoomPresenter {
 
     @Override
     protected void onPageOpen() {
-	display.setPageTitle(i18n().invitePeopleToRoom());
+	display.setPageTitle(i18n().invitePeopleToGroupChat());
 
 	final Roster roster = Suco.get(Roster.class);
 	final String roomName = RoomName.decode(room.getURI().toString());
