@@ -1,6 +1,7 @@
-package com.calclab.hablar.roster.client.addtogroup;
+package com.calclab.hablar.roster.client.changegroups;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
@@ -11,16 +12,16 @@ import com.calclab.suco.client.Suco;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
-public class AddToGroupsPresenter extends PagePresenter<AddToGroupsDisplay> {
+public class ManageGroupsPresenter extends PagePresenter<ManageGroupsDisplay> {
 
     public static String TYPE = "AddToGroups";
     private RosterItem item;
-    private final ArrayList<GroupSelectorDisplay> groupSelectors;
+    private final ArrayList<GroupSelectorPresenter> groupSelectors;
 
-    public AddToGroupsPresenter(final HablarEventBus eventBus, final AddToGroupsDisplay display) {
+    public ManageGroupsPresenter(final HablarEventBus eventBus, final ManageGroupsDisplay display) {
 	super(TYPE, eventBus, display);
 
-	groupSelectors = new ArrayList<GroupSelectorDisplay>();
+	groupSelectors = new ArrayList<GroupSelectorPresenter>();
 
 	display.getCancel().addClickHandler(new ClickHandler() {
 	    @Override
@@ -50,32 +51,41 @@ public class AddToGroupsPresenter extends PagePresenter<AddToGroupsDisplay> {
     }
 
     private void addNewGroup(final String name, final boolean editable, final boolean selected) {
-	groupSelectors.add(display.addGroupSelector(name, editable, selected));
+	final GroupSelectorDisplay selectorDisplay = display.addGroupSelector();
+	final GroupSelectorPresenter selector = new GroupSelectorPresenter(selectorDisplay);
+	selector.setProperties(name, editable, selected);
+	groupSelectors.add(selector);
     }
 
     private void addToNewGroups() {
 	final Roster roster = Suco.get(Roster.class);
 
-	for (final GroupSelectorDisplay selector : groupSelectors) {
-	    if (isValidGroup(selector)) {
-		item.addToGroup(selector.getEditableName().getText());
+	item.getGroups().clear();
+	for (final GroupSelectorPresenter selector : groupSelectors) {
+	    if (selector.isSelected()) {
+		item.addToGroup(selector.getName());
 	    }
 	}
 
 	roster.requestUpdateItem(item);
     }
 
-    private boolean isValidGroup(final GroupSelectorDisplay selector) {
-	return selector.getSelected().getValue() == true && !Empty.is(selector.getEditableName().getText());
-    }
-
     @Override
     protected void onBeforeFocus() {
+
+	display.getContactNameField().setText(item.getJID().toString());
+
 	final Roster roster = Suco.get(Roster.class);
 	display.clearGroupList();
 	groupSelectors.clear();
+	final List<String> belongingGroups = item.getGroups();
+	for (final String name : belongingGroups) {
+	    if (!Empty.is(name)) {
+		addNewGroup(name, false, true);
+	    }
+	}
 	final ArrayList<String> groups = new ArrayList<String>(roster.getGroupNames());
-	groups.removeAll(item.getGroups());
+	groups.removeAll(belongingGroups);
 	for (final String name : groups) {
 	    if (!Empty.is(name)) {
 		addNewGroup(name, false, false);

@@ -1,4 +1,4 @@
-package com.calclab.hablar.roster.client.addtogroup;
+package com.calclab.hablar.roster.client.changegroups;
 
 import com.calclab.hablar.core.client.mvp.Display;
 import com.google.gwt.user.client.ui.HasText;

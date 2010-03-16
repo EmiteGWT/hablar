@@ -5,8 +5,8 @@ import com.google.gwt.i18n.client.LocalizableResource.DefaultLocale;
 
 @DefaultLocale("en")
 public interface RosterMessages extends Messages {
-    @DefaultMessage("Add to a group")
-    String addToToGroupAction();
+    @DefaultMessage("Change groups")
+    String changeContactGroups();
 
     @DefaultMessage("Delete group {0} with {1} items. Are you sure?")
     String confirmDeleteGroup(String groupName, String itemCount);

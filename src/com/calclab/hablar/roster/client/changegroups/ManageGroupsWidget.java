@@ -1,7 +1,5 @@
-package com.calclab.hablar.roster.client.addtogroup;
+package com.calclab.hablar.roster.client.changegroups;
 
-import com.calclab.hablar.core.client.ui.icon.HablarIcons;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -9,11 +7,13 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
-public class AddToGroupsWidget extends Composite implements AddToGroupsDisplay {
+public class ManageGroupsWidget extends Composite implements ManageGroupsDisplay {
 
-    interface AddToGroupsWidgetUiBinder extends UiBinder<Widget, AddToGroupsWidget> {
+    interface AddToGroupsWidgetUiBinder extends UiBinder<Widget, ManageGroupsWidget> {
     }
 
     private static AddToGroupsWidgetUiBinder uiBinder = GWT.create(AddToGroupsWidgetUiBinder.class);
@@ -22,19 +22,16 @@ public class AddToGroupsWidget extends Composite implements AddToGroupsDisplay {
     Button accept, cancel, newGroup;
     @UiField
     FlowPanel groupList;
+    @UiField
+    Label contactName;
 
-    public AddToGroupsWidget() {
+    public ManageGroupsWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
     }
 
     @Override
-    public GroupSelectorDisplay addGroupSelector(final String name, final boolean editable, final boolean selected) {
+    public GroupSelectorDisplay addGroupSelector() {
 	final GroupSelectorDisplay selector = new GroupSelectorWidget();
-	selector.setIconStyle(HablarIcons.get(IconType.groupChat));
-	selector.setEditable(editable);
-	selector.getSelected().setValue(selected);
-	selector.getStaticName().setText(name);
-	selector.getEditableName().setText(name);
 	groupList.add(selector.asWidget());
 	return selector;
     }
@@ -57,6 +54,11 @@ public class AddToGroupsWidget extends Composite implements AddToGroupsDisplay {
     @Override
     public HasClickHandlers getCancel() {
 	return cancel;
+    }
+
+    @Override
+    public HasText getContactNameField() {
+	return contactName;
     }
 
     @Override

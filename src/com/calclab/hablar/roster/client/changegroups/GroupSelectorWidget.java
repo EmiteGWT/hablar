@@ -1,4 +1,4 @@
-package com.calclab.hablar.roster.client.addtogroup;
+package com.calclab.hablar.roster.client.changegroups;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;

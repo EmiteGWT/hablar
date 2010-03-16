@@ -7,18 +7,19 @@
 	<g:ScrollPanel ui:field="scroll" height="100%" styleName="scroll">
 		<g:HTMLPanel styleName="hablar-AddToGroupsWidget">
 			<div class="form">
-				<h2>Add contact to groups</h2>
+				<h2>Change contact groups</h2>
 				<p>
 					<label>Contact Name:</label>
-					<g:Label ui:field="contact"></g:Label>
+					<g:Label ui:field="contactName"></g:Label>
 				</p>
-				<label ui:field="groupListLabel">Roster Groups to be Added To:</label>
+				<br/>
+				<label ui:field="groupListLabel">Roster Groups:</label>
 				<g:FlowPanel ui:field="groupList" styleName="list"></g:FlowPanel>
 				<p>
 					<g:Button ui:field="newGroup">New group</g:Button>
 				</p>
 				<div class="actions">
-					<g:Button ui:field="accept">Add to Groups</g:Button>
+					<g:Button ui:field="accept">Accept</g:Button>
 					<g:Button ui:field="cancel">Cancel</g:Button>
 				</div>
 			</div>
