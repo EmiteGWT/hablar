@@ -26,6 +26,8 @@ public class GroupHeaderPresenter implements Presenter<GroupHeaderDisplay> {
 	    @Override
 	    public void onClick(final ClickEvent event) {
 		groupPresenter.toggleVisibility();
+		final boolean visible = groupPresenter.isVisible();
+		setVisibleStyle(visible);
 	    }
 	});
 	display.getOpenMenu().addClickHandler(new ClickHandler() {
@@ -48,12 +50,20 @@ public class GroupHeaderPresenter implements Presenter<GroupHeaderDisplay> {
 	};
 	group.onItemAdded(updateGroup);
 	group.onItemRemoved(updateGroup);
-
+	setVisibleStyle(groupPresenter.isVisible());
     }
 
     @Override
     public GroupHeaderDisplay getDisplay() {
 	return display;
+    }
+
+    protected void setVisibleStyle(final boolean visible) {
+	if (visible) {
+	    display.removeStyleName("collapsed");
+	} else {
+	    display.addStyleName("collapsed");
+	}
     }
 
 }

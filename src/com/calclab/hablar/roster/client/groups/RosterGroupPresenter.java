@@ -63,6 +63,10 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	return group;
     }
 
+    public boolean isVisible() {
+	return display.isVisible();
+    }
+
     public void toggleVisibility() {
 	display.setVisible(!display.isVisible());
     }

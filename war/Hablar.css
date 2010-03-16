@@ -252,9 +252,16 @@ div.hablar-ActionWidget:hover {
 	border-bottom: 1px solid #BBBBBB;
 }
 
-div.hablar-GroupHeaderWidget:hover {
-	background-color: #BBBBBB;
+
+div.hablar-GroupHeaderWidget.collapsed {
+    color: #BBBBBB;
 }
+
+div.hablar-GroupHeaderWidget:hover {
+    background-color: #BBBBBB;
+    color: black;
+}
+
 
 .hablar-GroupHeaderWidget .label {
 	display: block;
