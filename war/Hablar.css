@@ -252,16 +252,14 @@ div.hablar-ActionWidget:hover {
 	border-bottom: 1px solid #BBBBBB;
 }
 
-
 div.hablar-GroupHeaderWidget.collapsed {
-    color: #BBBBBB;
+	color: #BBBBBB;
 }
 
 div.hablar-GroupHeaderWidget:hover {
-    background-color: #BBBBBB;
-    color: black;
+	background-color: #BBBBBB;
+	color: black;
 }
-
 
 .hablar-GroupHeaderWidget .label {
 	display: block;
@@ -522,7 +520,7 @@ div.hablar-SearchResultItemWidget:hover {
 /** OVERLAY **/
 .hablar-Overlay {
 	background-color: black;
-	opacity: 0.85;
+	opacity: 0.9;
 	z-index: 6000;
 	color: white;
 }
@@ -808,9 +806,31 @@ div.hablar-SearchResultItemWidget:hover {
 	margin-right: 5px;
 }
 
-/** WTF!!?: SEMANTIC CSS PLEASE! **/
+/** SEMANTIC CSS PLEASE! **/
 .overflowhidden {
 	overflow: hidden;
+}
+
+/** ADD TO GROUP **/
+.hablar-AddToGroupsWidget .list {
+	background-color: #E9E9E9;
+	padding: 5px;
+}
+
+.hablar-GroupSelectorWidget {
+	width: 100%;
+	overflow: hidden;
+	height: 1.5em;
+}
+
+.hablar-GroupSelectorWidget .select,.hablar-GroupSelectorWidget div {
+	float: left;
+	color: gray;
+	margin-right: 3px;
+}
+
+.hablar-GroupSelectorWidget .name {
+	color: black;
 }
 
 /** COPY TO CLIPBOARD **/

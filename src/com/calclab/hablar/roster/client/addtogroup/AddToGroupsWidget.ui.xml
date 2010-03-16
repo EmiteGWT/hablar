@@ -1,0 +1,27 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		
+	</ui:style>
+	<g:ScrollPanel ui:field="scroll" height="100%" styleName="scroll">
+		<g:HTMLPanel styleName="hablar-AddToGroupsWidget">
+			<div class="form">
+				<h2>Add contact to groups</h2>
+				<p>
+					<label>Contact Name:</label>
+					<g:Label ui:field="contact"></g:Label>
+				</p>
+				<label ui:field="groupListLabel">Roster Groups to be Added To:</label>
+				<g:FlowPanel ui:field="groupList" styleName="list"></g:FlowPanel>
+				<p>
+					<g:Button ui:field="newGroup">New group</g:Button>
+				</p>
+				<div class="actions">
+					<g:Button ui:field="accept">Add to Groups</g:Button>
+					<g:Button ui:field="cancel">Cancel</g:Button>
+				</div>
+			</div>
+		</g:HTMLPanel>
+	</g:ScrollPanel>
+</ui:UiBinder> 
