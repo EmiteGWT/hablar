@@ -75,10 +75,12 @@ public class ConvertToGroupChatPresenter extends EditRoomPresenter {
 
 	setItems(roster.getItems(), true, false);
 	final SelectRosterItemPresenter other = getItem(chatJid);
-	if (other == null) {
-	} else {
+	if (other != null) {
 	    other.setSelected(true);
 	    other.setEnabled(false);
+	} else {
+	    final RosterItem item = new RosterItem(chatJid, null, chatJid.getNode(), null);
+	    createItem(item, false, true);
 	}
 	final SelectRosterItemPresenter self = getItem(currentJid);
 	if (self != null) {

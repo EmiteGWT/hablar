@@ -76,7 +76,7 @@ public abstract class EditRoomPresenter extends PagePresenter<EditRoomDisplay> {
     }
 
     protected SelectRosterItemPresenter getItem(final XmppURI uri) {
-	return itemsByUri.get(uri);
+	return itemsByUri.get(uri.getJID());
     }
 
     protected abstract void onAccept();
