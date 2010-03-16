@@ -2,6 +2,8 @@ package com.calclab.hablar.chat.client.ui;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
+import java.util.ArrayList;
+
 import com.calclab.hablar.core.client.ui.actions.ActionWidget;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.google.gwt.core.client.GWT;
@@ -52,6 +54,22 @@ public class ChatWidget extends Composite implements ChatDisplay {
     }
 
     @Override
+    public ChatMessageDisplay addMessage(final String name, final String body, final ChatDisplay.MessageType messageType) {
+	final ChatMessage message = new ChatMessage(name, body, messageType);
+	list.add(message);
+	scroll.ensureVisible(message);
+	return message;
+    }
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Override
+    public void addToActions(final Widget widget) {
+	actions.add(widget);
+    }
+
+    @Override
     public Widget asWidget() {
 	return this;
     }
@@ -77,6 +95,16 @@ public class ChatWidget extends Composite implements ChatDisplay {
     @Override
     public HasText getBody() {
 	return talkBox;
+    }
+
+    @Override
+    public ArrayList<ChatMessageDisplay> getMessages() {
+	final ArrayList<ChatMessageDisplay> messageList = new ArrayList<ChatMessageDisplay>();
+	final int widgetCount = list.getWidgetCount();
+	for (int index = 0; index < widgetCount; index++) {
+	    messageList.add((ChatMessageDisplay) list.getWidget(index));
+	}
+	return messageList;
     }
 
     @Override
@@ -120,13 +148,6 @@ public class ChatWidget extends Composite implements ChatDisplay {
 	page.animate(500);
     }
 
-    @Override
-    public void showMessage(final String name, final String body, final ChatDisplay.MessageType messageType) {
-	final ChatMessage message = new ChatMessage(name, body, messageType);
-	list.add(message);
-	scroll.ensureVisible(message);
-    }
-
     private void layoutControls() {
 	page.setWidgetTopBottom(scroll, statusHeight, PX, controlsHeight + 3, PX);
 	page.setWidgetBottomHeight(controls, 0, PX, controlsHeight, PX);
@@ -136,14 +157,6 @@ public class ChatWidget extends Composite implements ChatDisplay {
 	page.setWidgetTopBottom(scroll, statusHeight, PX, controlsHeight + 3, PX);
 	page.setWidgetTopHeight(actions, 0, PX, statusHeight, PX);
 
-    }
-
-    /**
-     * {@inheritDoc}.
-     */
-    @Override
-    public void addToActions(Widget widget) {
-	actions.add(widget);
     }
 
 }

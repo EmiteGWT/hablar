@@ -3,7 +3,7 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<g:HTMLPanel styleName="hablar-OpenChatWidget">
 		<div class="form">
-			<h2>Move contact to a group</h2>
+			<h2>Add contact to groups</h2>
 			<p>
 				<label>Contact:</label>
 				<g:Label ui:field="contact"></g:Label>

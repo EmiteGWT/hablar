@@ -80,6 +80,9 @@
             @sprite .groupChatIcon {
                 gwt-image: 'groupChatIcon';
             }
+            @sprite .clipboardIcon {
+                gwt-image: 'clipboardIcon';
+            }
 		</ui:style>
 
     <ui:image field="onIcon" src="jpg/on.jpg"></ui:image>
@@ -99,6 +102,7 @@
 	<ui:image field="buddyAddIcon" src="jpg/buddy-add.jpg"></ui:image>
 	<ui:image field="loadingIcon" src="png/loading.gif"></ui:image>
 	<ui:image field="groupChatIcon" src="jpg/group-chat.jpg"></ui:image>
+	<ui:image field="clipboardIcon" src="jpg/clipboard.jpg"></ui:image>
 
 	<g:SimplePanel></g:SimplePanel>
 </ui:UiBinder> 

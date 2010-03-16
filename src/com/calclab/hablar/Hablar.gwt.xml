@@ -2,6 +2,7 @@
 <module rename-to='Hablar'>
     <inherits name='com.calclab.emite.core.EmiteCore' />
     <inherits name='com.calclab.emite.im.EmiteIM' />
+    <inherits name='com.calclab.emite.xep.storage.EmitePrivateStorage' />
     <inherits name='com.calclab.hablar.core.HablarCore' />
     <inherits name='com.calclab.hablar.roster.HablarRoster' />
     <inherits name='com.calclab.hablar.search.HablarSearch' />
@@ -13,7 +14,7 @@
     <inherits name='com.calclab.hablar.vcard.HablarVCard' />
     <inherits name='com.calclab.hablar.groupchat.HablarGroupChat' />
     <inherits name='com.calclab.hablar.rooms.HablarRooms' />
-    <inherits name='com.calclab.emite.xep.storage.EmitePrivateStorage' />
+    <inherits name='com.calclab.hablar.clipboard.HablarClipboard' />
 
     <source path='' />
     <entry-point class="com.calclab.hablar.HablarEntryPoint"></entry-point>

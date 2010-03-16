@@ -1,5 +1,7 @@
 package com.calclab.hablar.chat.client.ui;
 
+import java.util.ArrayList;
+
 import com.calclab.hablar.core.client.mvp.Display;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -13,19 +15,38 @@ public interface ChatDisplay extends Display {
 	incoming, sent, info, alert
     }
 
-    void clearAndFocus();
+    /**
+     * Add a new message to the chat panel
+     * 
+     * @param name
+     * @param body
+     * @param messageType
+     * @return
+     */
+    ChatMessageDisplay addMessage(String name, String body, ChatDisplay.MessageType messageType);
 
     /**
      * Adds a widget to the action bar for this chat view
-     * @param widget the widget to add
+     * 
+     * @param widget
+     *            the widget to add
      */
     void addToActions(Widget widget);
-    
+
+    void clearAndFocus();
+
     HasClickHandlers createAction(Action<?> action);
 
     HasClickHandlers getAction();
 
     HasText getBody();
+
+    /**
+     * Return a list with all the messages of this chat panel
+     * 
+     * @return a list, never null but can be empty
+     */
+    ArrayList<ChatMessageDisplay> getMessages();
 
     HasText getState();
 
@@ -39,7 +60,5 @@ public interface ChatDisplay extends Display {
     void setId(String id);
 
     void setStatusVisible(boolean visible);
-
-    void showMessage(String name, String body, ChatDisplay.MessageType messageType);
 
 }

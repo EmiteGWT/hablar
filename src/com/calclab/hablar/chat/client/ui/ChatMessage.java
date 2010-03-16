@@ -11,7 +11,7 @@ import com.google.gwt.user.client.ui.Widget;
  * A chat message
  */
 // FIXME: probably UIBinder is too much
-public class ChatMessage extends Composite {
+public class ChatMessage extends Composite implements ChatMessageDisplay {
 
     interface ChatMessageUiBinder extends UiBinder<Widget, ChatMessage> {
     }
@@ -32,6 +32,16 @@ public class ChatMessage extends Composite {
 	}
 	this.body.setInnerHTML(body);
 	this.body.addClassName(type.toString());
+    }
+
+    @Override
+    public String getAuthor() {
+	return author.getInnerText();
+    }
+
+    @Override
+    public String getBody() {
+	return body.getInnerText();
     }
 
 }

@@ -17,6 +17,8 @@ public class HablarConfig {
 	config.hasSearch = PageAssist.isMetaTrue("hablar.search");
 	config.hasSignals = PageAssist.isMetaTrue("hablar.hasSignals");
 	config.hasChat = PageAssist.isMetaTrue("hablar.hasChats");
+	config.hasVCard = PageAssist.isMetaTrue("hablar.hasVCard");
+	config.hasCopyToClipboard = PageAssist.isMetaTrue("hablar.hasCopyToClipboard");
 
 	config.dockRoster = PageAssist.getMeta("hablar.dockRoster");
 
@@ -76,5 +78,15 @@ public class HablarConfig {
      * The Search module configuration
      */
     public SearchConfig searchConfig = new SearchConfig();
+
+    /**
+     * Install the copy-to-clipboard module
+     */
+    public boolean hasCopyToClipboard = true;
+
+    /**
+     * Install the VCard module
+     */
+    public boolean hasVCard = true;
 
 }

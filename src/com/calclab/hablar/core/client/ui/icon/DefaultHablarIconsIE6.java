@@ -5,8 +5,8 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * Extend the DefaultHablarIcons class to use jpg (yuck) icons
- * as IE6 seems to have a some issues with png background images
+ * Extend the DefaultHablarIcons class to use jpg (yuck) icons as IE6 seems to
+ * have a some issues with png background images
  */
 public class DefaultHablarIconsIE6 extends DefaultHablarIcons {
 

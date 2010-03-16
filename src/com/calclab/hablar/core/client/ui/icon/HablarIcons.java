@@ -9,7 +9,7 @@ package com.calclab.hablar.core.client.ui.icon;
  */
 public class HablarIcons {
     public static enum IconType {
-	buddy, buddyDnd, buddyOff, buddyOn, buddyWait, roster, menu, chat, chatAdd, search, on, off, close, buddyAdd, console, loading, groupChat
+	buddy, buddyDnd, buddyOff, buddyOn, buddyWait, roster, menu, chat, chatAdd, search, on, off, close, buddyAdd, console, loading, groupChat, clipboard
     }
 
     public static enum StyleType {

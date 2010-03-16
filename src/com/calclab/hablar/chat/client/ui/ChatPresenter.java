@@ -2,6 +2,8 @@ package com.calclab.hablar.chat.client.ui;
 
 import static com.calclab.hablar.chat.client.HablarChat.i18n;
 
+import java.util.ArrayList;
+
 import com.calclab.emite.core.client.packet.TextUtils;
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
@@ -61,7 +63,7 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
 	    public void onEvent(final Message message) {
 		final String body = ChatMessageFormatter.format(message.getBody());
 		if (body != null) {
-		    display.showMessage(userName, body, ChatDisplay.MessageType.incoming);
+		    display.addMessage(userName, body, ChatDisplay.MessageType.incoming);
 		    fireUserMessage(body);
 		    if (getVisibility() == Visibility.hidden) {
 			requestVisibility(Visibility.notFocused);
@@ -118,6 +120,11 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
     }
 
     @Override
+    public ArrayList<ChatMessageDisplay> getMessages() {
+	return display.getMessages();
+    }
+
+    @Override
     public void setPresence(final boolean available, final Show show) {
 	getState().setPageIcon(PresenceIcon.getIcon(available, show));
 	if (available) {
@@ -148,7 +155,7 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
 	final String text = display.getBody().getText().trim();
 	if (!text.isEmpty()) {
 	    final String body = ChatMessageFormatter.format(text);
-	    display.showMessage("me", body, ChatDisplay.MessageType.sent);
+	    display.addMessage("me", body, ChatDisplay.MessageType.sent);
 	    chat.send(new Message(text));
 	    display.clearAndFocus();
 	}

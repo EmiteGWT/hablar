@@ -52,9 +52,9 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> {
 		if (body != null) {
 		    final String from = message.getFrom().getResource();
 		    if (me.equals(from)) {
-			display.showMessage("me", body, ChatDisplay.MessageType.sent);
+			display.addMessage("me", body, ChatDisplay.MessageType.sent);
 		    } else {
-			display.showMessage(from, body, ChatDisplay.MessageType.incoming);
+			display.addMessage(from, body, ChatDisplay.MessageType.incoming);
 			fireUserMessage(roomName, from, body);
 		    }
 		}
@@ -103,7 +103,7 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> {
     }
 
     public void showMessage(final String text) {
-	display.showMessage(null, text, ChatDisplay.MessageType.info);
+	display.addMessage(null, text, ChatDisplay.MessageType.info);
     }
 
     private void fireUserMessage(final String roomName, final String from, String body) {

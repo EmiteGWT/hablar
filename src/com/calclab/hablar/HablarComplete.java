@@ -1,6 +1,7 @@
 package com.calclab.hablar;
 
 import com.calclab.hablar.chat.client.HablarChat;
+import com.calclab.hablar.clipboard.client.HablarClipboard;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.dock.client.DockConfig;
@@ -53,7 +54,14 @@ public class HablarComplete {
 	if (config.hasSignals) {
 	    HablarSignals.install(hablar);
 	}
-	HablarVCard.install(hablar);
+
+	if (config.hasVCard) {
+	    HablarVCard.install(hablar);
+	}
+
+	if (config.hasCopyToClipboard) {
+	    HablarClipboard.install(hablar);
+	}
 
     }
 
