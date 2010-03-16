@@ -63,7 +63,8 @@ public class EditBuddyPage extends PagePresenter<EditBuddyDisplay> {
 
     private void updateCurrentItem() {
 	final String newName = display.getNickName().getText();
-	if (!currentItem.getName().equals(newName)) {
+	assert newName != null : "Validation of new name field failed!";
+	if (!newName.equals(currentItem.getName())) {
 	    currentItem.setName(newName);
 	    roster.requestUpdateItem(currentItem);
 	}
