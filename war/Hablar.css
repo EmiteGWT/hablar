@@ -181,6 +181,11 @@ div.hablar-ActionWidget:hover {
 .hablar-Header.DockHeaderWidget-top {
 	background-color: #BBB;
 	border: 1px solid #BBB;
+	
+}
+
+.hablar-Header.DockHeaderWidget-left {
+	cursor: default;
 }
 
 .DockHeaderWidget-left .icon {
