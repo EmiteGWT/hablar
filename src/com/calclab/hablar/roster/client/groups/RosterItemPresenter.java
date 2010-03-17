@@ -32,6 +32,7 @@ public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
 	display.getMenuAction().addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(final ClickEvent event) {
+		event.stopPropagation();
 		event.preventDefault();
 		final Element element = event.getRelativeElement();
 		itemMenu.setTarget(RosterItemPresenter.this);

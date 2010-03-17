@@ -1,851 +1,855 @@
 /** TRYING TO SOLVE THE TABS ISSUE IN... WINDOWS? **/
 .gwt-TabLayoutPanel .gwt-TabLayoutPanelTabs,.gwt-TabLayoutPanel .gwt-TabLayoutPanelTab,.gwt-TabLayoutPanel .gwt-TabLayoutPanelTabInner
-	{
-	margin: 0;
-	padding: 0;
+    {
+    margin: 0;
+    padding: 0;
 }
 
 /** IE6 ZINDEX BUG **/
 .hablar-HablarWidget {
-	z-index: 1;
+    z-index: 1;
 }
 
 html {
-	font-family: Tahoma, sans-serif;
-	font-size: 80%;
+    font-family: Tahoma, sans-serif;
+    font-size: 80%;
 }
 
 /** HABLAR PAGE COMMON **/
 .hablar-Page {
-	background-color: #E9E9E9;
-	border: 3px solid #E9E9E9;
+    background-color: #E9E9E9;
+    border: 3px solid #E9E9E9;
 }
 
 .hablar-Page .panel {
-	width: 100%;
-	overflow: hidden;
-	background-color: #E9E9E9;
+    width: 100%;
+    overflow: hidden;
+    background-color: #E9E9E9;
 }
 
 .hablar-Page .scroll {
-	background-color: white;
-	border-left: 1px solid #BBBBBB;
-	/* This border affects scroll visibility */
-	border-top: 1px solid #BBBBBB;
+    background-color: white;
+    border-left: 1px solid #BBBBBB;
+    /* This border affects scroll visibility */
+    border-top: 1px solid #BBBBBB;
 }
 
 .hablar-Page .list {
-	width: 100%;
-	overflow: hidden;
+    width: 100%;
+    overflow: hidden;
 }
 
 .hablar-Page .gwt-Button {
-	font-size: 100%;
+    font-size: 100%;
 }
 
 div.hablar-ActionWidget {
-	padding: 2px 2px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	background-color: #E9E9E9;
-	cursor: pointer;
-	background-position: center;
+    padding: 2px 2px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    background-color: #E9E9E9;
+    cursor: pointer;
+    background-position: center;
 }
 
 div.hablar-ActionWidget:hover {
-	background-color: #BBBBBB;
+    background-color: #BBBBBB;
 }
 
 /** DISABLED PANEL **/
 .hablar-Page .disabledPanel {
-	position: relative;
-	left: 0;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	display: block;
-	background-color: #BBBBBB;
-	border-left: 1px solid #8C8C8C;
-	border-top: 1px solid #8C8C8C;
+    position: relative;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    background-color: #BBBBBB;
+    border-left: 1px solid #8C8C8C;
+    border-top: 1px solid #8C8C8C;
 }
 
 .hablar-Page .disabledPanel .disabledMessage {
-	display: block;
-	text-align: center;
-	width: 100%;
-	padding-top: 2em;
-	color: #E9E9E9;
+    display: block;
+    text-align: center;
+    width: 100%;
+    padding-top: 2em;
+    color: #E9E9E9;
 }
 
 /** HABLAR HEADER **/
 .hablar-Header {
-	width: 100%;
-	overflow: hidden;
-	background-color: #E9E9E9;
-	cursor: pointer;
-	padding: 3px 0;
-	border-top: 1px solid #E9E9E9;
-	border-bottom: 1px solid #E9E9E9;
+    width: 100%;
+    overflow: hidden;
+    background-color: #E9E9E9;
+    cursor: pointer;
+    padding: 3px 0;
+    border-top: 1px solid #E9E9E9;
+    border-bottom: 1px solid #E9E9E9;
 }
 
 .hablar-Header.unattended {
-	color: #c00;
-	font-weight: bold;
+    color: #c00;
+    font-weight: bold;
 }
 
 .hablar-Header .icon {
-	float: left;
-	margin-right: 3px;
+    float: left;
+    margin-right: 3px;
 }
 
 .hablar-Header .title {
-	float: left;
+    float: left;
 }
 
 .hablar-AccordionHeaderWidget  .icon {
-	float: left;
-	margin: 0 3px 0 3px;
+    float: left;
+    margin: 0 3px 0 3px;
 }
 
 .hablar-AccordionHeaderWidget  .title {
-	display: block;
-	margin: 0 3px;
+    display: block;
+    margin: 0 3px;
 }
 
 .hablar-AccordionHeaderWidget  .close {
-	float: right;
-	margin: 0px 3px 0 0;
+    float: right;
+    margin: 0px 3px 0 0;
 }
 
 .gwt-TabLayoutPanelTabs {
-	height: 24px;
+    height: 24px;
 }
 
 .hablar-TabsHeaderWidget {
-	padding: 0;
-	margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 .hablar-TabsHeaderWidget .close {
-	margin: 2px 3px;
+    margin: 2px 3px;
 }
 
 .hablar-AccordionHeader .close {
-	margin: 2px 3px 0 0;
+    margin: 2px 3px 0 0;
 }
 
 .hablar-AccordionHeader .icon {
-	
+
 }
 
 .hablar-AccordionHeader .title {
-	display: block;
+    display: block;
 }
 
 .hablar-AccordionHeaderWidget.notFocused {
-	border-top: 1px solid #E9E9E9;
-	border-bottom: 1px solid #BBB;
+    border-top: 1px solid #E9E9E9;
+    border-bottom: 1px solid #BBB;
 }
 
 .hablar-AccordionHeaderWidget.focused {
-	border-top: 1px solid white;
-	border-bottom: 1px solid #BBB;
+    border-top: 1px solid white;
+    border-bottom: 1px solid #BBB;
 }
 
 .hablar-TabsHeaderWidget .title {
-	display: inline;
-	margin-right: 10px;
+    display: inline;
+    margin-right: 10px;
 }
 
 .hablar-TabsHeaderWidget.notFocused {
-	border-top: 1px solid #E9E9E9;
-	border-left: 1px solid #BBB;
-	border-right: 1px solid #BBB;
-	border-bottom: 1px solid #BBB;
-	margin-right: -1px;
+    border-top: 1px solid #E9E9E9;
+    border-left: 1px solid #BBB;
+    border-right: 1px solid #BBB;
+    border-bottom: 1px solid #BBB;
+    margin-right: -1px;
 }
 
 .hablar-TabsHeaderWidget.focused {
-	border-top: 1px solid white;
-	border-left: 1px solid white;
-	border-right: 1px solid white;
-	border-bottom: 1px solid #E9E9E9;
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    border-bottom: 1px solid #E9E9E9;
 }
 
 /** DOCKS **/
 .hablar-DockContainer-top {
-	background-color: #BBB;
-	z-index: 6000;
+    background-color: #BBB;
+    z-index: 6000;
 }
 
 .hablar-Header.DockHeaderWidget-top {
-	background-color: #BBB;
-	border: 1px solid #BBB;
-	
+    background-color: #BBB;
+    border: 1px solid #BBB;
+
 }
 
 .hablar-Header.DockHeaderWidget-left {
-	cursor: default;
+    cursor: default;
+    -moz-user-select: none;
 }
 
 .DockHeaderWidget-left .icon {
-	margin-left: 3px;
+    margin-left: 3px;
 }
 
 /** LOGIN **/
 .hablar-Login .output {
-	padding: 3px;
-	background-color: white;
-	border-left: 1px solid #BBBBBB;
-	border-top: 1px solid #BBBBBB;
+    padding: 3px;
+    background-color: white;
+    border-left: 1px solid #BBBBBB;
+    border-top: 1px solid #BBBBBB;
 }
 
 /** LIST ITEMS **/
 .hablar-ListItem {
-	display: block;
-	width: 100%;
-	overflow: hidden;
-	padding: 5px 0px 0 0px;
-	border-bottom: 1px solid #E9E9E9;
-	cursor: pointer;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    padding: 5px 0px 0 0px;
+    border-bottom: 1px solid #E9E9E9;
+    cursor: pointer;
 }
 
 /** USER **/
 .hablar-UserWidget .container {
-	padding: 0px 10px;
-	z-index: 3000;
+    padding: 0px 10px;
+    z-index: 3000;
 }
 
 .hablar-UserWidget .hablar-Header {
-	background-color: #BBB;
-	margin-top: 15px;
+    background-color: #BBB;
+    margin-top: 15px;
 }
 
 .hablar-UserWidget .hablar-Header.focused,.hablar-UserWidget .hablar-Header.notFocused
-	{
-	background-color: #BBB;
-	border-bottom: 1px solid #EFEFEF;
-	border-top: 1px solid #BBB;
+    {
+    background-color: #BBB;
+    border-bottom: 1px solid #EFEFEF;
+    border-top: 1px solid #BBB;
 }
 
 .hablar-UserWidget h2 {
-	margin: 15px 0 5px 0;
-	border-bottom: 1px solid #EFEFEF;
+    margin: 15px 0 5px 0;
+    border-bottom: 1px solid #EFEFEF;
 }
 
 .hablar-UserWidget .actions {
-	padding: 5px 0 0 10px;
+    padding: 5px 0 0 10px;
 }
 
 /** ROSTER **/
 .hablar-RosterWidget .item {
-	width: 100%;
-	overflow: hidden;
+    width: 100%;
+    overflow: hidden;
 }
 
 .hablar-RosterWidget .actions {
-	width: 100%;
-	overflow: hidden;
+    width: 100%;
+    overflow: hidden;
 }
 
 .hablar-RosterWidget .actions .hablar-ActionWidget {
-	float: left;
-	margin-right: 1px;
+    float: left;
+    margin-right: 1px;
 }
 
 .hablar-GroupHeaderWidget {
-	width: 100%;
-	overflow: hidden;
-	background-color: #E9E9E9;
-	padding: 3px;
-	cursor: pointer;
-	border-bottom: 1px solid #BBBBBB;
+    width: 100%;
+    overflow: hidden;
+    background-color: #E9E9E9;
+    padding: 3px;
+    cursor: pointer;
+    border-bottom: 1px solid #BBBBBB;
 }
 
 div.hablar-GroupHeaderWidget.collapsed {
-	color: #BBBBBB;
+    color: #BBBBBB;
 }
 
 div.hablar-GroupHeaderWidget:hover {
-	background-color: #BBBBBB;
-	color: black;
+    background-color: #BBBBBB;
+    color: black;
 }
 
 .hablar-GroupHeaderWidget .label {
-	display: block;
-	margin: 3px;
+    display: block;
+    margin: 3px;
 }
 
 .hablar-GroupHeaderWidget .menu {
-	float: right;
-	margin-right: 3px;
+    float: right;
+    margin-right: 3px;
 }
 
 div.hablar-RosterItemWidget:hover {
-	background-color: #E9E9E9;
+    background-color: #E9E9E9;
 }
 
 .hablar-RosterItemWidget .user {
-	float: left;
+    float: left;
 }
 
 .hablar-RosterItemWidget .icon {
-	display: block;
-	float: left;
-	margin: 2px 5px 2px 2px;
-	width: 16px;
-	height: 16px;
+    display: block;
+    float: left;
+    margin: 2px 5px 2px 2px;
+    width: 16px;
+    height: 16px;
 }
 
 .hablar-RosterItemWidget .name {
-	display: block;
-	float: left;
-	cursor: pointer;
-	margin-right: 5px;
+    display: block;
+    float: left;
+    cursor: pointer;
+    margin-right: 5px;
 }
 
 .hablar-RosterItemWidget .jid {
-	float: left;
-	display: block;
-	color: #BBB;
-	padding-right: 5px;
+    float: left;
+    display: block;
+    color: #BBB;
+    padding-right: 5px;
 }
 
 .hablar-RosterItemWidget .menu {
-	float: right;
+    float: right;
 }
 
 .hablar-RosterItemWidget .status {
-	display: block;
-	margin: 0 0 2px 25px;
-	color: gray;
+    display: block;
+    margin: 0 0 2px 25px;
+    color: gray;
 }
 
 /** CHAT PAGE **/
 .hablar-ChatWidget .talkBox {
-	width: 100%;
-	margin: 3px 0;
-	padding: 3px;
-	height: 54px;
-	border: 1px solid #BBBBBB;
+    width: 100%;
+    margin: 3px 0;
+    padding: 3px;
+    height: 54px;
+    border: 1px solid #BBBBBB;
 }
 
 .hablar-ChatWidget .chatMessage {
-	display: block;
-	width: 94%;
-	overflow: hidden;
-	padding: 3px 3% 0 3%;
+    display: block;
+    width: 94%;
+    overflow: hidden;
+    padding: 3px 3% 0 3%;
 }
 
 .hablar-ChatWidget .author {
-	display: block;
-	float: left;
-	font-weight: bold;
+    display: block;
+    float: left;
+    font-weight: bold;
 }
 
 .hablar-ChatWidget .body {
-	margin-left: 10px;
-	float: left;
+    margin-left: 10px;
+    float: left;
 }
 
 .hablar-ChatWidget .state {
-	margin-left: 3px;
-	color: #999999;
+    margin-left: 3px;
+    color: #999999;
 }
 
 .hablar-ChatWidget .actions div {
-	float: right;
+    float: right;
 }
 
 .chatMessage .body.incoming {
-	
+
 }
 
 .chatMessage .body.sent {
-	color: #808080;
+    color: #808080;
 }
 
 .chatMessage .body.info {
-	color: #808080;
-	font-style: italic;
+    color: #808080;
+    font-style: italic;
 }
 
 .chatMessage .body.alert {
-	color: #c00;
+    color: #c00;
 }
 
 /** SEARCH PAGE **/
 .hablar-SearchWidget .searchBox {
-	width: 78%;
-	padding: 3px;
-	border: 1px solid #BBBBBB;
-	margin-right: 1%;
+    width: 78%;
+    padding: 3px;
+    border: 1px solid #BBBBBB;
+    margin-right: 1%;
 }
 
 .hablar-SearchWidget .gwt-Button {
-	width: 20%;
+    width: 20%;
 }
 
 .hablar-SearchResultItemWidget {
-	width: 100%;
-	overflow: hidden;
-	padding: 2px 0;
-	border-bottom: 1px solid #E9E9E9;
-	cursor: pointer;
+    width: 100%;
+    overflow: hidden;
+    padding: 2px 0;
+    border-bottom: 1px solid #E9E9E9;
+    cursor: default;
 }
 
 div.hablar-SearchResultItemWidget:hover {
-	background-color: #e9e9e9;
+    background-color: #e9e9e9;
 }
 
 .hablar-SearchResultItemWidget div {
-	float: left;
-	margin-right: 5px;
+    float: left;
+    margin-right: 5px;
 }
 
 .hablar-SearchResultItemWidget div.icon {
-	margin: 0 5px;
+    margin: 0 5px;
 }
 
 .hablar-SearchResultItemWidget div.jid {
-	color: gray;
+    color: gray;
 }
 
 .hablar-SearchResultItemWidget div.menu {
-	float: right;
-	margin-right: 0;
-	margin-left: 5px;
+    float: right;
+    margin-right: 0;
+    margin-left: 5px;
+    cursor: pointer;
 }
 
 /** ROOMS **/
 .hablar-ChatWidget .actions .hablar-OccupantsWidget {
-	display: block;
-	float: left;
-	padding: 2px 5px;
-	color: black;
-	margin-left: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	background-color: #E9E9E9;
-	cursor: pointer;
+    display: block;
+    float: left;
+    padding: 2px 5px;
+    color: black;
+    margin-left: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    background-color: #E9E9E9;
+    cursor: pointer;
 }
 
 .hablar-ChatWidget .actions div.hablar-OccupantsWidget:hover {
-	background-color: #BBBBBB;
-	color: white;
+    background-color: #BBBBBB;
+    color: white;
 }
 
 .gwt-PopupPanel.occupants {
-	background-color: #E9E9E9;
-	border-top: 1px solid #E9E9E9;
-	border-left: 1px solid #BBBBBB;
-	border-right: 1px solid #BBBBBB;
-	border-bottom: 1px solid #BBBBBB;
-	z-index: 10000;
+    background-color: #E9E9E9;
+    border-top: 1px solid #E9E9E9;
+    border-left: 1px solid #BBBBBB;
+    border-right: 1px solid #BBBBBB;
+    border-bottom: 1px solid #BBBBBB;
+    z-index: 10000;
 }
 
 .hablar-OccupantWidget {
-	width: 100%;
-	overflow: hidden;
-	margin: 2px 5px;
+    width: 100%;
+    overflow: hidden;
+    margin: 2px 5px;
 }
 
 .hablar-OccupantWidget .icon {
-	display: block;
-	float: left;
-	margin-right: 5px;
+    display: block;
+    float: left;
+    margin-right: 5px;
 }
 
 .hablar-OccupantWidget .name {
-	display: block;
-	float: left;
+    display: block;
+    float: left;
 }
 
 /** ROOM INVITATION **/
 .hablar-OpenRoomWidget .list {
-	background-color: #E9E9E9;
-	padding: 5px;
+    background-color: #E9E9E9;
+    padding: 5px;
 }
 
 .hablar-SelectRosterItemWidget {
-	width: 100%;
-	overflow: hidden;
+    width: 100%;
+    overflow: hidden;
 }
 
 .hablar-SelectRosterItemWidget .select,.hablar-SelectRosterItemWidget div
-	{
-	float: left;
-	color: gray;
-	margin-right: 3px;
+    {
+    float: left;
+    color: gray;
+    margin-right: 3px;
 }
 
 .hablar-SelectRosterItemWidget .name {
-	color: black;
+    color: black;
 }
 
 /** LOGGER **/
 .hablar-Logger {
-	border: 3px solid #E9E9E9;
-	background-color: #E9E9E9;
+    border: 3px solid #E9E9E9;
+    background-color: #E9E9E9;
 }
 
 .hablar-Logger .gwt-Label {
-	border-bottom: 1px solid #E9E9E9;
-	background-color: white;
-	opacity: 0.5;
+    border-bottom: 1px solid #E9E9E9;
+    background-color: white;
+    opacity: 0.5;
 }
 
 .hablar-Logger .actions {
-	border-bottom: 1px solid #BBBBBB;
+    border-bottom: 1px solid #BBBBBB;
 }
 
 .hablar-Logger .gwt-Anchor {
-	display: block;
-	float: left;
-	padding: 2px 5px;
-	color: black;
-	margin-left: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	background-color: #E9E9E9;
+    display: block;
+    float: left;
+    padding: 2px 5px;
+    color: black;
+    margin-left: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    background-color: #E9E9E9;
 }
 
 .hablar-Logger a.gwt-Anchor:hover {
-	color: white;
-	background-color: #BBBBBB;
+    color: white;
+    background-color: #BBBBBB;
 }
 
 .hablar-Logger .gwt-Label.ready {
-	opacity: 1;
+    opacity: 1;
 }
 
 .hablar-Logger .output {
-	color: blue;
+    color: blue;
 }
 
 .hablar-Logger .input {
-	color: #0c0;
+    color: #0c0;
 }
 
 /** OVERLAY **/
 .hablar-Overlay {
-	background-color: black;
-	opacity: 0.9;
-	z-index: 6000;
-	color: white;
+    background-color: black;
+    opacity: 0.9;
+    z-index: 6000;
+    color: white;
 }
 
 .hablar-Overlay .form {
-	margin: 50px 10px 10px 10px;
+    margin: 50px 10px 10px 10px;
 }
 
 /** FORMS **/
 .form p {
-	width: 100%;
-	overflow: hidden;
-	margin: 3px 0;
+    width: 100%;
+    overflow: hidden;
+    margin: 3px 0;
 }
 
 .form h2 {
-	font-size: 200%;
+    font-size: 200%;
 }
 
 .form span.option {
-	display: block;
-	margin: 0 0 15px 30px;
+    display: block;
+    margin: 0 0 15px 30px;
 }
 
 .form p label {
-	display: block;
-	margin-top: 5px;
-	margin-right: 10px;
-	margin-right: 0.5em;
+    display: block;
+    margin-top: 5px;
+    margin-right: 10px;
+    margin-right: 0.5em;
 }
 
 .form p .gwt-Label {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 .form .actions {
-	padding-left: 5px;
-	margin-top: 15px;
-	border-top: 1px solid #BBBBBB;
-	padding-top: 5px;
+    padding-left: 5px;
+    margin-top: 15px;
+    border-top: 1px solid #BBBBBB;
+    padding-top: 5px;
 }
 
 .form .gwt-TextBox,.form .gwt-PasswordTextBox {
-	border: 0px;
-	padding: 2px;
-	width: 100%;
+    border: 0px;
+    padding: 2px;
+    width: 100%;
 }
 
 .form p .gwt-RadioButton,.form p .gwt-CheckBox {
-	display: block;
-	width: 100%;
-	overflow: hidden;
+    display: block;
+    width: 100%;
+    overflow: hidden;
 }
 
 .form p .gwt-RadioButton input,.form p .gwt-CheckBox input {
-	float: left;
-	margin-right: 5px;
+    float: left;
+    margin-right: 5px;
 }
 
 .form p .gwt-RadioButton label,.form p .gwt-CheckBox label {
-	float: left;
-	margin: 0;
+    float: left;
+    margin: 0;
 }
 
 .form p .error {
-	color: #c00;
+    color: #c00;
 }
 
 .hablar-PopupPanel {
-	background-color: #E9E9E9;
-	border: 1px solid #BBBBBB;
-	z-index: 5000;
-	-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-	-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-	padding: 3px;
-	width: 170px;
-	overflow: hidden;
+    background-color: #E9E9E9;
+    border: 1px solid #BBBBBB;
+    z-index: 5000;
+    -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    padding: 3px;
+    width: 170px;
+    overflow: hidden;
 }
 
 .gwt-MenuBar {
-	cursor: default;
+    cursor: default;
+    -moz-user-select: none;
 }
 
 .gwt-MenuBar .gwt-MenuItem {
-	cursor: default;
+    cursor: default;
+    -moz-user-select: none;
 }
 
 .gwt-MenuBar .gwt-MenuItem-selected {
-	background: #cdcdcd;
+    background: #cdcdcd;
 }
 
 .gwt-MenuBar-horizontal {
-	background: #ebebeb url(images/hborder.png) repeat-x 0px -2003px;
-	border: 1px solid #BBBBBB;
+    background: #ebebeb url(images/hborder.png) repeat-x 0px -2003px;
+    border: 1px solid #BBBBBB;
 }
 
 .gwt-MenuBar-horizontal .gwt-MenuItem {
-	padding: 0px 10px;
-	vertical-align: bottom;
-	color: #666666;
-	font-weight: bold;
+    padding: 0px 10px;
+    vertical-align: bottom;
+    color: #666666;
+    font-weight: bold;
 }
 
 .gwt-MenuBar-horizontal .gwt-MenuItemSeparator {
-	width: 1px;
-	padding: 0px;
-	margin: 0px;
-	border: 0px;
-	border-left: 1px solid #888888;
-	background: white;
+    width: 1px;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    border-left: 1px solid #888888;
+    background: white;
 }
 
 .gwt-MenuBar-horizontal .gwt-MenuItemSeparator .menuSeparatorInner {
-	width: 1px;
-	height: 1px;
-	background: white;
+    width: 1px;
+    height: 1px;
+    background: white;
 }
 
 .gwt-MenuBar-vertical {
-	margin-top: 0px;
-	margin-left: 0px;
-	background: white;
+    margin-top: 0px;
+    margin-left: 0px;
+    background: white;
 }
 
 .gwt-MenuBar-vertical table {
-	border-collapse: collapse;
-	width: 100%;
+    border-collapse: collapse;
+    width: 100%;
 }
 
 .gwt-MenuBar-vertical .gwt-MenuItem {
-	padding: 4px 14px 4px 1px;
-	font-size: 80%;
+    padding: 4px 14px 4px 1px;
+    font-size: 80%;
 }
 
 .gwt-MenuBar-vertical .gwt-MenuItemSeparator {
-	padding: 2px 0px;
+    padding: 2px 0px;
 }
 
 .gwt-MenuBar-vertical .gwt-MenuItemSeparator .menuSeparatorInner {
-	height: 1px;
-	padding: 0px;
-	border: 0px;
-	border-top: 1px solid #777777;
-	background: #ddddee;
-	overflow: hidden;
+    height: 1px;
+    padding: 0px;
+    border: 0px;
+    border-top: 1px solid #777777;
+    background: #ddddee;
+    overflow: hidden;
 }
 
 .gwt-MenuBar-vertical .subMenuIcon {
-	padding-right: 4px;
+    padding-right: 4px;
 }
 
 .gwt-MenuBar-vertical .subMenuIcon-selected {
-	background: #cdcdcd;
+    background: #cdcdcd;
 }
 
 .gwt-MenuBarPopup {
-	margin: 0px 0px 0px 3px;
+    margin: 0px 0px 0px 3px;
 }
 
 .gwt-MenuBarPopup .menuPopupTopCenter {
-	background: url(images/hborder.png) 0px -12px repeat-x;
+    background: url(images/hborder.png) 0px -12px repeat-x;
 }
 
 .gwt-MenuBarPopup .menuPopupBottomCenter {
-	background: url(images/hborder.png) 0px -13px repeat-x;
-	-background: url(images/hborder_ie6.png) 0px -13px repeat-x;
+    background: url(images/hborder.png) 0px -13px repeat-x;
+    -background: url(images/hborder_ie6.png) 0px -13px repeat-x;
 }
 
 .gwt-MenuBarPopup .menuPopupMiddleLeft {
-	background: url(images/vborder.png) -12px 0px repeat-y;
-	-background: url(images/vborder_ie6.png) -12px 0px repeat-y;
+    background: url(images/vborder.png) -12px 0px repeat-y;
+    -background: url(images/vborder_ie6.png) -12px 0px repeat-y;
 }
 
 .gwt-MenuBarPopup .menuPopupMiddleRight {
-	background: url(images/vborder.png) -13px 0px repeat-y;
-	-background: url(images/vborder_ie6.png) -13px 0px repeat-y;
+    background: url(images/vborder.png) -13px 0px repeat-y;
+    -background: url(images/vborder_ie6.png) -13px 0px repeat-y;
 }
 
 .gwt-MenuBarPopup .menuPopupTopLeftInner {
-	width: 5px;
-	height: 5px;
-	zoom: 1;
+    width: 5px;
+    height: 5px;
+    zoom: 1;
 }
 
 .gwt-MenuBarPopup .menuPopupTopRightInner {
-	width: 8px;
-	height: 5px;
-	zoom: 1;
+    width: 8px;
+    height: 5px;
+    zoom: 1;
 }
 
 .gwt-MenuBarPopup .menuPopupBottomLeftInner {
-	width: 5px;
-	height: 8px;
-	zoom: 1;
+    width: 5px;
+    height: 8px;
+    zoom: 1;
 }
 
 .gwt-MenuBarPopup .menuPopupBottomRightInner {
-	width: 8px;
-	height: 8px;
-	zoom: 1;
+    width: 8px;
+    height: 8px;
+    zoom: 1;
 }
 
 .gwt-MenuBarPopup .menuPopupTopLeft {
-	background: url(images/corner.png) no-repeat 0px -36px;
-	-background: url(images/corner_ie6.png) no-repeat 0px -36px;
+    background: url(images/corner.png) no-repeat 0px -36px;
+    -background: url(images/corner_ie6.png) no-repeat 0px -36px;
 }
 
 .gwt-MenuBarPopup .menuPopupTopRight {
-	background: url(images/corner.png) no-repeat -5px -36px;
-	-background: url(images/corner_ie6.png) no-repeat -5px -36px;
+    background: url(images/corner.png) no-repeat -5px -36px;
+    -background: url(images/corner_ie6.png) no-repeat -5px -36px;
 }
 
 .gwt-MenuBarPopup .menuPopupBottomLeft {
-	background: url(images/corner.png) no-repeat 0px -41px;
-	-background: url(images/corner_ie6.png) no-repeat 0px -41px;
+    background: url(images/corner.png) no-repeat 0px -41px;
+    -background: url(images/corner_ie6.png) no-repeat 0px -41px;
 }
 
 .gwt-MenuBarPopup .menuPopupBottomRight {
-	background: url(images/corner.png) no-repeat -5px -41px;
-	-background: url(images/corner_ie6.png) no-repeat -5px -41px;
+    background: url(images/corner.png) no-repeat -5px -41px;
+    -background: url(images/corner_ie6.png) no-repeat -5px -41px;
 }
 
 * html .gwt-MenuBarPopup .menuPopupTopLeftInner {
-	width: 5px;
-	height: 5px;
-	overflow: hidden;
+    width: 5px;
+    height: 5px;
+    overflow: hidden;
 }
 
 * html .gwt-MenuBarPopup .menuPopupTopRightInner {
-	width: 8px;
-	height: 5px;
-	overflow: hidden;
+    width: 8px;
+    height: 5px;
+    overflow: hidden;
 }
 
 * html .gwt-MenuBarPopup .menuPopupBottomLeftInner {
-	width: 5px;
-	height: 8px;
-	overflow: hidden;
+    width: 5px;
+    height: 8px;
+    overflow: hidden;
 }
 
 * html .gwt-MenuBarPopup .menuPopupBottomRightInner {
-	width: 8px;
-	height: 8px;
-	overflow: hidden;
+    width: 8px;
+    height: 8px;
+    overflow: hidden;
 }
 
 .gwt-MenuItem {
-	
+
 }
 
 .gwt-MenuItem label {
-	display: block;
-	float: left;
-	width: 16px;
-	height: 16px;
-	margin-right: 3px;
+    display: block;
+    float: left;
+    width: 16px;
+    height: 16px;
+    margin-right: 3px;
 }
 
 .hablar-PresenceWidget .controls {
-	width: 100%;
-	overflow: hidden;
+    width: 100%;
+    overflow: hidden;
 }
 
 .hablar-PresenceWidget .menu,.hablar-PresenceWidget .icon {
-	float: left;
-	margin-top: 4px;
+    float: left;
+    margin-top: 4px;
 }
 
 .hablar-PresenceWidget .status {
-	float: left;
-	margin-top: 3px;
-	width: 80%;
+    float: left;
+    margin-top: 3px;
+    width: 80%;
 }
 
 .loading {
-	width: 100%;
-	overflow: hidden;
+    width: 100%;
+    overflow: hidden;
 }
 
 .loading .icon {
-	display: block;
-	float: left;
-	margin-right: 5px;
+    display: block;
+    float: left;
+    margin-right: 5px;
 }
 
 /** SEMANTIC CSS PLEASE! **/
 .overflowhidden {
-	overflow: hidden;
+    overflow: hidden;
 }
 
 /** ADD TO GROUP **/
 .hablar-AddToGroupsWidget .list {
-	background-color: #E9E9E9;
-	padding: 5px;
+    background-color: #E9E9E9;
+    padding: 5px;
 }
 
 .hablar-GroupSelectorWidget {
-	width: 100%;
-	overflow: hidden;
-	height: 1.5em;
+    width: 100%;
+    overflow: hidden;
+    height: 1.5em;
 }
 
 .hablar-GroupSelectorWidget .select,.hablar-GroupSelectorWidget div {
-	float: left;
-	color: gray;
-	margin-right: 3px;
+    float: left;
+    color: gray;
+    margin-right: 3px;
 }
 
 .hablar-GroupSelectorWidget .name {
-	color: black;
+    color: black;
 }
 
 /** COPY TO CLIPBOARD **/
 .hablar-CopyToClipboardWidget .gwt-TextArea {
-	width: 100%;
-	height: 10em;
-	margin-top: 3px;
+    width: 100%;
+    height: 10em;
+    margin-top: 3px;
 }

@@ -1,20 +1,20 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	<ui:style>
-		
-	</ui:style>
-	<g:FlowPanel styleName="hablar-rosterItemWidget hablar-ListItem">
-		<g:FlowPanel styleName="item">
-			<g:FocusPanel ui:field="self" styleName="user">
-				<g:FlowPanel>
-					<g:Label styleName="icon" ui:field="icon"></g:Label>
-					<g:Label styleName="name" ui:field="name">name-here</g:Label>
-					<g:Label styleName="jid" ui:field="jid">jid</g:Label>
-					<g:Label styleName="status" ui:field="status" />
-				</g:FlowPanel>
-			</g:FocusPanel>
-			<g:Label ui:field="menu" styleName="menu"></g:Label>
-		</g:FlowPanel>
-	</g:FlowPanel>
-</ui:UiBinder> 
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:style>
+
+  </ui:style>
+  <g:FocusPanel ui:field="self" styleName="user">
+    <g:FlowPanel styleName="hablar-rosterItemWidget hablar-ListItem">
+      <g:FlowPanel styleName="item">
+        <g:FlowPanel>
+          <g:Label styleName="icon" ui:field="icon"></g:Label>
+          <g:Label styleName="name" ui:field="name">name-here</g:Label>
+          <g:Label styleName="jid" ui:field="jid">jid</g:Label>
+          <g:Label styleName="status" ui:field="status" />
+        </g:FlowPanel>
+        <g:Label ui:field="menu" styleName="menu"></g:Label>
+      </g:FlowPanel>
+    </g:FlowPanel>
+  </g:FocusPanel>
+</ui:UiBinder>
