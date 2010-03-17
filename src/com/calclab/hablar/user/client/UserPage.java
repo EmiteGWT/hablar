@@ -1,5 +1,7 @@
 package com.calclab.hablar.user.client;
 
+import static com.calclab.hablar.user.client.HablarUser.i18n;
+
 import java.util.ArrayList;
 
 import com.calclab.emite.core.client.xmpp.session.Session;
@@ -14,6 +16,7 @@ import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
@@ -36,18 +39,18 @@ public class UserPage extends PagePresenter<UserDisplay> {
 	session.onStateChanged(new Listener<Session>() {
 	    @Override
 	    public void onEvent(final Session session) {
-		updatePresence();
+		updatePageState();
 	    }
 	});
 
 	manager.onOwnPresenceChanged(new Listener<Presence>() {
 	    @Override
 	    public void onEvent(final Presence presence) {
-		setState(presence);
+		updatePageState();
 	    }
 	});
 
-	updatePresence();
+	updatePageState();
 	model.setPageIcon(HablarIcons.get(IconType.buddyOff));
 
 	display.getClose().addClickHandler(new ClickHandler() {
@@ -68,6 +71,18 @@ public class UserPage extends PagePresenter<UserDisplay> {
 	return pages.contains(page);
     }
 
+    /**
+     * Do not open the page if logged not logged in
+     */
+    @Override
+    public void requestVisibility(final Visibility newVisibility) {
+	final State state = session.getState();
+	GWT.log("USERPAGE " + state + " " + newVisibility);
+	if (state == State.ready || newVisibility == Visibility.hidden || newVisibility == Visibility.notFocused) {
+	    super.requestVisibility(newVisibility);
+	}
+    }
+
     @Override
     public void setVisibility(final Visibility visibility) {
 	for (final EditorPage<?> page : pages) {
@@ -83,7 +98,7 @@ public class UserPage extends PagePresenter<UserDisplay> {
 	for (final EditorPage<?> editor : pages) {
 	    editor.saveData();
 	}
-	updatePresence();
+	updatePageState();
 	model.setCloseable(false);
     }
 
@@ -97,21 +112,22 @@ public class UserPage extends PagePresenter<UserDisplay> {
 	}
     }
 
-    private void setState(final Presence presence) {
-	final State s = session.getState();
-	if (s == State.disconnected) {
-	    model.setPageIcon(HablarIcons.get(HablarIcons.IconType.buddyOff));
-	} else if (s == State.ready) {
+    private void updatePageState() {
+	updatePageState(session.getState(), manager.getOwnPresence());
+    }
+
+    private void updatePageState(final State state, final Presence presence) {
+	if (state == State.ready) {
 	    String userStatus = presence != null ? presence.getStatus() : "";
 	    userStatus = userStatus == null || userStatus.isEmpty() ? "" : " - " + userStatus;
 	    model.setPageTitle(session.getCurrentUser().getShortName() + userStatus);
 	    model.setPageTitleTooltip("Click here to change status");
 	    setShow(presence.getShow());
+	} else {
+	    model.setPageTitle(i18n().notLoggedIn());
+	    model.setPageIcon(HablarIcons.get(HablarIcons.IconType.buddyOff));
+	    requestVisibility(Visibility.notFocused);
 	}
-    }
-
-    private void updatePresence() {
-	setState(manager.getOwnPresence());
     }
 
 }

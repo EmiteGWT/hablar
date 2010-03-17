@@ -21,6 +21,9 @@ public interface UserMessages extends Messages {
     @DefaultMessage("Clear custom messages")
     String clearCustom();
 
+    @DefaultMessage("Disconnected")
+    String notLoggedIn();
+
     @DefaultMessage("Your status")
     String presencePageTitle();
 
