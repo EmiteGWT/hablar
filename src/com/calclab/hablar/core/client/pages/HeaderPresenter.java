@@ -15,6 +15,7 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 
     private final HeaderDisplay display;
     private String currentStyle, currentIconStyle;
+    private String currentExternalStyle;
 
     public HeaderPresenter(final Page<?> page, final HeaderDisplay display) {
 	this.display = display;
@@ -47,15 +48,25 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 	state.addInfoChangedHandler(new PageInfoChangedHandler() {
 	    @Override
 	    public void onPageInfoChanged(final PageInfoChangedEvent event) {
-		update(display, state);
+		update(state);
 	    }
 	});
 
-	update(display, state);
+	update(state);
     }
 
     public HeaderDisplay getDisplay() {
 	return display;
+    }
+
+    private void setExternalState(final String externalState) {
+	if (currentExternalStyle != null) {
+	    display.removeStyle(currentExternalStyle);
+	}
+	currentExternalStyle = externalState;
+	if (externalState != null) {
+	    display.addStyle(externalState);
+	}
     }
 
     private void setIconStyle(final String pageIcon) {
@@ -66,11 +77,12 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 	display.addIconStyle(currentIconStyle);
     }
 
-    private void update(final HeaderDisplay display, final PageState state) {
+    private void update(final PageState state) {
 	setIconStyle(state.getPageIcon());
 	display.getHeaderTitle().setText(state.getPageTitle());
 	display.setHeaderTooltip(state.getPageTitleTooltip());
 	display.setCloseIconVisible(state.isCloseable());
+	setExternalState(state.getExternalState());
     }
 
     private void visibilityChanged(final Visibility visibility) {

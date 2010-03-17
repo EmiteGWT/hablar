@@ -11,18 +11,19 @@ import com.calclab.hablar.core.client.page.events.UserMessageHandler;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedHandler;
 import com.calclab.hablar.rooms.client.room.RoomPresenter;
+import com.calclab.hablar.signals.client.unattended.UnattendedPagesChangedEvent.ChangeType;
 
 /**
- * A registry of unattended chat pages. It listen to events and tracks which
- * chat are unattended
+ * A registry of unattended pages. It listen to events and tracks which chat are
+ * unattended
  * 
  */
-public class UnattendedChatPages {
+public class UnattendedPagesManager {
 
     private final HablarEventBus eventBus;
     private final HashSet<Page<?>> unattendedChatPages;
 
-    public UnattendedChatPages(final HablarEventBus hablarEventBus) {
+    public UnattendedPagesManager(final HablarEventBus hablarEventBus) {
 	eventBus = hablarEventBus;
 	unattendedChatPages = new HashSet<Page<?>>();
 	bind();
@@ -42,10 +43,10 @@ public class UnattendedChatPages {
 	    public void onUserMessage(final UserMessageEvent event) {
 		final String messageType = event.getMessageType();
 		if (isChatMessage(messageType)) {
-		    Page<?> page = event.getPage();
+		    final Page<?> page = event.getPage();
 		    final Visibility visibility = page.getVisibility();
 		    if (visibility != Visibility.focused && unattendedChatPages.add(page)) {
-			eventBus.fireEvent(new UnattendedChatsChangedEvent(UnattendedChatPages.this));
+			eventBus.fireEvent(new UnattendedPagesChangedEvent(ChangeType.added, page));
 		    }
 		}
 	    }
@@ -75,10 +76,7 @@ public class UnattendedChatPages {
     private void onChatVisibilityChanged(final Page<?> page) {
 	final Visibility visibility = page.getVisibility();
 	if (visibility == Visibility.focused && unattendedChatPages.remove(page)) {
-	    eventBus.fireEvent(new UnattendedChatsChangedEvent(this));
-	} else if (unattendedChatPages.remove(page)) {
-	    eventBus.fireEvent(new UnattendedChatsChangedEvent(this));
+	    eventBus.fireEvent(new UnattendedPagesChangedEvent(ChangeType.removed, page));
 	}
     }
-
 }

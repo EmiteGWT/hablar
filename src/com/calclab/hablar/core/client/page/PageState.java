@@ -11,12 +11,14 @@ public class PageState {
     private Visibility visibility;
     private final HablarEventBus eventBus;
     private final Page<?> page;
+    private String externalState;
 
     public PageState(final HablarEventBus eventBus, final Page<?> page) {
 	this.eventBus = eventBus;
 	this.page = page;
 	visibility = Visibility.hidden;
 	closeable = false;
+	externalState = null;
     }
 
     public void addInfoChangedHandler(final PageInfoChangedHandler handler) {
@@ -39,6 +41,15 @@ public class PageState {
 		}
 	    }
 	});
+    }
+    
+    public void setExternalState(String externalState) {
+	this.externalState = externalState;
+	fireChanged();
+    }
+
+    public String getExternalState() {
+	return externalState;
     }
 
     public Page<?> getPage() {

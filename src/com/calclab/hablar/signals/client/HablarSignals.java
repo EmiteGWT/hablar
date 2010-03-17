@@ -7,7 +7,7 @@ import com.calclab.hablar.signals.client.notifications.JGrowlHablarNotifier;
 import com.calclab.hablar.signals.client.notifications.NotificationManager;
 import com.calclab.hablar.signals.client.preferences.SignalsPreferencesPresenter;
 import com.calclab.hablar.signals.client.preferences.SignalsPreferencesWidget;
-import com.calclab.hablar.signals.client.unattended.UnattendedChatPages;
+import com.calclab.hablar.signals.client.unattended.UnattendedPagesManager;
 import com.calclab.hablar.user.client.UserContainer;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -31,8 +31,8 @@ public class HablarSignals implements EntryPoint {
 	};
 	final SignalPreferences preferences = new SignalPreferences();
 
-	new UnattendedChatPages(eventBus);
-	new WindowTitlePresenter(eventBus, preferences, titleDisplay);
+	final UnattendedPagesManager manager = new UnattendedPagesManager(eventBus);
+	new UnattendedPresenter(eventBus, preferences, manager, titleDisplay);
 	new NotificationManager(eventBus, preferences, new JGrowlHablarNotifier());
 
 	final SignalsPreferencesPresenter preferencesPage = new SignalsPreferencesPresenter(eventBus, preferences,

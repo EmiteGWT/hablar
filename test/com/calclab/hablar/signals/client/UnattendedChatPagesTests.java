@@ -13,18 +13,18 @@ import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.page.events.UserMessageEvent;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
-import com.calclab.hablar.signals.client.unattended.UnattendedChatPages;
+import com.calclab.hablar.signals.client.unattended.UnattendedPagesManager;
 import com.calclab.hablar.testing.HablarTester;
 
 public class UnattendedChatPagesTests {
 
-    private UnattendedChatPages pages;
+    private UnattendedPagesManager pages;
     private HablarTester tester;
 
     @Before
     public void setup() {
 	tester = new HablarTester();
-	pages = new UnattendedChatPages(tester.eventBus);
+	pages = new UnattendedPagesManager(tester.eventBus);
     }
 
     @Test

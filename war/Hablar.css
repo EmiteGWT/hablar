@@ -88,6 +88,11 @@ div.hablar-ActionWidget:hover {
 	border-bottom: 1px solid #E9E9E9;
 }
 
+.hablar-Header.unattended {
+	color: #c00;
+	font-weight: bold;
+}
+
 .hablar-Header .icon {
 	float: left;
 	margin-right: 3px;
