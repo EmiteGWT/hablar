@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 
 import com.calclab.hablar.selenium.chat.ChatPageObject;
+import com.calclab.hablar.selenium.clipboard.CopyToClipboardPageObject;
 import com.calclab.hablar.selenium.editbuddy.EditBuddyPageObject;
 import com.calclab.hablar.selenium.groupchat.GroupChatPageObject;
 import com.calclab.hablar.selenium.login.LoginPageObject;
@@ -35,6 +36,7 @@ public class HablarSeleniumDefaults {
     protected GroupChatPageObject groupChat;
     protected UserPageObject userPage;
     protected OtherVCardPageObject otherVCardPage;
+    protected CopyToClipboardPageObject copyToClipboard;
 
     @AfterSuite
     public void closeBrowser() {
@@ -77,6 +79,7 @@ public class HablarSeleniumDefaults {
 	    groupChat = Suco.get(GroupChatPageObject.class);
 	    userPage = Suco.get(UserPageObject.class);
 	    otherVCardPage = Suco.get(OtherVCardPageObject.class);
+	    copyToClipboard = Suco.get(CopyToClipboardPageObject.class);
 	}
 	webtester.home();
     }

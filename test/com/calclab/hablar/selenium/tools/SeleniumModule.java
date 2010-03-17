@@ -6,6 +6,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
 import com.calclab.hablar.selenium.chat.ChatPageObject;
+import com.calclab.hablar.selenium.clipboard.CopyToClipboardPageObject;
 import com.calclab.hablar.selenium.editbuddy.EditBuddyPageObject;
 import com.calclab.hablar.selenium.groupchat.GroupChatPageObject;
 import com.calclab.hablar.selenium.login.LoginPageObject;
@@ -57,5 +58,6 @@ public class SeleniumModule extends PageObjectModule {
 	registerPageObject(EditBuddyPageObject.class, new EditBuddyPageObject());
 	registerPageObject(UserPageObject.class, new UserPageObject());
 	registerPageObject(OtherVCardPageObject.class, new OtherVCardPageObject());
+	registerPageObject(CopyToClipboardPageObject.class, new CopyToClipboardPageObject());
     }
 }

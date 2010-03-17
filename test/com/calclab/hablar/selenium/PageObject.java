@@ -24,6 +24,10 @@ public abstract class PageObject {
 	});
     }
 
+    private WebDriver getWebDriver() {
+	return Suco.get(WebDriver.class);
+    }
+
     protected RenderedWebElement findElement(final By by) {
 	return (RenderedWebElement) getWebDriver().findElement(by);
     }
@@ -68,6 +72,7 @@ public abstract class PageObject {
 	    @Override
 	    public void run() {
 		final String elText = element.getText();
+		System.out.println("Element text: " + elText);
 		Assert.assertTrue(elText.contains(text));
 	    }
 	});
@@ -81,9 +86,5 @@ public abstract class PageObject {
 		Assert.assertTrue(((RenderedWebElement) getWebDriver().findElement(new ByIdOrName(id))).isDisplayed());
 	    }
 	});
-    }
-
-    private WebDriver getWebDriver() {
-	return Suco.get(WebDriver.class);
     }
 }

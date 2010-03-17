@@ -22,6 +22,9 @@ public class CopyToClipboardWidget extends Composite implements CopyToClipboardD
 
     public CopyToClipboardWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
+	accept.ensureDebugId("CopyToClipboardWidget-accept");
+	cancel.ensureDebugId("CopyToClipboardWidget-cancel");
+	content.ensureDebugId("CopyToClipboardWidget-content");
     }
 
     @Override
