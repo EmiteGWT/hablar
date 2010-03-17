@@ -90,7 +90,7 @@ public class HablarRoomManager {
 	if (invitation != null) {
 	    acceptedInvitations.remove(invitation);
 	    roomPage.requestVisibility(Visibility.notFocused);
-	    String message = "You have been invited to this room by " + invitation.getInvitor().getNode();
+	    String message = "You have been invited to this group chat by " + invitation.getInvitor().getNode();
 	    message += invitation.getReason() != null ? ": " + invitation.getReason() : "";
 	    roomPage.showMessage(message);
 	} else {

@@ -34,7 +34,7 @@ public class GroupChatSeleniumTests extends HablarSeleniumTest {
 	roster.getOpenGroupChat().click();
 	groupChat.getOpenGroupChatAccept().click();
 	groupChat.getRoomHeader("1").click();
-	groupChat.waitForTextInRoom("1", "This room is now unlocked");
+	groupChat.waitForTextInRoom("1", "This group chat is now unlocked");
 	groupChat.getRoomTextBox("1").sendKeys("hi!\n");
 	groupChat.waitForTextInRoom("1", "hi!");
 	groupChat.waitForStatus("1", i18n.get("occupants", Integer.valueOf(1)));

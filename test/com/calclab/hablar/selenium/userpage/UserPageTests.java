@@ -63,10 +63,12 @@ public class UserPageTests extends HablarSeleniumTest {
 	login();
 	userPage.getHeader().click();
 	checkVCard(value, userPage);
+	userPage.getClose().click();
 	addSeleniumBuddy();
 	roster.getHeader().click();
 	roster.getItemMenu("", "selenium@localhost").click();
 	roster.getSeeBuddyVCardAction().click();
+	sleep(1000);
 	checkVCard(value, otherVCardPage);
 	removeSeleniumBuddy();
 	logout();
