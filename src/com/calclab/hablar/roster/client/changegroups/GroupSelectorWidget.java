@@ -28,6 +28,7 @@ public class GroupSelectorWidget extends Composite implements GroupSelectorDispl
 
     public GroupSelectorWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
+	editableName.ensureDebugId("GroupSelectorWidget-editableName");
     }
 
     @Override

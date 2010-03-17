@@ -27,6 +27,8 @@ public class ManageGroupsWidget extends Composite implements ManageGroupsDisplay
 
     public ManageGroupsWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
+	accept.ensureDebugId("ManageGroupsWidget-accept");
+	newGroup.ensureDebugId("ManageGroupsWidget-newGroup");
     }
 
     @Override

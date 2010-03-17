@@ -26,9 +26,10 @@ public abstract class HablarSeleniumTest extends HablarSeleniumDefaults {
     protected void addToGroup(final String group) {
 	roster.getHeader().click();
 	roster.getItemMenu("", "selenium@localhost").click();
-	roster.getAddToGroupAction().click();
-	roster.getAddToGroupNewGroupName().sendKeys(group);
-	roster.getAddToGroupAccept().click();
+	roster.getManageGroupsAction().click();
+	roster.getCreateNewGroupButton().click();
+	roster.getNewGroupField().sendKeys(group);
+	roster.getManageGroupsAccept().click();
     }
 
     protected String getTempString() {

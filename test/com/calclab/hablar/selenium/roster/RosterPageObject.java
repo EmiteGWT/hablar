@@ -24,8 +24,8 @@ public class RosterPageObject extends PageObject {
     @FindBy(id = "gwt-debug-HablarRoster-removeFromRosterAction")
     private RenderedWebElement removeBuddyAction;
 
-    @FindBy(id = "gwt-debug-HablarRoster-addToGroupAction")
-    private RenderedWebElement addBuddyToGroupAction;
+    @FindBy(id = "gwt-debug-HablarRoster-manageGroupsAction")
+    private RenderedWebElement manageGroupsAction;
 
     @FindBy(id = "gwt-debug-EditBuddy-editAction")
     private RenderedWebElement editBuddyAction;
@@ -33,28 +33,23 @@ public class RosterPageObject extends PageObject {
     @FindBy(id = "gwt-debug-HablarVCard-seeVCardAction")
     private RenderedWebElement seeBuddyVCardAction;
 
-    @FindBy(id = "gwt-debug-AddToGroupWidget-newgroupname")
-    private RenderedWebElement addToGroupNewGroupName;
-
-    @FindBy(id = "gwt-debug-AddToGroupWidget-accept")
-    private RenderedWebElement addToGroupAccept;
+    @FindBy(id = "gwt-debug-ManageGroupsWidget-accept")
+    private RenderedWebElement manageGroupsAccept;
 
     @FindBy(id = "gwt-debug-HablarRoster-deleteGroupAction")
     private RenderedWebElement deleteGroupAction;
 
+    @FindBy(id = "gwt-debug-ManageGroupsWidget-newGroup")
+    private RenderedWebElement createNewGroupButton;
+
+    @FindBy(id = "gwt-debug-GroupSelectorWidget-editableName")
+    private RenderedWebElement newGroupField;
+
     public RosterPageObject() {
     }
 
-    public RenderedWebElement getAddToGroupAccept() {
-	return addToGroupAccept;
-    }
-
-    public RenderedWebElement getAddToGroupAction() {
-	return addBuddyToGroupAction;
-    }
-
-    public RenderedWebElement getAddToGroupNewGroupName() {
-	return addToGroupNewGroupName;
+    public RenderedWebElement getCreateNewGroupButton() {
+	return createNewGroupButton;
     }
 
     public RenderedWebElement getDeleteGroupAction() {
@@ -86,6 +81,18 @@ public class RosterPageObject extends PageObject {
     public RenderedWebElement getItemMenu(final String groupId, final String jid) {
 	final String id = Idify.id("RosterItemWidget", groupId, Idify.uriId(jid), "roster-menu");
 	return findElement(new ByIdOrName("gwt-debug-" + id));
+    }
+
+    public RenderedWebElement getManageGroupsAccept() {
+	return manageGroupsAccept;
+    }
+
+    public RenderedWebElement getManageGroupsAction() {
+	return manageGroupsAction;
+    }
+
+    public RenderedWebElement getNewGroupField() {
+	return newGroupField;
     }
 
     public RenderedWebElement getOpenGroupChat() {

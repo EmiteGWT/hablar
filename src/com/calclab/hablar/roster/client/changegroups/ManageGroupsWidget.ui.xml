@@ -5,7 +5,7 @@
 		
 	</ui:style>
 	<g:ScrollPanel ui:field="scroll" height="100%" styleName="scroll">
-		<g:HTMLPanel styleName="hablar-AddToGroupsWidget">
+		<g:HTMLPanel styleName="hablar-ManageGroupsWidget">
 			<div class="form">
 				<h2>Change contact groups</h2>
 				<p>

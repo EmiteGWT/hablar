@@ -14,7 +14,7 @@ import com.calclab.hablar.roster.client.groups.RosterItemPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
 
 public class HablarManageGroups {
-    private static final String ACTION_ID_ADD_TO_GROUP = "HablarRoster-addToGroupAction";
+    private static final String ACTION_ID_ADD_TO_GROUP = "HablarRoster-manageGroupsAction";
 
     public static void install(final RosterPage roster, final Hablar hablar) {
 	final ManageGroupsPresenter movePage = new ManageGroupsPresenter(hablar.getEventBus(), new ManageGroupsWidget());
