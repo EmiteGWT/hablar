@@ -70,7 +70,8 @@ public class ConvertToGroupChatPresenter extends EditRoomPresenter {
 
 	final XmppURI currentJid = session.getCurrentUser().getJID();
 	final XmppURI chatJid = chat.getURI();
-	final String name = i18n().defaultRoomName(currentJid.getNode(), chatJid.getNode());
+	String name = i18n().defaultRoomName(currentJid.getNode(), chatJid.getNode());
+	name = name.replaceAll("[^-a-zA-Z0-9 ]", "-");
 	display.getRoomName().setText(name);
 
 	setItems(roster.getItems(), true, false);
