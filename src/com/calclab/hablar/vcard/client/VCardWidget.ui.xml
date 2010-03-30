@@ -2,7 +2,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
-		
+
 	</ui:style>
 	<g:HTMLPanel styleName="hablar-VCardWidget">
 		<h2>
@@ -15,35 +15,35 @@
 		<div class="form">
 			<div ui:field="form">
 				<p>
-					<label>Name:</label>
+					<label ui:field="nameLabel">Name:</label>
 					<g:TextBox ui:field="name"></g:TextBox>
 				</p>
 				<p>
-					<label>Nickname:</label>
+					<label ui:field="nicknameLabel">Nickname:</label>
 					<g:TextBox ui:field="nickName"></g:TextBox>
 				</p>
 				<p>
-					<label>Family name:</label>
+					<label ui:field="familyNameLabel">Family name:</label>
 					<g:TextBox ui:field="familyName"></g:TextBox>
 				</p>
 				<p>
-					<label>Middle name:</label>
+					<label ui:field="middleNameLabel">Middle name:</label>
 					<g:TextBox ui:field="middleName"></g:TextBox>
 				</p>
 				<p>
-					<label>Given name:</label>
+					<label ui:field="givenNameLabel">Given name:</label>
 					<g:TextBox ui:field="givenName"></g:TextBox>
 				</p>
 				<p>
-					<label>Organization:</label>
+					<label ui:field="organizationLabel">Organization:</label>
 					<g:TextBox ui:field="organizationName"></g:TextBox>
 				</p>
 				<p>
-					<label>Homepage:</label>
+					<label ui:field="homepageLabel">Homepage:</label>
 					<g:TextBox ui:field="homepage"></g:TextBox>
 				</p>
 				<p>
-					<label>Email:</label>
+					<label ui:field="emailLabel">Email:</label>
 					<g:TextBox ui:field="email"></g:TextBox>
 				</p>
 			</div>
@@ -54,4 +54,4 @@
 		</div>
 	</g:HTMLPanel>
 
-</ui:UiBinder> 
+</ui:UiBinder>

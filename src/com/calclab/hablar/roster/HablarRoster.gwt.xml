@@ -6,6 +6,10 @@
     <inherits name='com.calclab.emite.core.EmiteCore' />
     <inherits name='com.calclab.emite.im.EmiteIM' />
     <inherits name='com.calclab.emite.browser.EmiteBrowser' />
+
+	<extend-property name="locale" values="it"/>
+	<extend-property name="locale" values="en"/>
+
 	<source path="client" />
 	<entry-point class="com.calclab.hablar.roster.client.HablarRoster" />
 </module>

@@ -5,10 +5,12 @@
 
   </ui:style>
   <g:HTMLPanel styleName="hablar-PresenceWidget">
-    <h2>Your status</h2>
+    <h2>
+		<span ui:field='title' />
+    </h2>
     <div class="form">
       <p>
-        <label>Status:</label>
+        <label ui:field="statusLabel">Status:</label>
         <div class="controls">
           <g:Label ui:field="icon" styleName="icon" />
           <g:Label ui:field="menu" styleName="menu" />

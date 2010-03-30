@@ -56,7 +56,9 @@ public class HablarEditBuddy implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-	setMessages((EditBuddyMessages) GWT.create(EditBuddyMessages.class));
+	EditBuddyMessages messages = (EditBuddyMessages) GWT.create(EditBuddyMessages.class);
+	setMessages(messages);
+	EditBuddyWidget.setMessages(messages);
     }
 
 }

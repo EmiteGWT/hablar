@@ -54,7 +54,9 @@ public class HablarLogin implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-	setMessages((LoginMessages) GWT.create(LoginMessages.class));
+	LoginMessages messages = (LoginMessages) GWT.create(LoginMessages.class);
+	setMessages(messages);
+	LoginWidget.setMessages(messages);
 
     }
 

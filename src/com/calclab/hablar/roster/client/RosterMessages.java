@@ -24,4 +24,33 @@ public interface RosterMessages extends Messages {
     @DefaultMessage("User {0} has been removed from contacts.")
     String userRemoved(String shortName);
 
+    @DefaultMessage("All contacts")
+    String allContactsGroupName();
+
+    @DefaultMessage("Change contact groups")
+    String changeContactGroupsTitle();
+
+    @DefaultMessage("Contact Name:")
+    String contactNameLabelText();
+
+    @DefaultMessage("Roster Groups:")
+    String rosterGroupsLabelText();
+
+    @DefaultMessage("New group")
+    String newGroupAction();
+
+    @DefaultMessage("Accept")
+    String acceptAction();
+
+    @DefaultMessage("Cancel")
+    String cancelAction();
+
+    @DefaultMessage("Remove contact")
+    String removeContactAction();
+
+    @DefaultMessage("Remove from this group")
+    String removeFromGroupAction();
+
+    @DefaultMessage("Delete this group")
+    String deleteGroupAction();
 }

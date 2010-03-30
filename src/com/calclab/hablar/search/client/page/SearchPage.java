@@ -67,14 +67,14 @@ public class SearchPage extends PagePresenter<SearchDisplay> {
 	final String text = display.getSearchTerm().getText().trim();
 	if (text.length() > 0) {
 	    display.clearResults();
-	    display.showMessage("Searching " + text + "...", Level.info);
+	    display.showMessage(i18n().searchingTerm(text), Level.info);
 	    final HashMap<String, String> query = new HashMap<String, String>();
 	    query.put("nick", text + "*");
 
 	    manager.search(query, new ResultListener<List<SearchResultItem>>() {
 		@Override
 		public void onFailure(final String message) {
-		    display.showMessage("Couldn't retrieve results", Level.error);
+		    display.showMessage(i18n().searchError(), Level.error);
 		}
 
 		@Override

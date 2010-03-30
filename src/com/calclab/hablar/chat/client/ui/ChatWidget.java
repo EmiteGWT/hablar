@@ -4,6 +4,7 @@ import static com.google.gwt.dom.client.Style.Unit.PX;
 
 import java.util.ArrayList;
 
+import com.calclab.hablar.chat.client.ChatMessages;
 import com.calclab.hablar.core.client.ui.actions.ActionWidget;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.google.gwt.core.client.GWT;
@@ -22,6 +23,16 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 
 public class ChatWidget extends Composite implements ChatDisplay {
+
+    private static ChatMessages messages;
+
+    public static void setMessages(final ChatMessages messages) {
+	ChatWidget.messages = messages;
+    }
+
+    public static ChatMessages i18n() {
+	return messages;
+    }
 
     interface ChatWidgetUiBinder extends UiBinder<Widget, ChatWidget> {
     }
@@ -49,6 +60,7 @@ public class ChatWidget extends Composite implements ChatDisplay {
 
     public ChatWidget(final boolean sendButtonVisible) {
 	initWidget(uiBinder.createAndBindUi(this));
+	send.setText(i18n().sendAction());
 	controlsHeight = 0;
 	statusHeight = 0;
     }

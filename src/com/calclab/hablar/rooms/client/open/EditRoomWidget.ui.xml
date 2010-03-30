@@ -12,12 +12,12 @@
           <span ui:field='title' />
         </h2>
         <p>
-          <label>Group Chat Name:</label>
+          <label ui:field="groupChatNameLabel">Group Chat Name:</label>
           <g:TextBox ui:field="roomName"></g:TextBox>
           <g:Label ui:field="roomNameError" styleName="error"></g:Label>
         </p>
         <p>
-          <label>Invitation message:</label>
+          <label ui:field="invitationLabel">Invitation message:</label>
           <g:TextBox ui:field="message"></g:TextBox>
         </p>
         <label ui:field="occupantsLabel">Group Chat Participants:</label>

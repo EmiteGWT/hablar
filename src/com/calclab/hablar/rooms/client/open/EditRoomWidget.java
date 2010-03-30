@@ -1,6 +1,7 @@
 package com.calclab.hablar.rooms.client.open;
 
 import com.calclab.hablar.core.client.validators.HasState;
+import com.calclab.hablar.rooms.client.RoomsMessages;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.LabelElement;
 import com.google.gwt.dom.client.SpanElement;
@@ -18,6 +19,16 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class EditRoomWidget extends Composite implements EditRoomDisplay {
 
+    private static RoomsMessages messages;
+
+    public static void setMessages(final RoomsMessages messages) {
+	EditRoomWidget.messages = messages;
+    }
+
+    public static RoomsMessages i18n() {
+	return messages;
+    }
+
     interface InviteToRoomWidgetUiBinder extends UiBinder<Widget, EditRoomWidget> {
     }
 
@@ -30,7 +41,7 @@ public class EditRoomWidget extends Composite implements EditRoomDisplay {
     @UiField
     TextBox message, roomName;
     @UiField
-    LabelElement occupantsLabel;
+    LabelElement groupChatNameLabel, invitationLabel, occupantsLabel;
     @UiField
     Label roomNameError;
 
@@ -42,6 +53,10 @@ public class EditRoomWidget extends Composite implements EditRoomDisplay {
 	accept.ensureDebugId("InviteToRoomWidget-invite");
 	cancel.ensureDebugId("InviteToRoomWidget-cancel");
 	occupantsList.ensureDebugId("InviteToRoomWidget-list");
+	groupChatNameLabel.setInnerText(i18n().groupChatNameLabelText());
+	invitationLabel.setInnerText(i18n().invitationMessageLabelText());
+	occupantsLabel.setInnerText(i18n().occupantsLabelText());
+	cancel.setText(i18n().cancelAction());
     }
 
     @Override
@@ -118,5 +133,4 @@ public class EditRoomWidget extends Composite implements EditRoomDisplay {
     public void setRoomNameEnabled(final boolean enabled) {
 	roomName.setEnabled(enabled);
     }
-
 }

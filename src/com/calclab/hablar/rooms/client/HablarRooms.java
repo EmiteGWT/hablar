@@ -74,7 +74,7 @@ public class HablarRooms implements EntryPoint {
     }
 
     protected static SimpleAction<RosterPage> createOpenRoomAction(final OpenNewRoomPresenter page) {
-	final String name = "Open new group chat";
+	final String name = i18n().openNewGroupChatTooltip();
 	final String icon = HablarIcons.get(IconType.groupChat);
 	final SimpleAction<RosterPage> action = new SimpleAction<RosterPage>(name, ACTION_ID_OPENROOM, icon) {
 	    @Override
@@ -87,7 +87,9 @@ public class HablarRooms implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-	HablarRooms.setMessages((RoomsMessages) GWT.create(RoomsMessages.class));
+	RoomsMessages messages = (RoomsMessages) GWT.create(RoomsMessages.class);
+	HablarRooms.setMessages(messages);
+	EditRoomWidget.setMessages(messages);
     }
 
 }

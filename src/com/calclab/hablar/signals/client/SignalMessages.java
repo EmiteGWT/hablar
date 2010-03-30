@@ -17,4 +17,16 @@ public interface SignalMessages extends Messages {
 
     @DefaultMessage("Please log in to retrieve preferences")
     String waitingToSession();
+
+    @DefaultMessage("Notification preferences")
+    String preferencesPageTitle();
+
+    @DefaultMessage("Show unread conversations in title")
+    String showUnreadConversations();
+
+    @DefaultMessage("Show incoming message notifications")
+    String showIncomingMessages();
+
+    @DefaultMessage("Show roster notifications")
+    String showRoster();
 }

@@ -1,7 +1,5 @@
 package com.calclab.hablar.roster.client;
 
-import static com.calclab.hablar.roster.client.HablarRoster.i18n;
-
 import java.util.Collection;
 
 import com.calclab.emite.im.client.roster.Roster;
@@ -20,8 +18,18 @@ public class RosterBasicActions {
     private static final String ID_ACTION_REMOVE_FROM_GROUP = "HablarRoster-removeFromGroupAction";
     private static final String ID_ACTION_DELETE_GROUP = "HablarRoster-deleteGroupAction";
 
+    private static RosterMessages messages;
+
+    public static void setMessages(final RosterMessages messages) {
+	RosterBasicActions.messages = messages;
+    }
+
+    public static RosterMessages i18n() {
+	return messages;
+    }
+
     private final SimpleAction<RosterItemPresenter> removeFromRoster = new SimpleAction<RosterItemPresenter>(
-	    "Remove contact", ACTION_ID_REMOVE_FROM_ROSTER) {
+	    i18n().removeContactAction(), ACTION_ID_REMOVE_FROM_ROSTER) {
 	@Override
 	public void execute(final RosterItemPresenter target) {
 	    final RosterItem item = target.getItem();
@@ -35,7 +43,7 @@ public class RosterBasicActions {
     };
 
     private final SimpleAction<RosterItemPresenter> removeFromGroup = new SimpleAction<RosterItemPresenter>(
-	    "Remove from this group", ID_ACTION_REMOVE_FROM_GROUP) {
+	    i18n().removeFromGroupAction(), ID_ACTION_REMOVE_FROM_GROUP) {
 	@Override
 	public void execute(final RosterItemPresenter target) {
 	    removeFromGroup(target.getItem(), target.getGroupName());
@@ -47,7 +55,7 @@ public class RosterBasicActions {
 	};
     };
     private final Action<RosterGroupPresenter> deleteGroup = new SimpleAction<RosterGroupPresenter>(
-	    "Delete this group", ID_ACTION_DELETE_GROUP) {
+	    i18n().deleteGroupAction(), ID_ACTION_DELETE_GROUP) {
 	@Override
 	public void execute(final RosterGroupPresenter target) {
 

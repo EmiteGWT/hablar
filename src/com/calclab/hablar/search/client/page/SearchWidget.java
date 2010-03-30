@@ -5,6 +5,7 @@ import static com.google.gwt.dom.client.Style.Unit.PX;
 import com.calclab.emite.xep.search.client.SearchResultItem;
 import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
 import com.calclab.hablar.core.client.ui.menu.PopupMenu;
+import com.calclab.hablar.search.client.SearchMessages;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
@@ -24,6 +25,16 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 public class SearchWidget extends Composite implements SearchDisplay {
+
+    private static SearchMessages messages;
+
+    public static void setMessages(final SearchMessages messages) {
+	SearchWidget.messages = messages;
+    }
+
+    public static SearchMessages i18n() {
+	return messages;
+    }
 
     interface SearchWidgetUiBinder extends UiBinder<Widget, SearchWidget> {
     }
@@ -54,6 +65,7 @@ public class SearchWidget extends Composite implements SearchDisplay {
 	term.ensureDebugId("SearchWidget-term");
 	message.ensureDebugId("SearchWidget-message");
 	search.ensureDebugId("SearchWidget-search");
+	search.setText(i18n().searchAction());
     }
 
     @Override

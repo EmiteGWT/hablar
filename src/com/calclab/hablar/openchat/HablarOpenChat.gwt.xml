@@ -4,6 +4,10 @@
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name='com.calclab.hablar.core.HablarCore' />
 	<inherits name='com.calclab.hablar.roster.HablarRoster' />
+
+	<extend-property name="locale" values="it"/>
+	<extend-property name="locale" values="en"/>
+
 	<source path="client" />
 	<entry-point
 		class="com.calclab.hablar.openchat.client.HablarOpenChat" />

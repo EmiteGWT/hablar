@@ -2,13 +2,15 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
-		
+
 	</ui:style>
 	<g:HTMLPanel styleName="hablar-OpenChatWidget">
 		<div class="form">
-			<h2>Open a new chat</h2>
+			<h2>
+				<span ui:field='title' />
+			</h2>
 			<p>
-				<label>Jabber ID:</label>
+				<label ui:field="jabberIdLabel">Jabber ID:</label>
 				<g:TextBox ui:field="jabberId"></g:TextBox>
 				<g:Label ui:field="jabberIdError" styleName="error"></g:Label>
 			</p>
@@ -19,4 +21,4 @@
 			</div>
 		</div>
 	</g:HTMLPanel>
-</ui:UiBinder> 
+</ui:UiBinder>

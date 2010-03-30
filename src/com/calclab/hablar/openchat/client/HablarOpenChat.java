@@ -21,7 +21,7 @@ import com.google.gwt.core.client.GWT;
  * This module adds:<br/>
  * 1. A button in the roster<br/>
  * 2. A overlay panel to write the jabber id
- * 
+ *
  */
 public class HablarOpenChat implements EntryPoint {
 
@@ -42,7 +42,7 @@ public class HablarOpenChat implements EntryPoint {
 		final RosterPage rosterPage = RosterPresenter.asRoster(event.getPage());
 		if (rosterPage != null) {
 
-		    final String name = "Open New Chat";
+		    final String name = i18n().openNewChat();
 		    final String icon = HablarIcons.get(IconType.chatAdd);
 		    rosterPage.addAction(new SimpleAction<RosterPage>(name, ACTION_ID, icon) {
 			@Override
@@ -65,7 +65,9 @@ public class HablarOpenChat implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-	HablarOpenChat.setMessages((OpenChatMessages) GWT.create(OpenChatMessages.class));
+	OpenChatMessages messages = (OpenChatMessages) GWT.create(OpenChatMessages.class);
+	HablarOpenChat.setMessages(messages);
+	OpenChatWidget.setMessages(messages);
     }
 
 }

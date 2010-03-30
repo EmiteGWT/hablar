@@ -28,4 +28,7 @@ public interface ChatMessages extends Messages {
 
     @DefaultMessage("{0} is paused")
     String statePause(String userName);
+
+    @DefaultMessage("Invia")
+    String sendAction();
 }

@@ -6,6 +6,7 @@ import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
+import com.google.gwt.dom.client.LabelElement;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -18,6 +19,16 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 public class VCardWidget extends Composite implements VCardDisplay {
+
+    private static VCardMessages messages;
+
+    public static void setMessages(final VCardMessages messages) {
+	VCardWidget.messages = messages;
+    }
+
+    public static VCardMessages i18n() {
+	return messages;
+    }
 
     interface VCardWidgetUiBinder extends UiBinder<Widget, VCardWidget> {
     }
@@ -34,6 +45,9 @@ public class VCardWidget extends Composite implements VCardDisplay {
     Label loadingMessage;
     @UiField
     DivElement form, loading;
+    @UiField
+    LabelElement nameLabel, nicknameLabel, familyNameLabel, middleNameLabel, givenNameLabel,
+    		organizationLabel, homepageLabel, emailLabel;
 
     protected final HashMap<Field, TextBox> fields = new HashMap<Field, TextBox>();
 
@@ -42,6 +56,7 @@ public class VCardWidget extends Composite implements VCardDisplay {
 
     public VCardWidget(final boolean readOnly, final String idPrefix) {
 	initWidget(uiBinder.createAndBindUi(this));
+	initI18n();
 	init(readOnly, idPrefix);
     }
 
@@ -121,5 +136,16 @@ public class VCardWidget extends Composite implements VCardDisplay {
 	}
 
 	setReadOnly(readOnly);
+    }
+
+    protected void initI18n() {
+	nameLabel.setInnerText(i18n().nameLabelText());
+	nicknameLabel.setInnerText(i18n().nicknameLabelText());
+	familyNameLabel.setInnerText(i18n().familyNameLabelText());
+	middleNameLabel.setInnerText(i18n().middleNameLabelText());
+	givenNameLabel.setInnerText(i18n().givenNameLabelText());
+	organizationLabel.setInnerText(i18n().organizationLabelText());
+	homepageLabel.setInnerText(i18n().homepageLabelText());
+	emailLabel.setInnerText(i18n().emailLabelText());
     }
 }

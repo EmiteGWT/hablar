@@ -3,6 +3,7 @@ package com.calclab.hablar.chat.client;
 import com.calclab.hablar.chat.client.state.HablarChatStateManager;
 import com.calclab.hablar.chat.client.ui.ChatPage;
 import com.calclab.hablar.chat.client.ui.ChatPresenter;
+import com.calclab.hablar.chat.client.ui.ChatWidget;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.core.client.container.PageAddedEvent;
@@ -46,7 +47,9 @@ public class HablarChat implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-	setMessages((ChatMessages) GWT.create(ChatMessages.class));
+	ChatMessages messages = (ChatMessages) GWT.create(ChatMessages.class);
+	setMessages(messages);
+	ChatWidget.setMessages(messages);
     }
 
 }

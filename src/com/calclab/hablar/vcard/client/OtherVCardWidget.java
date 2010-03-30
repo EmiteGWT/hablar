@@ -8,6 +8,7 @@ public class OtherVCardWidget extends VCardWidget implements VCardDisplay {
 	final ScrollPanel scroll = new ScrollPanel();
 	scroll.add(uiBinder.createAndBindUi(this));
 	initWidget(scroll);
+	initI18n();
 	init(readOnly, "OtherVCardWidget");
     }
 

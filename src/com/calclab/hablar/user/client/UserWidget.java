@@ -11,6 +11,16 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class UserWidget extends Composite implements UserDisplay {
 
+    private static UserMessages messages;
+
+    public static void setMessages(final UserMessages messages) {
+	UserWidget.messages = messages;
+    }
+
+    public static UserMessages i18n() {
+	return messages;
+    }
+
     interface UserWidgetUiBinder extends UiBinder<Widget, UserWidget> {
     }
 
@@ -24,6 +34,7 @@ public class UserWidget extends Composite implements UserDisplay {
     public UserWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
 	close.ensureDebugId("UserWidget-close");
+	close.setText(i18n().closeAction());
     }
 
     @Override

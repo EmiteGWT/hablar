@@ -1,7 +1,10 @@
 package com.calclab.hablar.editbuddy.client.ui;
 
 import com.calclab.hablar.core.client.validators.HasState;
+import com.calclab.hablar.editbuddy.client.EditBuddyMessages;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.LabelElement;
+import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
@@ -17,15 +20,29 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class EditBuddyWidget extends Composite implements EditBuddyDisplay {
 
+    private static EditBuddyMessages messages;
+
+    public static void setMessages(final EditBuddyMessages messages) {
+	EditBuddyWidget.messages = messages;
+    }
+
+    public static EditBuddyMessages i18n() {
+	return messages;
+    }
+
     interface EditBuddyWidgetUiBinder extends UiBinder<Widget, EditBuddyWidget> {
     }
 
+    @UiField
+    SpanElement title;
     @UiField
     Button cancel, save;
     @UiField
     TextBox nickName;
     @UiField
     Label oldNickName, nickNameError;
+    @UiField
+    LabelElement changeFromLabel, changeToLabel;
 
     private static EditBuddyWidgetUiBinder uiBinder = GWT.create(EditBuddyWidgetUiBinder.class);
 
@@ -33,6 +50,11 @@ public class EditBuddyWidget extends Composite implements EditBuddyDisplay {
 	initWidget(uiBinder.createAndBindUi(this));
 	nickName.ensureDebugId("EditBuddyWidget-nickname");
 	save.ensureDebugId("EditBuddyWidget-save");
+	title.setInnerText(i18n().changeBuddyNickname());
+	changeFromLabel.setInnerText(i18n().changeFromLabelText());
+	changeToLabel.setInnerText(i18n().changeToLabelText());
+	save.setText(i18n().acceptAction());
+	cancel.setText(i18n().cancelAction());
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.calclab.hablar.login.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.LabelElement;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -13,6 +14,16 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 public class LoginWidget extends Composite implements LoginDisplay {
+
+    private static LoginMessages messages;
+
+    public static void setMessages(final LoginMessages messages) {
+	LoginWidget.messages = messages;
+    }
+
+    public static LoginMessages i18n() {
+	return messages;
+    }
 
     interface LoginWidgetUiBinder extends UiBinder<Widget, LoginWidget> {
     }
@@ -28,12 +39,17 @@ public class LoginWidget extends Composite implements LoginDisplay {
     @UiField
     FlowPanel output;
 
+    @UiField
+    LabelElement userLabel, passwordLabel;
+
     public LoginWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
 	button.ensureDebugId("LoginWidget-button");
 	user.ensureDebugId("LoginWidget-user");
 	password.ensureDebugId("LoginWidget-password");
 	output.ensureDebugId("LoginWidget-output");
+	userLabel.setInnerText(i18n().userLabelText());
+	passwordLabel.setInnerText(i18n().passwordLabelText());
     }
 
     @Override

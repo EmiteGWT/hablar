@@ -2,6 +2,7 @@ package com.calclab.hablar.signals.client.preferences;
 
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
+import com.calclab.hablar.signals.client.SignalMessages;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.SpanElement;
@@ -16,6 +17,16 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class SignalsPreferencesWidget extends Composite implements SignalsPreferencesDisplay {
 
+    private static SignalMessages messages;
+
+    public static void setMessages(final SignalMessages messages) {
+	SignalsPreferencesWidget.messages = messages;
+    }
+
+    public static SignalMessages i18n() {
+	return messages;
+    }
+
     interface SignalsPreferencesWidgetUiBinder extends UiBinder<Widget, SignalsPreferencesWidget> {
     }
 
@@ -25,7 +36,7 @@ public class SignalsPreferencesWidget extends Composite implements SignalsPrefer
     CheckBox titleSignals, incomingNotifications, rosterNotifications;
 
     @UiField
-    SpanElement icon;
+    SpanElement title, icon;
     @UiField
     Label loadingMessage;
     @UiField
@@ -37,6 +48,10 @@ public class SignalsPreferencesWidget extends Composite implements SignalsPrefer
 	titleSignals.ensureDebugId("SignalsPreferencesWidget-titleSignals");
 	incomingNotifications.ensureDebugId("SignalsPreferencesWidget-incomingNotifications");
 	rosterNotifications.ensureDebugId("SignalsPreferencesWidget-rosterNotifications");
+	title.setInnerText(i18n().preferencesPageTitle());
+	titleSignals.setText(i18n().showUnreadConversations());
+	incomingNotifications.setText(i18n().showIncomingMessages());
+	rosterNotifications.setText(i18n().showRoster());
     }
 
     @Override

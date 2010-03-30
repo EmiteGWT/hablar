@@ -16,6 +16,16 @@ import com.google.gwt.core.client.GWT;
 
 public class HablarVCard implements EntryPoint {
 
+    private static VCardMessages messages;
+
+    public static void setMessages(final VCardMessages messages) {
+	HablarVCard.messages = messages;
+    }
+
+    public static VCardMessages i18n() {
+	return messages;
+    }
+
     private static final String ACTION_ID_VIEW_VCARD = "HablarVCard-seeVCardAction";
 
     public static void install(final Hablar hablar) {
@@ -39,7 +49,7 @@ public class HablarVCard implements EntryPoint {
     }
 
     protected static Action<RosterItemPresenter> createViewVCardAction(final OthersVCardPresenter othersVCardPage) {
-	return new SimpleAction<RosterItemPresenter>("See user profile", ACTION_ID_VIEW_VCARD) {
+	return new SimpleAction<RosterItemPresenter>(i18n().seeUserProfileAction(), ACTION_ID_VIEW_VCARD) {
 	    @Override
 	    public void execute(final RosterItemPresenter target) {
 		othersVCardPage.setUser(target.getItem().getJID());
@@ -52,6 +62,8 @@ public class HablarVCard implements EntryPoint {
     public void onModuleLoad() {
 	final VCardMessages messages = GWT.create(VCardMessages.class);
 	I18nVCard.set(messages);
+	VCardWidget.setMessages(messages);
+	HablarVCard.setMessages(messages);
     }
 
 }

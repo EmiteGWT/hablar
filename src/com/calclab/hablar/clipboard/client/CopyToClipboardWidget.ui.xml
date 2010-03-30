@@ -2,13 +2,15 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
-		
+
 	</ui:style>
 	<g:HTMLPanel styleName="hablar-CopyToClipboardWidget">
 		<div class="form">
-			<h2>Copy conversation to clipboard</h2>
+			<h2>
+				<span ui:field='title' />
+			</h2>
 			<p>
-			<label>Use your browser's copy command to place this text into the clipboard</label>
+			<label ui:field="useYourBrowserLabel">Use your browser's copy command to place this text into the clipboard</label>
 				<g:TextArea ui:field="content"></g:TextArea>
 			</p>
 			<div class="actions">
@@ -17,4 +19,4 @@
 			</div>
 		</div>
 	</g:HTMLPanel>
-</ui:UiBinder> 
+</ui:UiBinder>

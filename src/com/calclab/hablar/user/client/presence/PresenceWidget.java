@@ -4,7 +4,10 @@ import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
 import com.calclab.hablar.core.client.ui.menu.PopupMenu;
+import com.calclab.hablar.user.client.UserMessages;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.LabelElement;
+import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.HasBlurHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
@@ -18,6 +21,16 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class PresenceWidget extends Composite implements PresenceDisplay {
 
+    private static UserMessages messages;
+
+    public static void setMessages(final UserMessages messages) {
+	PresenceWidget.messages = messages;
+    }
+
+    public static UserMessages i18n() {
+	return messages;
+    }
+
     interface PresenceWidgetUiBinder extends UiBinder<Widget, PresenceWidget> {
     }
 
@@ -28,12 +41,17 @@ public class PresenceWidget extends Composite implements PresenceDisplay {
     @UiField
     Label menu, icon;
     private String currentStyle;
+    @UiField
+    SpanElement title;
+    @UiField
+    LabelElement statusLabel;
 
     public PresenceWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
 	status.ensureDebugId("PresenceWidget-status");
 	menu.addStyleName("PresenceWidget-menu");
 	menu.addStyleName(HablarIcons.get(IconType.menu));
+	statusLabel.setInnerText(i18n().statusLabelText());
     }
 
     @Override
@@ -90,4 +108,8 @@ public class PresenceWidget extends Composite implements PresenceDisplay {
 	icon.addStyleName(iconStyle);
     }
 
+    @Override
+    public void setPageTitle(String title) {
+	this.title.setInnerText(title);
+    }
 }

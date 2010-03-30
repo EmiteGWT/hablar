@@ -55,6 +55,7 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 	final String style = HablarIcons.get(IconType.buddy);
 	model.init(style, i18n().presencePageTitle());
 	display.setStatusIcon(HablarIcons.get(IconType.buddyOff));
+	display.setPageTitle(i18n().presencePageTitle());
 	storedPresenceManager = new StoredPresenceManager(Suco.get(PrivateStorageManager.class));
 	createDefActions();
 	updateMenu();

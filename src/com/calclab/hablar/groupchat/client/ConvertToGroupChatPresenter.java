@@ -31,6 +31,7 @@ public class ConvertToGroupChatPresenter extends EditRoomPresenter {
 	super(TYPE, eventBus, openRoomWidget);
 	this.roomsService = roomsService;
 	display.setPageTitle(i18n().convertPageTitle());
+	display.setAcceptText(i18n().convertToGroupAction());
     }
 
     public void setChat(final Chat chat) {

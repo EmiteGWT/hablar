@@ -2,14 +2,16 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
-		
+
 	</ui:style>
 	<g:ScrollPanel ui:field="scroll" height="100%" styleName="scroll">
 		<g:HTMLPanel styleName="hablar-ManageGroupsWidget">
 			<div class="form">
-				<h2>Change contact groups</h2>
+				<h2>
+					<span ui:field='title' />
+				</h2>
 				<p>
-					<label>Contact Name:</label>
+					<label ui:field="contactNameLabel">Contact Name:</label>
 					<g:Label ui:field="contactName"></g:Label>
 				</p>
 				<br/>
@@ -25,4 +27,4 @@
 			</div>
 		</g:HTMLPanel>
 	</g:ScrollPanel>
-</ui:UiBinder> 
+</ui:UiBinder>

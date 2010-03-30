@@ -35,7 +35,10 @@ public class HablarUser implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-	setMessages((UserMessages) GWT.create(UserMessages.class));
+	UserMessages messages = (UserMessages) GWT.create(UserMessages.class);
+	setMessages(messages);
+	PresenceWidget.setMessages(messages);
+	UserWidget.setMessages(messages);
     }
 
 }

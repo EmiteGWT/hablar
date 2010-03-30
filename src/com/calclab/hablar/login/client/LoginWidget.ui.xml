@@ -2,21 +2,17 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
-		
+
 	</ui:style>
 	<g:DockLayoutPanel styleName="hablar-Login hablar-Page" unit="EM">
 		<g:north size="9">
 			<g:HTMLPanel styleName="form">
 				<p>
-					<label>
-						<ui:msg description="User field">User:</ui:msg>
-					</label>
+					<label ui:field="userLabel">User:</label>
 					<g:TextBox  ui:field="user" />
 				</p>
 				<p>
-					<label>
-						<ui:msg description="Password field">Password:</ui:msg>
-					</label>
+					<label ui:field="passwordLabel">Password:</label>
 					<g:PasswordTextBox ui:field="password" />
 				</p>
 				<div styleName="actions">
@@ -28,4 +24,4 @@
 			<g:FlowPanel ui:field="output" styleName="output"></g:FlowPanel>
 		</g:center>
 	</g:DockLayoutPanel>
-</ui:UiBinder> 
+</ui:UiBinder>

@@ -27,4 +27,6 @@ public interface PresenceDisplay extends Display {
 
     void setStatusIcon(String iconStyle);
 
+    void setPageTitle(String title);
+
 }

@@ -18,4 +18,36 @@ public interface VCardMessages extends Messages {
     @DefaultMessage("Please log in to retrieve your profile")
     String waitingToLogin();
 
+    @DefaultMessage("See user profile")
+    String seeUserProfileAction();
+
+    @DefaultMessage("Close")
+    String closeAction();
+
+    @DefaultMessage("Profile of {0}")
+    String profileOfBuddy(String name);
+
+    @DefaultMessage("Name:")
+    String nameLabelText();
+
+    @DefaultMessage("Nickname:")
+    String nicknameLabelText();
+
+    @DefaultMessage("Family Name:")
+    String familyNameLabelText();
+
+    @DefaultMessage("Middle Name:")
+    String middleNameLabelText();
+
+    @DefaultMessage("Given Name:")
+    String givenNameLabelText();
+
+    @DefaultMessage("Organization:")
+    String organizationLabelText();
+
+    @DefaultMessage("Homepage:")
+    String homepageLabelText();
+
+    @DefaultMessage("Email:")
+    String emailLabelText();
 }

@@ -15,7 +15,7 @@ public class OthersVCardPresenter extends VCardPage {
 	super(eventBus, display);
 	display.setAcceptVisible(false);
 	display.setCancelVisible(true);
-	display.setCancelText("Close");
+	display.setCancelText(I18nVCard.t.closeAction());
 	display.getCancel().addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(final ClickEvent event) {
@@ -25,7 +25,7 @@ public class OthersVCardPresenter extends VCardPage {
     }
 
     public void setUser(final XmppURI jid) {
-	display.setPageTitle("Profile of " + jid.getShortName());
+	display.setPageTitle(I18nVCard.t.profileOfBuddy(jid.getShortName()));
 	final VCardManager manager = Suco.get(VCardManager.class);
 	manager.getUserVCard(jid, new Listener<VCardResponse>() {
 	    @Override

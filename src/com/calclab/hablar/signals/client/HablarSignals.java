@@ -47,7 +47,9 @@ public class HablarSignals implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-	I18nSignals.set((SignalMessages) GWT.create(SignalMessages.class));
+	SignalMessages messages = (SignalMessages) GWT.create(SignalMessages.class);
+	I18nSignals.set(messages);
+	SignalsPreferencesWidget.setMessages(messages);
     }
 
 }

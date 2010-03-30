@@ -27,4 +27,9 @@ public interface UserMessages extends Messages {
     @DefaultMessage("Your status")
     String presencePageTitle();
 
+    @DefaultMessage("Status:")
+    String statusLabelText();
+
+    @DefaultMessage("Close")
+    String closeAction();
 }

@@ -9,6 +9,9 @@
 	<inherits name='com.calclab.emite.xep.chatstate.EmiteChatState' />
 	<inherits name='com.calclab.hablar.core.HablarCore' />
 
+	<extend-property name="locale" values="it"/>
+	<extend-property name="locale" values="en"/>
+
 	<source path="client" />
 	<entry-point class="com.calclab.hablar.chat.client.HablarChat" />
 </module>

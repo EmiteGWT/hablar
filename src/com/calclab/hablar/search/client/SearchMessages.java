@@ -25,4 +25,13 @@ public interface SearchMessages extends Messages {
 
     @DefaultMessage("Search users")
     String searchUsers();
+
+    @DefaultMessage("Couldn''t retrieve results")
+    String searchError();
+
+    @DefaultMessage("Searching {0}...")
+    String searchingTerm(String term);
+
+    @DefaultMessage("Search")
+    String searchAction();
 }

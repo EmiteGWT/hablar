@@ -20,7 +20,7 @@ import com.google.gwt.core.client.GWT;
 
 /**
  * Adds Search support to Hablar
- * 
+ *
  */
 public class HablarSearch implements EntryPoint {
 
@@ -74,7 +74,9 @@ public class HablarSearch implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-	setMessages((SearchMessages) GWT.create(SearchMessages.class));
+	SearchMessages messages = (SearchMessages) GWT.create(SearchMessages.class);
+	setMessages(messages);
+	SearchWidget.setMessages(messages);
     }
 
 }

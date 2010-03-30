@@ -21,6 +21,15 @@ public interface LoginMessages extends Messages {
     @DefaultMessage("Session state: {0}")
     String sessionState(String state);
 
+    @DefaultMessage("Session: {0}")
+    String sessionStateMessage(String state);
+
     @DefaultMessage("Wait...")
     String waitDots();
+
+    @DefaultMessage("User:")
+    String userLabelText();
+
+    @DefaultMessage("Password:")
+    String passwordLabelText();
 }

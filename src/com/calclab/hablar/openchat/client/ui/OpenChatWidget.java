@@ -1,7 +1,10 @@
 package com.calclab.hablar.openchat.client.ui;
 
 import com.calclab.hablar.core.client.validators.HasState;
+import com.calclab.hablar.openchat.client.OpenChatMessages;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.LabelElement;
+import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -17,6 +20,16 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class OpenChatWidget extends Composite implements OpenChatDisplay {
 
+    private static OpenChatMessages messages;
+
+    public static void setMessages(final OpenChatMessages messages) {
+	OpenChatWidget.messages = messages;
+    }
+
+    public static OpenChatMessages i18n() {
+	return messages;
+    }
+
     interface OpenChatWidgetUiBinder extends UiBinder<Widget, OpenChatWidget> {
     }
 
@@ -29,7 +42,12 @@ public class OpenChatWidget extends Composite implements OpenChatDisplay {
     @UiField
     CheckBox addToRoster;
     @UiField
+    LabelElement jabberIdLabel;
+    @UiField
     Label jabberIdError;
+
+    @UiField
+    SpanElement title;
 
     public OpenChatWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
@@ -37,6 +55,11 @@ public class OpenChatWidget extends Composite implements OpenChatDisplay {
 	cancel.ensureDebugId("OpenChatWidget-cancel");
 	jabberId.ensureDebugId("OpenChatWidget-jabberId");
 	addToRoster.ensureDebugId("OpenChatWidget-addToRoster");
+	title.setInnerText(i18n().openNewChatLabelText());
+	jabberIdLabel.setInnerText(i18n().jabberIdLabelText());
+	addToRoster.setText(i18n().addToRosterLabelText());
+	accept.setText(i18n().openChatAction());
+	cancel.setText(i18n().cancelAction());
     }
 
     @Override

@@ -43,7 +43,7 @@ public class GroupHeaderPresenter implements Presenter<GroupHeaderDisplay> {
 	final Listener<RosterItem> updateGroup = new Listener<RosterItem>() {
 	    @Override
 	    public void onEvent(final RosterItem parameter) {
-		final String groupLabel = isAllContacts ? "All contacts" : i18n().groupName(group.getName(),
+		final String groupLabel = isAllContacts ? i18n().allContactsGroupName() : i18n().groupName(group.getName(),
 			"" + group.getSize());
 		display.getName().setText(groupLabel);
 	    }
