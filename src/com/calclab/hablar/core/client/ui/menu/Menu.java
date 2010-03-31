@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.Window;
 
 public class Menu<T> implements Presenter<MenuDisplay<T>> {
 
@@ -53,7 +54,16 @@ public class Menu<T> implements Presenter<MenuDisplay<T>> {
 	for (final Action<T> action : actions) {
 	    display.setActionVisible(action, action.isApplicable(target));
 	}
-	display.show(left - WIDTH, top + Y_OFFSET);
+	
+	int menuLeft = left;
+	
+	// If the menu goes off the right edge of the window, make the anchor point the top right
+	// This should hopefully mean the menu is always displayed on the screen
+	if((left + WIDTH) > Window.getClientWidth()) {
+	    menuLeft = left - WIDTH;
+	}
+	    
+	display.show(menuLeft, top + Y_OFFSET);
     }
 
 }
