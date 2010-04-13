@@ -98,6 +98,11 @@ div.hablar-ActionWidget:hover {
     margin-right: 3px;
 }
 
+hablar-RosterGroupWidget .icon {
+    float: left;
+    margin-right: 3px;
+}
+
 .hablar-Header .title {
     float: left;
 }
@@ -312,7 +317,18 @@ div.hablar-RosterItemWidget:hover {
     padding-right: 5px;
 }
 
+.hablar-RosterGroupWidget .jid {
+    float: left;
+    display: block;
+    color: #BBB;
+    padding-right: 5px;
+}
+
 .hablar-RosterItemWidget .menu {
+    float: right;
+}
+
+.hablar-RosterGroupWidget .menu {
     float: right;
 }
 
