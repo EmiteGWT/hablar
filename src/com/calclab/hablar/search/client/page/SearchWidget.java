@@ -66,6 +66,7 @@ public class SearchWidget extends Composite implements SearchDisplay {
 	message.ensureDebugId("SearchWidget-message");
 	search.ensureDebugId("SearchWidget-search");
 	search.setText(i18n().searchAction());
+	term.setTitle(i18n().searchTooltip());
     }
 
     @Override

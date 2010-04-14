@@ -34,4 +34,7 @@ public interface SearchMessages extends Messages {
 
     @DefaultMessage("Search")
     String searchAction();
+
+    @DefaultMessage("Type the name, or part of it, and press \"Search\"")
+    String searchTooltip();
 }

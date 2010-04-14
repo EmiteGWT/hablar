@@ -2,7 +2,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
-		
+
 	</ui:style>
     <g:LayoutPanel ui:field="self" styleName="hablar-Page hablar-SearchWidget">
         <g:layer left="0" top="0" width="100%" height="0">
@@ -11,16 +11,16 @@
                 </g:Label>
             </g:FlowPanel>
         </g:layer>
-        <g:layer left="0" top="0" right="0" bottom="40px">
+        <g:layer left="0" top="0" right="0" bottom="47px">
             <g:ScrollPanel ui:field="scroll" height="100%" styleName="scroll">
                 <g:FlowPanel styleName="list" ui:field="results" />
             </g:ScrollPanel>
         </g:layer>
-        <g:layer left="0" bottom="0" width="100%" height="33px">
-            <g:FlowPanel styleName="panel">
+        <g:layer left="0" bottom="0" width="100%" height="40px">
+            <g:FlowPanel styleName="searchControlsPanel">
                 <g:TextBox ui:field="term" styleName="searchBox" />
                 <g:Button ui:field="search">Search</g:Button>
             </g:FlowPanel>
         </g:layer>
     </g:LayoutPanel>
-</ui:UiBinder> 
+</ui:UiBinder>
