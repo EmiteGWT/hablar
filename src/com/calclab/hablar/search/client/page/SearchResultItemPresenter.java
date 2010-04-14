@@ -18,7 +18,7 @@ public class SearchResultItemPresenter implements Presenter<SearchResultItemDisp
 	this.display = display;
 	display.getName().setText(item.getNick());
 	display.getJid().setText(item.getJid().toString());
-	display.getMenu().addClickHandler(new ClickHandler() {
+	ClickHandler handler = new ClickHandler() {
 	    @Override
 	    public void onClick(final ClickEvent event) {
 		event.preventDefault();
@@ -26,7 +26,11 @@ public class SearchResultItemPresenter implements Presenter<SearchResultItemDisp
 		itemMenu.setTarget(item);
 		itemMenu.show(element.getAbsoluteLeft(), element.getAbsoluteTop());
 	    }
-	});
+	};
+	display.getMenu().addClickHandler(handler);
+	display.getBuddyIcon().addClickHandler(handler);
+	display.getClickableJid().addClickHandler(handler);
+	display.getClickableName().addClickHandler(handler);
     }
 
     @Override

@@ -8,8 +8,13 @@ public interface SearchResultItemDisplay extends Display {
 
     HasText getJid();
 
-    HasClickHandlers getMenu();
-
     HasText getName();
 
+    HasClickHandlers getMenu();
+
+    HasClickHandlers getBuddyIcon();
+
+    HasClickHandlers getClickableJid();
+
+    HasClickHandlers getClickableName();
 }

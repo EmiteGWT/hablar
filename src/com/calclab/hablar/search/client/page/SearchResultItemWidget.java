@@ -19,6 +19,9 @@ public class SearchResultItemWidget extends Composite implements SearchResultIte
     private static SearchResultItemWidgetUiBinder uiBinder = GWT.create(SearchResultItemWidgetUiBinder.class);
 
     @UiField
+    Label buddyIcon;
+
+    @UiField
     Label name, jid, menu;
 
     public SearchResultItemWidget(final String itemId) {
@@ -47,4 +50,18 @@ public class SearchResultItemWidget extends Composite implements SearchResultIte
 	return name;
     }
 
+    @Override
+    public HasClickHandlers getBuddyIcon() {
+	return buddyIcon;
+    }
+
+    @Override
+    public HasClickHandlers getClickableJid() {
+	return jid;
+    }
+
+    @Override
+    public HasClickHandlers getClickableName() {
+	return name;
+    }
 }
