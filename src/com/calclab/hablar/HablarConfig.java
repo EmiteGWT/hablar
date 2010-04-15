@@ -5,6 +5,7 @@ import com.calclab.hablar.core.client.HablarDisplay;
 import com.calclab.hablar.core.client.pages.tabs.TabsLayout;
 import com.calclab.hablar.core.client.pages.tabs.TabsLayout.TabHeaderSize;
 import com.calclab.hablar.rooms.client.HablarRoomsConfig;
+import com.calclab.hablar.roster.client.RosterConfig;
 import com.calclab.hablar.search.client.SearchConfig;
 
 public class HablarConfig {
@@ -35,6 +36,7 @@ public class HablarConfig {
 	}
 
 	config.roomsConfig = HablarRoomsConfig.getFromMeta();
+	config.rosterConfig = RosterConfig.getFromMeta();
 	config.searchConfig = SearchConfig.getFromMeta();
 	return config;
     }
@@ -83,6 +85,11 @@ public class HablarConfig {
      * Show user page docked on top
      */
     public boolean dockUser = true;
+
+    /**
+     * The Search module configuration
+     */
+    public RosterConfig rosterConfig = new RosterConfig();
 
     /**
      * The Search module configuration

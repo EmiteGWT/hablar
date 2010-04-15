@@ -11,6 +11,7 @@ import com.calclab.emite.im.client.roster.RosterItemsOrder;
 import com.calclab.hablar.core.client.Idify;
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.ui.menu.Menu;
+import com.calclab.hablar.roster.client.RosterConfig;
 import com.calclab.suco.client.events.Listener;
 
 @SuppressWarnings("unchecked")
@@ -25,11 +26,14 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 
     private final RosterGroup group;
 
+    private final RosterConfig rosterConfig;
+
     public RosterGroupPresenter(final RosterGroup group, final Menu<RosterItemPresenter> itemMenu,
-	    final RosterGroupDisplay display) {
+	    final RosterGroupDisplay display, RosterConfig rosterConfig) {
 	this.group = group;
 	this.itemMenu = itemMenu;
 	this.display = display;
+	this.rosterConfig = rosterConfig;
 
 	itemPresenters = new HashMap<XmppURI, RosterItemPresenter>();
 	display.setVisible(group.isAllContacts());
@@ -75,7 +79,8 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	// FIXME: no mola nada toda esta basura selenium
 	final RosterItemDisplay itemDisplay = display.newRosterItemDisplay(Idify.id(group.getName()), Idify.id(item
 		.getJID()));
-	final RosterItemPresenter presenter = new RosterItemPresenter(group.getName(), itemMenu, itemDisplay);
+	final RosterItemPresenter presenter = new RosterItemPresenter(group.getName(), itemMenu, itemDisplay,
+		rosterConfig);
 	itemPresenters.put(item.getJID(), presenter);
 	return presenter;
     }

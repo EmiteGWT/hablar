@@ -5,6 +5,7 @@ import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
 import com.calclab.hablar.core.client.ui.menu.Menu;
+import com.calclab.hablar.roster.client.RosterConfig;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -17,18 +18,22 @@ public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
     private final String groupName;
 
     public RosterItemPresenter(final String groupName, final Menu<RosterItemPresenter> itemMenu,
-	    final RosterItemDisplay display) {
+	    final RosterItemDisplay display, RosterConfig rosterConfig) {
 	this.groupName = groupName;
 	this.display = display;
 
 	final ChatManager manager = Suco.get(ChatManager.class);
 
-	display.getAction().addClickHandler(new ClickHandler() {
-	    @Override
-	    public void onClick(final ClickEvent event) {
-		manager.open(item.getJID());
-	    }
-	});
+	if (rosterConfig.oneClickChat) {
+	    display.getAction().addClickHandler(new ClickHandler() {
+		@Override
+		public void onClick(final ClickEvent event) {
+		    manager.open(item.getJID());
+		}
+	    });
+	    display.asWidget().addStyleName("clickable");
+	}
+
 	display.getMenuAction().addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(final ClickEvent event) {

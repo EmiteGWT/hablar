@@ -2,6 +2,7 @@ package com.calclab.hablar.roster.client;
 
 import java.util.Collection;
 
+import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.ui.menu.Action;
@@ -14,6 +15,7 @@ import com.google.gwt.user.client.Window;
 
 public class RosterBasicActions {
 
+    private static final String ACTION_ID_START_CHAT = "HablarRoster-startChat";
     private static final String ACTION_ID_REMOVE_FROM_ROSTER = "HablarRoster-removeFromRosterAction";
     private static final String ID_ACTION_REMOVE_FROM_GROUP = "HablarRoster-removeFromGroupAction";
     private static final String ID_ACTION_DELETE_GROUP = "HablarRoster-deleteGroupAction";
@@ -28,6 +30,15 @@ public class RosterBasicActions {
 	return messages;
     }
 
+    private final SimpleAction<RosterItemPresenter> startChat = new SimpleAction<RosterItemPresenter>(
+	    i18n().startChatAction(), ACTION_ID_START_CHAT) {
+	@Override
+	public void execute(final RosterItemPresenter target) {
+	    final ChatManager manager = Suco.get(ChatManager.class);
+	    manager.open(target.getItem().getJID());
+	}
+    };
+
     private final SimpleAction<RosterItemPresenter> removeFromRoster = new SimpleAction<RosterItemPresenter>(
 	    i18n().removeContactAction(), ACTION_ID_REMOVE_FROM_ROSTER) {
 	@Override
@@ -39,7 +50,7 @@ public class RosterBasicActions {
 	@Override
 	public boolean isApplicable(final RosterItemPresenter target) {
 	    return isEntrieRoster(target);
-	};
+	}
     };
 
     private final SimpleAction<RosterItemPresenter> removeFromGroup = new SimpleAction<RosterItemPresenter>(
@@ -52,7 +63,7 @@ public class RosterBasicActions {
 	@Override
 	public boolean isApplicable(final RosterItemPresenter target) {
 	    return !isEntrieRoster(target);
-	};
+	}
     };
     private final Action<RosterGroupPresenter> deleteGroup = new SimpleAction<RosterGroupPresenter>(
 	    i18n().deleteGroupAction(), ID_ACTION_DELETE_GROUP) {
@@ -70,12 +81,19 @@ public class RosterBasicActions {
 	@Override
 	public boolean isApplicable(final RosterGroupPresenter target) {
 	    return target.getGroupName() != null;
-	};
+	}
     };
     private final Roster roster;
 
-    public RosterBasicActions(final RosterPage rosterPage) {
+    public RosterBasicActions() {
 	roster = Suco.get(Roster.class);
+    }
+
+    public void addHighPriorityActions(final RosterPage rosterPage) {
+	rosterPage.getItemMenu().addAction(startChat);
+    }
+
+    public void addLowPriorityActions(final RosterPage rosterPage) {
 	rosterPage.getItemMenu().addAction(removeFromRoster);
 	rosterPage.getItemMenu().addAction(removeFromGroup);
 	rosterPage.getGroupMenu().addAction(deleteGroup);

@@ -45,6 +45,9 @@ public interface RosterMessages extends Messages {
     @DefaultMessage("Cancel")
     String cancelAction();
 
+    @DefaultMessage("Start chat")
+    String startChatAction();
+
     @DefaultMessage("Remove contact")
     String removeContactAction();
 

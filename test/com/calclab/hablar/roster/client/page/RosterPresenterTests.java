@@ -11,6 +11,7 @@ import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emite.xtesting.RosterTester;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.ui.menu.Menu;
+import com.calclab.hablar.roster.client.RosterConfig;
 import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.testing.EmiteTester;
 import com.calclab.hablar.testing.HablarTester;
@@ -28,7 +29,9 @@ public class RosterPresenterTests {
 	final HablarTester tester = new HablarTester();
 	eventBus = tester.eventBus;
 	display = tester.newDisplay(RosterDisplay.class);
-	new RosterPresenter(eventBus, display);
+	RosterConfig rosterConfig = new RosterConfig();
+	rosterConfig.oneClickChat = true;
+	new RosterPresenter(eventBus, display, rosterConfig);
 	roster.storeItem("jid1", "name1", "group1");
 	roster.storeItem("jid2", "name2", "group2");
     }

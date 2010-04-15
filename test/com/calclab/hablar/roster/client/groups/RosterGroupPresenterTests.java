@@ -13,6 +13,7 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterGroup;
 import com.calclab.emite.xtesting.RosterTester;
 import com.calclab.hablar.core.client.ui.menu.Menu;
+import com.calclab.hablar.roster.client.RosterConfig;
 import com.calclab.hablar.testing.EmiteTester;
 import com.calclab.hablar.testing.HablarTester;
 
@@ -34,7 +35,9 @@ public class RosterGroupPresenterTests {
 	group.add(RosterTester.createItem("test1", "name1", "mygroup"));
 	group.add(RosterTester.createItem("test2", "name2", "mygroup"));
 	group.add(RosterTester.createItem("test3", "name3", "mygroup"));
-	new RosterGroupPresenter(group, itemMenu, display);
+	RosterConfig rosterConfig = new RosterConfig();
+	rosterConfig.oneClickChat = true;
+	new RosterGroupPresenter(group, itemMenu, display, rosterConfig);
     }
 
     @Test

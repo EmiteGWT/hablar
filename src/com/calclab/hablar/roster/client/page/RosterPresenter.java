@@ -17,6 +17,8 @@ import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.Menu;
+import com.calclab.hablar.roster.client.RosterBasicActions;
+import com.calclab.hablar.roster.client.RosterConfig;
 import com.calclab.hablar.roster.client.groups.RosterGroupDisplay;
 import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.roster.client.groups.RosterItemPresenter;
@@ -28,7 +30,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 
 /**
  * The roster page presenter.
- * 
+ *
  * @see RosterPage
  */
 public class RosterPresenter extends PagePresenter<RosterDisplay> implements RosterPage {
@@ -44,13 +46,17 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
     }
     private boolean active;
     private final Roster roster;
+    private final RosterBasicActions basicActions;
     private final Menu<RosterItemPresenter> itemMenu;
     private final HashMap<String, RosterGroupPresenter> groupPresenters;
     private final Menu<RosterGroupPresenter> groupMenu;
+    private final RosterConfig rosterConfig;
 
-    public RosterPresenter(final HablarEventBus eventBus, final RosterDisplay display) {
+    public RosterPresenter(final HablarEventBus eventBus, final RosterDisplay display, final RosterConfig rosterConfig) {
 	super(TYPE, "" + ++index, eventBus, display);
 	roster = Suco.get(Roster.class);
+	basicActions = new RosterBasicActions();
+	this.rosterConfig = rosterConfig;
 
 	groupPresenters = new HashMap<String, RosterGroupPresenter>();
 	active = true;
@@ -62,6 +68,16 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 	addSessionListeners();
 	getState().init(HablarIcons.get(IconType.roster), i18n().contacts());
 
+    }
+
+    @Override
+    public void addHighPriorityActions() {
+	basicActions.addHighPriorityActions(this);
+    }
+
+    @Override
+    public void addLowPriorityActions() {
+	basicActions.addLowPriorityActions(this);
     }
 
     @Override
@@ -138,7 +154,7 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 
     private void createGroup(final RosterGroup group) {
 	final RosterGroupDisplay groupDisplay = display.newRosterGroupDisplay();
-	final RosterGroupPresenter presenter = new RosterGroupPresenter(group, itemMenu, groupDisplay);
+	final RosterGroupPresenter presenter = new RosterGroupPresenter(group, itemMenu, groupDisplay, rosterConfig);
 	groupPresenters.put(group.getName(), presenter);
 	display.addGroup(presenter, groupMenu);
     }

@@ -41,10 +41,19 @@ public class HablarComplete {
 
 	HablarUser.install(hablar);
 
+	RosterPage roster = null;
 	if (config.hasRoster) {
-	    HablarRoster.install(hablar);
+	    roster = HablarRoster.installModule(hablar, config.rosterConfig);
+	}
+
+	if (config.hasVCard) {
+	    HablarVCard.install(hablar);
+	}
+
+	if (config.hasRoster) {
 	    HablarOpenChat.install(hablar);
 	    HablarEditBuddy.install(hablar);
+	    HablarRoster.addActions(hablar, roster);
 	}
 
 	if (config.hasSearch) {
@@ -53,10 +62,6 @@ public class HablarComplete {
 
 	if (config.hasSignals) {
 	    HablarSignals.install(hablar);
-	}
-
-	if (config.hasVCard) {
-	    HablarVCard.install(hablar);
 	}
 
 	if (config.hasCopyToClipboard) {

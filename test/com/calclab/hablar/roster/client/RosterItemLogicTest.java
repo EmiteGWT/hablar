@@ -25,7 +25,9 @@ public class RosterItemLogicTest {
 	final HablarTester tester = new HablarTester();
 	display = tester.newDisplay(RosterItemDisplay.class);
 	final Menu<RosterItemPresenter> menu = tester.newMenu();
-	presenter = new RosterItemPresenter("group", menu, display);
+	RosterConfig rosterConfig = new RosterConfig();
+	rosterConfig.oneClickChat = true;
+	presenter = new RosterItemPresenter("group", menu, display, rosterConfig);
 	item = new RosterItem(XmppURI.uri("test1@localhost"), SubscriptionState.both, "test1", null);
     }
 

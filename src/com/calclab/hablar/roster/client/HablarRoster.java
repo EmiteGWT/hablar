@@ -5,7 +5,6 @@ import com.calclab.emite.core.client.xmpp.session.Session.State;
 import com.calclab.emite.im.client.roster.SubscriptionHandler;
 import com.calclab.emite.im.client.roster.SubscriptionHandler.Behaviour;
 import com.calclab.hablar.core.client.Hablar;
-import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.roster.client.changegroups.ManageGroupsWidget;
 import com.calclab.hablar.roster.client.page.RosterPage;
@@ -24,16 +23,13 @@ public class HablarRoster implements EntryPoint {
 	return rosterMessages;
     }
 
-    public static void install(final Hablar hablar) {
+    public static RosterPage installModule(final Hablar hablar, RosterConfig rosterConfig) {
 	final SubscriptionHandler subscriptionHandler = Suco.get(SubscriptionHandler.class);
 	subscriptionHandler.setBehaviour(Behaviour.acceptAll);
 
-	final RosterPage roster = new RosterPresenter(hablar.getEventBus(), new RosterWidget());
+	final RosterPage roster = new RosterPresenter(hablar.getEventBus(), new RosterWidget(), rosterConfig);
 	roster.setVisibility(Visibility.notFocused);
 	hablar.addPage(roster);
-
-	new RosterBasicActions(roster);
-	HablarManageGroups.install(roster, hablar);
 
 	final Session session = Suco.get(Session.class);
 	session.onStateChanged(new Listener<Session>() {
@@ -44,10 +40,13 @@ public class HablarRoster implements EntryPoint {
 	    }
 	});
 	setState(roster, session.getState());
+	roster.addHighPriorityActions();
+	return roster;
     }
 
-    public static void install(final HablarWidget widget) {
-	install(widget.getHablar());
+    public static void addActions(final Hablar hablar, final RosterPage roster) {
+	HablarManageGroups.install(roster, hablar);
+	roster.addLowPriorityActions();
     }
 
     public static void setMessages(final RosterMessages messages) {

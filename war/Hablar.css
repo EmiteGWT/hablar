@@ -222,7 +222,10 @@ div.hablar-ActionWidget:hover {
     overflow: hidden;
     padding: 5px 0px 0 0px;
     border-bottom: 1px solid #E9E9E9;
-    cursor: pointer;
+}
+
+.clickable {
+	cursor: pointer;
 }
 
 /** USER **/
@@ -339,6 +342,7 @@ div.hablar-RosterItemWidget:hover {
 
 .hablar-RosterGroupWidget .menu {
     float: right;
+	cursor: pointer;
 }
 
 .hablar-RosterItemWidget .status {
