@@ -28,11 +28,17 @@ public class TabsHeaderWidget extends Composite implements HeaderDisplay {
     Label icon, close;
 
     public TabsHeaderWidget(final String id) {
+	this(id, "24px", "120px", 10);
+    }
+
+    public TabsHeaderWidget(final String id, String height, String width, int trim) {
 	initWidget(uiBinder.createAndBindUi(this));
+	this.setHeight(height);
+	this.setWidth(width);
 	close.addStyleName(HablarIcons.get(IconType.close));
 	ensureDebugId("HeaderWidget-" + id);
 	// title.ensureDebugId(Idify.id("HeaderWidget", id, "title"));
-	title.setTrim(10);
+	title.setTrim(trim);
     }
 
     @Override

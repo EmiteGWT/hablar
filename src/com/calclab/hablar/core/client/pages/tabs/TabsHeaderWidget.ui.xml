@@ -3,19 +3,14 @@
 	xmlns:h="urn:import:com.calclab.hablar.core.client.pages.tabs" xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
 	<ui:style>
-	   .tab {
-	   	   width: 120px;
-	   	   height: 24px;
-	   	}
-	
 		.tabInner {
 			width: 100%;
 			height: 100%;
 		}
 	</ui:style>
 
-	<g:FocusPanel ui:field="self" 
-		styleName='hablar-TabsHeaderWidget hablar-Header {style.tab}'>
+	<g:FocusPanel ui:field="self"
+		styleName='hablar-TabsHeaderWidget hablar-Header'>
 		<g:LayoutPanel styleName="{style.tabInner}">
 			<g:layer left="2px" top="3px" width="20px" bottom="0">
 				<g:Label styleName="icon" ui:field="icon"></g:Label>

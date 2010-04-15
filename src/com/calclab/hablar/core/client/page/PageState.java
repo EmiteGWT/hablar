@@ -42,7 +42,7 @@ public class PageState {
 	    }
 	});
     }
-    
+
     public void setExternalState(String externalState) {
 	this.externalState = externalState;
 	fireChanged();
@@ -75,6 +75,7 @@ public class PageState {
     public void init(final String style, final String title) {
 	pageIcon = style;
 	pageTitle = title;
+	pageTitleTooltip = title;
 	fireChanged();
     }
 
@@ -94,6 +95,9 @@ public class PageState {
 
     public void setPageTitle(final String pageTitle) {
 	this.pageTitle = pageTitle;
+	if (pageTitleTooltip == null) {
+	    pageTitleTooltip = pageTitle;
+	}
 	fireChanged();
     }
 

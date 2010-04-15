@@ -73,6 +73,7 @@ public class LoginPage extends PagePresenter<LoginDisplay> {
 	display.setActionEnabled(actionEnabled);
 	display.addMessage(i18n().sessionStateMessage(state.toString()));
 	getState().setPageTitle(pageTitle);
+	getState().setPageTitleTooltip(pageTitle);
 	getState().setPageIcon(pageIcon);
 	fireUserMessage(state);
     }

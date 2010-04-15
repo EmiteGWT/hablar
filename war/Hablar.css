@@ -176,6 +176,7 @@ div.hablar-ActionWidget:hover {
     border-right: 1px solid #BBB;
     border-bottom: 1px solid #BBB;
     margin-right: -1px;
+    background-color: #AAAAAA;
 }
 
 .hablar-TabsHeaderWidget.focused {

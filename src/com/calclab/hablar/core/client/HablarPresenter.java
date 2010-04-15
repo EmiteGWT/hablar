@@ -2,11 +2,11 @@ package com.calclab.hablar.core.client;
 
 import java.util.List;
 
-import com.calclab.hablar.core.client.HablarDisplay.Layout;
 import com.calclab.hablar.core.client.container.ContainerAggregator;
 import com.calclab.hablar.core.client.container.PageAddedEvent;
 import com.calclab.hablar.core.client.container.PageAddedHandler;
 import com.calclab.hablar.core.client.container.PagesContainer;
+import com.calclab.hablar.core.client.container.main.MainContainer;
 import com.calclab.hablar.core.client.container.overlay.OverlayContainer;
 import com.calclab.hablar.core.client.container.overlay.OverlayLayout;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
@@ -15,13 +15,25 @@ import com.calclab.hablar.core.client.pages.accordion.AccordionContainer;
 import com.calclab.hablar.core.client.pages.accordion.AccordionLayout;
 import com.calclab.hablar.core.client.pages.tabs.TabsContainer;
 import com.calclab.hablar.core.client.pages.tabs.TabsLayout;
+import com.calclab.hablar.core.client.pages.tabs.TabsLayout.TabHeaderSize;
 
 public class HablarPresenter implements Hablar {
     private final HablarDisplay display;
     private final HablarEventBus eventBus;
     private final ContainerAggregator aggregator;
 
-    public HablarPresenter(HablarEventBus eventBus, Layout layout, HablarDisplay display) {
+    public static HablarPresenter createAccordionPresenter(HablarEventBus eventBus, HablarDisplay display) {
+	MainContainer container = new AccordionContainer(eventBus, new AccordionLayout(display));
+	return new HablarPresenter(eventBus, display, container);
+    }
+
+    public static HablarPresenter createTabsPresenter(HablarEventBus eventBus, HablarDisplay display,
+	    TabHeaderSize tabHeaderSize) {
+	MainContainer container = new TabsContainer(eventBus, new TabsLayout(display, tabHeaderSize));
+	return new HablarPresenter(eventBus, display, container);
+    }
+
+    private HablarPresenter(HablarEventBus eventBus, HablarDisplay display, MainContainer container) {
 	this.eventBus = eventBus;
 	this.display = display;
 	this.aggregator = new ContainerAggregator(eventBus);
@@ -29,12 +41,7 @@ public class HablarPresenter implements Hablar {
 	OverlayLayout overlayLayout = new OverlayLayout(display);
 	OverlayContainer overlayContainer = new OverlayContainer(eventBus, overlayLayout);
 	addContainer(overlayContainer, Chain.after);
-	if (layout == HablarDisplay.Layout.accordion) {
-	    addContainer(new AccordionContainer(eventBus, new AccordionLayout(display)), Chain.before);
-	} else if (layout == HablarDisplay.Layout.tabs) {
-	    addContainer(new TabsContainer(eventBus, new TabsLayout(display)), Chain.before);
-	}
-
+	addContainer(container, Chain.before);
     }
 
     @Override
@@ -58,7 +65,7 @@ public class HablarPresenter implements Hablar {
 		handler.onPageAdded(new PageAddedEvent(page, null));
 	    }
 	}
-	    
+
     }
 
     @Override

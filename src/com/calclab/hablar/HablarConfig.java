@@ -2,6 +2,8 @@ package com.calclab.hablar;
 
 import com.calclab.emite.browser.client.PageAssist;
 import com.calclab.hablar.core.client.HablarDisplay;
+import com.calclab.hablar.core.client.pages.tabs.TabsLayout;
+import com.calclab.hablar.core.client.pages.tabs.TabsLayout.TabHeaderSize;
 import com.calclab.hablar.rooms.client.HablarRoomsConfig;
 import com.calclab.hablar.search.client.SearchConfig;
 
@@ -28,6 +30,9 @@ public class HablarConfig {
 	} else {
 	    config.layout = HablarDisplay.Layout.accordion;
 	}
+	if (config.layout == HablarDisplay.Layout.tabs) {
+	    createTabHeaderSize(config);
+	}
 
 	config.roomsConfig = HablarRoomsConfig.getFromMeta();
 	config.searchConfig = SearchConfig.getFromMeta();
@@ -53,6 +58,11 @@ public class HablarConfig {
      * Choose a layout
      */
     public HablarDisplay.Layout layout = HablarDisplay.Layout.tabs;
+
+    /**
+     * The size of the header in tabs layout
+     */
+    public TabsLayout.TabHeaderSize tabHeaderSize;
 
     /**
      * Install Roster module
@@ -89,4 +99,17 @@ public class HablarConfig {
      */
     public boolean hasVCard = true;
 
+    private static void createTabHeaderSize(final HablarConfig config) {
+	Integer trim = null;
+	String trimString = PageAssist.getMeta("hablar.tabHeaderTrim");
+	if (trimString != null) {
+	    try {
+		trim = Integer.decode(trimString);
+	    } catch (NumberFormatException e) {
+		// Ignore it.
+	    }
+	}
+	config.tabHeaderSize = TabHeaderSize.create(PageAssist.getMeta("hablar.tabHeaderHeight"), PageAssist
+		.getMeta("hablar.tabHeaderWidth"), trim);
+    }
 }
