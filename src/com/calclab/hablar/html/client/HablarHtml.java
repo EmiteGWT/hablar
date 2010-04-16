@@ -57,7 +57,7 @@ public class HablarHtml implements EntryPoint {
 	final HablarConfig config = HablarConfig.getFromMeta();
 	final HtmlConfig htmlConfig = HtmlConfig.getFromMeta();
 	htmlConfig.hasLogger = true;
-	final HablarWidget widget = new HablarWidget(config);
+	final HablarWidget widget = new HablarWidget(config.layout, config.tabHeaderSize);
 	final Hablar hablar = widget.getHablar();
 
 	HablarComplete.install(hablar, config);
