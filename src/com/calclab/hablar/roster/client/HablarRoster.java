@@ -7,6 +7,7 @@ import com.calclab.emite.im.client.roster.SubscriptionHandler.Behaviour;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.roster.client.changegroups.ManageGroupsWidget;
+import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
 import com.calclab.hablar.roster.client.page.RosterWidget;
@@ -65,6 +66,7 @@ public class HablarRoster implements EntryPoint {
 	setMessages(messages);
 	ManageGroupsWidget.setMessages(messages);
 	RosterBasicActions.setMessages(messages);
+	RosterGroupPresenter.setMessages(messages);
     }
 
 }

@@ -12,12 +12,24 @@ import com.calclab.hablar.core.client.Idify;
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.roster.client.RosterConfig;
+import com.calclab.hablar.roster.client.RosterMessages;
 import com.calclab.suco.client.events.Listener;
 
 @SuppressWarnings("unchecked")
 public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
+
     private final static Comparator<RosterItem> ORDER = RosterItemsOrder.order(RosterItemsOrder.byAvailability,
 	    RosterItemsOrder.groupedFirst, RosterItemsOrder.byName);
+
+    private static RosterMessages messages;
+
+    public static void setMessages(final RosterMessages messages) {
+	RosterGroupPresenter.messages = messages;
+    }
+
+    public static RosterMessages i18n() {
+	return messages;
+    }
 
     private final RosterGroupDisplay display;
     private String groupLabel;
@@ -79,6 +91,13 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	// FIXME: no mola nada toda esta basura selenium
 	final RosterItemDisplay itemDisplay = display.newRosterItemDisplay(Idify.id(group.getName()), Idify.id(item
 		.getJID()));
+	String title;
+	if (rosterConfig.oneClickChat) {
+	    title = i18n().clickToChatTooltip(item.getName());
+	} else {
+	    title = i18n().startChatTooltip(item.getName());
+	}
+	display.asWidget().setTitle(title);
 	final RosterItemPresenter presenter = new RosterItemPresenter(group.getName(), itemMenu, itemDisplay,
 		rosterConfig);
 	itemPresenters.put(item.getJID(), presenter);

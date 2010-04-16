@@ -48,6 +48,12 @@ public interface RosterMessages extends Messages {
     @DefaultMessage("Start chat")
     String startChatAction();
 
+    @DefaultMessage("Click here to chat with {0}")
+    String clickToChatTooltip(String user);
+
+    @DefaultMessage("Select \"Start chat\" in the menu to chat with {0}")
+    String startChatTooltip(String user);
+
     @DefaultMessage("Remove contact")
     String removeContactAction();
 
