@@ -97,7 +97,7 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	} else {
 	    title = i18n().startChatTooltip(item.getName());
 	}
-	display.asWidget().setTitle(title);
+	itemDisplay.asWidget().setTitle(title);
 	final RosterItemPresenter presenter = new RosterItemPresenter(group.getName(), itemMenu, itemDisplay,
 		rosterConfig);
 	itemPresenters.put(item.getJID(), presenter);
