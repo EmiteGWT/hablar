@@ -15,6 +15,10 @@ html {
     font-size: 80%;
 }
 
+body {
+	height: 100%;
+}
+
 /** HABLAR PAGE COMMON **/
 .hablar-Page {
     background-color: #E9E9E9;
