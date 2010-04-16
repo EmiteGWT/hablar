@@ -23,22 +23,21 @@ public class TabsHeaderWidget extends Composite implements HeaderDisplay {
     @UiField
     FocusPanel self;
     @UiField
-    TruncatedLabel title;
+    Label title;
     @UiField
     Label icon, close;
 
     public TabsHeaderWidget(final String id) {
-	this(id, "24px", "120px", 10);
+	this(id, "24px", "120px");
     }
 
-    public TabsHeaderWidget(final String id, String height, String width, int trim) {
+    public TabsHeaderWidget(final String id, String height, String width) {
 	initWidget(uiBinder.createAndBindUi(this));
 	this.setHeight(height);
 	this.setWidth(width);
 	close.addStyleName(HablarIcons.get(IconType.close));
 	ensureDebugId("HeaderWidget-" + id);
 	// title.ensureDebugId(Idify.id("HeaderWidget", id, "title"));
-	title.setTrim(trim);
     }
 
     @Override

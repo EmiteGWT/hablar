@@ -16,7 +16,7 @@
 				<g:Label styleName="icon" ui:field="icon"></g:Label>
 			</g:layer>
 			<g:layer left="20px" top="3px" right="20px" bottom="0">
-				<h:TruncatedLabel styleName="title" ui:field="title">Title</h:TruncatedLabel>
+				<h:TruncatedLabel styleName="title ellipsis" ui:field="title">Title</h:TruncatedLabel>
 			</g:layer>
 			<g:layer width="20px" top="1px" right="0" bottom="0">
 				<g:Label styleName="close" ui:field="close" />

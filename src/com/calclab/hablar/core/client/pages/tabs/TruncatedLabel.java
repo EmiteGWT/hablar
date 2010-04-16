@@ -1,15 +1,11 @@
 package com.calclab.hablar.core.client.pages.tabs;
 
-import com.calclab.emite.core.client.packet.TextUtils;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Label;
 
 public class TruncatedLabel extends Label {
 
     private int trim;
-
-    public TruncatedLabel() {
-	this.setTrim(0);
-    }
 
     public int getTrim() {
 	return trim;
@@ -17,10 +13,19 @@ public class TruncatedLabel extends Label {
 
     @Override
     public void setText(final String text) {
-	super.setText(TextUtils.ellipsis(text, getTrim()));
+	super.setText(text);
+	String userAgent = getUserAgent();
+	if (userAgent.contains("gecko")) { // Needed only for Firefox
+	    Element element = getElement();
+	    Element parent = element.getParentElement();
+	    if (parent != null) {
+		element.removeFromParent();
+		parent.appendChild(element);
+	    }
+	}
     }
 
-    public void setTrim(final int trim) {
-	this.trim = trim;
-    }
+    public static native String getUserAgent() /*-{
+        return navigator.userAgent.toLowerCase();
+    }-*/;
 }

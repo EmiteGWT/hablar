@@ -80,8 +80,7 @@ public class TabsLayout extends MainLayout {
 
     @Override
     public HeaderDisplay createHeaderDisplay(final Page<?> page) {
-	return new TabsHeaderWidget(page.getId(), tabHeaderSize.getHeight(), tabHeaderSize.getWidth(), tabHeaderSize
-		.getTrim());
+	return new TabsHeaderWidget(page.getId(), tabHeaderSize.getHeight(), tabHeaderSize.getWidth());
     }
 
     @Override

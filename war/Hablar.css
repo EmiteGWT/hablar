@@ -882,3 +882,13 @@ div.hablar-SearchResultItemWidget:hover {
     height: 10em;
     margin-top: 3px;
 }
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -moz-binding: url('ellipsis.xml#ellipsis');
+    width: 100%
+}
