@@ -193,7 +193,7 @@ div.hablar-ActionWidget:hover {
 /** DOCKS **/
 .hablar-DockContainer-top {
     background-color: #BBB;
-    z-index: 6000;
+    z-index: 4000;
 }
 
 .hablar-Header.DockHeaderWidget-top {
@@ -567,7 +567,7 @@ div.hablar-SearchResultItemWidget:hover {
 .hablar-Overlay {
     background-color: black;
     opacity: 0.9;
-    z-index: 6000;
+    z-index: 7000;
     color: white;
 }
 
