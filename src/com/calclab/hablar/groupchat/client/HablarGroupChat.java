@@ -19,6 +19,10 @@ import com.calclab.hablar.roster.client.page.RosterPage;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 
+/**
+ * Implement group chat: group chat are anonymous rooms created by-request using
+ * normal chats
+ */
 public class HablarGroupChat implements EntryPoint {
     public static final String ACTION_ID_CONVERT = "HablarGroupChat-convertToGroup-";
     public static final String ACTION_ID_OPEN = "HablarGroupChat-openGroupChatAction";

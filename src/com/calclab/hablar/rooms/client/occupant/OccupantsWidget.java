@@ -1,6 +1,8 @@
 package com.calclab.hablar.rooms.client.occupant;
 
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.dom.client.HasMouseOutHandlers;
+import com.google.gwt.event.dom.client.HasMouseOverHandlers;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Label;
@@ -46,6 +48,16 @@ public class OccupantsWidget extends Label implements OccupantsDisplay {
 
     @Override
     public HasText getLabel() {
+	return this;
+    }
+
+    @Override
+    public HasMouseOutHandlers getOutAction() {
+	return this;
+    }
+
+    @Override
+    public HasMouseOverHandlers getOverAction() {
 	return this;
     }
 

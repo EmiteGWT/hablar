@@ -483,6 +483,7 @@ div.hablar-SearchResultItemWidget:hover {
     width: 100%;
     overflow: hidden;
     margin: 2px 5px;
+    cursor: default;
 }
 
 .hablar-OccupantWidget .icon {

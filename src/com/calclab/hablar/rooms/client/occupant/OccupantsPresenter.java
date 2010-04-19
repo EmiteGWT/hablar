@@ -12,8 +12,10 @@ import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.MouseOutEvent;
+import com.google.gwt.event.dom.client.MouseOutHandler;
+import com.google.gwt.event.dom.client.MouseOverEvent;
+import com.google.gwt.event.dom.client.MouseOverHandler;
 
 /**
  * Shows the list of the occupants of the rooms
@@ -27,7 +29,7 @@ public class OccupantsPresenter implements Presenter<OccupantsDisplay> {
     public OccupantsPresenter(final Room room, final OccupantsDisplay display) {
 	this.display = display;
 	occupantsCount = 0;
-	showOccupantsCount();
+	updateOccupants(room);
 
 	roster = Suco.get(Roster.class);
 
@@ -35,7 +37,7 @@ public class OccupantsPresenter implements Presenter<OccupantsDisplay> {
 	    @Override
 	    public void onEvent(final Occupant occupant) {
 		occupantsCount++;
-		showOccupantsCount();
+		updateOccupants(room);
 	    }
 	});
 
@@ -43,22 +45,22 @@ public class OccupantsPresenter implements Presenter<OccupantsDisplay> {
 	    @Override
 	    public void onEvent(final Occupant parameter) {
 		occupantsCount--;
-		showOccupantsCount();
+		updateOccupants(room);
 	    }
 	});
 
-	display.getAction().addClickHandler(new ClickHandler() {
+	display.getOverAction().addMouseOverHandler(new MouseOverHandler() {
 	    @Override
-	    public void onClick(final ClickEvent event) {
-		if (display.isPanelVisible()) {
-		    display.setPanelVisible(false);
-		} else {
-		    display.clearPanel();
-		    addOccupantsToPanel(room);
-		    display.setPanelVisible(true);
-		}
+	    public void onMouseOver(final MouseOverEvent event) {
+		display.setPanelVisible(true);
 	    }
+	});
 
+	display.getOutAction().addMouseOutHandler(new MouseOutHandler() {
+	    @Override
+	    public void onMouseOut(final MouseOutEvent event) {
+		display.setPanelVisible(false);
+	    }
 	});
     }
 
@@ -79,8 +81,10 @@ public class OccupantsPresenter implements Presenter<OccupantsDisplay> {
 	}
     }
 
-    private void showOccupantsCount() {
+    private void updateOccupants(final Room room) {
 	display.getLabel().setText(i18n().occupants(occupantsCount));
+	display.clearPanel();
+	addOccupantsToPanel(room);
     }
 
 }
