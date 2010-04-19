@@ -20,7 +20,7 @@ import com.google.gwt.core.client.GWT;
 
 /**
  * Adds Search support to Hablar
- *
+ * 
  */
 public class HablarSearch implements EntryPoint {
 
@@ -35,8 +35,8 @@ public class HablarSearch implements EntryPoint {
 	final SearchManager searchManager = Suco.get(SearchManager.class);
 	searchManager.setHost(XmppURI.uri(null, config.searchService, null));
 	final Visibility visible = config.searchOnRoster ? Visibility.hidden : Visibility.notFocused;
-	final SearchPage searchPage = new SearchPage(visible, config.searchCloseable, hablar.getEventBus(),
-		new SearchWidget());
+	final SearchPage searchPage = new SearchPage(visible, config.searchCloseable, config.queryFactory, hablar
+		.getEventBus(), new SearchWidget());
 	hablar.addPage(searchPage);
 	new SearchBasicActions(searchPage);
 
@@ -74,7 +74,7 @@ public class HablarSearch implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-	SearchMessages messages = (SearchMessages) GWT.create(SearchMessages.class);
+	final SearchMessages messages = (SearchMessages) GWT.create(SearchMessages.class);
 	setMessages(messages);
 	SearchWidget.setMessages(messages);
     }

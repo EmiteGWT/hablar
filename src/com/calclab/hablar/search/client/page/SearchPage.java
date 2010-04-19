@@ -14,6 +14,7 @@ import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
+import com.calclab.hablar.search.client.SearchQueryFactory;
 import com.calclab.hablar.search.client.page.SearchDisplay.Level;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -30,9 +31,12 @@ public class SearchPage extends PagePresenter<SearchDisplay> {
 
     private final Menu<SearchResultItem> itemMenu;
 
-    public SearchPage(final Visibility visibility, final boolean closeable, final HablarEventBus eventBus,
-	    final SearchWidget display) {
+    private final SearchQueryFactory queryFactory;
+
+    public SearchPage(final Visibility visibility, final boolean closeable, final SearchQueryFactory queryFactory,
+	    final HablarEventBus eventBus, final SearchWidget display) {
 	super("HablarSearch", "" + ++index, eventBus, display);
+	this.queryFactory = queryFactory;
 	manager = Suco.get(SearchManager.class);
 	setVisibility(visibility);
 	model.setCloseable(closeable);
@@ -68,8 +72,7 @@ public class SearchPage extends PagePresenter<SearchDisplay> {
 	if (text.length() > 0) {
 	    display.clearResults();
 	    display.showMessage(i18n().searchingTerm(text), Level.info);
-	    final HashMap<String, String> query = new HashMap<String, String>();
-	    query.put("nick", text + "*");
+	    final HashMap<String, String> query = queryFactory.createSearchQuery(text);
 
 	    manager.search(query, new ResultListener<List<SearchResultItem>>() {
 		@Override
