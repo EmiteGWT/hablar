@@ -40,8 +40,9 @@ public class SearchPage extends PagePresenter<SearchDisplay> {
 	manager = Suco.get(SearchManager.class);
 	setVisibility(visibility);
 	model.setCloseable(closeable);
+	String title = i18n().searchUsers();
 
-	model.init(HablarIcons.get(HablarIcons.IconType.search), i18n().searchUsers());
+	model.init(HablarIcons.get(HablarIcons.IconType.search), title, title);
 	final MenuDisplay<SearchResultItem> menuDisplay = display.createMenu(SEARCH_MENU);
 	itemMenu = new Menu<SearchResultItem>(menuDisplay);
 	bind();

@@ -66,7 +66,8 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 
 	addRosterListeners();
 	addSessionListeners();
-	getState().init(HablarIcons.get(IconType.roster), i18n().contacts());
+	String title = i18n().contacts();
+	getState().init(HablarIcons.get(IconType.roster), title, title);
 
     }
 

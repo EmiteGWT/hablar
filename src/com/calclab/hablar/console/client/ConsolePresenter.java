@@ -22,7 +22,7 @@ public class ConsolePresenter extends PagePresenter<ConsoleDisplay> {
 
     public ConsolePresenter(final HablarEventBus eventBus, final ConsoleDisplay display) {
 	super(TYPE, eventBus, display);
-	model.init(HablarIcons.get(IconType.console), "Console");
+	model.init(HablarIcons.get(IconType.console), "Console", "Console");
 	setVisibility(Visibility.hidden);
 	model.setCloseable(true);
 

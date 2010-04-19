@@ -42,7 +42,7 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> {
 	final String me = session.getCurrentUser().getNode();
 	final String roomName = RoomName.decode(room.getURI().getNode());
 	setVisibility(Visibility.notFocused);
-	model.init(HablarIcons.get(IconType.roster), roomName);
+	model.init(HablarIcons.get(IconType.roster), roomName, roomName);
 	model.setCloseable(true);
 
 	room.onMessageReceived(new Listener<Message>() {

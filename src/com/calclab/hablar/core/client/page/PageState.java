@@ -43,11 +43,6 @@ public class PageState {
 	});
     }
 
-    public void setExternalState(String externalState) {
-	this.externalState = externalState;
-	fireChanged();
-    }
-
     public String getExternalState() {
 	return externalState;
     }
@@ -72,10 +67,10 @@ public class PageState {
 	return visibility;
     }
 
-    public void init(final String style, final String title) {
+    public void init(final String style, final String title, final String tooltip) {
 	pageIcon = style;
 	pageTitle = title;
-	pageTitleTooltip = title;
+	pageTitleTooltip = tooltip;
 	fireChanged();
     }
 
@@ -85,6 +80,11 @@ public class PageState {
 
     public void setCloseable(final boolean closeable) {
 	this.closeable = closeable;
+	fireChanged();
+    }
+
+    public void setExternalState(final String externalState) {
+	this.externalState = externalState;
 	fireChanged();
     }
 

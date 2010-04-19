@@ -53,7 +53,8 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 
 	manager = Suco.get(PresenceManager.class);
 	final String style = HablarIcons.get(IconType.buddy);
-	model.init(style, i18n().presencePageTitle());
+	String title = i18n().presencePageTitle();
+	model.init(style, title, title);
 	display.setStatusIcon(HablarIcons.get(IconType.buddyOff));
 	display.setPageTitle(i18n().presencePageTitle());
 	storedPresenceManager = new StoredPresenceManager(Suco.get(PrivateStorageManager.class));

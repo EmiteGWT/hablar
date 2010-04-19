@@ -23,7 +23,8 @@ public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisp
 
     public OwnVCardPresenter(final HablarEventBus eventBus, final VCardDisplay display) {
 	super(eventBus, display);
-	model.init(HablarIcons.get(IconType.buddyWait), I18nVCard.t.ownVCardTitle());
+	String title = I18nVCard.t.ownVCardTitle();
+	model.init(HablarIcons.get(IconType.buddyWait), title, title);
 	display.setAcceptVisible(false);
 	display.setCancelVisible(false);
 	display.setPageTitle(I18nVCard.t.ownVCardTitle());
