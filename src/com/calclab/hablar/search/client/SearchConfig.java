@@ -1,8 +1,8 @@
 package com.calclab.hablar.search.client;
 
-import java.util.HashMap;
 
 import com.calclab.emite.browser.client.PageAssist;
+import com.calclab.hablar.search.client.query.NicknameStartsWithSearchQueryFactory;
 
 public class SearchConfig {
 
@@ -14,14 +14,7 @@ public class SearchConfig {
 	return config;
     }
 
-    SearchQueryFactory DEFAULT_QUERY_FACTORY = new SearchQueryFactory() {
-	@Override
-	public HashMap<String, String> createSearchQuery(final String term) {
-	    final HashMap<String, String> query = new HashMap<String, String>();
-	    query.put("nick", term + "*");
-	    return query;
-	}
-    };
+    SearchQueryFactory DEFAULT_QUERY_FACTORY = new NicknameStartsWithSearchQueryFactory();
 
     /**
      * The name of the search service
