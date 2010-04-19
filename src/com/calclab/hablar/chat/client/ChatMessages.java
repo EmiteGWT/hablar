@@ -8,6 +8,9 @@ public interface ChatMessages extends Messages {
     @DefaultMessage("User {0} says «{1}»")
     String newChatFrom(String userName, String msg);
 
+    @DefaultMessage("Send")
+    String sendAction();
+
     @DefaultMessage("{0} is active")
     String stateActive(String userName);
 
@@ -28,7 +31,4 @@ public interface ChatMessages extends Messages {
 
     @DefaultMessage("{0} is paused")
     String statePause(String userName);
-
-    @DefaultMessage("Invia")
-    String sendAction();
 }
