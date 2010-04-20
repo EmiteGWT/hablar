@@ -19,8 +19,8 @@ public class OverlayLayout {
 	panel.addStyleName("hablar-OverlayContainer");
 	display.add(panel);
 	display.setWidgetLeftRight(panel, 0, PX, 0, PX);
-	display.setWidgetTopBottom(panel, 0, PX, 0, PX);
-	
+	display.setWidgetTopBottom(panel, 24, PX, 0, PX);
+
 	panel.getElement().getParentElement().addClassName("hablar-OverlayContainerOuter");
     }
 
@@ -63,9 +63,9 @@ public class OverlayLayout {
 
     public void setVisible(boolean visible) {
 	panel.setVisible(visible);
-	
+
 	// +++ Serious bodge for IE6
-	// Sets the z-index to 1 if visible, -1 if not 
+	// Sets the z-index to 1 if visible, -1 if not
 	if(panel.getElement().getParentElement() != null) {
 	    panel.getElement().getParentElement().getStyle().setZIndex(visible ? 1 : -1);
 	}
