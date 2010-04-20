@@ -45,6 +45,9 @@ public interface VCardMessages extends Messages {
     @DefaultMessage("Organization:")
     String organizationLabelText();
 
+    @DefaultMessage("Organization unit:")
+    String organizationUnitLabelText();
+
     @DefaultMessage("Homepage:")
     String homepageLabelText();
 

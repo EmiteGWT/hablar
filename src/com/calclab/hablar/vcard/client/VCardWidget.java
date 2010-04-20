@@ -36,7 +36,7 @@ public class VCardWidget extends Composite implements VCardDisplay {
     protected static VCardWidgetUiBinder uiBinder = GWT.create(VCardWidgetUiBinder.class);
 
     @UiField
-    TextBox name, nickName, givenName, middleName, familyName, email, organizationName, homepage;
+    TextBox name, nickName, givenName, middleName, familyName, email, organizationName, organizationUnit, homepage;
     @UiField
     Button accept, cancel;
     @UiField
@@ -47,7 +47,7 @@ public class VCardWidget extends Composite implements VCardDisplay {
     DivElement form, loading;
     @UiField
     LabelElement nameLabel, nicknameLabel, familyNameLabel, middleNameLabel, givenNameLabel,
-    		organizationLabel, homepageLabel, emailLabel;
+    		organizationLabel, organizationUnitLabel, homepageLabel, emailLabel;
 
     protected final HashMap<Field, TextBox> fields = new HashMap<Field, TextBox>();
 
@@ -131,6 +131,7 @@ public class VCardWidget extends Composite implements VCardDisplay {
 	fields.put(Field.email, email);
 	fields.put(Field.homepage, homepage);
 	fields.put(Field.organizationName, organizationName);
+	fields.put(Field.organizationUnit, organizationUnit);
 	for (final Field field : fields.keySet()) {
 	    fields.get(field).ensureDebugId(idPrefix + "-" + field.toString());
 	}
@@ -145,6 +146,7 @@ public class VCardWidget extends Composite implements VCardDisplay {
 	middleNameLabel.setInnerText(i18n().middleNameLabelText());
 	givenNameLabel.setInnerText(i18n().givenNameLabelText());
 	organizationLabel.setInnerText(i18n().organizationLabelText());
+	organizationUnitLabel.setInnerText(i18n().organizationUnitLabelText());
 	homepageLabel.setInnerText(i18n().homepageLabelText());
 	emailLabel.setInnerText(i18n().emailLabelText());
     }

@@ -7,7 +7,7 @@ import com.google.gwt.user.client.ui.HasText;
 public interface VCardDisplay extends Display {
 
     public static enum Field {
-	name, nickName, familyName, givenName, middleName, organizationName, email, homepage
+	name, nickName, familyName, givenName, middleName, organizationName, organizationUnit, email, homepage
     }
 
     HasClickHandlers getCancel();

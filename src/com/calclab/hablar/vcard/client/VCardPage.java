@@ -33,6 +33,9 @@ public abstract class VCardPage extends PagePresenter<VCardDisplay> {
 	}
 	vcard.getOrganization().setData(VCardOrganization.Data.ORGNAME, newOrg);
 
+	vcard.getOrganization().setData(VCardOrganization.Data.ORGUNIT,
+		display.getField(Field.organizationUnit).getText());
+
 	final String newEmail = display.getField(Field.email).getText();
 	final List<VCardEmail> emails = vcard.getEmails();
 	for (final VCardEmail email : emails) {
@@ -59,6 +62,8 @@ public abstract class VCardPage extends PagePresenter<VCardDisplay> {
 	    display.getField(Field.homepage).setText(vcard.getURL());
 	    display.getField(Field.organizationName).setText(
 		    vcard.getOrganization().getData(VCardOrganization.Data.ORGNAME));
+	    display.getField(Field.organizationUnit).setText(
+		    vcard.getOrganization().getData(VCardOrganization.Data.ORGUNIT));
 
 	    final List<VCardEmail> emails = vcard.getEmails();
 	    for (final VCardEmail email : emails) {

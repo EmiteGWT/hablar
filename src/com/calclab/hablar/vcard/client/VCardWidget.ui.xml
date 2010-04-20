@@ -39,6 +39,10 @@
 					<g:TextBox ui:field="organizationName"></g:TextBox>
 				</p>
 				<p>
+					<label ui:field="organizationUnitLabel">Organization unit:</label>
+					<g:TextBox ui:field="organizationUnit"></g:TextBox>
+				</p>
+				<p>
 					<label ui:field="homepageLabel">Homepage:</label>
 					<g:TextBox ui:field="homepage"></g:TextBox>
 				</p>
