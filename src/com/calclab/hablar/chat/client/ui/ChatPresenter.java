@@ -53,7 +53,7 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
 	final XmppURI fromURI = chat.getURI();
 	userName = getName(fromURI);
 
-	model.init(HablarIcons.get(IconType.buddyOff), userName, fromURI.toString());
+	model.init(HablarIcons.get(IconType.buddyOff), userName, userName + ": " + fromURI.toString());
 	setVisibility(Visibility.notFocused);
 	model.setCloseable(true);
 
