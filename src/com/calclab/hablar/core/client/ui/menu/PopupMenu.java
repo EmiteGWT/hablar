@@ -15,7 +15,7 @@ public class PopupMenu<T> extends PopupPanel implements MenuDisplay<T> {
     public PopupMenu(final String debugId) {
 	super(true);
 	super.ensureDebugId(debugId);
-	setStyleName("hablar-PopupPanel");
+	addStyleName("hablar-PopupPanel");
 	this.items = new HashMap<Action<T>, MenuItem>();
 	bar = new MenuBar(true);
 	setWidget(bar);
@@ -23,7 +23,8 @@ public class PopupMenu<T> extends PopupPanel implements MenuDisplay<T> {
 
     @Override
     public void addAction(final Action<T> action, final Command command) {
-	String html = "<label class='" + action.getIconStyle() + "'>&nbsp;</label>";
+	String html = "<label class='" + action.getIconStyle()
+		+ "' style='display: block; float: left; width: 16px; height: 16px; margin-right: 3px;'>&nbsp;</label>";
 	html += action.getName();
 	final MenuItem menuItem = bar.addItem(html, true, command);
 	menuItem.ensureDebugId(action.getId());

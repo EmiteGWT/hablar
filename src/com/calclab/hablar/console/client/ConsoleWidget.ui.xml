@@ -3,23 +3,23 @@
   xmlns:g="urn:import:com.google.gwt.user.client.ui">
   <ui:style>
   </ui:style>
-  <g:LayoutPanel styleName="hablar-Logger">
+  <g:LayoutPanel addStyleNames="hablar-Logger hablar-lightBackground">
     <!--  Actions -->
     <g:layer left="0" top="0" width="100%" height="25px">
-      <g:FlowPanel ui:field="actions" styleName="actions">
+      <g:FlowPanel ui:field="actions" addStyleNames="actions">
         <g:Anchor ui:field="clear">Clear</g:Anchor>
       </g:FlowPanel>
     </g:layer>
     <!-- Results -->
     <g:layer left="0" top="25px" width="100%" bottom="5em">
       <g:ScrollPanel ui:field="scroll" height="100%"
-        styleName="scroll">
+        addStyleNames="scroll">
         <g:FlowPanel ui:field="output">
         </g:FlowPanel>
       </g:ScrollPanel>
     </g:layer>
     <g:layer left="0" height="5em" width="100%" bottom="0px">
-        <g:TextArea height="5em" width="100%" visibleLines="3" ui:field="input" />
+        <g:TextArea height="4.6em" width="98%" visibleLines="3" ui:field="input" />
     </g:layer>
   </g:LayoutPanel>
 </ui:UiBinder>

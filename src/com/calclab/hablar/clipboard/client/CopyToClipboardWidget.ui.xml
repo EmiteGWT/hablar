@@ -4,7 +4,7 @@
 	<ui:style>
 
 	</ui:style>
-	<g:HTMLPanel styleName="hablar-CopyToClipboardWidget">
+	<g:HTMLPanel addStyleNames="hablar-CopyToClipboardWidget">
 		<div class="form">
 			<h2>
 				<span ui:field='title' />

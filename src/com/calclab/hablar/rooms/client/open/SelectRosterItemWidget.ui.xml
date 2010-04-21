@@ -4,11 +4,11 @@
 	<ui:style>
 		
 	</ui:style>
-	<g:HTMLPanel styleName="hablar-SelectRosterItemWidget">
-		<g:CheckBox ui:field="select" styleName="select"></g:CheckBox>
-		<g:Label ui:field="icon" styleName="icon"></g:Label>
-		<g:Label ui:field="name" styleName="name"></g:Label>
-		<g:Label ui:field="jid" styleName="jid"></g:Label>
-		<g:Label ui:field="status" styleName="status"></g:Label>
+	<g:HTMLPanel addStyleNames="hablar-SelectRosterItemWidget">
+		<g:CheckBox ui:field="select" addStyleNames="select"></g:CheckBox>
+		<g:Label ui:field="icon" addStyleNames="icon"></g:Label>
+		<g:Label ui:field="name" addStyleNames="name"></g:Label>
+		<g:Label ui:field="jid" addStyleNames="jid"></g:Label>
+		<g:Label ui:field="status" addStyleNames="status"></g:Label>
 	</g:HTMLPanel>
 </ui:UiBinder> 

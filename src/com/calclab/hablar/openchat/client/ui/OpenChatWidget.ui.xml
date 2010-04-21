@@ -4,7 +4,7 @@
 	<ui:style>
 
 	</ui:style>
-	<g:HTMLPanel styleName="hablar-OpenChatWidget">
+	<g:HTMLPanel addStyleNames="hablar-OpenChatWidget">
 		<div class="form">
 			<h2>
 				<span ui:field='title' />
@@ -12,7 +12,7 @@
 			<p>
 				<label ui:field="jabberIdLabel">Jabber ID:</label>
 				<g:TextBox ui:field="jabberId"></g:TextBox>
-				<g:Label ui:field="jabberIdError" styleName="error"></g:Label>
+				<g:Label ui:field="jabberIdError" addStyleNames="error"></g:Label>
 			</p>
 			<p><g:CheckBox ui:field="addToRoster">Add to roster</g:CheckBox></p>
 			<div class="actions">

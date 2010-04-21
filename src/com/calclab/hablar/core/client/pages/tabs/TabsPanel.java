@@ -31,17 +31,17 @@ import com.google.gwt.user.client.ui.WidgetCollection;
 
 /**
  * A modified version of TabLayoutPanel to avoid auto-open tabs.
- * 
+ *
  * A panel that represents a tabbed set of pages, each of which contains another
  * widget. Its child widgets are shown as the user selects the various tabs
  * associated with them. The tabs can contain arbitrary text, HTML, or widgets.
- * 
+ *
  * <p>
  * This widget will <em>only</em> work in standards mode, which requires that
  * the HTML page in which it is run have an explicit &lt;!DOCTYPE&gt;
  * declaration.
  * </p>
- * 
+ *
  * <h3>CSS Style Rules</h3>
  * <dl>
  * <dt>.gwt-TabLayoutPanel
@@ -53,11 +53,11 @@ import com.google.gwt.user.client.ui.WidgetCollection;
  * <dt>.gwt-TabLayoutPanel .gwt-TabLayoutPanelTabInner
  * <dd>an element nested in each tab (useful for styling)
  * </dl>
- * 
+ *
  * <p>
  * <h3>Example</h3>
  * {@example com.google.gwt.examples.TabLayoutPanelExample}
- * 
+ *
  * <h3>Use in UiBinder Templates</h3>
  * <p>
  * A TabLayoutPanel element in a {@link com.google.gwt.uibinder.client.UiBinder
@@ -74,7 +74,7 @@ import com.google.gwt.user.client.ui.WidgetCollection;
  * and so cannot have a <code>ui:field</code> attribute.)
  * <p>
  * For example:
- * 
+ *
  * <pre>
  * &lt;g:TabLayoutPanel barUnit='PX' barHeight='3'>
  *  &lt;g:tab>
@@ -145,7 +145,7 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
 
     /**
      * Creates an empty tab panel.
-     * 
+     *
      * @param barHeight
      *            the size of the tab bar
      * @param barUnit
@@ -187,7 +187,7 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
     /**
      * Adds a widget to the panel. If the Widget is already attached, it will be
      * moved to the right-most index.
-     * 
+     *
      * @param child
      *            the widget to be added
      * @param text
@@ -200,7 +200,7 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
     /**
      * Adds a widget to the panel. If the Widget is already attached, it will be
      * moved to the right-most index.
-     * 
+     *
      * @param child
      *            the widget to be added
      * @param text
@@ -215,7 +215,7 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
     /**
      * Adds a widget to the panel. If the Widget is already attached, it will be
      * moved to the right-most index.
-     * 
+     *
      * @param child
      *            the widget to be added
      * @param tab
@@ -247,7 +247,7 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
 
     /**
      * Gets the index of the currently-selected tab.
-     * 
+     *
      * @return the selected index, or <code>-1</code> if none is selected.
      */
     public int getSelectedIndex() {
@@ -256,7 +256,7 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
 
     /**
      * Gets the widget in the tab at the given index.
-     * 
+     *
      * @param index
      *            the index of the tab to be retrieved
      * @return the tab's widget
@@ -268,7 +268,7 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
 
     /**
      * Gets the widget in the tab associated with the given child widget.
-     * 
+     *
      * @param child
      *            the child whose tab is to be retrieved
      * @return the tab's widget
@@ -294,7 +294,7 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
     /**
      * Inserts a widget into the panel. If the Widget is already attached, it
      * will be moved to the requested index.
-     * 
+     *
      * @param child
      *            the widget to be added
      * @param beforeIndex
@@ -307,7 +307,7 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
     /**
      * Inserts a widget into the panel. If the Widget is already attached, it
      * will be moved to the requested index.
-     * 
+     *
      * @param child
      *            the widget to be added
      * @param text
@@ -330,7 +330,7 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
     /**
      * Inserts a widget into the panel. If the Widget is already attached, it
      * will be moved to the requested index.
-     * 
+     *
      * @param child
      *            the widget to be added
      * @param text
@@ -345,7 +345,7 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
     /**
      * Inserts a widget into the panel. If the Widget is already attached, it
      * will be moved to the requested index.
-     * 
+     *
      * @param child
      *            the widget to be added
      * @param tab
@@ -400,7 +400,7 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
 
     /**
      * Programmatically selects the specified tab.
-     * 
+     *
      * @param index
      *            the index of the tab to be selected
      */
@@ -442,7 +442,7 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
 
     /**
      * Programmatically selects the specified tab.
-     * 
+     *
      * @param child
      *            the child whose tab is to be selected
      */
@@ -452,11 +452,11 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
 
     /**
      * Sets a tab's HTML contents.
-     * 
+     *
      * Use care when setting an object's HTML; it is an easy way to expose
      * script-based security problems. Consider using
      * {@link #setTabText(int, String)} whenever possible.
-     * 
+     *
      * @param index
      *            the index of the tab whose HTML is to be set
      * @param html
@@ -469,7 +469,7 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
 
     /**
      * Sets a tab's text contents.
-     * 
+     *
      * @param index
      *            the index of the tab whose text is to be set
      * @param text

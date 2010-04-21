@@ -4,7 +4,7 @@
 	<ui:style>
 
 	</ui:style>
-	<g:HTMLPanel styleName="hablar-EditBuddyWidget">
+	<g:HTMLPanel addStyleNames="hablar-EditBuddyWidget">
 		<div class="form">
 			<h2>
 				<span ui:field='title' />
@@ -16,7 +16,7 @@
 			<p>
 				<label ui:field="changeToLabel">To:</label>
 				<g:TextBox ui:field="nickName">newNickName</g:TextBox>
-				<g:Label ui:field="nickNameError" styleName="error"></g:Label>
+				<g:Label ui:field="nickNameError" addStyleNames="error"></g:Label>
 			</p>
 			<div class="actions">
 				<g:Button ui:field="save">Change</g:Button>

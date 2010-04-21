@@ -4,7 +4,7 @@
 	<ui:style>
 
 	</ui:style>
-	<g:HTMLPanel styleName="hablar-VCardWidget">
+	<g:HTMLPanel addStyleNames="hablar-VCardWidget">
 		<h2>
 			<span ui:field='title' />
 		</h2>

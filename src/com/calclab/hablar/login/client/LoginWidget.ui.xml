@@ -4,9 +4,9 @@
 	<ui:style>
 
 	</ui:style>
-	<g:DockLayoutPanel styleName="hablar-Login hablar-Page" unit="EM">
+	<g:DockLayoutPanel addStyleNames="hablar-Login hablar-Page hablar-lightBackground" unit="EM">
 		<g:north size="9">
-			<g:HTMLPanel styleName="form">
+			<g:HTMLPanel addStyleNames="form">
 				<p>
 					<label ui:field="userLabel">User:</label>
 					<g:TextBox  ui:field="user" />
@@ -15,13 +15,13 @@
 					<label ui:field="passwordLabel">Password:</label>
 					<g:PasswordTextBox ui:field="password" />
 				</p>
-				<div styleName="actions">
+				<div addStyleNames="actions">
 					<g:Button ui:field="button">Login</g:Button>
 				</div>
 			</g:HTMLPanel>
 		</g:north>
 		<g:center>
-			<g:FlowPanel ui:field="output" styleName="output"></g:FlowPanel>
+			<g:FlowPanel ui:field="output" addStyleNames="output hablar-clearBackground"></g:FlowPanel>
 		</g:center>
 	</g:DockLayoutPanel>
 </ui:UiBinder>

@@ -2,11 +2,11 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
     xmlns:g="urn:import:com.google.gwt.user.client.ui">
   <g:FocusPanel ui:field="self">
-    <g:FlowPanel styleName='hablar-AccordionHeaderWidget hablar-Header'
+    <g:FlowPanel addStyleNames='hablar-AccordionHeaderWidget hablar-Header hablar-lightBackground'
         ui:field="flow">
-        <g:Label styleName="icon" ui:field="icon"></g:Label>
-        <g:Label styleName="close"  ui:field="close"></g:Label>
-        <g:Label styleName="title"  ui:field="title">Title</g:Label>
+        <g:Label addStyleNames="icon" ui:field="icon"></g:Label>
+        <g:Label addStyleNames="close"  ui:field="close"></g:Label>
+        <g:Label addStyleNames="title"  ui:field="title">Title</g:Label>
     </g:FlowPanel>
   </g:FocusPanel>
 </ui:UiBinder>

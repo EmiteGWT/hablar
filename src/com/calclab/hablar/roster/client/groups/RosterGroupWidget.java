@@ -6,7 +6,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class RosterGroupWidget extends FlowPanel implements RosterGroupDisplay {
 
     public RosterGroupWidget() {
-	setStyleName("hablar-RosterGroupWidget");
+	addStyleName("hablar-RosterGroupWidget");
     }
 
     @Override

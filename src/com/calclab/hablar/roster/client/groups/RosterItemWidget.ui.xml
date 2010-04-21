@@ -13,7 +13,7 @@
 		.jid {
 			color: gray;
 		}
-		
+
 		.data {
 			width: 100%;
 			overflow: hidden;
@@ -24,23 +24,23 @@
 			padding-right: 5px;
 		}
 	</ui:style>
-	<g:FocusPanel ui:field="self" styleName="user">
-		<g:FlowPanel styleName="hablar-rosterItemWidget hablar-ListItem">
-			<g:LayoutPanel styleName="{style.item} item">
+	<g:FocusPanel ui:field="self" addStyleNames="user">
+		<g:FlowPanel addStyleNames="hablar-RosterItemWidget hablar-ListItem">
+			<g:LayoutPanel addStyleNames="{style.item} item">
 				<g:layer top="0" left="0" width="20px" height="16px">
-					<g:Label styleName="icon" ui:field="icon"></g:Label>
+					<g:Label addStyleNames="icon" ui:field="icon"></g:Label>
 				</g:layer>
 				<g:layer top="0" left="20px" height="16px" right="20px">
-					<g:FlowPanel styleName="{style.data}">
-						<g:Label styleName="{style.name} name" ui:field="name">name-here</g:Label>
-						<g:Label styleName="{style.jid} jid" ui:field="jid">jid</g:Label>
+					<g:FlowPanel addStyleNames="{style.data}">
+						<g:Label addStyleNames="{style.name} name" ui:field="name">name-here</g:Label>
+						<g:Label addStyleNames="{style.jid} jid" ui:field="jid">jid</g:Label>
 					</g:FlowPanel>
 				</g:layer>
 				<g:layer top="0" right="0" width="20px" height="16px">
-					<g:Label ui:field="menu" styleName="menu"></g:Label>
+					<g:Label ui:field="menu" addStyleNames="menu"></g:Label>
 				</g:layer>
 			</g:LayoutPanel>
-			<g:Label styleName="{style.status} status" ui:field="status" />
+			<g:Label addStyleNames="{style.status} status" ui:field="status" />
 		</g:FlowPanel>
 	</g:FocusPanel>
 </ui:UiBinder>

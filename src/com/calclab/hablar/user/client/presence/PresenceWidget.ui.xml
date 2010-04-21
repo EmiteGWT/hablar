@@ -4,7 +4,7 @@
   <ui:style>
 
   </ui:style>
-  <g:HTMLPanel styleName="hablar-PresenceWidget">
+  <g:HTMLPanel addStyleNames="hablar-PresenceWidget">
     <h2>
 		<span ui:field='title' />
     </h2>
@@ -12,8 +12,8 @@
       <p>
         <label ui:field="statusLabel">Status:</label>
         <div class="controls">
-          <g:Label ui:field="icon" styleName="icon" />
-          <g:Label ui:field="menu" styleName="menu" />
+          <g:Label ui:field="icon" addStyleNames="icon" />
+          <g:Label ui:field="menu" addStyleNames="menu" />
           <g:TextBox ui:field="status" addStyleNames="status gwt-TextBox" />
         </div>
       </p>

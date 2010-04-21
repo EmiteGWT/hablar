@@ -4,8 +4,8 @@
 	<ui:style>
 
 	</ui:style>
-	<g:ScrollPanel ui:field="scroll" height="100%" styleName="scroll">
-		<g:HTMLPanel styleName="hablar-ManageGroupsWidget">
+	<g:ScrollPanel ui:field="scroll" height="100%" addStyleNames="scroll">
+		<g:HTMLPanel addStyleNames="hablar-ManageGroupsWidget">
 			<div class="form">
 				<h2>
 					<span ui:field='title' />
@@ -16,7 +16,7 @@
 				</p>
 				<br/>
 				<label ui:field="groupListLabel">Roster Groups:</label>
-				<g:FlowPanel ui:field="groupList" styleName="list"></g:FlowPanel>
+				<g:FlowPanel ui:field="groupList" addStyleNames="list hablar-lightBackground"></g:FlowPanel>
 				<p>
 					<g:Button ui:field="newGroup">New group</g:Button>
 				</p>

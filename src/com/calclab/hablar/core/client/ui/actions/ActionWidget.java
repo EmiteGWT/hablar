@@ -6,6 +6,7 @@ import com.google.gwt.user.client.ui.Label;
 public class ActionWidget extends Label {
     public ActionWidget(final Action<?> action) {
 	addStyleName("hablar-ActionWidget");
+	addStyleName("hablar-lightBackground");
 	addStyleName(action.getIconStyle());
 	this.ensureDebugId(action.getId());
 	setTitle(action.getName());

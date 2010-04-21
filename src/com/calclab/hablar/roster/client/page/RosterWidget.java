@@ -12,6 +12,7 @@ import com.calclab.hablar.roster.client.groups.RosterItemPresenter;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -22,6 +23,10 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class RosterWidget extends Composite implements RosterDisplay {
+
+    interface ActionItemStyle extends CssResource {
+	String actionWidget();
+    }
 
     interface RosterWidgetUiBinder extends UiBinder<Widget, RosterWidget> {
     }
@@ -39,6 +44,10 @@ public class RosterWidget extends Composite implements RosterDisplay {
 
     @UiField
     Label disabledLabel;
+
+    @UiField
+    ActionItemStyle style;
+
     private final RosterListPresenter groups;
 
     public RosterWidget() {
@@ -63,6 +72,7 @@ public class RosterWidget extends Composite implements RosterDisplay {
     @Override
     public HasClickHandlers createAction(final Action<?> action) {
 	final ActionWidget widget = new ActionWidget(action);
+	widget.addStyleName(style.actionWidget());
 	actions.add(widget);
 	return widget;
 

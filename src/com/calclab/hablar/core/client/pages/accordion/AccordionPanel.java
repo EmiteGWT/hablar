@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -30,11 +30,11 @@ import com.google.gwt.user.client.ui.Widget;
 
 /**
  * A regular GWT StackLayoutPanel but with some improvements.
- * 
+ *
  * 1) Fire events when the header are clicked, but do not open them<br/>
  * 2) Remove widgets correctly (see
  * http://code.google.com/p/google-web-toolkit/issues/detail?id=4174)
- * 
+ *
  */
 public class AccordionPanel extends Composite implements HasWidgets, RequiresResize, ProvidesResize {
 
@@ -59,14 +59,14 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
 
     /**
      * Creates an empty stack panel.
-     * 
+     *
      * @param unit
      *            the unit to be used for layout
      */
     public AccordionPanel() {
 	this.unit = Unit.PX;
 	initWidget(layoutPanel = new LayoutPanel());
-	layoutPanel.setStyleName("hablar-AccordionPanel");
+	layoutPanel.addStyleName("hablar-AccordionPanel");
     }
 
     public void add(Widget w) {
@@ -76,7 +76,7 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
     /**
      * Adds a child widget to this stack, along with a widget representing the
      * stack header.
-     * 
+     *
      * @param widget
      *            the child widget to be added
      * @param header
@@ -116,7 +116,7 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
 
     /**
      * Check if the given widget is a child of this accordion
-     * 
+     *
      * @param widget
      *            the widget to check
      * @return true if the widget is in the accordion, false if not
@@ -159,7 +159,7 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
     /**
      * Because the accordion panel never changes the visibility of its children,
      * you can not remove the visible widget
-     * 
+     *
      * @see http://code.google.com/p/google-web-toolkit/issues/detail?id=4174
      */
     public boolean remove(Widget child) {
@@ -185,7 +185,7 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
 
     /**
      * Shows the specified widget.
-     * 
+     *
      * @param widget
      *            the child widget to be shown.
      */

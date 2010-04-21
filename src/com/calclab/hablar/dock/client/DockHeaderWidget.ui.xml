@@ -5,14 +5,18 @@
     @sprite .close {
       gwt-image: 'closeIcon';
     }
+
+    .beside {
+    	float: left;
+    }
   </ui:style>
   <ui:image field='closeIcon' src='close.png' />
   <g:FocusPanel ui:field="self">
-    <g:FlowPanel styleName='hablar-DockHeaderWidget hablar-Header'
+    <g:FlowPanel addStyleNames='hablar-DockHeaderWidget hablar-Header hablar-lightBackground'
       ui:field="flow">
-      <g:Label styleName="icon" ui:field="icon"></g:Label>
-      <g:Label styleName="title" ui:field="title">Title</g:Label>
-      <g:Label styleName="close {style.close}" ui:field="close" />
+      <g:Label addStyleNames="{style.beside} icon" ui:field="icon"></g:Label>
+      <g:Label addStyleNames="{style.beside}title" ui:field="title">Title</g:Label>
+      <g:Label addStyleNames="close {style.beside} {style.close}" ui:field="close" />
     </g:FlowPanel>
   </g:FocusPanel>
 </ui:UiBinder>

@@ -26,6 +26,7 @@ public class OverlayLayout {
 
     public void add(Widget widget) {
 	widget.addStyleName(STYLE_OVERLAY);
+	widget.addStyleName("hablar-darkBackground");
 	panel.add(widget);
 	// FIXME: Animation
 	panel.setWidgetLeftRight(widget, 0, PX, 0, PX);

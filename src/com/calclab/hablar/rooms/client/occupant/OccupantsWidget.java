@@ -14,10 +14,12 @@ public class OccupantsWidget extends Label implements OccupantsDisplay {
     private final FlowPanel occupants;
 
     public OccupantsWidget(final String roomId) {
-	this.setStyleName("hablar-OccupantsWidget");
+	this.addStyleName("hablar-OccupantsWidget");
+	this.addStyleName("hablar-lightBackground");
 	this.ensureDebugId("hablar-OccupantsWidget-" + roomId);
 	popup = new PopupPanel(true);
 	popup.addStyleName("occupants");
+	popup.addStyleName("hablar-lightBackground");
 	occupants = new FlowPanel();
 	popup.setWidget(occupants);
 	popup.setAnimationEnabled(false);

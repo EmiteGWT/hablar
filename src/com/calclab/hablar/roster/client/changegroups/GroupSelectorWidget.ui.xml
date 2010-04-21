@@ -4,10 +4,10 @@
 	<ui:style>
 		
 	</ui:style>
-	<g:HTMLPanel styleName="hablar-GroupSelectorWidget">
-		<g:CheckBox ui:field="select" styleName="select"></g:CheckBox>
-		<g:Label ui:field="icon" styleName="icon"></g:Label>
-		<g:Label ui:field="staticName" styleName="name"></g:Label>
-		<g:TextBox ui:field="editableName" styleName="name" />
+	<g:HTMLPanel addStyleNames="hablar-GroupSelectorWidget">
+		<g:CheckBox ui:field="select" addStyleNames="select"></g:CheckBox>
+		<g:Label ui:field="icon" addStyleNames="icon"></g:Label>
+		<g:Label ui:field="staticName" addStyleNames="name"></g:Label>
+		<g:TextBox ui:field="editableName" addStyleNames="name" />
 	</g:HTMLPanel>
 </ui:UiBinder> 

@@ -2,25 +2,35 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
-		
+		.talkBox {
+		    width: 97%;
+		    margin: 3px 0;
+		    padding: 3px;
+		    height: 54px;
+		}
+
+		.talkPanel {
+		    width: 100%;
+		    overflow: hidden;
+		}
 	</ui:style>
-	<g:LayoutPanel styleName="hablar-ChatWidget hablar-Page"
+	<g:LayoutPanel addStyleNames="hablar-ChatWidget hablar-Page hablar-lightBackground"
 		ui:field="page">
 		<g:layer top="0px" left="0px" right="0px" height="0px">
-			<g:FlowPanel ui:field="actions" styleName="actions"></g:FlowPanel>
+			<g:FlowPanel ui:field="actions" addStyleNames="actions"></g:FlowPanel>
 		</g:layer>
 		<g:layer top='0px' left='0px' right='0px' bottom='69px'>
 			<g:ScrollPanel ui:field="scroll" height="100%"
-				styleName="scroll">
-				<g:FlowPanel styleName="list" ui:field="list" />
+				addStyleNames="scroll hablar-clearBackground">
+				<g:FlowPanel addStyleNames="list" ui:field="list" />
 			</g:ScrollPanel>
 		</g:layer>
 		<g:layer left="0" right="0" bottom="0" height="0">
-			<g:FlowPanel ui:field="controls" styleName="panel">
-				<g:Label ui:field="state" styleName="state">&nbsp;</g:Label>
-				<g:TextArea styleName="talkBox" ui:field="talkBox"></g:TextArea>
+			<g:FlowPanel ui:field="controls" addStyleNames="{style.talkPanel}">
+				<g:Label ui:field="state" addStyleNames="state">&nbsp;</g:Label>
+				<g:TextArea addStyleNames="{style.talkBox}" ui:field="talkBox"></g:TextArea>
 				<g:Button ui:field="send">Send</g:Button>
 			</g:FlowPanel>
 		</g:layer>
 	</g:LayoutPanel>
-</ui:UiBinder> 
+</ui:UiBinder>

@@ -5,8 +5,8 @@
 
   </ui:style>
   <g:ScrollPanel ui:field="scroll" height="100%"
-    styleName="scroll">
-    <g:HTMLPanel styleName="hablar-OpenRoomWidget">
+    addStyleNames="scroll">
+    <g:HTMLPanel addStyleNames="hablar-OpenRoomWidget">
       <div class="form">
         <h2>
           <span ui:field='title' />
@@ -14,14 +14,14 @@
         <p>
           <label ui:field="groupChatNameLabel">Group Chat Name:</label>
           <g:TextBox ui:field="roomName"></g:TextBox>
-          <g:Label ui:field="roomNameError" styleName="error"></g:Label>
+          <g:Label ui:field="roomNameError" addStyleNames="error"></g:Label>
         </p>
         <p>
           <label ui:field="invitationLabel">Invitation message:</label>
           <g:TextBox ui:field="message"></g:TextBox>
         </p>
         <label ui:field="occupantsLabel">Group Chat Participants:</label>
-        <g:FlowPanel ui:field="occupantsList" styleName="list"></g:FlowPanel>
+        <g:FlowPanel ui:field="occupantsList" addStyleNames="list hablar-lightBackground"></g:FlowPanel>
         <div class="actions">
           <g:Button ui:field="accept">Accept</g:Button>
           <g:Button ui:field="cancel">Cancel</g:Button>
