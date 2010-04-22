@@ -6,7 +6,7 @@
 	<inherits name='com.calclab.hablar.console.HablarConsole' />
 	<inherits name='com.calclab.hablar.login.HablarLogin' />
 
-	<!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome' /> -->
+	<inherits name='com.google.gwt.user.theme.chrome.Chrome' />
 	<!-- <inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
 	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
 
