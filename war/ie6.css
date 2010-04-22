@@ -11,3 +11,14 @@
 .nogwt-TabLayoutPanelTab {
 	width: 140px;
 }
+
+.hablar-Emoticon {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	padding: 0 !important;
+}
+
+.hablar-Emoticon span {
+	display: none;
+}

@@ -117,7 +117,7 @@ public class ChatMessageFormatter {
     }
 
     private static String getSpan(final String style) {
-	return "<span class=\"" + icons.css().base() + " " + style + "\"><span>";
+	return "<span class=\"hablar-Emoticon " + icons.css().base() + " " + style + "\"><span>";
     }
 
     private static String replace(String message, final String[] from, final String to) {
