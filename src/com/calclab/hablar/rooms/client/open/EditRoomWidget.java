@@ -50,6 +50,8 @@ public class EditRoomWidget extends Composite implements EditRoomDisplay {
 
     public EditRoomWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
+	roomName.ensureDebugId("InviteToRoomWidget-roomName");
+	message.ensureDebugId("InviteToRoomWidget-message");
 	accept.ensureDebugId("InviteToRoomWidget-invite");
 	cancel.ensureDebugId("InviteToRoomWidget-cancel");
 	occupantsList.ensureDebugId("InviteToRoomWidget-list");

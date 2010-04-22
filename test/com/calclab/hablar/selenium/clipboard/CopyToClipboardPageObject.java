@@ -23,7 +23,7 @@ public class CopyToClipboardPageObject extends PageObject {
     }
 
     public void waitForMessage(final String message) {
-	waitFor(content, message);
+	waitForValue(content, message);
     }
 
 }

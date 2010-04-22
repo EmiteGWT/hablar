@@ -31,7 +31,7 @@ public abstract class PageObject {
     protected RenderedWebElement findElement(final By by) {
 	return (RenderedWebElement) getWebDriver().findElement(by);
     }
-
+    
     /**
      * Thanks to:
      * http://groups.google.com/group/webdriver/browse_frm/thread/6e705242
@@ -74,6 +74,18 @@ public abstract class PageObject {
 		final String elText = element.getText();
 		System.out.println("Element text: " + elText);
 		Assert.assertTrue(elText.contains(text));
+	    }
+	});
+    }
+
+    protected void waitForValue(final WebElement element, final String text) {
+	System.out.println("WAIT FOR: " + text);
+	waitFor(text, new Runnable() {
+	    @Override
+	    public void run() {
+		final String elValue = element.getValue();
+		System.out.println("Element value: " + elValue);
+		Assert.assertTrue(elValue.contains(text));
 	    }
 	});
     }

@@ -11,6 +11,7 @@ import com.calclab.hablar.selenium.editbuddy.EditBuddyPageObject;
 import com.calclab.hablar.selenium.groupchat.GroupChatPageObject;
 import com.calclab.hablar.selenium.login.LoginPageObject;
 import com.calclab.hablar.selenium.openchat.OpenChatPageObject;
+import com.calclab.hablar.selenium.opengroupchat.OpenGroupChatPageObject;
 import com.calclab.hablar.selenium.roster.RosterPageObject;
 import com.calclab.hablar.selenium.search.SearchPageObject;
 import com.calclab.hablar.selenium.userpage.UserPageObject;
@@ -59,5 +60,6 @@ public class SeleniumModule extends PageObjectModule {
 	registerPageObject(UserPageObject.class, new UserPageObject());
 	registerPageObject(OtherVCardPageObject.class, new OtherVCardPageObject());
 	registerPageObject(CopyToClipboardPageObject.class, new CopyToClipboardPageObject());
+	registerPageObject(OpenGroupChatPageObject.class, new OpenGroupChatPageObject());
     }
 }

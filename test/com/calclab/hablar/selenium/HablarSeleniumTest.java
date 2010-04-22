@@ -59,6 +59,21 @@ public abstract class HablarSeleniumTest extends HablarSeleniumDefaults {
 	openChat.getOpen().click();
     }
 
+    /**
+     * Opens a group chat with the given users. 
+     * 
+     * @param jids
+     */
+    protected void openGroupChat(final String[] jids) {
+	// TODO Would be great if it could send back the id for the new group chat
+	roster.getHeader().click();
+	openGroupChat.getAction().click();
+	for (String jid : jids) {
+	    openGroupChat.getUserSelect(jid);
+	}
+	openGroupChat.getInvite().click();
+    }
+
     protected void removeBuddy(final String groupId, final String jid) {
 	roster.getHeader().click();
 	roster.getItemMenu(groupId, jid).click();

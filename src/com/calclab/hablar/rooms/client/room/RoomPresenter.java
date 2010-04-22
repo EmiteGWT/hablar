@@ -2,12 +2,15 @@ package com.calclab.hablar.rooms.client.room;
 
 import static com.calclab.hablar.rooms.client.HablarRooms.i18n;
 
+import java.util.ArrayList;
+
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
 import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.chat.Chat.State;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.hablar.chat.client.ui.ChatDisplay;
+import com.calclab.hablar.chat.client.ui.ChatMessageDisplay;
 import com.calclab.hablar.chat.client.ui.ChatMessageFormatter;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
@@ -24,7 +27,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 
-public class RoomPresenter extends PagePresenter<RoomDisplay> {
+public class RoomPresenter extends PagePresenter<RoomDisplay> implements RoomPage {
     public static final String TYPE = "Room";
     public static final String ROOM_MESSAGE = "RoomMessage";
     private static int id = 0;
@@ -89,7 +92,7 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> {
 	});
     }
 
-    public void addAction(final Action<RoomPresenter> action) {
+    public void addAction(final Action<RoomPage> action) {
 	display.createAction(action).addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(final ClickEvent event) {
@@ -133,4 +136,13 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> {
 	display.setStatusVisible(visible);
     }
 
+    @Override
+    public String getChatName() {
+	return room.getID();
+    }
+
+    @Override
+    public ArrayList<ChatMessageDisplay> getMessages() {
+	return display.getMessages();
+    }
 }

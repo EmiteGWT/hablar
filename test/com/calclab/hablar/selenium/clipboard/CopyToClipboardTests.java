@@ -21,4 +21,30 @@ public class CopyToClipboardTests extends HablarSeleniumTest {
 	copyToClipboard.getClose().click();
 	logout();
     }
+
+    @Test
+    public void testCopyToClipboardPageForGroupChat() {
+	login();
+
+	String[] jids = {};
+	openGroupChat(jids);
+
+	groupChat.getRoomHeader("1").click();
+	groupChat.waitForTextInRoom("1", "This group chat is now unlocked");
+	final String message = "test message " + System.currentTimeMillis();
+	groupChat.getRoomTextBox("1").sendKeys(message + "\n");
+	groupChat.waitForTextInRoom("1", message);
+
+	// This is weird. It seems to only work if I call click loads of times!
+	copyToClipboard.getAction().click();
+	copyToClipboard.getAction().click();
+	copyToClipboard.getAction().click();
+	copyToClipboard.getAction().click();
+	copyToClipboard.getAction().click();
+	copyToClipboard.getAction().click();
+
+	copyToClipboard.waitForMessage(message);
+	copyToClipboard.getClose().click();
+	logout();
+    }
 }

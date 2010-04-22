@@ -25,11 +25,11 @@ public class LoginPageObject extends PageObject {
     }
 
     public void assertIsConnectedAs(final String user) {
-	waitFor(header, TextUtils.ellipsis(i18n.get("connectedAs", user), 10));
+	waitFor(header, i18n.get("connectedAs", user));
     }
 
     public void assertIsDisconnected() {
-	waitFor(header, TextUtils.ellipsis(i18n.get("disconnected"), 10));
+	waitFor(header, i18n.get("disconnected"));
     }
 
     public RenderedWebElement getHeader() {

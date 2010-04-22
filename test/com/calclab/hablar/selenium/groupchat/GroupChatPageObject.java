@@ -19,7 +19,7 @@ public class GroupChatPageObject extends PageObject {
 	final String id = Idify.id(HablarGroupChat.ACTION_ID_CONVERT, Idify.uriId(jid));
 	return findElement(new ByIdOrName("gwt-debug-" + id));
     }
-
+    
     public RenderedWebElement getOpenGroupChatAccept() {
 	return openGroupChatAccept;
     }

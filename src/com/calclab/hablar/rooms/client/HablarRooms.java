@@ -11,6 +11,7 @@ import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.rooms.client.invite.InviteToRoomPresenter;
 import com.calclab.hablar.rooms.client.open.EditRoomWidget;
+import com.calclab.hablar.rooms.client.room.RoomPage;
 import com.calclab.hablar.rooms.client.room.RoomPresenter;
 import com.calclab.hablar.rooms.client.state.HablarRoomStateManager;
 import com.calclab.hablar.roster.client.page.RosterPage;
@@ -62,11 +63,11 @@ public class HablarRooms implements EntryPoint {
 	roomMessages = messages;
     }
 
-    protected static Action<RoomPresenter> createInviteAction(final InviteToRoomPresenter invitePage) {
+    protected static Action<RoomPage> createInviteAction(final InviteToRoomPresenter invitePage) {
 	final String icon = HablarIcons.get(IconType.buddyAdd);
-	return new SimpleAction<RoomPresenter>(i18n().inviteToThisGroupChat(), ACTION_ID_INVITE, icon) {
+	return new SimpleAction<RoomPage>(i18n().inviteToThisGroupChat(), ACTION_ID_INVITE, icon) {
 	    @Override
-	    public void execute(final RoomPresenter target) {
+	    public void execute(final RoomPage target) {
 		invitePage.setRoom(target.getRoom());
 		invitePage.requestVisibility(Visibility.focused);
 	    }

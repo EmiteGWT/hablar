@@ -15,6 +15,7 @@ import com.calclab.hablar.selenium.editbuddy.EditBuddyPageObject;
 import com.calclab.hablar.selenium.groupchat.GroupChatPageObject;
 import com.calclab.hablar.selenium.login.LoginPageObject;
 import com.calclab.hablar.selenium.openchat.OpenChatPageObject;
+import com.calclab.hablar.selenium.opengroupchat.OpenGroupChatPageObject;
 import com.calclab.hablar.selenium.roster.RosterPageObject;
 import com.calclab.hablar.selenium.search.SearchPageObject;
 import com.calclab.hablar.selenium.tools.GenericWebTester;
@@ -37,6 +38,7 @@ public class HablarSeleniumDefaults {
     protected UserPageObject userPage;
     protected OtherVCardPageObject otherVCardPage;
     protected CopyToClipboardPageObject copyToClipboard;
+    protected OpenGroupChatPageObject openGroupChat;
 
     @AfterSuite
     public void closeBrowser() {
@@ -80,6 +82,7 @@ public class HablarSeleniumDefaults {
 	    userPage = Suco.get(UserPageObject.class);
 	    otherVCardPage = Suco.get(OtherVCardPageObject.class);
 	    copyToClipboard = Suco.get(CopyToClipboardPageObject.class);
+	    openGroupChat = Suco.get(OpenGroupChatPageObject.class);
 	}
 	webtester.home();
     }
