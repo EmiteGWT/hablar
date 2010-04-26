@@ -1,5 +1,7 @@
 package com.calclab.hablar.groupchat.client;
 
+import static com.calclab.hablar.rooms.client.HablarRooms.i18n;
+
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.rooms.client.open.EditRoomDisplay;
@@ -23,8 +25,8 @@ public class OpenGroupChatPresenter extends OpenRoomPresenter {
     @Override
     protected void onPageOpen() {
 	display.getRoomName().setText(groupName);
-	display.setPageTitle("Open Group Chat");
-	display.setAcceptText("Open Group Chat");
+	display.setPageTitle(i18n().openNewGroupChat());
+	display.setAcceptText(i18n().openNewGroupChatAction());
 
 	final Roster roster = Suco.get(Roster.class);
 	setItems(roster.getItemsByGroup(groupName), false, true);

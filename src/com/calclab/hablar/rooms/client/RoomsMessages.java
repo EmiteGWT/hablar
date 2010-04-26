@@ -45,6 +45,9 @@ public interface RoomsMessages extends Messages {
     @DefaultMessage("Create a new group chat")
     String openNewGroupChat();
 
+    @DefaultMessage("Accept")
+    String acceptAction();
+
     @DefaultMessage("Create Group Chat")
     String openNewGroupChatAction();
 
