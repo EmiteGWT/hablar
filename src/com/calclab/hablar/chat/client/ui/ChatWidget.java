@@ -37,7 +37,7 @@ public class ChatWidget extends Composite implements ChatDisplay {
     interface ChatWidgetUiBinder extends UiBinder<Widget, ChatWidget> {
     }
 
-    private static final int CONTROLS_HEIGHT = 104;
+    private static final int CONTROLS_HEIGHT = 115;
     private static final int STATUS_HEIGHT = 24;
 
     private static ChatWidgetUiBinder uiBinder = GWT.create(ChatWidgetUiBinder.class);
@@ -161,13 +161,13 @@ public class ChatWidget extends Composite implements ChatDisplay {
     }
 
     private void layoutControls() {
-	page.setWidgetTopBottom(scroll, statusHeight, PX, controlsHeight + 3, PX);
-	page.setWidgetBottomHeight(controls, 0, PX, controlsHeight, PX);
+	page.setWidgetTopBottom(scroll, statusHeight + 3, PX, controlsHeight + 3, PX);
+	page.setWidgetBottomHeight(controls, 3, PX, controlsHeight, PX);
     }
 
     private void layoutStatus() {
-	page.setWidgetTopBottom(scroll, statusHeight, PX, controlsHeight + 3, PX);
-	page.setWidgetTopHeight(actions, 0, PX, statusHeight, PX);
+	page.setWidgetTopBottom(scroll, statusHeight + 3, PX, controlsHeight + 3, PX);
+	page.setWidgetTopHeight(actions, 3, PX, statusHeight, PX);
 
     }
 

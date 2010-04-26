@@ -122,8 +122,8 @@ public class SearchWidget extends Composite implements SearchDisplay {
 
     @Override
     public void showMessage(final String body, final Level level) {
-	self.setWidgetTopHeight(messagePanel, 0, PX, 22, PX);
-	self.setWidgetTopBottom(scroll, 22, PX, 33, PX);
+	self.setWidgetTopHeight(messagePanel, 3, PX, 22, PX);
+	self.setWidgetTopBottom(scroll, 22, PX, 47, PX);
 	self.animate(250);
 
 	message.setText(body);

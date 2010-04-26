@@ -8,8 +8,8 @@
     </ui:style>
 
     <ui:image field="buddy" src="buddy-small.png"></ui:image>
-    
-    <g:HTMLPanel addStyleNames="hablar-SearchResultItemWidget">
+
+    <g:HTMLPanel addStyleNames="hablar-SearchResultItemWidget hablar-bottomLightBordered">
         <g:Label addStyleNames="icon {style.userAdd}" ui:field="buddyIcon"></g:Label>
         <g:Label ui:field="name" addStyleNames="name">Result</g:Label>
         <g:Label ui:field="jid" addStyleNames="jid">JID</g:Label>

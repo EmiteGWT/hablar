@@ -12,7 +12,7 @@
   </ui:style>
   <ui:image field='closeIcon' src='close.png' />
   <g:FocusPanel ui:field="self">
-    <g:FlowPanel addStyleNames='hablar-DockHeaderWidget hablar-Header hablar-lightBackground'
+    <g:FlowPanel addStyleNames='hablar-DockHeaderWidget hablar-Header hablar-lightBackground hablar-partialLightBordered'
       ui:field="flow">
       <g:Label addStyleNames="{style.beside} icon" ui:field="icon"></g:Label>
       <g:Label addStyleNames="{style.beside}title" ui:field="title">Title</g:Label>

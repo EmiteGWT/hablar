@@ -2,10 +2,13 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
   xmlns:g="urn:import:com.google.gwt.user.client.ui">
   <ui:style>
-
+	    .wideArea {
+		    width: 100%;
+		    overflow: hidden;
+	    }
   </ui:style>
   <g:ScrollPanel ui:field="scroll" height="100%"
-    addStyleNames="scroll">
+    addStyleNames="hablar-defaultBordered">
     <g:HTMLPanel addStyleNames="hablar-OpenRoomWidget">
       <div class="form">
         <h2>
@@ -21,8 +24,8 @@
           <g:TextBox ui:field="message"></g:TextBox>
         </p>
         <label ui:field="occupantsLabel">Group Chat Participants:</label>
-        <g:FlowPanel ui:field="occupantsList" addStyleNames="list hablar-lightBackground"></g:FlowPanel>
-        <div class="actions">
+        <g:FlowPanel ui:field="occupantsList" addStyleNames="{style.wideArea} hablar-lightBackground"></g:FlowPanel>
+        <div class="actions hablar-topDefaultBordered">
           <g:Button ui:field="accept">Accept</g:Button>
           <g:Button ui:field="cancel">Cancel</g:Button>
         </div>

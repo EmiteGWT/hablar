@@ -11,24 +11,39 @@
 		    cursor: pointer;
 		    background-position: center;
 	    }
+
+	    .wideArea {
+		    width: 100%;
+		    overflow: hidden;
+	    }
+
+		.disabledPanel {
+		    position: relative;
+		    left: 0;
+		    top: 0;
+		    right: 0;
+		    bottom: 0;
+		    display: block;
+		}
     </ui:style>
-    <g:LayoutPanel ui:field="roster" addStyleNames="hablar-RosterWidget hablar-Page hablar-lightBackground">
+    <g:LayoutPanel ui:field="roster" addStyleNames="hablar-RosterWidget hablar-lightBackground">
         <!--  Actions -->
-        <g:layer left="0" top="0" width="100%" height="20px">
+        <g:layer left="3px" top="3px" right="3px" height="20px">
             <g:FlowPanel ui:field="actions" addStyleNames="actions">
             </g:FlowPanel>
         </g:layer>
         <!-- Results -->
-        <g:layer left="0" top="20px" width="100%" bottom="0px">
+        <g:layer left="3px" top="20px" right="3px" bottom="0px">
             <g:ScrollPanel ui:field="scroll" height="100%"
-                addStyleNames="scroll hablar-clearBackground">
-                <r:RosterListWidget addStyleNames="list" ui:field="list">
+                addStyleNames="hablar-defaultBordered hablar-clearBackground">
+                <r:RosterListWidget addStyleNames="{style.wideArea}" ui:field="list">
                 </r:RosterListWidget>
             </g:ScrollPanel>
         </g:layer>
         <!-- Inactive -->
-        <g:layer left="0" top="20px" width="100%" height="0px">
-            <g:FlowPanel addStyleNames="disabledPanel hablar-defaultBackground" ui:field="disabledPanel">
+        <g:layer left="3px" top="20px" right="3px" height="0px">
+        	<!-- Why do we need this? -->
+            <g:FlowPanel addStyleNames="{style.disabledPanel} hablar-defaultBackground hablar-disabledBordered" ui:field="disabledPanel">
                 <g:Label ui:field="disabledLabel" />
             </g:FlowPanel>
         </g:layer>

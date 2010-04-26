@@ -7,13 +7,13 @@
     <g:LayoutPanel addStyleNames="hablar-UserWidget hablar-defaultBackground">
         <g:layer left="0" top="0px" width="100%" bottom="40px">
             <g:ScrollPanel ui:field="scroll" height="100%"
-                addStyleNames="scroll">
+                addStyleNames="hablar-defaultBordered">
                 <g:FlowPanel ui:field="container" addStyleNames="container">
                 </g:FlowPanel>
             </g:ScrollPanel>
         </g:layer>
         <g:layer left="0" width="100%" bottom="0" height="40px">
-            <g:FlowPanel addStyleNames="actions" ui:field="actions">
+            <g:FlowPanel addStyleNames="actions hablar-topDefaultBordered" ui:field="actions">
                 <g:Button ui:field="close">Close</g:Button>
             </g:FlowPanel>
         </g:layer>

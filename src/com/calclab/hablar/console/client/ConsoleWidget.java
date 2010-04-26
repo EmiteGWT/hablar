@@ -39,6 +39,7 @@ public class ConsoleWidget extends Composite implements ConsoleDisplay {
 	label.addStyleName(styleName);
 	label.addStyleName(sessionStyle);
 	label.addStyleName("hablar-clearBackground");
+	label.addStyleName("hablar-bottomLightBordered");
 	output.add(label);
 	scroll.ensureVisible(label);
     }

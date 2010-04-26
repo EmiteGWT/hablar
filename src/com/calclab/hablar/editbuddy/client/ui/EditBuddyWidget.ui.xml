@@ -18,7 +18,7 @@
 				<g:TextBox ui:field="nickName">newNickName</g:TextBox>
 				<g:Label ui:field="nickNameError" addStyleNames="error"></g:Label>
 			</p>
-			<div class="actions">
+			<div class="actions hablar-topDefaultBordered">
 				<g:Button ui:field="save">Change</g:Button>
 				<g:Button ui:field="cancel">Cancel</g:Button>
 			</div>

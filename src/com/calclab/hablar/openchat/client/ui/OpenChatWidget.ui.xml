@@ -15,7 +15,7 @@
 				<g:Label ui:field="jabberIdError" addStyleNames="error"></g:Label>
 			</p>
 			<p><g:CheckBox ui:field="addToRoster">Add to roster</g:CheckBox></p>
-			<div class="actions">
+			<div class="actions hablar-topDefaultBordered">
 				<g:Button ui:field="accept">Open Chat</g:Button>
 				<g:Button ui:field="cancel">Cancel</g:Button>
 			</div>

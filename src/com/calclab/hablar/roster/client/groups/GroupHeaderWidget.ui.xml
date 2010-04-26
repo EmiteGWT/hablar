@@ -4,7 +4,7 @@
 	<ui:style>
 
 	</ui:style>
-	<g:HTMLPanel addStyleNames="hablar-GroupHeaderWidget hablar-lightBackground">
+	<g:HTMLPanel addStyleNames="hablar-GroupHeaderWidget hablar-lightBackground hablar-bottomDarkBordered">
 	<g:Label ui:field="menu" addStyleNames="menu"></g:Label>
 	<g:Label ui:field="name" addStyleNames="name">name</g:Label>
 	</g:HTMLPanel>

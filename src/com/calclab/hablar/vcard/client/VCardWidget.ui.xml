@@ -2,10 +2,9 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
-
 	</ui:style>
 	<g:HTMLPanel addStyleNames="hablar-VCardWidget">
-		<h2>
+		<h2 class="hablar-bottomLightBordered">
 			<span ui:field='title' />
 		</h2>
 		<div class="loading" ui:field="loading">
@@ -51,7 +50,7 @@
 					<g:TextBox ui:field="email"></g:TextBox>
 				</p>
 			</div>
-			<div class="actions">
+			<div class="actions hablar-topDefaultBordered">
 				<g:Button ui:field="accept">Accept</g:Button>
 				<g:Button ui:field="cancel">Cancel</g:Button>
 			</div>

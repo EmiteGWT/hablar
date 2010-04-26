@@ -5,20 +5,20 @@
   </ui:style>
   <g:LayoutPanel addStyleNames="hablar-Logger hablar-lightBackground">
     <!--  Actions -->
-    <g:layer left="0" top="0" width="100%" height="25px">
-      <g:FlowPanel ui:field="actions" addStyleNames="actions">
+    <g:layer left="3px" top="3px" width="100%" height="25px">
+      <g:FlowPanel ui:field="actions" addStyleNames="hablar-bottomDefaultBordered">
         <g:Anchor ui:field="clear">Clear</g:Anchor>
       </g:FlowPanel>
     </g:layer>
     <!-- Results -->
-    <g:layer left="0" top="25px" width="100%" bottom="5em">
-      <g:ScrollPanel ui:field="scroll" height="100%"
-        addStyleNames="scroll">
+    <g:layer left="3px" top="25px" right="3px" bottom="6em">
+      <g:ScrollPanel ui:field="scroll" height="99%"
+        addStyleNames="hablar-defaultBordered">
         <g:FlowPanel ui:field="output">
         </g:FlowPanel>
       </g:ScrollPanel>
     </g:layer>
-    <g:layer left="0" height="5em" width="100%" bottom="0px">
+    <g:layer left="3px" height="5em" right="3px" bottom="3px">
         <g:TextArea height="4.6em" width="98%" visibleLines="3" ui:field="input" />
     </g:layer>
   </g:LayoutPanel>

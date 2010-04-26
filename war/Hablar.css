@@ -58,6 +58,75 @@ div.hablar-SearchResultItemWidget:hover {
   background-color: #e9e9e9;
 }
 
+
+/** Classes for borders **/
+.hablar-lightBordered {
+    border: 3px solid #E9E9E9;
+}
+
+.hablar-partialLightBordered {
+    border-top: 1px solid #E9E9E9;
+    border-bottom: 1px solid #E9E9E9;
+}
+
+.hablar-bottomLightBordered {
+    border-bottom: 1px solid #E9E9E9;
+}
+
+.hablar-defaultBordered {
+	border-left: 1px solid #BBBBBB;
+    /* This border affects scroll visibility */
+    border-top: 1px solid #BBBBBB;
+}
+
+.hablar-topDefaultBordered {
+    border-top: 1px solid #BBBBBB;
+}
+
+.hablar-bottomDefaultBordered {
+    border-bottom: 1px solid #BBBBBB;
+}
+
+.hablar-partialDarkBordered {
+	border-left: 1px solid #BBBBBB;
+    border-top: 1px solid #BBBBBB;
+}
+
+.hablar-darkBordered {
+	border: 1px solid #BBBBBB;
+}
+
+.hablar-bottomDarkBordered {
+    border-bottom: 1px solid #BBBBBB;
+}
+
+.hablar-disabledBordered {
+    border-left: 1px solid #8C8C8C;
+    border-top: 1px solid #8C8C8C;
+}
+
+/** Accordion effects **/
+
+.hablar-AccordionHeaderWidget.notFocused {
+    border-top: 1px solid #E9E9E9;
+    border-bottom: 1px solid #BBB;
+}
+
+.hablar-AccordionHeaderWidget.focused {
+    border-top: 1px solid white;
+    border-bottom: 1px solid #BBB;
+}
+
+/** MUC room occupants **/
+.gwt-PopupPanel.occupants {
+    border-top: 1px solid #E9E9E9;
+    border-left: 1px solid #BBBBBB;
+    border-right: 1px solid #BBBBBB;
+    border-bottom: 1px solid #BBBBBB;
+    background-color: #e9e9e9;
+    z-index: 10000;
+}
+
 /** IE6 ZINDEX BUG **/
 .hablar-HablarWidget {
     z-index: 1;
@@ -73,25 +142,6 @@ body {
 }
 
 /** HABLAR PAGE COMMON **/
-.hablar-Page {
-    border: 3px solid #E9E9E9;
-}
-
-.hablar-Page .scroll {
-    border-left: 1px solid #BBBBBB;
-    /* This border affects scroll visibility */
-    border-top: 1px solid #BBBBBB;
-}
-
-.hablar-Page .list {
-    width: 100%;
-    overflow: hidden;
-}
-
-.hablar-Page .gwt-Button {
-    font-size: 100%;
-}
-
 div.hablar-ActionWidget {
     padding: 2px 2px;
     -moz-border-radius: 5px;
@@ -100,34 +150,12 @@ div.hablar-ActionWidget {
     background-position: center;
 }
 
-/** DISABLED PANEL **/
-.hablar-Page .disabledPanel {
-    position: relative;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    display: block;
-    border-left: 1px solid #8C8C8C;
-    border-top: 1px solid #8C8C8C;
-}
-
-.hablar-Page .disabledPanel .disabledMessage {
-    display: block;
-    text-align: center;
-    width: 100%;
-    padding-top: 2em;
-    color: #E9E9E9;
-}
-
 /** HABLAR HEADER **/
 .hablar-Header {
     width: 100%;
     overflow: hidden;
     cursor: pointer;
     padding: 3px 0;
-    border-top: 1px solid #E9E9E9;
-    border-bottom: 1px solid #E9E9E9;
 }
 
 .hablar-Header.unattended {
@@ -191,16 +219,6 @@ div.hablar-ActionWidget {
     display: block;
 }
 
-.hablar-AccordionHeaderWidget.notFocused {
-    border-top: 1px solid #E9E9E9;
-    border-bottom: 1px solid #BBB;
-}
-
-.hablar-AccordionHeaderWidget.focused {
-    border-top: 1px solid white;
-    border-bottom: 1px solid #BBB;
-}
-
 .hablar-TabsHeaderWidget .title {
     display: inline;
     margin-right: 10px;
@@ -214,7 +232,7 @@ div.hablar-ActionWidget {
 
 .hablar-Header.DockHeaderWidget-top {
 	background-color: transparent;
-    border: 1px solid #BBB;
+    border: 1px transparent;
 
 }
 
@@ -227,20 +245,12 @@ div.hablar-ActionWidget {
     margin-left: 3px;
 }
 
-/** LOGIN **/
-.hablar-Login .output {
-    padding: 3px;
-    border-left: 1px solid #BBBBBB;
-    border-top: 1px solid #BBBBBB;
-}
-
 /** LIST ITEMS **/
 .hablar-ListItem {
     display: block;
     width: 100%;
     overflow: hidden;
     padding: 5px 0px 0 0px;
-    border-bottom: 1px solid #E9E9E9;
 }
 
 .clickable {
@@ -255,7 +265,6 @@ div.hablar-ActionWidget {
 
 .hablar-UserWidget h2 {
     margin: 15px 0 5px 0;
-    border-bottom: 1px solid #EFEFEF;
 }
 
 .hablar-UserWidget .actions {
@@ -279,11 +288,9 @@ div.hablar-ActionWidget {
 }
 
 .hablar-GroupHeaderWidget {
-    width: 100%;
     overflow: hidden;
     padding: 3px;
     cursor: pointer;
-    border-bottom: 1px solid #BBBBBB;
 }
 
 .hablar-GroupHeaderWidget .label {
@@ -350,7 +357,6 @@ div.hablar-ActionWidget {
     margin: 3px 0;
     padding: 3px;
     height: 54px;
-    border: 1px solid #BBBBBB;
 }
 
 .hablar-ChatWidget .chatMessage {
@@ -401,7 +407,6 @@ div.hablar-ActionWidget {
 .hablar-SearchWidget .searchBox {
     width: 75%;
     padding: 3px;
-    border: 1px solid #BBBBBB;
     margin-right: 1%;
 }
 
@@ -413,7 +418,6 @@ div.hablar-ActionWidget {
     width: 100%;
     overflow: hidden;
     padding: 2px 0;
-    border-bottom: 1px solid #E9E9E9;
     cursor: default;
 }
 
@@ -447,14 +451,6 @@ div.hablar-ActionWidget {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     cursor: pointer;
-}
-
-.gwt-PopupPanel.occupants {
-    border-top: 1px solid #E9E9E9;
-    border-left: 1px solid #BBBBBB;
-    border-right: 1px solid #BBBBBB;
-    border-bottom: 1px solid #BBBBBB;
-    z-index: 10000;
 }
 
 .hablar-OccupantWidget {
@@ -497,17 +493,13 @@ div.hablar-ActionWidget {
 }
 
 /** LOGGER **/
-.hablar-Logger {
-    border: 3px solid #E9E9E9;
-}
 
 .hablar-Logger .gwt-Label {
-    border-bottom: 1px solid #E9E9E9;
     opacity: 0.5;
 }
 
-.hablar-Logger .actions {
-    border-bottom: 1px solid #BBBBBB;
+.hablar-Logger .gwt-Label.ready {
+    opacity: 1;
 }
 
 .hablar-Logger .gwt-Anchor {
@@ -518,10 +510,6 @@ div.hablar-ActionWidget {
     margin-left: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-}
-
-.hablar-Logger .gwt-Label.ready {
-    opacity: 1;
 }
 
 .hablar-Logger .output {
@@ -573,7 +561,6 @@ div.hablar-ActionWidget {
 .form .actions {
     padding-left: 5px;
     margin-top: 15px;
-    border-top: 1px solid #BBBBBB;
     padding-top: 5px;
 }
 

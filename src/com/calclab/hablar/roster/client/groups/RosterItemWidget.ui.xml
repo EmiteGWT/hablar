@@ -25,7 +25,7 @@
 		}
 	</ui:style>
 	<g:FocusPanel ui:field="self" addStyleNames="user">
-		<g:FlowPanel addStyleNames="hablar-RosterItemWidget hablar-ListItem">
+		<g:FlowPanel addStyleNames="hablar-RosterItemWidget hablar-ListItem hablar-bottomLightBordered">
 			<g:LayoutPanel addStyleNames="{style.item} item">
 				<g:layer top="0" left="0" width="20px" height="16px">
 					<g:Label addStyleNames="icon" ui:field="icon"></g:Label>
