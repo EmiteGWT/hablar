@@ -318,7 +318,6 @@ div.hablar-ActionWidget {
 .hablar-RosterItemWidget .name {
     display: block;
     float: left;
-    cursor: pointer;
     margin-right: 5px;
 }
 
