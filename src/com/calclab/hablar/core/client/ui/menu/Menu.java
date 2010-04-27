@@ -54,16 +54,35 @@ public class Menu<T> implements Presenter<MenuDisplay<T>> {
 	for (final Action<T> action : actions) {
 	    display.setActionVisible(action, action.isApplicable(target));
 	}
-	
+
 	int menuLeft = left;
-	
-	// If the menu goes off the right edge of the window, make the anchor point the top right
+
+	// If the menu goes off the right edge of the window, make the anchor
+	// point the top right
 	// This should hopefully mean the menu is always displayed on the screen
-	if((left + WIDTH) > Window.getClientWidth()) {
+	if ((left + WIDTH) > Window.getClientWidth()) {
 	    menuLeft = left - WIDTH;
 	}
-	    
+
 	display.show(menuLeft, top + Y_OFFSET);
+
+	// This next bit is just in case the rendered width is different from the specified width - there might be some extra css or something
+	int width = display.asWidget().getOffsetWidth();
+
+	if (width != WIDTH) {
+	    menuLeft = left;
+
+	    // If the menu goes off the right edge of the window, make the
+	    // anchor point the top right
+	    // This should hopefully mean the menu is always displayed on the
+	    // screen
+	    if ((left + width) > Window.getClientWidth()) {
+		menuLeft = left - width;
+	    }
+	    
+	    display.show(menuLeft, top + Y_OFFSET);
+	}
+
     }
 
 }
