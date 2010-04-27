@@ -19,12 +19,30 @@
 	background-color: black;
 }
 
-div.hablar-ActionWidget:hover {
-    background-color: #BBBBBB;
+/** Text colors **/
+.hablar-clearColor {
+    color: white;
 }
 
-div.hablar-GroupHeaderWidget.collapsed {
+.hablar-lightColor {
     color: #BBBBBB;
+}
+
+.hablar-mediumColor {
+    color: gray;
+}
+
+.hablar-darkColor {
+    color: black;
+}
+
+.hablar-errorColor {
+    color: #c00;
+}
+
+/** Non generalizable styles **/
+div.hablar-ActionWidget:hover {
+    background-color: #BBBBBB;
 }
 
 div.hablar-GroupHeaderWidget:hover {
@@ -61,6 +79,11 @@ div.hablar-SearchResultItemWidget:hover {
 input[disabled] {
 	background-color: #e9e9e9;
 	color: black;
+}
+
+.hablar-Header.unattended {
+    color: #c00;
+    font-weight: bold;
 }
 
 /** Classes for borders **/
@@ -121,6 +144,42 @@ input[disabled] {
     border-bottom: 1px solid #BBB;
 }
 
+/** Chat messages **/
+.chatMessage .body.incoming {
+
+}
+
+.chatMessage .body.sent {
+    color: #808080;
+}
+
+.chatMessage .body.info {
+    color: #808080;
+    font-style: italic;
+}
+
+.chatMessage .body.alert {
+    color: #c00;
+}
+
+.hablar-ChatWidget .chatMessage {
+    display: block;
+    width: 94%;
+    overflow: hidden;
+    padding: 3px 3% 0 3%;
+}
+
+.hablar-ChatWidget .author {
+    display: block;
+    float: left;
+    font-weight: bold;
+}
+
+.hablar-ChatWidget .body {
+    margin-left: 10px;
+    float: left;
+}
+
 /** MUC room occupants **/
 .gwt-PopupPanel.occupants {
     border-top: 1px solid #E9E9E9;
@@ -160,11 +219,6 @@ div.hablar-ActionWidget {
     overflow: hidden;
     cursor: pointer;
     padding: 3px 0;
-}
-
-.hablar-Header.unattended {
-    color: #c00;
-    font-weight: bold;
 }
 
 .hablar-Header .icon {
@@ -325,20 +379,6 @@ div.hablar-ActionWidget {
     margin-right: 5px;
 }
 
-.hablar-RosterItemWidget .jid {
-    float: left;
-    display: block;
-    color: #BBB;
-    padding-right: 5px;
-}
-
-.hablar-RosterGroupWidget .jid {
-    float: left;
-    display: block;
-    color: #BBB;
-    padding-right: 5px;
-}
-
 .hablar-RosterItemWidget .menu {
     float: right;
 }
@@ -348,62 +388,10 @@ div.hablar-ActionWidget {
 	cursor: pointer;
 }
 
-.hablar-RosterItemWidget .status {
-    display: block;
-    margin: 0 0 2px 25px;
-    color: gray;
-}
-
 /** CHAT PAGE **/
-.hablar-ChatWidget .talkBox {
-    width: 100%;
-    margin: 3px 0;
-    padding: 3px;
-    height: 54px;
-}
-
-.hablar-ChatWidget .chatMessage {
-    display: block;
-    width: 94%;
-    overflow: hidden;
-    padding: 3px 3% 0 3%;
-}
-
-.hablar-ChatWidget .author {
-    display: block;
-    float: left;
-    font-weight: bold;
-}
-
-.hablar-ChatWidget .body {
-    margin-left: 10px;
-    float: left;
-}
-
-.hablar-ChatWidget .state {
-    margin-left: 3px;
-    color: #999999;
-}
 
 .hablar-ChatWidget .actions div {
     float: right;
-}
-
-.chatMessage .body.incoming {
-
-}
-
-.chatMessage .body.sent {
-    color: #808080;
-}
-
-.chatMessage .body.info {
-    color: #808080;
-    font-style: italic;
-}
-
-.chatMessage .body.alert {
-    color: #c00;
 }
 
 /** SEARCH PAGE **/
@@ -417,39 +405,11 @@ div.hablar-ActionWidget {
     width: 20%;
 }
 
-.hablar-SearchResultItemWidget {
-    width: 100%;
-    overflow: hidden;
-    padding: 2px 0;
-    cursor: default;
-}
-
-.hablar-SearchResultItemWidget div {
-    float: left;
-    margin-right: 5px;
-}
-
-.hablar-SearchResultItemWidget div.icon {
-    margin: 0 5px;
-}
-
-.hablar-SearchResultItemWidget div.jid {
-    color: gray;
-}
-
-.hablar-SearchResultItemWidget div.menu {
-    float: right;
-    margin-right: 0;
-    margin-left: 5px;
-    cursor: pointer;
-}
-
 /** ROOMS **/
 .hablar-ChatWidget .actions .hablar-OccupantsWidget {
     display: block;
     float: left;
     padding: 2px 5px;
-    color: black;
     margin-left: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -479,40 +439,13 @@ div.hablar-ActionWidget {
     padding: 5px;
 }
 
-.hablar-SelectRosterItemWidget {
-    width: 100%;
-    overflow: hidden;
-}
-
-.hablar-SelectRosterItemWidget .select,.hablar-SelectRosterItemWidget div
-    {
-    float: left;
-    color: gray;
-    margin-right: 3px;
-}
-
-.hablar-SelectRosterItemWidget .name {
-    color: black;
-}
-
 /** LOGGER **/
-
 .hablar-Logger .gwt-Label {
     opacity: 0.5;
 }
 
 .hablar-Logger .gwt-Label.ready {
     opacity: 1;
-}
-
-.hablar-Logger .gwt-Anchor {
-    display: block;
-    float: left;
-    padding: 2px 5px;
-    color: black;
-    margin-left: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
 }
 
 .hablar-Logger .output {
@@ -526,11 +459,7 @@ div.hablar-ActionWidget {
 /** OVERLAY **/
 .hablar-Overlay {
     z-index: 7000;
-    color: white;
-}
-
-.hablar-Overlay .form {
-    margin: 50px 10px 10px 10px;
+    padding: 20px 10px 10px 10px;
 }
 
 /** FORMS **/
@@ -567,9 +496,8 @@ div.hablar-ActionWidget {
 }
 
 .form .gwt-TextBox,.form .gwt-PasswordTextBox {
-    border: 0px;
     padding: 2px;
-    width: 100%;
+    width: 98%;
 }
 
 .form p .gwt-RadioButton,.form p .gwt-CheckBox {
@@ -588,10 +516,6 @@ div.hablar-ActionWidget {
     margin: 0;
 }
 
-.form p .error {
-    color: #c00;
-}
-
 .hablar-PopupPanel {
     z-index: 5000;
     -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
@@ -606,12 +530,6 @@ div.hablar-ActionWidget {
 .hablar-PresenceWidget .menu,.hablar-PresenceWidget .icon {
     float: left;
     margin-top: 4px;
-}
-
-.hablar-PresenceWidget .status {
-    float: left;
-    margin-top: 3px;
-    width: 80%;
 }
 
 .loading {
@@ -633,22 +551,6 @@ div.hablar-ActionWidget {
 /** ADD TO GROUP **/
 .hablar-ManageGroupsWidget .list {
     padding: 5px;
-}
-
-.hablar-GroupSelectorWidget {
-    width: 100%;
-    overflow: hidden;
-    height: 1.5em;
-}
-
-.hablar-GroupSelectorWidget .select,.hablar-GroupSelectorWidget div {
-    float: left;
-    color: gray;
-    margin-right: 3px;
-}
-
-.hablar-GroupSelectorWidget .name {
-    color: black;
 }
 
 /** COPY TO CLIPBOARD **/

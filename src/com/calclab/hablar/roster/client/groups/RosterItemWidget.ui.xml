@@ -6,12 +6,14 @@
 			height: 20px;
 		}
 		.status {
-			margin-left: 20px;
+		    display: block;
+		    margin: 0 0 2px 25px;
 			padding: 2px 0;
-			color: gray;
 		}
 		.jid {
-			color: gray;
+		    float: left;
+		    display: block;
+		    padding-right: 5px;
 		}
 
 		.data {
@@ -33,14 +35,14 @@
 				<g:layer top="0" left="20px" height="16px" right="20px">
 					<g:FlowPanel addStyleNames="{style.data}">
 						<g:Label addStyleNames="{style.name} name" ui:field="name">name-here</g:Label>
-						<g:Label addStyleNames="{style.jid} jid" ui:field="jid">jid</g:Label>
+						<g:Label addStyleNames="{style.jid} hablar-lightColor" ui:field="jid">jid</g:Label>
 					</g:FlowPanel>
 				</g:layer>
 				<g:layer top="0" right="0" width="20px" height="16px">
 					<g:Label ui:field="menu" addStyleNames="menu"></g:Label>
 				</g:layer>
 			</g:LayoutPanel>
-			<g:Label addStyleNames="{style.status} status" ui:field="status" />
+			<g:Label addStyleNames="{style.status} hablar-mediumColor" ui:field="status" />
 		</g:FlowPanel>
 	</g:FocusPanel>
 </ui:UiBinder>

@@ -13,6 +13,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 
 public class GroupHeaderPresenter implements Presenter<GroupHeaderDisplay> {
 
+    private static final String COLLAPSED_CLASS = "hablar-lightColor";
+
     private final GroupHeaderDisplay display;
 
     public GroupHeaderPresenter(final RosterGroupPresenter groupPresenter, final Menu<RosterGroupPresenter> groupMenu,
@@ -60,9 +62,9 @@ public class GroupHeaderPresenter implements Presenter<GroupHeaderDisplay> {
 
     protected void setVisibleStyle(final boolean visible) {
 	if (visible) {
-	    display.removeStyleName("collapsed");
+	    display.removeStyleName(COLLAPSED_CLASS);
 	} else {
-	    display.addStyleName("collapsed");
+	    display.addStyleName(COLLAPSED_CLASS);
 	}
     }
 

@@ -32,7 +32,7 @@
 		</g:layer>
 		<g:layer left="3px" right="3px" bottom="10px" height="0">
 			<g:FlowPanel ui:field="controls" addStyleNames="{style.talkPanel}">
-				<g:Label ui:field="state" addStyleNames="state">&nbsp;</g:Label>
+				<g:Label ui:field="state">&nbsp;</g:Label>
 				<g:TextArea addStyleNames="{style.talkBox}" ui:field="talkBox"></g:TextArea>
 				<g:Button ui:field="send">Send</g:Button>
 			</g:FlowPanel>

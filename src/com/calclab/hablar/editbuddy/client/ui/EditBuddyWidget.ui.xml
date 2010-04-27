@@ -16,7 +16,7 @@
 			<p>
 				<label ui:field="changeToLabel">To:</label>
 				<g:TextBox ui:field="nickName">newNickName</g:TextBox>
-				<g:Label ui:field="nickNameError" addStyleNames="error"></g:Label>
+				<g:Label ui:field="nickNameError" addStyleNames="hablar-errorColor"></g:Label>
 			</p>
 			<div class="actions hablar-topDefaultBordered">
 				<g:Button ui:field="save">Change</g:Button>

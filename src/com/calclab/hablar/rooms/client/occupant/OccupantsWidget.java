@@ -16,6 +16,7 @@ public class OccupantsWidget extends Label implements OccupantsDisplay {
     public OccupantsWidget(final String roomId) {
 	this.addStyleName("hablar-OccupantsWidget");
 	this.addStyleName("hablar-lightBackground");
+	this.addStyleName("hablar-darkColor");
 	this.ensureDebugId("hablar-OccupantsWidget-" + roomId);
 	popup = new PopupPanel(true);
 	popup.addStyleName("occupants");

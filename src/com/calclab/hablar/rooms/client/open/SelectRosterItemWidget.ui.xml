@@ -2,13 +2,20 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
-		
+		.selectRosterItemWidget {
+		    width: 100%;
+		    overflow: hidden;
+		}
+		.selectRosterItemWidgetDiv {
+			float: left;
+		    margin-right: 3px;
+		}
 	</ui:style>
-	<g:HTMLPanel addStyleNames="hablar-SelectRosterItemWidget">
-		<g:CheckBox ui:field="select" addStyleNames="select"></g:CheckBox>
-		<g:Label ui:field="icon" addStyleNames="icon"></g:Label>
-		<g:Label ui:field="name" addStyleNames="name"></g:Label>
-		<g:Label ui:field="jid" addStyleNames="jid"></g:Label>
-		<g:Label ui:field="status" addStyleNames="status"></g:Label>
+	<g:HTMLPanel addStyleNames="hablar-SelectRosterItemWidget {style.selectRosterItemWidget}">
+		<g:CheckBox ui:field="select" addStyleNames="select {style.selectRosterItemWidgetDiv}"></g:CheckBox>
+		<g:Label ui:field="icon" addStyleNames="icon {style.selectRosterItemWidgetDiv}"></g:Label>
+		<g:Label ui:field="name" addStyleNames="{style.selectRosterItemWidgetDiv} name"></g:Label>
+		<g:Label ui:field="jid" addStyleNames="{style.selectRosterItemWidgetDiv} hablar-lightColor jid"></g:Label>
+		<g:Label ui:field="status" addStyleNames="{style.selectRosterItemWidgetDiv} status"></g:Label>
 	</g:HTMLPanel>
-</ui:UiBinder> 
+</ui:UiBinder>

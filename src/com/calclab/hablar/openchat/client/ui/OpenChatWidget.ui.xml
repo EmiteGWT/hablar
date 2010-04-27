@@ -12,7 +12,7 @@
 			<p>
 				<label ui:field="jabberIdLabel">Jabber ID:</label>
 				<g:TextBox ui:field="jabberId"></g:TextBox>
-				<g:Label ui:field="jabberIdError" addStyleNames="error"></g:Label>
+				<g:Label ui:field="jabberIdError" addStyleNames="hablar-errorColor"></g:Label>
 			</p>
 			<p><g:CheckBox ui:field="addToRoster">Add to roster</g:CheckBox></p>
 			<div class="actions hablar-topDefaultBordered">

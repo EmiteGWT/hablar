@@ -5,14 +5,33 @@
         @sprite .userAdd {
             gwt-image: 'buddy';
         }
+        .userWidget {
+		    width: 100%;
+		    overflow: hidden;
+		    padding: 2px 0;
+		    cursor: default;
+        }
+        .userWidgetItem {
+		    float: left;
+		    margin-right: 5px;
+        }
+        .userWidgetIcon {
+		    margin: 0 5px;
+        }
+        .userWidgetMenu {
+		    float: right;
+		    margin-right: 0;
+		    margin-left: 5px;
+		    cursor: pointer;
+        }
     </ui:style>
 
     <ui:image field="buddy" src="buddy-small.png"></ui:image>
 
-    <g:HTMLPanel addStyleNames="hablar-SearchResultItemWidget hablar-bottomLightBordered">
-        <g:Label addStyleNames="icon {style.userAdd}" ui:field="buddyIcon"></g:Label>
-        <g:Label ui:field="name" addStyleNames="name">Result</g:Label>
-        <g:Label ui:field="jid" addStyleNames="jid">JID</g:Label>
-        <g:Label ui:field="menu" addStyleNames="menu"></g:Label>
+    <g:HTMLPanel addStyleNames="{style.userWidget} hablar-SearchResultItemWidget hablar-bottomLightBordered">
+        <g:Label addStyleNames="{style.userWidgetItem} {style.userWidgetIcon} {style.userAdd}" ui:field="buddyIcon"></g:Label>
+        <g:Label ui:field="name" addStyleNames="{style.userWidgetItem} name">Result</g:Label>
+        <g:Label ui:field="jid" addStyleNames="{style.userWidgetItem} hablar-lightColor">JID</g:Label>
+        <g:Label ui:field="menu" addStyleNames="{style.userWidgetMenu}"></g:Label>
     </g:HTMLPanel>
 </ui:UiBinder>

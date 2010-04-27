@@ -2,12 +2,26 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
-		
+		.groupSelectorWidget {
+		    width: 100%;
+		    overflow: hidden;
+		    height: 2em;
+		}
+		.groupSelectorWidgetDiv {
+		    float: left;
+		    margin-right: 3px;
+		}
+		.groupSelectorWidgetInput {
+		    float: left;
+		    padding: 2px;
+		    margin-right: 3px;
+		    width: 90%;
+		}
 	</ui:style>
-	<g:HTMLPanel addStyleNames="hablar-GroupSelectorWidget">
-		<g:CheckBox ui:field="select" addStyleNames="select"></g:CheckBox>
-		<g:Label ui:field="icon" addStyleNames="icon"></g:Label>
-		<g:Label ui:field="staticName" addStyleNames="name"></g:Label>
-		<g:TextBox ui:field="editableName" addStyleNames="name" />
+	<g:HTMLPanel addStyleNames="{style.groupSelectorWidget}">
+		<g:CheckBox ui:field="select" addStyleNames="{style.groupSelectorWidgetDiv} select"></g:CheckBox>
+		<g:Label ui:field="icon" addStyleNames="{style.groupSelectorWidgetDiv} icon"></g:Label>
+		<g:Label ui:field="staticName" addStyleNames="{style.groupSelectorWidgetDiv} hablar-darkColor name"></g:Label>
+		<g:TextBox ui:field="editableName" styleName="{style.groupSelectorWidgetInput} name" />
 	</g:HTMLPanel>
-</ui:UiBinder> 
+</ui:UiBinder>
