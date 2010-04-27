@@ -19,7 +19,7 @@
 				</p>
 				<br/>
 				<label ui:field="groupListLabel">Roster Groups:</label>
-				<g:FlowPanel ui:field="groupList" addStyleNames="{style.wideArea} hablar-lightBackground"></g:FlowPanel>
+				<g:FlowPanel ui:field="groupList" addStyleNames="{style.wideArea} hablar-clearBackground"></g:FlowPanel>
 				<p>
 					<g:Button ui:field="newGroup">New group</g:Button>
 				</p>
