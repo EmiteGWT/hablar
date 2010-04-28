@@ -7,8 +7,7 @@
 		    overflow: hidden;
 	    }
   </ui:style>
-  <g:ScrollPanel ui:field="scroll" height="100%"
-    addStyleNames="hablar-defaultBordered">
+  <g:ScrollPanel ui:field="scroll" addStyleNames="hablar-defaultBordered">
     <g:HTMLPanel addStyleNames="hablar-OpenRoomWidget">
       <div class="form">
         <h2>
