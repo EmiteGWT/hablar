@@ -7,6 +7,7 @@
     <inherits name='com.calclab.hablar.roster.HablarRoster' />
     <inherits name='com.calclab.hablar.search.HablarSearch' />
     <inherits name='com.calclab.hablar.signals.HablarSignals' />
+    <inherits name='com.calclab.hablar.signals.sound.HablarSoundSignals' />
     <inherits name='com.calclab.hablar.editbuddy.HablarEditBuddy' />
     <inherits name='com.calclab.hablar.openchat.HablarOpenChat' />
     <inherits name='com.calclab.hablar.dock.HablarDock' />

@@ -22,6 +22,7 @@ public class HablarConfig {
 	config.hasChat = PageAssist.isMetaTrue("hablar.hasChats");
 	config.hasVCard = PageAssist.isMetaTrue("hablar.hasVCard");
 	config.hasCopyToClipboard = PageAssist.isMetaTrue("hablar.hasCopyToClipboard");
+	config.hasSound = PageAssist.isMetaTrue("hablar.hasSound");
 
 	config.dockRoster = PageAssist.getMeta("hablar.dockRoster");
 
@@ -39,6 +40,20 @@ public class HablarConfig {
 	config.rosterConfig = RosterConfig.getFromMeta();
 	config.searchConfig = SearchConfig.getFromMeta();
 	return config;
+    }
+
+    private static void createTabHeaderSize(final HablarConfig config) {
+	Integer trim = null;
+	final String trimString = PageAssist.getMeta("hablar.tabHeaderTrim");
+	if (trimString != null) {
+	    try {
+		trim = Integer.decode(trimString);
+	    } catch (final NumberFormatException e) {
+		// Ignore it.
+	    }
+	}
+	config.tabHeaderSize = TabHeaderSize.create(PageAssist.getMeta("hablar.tabHeaderHeight"), PageAssist
+		.getMeta("hablar.tabHeaderWidth"), trim);
     }
 
     /**
@@ -106,17 +121,8 @@ public class HablarConfig {
      */
     public boolean hasVCard = true;
 
-    private static void createTabHeaderSize(final HablarConfig config) {
-	Integer trim = null;
-	String trimString = PageAssist.getMeta("hablar.tabHeaderTrim");
-	if (trimString != null) {
-	    try {
-		trim = Integer.decode(trimString);
-	    } catch (NumberFormatException e) {
-		// Ignore it.
-	    }
-	}
-	config.tabHeaderSize = TabHeaderSize.create(PageAssist.getMeta("hablar.tabHeaderHeight"), PageAssist
-		.getMeta("hablar.tabHeaderWidth"), trim);
-    }
+    /**
+     * Install SoundSignalModule
+     */
+    public boolean hasSound = true;
 }

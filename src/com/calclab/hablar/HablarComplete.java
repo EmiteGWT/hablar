@@ -15,6 +15,7 @@ import com.calclab.hablar.roster.client.HablarRoster;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.search.client.HablarSearch;
 import com.calclab.hablar.signals.client.HablarSignals;
+import com.calclab.hablar.signals.sound.client.HablarSoundSignals;
 import com.calclab.hablar.user.client.HablarUser;
 import com.calclab.hablar.user.client.UserPage;
 import com.calclab.hablar.vcard.client.HablarVCard;
@@ -62,6 +63,10 @@ public class HablarComplete {
 
 	if (config.hasSignals) {
 	    HablarSignals.install(hablar);
+	}
+
+	if (config.hasSound) {
+	    HablarSoundSignals.install(hablar);
 	}
 
 	if (config.hasCopyToClipboard) {
