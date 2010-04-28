@@ -9,9 +9,8 @@ import com.google.gwt.core.client.EntryPoint;
 
 public class HablarSoundSignals implements EntryPoint {
 
-    public static void install(final Hablar hablar) {
-	final String prefix = "com.calclab.hablar.signals.sound.HablarSoundSignals/";
-	final SoundManager soundManager = new SoundManager(prefix + "click.wav");
+    public static void install(final Hablar hablar, final SoundSignalsConfig config) {
+	final SoundManager soundManager = new SoundManager(config);
 
 	final HablarEventBus eventBus = hablar.getEventBus();
 	eventBus.addHandler(UserMessageEvent.TYPE, new UserMessageHandler() {
@@ -22,7 +21,7 @@ public class HablarSoundSignals implements EntryPoint {
     }
 
     public static void install(final HablarWidget widget) {
-	install(widget.getHablar());
+	install(widget.getHablar(), SoundSignalsConfig.getFromMeta());
     }
 
     @Override

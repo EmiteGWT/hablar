@@ -7,6 +7,7 @@ import com.calclab.hablar.core.client.pages.tabs.TabsLayout.TabHeaderSize;
 import com.calclab.hablar.rooms.client.HablarRoomsConfig;
 import com.calclab.hablar.roster.client.RosterConfig;
 import com.calclab.hablar.search.client.SearchConfig;
+import com.calclab.hablar.signals.sound.client.SoundSignalsConfig;
 
 public class HablarConfig {
 
@@ -39,6 +40,7 @@ public class HablarConfig {
 	config.roomsConfig = HablarRoomsConfig.getFromMeta();
 	config.rosterConfig = RosterConfig.getFromMeta();
 	config.searchConfig = SearchConfig.getFromMeta();
+	config.soundConfig = SoundSignalsConfig.getFromMeta();
 	return config;
     }
 
@@ -125,4 +127,6 @@ public class HablarConfig {
      * Install SoundSignalModule
      */
     public boolean hasSound = true;
+
+    public SoundSignalsConfig soundConfig = new SoundSignalsConfig();
 }

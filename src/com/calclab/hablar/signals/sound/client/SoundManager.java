@@ -7,12 +7,14 @@ import com.google.gwt.core.client.GWT;
 public class SoundManager {
     private final Sound sound;
 
-    public SoundManager(final String filePath) {
+    public SoundManager(final SoundSignalsConfig config) {
 	final SoundController soundController = new SoundController();
-	soundController.setDefaultVolume(50);
+	soundController.setDefaultVolume(config.defaultVolume);
 
-	final int lastDotIndex = filePath.lastIndexOf('.') + 1;
-	final String extension = filePath.substring(lastDotIndex);
+	final String fileUrl = config.fileUrl;
+
+	final int lastDotIndex = fileUrl.lastIndexOf('.') + 1;
+	final String extension = fileUrl.substring(lastDotIndex);
 
 	String mimeTypeAudioMpeg = null;
 	if (extension.equals("mp3")) {
@@ -20,7 +22,7 @@ public class SoundManager {
 	} else if (extension.equals("wav")) {
 	    mimeTypeAudioMpeg = Sound.MIME_TYPE_AUDIO_X_WAV;
 	}
-	sound = mimeTypeAudioMpeg != null ? soundController.createSound(mimeTypeAudioMpeg, filePath) : null;
+	sound = mimeTypeAudioMpeg != null ? soundController.createSound(mimeTypeAudioMpeg, fileUrl) : null;
     }
 
     public void play() {

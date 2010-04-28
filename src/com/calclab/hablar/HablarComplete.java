@@ -66,7 +66,7 @@ public class HablarComplete {
 	}
 
 	if (config.hasSound) {
-	    HablarSoundSignals.install(hablar);
+	    HablarSoundSignals.install(hablar, config.soundConfig);
 	}
 
 	if (config.hasCopyToClipboard) {
