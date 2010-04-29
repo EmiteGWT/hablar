@@ -86,6 +86,10 @@ public class UnattendedPresenter {
 
     protected void togglePageBlink(final Page<?> page, final boolean on) {
 	// TODO This is non-ideal. Need to come up with a better way of doing this.
+
+	if((page.getState() == null) || (page.getState().getExternalState() == null))
+	    return;
+	
 	if (page.getState().getExternalState().startsWith("unattended")) {
 	    if (on) {
 		page.getState().setExternalState("unattended blinkOn");
