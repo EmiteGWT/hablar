@@ -22,3 +22,7 @@
 .hablar-Emoticon span {
 	display: none;
 }
+
+.hablar-Header.unattended.blinkOn {
+    background-color: #3399cc;
+}
