@@ -77,7 +77,28 @@ public class UnattendedPresenter {
 	final Page<?> page = event.getPage();
 	final ChangeType type = event.getChangeType();
 	final String externalState = type == ChangeType.added ? "unattended" : null;
+
 	page.getState().setExternalState(externalState);
+	if (type == ChangeType.added) {
+	    togglePageBlink(page, true);
+	}
+    }
+
+    protected void togglePageBlink(final Page<?> page, final boolean on) {
+	// TODO This is non-ideal. Need to come up with a better way of doing this.
+	if (page.getState().getExternalState().startsWith("unattended")) {
+	    if (on) {
+		page.getState().setExternalState("unattended blinkOn");
+	    } else {
+		page.getState().setExternalState("unattended");
+	    }
+
+	    new Timer() {
+		public void run() {
+		    togglePageBlink(page, !on);
+		}
+	    }.schedule(BLINK_TIME);
+	}
     }
 
     protected void stopTitleChange() {

@@ -82,8 +82,13 @@ input[disabled] {
 }
 
 .hablar-Header.unattended {
-    color: #c00;
+    color: #cc0000;
     font-weight: bold;
+}
+
+.hablar-Header.unattended.blinkOn {
+    color: #000000;
+    background-color: highlight;
 }
 
 /** Classes for borders **/
