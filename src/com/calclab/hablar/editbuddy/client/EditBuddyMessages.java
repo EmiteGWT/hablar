@@ -8,7 +8,7 @@ public interface EditBuddyMessages extends Messages {
     @DefaultMessage("Change")
     String acceptAction();
 
-    @DefaultMessage("Change")
+    @DefaultMessage("Cancel")
     String cancelAction();
 
     @DefaultMessage("Change buddy nickname")
