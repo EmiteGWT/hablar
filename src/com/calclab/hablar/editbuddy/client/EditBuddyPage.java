@@ -52,6 +52,7 @@ public class EditBuddyPage extends PagePresenter<EditBuddyDisplay> {
 		requestVisibility(Visibility.hidden);
 	    }
 	});
+	/*
 	display.getEnterAction().addChangeHandler(new ChangeHandler() {
 	    @Override
 	    public void onChange(final ChangeEvent event) {
@@ -59,6 +60,7 @@ public class EditBuddyPage extends PagePresenter<EditBuddyDisplay> {
 		requestVisibility(Visibility.hidden);
 	    }
 	});
+	*/
     }
 
     private void updateCurrentItem() {
