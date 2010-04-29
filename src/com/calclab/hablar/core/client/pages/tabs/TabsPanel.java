@@ -3,6 +3,7 @@ package com.calclab.hablar.core.client.pages.tabs;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
@@ -421,16 +422,24 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
 	if (selectedIndex != -1) {
 	    Widget child = children.get(selectedIndex);
 	    Element container = panel.getWidgetContainerElement(child);
-	    container.getStyle().setDisplay(Display.NONE);
-	    child.setVisible(false);
+
+//	    container.getStyle().setDisplay(Display.NONE);
+	    container.getStyle().setVisibility(com.google.gwt.dom.client.Style.Visibility.HIDDEN);
+	    
+//	    child.setVisible(false);
+	    child.getElement().getStyle().setVisibility(com.google.gwt.dom.client.Style.Visibility.HIDDEN);
+	    
 	    tabs.get(selectedIndex).setSelected(false);
 	}
 
 	Widget child = children.get(index);
 	Element container = panel.getWidgetContainerElement(child);
 	layoutChild(child);
-	container.getStyle().clearDisplay();
+//	container.getStyle().clearDisplay();
+	container.getStyle().setVisibility(com.google.gwt.dom.client.Style.Visibility.VISIBLE);
+	
 	child.setVisible(true);
+	child.getElement().getStyle().setVisibility(com.google.gwt.dom.client.Style.Visibility.VISIBLE);
 	final Tab tab = tabs.get(index);
 	tab.setSelected(true);
 	scroll.ensureVisible(tab);
@@ -517,7 +526,9 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
     private void layoutChild(Widget child) {
 	panel.setWidgetLeftRight(child, 0, Unit.PX, 0, Unit.PX);
 	panel.setWidgetTopBottom(child, barHeight, barUnit, 0, Unit.PX);
-	panel.getWidgetContainerElement(child).getStyle().setDisplay(Display.NONE);
-	child.setVisible(false);
+//	panel.getWidgetContainerElement(child).getStyle().setDisplay(Display.NONE);
+	panel.getWidgetContainerElement(child).getStyle().setVisibility(com.google.gwt.dom.client.Style.Visibility.HIDDEN);
+	child.getElement().getStyle().setVisibility(com.google.gwt.dom.client.Style.Visibility.HIDDEN);
+//	child.setVisible(false);
     }
 }
