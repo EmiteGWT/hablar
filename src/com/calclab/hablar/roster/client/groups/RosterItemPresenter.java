@@ -62,7 +62,14 @@ public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
 
     public void setItem(final RosterItem item) {
 	this.item = item;
-	display.getName().setText(item.getName());
+	
+	String name = item.getName();
+	
+	if(name == null) {
+	    name = item.getJID().getShortName();
+	}
+	
+	display.getName().setText(name);
 	display.getJid().setText(item.getJID().toString());
 	final String status = item.getStatus();
 	final boolean hasStatus = status != null && status.trim().length() > 0;
