@@ -139,12 +139,17 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
     }
 
     private String getName(final XmppURI fromURI) {
-	final String name;
+	String name = null;
 	final Roster roster = Suco.get(Roster.class);
 	final RosterItem itemByJID = roster.getItemByJID(fromURI);
+	
+	// We will try and get the name from the item
 	if (itemByJID != null) {
 	    name = itemByJID.getName();
-	} else {
+	}
+	
+	// Otherwise we will use the jid
+	if(name == null) {
 	    name = fromURI.getShortName();
 	}
 	return name;

@@ -92,10 +92,17 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	final RosterItemDisplay itemDisplay = display.newRosterItemDisplay(Idify.id(group.getName()), Idify.id(item
 		.getJID()));
 	String title;
+	
+	String nameOrJid = item.getName();
+	
+	if(nameOrJid == null) {
+	    nameOrJid = item.getJID().getShortName();
+	}
+	
 	if (rosterConfig.oneClickChat) {
-	    title = i18n().clickToChatTooltip(item.getName());
+	    title = i18n().clickToChatTooltip(nameOrJid);
 	} else {
-	    title = i18n().startChatTooltip(item.getName());
+	    title = i18n().startChatTooltip(nameOrJid);
 	}
 	itemDisplay.asWidget().setTitle(title);
 	final RosterItemPresenter presenter = new RosterItemPresenter(group.getName(), itemMenu, itemDisplay,
