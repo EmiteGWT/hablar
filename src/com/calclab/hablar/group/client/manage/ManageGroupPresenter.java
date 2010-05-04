@@ -8,6 +8,7 @@ import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.validators.TextValidator;
 import com.calclab.hablar.core.client.validators.Validators;
+import com.calclab.hablar.group.client.GroupMessages;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -15,8 +16,17 @@ import com.google.gwt.event.dom.client.ClickHandler;
 public class ManageGroupPresenter extends PagePresenter<ManageGroupDisplay> {
 
     private TextValidator groupNameValidator;
+    private static GroupMessages groupMessages;
 
-    public ManageGroupPresenter(HablarEventBus eventBus, final ManageGroupDisplay display) {
+    public static GroupMessages i18n() {
+	return groupMessages;
+    }
+
+    public static void setMessages(GroupMessages groupMessages) {
+	ManageGroupPresenter.groupMessages = groupMessages;
+    }
+
+    public ManageGroupPresenter(HablarEventBus eventBus, final ManageGroupDisplay display, String pageTitle) {
 	super("ManageGroup", eventBus, display);
 
 	display.getCancel().addClickHandler(new ClickHandler() {
@@ -40,9 +50,10 @@ public class ManageGroupPresenter extends PagePresenter<ManageGroupDisplay> {
 		requestVisibility(Visibility.hidden);
 	    }
 	});
+	display.setPageTitle(pageTitle);
 	groupNameValidator = new TextValidator(display.getGroupNameKeys(), display.getGroupName(), display
 		.getGroupNameError(), display.getAcceptEnabled());
-	groupNameValidator.add(Validators.notEmpty("The group name cannot be empty"));
+	groupNameValidator.add(Validators.notEmpty(i18n().groupNameEmptyErrorMessage()));
     }
 
     @Override
@@ -54,6 +65,4 @@ public class ManageGroupPresenter extends PagePresenter<ManageGroupDisplay> {
 	}
 	groupNameValidator.validate();
     }
-
-
 }

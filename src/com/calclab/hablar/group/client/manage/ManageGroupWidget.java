@@ -7,9 +7,12 @@ import java.util.List;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.ui.selectionlist.DoubleList;
 import com.calclab.hablar.core.client.validators.HasState;
+import com.calclab.hablar.group.client.GroupMessages;
 import com.calclab.hablar.group.client.userlist.RosterItemSelectable;
 import com.calclab.hablar.roster.client.groups.RosterItemWidget;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.LabelElement;
+import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -24,12 +27,27 @@ import com.google.gwt.user.client.ui.Widget;
 public class ManageGroupWidget extends Composite implements ManageGroupDisplay {
 
     private static ManageGroupWidgetUiBinder uiBinder = GWT.create(ManageGroupWidgetUiBinder.class);
+    private static GroupMessages groupMessages;
+
+    public static GroupMessages i18n() {
+	return groupMessages;
+    }
+
+    public static void setMessages(GroupMessages groupMessages) {
+	ManageGroupWidget.groupMessages = groupMessages;
+    }
+
+    @UiField
+    SpanElement title;
 
     @UiField
     TextBox groupName;
 
     @UiField
     Label groupNameError;
+
+    @UiField
+    LabelElement groupNameLabel, userListLabel;
 
     @UiField
     Button accept, cancel;
@@ -42,6 +60,16 @@ public class ManageGroupWidget extends Composite implements ManageGroupDisplay {
 
     public ManageGroupWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
+	groupNameLabel.setInnerText(i18n().groupNameLabelText());
+	userListLabel.setInnerText(i18n().usersLabelText());
+	accept.setText(i18n().acceptAction());
+	cancel.setText(i18n().cancelAction());
+	selectionList.setAvailableLabelText(i18n().availableUsersLabelText());
+	selectionList.setSelectedLabelText(i18n().selectedUsersLabelText());
+	selectionList.setSelectAllTooltip(i18n().selectAllTooltip());
+	selectionList.setSelectSomeTooltip(i18n().selectSomeTooltip());
+	selectionList.setDeselectAllTooltip(i18n().deselectAllTooltip());
+	selectionList.setDeselectSomeTooltip(i18n().deselectSomeTooltip());
     }
 
     @Override
@@ -111,5 +139,10 @@ public class ManageGroupWidget extends Composite implements ManageGroupDisplay {
     @Override
     public HasText getGroupNameError() {
 	return groupNameError;
+    }
+
+    @Override
+    public void setPageTitle(String title) {
+	this.title.setInnerText(title);
     }
 }

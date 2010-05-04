@@ -30,4 +30,6 @@ public interface ManageGroupDisplay extends Display {
     Collection<RosterItem> getSelectedItems();
 
     HasState<Boolean> getAcceptEnabled();
+
+    void setPageTitle(String title);
 }

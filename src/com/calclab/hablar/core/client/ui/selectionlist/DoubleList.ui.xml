@@ -17,10 +17,10 @@
 	</ui:style>
 	<g:LayoutPanel>
 		<g:layer top="0.2em" height="1.5em" left="0" width="45%">
-			<g:Label addStyleNames="{style.labelAlign}">Available</g:Label>
+			<g:Label ui:field="availableLabel" addStyleNames="{style.labelAlign}">Available</g:Label>
 		</g:layer>
 		<g:layer top="0.2em" height="1.5em" left="55%" width="45%">
-			<g:Label addStyleNames="{style.labelAlign}">Selected</g:Label>
+			<g:Label ui:field="selectedLabel" addStyleNames="{style.labelAlign}">Selected</g:Label>
 		</g:layer>
 		<g:layer top="1.7em" bottom="0" left="0" width="45%">
 			<hs:SelectionList ui:field="availableList" addStyleNames="hablar-lightBordered" />

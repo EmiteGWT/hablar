@@ -13,6 +13,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -24,6 +25,9 @@ import com.google.gwt.user.client.ui.Widget;
  * Between them there are four buttons to command the movement between the two lists.
  */
 public class DoubleList extends Composite {
+
+    @UiField
+    Label availableLabel, selectedLabel;
 
     @UiField
     SelectionList availableList, selectedList;
@@ -96,5 +100,29 @@ public class DoubleList extends Composite {
 
     public List<Object> getSelectedItems() {
 	return selectedList.getItems();
+    }
+
+    public void setAvailableLabelText(String text) {
+	availableLabel.setText(text);
+    }
+
+    public void setSelectedLabelText(String text) {
+	selectedLabel.setText(text);
+    }
+
+    public void setSelectAllTooltip(String text) {
+	selectAll.setTitle(text);
+    }
+
+    public void setSelectSomeTooltip(String text) {
+	selectSome.setTitle(text);
+    }
+
+    public void setDeselectAllTooltip(String text) {
+	deselectAll.setTitle(text);
+    }
+
+    public void setDeselectSomeTooltip(String text) {
+	deselectSome.setTitle(text);
     }
 }
