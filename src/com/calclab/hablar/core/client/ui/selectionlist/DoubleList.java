@@ -78,15 +78,6 @@ public class DoubleList extends Composite {
 	    }
 	});
     }
-//
-//    public void initialize(Collection<Selectable> allSelectables, Collection<Selectable> selectedSelectables) {
-//	availableList.clear();
-//	selectedList.clear();
-//	Set<Selectable> availableSelectables = new TreeSet<Selectable>(allSelectables);
-//	availableSelectables.removeAll(selectedSelectables);
-//	availableList.addAll(availableSelectables);
-//	selectedList.addAll(selectedSelectables);
-//    }
 
     public void add(Selectable selectable) {
 	availableList.add(selectable);
