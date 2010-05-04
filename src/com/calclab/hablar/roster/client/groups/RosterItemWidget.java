@@ -1,7 +1,9 @@
 package com.calclab.hablar.roster.client.groups;
 
+import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.Idify;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -33,6 +35,19 @@ public class RosterItemWidget extends Composite implements RosterItemDisplay {
 	self.ensureDebugId(Idify.id("RosterItemWidget", groupId, itemId));
 	menu.addStyleName(HablarIcons.get(IconType.menu));
 	menu.ensureDebugId(Idify.id("RosterItemWidget", groupId, itemId, "roster-menu"));
+    }
+
+    public RosterItemWidget(final String groupId, final RosterItem item) {
+	this(groupId, Idify.id(item.getJID()));
+	jid.setText(item.getJID().toString());
+	name.setText(item.getName());
+	final String status = item.getStatus();
+	final boolean hasStatus = status != null && status.trim().length() > 0;
+	if (hasStatus) {
+	    this.status.setText(status);
+	}
+	this.status.setVisible(hasStatus);
+	setIcon(PresenceIcon.getIcon(item.isAvailable(), item.getShow()));
     }
 
     @Override
@@ -79,4 +94,8 @@ public class RosterItemWidget extends Composite implements RosterItemDisplay {
 	status.setVisible(visible);
     }
 
+    @Override
+    public void setMenuVisible(final boolean visible) {
+	menu.setVisible(visible);
+    }
 }

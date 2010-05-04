@@ -19,4 +19,6 @@ public interface RosterItemDisplay extends Display {
     void setIcon(String iconStyle);
 
     void setStatusVisible(boolean visible);
+
+    void setMenuVisible(boolean visible);
 }

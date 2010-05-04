@@ -19,6 +19,14 @@
 	background-color: black;
 }
 
+.hablar-selectedBackground {
+	background-color: highlight;
+}
+
+.hablar-selectedBackground div.hablar-RosterItemWidget:hover {
+    background-color: transparent;
+}
+
 /** Text colors **/
 .hablar-clearColor {
     color: white;

@@ -6,7 +6,7 @@
 		.active {
 			background-color: #EEEEEE;
 		}
-		
+
 		.inactive {
 			background-color: white;
 		}
@@ -17,39 +17,39 @@
 			@sprite .buddyIcon {
 				gwt-image: 'buddy';
 			}
-			
+
 			@sprite .buddyIconOn {
 				gwt-image: 'buddyOn';
 			}
-			
+
 			@sprite .buddyIconOff {
 				gwt-image: 'buddyOff';
 			}
-			
+
 			@sprite .buddyIconDnd {
 				gwt-image: 'buddyDnd';
 			}
-			
+
 			@sprite .buddyIconWait {
 				gwt-image: 'buddyWait';
 			}
-			
+
 			@sprite .rosterIcon {
 				gwt-image: 'rosterIcon';
 			}
-			
+
 			@sprite .menuIcon {
 				gwt-image: 'menuIcon';
 			}
-			
+
 			@sprite .chatIcon {
 				gwt-image: 'chatIcon';
 			}
-			
+
 			@sprite .chatAddIcon {
 				gwt-image: 'chatAddIcon';
 			}
-			
+
 			@sprite .searchIcon {
 				gwt-image: 'searchIcon';
 			}
@@ -64,24 +64,28 @@
             @sprite .closeIcon {
                 gwt-image: 'closeIcon';
             }
-            
+
             @sprite .buddyAddIcon {
                 gwt-image: 'buddyAddIcon';
             }
-            
+
             @sprite .consoleIcon {
                 gwt-image: 'consoleIcon';
             }
-            
+
             @sprite .loadingIcon {
                 gwt-image: 'loadingIcon';
             }
-            
+
             @sprite .groupChatIcon {
                 gwt-image: 'groupChatIcon';
             }
             @sprite .clipboardIcon {
                 gwt-image: 'clipboardIcon';
+            }
+
+            @sprite .groupAddIcon {
+                gwt-image: 'groupAddIcon';
             }
 		</ui:style>
 
@@ -103,6 +107,7 @@
 	<ui:image field="loadingIcon" src="png/loading.gif"></ui:image>
 	<ui:image field="groupChatIcon" src="jpg/group-chat.jpg"></ui:image>
 	<ui:image field="clipboardIcon" src="jpg/clipboard.jpg"></ui:image>
+	<ui:image field="groupAddIcon" src="jpg/group-add.jpg"></ui:image>
 
 	<g:SimplePanel></g:SimplePanel>
-</ui:UiBinder> 
+</ui:UiBinder>

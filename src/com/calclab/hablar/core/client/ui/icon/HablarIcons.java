@@ -2,14 +2,14 @@ package com.calclab.hablar.core.client.ui.icon;
 
 /**
  * A class to retrieve, mostly, default icons
- * 
+ *
  * <pre>
  * HablarStyles.get(IconType.buddy);
  * </pre>
  */
 public class HablarIcons {
     public static enum IconType {
-	buddy, buddyDnd, buddyOff, buddyOn, buddyWait, roster, menu, chat, chatAdd, search, on, off, close, buddyAdd, console, loading, groupChat, clipboard
+	buddy, buddyDnd, buddyOff, buddyOn, buddyWait, roster, menu, chat, chatAdd, search, on, off, close, buddyAdd, console, loading, groupChat, clipboard, groupAdd
     }
 
     public static enum StyleType {

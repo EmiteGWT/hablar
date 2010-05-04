@@ -49,6 +49,7 @@ public class DefaultHablarIcons extends HablarIcons {
 
 	String searchIcon();
 
+	String groupAddIcon();
     }
 
     interface Styles extends CssResource {
@@ -107,6 +108,8 @@ public class DefaultHablarIcons extends HablarIcons {
 	    return icons.groupChatIcon();
 	case clipboard:
 	    return icons.clipboardIcon();
+	case groupAdd:
+	    return icons.groupAddIcon();
 	}
 	return null;
     }

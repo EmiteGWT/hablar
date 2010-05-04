@@ -1,0 +1,40 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:hs="urn:import:com.calclab.hablar.core.client.ui.selectionlist">
+	<ui:style>
+		/* Add CSS here. See the GWT docs on UI Binder for more details */
+		.important {
+			font-weight: bold;
+		}
+		.labelAlign {
+			text-align: center;
+		}
+		.buttonStyle {
+			display: block;
+			width: 100%;
+		}
+	</ui:style>
+	<g:LayoutPanel>
+		<g:layer top="0.2em" height="1.5em" left="0" width="45%">
+			<g:Label addStyleNames="{style.labelAlign}">Available</g:Label>
+		</g:layer>
+		<g:layer top="0.2em" height="1.5em" left="55%" width="45%">
+			<g:Label addStyleNames="{style.labelAlign}">Selected</g:Label>
+		</g:layer>
+		<g:layer top="1.7em" bottom="0" left="0" width="45%">
+			<hs:SelectionList ui:field="availableList" addStyleNames="hablar-lightBordered" />
+		</g:layer>
+		<g:layer top="1.7em" bottom="0" left="46%" width="8%">
+			<g:FlowPanel>
+				<g:Button ui:field="selectAll" addStyleNames="{style.buttonStyle}">&gt;&gt;</g:Button>
+				<g:Button ui:field="selectSome" addStyleNames="{style.buttonStyle}">&gt;</g:Button>
+				<g:Button ui:field="deselectSome" addStyleNames="{style.buttonStyle}">&lt;</g:Button>
+				<g:Button ui:field="deselectAll" addStyleNames="{style.buttonStyle}">&lt;&lt;</g:Button>
+			</g:FlowPanel>
+		</g:layer>
+		<g:layer top="1.7em" bottom="0" left="55%" width="45%">
+			<hs:SelectionList ui:field="selectedList" addStyleNames="hablar-lightBordered" />
+		</g:layer>
+	</g:LayoutPanel>
+</ui:UiBinder>

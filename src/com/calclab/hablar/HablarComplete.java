@@ -8,6 +8,7 @@ import com.calclab.hablar.dock.client.DockConfig;
 import com.calclab.hablar.dock.client.HablarDock;
 import com.calclab.hablar.dock.client.DockConfig.Position;
 import com.calclab.hablar.editbuddy.client.HablarEditBuddy;
+import com.calclab.hablar.group.client.HablarGroup;
 import com.calclab.hablar.groupchat.client.HablarGroupChat;
 import com.calclab.hablar.openchat.client.HablarOpenChat;
 import com.calclab.hablar.rooms.client.HablarRooms;
@@ -55,6 +56,7 @@ public class HablarComplete {
 	    HablarOpenChat.install(hablar);
 	    HablarEditBuddy.install(hablar);
 	    HablarRoster.addActions(hablar, roster);
+	    HablarGroup.install(hablar);
 	}
 
 	if (config.hasSearch) {
