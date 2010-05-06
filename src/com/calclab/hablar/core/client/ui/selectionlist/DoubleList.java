@@ -9,10 +9,16 @@ import java.util.Set;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -24,7 +30,7 @@ import com.google.gwt.user.client.ui.Widget;
  * </ul>
  * Between them there are four buttons to command the movement between the two lists.
  */
-public class DoubleList extends Composite {
+public class DoubleList extends Composite implements HasValue<List<Selectable>> {
 
     @UiField
     Label availableLabel, selectedLabel;
@@ -77,6 +83,40 @@ public class DoubleList extends Composite {
 		availableList.addAll(selectables);
 	    }
 	});
+	availableList.addSelectionHandler(new SelectionHandler<Selectable>() {
+
+	    @Override
+	    public void onSelection(SelectionEvent<Selectable> event) {
+		verifyButtons();
+	    }
+	});
+	availableList.addValueChangeHandler(new ValueChangeHandler<List<Selectable>>() {
+
+	    @Override
+	    public void onValueChange(ValueChangeEvent<List<Selectable>> event) {
+		verifyButtons();
+	    }
+	});
+	selectedList.addSelectionHandler(new SelectionHandler<Selectable>() {
+
+	    @Override
+	    public void onSelection(SelectionEvent<Selectable> event) {
+		verifyButtons();
+	    }
+	});
+	selectedList.addValueChangeHandler(new ValueChangeHandler<List<Selectable>>() {
+
+	    @Override
+	    public void onValueChange(ValueChangeEvent<List<Selectable>> event) {
+		verifyButtons();
+		ValueChangeEvent.fire(DoubleList.this, event.getValue());
+	    }
+	});
+    }
+
+    @Override
+    public HandlerRegistration addValueChangeHandler(ValueChangeHandler<List<Selectable>> handler) {
+	return super.addHandler(handler, ValueChangeEvent.getType());
     }
 
     public void add(Selectable selectable) {
@@ -86,11 +126,14 @@ public class DoubleList extends Composite {
     public void clear() {
 	availableList.clear();
 	selectedList.clear();
-
     }
 
     public List<Object> getSelectedItems() {
 	return selectedList.getItems();
+    }
+
+    public List<Selectable> getSelectedSelectables() {
+	return selectedList.getSelectables();
     }
 
     public void setAvailableLabelText(String text) {
@@ -115,5 +158,28 @@ public class DoubleList extends Composite {
 
     public void setDeselectSomeTooltip(String text) {
 	deselectSome.setTitle(text);
+    }
+
+    private void verifyButtons() {
+	selectAll.setEnabled(!availableList.getSelectables().isEmpty());
+	selectSome.setEnabled(!availableList.getSelectedSelectables().isEmpty());
+	deselectAll.setEnabled(!selectedList.getSelectables().isEmpty());
+	deselectSome.setEnabled(!selectedList.getSelectedSelectables().isEmpty());
+    }
+
+    @Override
+    public List<Selectable> getValue() {
+	return getSelectedSelectables();
+    }
+
+    @Override
+    public void setValue(List<Selectable> value) {
+	clear();
+	selectedList.addAll(value);
+    }
+
+    @Override
+    public void setValue(List<Selectable> value, boolean fireEvents) {
+	setValue(value);
     }
 }

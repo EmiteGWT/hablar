@@ -1,21 +1,29 @@
 package com.calclab.hablar.group.client.manage;
 
 import java.util.Collection;
+import java.util.List;
 
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
-import com.calclab.hablar.core.client.validators.TextValidator;
+import com.calclab.hablar.core.client.ui.selectionlist.Selectable;
+import com.calclab.hablar.core.client.validators.CompositeValidatorChecker;
+import com.calclab.hablar.core.client.validators.ListNotEmptyValidator;
 import com.calclab.hablar.core.client.validators.Validators;
 import com.calclab.hablar.group.client.GroupMessages;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.event.dom.client.KeyDownHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.user.client.DeferredCommand;
 
 public class ManageGroupPresenter extends PagePresenter<ManageGroupDisplay> {
 
-    private TextValidator groupNameValidator;
+    private CompositeValidatorChecker groupNameValidator;
     private static GroupMessages groupMessages;
 
     public static GroupMessages i18n() {
@@ -51,9 +59,25 @@ public class ManageGroupPresenter extends PagePresenter<ManageGroupDisplay> {
 	    }
 	});
 	display.setPageTitle(pageTitle);
-	groupNameValidator = new TextValidator(display.getGroupNameKeys(), display.getGroupName(), display
+	groupNameValidator = new CompositeValidatorChecker(display
 		.getGroupNameError(), display.getAcceptEnabled());
-	groupNameValidator.add(Validators.notEmpty(i18n().groupNameEmptyErrorMessage()));
+	groupNameValidator.add(display.getGroupName(), Validators.notEmpty(i18n().groupNameEmptyErrorMessage()));
+	groupNameValidator.add(display.getSelectionList(), new ListNotEmptyValidator<Selectable>(i18n()
+		.selectionEmptyErrorMessage()));
+	display.getGroupNameKeys().addKeyDownHandler(new KeyDownHandler() {
+
+	    @Override
+	    public void onKeyDown(KeyDownEvent event) {
+		DeferredCommand.addCommand(groupNameValidator.getDeferredCommand());
+	    }
+	});
+	display.getSelectionList().addValueChangeHandler(new ValueChangeHandler<List<Selectable>>() {
+
+	    @Override
+	    public void onValueChange(ValueChangeEvent<List<Selectable>> event) {
+		DeferredCommand.addCommand(groupNameValidator.getDeferredCommand());
+	    }
+	});
     }
 
     @Override

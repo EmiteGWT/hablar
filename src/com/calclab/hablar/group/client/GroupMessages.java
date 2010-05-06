@@ -18,6 +18,9 @@ public interface GroupMessages extends Messages {
     @DefaultMessage("The group name cannot be empty")
     String groupNameEmptyErrorMessage();
 
+    @DefaultMessage("The group must have at least one member")
+    String selectionEmptyErrorMessage();
+
     @DefaultMessage("Users:")
     String usersLabelText();
 

@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.ui.selectionlist.DoubleList;
+import com.calclab.hablar.core.client.ui.selectionlist.Selectable;
 import com.calclab.hablar.core.client.validators.HasState;
 import com.calclab.hablar.group.client.GroupMessages;
 import com.calclab.hablar.group.client.userlist.RosterItemSelectable;
@@ -20,6 +21,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
@@ -117,8 +119,13 @@ public class ManageGroupWidget extends Composite implements ManageGroupDisplay {
     }
 
     @Override
-    public HasText getGroupName() {
+    public HasValue<String> getGroupName() {
 	return groupName;
+    }
+
+    @Override
+    public HasValue<List<Selectable>> getSelectionList() {
+	return selectionList;
     }
 
     @Override
