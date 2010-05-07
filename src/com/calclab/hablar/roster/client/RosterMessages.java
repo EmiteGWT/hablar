@@ -5,9 +5,6 @@ import com.google.gwt.i18n.client.LocalizableResource.DefaultLocale;
 
 @DefaultLocale("en")
 public interface RosterMessages extends Messages {
-    @DefaultMessage("Change groups")
-    String changeContactGroups();
-
     @DefaultMessage("Delete group {0} with {1} items. Are you sure?")
     String confirmDeleteGroup(String groupName, String itemCount);
 
@@ -26,24 +23,6 @@ public interface RosterMessages extends Messages {
 
     @DefaultMessage("All contacts")
     String allContactsGroupName();
-
-    @DefaultMessage("Change contact groups")
-    String changeContactGroupsTitle();
-
-    @DefaultMessage("Contact Name:")
-    String contactNameLabelText();
-
-    @DefaultMessage("Roster Groups:")
-    String rosterGroupsLabelText();
-
-    @DefaultMessage("New group")
-    String newGroupAction();
-
-    @DefaultMessage("Accept")
-    String acceptAction();
-
-    @DefaultMessage("Cancel")
-    String cancelAction();
 
     @DefaultMessage("Start chat")
     String startChatAction();

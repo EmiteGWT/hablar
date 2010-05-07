@@ -1,4 +1,4 @@
-package com.calclab.hablar.roster.client.changegroups;
+package com.calclab.hablar.usergroups.client.changegroups;
 
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;

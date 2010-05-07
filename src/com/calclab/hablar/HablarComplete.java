@@ -19,6 +19,7 @@ import com.calclab.hablar.signals.client.HablarSignals;
 import com.calclab.hablar.signals.sound.client.HablarSoundSignals;
 import com.calclab.hablar.user.client.HablarUser;
 import com.calclab.hablar.user.client.UserPage;
+import com.calclab.hablar.usergroups.client.HablarUserGroups;
 import com.calclab.hablar.vcard.client.HablarVCard;
 
 public class HablarComplete {
@@ -55,8 +56,9 @@ public class HablarComplete {
 	if (config.hasRoster) {
 	    HablarOpenChat.install(hablar);
 	    HablarEditBuddy.install(hablar);
+	    HablarUserGroups.install(roster, hablar);
 	    HablarGroup.install(hablar);
-	    HablarRoster.addActions(hablar, roster);
+	    HablarRoster.addActions(roster);
 	}
 
 	if (config.hasSearch) {

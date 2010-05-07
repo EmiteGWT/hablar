@@ -1,4 +1,4 @@
-package com.calclab.hablar.roster.client.changegroups;
+package com.calclab.hablar.usergroups.client.changegroups;
 
 import java.util.ArrayList;
 import java.util.List;

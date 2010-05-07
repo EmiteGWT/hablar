@@ -6,7 +6,6 @@ import com.calclab.emite.im.client.roster.SubscriptionHandler;
 import com.calclab.emite.im.client.roster.SubscriptionHandler.Behaviour;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
-import com.calclab.hablar.roster.client.changegroups.ManageGroupsWidget;
 import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
@@ -45,8 +44,7 @@ public class HablarRoster implements EntryPoint {
 	return roster;
     }
 
-    public static void addActions(final Hablar hablar, final RosterPage roster) {
-	HablarManageGroups.install(roster, hablar);
+    public static void addActions(final RosterPage roster) {
 	roster.addLowPriorityActions();
     }
 
@@ -64,7 +62,6 @@ public class HablarRoster implements EntryPoint {
     public void onModuleLoad() {
 	RosterMessages messages = (RosterMessages) GWT.create(RosterMessages.class);
 	setMessages(messages);
-	ManageGroupsWidget.setMessages(messages);
 	RosterBasicActions.setMessages(messages);
 	RosterGroupPresenter.setMessages(messages);
     }

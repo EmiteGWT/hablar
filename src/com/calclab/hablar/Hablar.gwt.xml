@@ -16,6 +16,7 @@
     <inherits name='com.calclab.hablar.groupchat.HablarGroupChat' />
     <inherits name='com.calclab.hablar.rooms.HablarRooms' />
     <inherits name='com.calclab.hablar.clipboard.HablarClipboard' />
+    <inherits name='com.calclab.hablar.usergroups.HablarUserGroups' />
     <inherits name='com.calclab.hablar.group.HablarGroup' />
 
     <source path='' />

@@ -1,6 +1,6 @@
-package com.calclab.hablar.roster.client.changegroups;
+package com.calclab.hablar.usergroups.client.changegroups;
 
-import com.calclab.hablar.roster.client.RosterMessages;
+import com.calclab.hablar.usergroups.client.UserGroupsMessages;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.LabelElement;
 import com.google.gwt.dom.client.SpanElement;
@@ -16,13 +16,13 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class ManageGroupsWidget extends Composite implements ManageGroupsDisplay {
 
-    private static RosterMessages messages;
+    private static UserGroupsMessages messages;
 
-    public static void setMessages(final RosterMessages messages) {
+    public static void setMessages(final UserGroupsMessages messages) {
 	ManageGroupsWidget.messages = messages;
     }
 
-    public static RosterMessages i18n() {
+    public static UserGroupsMessages i18n() {
 	return messages;
     }
 
