@@ -26,6 +26,9 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * A form to manage a group in the roster.
+ */
 public class ManageGroupWidget extends Composite implements ManageGroupDisplay {
 
     private static ManageGroupWidgetUiBinder uiBinder = GWT.create(ManageGroupWidgetUiBinder.class);
@@ -95,6 +98,14 @@ public class ManageGroupWidget extends Composite implements ManageGroupDisplay {
 	widget.setMenuVisible(false);
 	RosterItemSelectable selectable = new RosterItemSelectable(rosterItem, widget);
 	selectionList.add(selectable);
+    }
+
+    @Override
+    public void addSelectedRosterItem(RosterItem rosterItem) {
+	RosterItemWidget widget = new RosterItemWidget("selection", rosterItem);
+	widget.setMenuVisible(false);
+	RosterItemSelectable selectable = new RosterItemSelectable(rosterItem, widget);
+	selectionList.addSelected(selectable);
     }
 
     @Override

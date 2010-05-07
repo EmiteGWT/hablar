@@ -123,6 +123,10 @@ public class DoubleList extends Composite implements HasValue<List<Selectable>> 
 	availableList.add(selectable);
     }
 
+    public void addSelected(Selectable selectable) {
+	selectedList.add(selectable);
+    }
+
     public void clear() {
 	availableList.clear();
 	selectedList.clear();

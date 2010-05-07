@@ -12,6 +12,9 @@ import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HasValue;
 
+/**
+ * Interface for a form to manage a group in the roster.
+ */
 public interface ManageGroupDisplay extends Display {
 
     HasClickHandlers getApply();
@@ -21,6 +24,8 @@ public interface ManageGroupDisplay extends Display {
     void clearSelectionList();
 
     void addRosterItem(RosterItem rosterItem);
+
+    void addSelectedRosterItem(RosterItem rosterItem);
 
     String getGroupNameText();
 

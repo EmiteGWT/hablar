@@ -8,15 +8,19 @@ import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
+import com.calclab.hablar.group.client.manage.CreateGroupPresenter;
 import com.calclab.hablar.group.client.manage.ManageGroupPresenter;
 import com.calclab.hablar.group.client.manage.ManageGroupWidget;
+import com.calclab.hablar.group.client.manage.ModifyGroupPresenter;
+import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 
 public class HablarGroup implements EntryPoint {
-    protected static final String ACTION_ID = "HablarGroup-createGroup";
+    private static final String ACTION_ID_MODIFY_GROUP = "HablarGroup-modifyGroup";
+    protected static final String ACTION_ID_CREATE_GROUP = "HablarGroup-createGroup";
     private static GroupMessages groupMessages;
 
     public static GroupMessages i18n() {
@@ -24,9 +28,12 @@ public class HablarGroup implements EntryPoint {
     }
 
     public static void install(final Hablar hablar) {
-	final ManageGroupPresenter presenter = new ManageGroupPresenter(hablar.getEventBus(), new ManageGroupWidget(),
+	final CreateGroupPresenter createGrouppresenter = new CreateGroupPresenter(hablar.getEventBus(), new ManageGroupWidget(),
 		i18n().createNewGroup());
-	hablar.addPage(presenter, OverlayContainer.ROL);
+	final ModifyGroupPresenter modifyGroupPresenter = new ModifyGroupPresenter(hablar.getEventBus(), new ManageGroupWidget(),
+		i18n().modifyGroup());
+	hablar.addPage(createGrouppresenter, OverlayContainer.ROL);
+	hablar.addPage(modifyGroupPresenter, OverlayContainer.ROL);
 
 	hablar.addPageAddedHandler(new PageAddedHandler() {
 	    @Override
@@ -34,14 +41,22 @@ public class HablarGroup implements EntryPoint {
 		final RosterPage rosterPage = RosterPresenter.asRoster(event.getPage());
 		if (rosterPage != null) {
 
-		    final String name = i18n().createGroupAction();
 		    final String icon = HablarIcons.get(IconType.groupAdd);
-		    rosterPage.addAction(new SimpleAction<RosterPage>(name, ACTION_ID, icon) {
+		    rosterPage.addAction(new SimpleAction<RosterPage>(i18n().createGroupAction(), ACTION_ID_CREATE_GROUP, icon) {
 			@Override
 			public void execute(final RosterPage page) {
-			    presenter.requestVisibility(Visibility.focused);
+			    createGrouppresenter.requestVisibility(Visibility.focused);
 			}
 		    });
+		    rosterPage.getGroupMenu().addAction(
+			    new SimpleAction<RosterGroupPresenter>(i18n().modifyGroupAction(), ACTION_ID_MODIFY_GROUP) {
+
+				@Override
+				public void execute(RosterGroupPresenter target) {
+				    modifyGroupPresenter.setOldGroupName(target.getGroupName());
+				    modifyGroupPresenter.requestVisibility(Visibility.focused);
+				}
+			    });
 		}
 	    }
 	}, true);

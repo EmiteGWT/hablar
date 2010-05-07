@@ -12,6 +12,12 @@ public interface GroupMessages extends Messages {
     @DefaultMessage("Create a new group")
     String createNewGroup();
 
+    @DefaultMessage("Modify group")
+    String modifyGroupAction();
+
+    @DefaultMessage("Modify group")
+    String modifyGroup();
+
     @DefaultMessage("Group name:")
     String groupNameLabelText();
 

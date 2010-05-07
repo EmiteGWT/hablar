@@ -55,8 +55,8 @@ public class HablarComplete {
 	if (config.hasRoster) {
 	    HablarOpenChat.install(hablar);
 	    HablarEditBuddy.install(hablar);
-	    HablarRoster.addActions(hablar, roster);
 	    HablarGroup.install(hablar);
+	    HablarRoster.addActions(hablar, roster);
 	}
 
 	if (config.hasSearch) {
