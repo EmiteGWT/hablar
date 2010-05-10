@@ -4,6 +4,7 @@
 	<ui:style>
 		.noOverflow {
 			overflow: hidden;
+			cursor: pointer;
 		}
 	</ui:style>
 	<g:ScrollPanel>
