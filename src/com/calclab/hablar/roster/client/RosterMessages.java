@@ -41,4 +41,22 @@ public interface RosterMessages extends Messages {
 
     @DefaultMessage("Delete this group")
     String deleteGroupAction();
+
+    @DefaultMessage("Available users")
+    String availableUsersLabelText();
+
+    @DefaultMessage("Selected users")
+    String selectedUsersLabelText();
+
+    @DefaultMessage("Select all the users")
+    String selectAllTooltip();
+
+    @DefaultMessage("Select the highlighted users")
+    String selectSomeTooltip();
+
+    @DefaultMessage("Remove all the users from the selection")
+    String deselectAllTooltip();
+
+    @DefaultMessage("Remove the highlighted users from the selection")
+    String deselectSomeTooltip();
 }

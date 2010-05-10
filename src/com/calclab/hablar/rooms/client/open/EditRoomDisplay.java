@@ -1,14 +1,17 @@
 package com.calclab.hablar.rooms.client.open;
 
+import java.util.List;
+
 import com.calclab.hablar.core.client.mvp.Display;
+import com.calclab.hablar.core.client.ui.selectionlist.Selectable;
 import com.calclab.hablar.core.client.validators.HasState;
+import com.calclab.hablar.roster.client.selection.RosterItemSelector;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.HasValue;
 
-public interface EditRoomDisplay extends Display {
-
-    void addItem(SelectRosterItemDisplay itemDisplay);
+public interface EditRoomDisplay extends Display, RosterItemSelector {
 
     void clearList();
 
@@ -22,7 +25,9 @@ public interface EditRoomDisplay extends Display {
 
     HasText getMessage();
 
-    HasText getRoomName();
+    HasValue<String> getRoomName();
+
+    HasValue<List<Selectable>> getSelectionList();
 
     HasText getRoomNameError();
 

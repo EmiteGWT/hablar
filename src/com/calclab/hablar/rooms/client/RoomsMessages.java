@@ -57,4 +57,6 @@ public interface RoomsMessages extends Messages {
     @DefaultMessage("Group chat name can''t have white spaces")
     String spacesInGroupChatName();
 
+    @DefaultMessage("The group chat must have at least one member")
+    String selectionEmptyErrorMessage();
 }

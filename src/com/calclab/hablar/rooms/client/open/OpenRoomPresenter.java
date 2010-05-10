@@ -25,7 +25,7 @@ public abstract class OpenRoomPresenter extends EditRoomPresenter {
 	final RoomManager rooms = Suco.get(RoomManager.class);
 	final Session session = Suco.get(Session.class);
 	final XmppURI user = session.getCurrentUser();
-	final String roomName = RoomName.encode(display.getRoomName().getText(), user.getResource());
+	final String roomName = RoomName.encode(display.getRoomName().getValue(), user.getResource());
 	final XmppURI roomUri = XmppURI.uri(roomName, roomsService, user.getNode());
 	final Room room = (Room) rooms.open(roomUri);
 	room.onStateChanged(new Listener<State>() {

@@ -3,27 +3,31 @@ package com.calclab.hablar.rooms.client.open;
 import static com.calclab.hablar.rooms.client.HablarRooms.i18n;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.List;
 
-import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
-import com.calclab.hablar.core.client.validators.TextValidator;
+import com.calclab.hablar.core.client.ui.selectionlist.Selectable;
+import com.calclab.hablar.core.client.validators.CompositeValidatorChecker;
+import com.calclab.hablar.core.client.validators.ListNotEmptyValidator;
 import com.calclab.hablar.core.client.validators.Validators;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.event.dom.client.KeyDownHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.user.client.DeferredCommand;
 
 public abstract class EditRoomPresenter extends PagePresenter<EditRoomDisplay> {
 
-    private final HashMap<XmppURI, SelectRosterItemPresenter> itemsByUri;
-    protected TextValidator roomNameValidator;
+    protected CompositeValidatorChecker roomNameValidator;
 
     public EditRoomPresenter(final String pageType, final HablarEventBus eventBus, final EditRoomDisplay display) {
 	super(pageType, eventBus, display);
-	itemsByUri = new HashMap<XmppURI, SelectRosterItemPresenter>();
 	display.getCancel().addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(final ClickEvent event) {
@@ -39,44 +43,46 @@ public abstract class EditRoomPresenter extends PagePresenter<EditRoomDisplay> {
 	    }
 	});
 
-	roomNameValidator = new TextValidator(display.getRoomNameKeys(), display.getRoomName(), display
+	roomNameValidator = new CompositeValidatorChecker(display
 		.getRoomNameError(), display.getAcceptEnabled());
-	roomNameValidator.add(Validators.notEmpty(i18n().emptyGroupChatName()));
-	// roomNameValidator.add(Validators.hasNotSpaces(i18n().spacesInRoomName()));
-	roomNameValidator.add(Validators.isValidRoomName(i18n().notValidGroupChatName()));
+	roomNameValidator.add(display.getRoomName(), Validators.notEmpty(i18n().emptyGroupChatName()));
+	roomNameValidator.add(display.getRoomName(), Validators.isValidRoomName(i18n().notValidGroupChatName()));
+	roomNameValidator.add(display.getSelectionList(), new ListNotEmptyValidator<Selectable>(i18n()
+		.selectionEmptyErrorMessage()));
+	display.getRoomNameKeys().addKeyDownHandler(new KeyDownHandler() {
+
+	    @Override
+	    public void onKeyDown(KeyDownEvent event) {
+		DeferredCommand.addCommand(roomNameValidator.getDeferredCommand());
+	    }
+	});
+	display.getSelectionList().addValueChangeHandler(new ValueChangeHandler<List<Selectable>>() {
+
+	    @Override
+	    public void onValueChange(ValueChangeEvent<List<Selectable>> event) {
+		DeferredCommand.addCommand(roomNameValidator.getDeferredCommand());
+	    }
+	});
 
     }
 
-    public Collection<SelectRosterItemPresenter> getItems() {
-	return itemsByUri.values();
+    public Collection<RosterItem> getItems() {
+	return display.getSelectedItems();
     }
 
-    public void setItem(final XmppURI uri, final boolean enabled, final boolean selected) {
-	final SelectRosterItemPresenter item = itemsByUri.get(uri);
-	if (item != null) {
-	    item.setEnabled(enabled);
-	    item.setSelected(selected);
-	}
-    }
-
-    public void setItems(final Collection<RosterItem> items, final boolean enabled, final boolean selected) {
+    public void setItems(final Collection<RosterItem> items, final boolean selected) {
 	display.clearList();
-	itemsByUri.clear();
 	for (final RosterItem item : items) {
-	    createItem(item, enabled, selected);
+	    createItem(item, selected);
 	}
     }
 
-    protected void createItem(final RosterItem item, final boolean selectable, final boolean selected) {
-	final SelectRosterItemDisplay itemDisplay = display.createItem();
-	final SelectRosterItemPresenter selectItem = new SelectRosterItemPresenter(item, itemDisplay, selectable);
-	selectItem.setSelected(selected);
-	display.addItem(itemDisplay);
-	itemsByUri.put(item.getJID(), selectItem);
-    }
-
-    protected SelectRosterItemPresenter getItem(final XmppURI uri) {
-	return itemsByUri.get(uri.getJID());
+    protected void createItem(final RosterItem item, final boolean selected) {
+	if (selected) {
+	    display.addSelectedRosterItem(item);
+	} else {
+	    display.addRosterItem(item);
+	}
     }
 
     protected abstract void onAccept();
@@ -90,11 +96,9 @@ public abstract class EditRoomPresenter extends PagePresenter<EditRoomDisplay> {
 
     protected void sendInvitations(final Room room) {
 	final String reasonText = display.getMessage().getText();
-	for (final SelectRosterItemPresenter itemPresenter : getItems()) {
-	    if (itemPresenter.isSelected()) {
-		GWT.log("INVITING: " + itemPresenter.getItem().getJID());
-		room.sendInvitationTo(itemPresenter.getItem().getJID(), reasonText);
-	    }
+	for (final RosterItem item : getItems()) {
+	    GWT.log("INVITING: " + item.getJID());
+	    room.sendInvitationTo(item.getJID(), reasonText);
 	}
     }
 

@@ -10,6 +10,7 @@ import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
 import com.calclab.hablar.roster.client.page.RosterWidget;
+import com.calclab.hablar.roster.client.selection.DoubleListRosterItemSelector;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.EntryPoint;
@@ -64,6 +65,7 @@ public class HablarRoster implements EntryPoint {
 	setMessages(messages);
 	RosterBasicActions.setMessages(messages);
 	RosterGroupPresenter.setMessages(messages);
+	DoubleListRosterItemSelector.setMessages(messages);
     }
 
 }

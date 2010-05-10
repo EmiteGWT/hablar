@@ -24,12 +24,12 @@ public class OpenGroupChatPresenter extends OpenRoomPresenter {
 
     @Override
     protected void onPageOpen() {
-	display.getRoomName().setText(groupName);
+	display.getRoomName().setValue(groupName);
 	display.setPageTitle(i18n().openNewGroupChat());
 	display.setAcceptText(i18n().openNewGroupChatAction());
 
 	final Roster roster = Suco.get(Roster.class);
-	setItems(roster.getItemsByGroup(groupName), false, true);
+	setItems(roster.getItemsByGroup(groupName), true);
 	roomNameValidator.validate();
     }
 

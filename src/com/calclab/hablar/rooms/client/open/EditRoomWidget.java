@@ -1,7 +1,15 @@
 package com.calclab.hablar.rooms.client.open;
 
+import java.util.Collection;
+import java.util.List;
+
+import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.hablar.core.client.ui.selectionlist.DoubleList;
+import com.calclab.hablar.core.client.ui.selectionlist.Selectable;
 import com.calclab.hablar.core.client.validators.HasState;
 import com.calclab.hablar.rooms.client.RoomsMessages;
+import com.calclab.hablar.roster.client.selection.DoubleListRosterItemSelector;
+import com.calclab.hablar.roster.client.selection.RosterItemSelector;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.LabelElement;
 import com.google.gwt.dom.client.SpanElement;
@@ -11,8 +19,8 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
@@ -37,7 +45,7 @@ public class EditRoomWidget extends Composite implements EditRoomDisplay {
     @UiField
     Button accept, cancel;
     @UiField
-    FlowPanel occupantsList;
+    DoubleList selectionList;
     @UiField
     TextBox message, roomName;
     @UiField
@@ -48,22 +56,20 @@ public class EditRoomWidget extends Composite implements EditRoomDisplay {
     @UiField
     SpanElement title;
 
+    private RosterItemSelector selector;
+
     public EditRoomWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
 	roomName.ensureDebugId("InviteToRoomWidget-roomName");
 	message.ensureDebugId("InviteToRoomWidget-message");
 	accept.ensureDebugId("InviteToRoomWidget-invite");
 	cancel.ensureDebugId("InviteToRoomWidget-cancel");
-	occupantsList.ensureDebugId("InviteToRoomWidget-list");
+	selectionList.ensureDebugId("InviteToRoomWidget-list");
+	selector = new DoubleListRosterItemSelector(selectionList);
 	groupChatNameLabel.setInnerText(i18n().groupChatNameLabelText());
 	invitationLabel.setInnerText(i18n().invitationMessageLabelText());
 	occupantsLabel.setInnerText(i18n().occupantsLabelText());
 	cancel.setText(i18n().cancelAction());
-    }
-
-    @Override
-    public void addItem(final SelectRosterItemDisplay itemDisplay) {
-	occupantsList.add(itemDisplay.asWidget());
     }
 
     @Override
@@ -73,7 +79,7 @@ public class EditRoomWidget extends Composite implements EditRoomDisplay {
 
     @Override
     public void clearList() {
-	occupantsList.clear();
+	clearSelectionList();
     }
 
     @Override
@@ -107,8 +113,13 @@ public class EditRoomWidget extends Composite implements EditRoomDisplay {
     }
 
     @Override
-    public HasText getRoomName() {
+    public HasValue<String> getRoomName() {
 	return roomName;
+    }
+
+    @Override
+    public HasValue<List<Selectable>> getSelectionList() {
+	return selectionList;
     }
 
     @Override
@@ -134,5 +145,25 @@ public class EditRoomWidget extends Composite implements EditRoomDisplay {
     @Override
     public void setRoomNameEnabled(final boolean enabled) {
 	roomName.setEnabled(enabled);
+    }
+
+    @Override
+    public void addRosterItem(RosterItem rosterItem) {
+	selector.addRosterItem(rosterItem);
+    }
+
+    @Override
+    public void addSelectedRosterItem(RosterItem rosterItem) {
+	selector.addSelectedRosterItem(rosterItem);
+    }
+
+    @Override
+    public void clearSelectionList() {
+	selector.clearSelectionList();
+    }
+
+    @Override
+    public Collection<RosterItem> getSelectedItems() {
+	return selector.getSelectedItems();
     }
 }

@@ -27,9 +27,9 @@ public class OpenNewRoomPresenter extends OpenRoomPresenter {
     @Override
     protected void onPageOpen() {
 	final String roomName = i18n().groupChatId(roomNumber);
-	display.getRoomName().setText(roomName);
+	display.getRoomName().setValue(roomName);
 	final Roster roster = Suco.get(Roster.class);
-	setItems(roster.getItems(), true, false);
+	setItems(roster.getItems(), false);
 	roomNameValidator.validate();
     }
 

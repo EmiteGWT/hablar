@@ -1,6 +1,5 @@
 package com.calclab.hablar.group.client.manage;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -9,8 +8,8 @@ import com.calclab.hablar.core.client.ui.selectionlist.DoubleList;
 import com.calclab.hablar.core.client.ui.selectionlist.Selectable;
 import com.calclab.hablar.core.client.validators.HasState;
 import com.calclab.hablar.group.client.GroupMessages;
-import com.calclab.hablar.group.client.userlist.RosterItemSelectable;
-import com.calclab.hablar.roster.client.groups.RosterItemWidget;
+import com.calclab.hablar.roster.client.selection.DoubleListRosterItemSelector;
+import com.calclab.hablar.roster.client.selection.RosterItemSelector;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.LabelElement;
 import com.google.gwt.dom.client.SpanElement;
@@ -60,6 +59,8 @@ public class ManageGroupWidget extends Composite implements ManageGroupDisplay {
     @UiField
     DoubleList selectionList;
 
+    private RosterItemSelector selector;
+
     interface ManageGroupWidgetUiBinder extends UiBinder<Widget, ManageGroupWidget> {
     }
 
@@ -69,12 +70,7 @@ public class ManageGroupWidget extends Composite implements ManageGroupDisplay {
 	userListLabel.setInnerText(i18n().usersLabelText());
 	accept.setText(i18n().acceptAction());
 	cancel.setText(i18n().cancelAction());
-	selectionList.setAvailableLabelText(i18n().availableUsersLabelText());
-	selectionList.setSelectedLabelText(i18n().selectedUsersLabelText());
-	selectionList.setSelectAllTooltip(i18n().selectAllTooltip());
-	selectionList.setSelectSomeTooltip(i18n().selectSomeTooltip());
-	selectionList.setDeselectAllTooltip(i18n().deselectAllTooltip());
-	selectionList.setDeselectSomeTooltip(i18n().deselectSomeTooltip());
+	selector = new DoubleListRosterItemSelector(selectionList);
     }
 
     @Override
@@ -94,24 +90,18 @@ public class ManageGroupWidget extends Composite implements ManageGroupDisplay {
 
     @Override
     public void addRosterItem(RosterItem rosterItem) {
-	RosterItemWidget widget = new RosterItemWidget("selection", rosterItem);
-	widget.setMenuVisible(false);
-	RosterItemSelectable selectable = new RosterItemSelectable(rosterItem, widget);
-	selectionList.add(selectable);
+	selector.addRosterItem(rosterItem);
     }
 
     @Override
     public void addSelectedRosterItem(RosterItem rosterItem) {
-	RosterItemWidget widget = new RosterItemWidget("selection", rosterItem);
-	widget.setMenuVisible(false);
-	RosterItemSelectable selectable = new RosterItemSelectable(rosterItem, widget);
-	selectionList.addSelected(selectable);
+	selector.addSelectedRosterItem(rosterItem);
     }
 
     @Override
     public void clearSelectionList() {
 	groupName.setText("");
-	selectionList.clear();
+	selector.clearSelectionList();
     }
 
     @Override
@@ -121,12 +111,7 @@ public class ManageGroupWidget extends Composite implements ManageGroupDisplay {
 
     @Override
     public Collection<RosterItem> getSelectedItems() {
-	List<Object> items = selectionList.getSelectedItems();
-	ArrayList<RosterItem> retValue = new ArrayList<RosterItem>(items.size());
-	for (Object item : items) {
-	    retValue.add((RosterItem) item);
-	}
-	return retValue;
+	return selector.getSelectedItems();
     }
 
     @Override
