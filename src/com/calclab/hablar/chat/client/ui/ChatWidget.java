@@ -10,6 +10,7 @@ import com.calclab.hablar.core.client.ui.menu.Action;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
+import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
@@ -34,6 +35,10 @@ public class ChatWidget extends Composite implements ChatDisplay {
 	return messages;
     }
 
+    interface ActionItemStyle extends CssResource {
+	String actionWidget();
+    }
+
     interface ChatWidgetUiBinder extends UiBinder<Widget, ChatWidget> {
     }
 
@@ -54,6 +59,9 @@ public class ChatWidget extends Composite implements ChatDisplay {
     protected Button send;
     @UiField
     protected Label state;
+
+    @UiField
+    ActionItemStyle style;
 
     private int controlsHeight;
     private int statusHeight;
@@ -95,6 +103,7 @@ public class ChatWidget extends Composite implements ChatDisplay {
     @Override
     public HasClickHandlers createAction(final Action<?> action) {
 	final ActionWidget actionWidget = new ActionWidget(action);
+	actionWidget.addStyleName(style.actionWidget());
 	actions.add(actionWidget);
 	return actionWidget;
     }

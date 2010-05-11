@@ -217,15 +217,6 @@ body {
 	height: 90%;
 }
 
-/** HABLAR PAGE COMMON **/
-div.hablar-ActionWidget {
-    padding: 2px 2px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    cursor: pointer;
-    background-position: center;
-}
-
 /** HABLAR HEADER **/
 .hablar-Header {
     width: 100%;
@@ -261,10 +252,6 @@ div.hablar-ActionWidget {
 .hablar-AccordionHeaderWidget  .close {
     float: right;
     margin: 0px 3px 0 0;
-}
-
-.gwt-TabLayoutPanelTabs {
-    height: 24px;
 }
 
 .hablar-TabsHeaderWidget {
@@ -382,8 +369,6 @@ div.hablar-ActionWidget {
     display: block;
     float: left;
     margin: 2px 5px 2px 2px;
-    width: 16px;
-    height: 16px;
 }
 
 .hablar-RosterItemWidget .name {

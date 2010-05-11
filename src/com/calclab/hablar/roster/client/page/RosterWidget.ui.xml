@@ -5,11 +5,11 @@
     <ui:style type="com.calclab.hablar.roster.client.page.RosterWidget.ActionItemStyle">
 	    .actionWidget {
 	    	float: left;
-		    padding: 2px 2px;
 		    -moz-border-radius: 5px;
 		    -webkit-border-radius: 5px;
 		    cursor: pointer;
-		    background-position: center;
+		    margin-left: 2px;
+		    margin-top: 2px;
 	    }
 
 	    .wideArea {

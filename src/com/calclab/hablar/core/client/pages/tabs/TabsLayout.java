@@ -11,7 +11,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class TabsLayout extends MainLayout {
 
     public static class TabHeaderSize {
-	public static TabHeaderSize DEFAULT_SIZE = new TabHeaderSize("24px", "120px", 10);
+	public static TabHeaderSize DEFAULT_SIZE = new TabHeaderSize("30px", "120px", 10);
 
 	private String height;
 
@@ -56,7 +56,7 @@ public class TabsLayout extends MainLayout {
 	}
     }
 
-    private static final double BAR_SIZE = 24;
+    private static final double BAR_SIZE = 30;
     private static TabsPanel tabs;
 
     private final TabsMenuPresenter tabsMenuPresenter;
