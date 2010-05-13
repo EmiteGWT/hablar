@@ -1,8 +1,9 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:with type="com.calclab.hablar.core.client.ui.icon.HablarIconsBundle" field="res"></ui:with>
 	<g:HTMLPanel addStyleNames="hablar-OccupantWidget">
-		<span ui:field="icon" class="icon" />
+		<g:Image resource="{res.loadingIcon}" ui:field="icon" addStyleNames="icon" />
 		<g:Label ui:field="name" addStyleNames="name" />
 	</g:HTMLPanel>
-</ui:UiBinder> 
+</ui:UiBinder>

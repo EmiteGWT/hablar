@@ -14,7 +14,6 @@ import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.page.events.UserMessageEvent;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.roster.client.RosterBasicActions;
@@ -67,7 +66,7 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 	addRosterListeners();
 	addSessionListeners();
 	String title = i18n().contacts();
-	getState().init(HablarIcons.get(IconType.roster), title, title);
+	getState().init(HablarIcons.getBundle().rosterIcon(), title, title);
 
     }
 

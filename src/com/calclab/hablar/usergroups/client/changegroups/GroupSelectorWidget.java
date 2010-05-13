@@ -1,12 +1,14 @@
 package com.calclab.hablar.usergroups.client.changegroups;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HasValue;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
@@ -22,9 +24,11 @@ public class GroupSelectorWidget extends Composite implements GroupSelectorDispl
     CheckBox select;
 
     @UiField
-    Label staticName, icon;
+    Label staticName;
     @UiField
     TextBox editableName;
+    @UiField
+    Image icon;
 
     public GroupSelectorWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
@@ -58,8 +62,8 @@ public class GroupSelectorWidget extends Composite implements GroupSelectorDispl
     }
 
     @Override
-    public void setIconStyle(final String style) {
-	icon.addStyleName(style);
+    public void setIcon(final ImageResource icon) {
+	this.icon.setResource(icon);
     }
 
 }

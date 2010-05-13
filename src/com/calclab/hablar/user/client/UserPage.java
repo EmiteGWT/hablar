@@ -13,7 +13,6 @@ import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
@@ -51,7 +50,7 @@ public class UserPage extends PagePresenter<UserDisplay> {
 	});
 
 	updatePageState();
-	model.setPageIcon(HablarIcons.get(IconType.buddyOff));
+	model.setPageIcon(HablarIcons.getBundle().buddyIconOff());
 
 	display.getClose().addClickHandler(new ClickHandler() {
 	    @Override
@@ -104,11 +103,11 @@ public class UserPage extends PagePresenter<UserDisplay> {
 
     private void setShow(final Show show) {
 	if (show == Show.notSpecified || show == Show.chat) {
-	    model.setPageIcon(HablarIcons.get(HablarIcons.IconType.buddyOn));
+	    model.setPageIcon(HablarIcons.getBundle().buddyIconOn());
 	} else if (show == Show.dnd) {
-	    model.setPageIcon(HablarIcons.get(HablarIcons.IconType.buddyDnd));
+	    model.setPageIcon(HablarIcons.getBundle().buddyIconDnd());
 	} else if (show == Show.xa) {
-	    model.setPageIcon(HablarIcons.get(HablarIcons.IconType.buddyWait));
+	    model.setPageIcon(HablarIcons.getBundle().buddyIconWait());
 	}
     }
 
@@ -122,10 +121,10 @@ public class UserPage extends PagePresenter<UserDisplay> {
 	    userStatus = userStatus == null || userStatus.isEmpty() ? "" : " - " + userStatus;
 	    model.setPageTitle(session.getCurrentUser().getShortName() + userStatus);
 	    model.setPageTitleTooltip("Click here to change status");
-	    setShow(presence.getShow());
+	    setShow(presence != null ? presence.getShow() : Show.unknown);
 	} else {
 	    model.setPageTitle(i18n().notLoggedIn());
-	    model.setPageIcon(HablarIcons.get(HablarIcons.IconType.buddyOff));
+	    model.setPageIcon(HablarIcons.getBundle().buddyIconOff());
 	    requestVisibility(Visibility.notFocused);
 	}
     }

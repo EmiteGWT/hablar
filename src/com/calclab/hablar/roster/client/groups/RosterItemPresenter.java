@@ -62,13 +62,13 @@ public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
 
     public void setItem(final RosterItem item) {
 	this.item = item;
-	
+
 	String name = item.getName();
-	
+
 	if(name == null) {
 	    name = item.getJID().getShortName();
 	}
-	
+
 	display.getName().setText(name);
 	display.getJid().setText(item.getJID().toString());
 	final String status = item.getStatus();
@@ -77,7 +77,7 @@ public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
 	    display.getStatus().setText(status);
 	}
 	display.setStatusVisible(hasStatus);
-	display.setIcon(PresenceIcon.getIcon(item.isAvailable(), item.getShow()));
+	display.setIcon(PresenceIcon.getIconResource(item.isAvailable(), item.getShow()));
     }
 
 }

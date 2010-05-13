@@ -14,7 +14,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 public class HeaderPresenter implements Presenter<HeaderDisplay> {
 
     private final HeaderDisplay display;
-    private String currentStyle, currentIconStyle;
+    private String currentStyle;
     private String currentExternalStyle;
 
     public HeaderPresenter(final Page<?> page, final HeaderDisplay display) {
@@ -69,16 +69,8 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 	}
     }
 
-    private void setIconStyle(final String pageIcon) {
-	if (currentIconStyle != null) {
-	    display.removeIconStyle(currentIconStyle);
-	}
-	currentIconStyle = pageIcon;
-	display.addIconStyle(currentIconStyle);
-    }
-
     private void update(final PageState state) {
-	setIconStyle(state.getPageIcon());
+	display.setIcon(state.getPageIcon());
 	display.getHeaderTitle().setText(state.getPageTitle());
 	display.setHeaderTooltip(state.getPageTitleTooltip());
 	display.setCloseIconVisible(state.isCloseable());

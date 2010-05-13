@@ -2,8 +2,6 @@ package com.calclab.hablar.vcard.client;
 
 import java.util.HashMap;
 
-import com.calclab.hablar.core.client.ui.icon.HablarIcons;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.LabelElement;
@@ -40,7 +38,7 @@ public class VCardWidget extends Composite implements VCardDisplay {
     @UiField
     Button accept, cancel;
     @UiField
-    SpanElement title, icon;
+    SpanElement title;
     @UiField
     Label loadingMessage;
     @UiField
@@ -122,7 +120,6 @@ public class VCardWidget extends Composite implements VCardDisplay {
     }
 
     protected void init(final boolean readOnly, final String idPrefix) {
-	icon.addClassName(HablarIcons.get(IconType.loading));
 	fields.put(Field.name, name);
 	fields.put(Field.nickName, nickName);
 	fields.put(Field.middleName, middleName);

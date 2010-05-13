@@ -5,6 +5,7 @@ import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
 import com.google.gwt.event.dom.client.HasBlurHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.HasText;
 
 public interface PresenceDisplay extends Display {
@@ -25,7 +26,7 @@ public interface PresenceDisplay extends Display {
 
     void setStatusFocused(boolean focused);
 
-    void setStatusIcon(String iconStyle);
+    void setStatusIcon(ImageResource icon);
 
     void setPageTitle(String title);
 

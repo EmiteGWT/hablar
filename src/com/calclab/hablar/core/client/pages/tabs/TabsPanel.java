@@ -3,11 +3,9 @@ package com.calclab.hablar.core.client.pages.tabs;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
-import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.logical.shared.BeforeSelectionEvent;
 import com.google.gwt.event.logical.shared.BeforeSelectionHandler;
@@ -425,10 +423,10 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
 
 //	    container.getStyle().setDisplay(Display.NONE);
 	    container.getStyle().setVisibility(com.google.gwt.dom.client.Style.Visibility.HIDDEN);
-	    
+
 //	    child.setVisible(false);
 	    child.getElement().getStyle().setVisibility(com.google.gwt.dom.client.Style.Visibility.HIDDEN);
-	    
+
 	    tabs.get(selectedIndex).setSelected(false);
 	}
 
@@ -437,7 +435,7 @@ public class TabsPanel extends ResizeComposite implements HasWidgets, ProvidesRe
 	layoutChild(child);
 //	container.getStyle().clearDisplay();
 	container.getStyle().setVisibility(com.google.gwt.dom.client.Style.Visibility.VISIBLE);
-	
+
 	child.setVisible(true);
 	child.getElement().getStyle().setVisibility(com.google.gwt.dom.client.Style.Visibility.VISIBLE);
 	final Tab tab = tabs.get(index);

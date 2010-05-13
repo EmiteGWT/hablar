@@ -1,26 +1,28 @@
 package com.calclab.hablar.core.client.ui.menu;
 
+import com.google.gwt.resources.client.ImageResource;
+
 public abstract class SimpleAction<T> implements Action<T> {
     private final String name;
     private final String id;
-    private final String iconStyle;
+    private final ImageResource icon;
 
     public SimpleAction(final String name, final String id) {
 	this(name, id, null);
     }
 
-    public SimpleAction(final String name, final String id, final String iconStyle) {
+    public SimpleAction(final String name, final String id, final ImageResource icon) {
 	this.name = name;
 	this.id = id;
-	this.iconStyle = iconStyle;
+	this.icon = icon;
     }
 
     @Override
-    public abstract void execute(T target);;
+    public abstract void execute(T target);
 
     @Override
-    public String getIconStyle() {
-	return iconStyle;
+    public ImageResource getIcon() {
+	return icon;
     }
 
     @Override

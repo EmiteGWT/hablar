@@ -19,7 +19,6 @@ import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.page.events.UserMessageEvent;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
@@ -53,7 +52,7 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
 	final XmppURI fromURI = chat.getURI();
 	userName = getName(fromURI);
 
-	model.init(HablarIcons.get(IconType.buddyOff), userName, userName + ": " + fromURI.toString());
+	model.init(HablarIcons.getBundle().buddyIconOff(), userName, userName + ": " + fromURI.toString());
 	setVisibility(Visibility.notFocused);
 	model.setCloseable(true);
 
@@ -125,7 +124,7 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
 
     @Override
     public void setPresence(final boolean available, final Show show) {
-	getState().setPageIcon(PresenceIcon.getIcon(available, show));
+	getState().setPageIcon(PresenceIcon.getIconResource(available, show));
 	if (available) {
 	    display.getState().setText(i18n().stateAvailable(userName));
 	} else {
@@ -142,12 +141,12 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
 	String name = null;
 	final Roster roster = Suco.get(Roster.class);
 	final RosterItem itemByJID = roster.getItemByJID(fromURI);
-	
+
 	// We will try and get the name from the item
 	if (itemByJID != null) {
 	    name = itemByJID.getName();
 	}
-	
+
 	// Otherwise we will use the jid
 	if(name == null) {
 	    name = fromURI.getShortName();

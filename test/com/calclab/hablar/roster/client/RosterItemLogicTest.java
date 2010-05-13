@@ -35,8 +35,7 @@ public class RosterItemLogicTest {
     public void shouldSetAvailable() {
 	item.setAvailable(true);
 	presenter.setItem(item);
-	final String iconStyle = HablarIcons.get(HablarIcons.IconType.buddyOn);
-	verify(display).setIcon(iconStyle);
+	verify(display).setIcon(HablarIcons.getBundle().buddyIconOn());
     }
 
     @Test

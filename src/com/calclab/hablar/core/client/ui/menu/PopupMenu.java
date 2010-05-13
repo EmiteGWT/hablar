@@ -23,7 +23,7 @@ public class PopupMenu<T> extends PopupPanel implements MenuDisplay<T> {
 
     @Override
     public void addAction(final Action<T> action, final Command command) {
-	String html = "<label class='" + action.getIconStyle()
+	String html = "<label class='" + action.getIcon()
 		+ "' style='display: block; float: left; width: 16px; height: 16px; margin-right: 3px;'>&nbsp;</label>";
 	html += action.getName();
 	final MenuItem menuItem = bar.addItem(html, true, command);

@@ -2,16 +2,16 @@ package com.calclab.hablar.roster.client.groups;
 
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.Idify;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -24,16 +24,17 @@ public class RosterItemWidget extends Composite implements RosterItemDisplay {
     FocusPanel self;
 
     @UiField
-    Label icon, name, jid, menu, status;
+    Label name, jid, status;
 
-    private String currentStyle;
+    @UiField
+    Image menu, icon;
 
     private static RosterItemWidgetUiBinder uiBinder = GWT.create(RosterItemWidgetUiBinder.class);
 
     public RosterItemWidget(final String groupId, final String itemId) {
 	initWidget(uiBinder.createAndBindUi(this));
 	self.ensureDebugId(Idify.id("RosterItemWidget", groupId, itemId));
-	menu.addStyleName(HablarIcons.get(IconType.menu));
+//	menu.addStyleName(HablarIcons.get(IconType.menu));
 	menu.ensureDebugId(Idify.id("RosterItemWidget", groupId, itemId, "roster-menu"));
     }
 
@@ -47,7 +48,7 @@ public class RosterItemWidget extends Composite implements RosterItemDisplay {
 	    this.status.setText(status);
 	}
 	this.status.setVisible(hasStatus);
-	setIcon(PresenceIcon.getIcon(item.isAvailable(), item.getShow()));
+	setIcon(PresenceIcon.getIconResource(item.isAvailable(), item.getShow()));
     }
 
     @Override
@@ -81,12 +82,8 @@ public class RosterItemWidget extends Composite implements RosterItemDisplay {
     }
 
     @Override
-    public void setIcon(final String iconStyle) {
-	if (currentStyle != null) {
-	    icon.removeStyleName(currentStyle);
-	}
-	currentStyle = iconStyle;
-	icon.addStyleName(iconStyle);
+    public void setIcon(final ImageResource icon) {
+	this.icon.setResource(icon);
     }
 
     @Override

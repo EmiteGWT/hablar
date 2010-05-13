@@ -42,7 +42,7 @@ public class SearchPage extends PagePresenter<SearchDisplay> {
 	model.setCloseable(closeable);
 	String title = i18n().searchUsers();
 
-	model.init(HablarIcons.get(HablarIcons.IconType.search), title, title);
+	model.init(HablarIcons.getBundle().searchIcon(), title, title);
 	final MenuDisplay<SearchResultItem> menuDisplay = display.createMenu(SEARCH_MENU);
 	itemMenu = new Menu<SearchResultItem>(menuDisplay);
 	bind();

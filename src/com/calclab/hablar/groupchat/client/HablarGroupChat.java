@@ -10,7 +10,6 @@ import com.calclab.hablar.core.client.container.PageAddedHandler;
 import com.calclab.hablar.core.client.container.overlay.OverlayContainer;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.rooms.client.HablarRoomsConfig;
 import com.calclab.hablar.rooms.client.open.EditRoomWidget;
@@ -62,7 +61,7 @@ public class HablarGroupChat implements EntryPoint {
     private static SimpleAction<ChatPage> createConvertToGroupChatAction(final XmppURI uri,
 	    final ConvertToGroupChatPresenter convertToGroupPage) {
 	final String actionId = ACTION_ID_CONVERT + Idify.id(uri);
-	return new SimpleAction<ChatPage>(i18n().convertToGroupAction(), actionId, HablarIcons.get(IconType.buddyAdd)) {
+	return new SimpleAction<ChatPage>(i18n().convertToGroupAction(), actionId, HablarIcons.getBundle().buddyAddIcon()) {
 	    @Override
 	    public void execute(final ChatPage chatPage) {
 		convertToGroupPage.setChat(chatPage.getChat());
@@ -73,7 +72,7 @@ public class HablarGroupChat implements EntryPoint {
 
     private static SimpleAction<RosterGroupPresenter> openGroupChatAction(final OpenGroupChatPresenter openGroupPage) {
 	return new SimpleAction<RosterGroupPresenter>(i18n().openGroupChatAction(), ACTION_ID_OPEN, HablarIcons
-		.get(IconType.groupChat)) {
+		.getBundle().groupChatIcon()) {
 	    @Override
 	    public void execute(final RosterGroupPresenter target) {
 		openGroupPage.setGroupName(target.getGroupName());

@@ -2,6 +2,7 @@ package com.calclab.hablar.roster.client.groups;
 
 import com.calclab.hablar.core.client.mvp.Display;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.HasText;
 
 public interface RosterItemDisplay extends Display {
@@ -16,7 +17,7 @@ public interface RosterItemDisplay extends Display {
 
     HasText getStatus();
 
-    void setIcon(String iconStyle);
+    void setIcon(ImageResource icon);
 
     void setStatusVisible(boolean visible);
 

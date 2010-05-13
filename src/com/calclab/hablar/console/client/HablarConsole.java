@@ -5,11 +5,11 @@ import com.calclab.hablar.core.client.container.PageAddedEvent;
 import com.calclab.hablar.core.client.container.PageAddedHandler;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.resources.client.ImageResource;
 
 public class HablarConsole implements EntryPoint {
 
@@ -26,7 +26,7 @@ public class HablarConsole implements EntryPoint {
 		if (rosterPage != null) {
 
 		    final String name = "Open Console";
-		    final String icon = HablarIcons.get(IconType.console);
+		    final ImageResource icon = HablarIcons.getBundle().consoleIcon();
 		    rosterPage.addAction(new SimpleAction<RosterPage>(name, ACTION_ID, icon) {
 			@Override
 			public void execute(final RosterPage page) {

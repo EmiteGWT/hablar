@@ -11,7 +11,6 @@ import com.calclab.emite.xep.vcard.client.VCardResponse;
 import com.calclab.emite.xep.vcard.client.VCard.Data;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.user.client.EditorPage;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
@@ -24,7 +23,7 @@ public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisp
     public OwnVCardPresenter(final HablarEventBus eventBus, final VCardDisplay display) {
 	super(eventBus, display);
 	String title = I18nVCard.t.ownVCardTitle();
-	model.init(HablarIcons.get(IconType.buddyWait), title, title);
+	model.init(HablarIcons.getBundle().buddyIconWait(), title, title);
 	display.setAcceptVisible(false);
 	display.setCancelVisible(false);
 	display.setPageTitle(I18nVCard.t.ownVCardTitle());

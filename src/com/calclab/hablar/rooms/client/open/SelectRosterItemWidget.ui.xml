@@ -1,6 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:with type="com.calclab.hablar.core.client.ui.icon.HablarIconsBundle" field="res"></ui:with>
 	<ui:style>
 		.selectRosterItemWidget {
 		    width: 100%;
@@ -13,7 +14,7 @@
 	</ui:style>
 	<g:HTMLPanel addStyleNames="hablar-SelectRosterItemWidget {style.selectRosterItemWidget}">
 		<g:CheckBox ui:field="select" addStyleNames="select {style.selectRosterItemWidgetDiv}"></g:CheckBox>
-		<g:Label ui:field="icon" addStyleNames="icon {style.selectRosterItemWidgetDiv}"></g:Label>
+		<g:Image ui:field="icon" resource="{res.loadingIcon}" addStyleNames="icon {style.selectRosterItemWidgetDiv}" />
 		<g:Label ui:field="name" addStyleNames="{style.selectRosterItemWidgetDiv} name"></g:Label>
 		<g:Label ui:field="jid" addStyleNames="{style.selectRosterItemWidgetDiv} hablar-lightColor jid"></g:Label>
 		<g:Label ui:field="status" addStyleNames="{style.selectRosterItemWidgetDiv} status"></g:Label>

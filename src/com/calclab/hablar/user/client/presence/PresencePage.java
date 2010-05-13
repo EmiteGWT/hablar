@@ -13,8 +13,8 @@ import com.calclab.emite.xep.storage.client.PrivateStorageManager;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.HablarIconsBundle;
 import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.user.client.EditorPage;
@@ -30,6 +30,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
+import com.google.gwt.resources.client.ImageResource;
 
 public class PresencePage extends PagePresenter<PresenceDisplay> implements EditorPage<PresenceDisplay> {
     public static final String TYPE = "Presence";
@@ -52,10 +53,9 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 	statusMenu = new Menu<PresencePage>(display.newStatusMenuDisplay("hablar-StatusItemMenu"));
 
 	manager = Suco.get(PresenceManager.class);
-	final String style = HablarIcons.get(IconType.buddy);
 	String title = i18n().presencePageTitle();
-	model.init(style, title, title);
-	display.setStatusIcon(HablarIcons.get(IconType.buddyOff));
+	model.init(HablarIcons.getBundle().buddyIcon(), title, title);
+	display.setStatusIcon(HablarIcons.getBundle().buddyIconOff());
 	display.setPageTitle(i18n().presencePageTitle());
 	storedPresenceManager = new StoredPresenceManager(Suco.get(PrivateStorageManager.class));
 	createDefActions();
@@ -96,7 +96,7 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 	});
     }
 
-    public SimpleAction<PresencePage> createCustomAction(final String title, final String id, final String icon,
+    public SimpleAction<PresencePage> createCustomAction(final String title, final String id, final ImageResource icon,
 	    final String status, final Show show) {
 	return new SimpleAction<PresencePage>(title, id, icon) {
 	    @Override
@@ -125,8 +125,8 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 		    if (presences.size() > 0) {
 			for (final StoredPresence presence : presences) {
 			    final Show show = presence.getShow();
-			    statusMenu.addAction(createCustomAction(presence.getStatus(), null, PresenceIcon.getIcon(
-				    true, show), presence.getStatus(), show));
+			    statusMenu.addAction(createCustomAction(presence.getStatus(), null, PresenceIcon
+				    .getIconResource(true, show), presence.getStatus(), show));
 			}
 			statusMenu.addAction(clearCustomsAction);
 		    }
@@ -135,11 +135,10 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 	});
     }
 
-    private SimpleAction<PresencePage> createAction(final String label, final String actionId, final IconType iconType,
-	    final String status) {
+    private SimpleAction<PresencePage> createAction(final String label, final String actionId, final ImageResource iconType,
+	    final String status, final Show show) {
 	final boolean hasStatus = status != null;
-	final Show show = iconType == IconType.buddyOn ? Show.chat : Show.dnd;
-	return new SimpleAction<PresencePage>(label, actionId, HablarIcons.get(iconType)) {
+	return new SimpleAction<PresencePage>(label, actionId, iconType) {
 	    @Override
 	    public void execute(final PresencePage target) {
 		setPresence(status, show);
@@ -150,12 +149,12 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
     }
 
     private void createDefActions() {
-	defaultActions.add(createAction(i18n().available(), ACTION_ID_AVAILABLE, IconType.buddyOn, null));
-	defaultActions.add(createAction(i18n().availableCustom(), ACTION_ID_AVAILABLE_CUSTOM, IconType.buddyOn, ""));
-	defaultActions.add(createAction(i18n().busy(), ACTION_ID_BUSY, IconType.buddyDnd, null));
-	defaultActions.add(createAction(i18n().busyCustom(), ACTION_ID_BUSY_CUSTOM, IconType.buddyDnd, ""));
-	clearCustomsAction = new SimpleAction<PresencePage>(i18n().clearCustom(), ACTION_CLEAR_CUSTOM, HablarIcons
-		.get(IconType.close)) {
+	HablarIconsBundle bundle = HablarIcons.getBundle();
+	defaultActions.add(createAction(i18n().available(), ACTION_ID_AVAILABLE, bundle.buddyIconOn(), null, Show.chat));
+	defaultActions.add(createAction(i18n().availableCustom(), ACTION_ID_AVAILABLE_CUSTOM, bundle.buddyIconOn(), "", Show.chat));
+	defaultActions.add(createAction(i18n().busy(), ACTION_ID_BUSY, bundle.buddyIconDnd(), null, Show.dnd));
+	defaultActions.add(createAction(i18n().busyCustom(), ACTION_ID_BUSY_CUSTOM, bundle.buddyIconDnd(), "", Show.dnd));
+	clearCustomsAction = new SimpleAction<PresencePage>(i18n().clearCustom(), ACTION_CLEAR_CUSTOM, bundle.closeIcon()) {
 	    @Override
 	    public void execute(final PresencePage target) {
 		storedPresenceManager.clearAll();
@@ -183,7 +182,7 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
     }
 
     private void setShowIcon(final Show show) {
-	display.setStatusIcon(PresenceIcon.getIcon(true, show));
+	display.setStatusIcon(PresenceIcon.getIconResource(true, show));
     }
 
     private void showPresence(final String status, final Show show) {

@@ -16,7 +16,6 @@ import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.page.events.UserMessageEvent;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.rooms.client.RoomName;
 import com.calclab.hablar.rooms.client.occupant.OccupantsPresenter;
@@ -45,7 +44,7 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> implements RoomPag
 	final String me = session.getCurrentUser().getNode();
 	final String roomName = RoomName.decode(room.getURI().getNode());
 	setVisibility(Visibility.notFocused);
-	model.init(HablarIcons.get(IconType.roster), roomName, roomName);
+	model.init(HablarIcons.getBundle().rosterIcon(), roomName, roomName);
 	model.setCloseable(true);
 
 	room.onMessageReceived(new Listener<Message>() {

@@ -1,7 +1,5 @@
 package com.calclab.hablar.user.client.presence;
 
-import com.calclab.hablar.core.client.ui.icon.HablarIcons;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
 import com.calclab.hablar.core.client.ui.menu.PopupMenu;
 import com.calclab.hablar.user.client.UserMessages;
@@ -11,11 +9,12 @@ import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.HasBlurHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -39,18 +38,16 @@ public class PresenceWidget extends Composite implements PresenceDisplay {
     @UiField
     TextBox status;
     @UiField
-    Label menu, icon;
-    private String currentStyle;
-    @UiField
     SpanElement title;
     @UiField
     LabelElement statusLabel;
+    @UiField
+    Image icon, menu;
 
     public PresenceWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
 	status.ensureDebugId("PresenceWidget-status");
 	menu.addStyleName("PresenceWidget-menu");
-	menu.addStyleName(HablarIcons.get(IconType.menu));
 	statusLabel.setInnerText(i18n().statusLabelText());
     }
 
@@ -100,12 +97,8 @@ public class PresenceWidget extends Composite implements PresenceDisplay {
     }
 
     @Override
-    public void setStatusIcon(final String iconStyle) {
-	if (currentStyle != null) {
-	    icon.removeStyleName(currentStyle);
-	}
-	currentStyle = iconStyle;
-	icon.addStyleName(iconStyle);
+    public void setStatusIcon(final ImageResource icon) {
+	this.icon.setResource(icon);
     }
 
     @Override

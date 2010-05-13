@@ -1,13 +1,12 @@
 package com.calclab.hablar.roster.client.groups;
 
-import com.calclab.hablar.core.client.ui.icon.HablarIcons;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -19,13 +18,15 @@ public class GroupHeaderWidget extends Composite implements GroupHeaderDisplay {
     private static GroupHeaderWidgetUiBinder uiBinder = GWT.create(GroupHeaderWidgetUiBinder.class);
 
     @UiField
-    Label name, menu;
+    Label name;
+
+    @UiField
+    Image menu;
 
     public GroupHeaderWidget(final String id) {
 	initWidget(uiBinder.createAndBindUi(this));
 	name.ensureDebugId("GroupHeaderWidget-name-" + id);
 	menu.ensureDebugId("GroupHeaderWidget-menu-" + id);
-	menu.addStyleName(HablarIcons.get(IconType.menu));
     }
 
     @Override

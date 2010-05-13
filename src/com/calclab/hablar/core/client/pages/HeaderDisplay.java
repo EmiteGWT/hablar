@@ -2,10 +2,11 @@ package com.calclab.hablar.core.client.pages;
 
 import com.calclab.hablar.core.client.mvp.Display;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.HasText;
 
 public interface HeaderDisplay extends Display {
-    void addIconStyle(String iconStyle);
+    void setIcon(ImageResource iconStyle);
 
     void addStyle(String styleName);
 
@@ -14,8 +15,6 @@ public interface HeaderDisplay extends Display {
     HasText getHeaderTitle();
 
     HasClickHandlers getOpen();
-
-    void removeIconStyle(String iconStyle);
 
     void removeStyle(String styleName);
 

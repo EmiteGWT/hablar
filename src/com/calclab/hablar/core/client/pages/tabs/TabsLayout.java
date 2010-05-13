@@ -69,7 +69,7 @@ public class TabsLayout extends MainLayout {
 
     public TabsLayout(final HablarDisplay parent, TabHeaderSize tabHeaderSize) {
 	super(tabs = new TabsPanel(BAR_SIZE, PX), parent);
-	tabsMenuPresenter = new TabsMenuPresenter(tabs.getMenu(), this);
+	tabsMenuPresenter = new TabsMenuPresenter(tabs.getMenu());
 	this.tabHeaderSize = tabHeaderSize;
     }
 

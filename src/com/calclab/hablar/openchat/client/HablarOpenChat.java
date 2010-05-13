@@ -7,7 +7,6 @@ import com.calclab.hablar.core.client.container.PageAddedHandler;
 import com.calclab.hablar.core.client.container.overlay.OverlayContainer;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.openchat.client.ui.OpenChatPresenter;
 import com.calclab.hablar.openchat.client.ui.OpenChatWidget;
@@ -15,6 +14,7 @@ import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.resources.client.ImageResource;
 
 /**
  * Adds the ability to open a chat with any jabber id.<br/>
@@ -43,7 +43,7 @@ public class HablarOpenChat implements EntryPoint {
 		if (rosterPage != null) {
 
 		    final String name = i18n().openNewChat();
-		    final String icon = HablarIcons.get(IconType.chatAdd);
+		    final ImageResource icon = HablarIcons.getBundle().chatAddIcon();
 		    rosterPage.addAction(new SimpleAction<RosterPage>(name, ACTION_ID, icon) {
 			@Override
 			public void execute(final RosterPage page) {

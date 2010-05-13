@@ -1,12 +1,14 @@
 package com.calclab.hablar.rooms.client.open;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HasValue;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -18,10 +20,13 @@ public class SelectRosterItemWidget extends Composite implements SelectRosterIte
     private static SelectRosterItemWidgetUiBinder uiBinder = GWT.create(SelectRosterItemWidgetUiBinder.class);
 
     @UiField
-    Label name, icon, jid, status;
+    Label name, jid, status;
 
     @UiField
     CheckBox select;
+
+    @UiField
+    Image icon;
 
     public SelectRosterItemWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
@@ -53,8 +58,8 @@ public class SelectRosterItemWidget extends Composite implements SelectRosterIte
     }
 
     @Override
-    public void setIconStyle(final String style) {
-	icon.addStyleName(style);
+    public void setIcon(final ImageResource icon) {
+	this.icon.setResource(icon);
     }
 
     @Override

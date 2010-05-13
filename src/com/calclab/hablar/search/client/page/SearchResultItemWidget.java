@@ -1,13 +1,12 @@
 package com.calclab.hablar.search.client.page;
 
-import com.calclab.hablar.core.client.ui.icon.HablarIcons;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -19,14 +18,13 @@ public class SearchResultItemWidget extends Composite implements SearchResultIte
     private static SearchResultItemWidgetUiBinder uiBinder = GWT.create(SearchResultItemWidgetUiBinder.class);
 
     @UiField
-    Label buddyIcon;
+    Label name, jid;
 
     @UiField
-    Label name, jid, menu;
+    Image buddyIcon, menu;
 
     public SearchResultItemWidget(final String itemId) {
 	initWidget(uiBinder.createAndBindUi(this));
-	menu.addStyleName(HablarIcons.get(IconType.menu));
 	menu.ensureDebugId(itemId + "-search-menu");
     }
 
