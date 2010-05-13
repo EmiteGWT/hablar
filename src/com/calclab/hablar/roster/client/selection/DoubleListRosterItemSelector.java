@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.ui.selectionlist.DoubleList;
-import com.calclab.hablar.group.client.userlist.RosterItemSelectable;
 import com.calclab.hablar.roster.client.RosterMessages;
 import com.calclab.hablar.roster.client.groups.RosterItemWidget;
 

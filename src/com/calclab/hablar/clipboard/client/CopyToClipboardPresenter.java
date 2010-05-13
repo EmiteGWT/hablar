@@ -2,6 +2,7 @@ package com.calclab.hablar.clipboard.client;
 
 import java.util.ArrayList;
 
+import com.calclab.hablar.chat.client.MessageDataProvider;
 import com.calclab.hablar.chat.client.ui.ChatMessageDisplay;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
@@ -32,7 +33,7 @@ public class CopyToClipboardPresenter extends PagePresenter<CopyToClipboardDispl
 	});
     }
 
-    public void setChatMessagesProvider(final CopyToClipboardDataProvider provider) {
+    public void setChatMessagesProvider(final MessageDataProvider provider) {
 	final ArrayList<ChatMessageDisplay> messages = provider.getMessages();
 	final StringBuilder text = new StringBuilder();
 	for (final ChatMessageDisplay message : messages) {
