@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.calclab.hablar.core.client.mvp.Display;
 import com.calclab.hablar.core.client.ui.menu.Action;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.user.client.ui.HasText;
@@ -17,17 +18,17 @@ public interface ChatDisplay extends Display {
 
     /**
      * Add a new message to the chat panel
-     * 
+     *
      * @param name
      * @param body
      * @param messageType
      * @return
      */
-    ChatMessageDisplay addMessage(String name, String body, ChatDisplay.MessageType messageType);
+    ChatMessageDisplay addMessage(String name, Element body, ChatDisplay.MessageType messageType);
 
     /**
      * Adds a widget to the action bar for this chat view
-     * 
+     *
      * @param widget
      *            the widget to add
      */
@@ -43,7 +44,7 @@ public interface ChatDisplay extends Display {
 
     /**
      * Return a list with all the messages of this chat panel
-     * 
+     *
      * @return a list, never null but can be empty
      */
     ArrayList<ChatMessageDisplay> getMessages();

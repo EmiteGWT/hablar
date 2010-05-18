@@ -21,6 +21,8 @@ import com.calclab.hablar.rooms.client.RoomName;
 import com.calclab.hablar.rooms.client.occupant.OccupantsPresenter;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
@@ -50,14 +52,15 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> implements RoomPag
 	room.onMessageReceived(new Listener<Message>() {
 	    @Override
 	    public void onEvent(final Message message) {
-		final String body = ChatMessageFormatter.format(message.getBody());
+		final String from = message.getFrom().getResource();
+		String messageBody = message.getBody();
+		final Element body = ChatMessageFormatter.format(from, messageBody);
 		if (body != null) {
-		    final String from = message.getFrom().getResource();
 		    if (me.equals(from)) {
 			display.addMessage("me", body, ChatDisplay.MessageType.sent);
 		    } else {
 			display.addMessage(from, body, ChatDisplay.MessageType.incoming);
-			fireUserMessage(roomName, from, body);
+			fireUserMessage(roomName, from, messageBody);
 		    }
 		}
 	    }
@@ -105,7 +108,10 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> implements RoomPag
     }
 
     public void showMessage(final String text) {
-	display.addMessage(null, text, ChatDisplay.MessageType.info);
+	Document doc = Document.get();
+	Element element = doc.createSpanElement();
+	element.appendChild(doc.createTextNode(text));
+	display.addMessage(null, element, ChatDisplay.MessageType.info);
     }
 
     private void fireUserMessage(final String roomName, final String from, String body) {

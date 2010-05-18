@@ -193,6 +193,10 @@ input[disabled] {
     float: left;
 }
 
+.hablar-EmoticonImage {
+	vertical-align: text-top;
+}
+
 /** MUC room occupants **/
 .gwt-PopupPanel.occupants {
     border-top: 1px solid #E9E9E9;

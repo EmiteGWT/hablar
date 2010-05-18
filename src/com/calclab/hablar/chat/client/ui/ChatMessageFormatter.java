@@ -1,13 +1,25 @@
 package com.calclab.hablar.chat.client.ui;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.calclab.emite.core.client.packet.TextUtils;
-import com.calclab.hablar.core.client.ui.emoticons.EmoticonStyles;
 import com.calclab.hablar.core.client.ui.emoticons.Emoticons;
+import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.dom.client.AnchorElement;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.SpanElement;
+import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.ui.Image;
 
 /**
  * Some formatting utilities
  */
 public class ChatMessageFormatter {
+    private static final String NEWLINE = "EmiteProtIniNEWLINEEmiteProtEnd";
+    private static final String ANCHOR = "EmiteProtIniANCHOREmiteProtEnd";
     private static final String JOYFUL = "EmiteProtIniJOYFULEmiteProtEnd";
     private static final String ANGRY = "EmiteProtIniANGRYEmiteProtEnd";
     private static final String BLUSHING = "EmiteProtIniBLUSHINGEmiteProtEnd";
@@ -44,15 +56,61 @@ public class ChatMessageFormatter {
     private static final String HEART = "EmiteProtIniHEARTEmiteProtEnd";
     private static Emoticons icons;
 
+    private static List<PatternFactoryReplacement> patternImagePairs;
+
+    static {
+	icons = Emoticons.App.getInst();
+	patternImagePairs = new ArrayList<PatternFactoryReplacement>();
+	patternImagePairs.add(new PatternFactoryReplacement("\\r\\n", new NewlinePatternElementFactory(), NEWLINE));
+	patternImagePairs.add(new PatternFactoryReplacement("\\r|\\n", new NewlinePatternElementFactory(), NEWLINE));
+	patternImagePairs.add(new PatternFactoryReplacement(TextUtils.URL_REGEXP, new AnchorPatternElementFactory(), ANCHOR));
+	patternImagePairs.add(new PatternFactoryReplacement("&gt;:\\)", new ImagePatternElementFactory(icons.devil()), DEVIL));
+	patternImagePairs.add(new PatternFactoryReplacement("O:\\)|o:\\)|o:-\\)|O:-\\)|0:\\)|0:-\\)", new ImagePatternElementFactory(icons.angel()), ANGEL));
+	patternImagePairs.add(new PatternFactoryReplacement("\\^_\\^|\\^-\\^|\\^\\^|:\\)\\)|:-\\)\\)", new ImagePatternElementFactory(icons.joyful()), JOYFUL));
+	patternImagePairs.add(new PatternFactoryReplacement("\\(police\\)|\\(cop\\)|\\{\\):\\)", new ImagePatternElementFactory(icons.policeman()), POLICEMAN));
+	patternImagePairs.add(new PatternFactoryReplacement("=:\\)|\\(alien\\)", new ImagePatternElementFactory(icons.alien()), ALIEN));
+	patternImagePairs.add(new PatternFactoryReplacement("o_O|o_0|O_O|o_o|O_o|0_o|o0|0o|oO|Oo|0_0", new ImagePatternElementFactory(icons.andy()), ANDY));
+	patternImagePairs.add(new PatternFactoryReplacement("&gt;:o|&gt;:-o|&gt;:O|&gt;:-O|X\\(|X-\\(|x\\(|x-\\(|:@|&lt;_&lt;",
+		new ImagePatternElementFactory(icons.angry()), ANGRY));
+	patternImagePairs.add(new PatternFactoryReplacement("\\(bandit\\)|:\\(&gt;", new ImagePatternElementFactory(icons.bandit()), BANDIT));
+	patternImagePairs.add(new PatternFactoryReplacement(":&quot;&gt;|:\\*&gt;|:-\\$|:\\$", new ImagePatternElementFactory(icons.blushing()), BLUSHING));
+	patternImagePairs.add(new PatternFactoryReplacement("B\\)|B-\\)|8\\)", new ImagePatternElementFactory(icons.cool()), COOL));
+	patternImagePairs.add(new PatternFactoryReplacement(":\'\\(|=\'\\(", new ImagePatternElementFactory(icons.crying()), CRYING));
+	patternImagePairs.add(new PatternFactoryReplacement(":-d|:d|:-D|:D|:d|=D|=-D", new ImagePatternElementFactory(icons.grin()), GRIN));
+	patternImagePairs.add(new PatternFactoryReplacement("=\\)|=-\\)", new ImagePatternElementFactory(icons.happy()), HAPPY));
+	patternImagePairs.add(new PatternFactoryReplacement("\\(L\\)|\\(h\\)|\\(H\\)", new ImagePatternElementFactory(icons.heart()), HEART));
+	patternImagePairs.add(new PatternFactoryReplacement(":-\\*|:\\*", new ImagePatternElementFactory(icons.kissing()), KISSING));
+	patternImagePairs.add(new PatternFactoryReplacement("\\(LOL\\)|lol", new ImagePatternElementFactory(icons.lol()), LOL));
+	patternImagePairs
+		.add(new PatternFactoryReplacement(":-X|:-xX|:x|\\(wubya\\)|\\(wubyou\\)|\\(wub\\)", new ImagePatternElementFactory(icons.love()), LOVE));
+	patternImagePairs.add(new PatternFactoryReplacement("\\(:\\)|\\(ph33r\\)|\\(ph34r\\)", new ImagePatternElementFactory(icons.ninja()), NINJA));
+	patternImagePairs.add(new PatternFactoryReplacement("&gt;_&lt;", new ImagePatternElementFactory(icons.pinched()), PINCHED));
+	patternImagePairs.add(new PatternFactoryReplacement(":\\||=\\||:-\\|", new ImagePatternElementFactory(icons.pouty()), POUTY));
+	patternImagePairs.add(new PatternFactoryReplacement(":\\(|=\\(|=-\\(|:-\\(", new ImagePatternElementFactory(icons.sad()), SAD));
+	patternImagePairs.add(new PatternFactoryReplacement(":&amp;|:-&amp;", new ImagePatternElementFactory(icons.sick()), SICK));
+	patternImagePairs.add(new PatternFactoryReplacement("=]", new ImagePatternElementFactory(icons.sideways()), SIDEWAYS));
+	patternImagePairs.add(new PatternFactoryReplacement("\\(-.-\\)|\\|\\)|\\|-\\)|I-\\)|I-\\|", new ImagePatternElementFactory(icons.sleeping()), SLEEPING));
+	patternImagePairs.add(new PatternFactoryReplacement(":-O|:O|:-o|:o|:-0|=-O|=-o|=o|=O", new ImagePatternElementFactory(icons.surprised()), SURPRISED));
+	patternImagePairs.add(new PatternFactoryReplacement(":P|=P|=p|:-P|:p|:-p|:b", new ImagePatternElementFactory(icons.tongue()), TONGUE));
+	patternImagePairs.add(new PatternFactoryReplacement(":-\\\\|:-/|:/|:\\\\", new ImagePatternElementFactory(icons.uncertain()), UNCERTAIN));
+	patternImagePairs.add(new PatternFactoryReplacement(":s|:-S|:-s|:S", new ImagePatternElementFactory(icons.unsure()), UNSURE));
+	patternImagePairs.add(new PatternFactoryReplacement("\\(woot\\)|\\(w00t\\)|\\(wOOt\\)", new ImagePatternElementFactory(icons.w00t()), W00T));
+	patternImagePairs.add(new PatternFactoryReplacement(":-&quot;", new ImagePatternElementFactory(icons.whistling()), WHISTLING));
+	patternImagePairs.add(new PatternFactoryReplacement(";\\)|;-\\)|;&gt;", new ImagePatternElementFactory(icons.wink()), WINK));
+	patternImagePairs.add(new PatternFactoryReplacement("\\(wizard\\)", new ImagePatternElementFactory(icons.wizard()), WIZARD));
+	patternImagePairs.add(new PatternFactoryReplacement(":\\?", new ImagePatternElementFactory(icons.wondering()), WONDERING));
+	patternImagePairs.add(new PatternFactoryReplacement(":-\\)|:\\)", new ImagePatternElementFactory(icons.smile()), SMILE));
+    }
+
     /**
      * Ellipsis.
-     * 
+     *
      * @param text
      *            the string to truncate
      * @param length
      *            the size (if 0 returns the same text, if null return an empty
      *            string)
-     * 
+     *
      * @return the result string
      */
     public static String ellipsis(final String text, final int length) {
@@ -60,126 +118,188 @@ public class ChatMessageFormatter {
 		: text;
     }
 
-    public static String format(final String message) {
-	if (message != null) {
-	    String formatted = TextUtils.escape(message);
-	    formatted = formatNewLines(formatted);
-	    formatted = formatUrls(formatted);
-	    formatted = formatEmoticons(formatted);
-	    return formatted;
-	} else {
-	    return null;
+    public static Element format(String name, String message) {
+	if (name == null || name.length() <= 0) {
+	    // Workaround for #207
+	    message = message.replaceAll(" room ", " group chat ");
+	    message = message.replaceAll("Room ", "Group chat ");
 	}
-    }
-
-    private static String formatEmoticons(String message) {
-	// FIXME: find a better way (for instance using Suco), taking care of
-	// the tests (and GWT.create stuff)
-	icons = Emoticons.App.getInst();
-	final EmoticonStyles css = icons.css();
-	css.ensureInjected();
-	message = preFormatEmoticons(message);
-	message = message.replaceAll(SMILE, getSpan(css.smile()));
-	message = message.replaceAll(CRYING, getSpan(css.crying()));
-	message = message.replaceAll(SURPRISED, getSpan(css.surprised()));
-	message = message.replaceAll(ANGEL, getSpan(css.angel()));
-	message = message.replaceAll(HAPPY, getSpan(css.happy()));
-	message = message.replaceAll(GRIN, getSpan(css.grin()));
-	message = message.replaceAll(JOYFUL, getSpan(css.joyful()));
-	message = message.replaceAll(UNCERTAIN, getSpan(css.uncertain()));
-	message = message.replaceAll(ANGRY, getSpan(css.angry()));
-	message = message.replaceAll(TONGUE, getSpan(css.tongue()));
-	message = message.replaceAll(LOVE, getSpan(css.love()));
-	message = message.replaceAll(SLEEPING, getSpan(css.sleeping()));
-	message = message.replaceAll(COOL, getSpan(css.cool()));
-	message = message.replaceAll(KISSING, getSpan(css.kissing()));
-	message = message.replaceAll(SAD, getSpan(css.sad()));
-	message = message.replaceAll(ALIEN, getSpan(css.alien()));
-	message = message.replaceAll(ANDY, getSpan(css.andy()));
-	message = message.replaceAll(BANDIT, getSpan(css.bandit()));
-	message = message.replaceAll(BLUSHING, getSpan(css.blushing()));
-	message = message.replaceAll(DEVIL, getSpan(css.devil()));
-	message = message.replaceAll(HEART, getSpan(css.heart()));
-	message = message.replaceAll(LOL, getSpan(css.lol()));
-	message = message.replaceAll(NINJA, getSpan(css.ninja()));
-	message = message.replaceAll(PINCHED, getSpan(css.pinched()));
-	message = message.replaceAll(POLICEMAN, getSpan(css.policeman()));
-	message = message.replaceAll(POUTY, getSpan(css.pouty()));
-	message = message.replaceAll(SICK, getSpan(css.sick()));
-	message = message.replaceAll(SIDEWAYS, getSpan(css.sideways()));
-	message = message.replaceAll(UNSURE, getSpan(css.unsure()));
-	message = message.replaceAll(W00T, getSpan(css.w00t()));
-	message = message.replaceAll(WINK, getSpan(css.wink()));
-	message = message.replaceAll(WONDERING, getSpan(css.wondering()));
-	message = message.replaceAll(WHISTLING, getSpan(css.whistling()));
-	message = message.replaceAll(WIZARD, getSpan(css.wizard()));
-	return message;
-    }
-
-    private static String getSpan(final String style) {
-	return "<span class=\"hablar-Emoticon " + icons.css().base() + " " + style + "\"><span>";
-    }
-
-    private static String replace(String message, final String[] from, final String to) {
-	for (final String element : from) {
-	    message = message.replaceAll("(^|[\\s])(" + element + ")([\\s]|$)", "$1" + to + "$2</span></span>$3");
-	    // two times for: :) :) :) :)
-	    message = message.replaceAll("(^|[\\s])(" + element + ")([\\s]|$)", "$1" + to + "$2</span></span>$3");
-	}
-	return message;
-    }
-
-    static String formatNewLines(final String formatted) {
-	return formatted.replaceAll("\n", "<br>\n");
-    }
-
-    static String formatUrls(String message) {
-	return message = message.replaceAll(TextUtils.URL_REGEXP, "<a href=\"$1\" target=\"_blank\">$1</a>");
-    }
-
-    static String preFormatEmoticons(String message) {
-	message = replace(message, new String[] { "&gt;:\\)" }, DEVIL);
-	message = replace(message, new String[] { "O:\\)", "o:\\)", "o:-\\)", "O:-\\)", "0:\\)", "0:-\\)" }, ANGEL);
-	message = replace(message, new String[] { "\\^_\\^", "\\^-\\^", "\\^\\^", ":\\)\\)", ":-\\)\\)" }, JOYFUL);
-	message = replace(message, new String[] { "\\(police\\)", "\\(cop\\)", "\\{\\):\\)" }, POLICEMAN);
-	message = replace(message, new String[] { "=:\\)", "\\(alien\\)" }, ALIEN);
-	message = replace(message, new String[] { "o_O", "o_0", "O_O", "o_o", "O_o", "0_o", "o0", "0o", "oO", "Oo",
-		"0_0" }, ANDY);
-	message = replace(message, new String[] { "&gt;:o", "&gt;:-o", "&gt;:O", "&gt;:-O", "X\\(", "X-\\(", "x\\(",
-		"x-\\(", ":@", "&lt;_&lt;" }, ANGRY);
-	message = replace(message, new String[] { "\\(bandit\\)", ":\\(&gt;" }, BANDIT);
-	message = replace(message, new String[] { ":&quot;&gt;", ":\\*&gt;", ":-\\$", ":\\$" }, BLUSHING);
-	message = replace(message, new String[] { "B\\)", "B-\\)", "8\\)" }, COOL);
-	message = replace(message, new String[] { ":\'\\(", "=\'\\(" }, CRYING);
-	message = replace(message, new String[] { ":-d", ":d", ":-D", ":D", ":d", "=D", "=-D" }, GRIN);
-	message = replace(message, new String[] { "=\\)", "=-\\)" }, HAPPY);
-	message = replace(message, new String[] { "\\(L\\)", "\\(h\\)", "\\(H\\)" }, HEART);
-	message = replace(message, new String[] { ":-\\*", ":\\*" }, KISSING);
-	message = replace(message, new String[] { "\\(LOL\\)", "lol" }, LOL);
-	message = replace(message, new String[] { ":-X", ":-xX", ":x", "\\(wubya\\)", "\\(wubyou\\)", "\\(wub\\)" },
-		LOVE);
-	message = replace(message, new String[] { "\\(:\\)", "\\(ph33r\\)", "\\(ph34r\\)" }, NINJA);
-	message = replace(message, new String[] { "&gt;_&lt;" }, PINCHED);
-	message = replace(message, new String[] { ":\\|", "=\\|", ":-\\|" }, POUTY);
-	message = replace(message, new String[] { ":\\(", "=\\(", "=-\\(", ":-\\(" }, SAD);
-	message = replace(message, new String[] { ":&amp;", ":-&amp;" }, SICK);
-	message = replace(message, new String[] { "=]" }, SIDEWAYS);
-	message = replace(message, new String[] { "\\(-.-\\)", "\\|\\)", "\\|-\\)", "I-\\)", "I-\\|" }, SLEEPING);
-	message = replace(message, new String[] { ":-O", ":O", ":-o", ":o", ":-0", "=-O", "=-o", "=o", "=O" },
-		SURPRISED);
-	message = replace(message, new String[] { ":P", "=P", "=p", ":-P", ":p", ":-p", ":b" }, TONGUE);
-	message = replace(message, new String[] { ":-\\\\", ":-/", ":/", ":\\\\" }, UNCERTAIN);
-	message = replace(message, new String[] { ":s", ":-S", ":-s", ":S" }, UNSURE);
-	message = replace(message, new String[] { "\\(woot\\)", "\\(w00t\\)", "\\(wOOt\\)" }, W00T);
-	message = replace(message, new String[] { ":-&quot;" }, WHISTLING);
-	message = replace(message, new String[] { ";\\)", ";-\\)", ";&gt;" }, WINK);
-	message = replace(message, new String[] { "\\(wizard\\)" }, WIZARD);
-	message = replace(message, new String[] { ":\\?" }, WONDERING);
-	message = replace(message, new String[] { ":-\\)", ":\\)" }, SMILE);
-	return message;
+	List<ReplaceMatch> matchesToReplace = new ArrayList<ReplaceMatch>();
+	message = replaceAndFindEmoticonMatches(message, matchesToReplace);
+	List<ReplacePosition> positions = findEmoticonPositions(message, matchesToReplace);
+	SpanElement element = createFormattedMessageElement(message, positions);
+	return element;
     }
 
     private ChatMessageFormatter() {
     }
 
+    private static SpanElement createFormattedMessageElement(String message, List<ReplacePosition> positions) {
+	Document doc = Document.get();
+	SpanElement element = doc.createSpanElement();
+	int previousPosition = 0;
+	for (ReplacePosition position : positions) {
+	    element.appendChild(doc.createTextNode(message.substring(previousPosition, position.start)));
+	    element.appendChild(position.image.create(position.text));
+	    previousPosition = position.end;
+	}
+	if (previousPosition < message.length()) {
+	    element.appendChild(doc.createTextNode(message.substring(previousPosition)));
+	}
+	return element;
+    }
+
+    private static List<ReplacePosition> findEmoticonPositions(String message, List<ReplaceMatch> matchesToReplace) {
+	List<ReplacePosition> positions = new ArrayList<ReplacePosition>();
+	for (ReplaceMatch replaceMatch : matchesToReplace) {
+	    int pos = message.indexOf(replaceMatch.replacement, 0);
+	    int length = replaceMatch.replacement.length();
+	    int index = 0;
+	    while (pos >= 0) {
+		positions.add(new ReplacePosition(pos, pos + length, replaceMatch.matches[index], replaceMatch.image));
+		pos = message.indexOf(replaceMatch.replacement, pos + length);
+	    }
+	}
+	Collections.sort(positions);
+	return positions;
+    }
+
+    private static String replaceAndFindEmoticonMatches(String message, List<ReplaceMatch> matchesToReplace) {
+	for (PatternFactoryReplacement pair : patternImagePairs) {
+	    JsArrayString jsMatches = getMatches(message, pair.pattern);
+	    if (jsMatches != null && jsMatches.length() > 0) {
+		int length = jsMatches.length();
+		String[] matches = new String[length];
+		for (int i = 0; i < length; i++) {
+		    matches[i] = jsMatches.get(i);
+		}
+		message = message.replaceAll(pair.pattern, pair.replacement);
+		matchesToReplace.add(new ReplaceMatch(matches, pair.replacement, pair.factory));
+	    }
+	}
+	return message;
+    }
+
+    private static native JsArrayString getMatches(String text, String pattern) /*-{
+        var regexp = new RegExp(pattern);
+        return text.match(regexp);
+    }-*/;
+
+    /**
+     * It represents a factory of elements, given the original text.
+     */
+    private static interface PatternElementFactory {
+	Element create(String originalText);
+    }
+
+    /**
+     * Generates an element given the image resource and the original text.
+     */
+    private static class ImagePatternElementFactory implements PatternElementFactory {
+
+	private ImageResource image;
+
+	public ImagePatternElementFactory(ImageResource image) {
+	    this.image = image;
+	}
+
+	@Override
+	public Element create(String originalText) {
+	    Document doc = Document.get();
+	    SpanElement imageContainer = doc.createSpanElement();
+	    Image image = new Image(this.image);
+	    image.setTitle(originalText);
+	    image.addStyleName("hablar-EmoticonImage");
+	    imageContainer.appendChild(image.getElement());
+	    return imageContainer;
+	}
+
+    }
+
+    /**
+     * Generates an anchor, given the URL to point to.
+     */
+    private static class AnchorPatternElementFactory implements PatternElementFactory {
+
+	@Override
+	public Element create(String originalText) {
+	    Document doc = Document.get();
+	    AnchorElement element = doc.createAnchorElement();
+	    element.setHref(originalText);
+	    element.setTarget("_blank");
+	    element.appendChild(doc.createTextNode(originalText));
+	    return element;
+	}
+    }
+
+    /**
+     * Generates a &lt;br&gt; element.
+     */
+    private static class NewlinePatternElementFactory implements PatternElementFactory {
+
+	@Override
+	public Element create(String originalText) {
+	    Document doc = Document.get();
+	    return doc.createBRElement();
+	}
+    }
+
+    /**
+     * Triad of a string pattern, an pattern element factory and the replacement
+     * of found patterns in the messages.
+     */
+    private static class PatternFactoryReplacement {
+	private String pattern;
+
+	private PatternElementFactory factory;
+
+	private String replacement;
+
+	public PatternFactoryReplacement(String pattern, PatternElementFactory factory, String replacement) {
+	    this.pattern = pattern;
+	    this.factory = factory;
+	    this.replacement = replacement;
+	}
+    }
+
+    /**
+     * Contains the array of the matches and the replacements.
+     */
+    private static class ReplaceMatch {
+	private String[] matches;
+	private String replacement;
+
+	private PatternElementFactory image;
+
+	public ReplaceMatch(String[] matches, String replacement, PatternElementFactory image) {
+	    this.matches = matches;
+	    this.replacement = replacement;
+	    this.image = image;
+	}
+    }
+
+    /**
+     * Contains the placement of a replace activity that must be done. Stores
+     * the start and end of the string to replace, the text to replace and the
+     * pattern element factory to use.
+     */
+    private static class ReplacePosition implements Comparable<ReplacePosition> {
+	private int start;
+	private int end;
+	private String text;
+
+	private PatternElementFactory image;
+
+	public ReplacePosition(int start, int end, String text, PatternElementFactory image) {
+	    this.start = start;
+	    this.end = end;
+	    this.text = text;
+	    this.image = image;
+	}
+
+	@Override
+	public int compareTo(ReplacePosition o) {
+	    return start - o.start;
+	}
+    }
 }

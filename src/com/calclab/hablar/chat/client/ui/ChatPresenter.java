@@ -22,6 +22,7 @@ import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
@@ -59,10 +60,11 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
 	chat.onMessageReceived(new Listener<Message>() {
 	    @Override
 	    public void onEvent(final Message message) {
-		final String body = ChatMessageFormatter.format(message.getBody());
+		String messageBody = message.getBody();
+		final Element body = ChatMessageFormatter.format(userName, messageBody);
 		if (body != null) {
 		    display.addMessage(userName, body, ChatDisplay.MessageType.incoming);
-		    fireUserMessage(body);
+		    fireUserMessage(messageBody);
 		    if (getVisibility() == Visibility.hidden) {
 			requestVisibility(Visibility.notFocused);
 		    }
@@ -157,7 +159,7 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
     private void sendMessage(final Chat chat, final ChatDisplay display) {
 	final String text = display.getBody().getText().trim();
 	if (!text.isEmpty()) {
-	    final String body = ChatMessageFormatter.format(text);
+	    final Element body = ChatMessageFormatter.format("me", text);
 	    display.addMessage("me", body, ChatDisplay.MessageType.sent);
 	    chat.send(new Message(text));
 	    display.clearAndFocus();

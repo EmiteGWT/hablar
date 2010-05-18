@@ -1,6 +1,7 @@
 package com.calclab.hablar.chat.client.ui;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -23,18 +24,18 @@ public class ChatMessage extends Composite implements ChatMessageDisplay {
     @UiField
     SpanElement body;
 
-    public ChatMessage(final String name, String body, ChatDisplay.MessageType type) {
+    public ChatMessage(final String name, Element body, ChatDisplay.MessageType type) {
 	initWidget(uiBinder.createAndBindUi(this));
 	if (name != null && name.length() > 0) {
 	    author.setInnerText(name + ": ");
 	} else {
 	    type = ChatDisplay.MessageType.info;
-	    // Workaround for #207
-	    body = body.replaceAll(" room ", " group chat ");
-	    body = body.replaceAll("Room ", "Group chat ");
 	}
-	this.body.setInnerHTML(body);
-	this.body.addClassName(type.toString());
+	Element parent = this.body.getParentElement();
+	this.body.removeFromParent();
+	parent.appendChild(body);
+	body.addClassName("body");
+	body.addClassName(type.toString());
     }
 
     @Override

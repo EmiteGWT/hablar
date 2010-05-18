@@ -8,6 +8,7 @@ import com.calclab.hablar.chat.client.ChatMessages;
 import com.calclab.hablar.core.client.ui.actions.ActionWidget;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.resources.client.CssResource;
@@ -74,7 +75,7 @@ public class ChatWidget extends Composite implements ChatDisplay {
     }
 
     @Override
-    public ChatMessageDisplay addMessage(final String name, final String body, final ChatDisplay.MessageType messageType) {
+    public ChatMessageDisplay addMessage(final String name, final Element body, final ChatDisplay.MessageType messageType) {
 	final ChatMessage message = new ChatMessage(name, body, messageType);
 	list.add(message);
 	scroll.ensureVisible(message);
