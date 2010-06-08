@@ -22,9 +22,8 @@ public interface ChatDisplay extends Display {
      * @param name
      * @param body
      * @param messageType
-     * @return
      */
-    ChatMessageDisplay addMessage(String name, Element body, ChatDisplay.MessageType messageType);
+    void addMessage(String name, Element body, ChatDisplay.MessageType messageType);
 
     /**
      * Add a simple (string) message to the chat panel
@@ -32,9 +31,8 @@ public interface ChatDisplay extends Display {
      * @param name
      * @param body
      * @param messageType
-     * @return
      */
-    ChatMessageDisplay addMessage(String name, String body, ChatDisplay.MessageType messageType);
+    void addMessage(String name, String body, ChatDisplay.MessageType messageType);
 
     /**
      * Adds a widget to the action bar for this chat view

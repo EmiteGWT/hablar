@@ -77,20 +77,18 @@ public class ChatWidget extends Composite implements ChatDisplay {
     }
 
     @Override
-    public ChatMessageDisplay addMessage(final String name, final Element body,
-	    final ChatDisplay.MessageType messageType) {
-	final ChatMessage message = new ChatMessage(name, body, messageType);
+    public void addMessage(final String name, final Element body, final ChatDisplay.MessageType messageType) {
+	final ChatMessageWidget message = new ChatMessageWidget(name, body, messageType);
 	list.add(message);
 	scroll.ensureVisible(message);
-	return message;
     }
 
     @Override
-    public ChatMessageDisplay addMessage(final String name, final String body, final MessageType messageType) {
+    public void addMessage(final String name, final String body, final MessageType messageType) {
 	final Document doc = Document.get();
 	final Element element = doc.createSpanElement();
 	element.appendChild(doc.createTextNode(body));
-	return addMessage(name, element, ChatDisplay.MessageType.info);
+	addMessage(name, element, ChatDisplay.MessageType.info);
     }
 
     /**

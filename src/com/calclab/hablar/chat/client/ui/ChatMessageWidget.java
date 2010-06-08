@@ -12,9 +12,9 @@ import com.google.gwt.user.client.ui.Widget;
  * A chat message
  */
 // FIXME: probably UIBinder is too much
-public class ChatMessage extends Composite implements ChatMessageDisplay {
+public class ChatMessageWidget extends Composite implements ChatMessageDisplay {
 
-    interface ChatMessageUiBinder extends UiBinder<Widget, ChatMessage> {
+    interface ChatMessageUiBinder extends UiBinder<Widget, ChatMessageWidget> {
     }
 
     private static ChatMessageUiBinder uiBinder = GWT.create(ChatMessageUiBinder.class);
@@ -24,14 +24,14 @@ public class ChatMessage extends Composite implements ChatMessageDisplay {
     @UiField
     SpanElement body;
 
-    public ChatMessage(final String name, Element body, ChatDisplay.MessageType type) {
+    public ChatMessageWidget(final String name, final Element body, ChatDisplay.MessageType type) {
 	initWidget(uiBinder.createAndBindUi(this));
 	if (name != null && name.length() > 0) {
 	    author.setInnerText(name + ": ");
 	} else {
 	    type = ChatDisplay.MessageType.info;
 	}
-	Element parent = this.body.getParentElement();
+	final Element parent = this.body.getParentElement();
 	this.body.removeFromParent();
 	parent.appendChild(body);
 	body.addClassName("body");

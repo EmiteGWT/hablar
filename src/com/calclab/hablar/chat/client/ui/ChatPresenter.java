@@ -3,6 +3,7 @@ package com.calclab.hablar.chat.client.ui;
 import static com.calclab.hablar.chat.client.HablarChat.i18n;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.calclab.emite.core.client.packet.TextUtils;
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
@@ -14,12 +15,12 @@ import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.Idify;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
-import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.page.events.UserMessageEvent;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
 import com.calclab.hablar.core.client.ui.menu.Action;
+import com.calclab.hablar.core.client.validators.Empty;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.dom.client.Element;
@@ -27,21 +28,11 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
+import com.google.gwt.i18n.client.DateTimeFormat;
 
 public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPage {
     public static final String TYPE = "Chat";
     public static final String CHAT_MESSAGE = "ChatMessage";
-
-    public static ChatPresenter asChat(final Page<?> page) {
-	if (isChat(page)) {
-	    return (ChatPresenter) page;
-	}
-	return null;
-    }
-
-    public static boolean isChat(final Page<?> page) {
-	return ChatPresenter.TYPE.equals(page.getType());
-    }
 
     private final Chat chat;
     private final String userName;
@@ -60,10 +51,12 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
 	chat.onMessageReceived(new Listener<Message>() {
 	    @Override
 	    public void onEvent(final Message message) {
-		String messageBody = message.getBody();
-		final Element body = ChatMessageFormatter.format(userName, messageBody);
-		if (body != null) {
-		    display.addMessage(userName, body, ChatDisplay.MessageType.incoming);
+		final String messageBody = message.getBody();
+		if (!Empty.is(messageBody)) {
+		    final Element body = ChatMessageFormatter.format(userName, messageBody);
+		    final Date today = new Date();
+		    final String time = DateTimeFormat.getShortTimeFormat().format(today);
+		    display.addMessage(time + " " + userName, body, ChatDisplay.MessageType.incoming);
 		    fireUserMessage(messageBody);
 		    if (getVisibility() == Visibility.hidden) {
 			requestVisibility(Visibility.notFocused);
@@ -150,7 +143,7 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
 	}
 
 	// Otherwise we will use the jid
-	if(name == null) {
+	if (name == null) {
 	    name = fromURI.getShortName();
 	}
 	return name;

@@ -3,7 +3,6 @@ package com.calclab.hablar.selenium.login;
 import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.calclab.emite.core.client.packet.TextUtils;
 import com.calclab.hablar.login.client.LoginMessages;
 import com.calclab.hablar.selenium.PageObject;
 import com.calclab.hablar.selenium.tools.I18nHelper;

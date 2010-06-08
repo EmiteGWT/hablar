@@ -10,8 +10,6 @@ import com.calclab.hablar.core.client.validators.TextValidator;
 import com.calclab.hablar.core.client.validators.Validators;
 import com.calclab.hablar.editbuddy.client.ui.EditBuddyDisplay;
 import com.calclab.suco.client.Suco;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
@@ -53,14 +51,11 @@ public class EditBuddyPage extends PagePresenter<EditBuddyDisplay> {
 	    }
 	});
 	/*
-	display.getEnterAction().addChangeHandler(new ChangeHandler() {
-	    @Override
-	    public void onChange(final ChangeEvent event) {
-		updateCurrentItem();
-		requestVisibility(Visibility.hidden);
-	    }
-	});
-	*/
+	 * display.getEnterAction().addChangeHandler(new ChangeHandler() {
+	 * 
+	 * @Override public void onChange(final ChangeEvent event) {
+	 * updateCurrentItem(); requestVisibility(Visibility.hidden); } });
+	 */
     }
 
     private void updateCurrentItem() {
