@@ -8,7 +8,7 @@ public class PageInfoChangedEvent extends GwtEvent<PageInfoChangedHandler> {
     private final Page<?> page;
     private final PageState pageState;
 
-    public PageInfoChangedEvent(Page<?> page, PageState pageState) {
+    public PageInfoChangedEvent(final Page<?> page, final PageState pageState) {
 	this.page = page;
 	this.pageState = pageState;
     }
@@ -27,7 +27,12 @@ public class PageInfoChangedEvent extends GwtEvent<PageInfoChangedHandler> {
     }
 
     @Override
-    protected void dispatch(PageInfoChangedHandler handler) {
+    public String toDebugString() {
+	return super.toDebugString() + pageState + " (" + page + ")";
+    }
+
+    @Override
+    protected void dispatch(final PageInfoChangedHandler handler) {
 	handler.onPageInfoChanged(this);
     }
 

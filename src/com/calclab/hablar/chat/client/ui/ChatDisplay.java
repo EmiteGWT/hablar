@@ -17,8 +17,8 @@ public interface ChatDisplay extends Display {
     }
 
     /**
-     * Add a new message to the chat panel
-     *
+     * Add a complext (html) message to the chat panel
+     * 
      * @param name
      * @param body
      * @param messageType
@@ -27,8 +27,18 @@ public interface ChatDisplay extends Display {
     ChatMessageDisplay addMessage(String name, Element body, ChatDisplay.MessageType messageType);
 
     /**
+     * Add a simple (string) message to the chat panel
+     * 
+     * @param name
+     * @param body
+     * @param messageType
+     * @return
+     */
+    ChatMessageDisplay addMessage(String name, String body, ChatDisplay.MessageType messageType);
+
+    /**
      * Adds a widget to the action bar for this chat view
-     *
+     * 
      * @param widget
      *            the widget to add
      */
@@ -44,7 +54,7 @@ public interface ChatDisplay extends Display {
 
     /**
      * Return a list with all the messages of this chat panel
-     *
+     * 
      * @return a list, never null but can be empty
      */
     ArrayList<ChatMessageDisplay> getMessages();

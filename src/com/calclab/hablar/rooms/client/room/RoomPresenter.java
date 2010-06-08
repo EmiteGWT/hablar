@@ -22,7 +22,6 @@ import com.calclab.hablar.rooms.client.notification.RoomNotificationPresenter;
 import com.calclab.hablar.rooms.client.occupant.OccupantsPresenter;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -35,6 +34,7 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> implements RoomPag
     private static int id = 0;
 
     private final Room room;
+    private final String me;
 
     public RoomPresenter(final HablarEventBus eventBus, final Room room, final RoomDisplay display) {
 	super(TYPE, "" + ++id, eventBus, display);
@@ -45,7 +45,7 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> implements RoomPag
 	new OccupantsPresenter(room, display.createOccupantsDisplay(room.getID()));
 
 	final Session session = Suco.get(Session.class);
-	final String me = session.getCurrentUser().getNode();
+	me = session.getCurrentUser().getNode();
 	final String roomName = RoomName.decode(room.getURI().getNode());
 	setVisibility(Visibility.notFocused);
 	model.init(HablarIcons.getBundle().rosterIcon(), roomName, roomName);
@@ -55,12 +55,10 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> implements RoomPag
 	    @Override
 	    public void onEvent(final Message message) {
 		final String from = message.getFrom().getResource();
-		final String messageBody = message.getBody();
-		final Element body = ChatMessageFormatter.format(from, messageBody);
-		if (body != null) {
-		    if (me.equals(from)) {
-			display.addMessage("me", body, ChatDisplay.MessageType.sent);
-		    } else {
+		if (!me.equals(from)) {
+		    final String messageBody = message.getBody();
+		    final Element body = ChatMessageFormatter.format(from, messageBody);
+		    if (body != null) {
 			display.addMessage(from, body, ChatDisplay.MessageType.incoming);
 			fireUserMessage(roomName, from, messageBody);
 		    }
@@ -120,10 +118,7 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> implements RoomPag
     }
 
     public void showMessage(final String text) {
-	final Document doc = Document.get();
-	final Element element = doc.createSpanElement();
-	element.appendChild(doc.createTextNode(text));
-	display.addMessage(null, element, ChatDisplay.MessageType.info);
+	display.addMessage(null, text, ChatDisplay.MessageType.info);
     }
 
     private void fireUserMessage(final String roomName, final String from, String body) {
@@ -140,8 +135,8 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> implements RoomPag
     private void sendMessage(final Chat chat, final ChatDisplay display) {
 	final String text = display.getBody().getText().trim();
 	if (!text.isEmpty()) {
-	    // final String body = ChatMessageFormatter.format(text);
-	    // display.showMessage("me", body, ChatDisplay.MessageType.sent);
+	    final Element body = ChatMessageFormatter.format(me, text);
+	    display.addMessage("me", body, ChatDisplay.MessageType.sent);
 	    chat.send(new Message(text));
 	    display.clearAndFocus();
 	}

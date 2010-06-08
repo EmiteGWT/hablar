@@ -8,6 +8,7 @@ import com.calclab.hablar.chat.client.ChatMessages;
 import com.calclab.hablar.core.client.ui.actions.ActionWidget;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
@@ -26,16 +27,6 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class ChatWidget extends Composite implements ChatDisplay {
 
-    private static ChatMessages messages;
-
-    public static void setMessages(final ChatMessages messages) {
-	ChatWidget.messages = messages;
-    }
-
-    public static ChatMessages i18n() {
-	return messages;
-    }
-
     interface ActionItemStyle extends CssResource {
 	String actionWidget();
     }
@@ -43,10 +34,21 @@ public class ChatWidget extends Composite implements ChatDisplay {
     interface ChatWidgetUiBinder extends UiBinder<Widget, ChatWidget> {
     }
 
+    private static ChatMessages messages;
+
     private static final int CONTROLS_HEIGHT = 115;
+
     private static final int STATUS_HEIGHT = 24;
 
     private static ChatWidgetUiBinder uiBinder = GWT.create(ChatWidgetUiBinder.class);
+
+    public static ChatMessages i18n() {
+	return messages;
+    }
+
+    public static void setMessages(final ChatMessages messages) {
+	ChatWidget.messages = messages;
+    }
 
     @UiField
     protected TextArea talkBox;
@@ -75,11 +77,20 @@ public class ChatWidget extends Composite implements ChatDisplay {
     }
 
     @Override
-    public ChatMessageDisplay addMessage(final String name, final Element body, final ChatDisplay.MessageType messageType) {
+    public ChatMessageDisplay addMessage(final String name, final Element body,
+	    final ChatDisplay.MessageType messageType) {
 	final ChatMessage message = new ChatMessage(name, body, messageType);
 	list.add(message);
 	scroll.ensureVisible(message);
 	return message;
+    }
+
+    @Override
+    public ChatMessageDisplay addMessage(final String name, final String body, final MessageType messageType) {
+	final Document doc = Document.get();
+	final Element element = doc.createSpanElement();
+	element.appendChild(doc.createTextNode(body));
+	return addMessage(name, element, ChatDisplay.MessageType.info);
     }
 
     /**
