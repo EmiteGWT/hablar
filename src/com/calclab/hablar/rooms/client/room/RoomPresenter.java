@@ -18,7 +18,6 @@ import com.calclab.hablar.core.client.page.events.UserMessageEvent;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.rooms.client.RoomName;
-import com.calclab.hablar.rooms.client.notification.RoomNotificationPresenter;
 import com.calclab.hablar.rooms.client.occupant.OccupantsPresenter;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
@@ -41,7 +40,7 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> implements RoomPag
 	this.room = room;
 	display.setId(getId());
 
-	new RoomNotificationPresenter(room, display);
+	new RoomNotificationPresenter(this, room, display);
 	new OccupantsPresenter(room, display.createOccupantsDisplay(room.getID()));
 
 	final Session session = Suco.get(Session.class);
@@ -129,7 +128,7 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> implements RoomPag
 	} else {
 	    message = i18n().incommingMessage(roomName, from, body);
 	}
-	eventBus.fireEvent(new UserMessageEvent(this, message, ROOM_MESSAGE));
+	fireUserNotification(message);
     }
 
     private void sendMessage(final Chat chat, final ChatDisplay display) {
@@ -146,5 +145,9 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> implements RoomPag
 	final boolean visible = state == State.ready;
 	display.setControlsVisible(visible);
 	display.setStatusVisible(visible);
+    }
+
+    void fireUserNotification(final String message) {
+	eventBus.fireEvent(new UserMessageEvent(this, message, ROOM_MESSAGE));
     }
 }

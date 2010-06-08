@@ -21,12 +21,6 @@ public interface RoomsMessages extends Messages {
     @DefaultMessage("Group Chat Name:")
     String groupChatNameLabelText();
 
-    @DefaultMessage("''{0}'' has joined the conversation")
-    String hasJoined(String nick);
-
-    @DefaultMessage("''{0}'' has left the conversation")
-    String hasLeft(String nick);
-
     @DefaultMessage("At group chat ''{0}'': {1}")
     String incommingAdminMessage(String groupChatName, String body);
 
@@ -36,6 +30,12 @@ public interface RoomsMessages extends Messages {
     @DefaultMessage("Invitation message:")
     String invitationMessageLabelText();
 
+    @DefaultMessage("You invited ''{0}'' to this conversation")
+    String invitationSent(String name);
+
+    @DefaultMessage("You invited ''{0}'' to this conversation with this message: {1}")
+    String invitationSentWithReason(String name, String reason);
+
     @DefaultMessage("Invite more people to this group chat")
     String invitePeopleToGroupChat();
 
@@ -44,6 +44,15 @@ public interface RoomsMessages extends Messages {
 
     @DefaultMessage("The group name has not valid characters")
     String notValidGroupChatName();
+
+    @DefaultMessage("''{0}'' has joined the conversation")
+    String occupantHasJoined(String nick);
+
+    @DefaultMessage("''{0}'' has left the conversation")
+    String occupantHasLeft(String nick);
+
+    @DefaultMessage("Occupant ''{0}'' has been modified.")
+    String occupantModified(String nick);
 
     @DefaultMessage("{0} Occupants")
     String occupants(int numberOfOccupants);
@@ -59,6 +68,9 @@ public interface RoomsMessages extends Messages {
 
     @DefaultMessage("Open new group chat")
     String openNewGroupChatTooltip();
+
+    @DefaultMessage("''{0}'' has change the subject of this conversation to ''{1}''")
+    String roomSubjectChanged(String nick, String newSubject);
 
     @DefaultMessage("The group chat must have at least one member")
     String selectionEmptyErrorMessage();
