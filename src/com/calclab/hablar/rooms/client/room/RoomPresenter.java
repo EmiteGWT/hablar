@@ -18,6 +18,7 @@ import com.calclab.hablar.core.client.page.events.UserMessageEvent;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.rooms.client.RoomName;
+import com.calclab.hablar.rooms.client.notification.RoomNotificationPresenter;
 import com.calclab.hablar.rooms.client.occupant.OccupantsPresenter;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
@@ -40,6 +41,7 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> implements RoomPag
 	this.room = room;
 	display.setId(getId());
 
+	new RoomNotificationPresenter(room, display);
 	new OccupantsPresenter(room, display.createOccupantsDisplay(room.getID()));
 
 	final Session session = Suco.get(Session.class);
@@ -53,7 +55,7 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> implements RoomPag
 	    @Override
 	    public void onEvent(final Message message) {
 		final String from = message.getFrom().getResource();
-		String messageBody = message.getBody();
+		final String messageBody = message.getBody();
 		final Element body = ChatMessageFormatter.format(from, messageBody);
 		if (body != null) {
 		    if (me.equals(from)) {
@@ -103,13 +105,23 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> implements RoomPag
 	});
     }
 
+    @Override
+    public String getChatName() {
+	return room.getID();
+    }
+
+    @Override
+    public ArrayList<ChatMessageDisplay> getMessages() {
+	return display.getMessages();
+    }
+
     public Room getRoom() {
 	return room;
     }
 
     public void showMessage(final String text) {
-	Document doc = Document.get();
-	Element element = doc.createSpanElement();
+	final Document doc = Document.get();
+	final Element element = doc.createSpanElement();
 	element.appendChild(doc.createTextNode(text));
 	display.addMessage(null, element, ChatDisplay.MessageType.info);
     }
@@ -139,15 +151,5 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> implements RoomPag
 	final boolean visible = state == State.ready;
 	display.setControlsVisible(visible);
 	display.setStatusVisible(visible);
-    }
-
-    @Override
-    public String getChatName() {
-	return room.getID();
-    }
-
-    @Override
-    public ArrayList<ChatMessageDisplay> getMessages() {
-	return display.getMessages();
     }
 }
