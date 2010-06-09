@@ -1,8 +1,8 @@
 package com.calclab.hablar.groupchat.client;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
-import com.calclab.hablar.chat.client.ui.ChatPage;
-import com.calclab.hablar.chat.client.ui.ChatPresenter;
+import com.calclab.hablar.chat.client.ui.PairChatPage;
+import com.calclab.hablar.chat.client.ui.PairChatPresenter;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.Idify;
 import com.calclab.hablar.core.client.container.PageAddedEvent;
@@ -42,8 +42,8 @@ public class HablarGroupChat implements EntryPoint {
 	hablar.addPageAddedHandler(new PageAddedHandler() {
 	    @Override
 	    public void onPageAdded(final PageAddedEvent event) {
-		if (event.isType(ChatPresenter.TYPE)) {
-		    final ChatPage chatPage = (ChatPage) event.getPage();
+		if (event.isType(PairChatPresenter.TYPE)) {
+		    final PairChatPage chatPage = (PairChatPage) event.getPage();
 		    final XmppURI uri = chatPage.getChat().getURI();
 		    chatPage.addAction(createConvertToGroupChatAction(uri, convertToGroupPage));
 		} else if (event.isType(RosterPage.TYPE)) {
@@ -58,12 +58,12 @@ public class HablarGroupChat implements EntryPoint {
 	messages = groupChatMessages;
     }
 
-    private static SimpleAction<ChatPage> createConvertToGroupChatAction(final XmppURI uri,
+    private static SimpleAction<PairChatPage> createConvertToGroupChatAction(final XmppURI uri,
 	    final ConvertToGroupChatPresenter convertToGroupPage) {
 	final String actionId = ACTION_ID_CONVERT + Idify.id(uri);
-	return new SimpleAction<ChatPage>(i18n().convertToGroupAction(), actionId, HablarIcons.getBundle().buddyAddIcon()) {
+	return new SimpleAction<PairChatPage>(i18n().convertToGroupAction(), actionId, HablarIcons.getBundle().buddyAddIcon()) {
 	    @Override
-	    public void execute(final ChatPage chatPage) {
+	    public void execute(final PairChatPage chatPage) {
 		convertToGroupPage.setChat(chatPage.getChat());
 		convertToGroupPage.requestVisibility(Visibility.focused);
 	    }

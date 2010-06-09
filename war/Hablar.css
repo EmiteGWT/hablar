@@ -182,14 +182,21 @@ input[disabled] {
     padding: 3px 3% 0 3%;
 }
 
-.hablar-ChatWidget .author {
+.chatMessage .author {
     display: block;
     float: left;
     font-weight: bold;
 }
 
-.hablar-ChatWidget .body {
-    margin-left: 10px;
+.chatMessage .metadata {
+	display: block;
+	float: left;
+	color: #BBBBBB;
+	margin-right: 5px;
+}
+
+.chatMessage .body {
+    margin-left: 5px;
     float: left;
 }
 

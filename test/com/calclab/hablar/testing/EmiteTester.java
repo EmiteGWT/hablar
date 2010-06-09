@@ -38,7 +38,6 @@ public class EmiteTester {
     public DefaultEventBus eventBus;
 
     public EmiteTester() {
-	// FIXME: Add setContainer to Suco (switch context)
 	final HashMapContainer container = (HashMapContainer) Suco.getComponents();
 	container.clear();
 	new SucoCoreModule().onInstall(container);

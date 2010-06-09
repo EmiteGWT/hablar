@@ -2,7 +2,7 @@ package com.calclab.hablar.usergroups.client.changegroups;
 
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
-import com.calclab.hablar.core.client.validators.Empty;
+import com.calclab.hablar.core.client.validators.IsEmpty;
 
 public class GroupSelectorPresenter implements Presenter<GroupSelectorDisplay> {
 
@@ -22,7 +22,7 @@ public class GroupSelectorPresenter implements Presenter<GroupSelectorDisplay> {
     }
 
     public boolean isSelected() {
-	return display.getSelected().getValue() == true && !Empty.is(display.getEditableName().getText());
+	return display.getSelected().getValue() == true && !IsEmpty.is(display.getEditableName().getText());
     }
 
     public void setProperties(final String name, final boolean editable, final boolean selected) {

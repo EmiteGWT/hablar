@@ -2,8 +2,8 @@ package com.calclab.hablar.clipboard.client;
 
 import java.util.ArrayList;
 
-import com.calclab.hablar.chat.client.MessageDataProvider;
-import com.calclab.hablar.chat.client.ui.ChatMessageDisplay;
+import com.calclab.hablar.chat.client.ChatMessageProvider;
+import com.calclab.hablar.chat.client.ui.ChatMessage;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -33,13 +33,11 @@ public class CopyToClipboardPresenter extends PagePresenter<CopyToClipboardDispl
 	});
     }
 
-    public void setChatMessagesProvider(final MessageDataProvider provider) {
-	final ArrayList<ChatMessageDisplay> messages = provider.getMessages();
+    public void setChatMessagesProvider(final ChatMessageProvider provider) {
+	final ArrayList<ChatMessage> messages = provider.getMessages();
 	final StringBuilder text = new StringBuilder();
-	for (final ChatMessageDisplay message : messages) {
-	    text.append(message.getAuthor());
-	    text.append(message.getBody());
-	    text.append("\n");
+	for (final ChatMessage message : messages) {
+	    text.append(message.toString());
 	}
 	display.getContentField().setText(text.toString());
     }

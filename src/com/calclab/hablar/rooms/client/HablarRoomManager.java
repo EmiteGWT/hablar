@@ -8,6 +8,7 @@ import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.emite.xep.muc.client.RoomInvitation;
 import com.calclab.emite.xep.muc.client.RoomManager;
+import com.calclab.hablar.chat.client.ui.ChatMessage;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.rooms.client.room.RoomDisplay;
@@ -92,7 +93,7 @@ public class HablarRoomManager {
 	    roomPage.requestVisibility(Visibility.notFocused);
 	    String message = "You have been invited to this group chat by " + invitation.getInvitor().getNode();
 	    message += invitation.getReason() != null ? ": " + invitation.getReason() : "";
-	    roomPage.showMessage(message);
+	    roomPage.addMessage(new ChatMessage(message));
 	} else {
 	    roomPage.requestVisibility(Visibility.focused);
 	}

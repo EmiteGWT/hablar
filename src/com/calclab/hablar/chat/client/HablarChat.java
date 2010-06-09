@@ -1,8 +1,8 @@
 package com.calclab.hablar.chat.client;
 
 import com.calclab.hablar.chat.client.state.HablarChatStateManager;
-import com.calclab.hablar.chat.client.ui.ChatPage;
-import com.calclab.hablar.chat.client.ui.ChatPresenter;
+import com.calclab.hablar.chat.client.ui.PairChatPage;
+import com.calclab.hablar.chat.client.ui.PairChatPresenter;
 import com.calclab.hablar.chat.client.ui.ChatWidget;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
@@ -29,8 +29,8 @@ public class HablarChat implements EntryPoint {
 	hablar.addPageAddedHandler(new PageAddedHandler() {
 	    @Override
 	    public void onPageAdded(final PageAddedEvent event) {
-		if (event.isType(ChatPresenter.TYPE)) {
-		    final ChatPage page = (ChatPage) event.getPage();
+		if (event.isType(PairChatPresenter.TYPE)) {
+		    final PairChatPage page = (PairChatPage) event.getPage();
 		    new HablarChatStateManager(page);
 		}
 	    }

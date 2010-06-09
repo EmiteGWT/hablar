@@ -6,7 +6,7 @@ import static org.mockito.Mockito.verify;
 
 import org.junit.Test;
 
-import com.calclab.hablar.chat.client.ui.ChatPresenter;
+import com.calclab.hablar.chat.client.ui.PairChatPresenter;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.events.UserMessageEvent;
 import com.calclab.hablar.rooms.client.room.RoomPresenter;
@@ -34,10 +34,10 @@ public class NotificationManagerTests {
     @Test
     public void shouldShowChatMessagesIfChoosed() {
 	preferences.incomingMessages = false;
-	fire("message", ChatPresenter.CHAT_MESSAGE);
+	fire("message", PairChatPresenter.CHAT_MESSAGE);
 	verify(notifier, times(0)).show("message");
 	preferences.incomingMessages = true;
-	fire("message", ChatPresenter.CHAT_MESSAGE);
+	fire("message", PairChatPresenter.CHAT_MESSAGE);
 	verify(notifier, times(1)).show("message");
     }
 

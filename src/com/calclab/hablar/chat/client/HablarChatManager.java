@@ -10,8 +10,8 @@ import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.chat.client.ui.ChatDisplay;
-import com.calclab.hablar.chat.client.ui.ChatPage;
-import com.calclab.hablar.chat.client.ui.ChatPresenter;
+import com.calclab.hablar.chat.client.ui.PairChatPage;
+import com.calclab.hablar.chat.client.ui.PairChatPresenter;
 import com.calclab.hablar.chat.client.ui.ChatWidget;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
@@ -24,7 +24,7 @@ public class HablarChatManager {
 
 	ChatDisplay create(boolean sendButtonVisible);
     }
-    private final HashMap<XmppURI, ChatPage> chatPages;
+    private final HashMap<XmppURI, PairChatPage> chatPages;
 
     private final Roster roster;
     private final ChatPageFactory factory;
@@ -44,7 +44,7 @@ public class HablarChatManager {
     public HablarChatManager(final Hablar hablarPresenter, final ChatConfig config, final ChatPageFactory factory) {
 	hablar = hablarPresenter;
 	this.factory = factory;
-	chatPages = new HashMap<XmppURI, ChatPage>();
+	chatPages = new HashMap<XmppURI, PairChatPage>();
 
 	roster = Suco.get(Roster.class);
 	final ChatManager chatManager = Suco.get(ChatManager.class);
@@ -63,7 +63,7 @@ public class HablarChatManager {
 	chatManager.onChatOpened(new Listener<Chat>() {
 	    @Override
 	    public void onEvent(final Chat chat) {
-		final ChatPage page = chatPages.get(chat.getURI());
+		final PairChatPage page = chatPages.get(chat.getURI());
 		assert page != null;
 		page.requestVisibility(Visibility.focused);
 	    }
@@ -72,7 +72,7 @@ public class HablarChatManager {
 	chatManager.onChatClosed(new Listener<Chat>() {
 	    @Override
 	    public void onEvent(final Chat chat) {
-		final ChatPage page = chatPages.get(chat.getURI());
+		final PairChatPage page = chatPages.get(chat.getURI());
 		page.requestVisibility(Visibility.hidden);
 	    }
 	});
@@ -83,7 +83,7 @@ public class HablarChatManager {
 		final Set<XmppURI> chats = chatPages.keySet();
 		for (final XmppURI chatURI : chats) {
 		    if (chatURI.equalsNoResource(jid)) {
-			final ChatPage page = chatPages.get(chatURI);
+			final PairChatPage page = chatPages.get(chatURI);
 			page.setPresence(item.isAvailable(), item.getShow());
 		    }
 		}
@@ -96,7 +96,7 @@ public class HablarChatManager {
 
     private void createChat(final Chat chat, final Visibility visibility) {
 	final ChatDisplay display = factory.create(sendButtonVisible);
-	final ChatPage presenter = new ChatPresenter(hablar.getEventBus(), chat, display);
+	final PairChatPage presenter = new PairChatPresenter(hablar.getEventBus(), chat, display);
 	chatPages.put(chat.getURI(), presenter);
 	hablar.addPage(presenter);
 

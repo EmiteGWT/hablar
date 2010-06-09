@@ -8,7 +8,7 @@ import static org.mockito.Mockito.when;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.calclab.hablar.chat.client.ui.ChatPresenter;
+import com.calclab.hablar.chat.client.ui.PairChatPresenter;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.page.events.UserMessageEvent;
@@ -31,14 +31,14 @@ public class UnattendedChatPagesTests {
     public void shouldAddChatIfNewMessageAndNotFocused() {
 	final Page<?> page = createChatPage(Visibility.notFocused);
 	assertEquals(0, pages.getSize());
-	tester.fire(new UserMessageEvent(page, "message", ChatPresenter.CHAT_MESSAGE));
+	tester.fire(new UserMessageEvent(page, "message", PairChatPresenter.CHAT_MESSAGE));
 	assertTrue(pages.contains(page));
     }
 
     @Test
     public void shouldRemoveChatIfFocused() {
 	final Page<?> page = createChatPage(Visibility.notFocused);
-	tester.fire(new UserMessageEvent(page, "message", ChatPresenter.CHAT_MESSAGE));
+	tester.fire(new UserMessageEvent(page, "message", PairChatPresenter.CHAT_MESSAGE));
 	assertTrue(pages.contains(page));
 	tester.fire(new VisibilityChangedEvent(page, Visibility.focused));
 	assertFalse(pages.contains(page));
@@ -46,7 +46,7 @@ public class UnattendedChatPagesTests {
 
     private Page<?> createChatPage(final Visibility visibility) {
 	final Page<?> page = tester.newPage(visibility);
-	when(page.getType()).thenReturn(ChatPresenter.TYPE);
+	when(page.getType()).thenReturn(PairChatPresenter.TYPE);
 	return page;
     }
 }

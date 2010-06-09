@@ -4,7 +4,8 @@
 	<ui:style>
 	</ui:style>
 
-	<g:HTMLPanel  addStyleNames="chatMessage">
+	<g:HTMLPanel addStyleNames="chatMessage">
+		<span ui:field="metadata" class="metadata" />
 		<span ui:field="author" class="author"></span>
 		<span ui:field="body" class="body"></span>
 	</g:HTMLPanel>

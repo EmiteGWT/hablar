@@ -7,19 +7,17 @@ import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emite.xep.muc.client.Occupant;
 import com.calclab.emite.xep.muc.client.Room;
-import com.calclab.hablar.chat.client.ui.ChatDisplay;
+import com.calclab.hablar.chat.client.ui.ChatMessage;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener2;
 
 public class RoomNotificationPresenter {
 
-    private final RoomDisplay display;
     private final RoomPresenter roomPresenter;
 
-    public RoomNotificationPresenter(final RoomPresenter roomPresenter, final Room room, final RoomDisplay display) {
+    public RoomNotificationPresenter(final RoomPresenter roomPresenter, final Room room) {
 	this.roomPresenter = roomPresenter;
-	this.display = display;
 
 	room.onOccupantAdded(new Listener<Occupant>() {
 	    @Override
@@ -70,7 +68,7 @@ public class RoomNotificationPresenter {
     }
 
     private void show(final String body) {
-	display.addMessage(null, body, ChatDisplay.MessageType.info);
+	roomPresenter.addMessage(new ChatMessage(null, null, body, ChatMessage.MessageType.info));
 	roomPresenter.fireUserNotification(body);
     }
 }

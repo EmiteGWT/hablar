@@ -2,7 +2,7 @@ package com.calclab.hablar.signals.client.unattended;
 
 import java.util.HashSet;
 
-import com.calclab.hablar.chat.client.ui.ChatPresenter;
+import com.calclab.hablar.chat.client.ui.PairChatPresenter;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
@@ -66,11 +66,11 @@ public class UnattendedPagesManager {
     }
 
     private boolean isChatMessage(final String messageType) {
-	return messageType.equals(ChatPresenter.CHAT_MESSAGE) || messageType.equals(RoomPresenter.ROOM_MESSAGE);
+	return messageType.equals(PairChatPresenter.CHAT_MESSAGE) || messageType.equals(RoomPresenter.ROOM_MESSAGE);
     }
 
     private boolean isChatPage(final String pageType) {
-	return pageType.equals(ChatPresenter.TYPE) || pageType.equals(RoomPresenter.TYPE);
+	return pageType.equals(PairChatPresenter.TYPE) || pageType.equals(RoomPresenter.TYPE);
     }
 
     private void onChatVisibilityChanged(final Page<?> page) {

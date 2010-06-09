@@ -1,5 +1,6 @@
 package com.calclab.hablar.chat.client.ui;
 
+import com.calclab.hablar.core.client.validators.IsEmpty;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.SpanElement;
@@ -12,7 +13,7 @@ import com.google.gwt.user.client.ui.Widget;
  * A chat message
  */
 // FIXME: probably UIBinder is too much
-public class ChatMessageWidget extends Composite implements ChatMessageDisplay {
+public class ChatMessageWidget extends Composite {
 
     interface ChatMessageUiBinder extends UiBinder<Widget, ChatMessageWidget> {
     }
@@ -20,32 +21,24 @@ public class ChatMessageWidget extends Composite implements ChatMessageDisplay {
     private static ChatMessageUiBinder uiBinder = GWT.create(ChatMessageUiBinder.class);
 
     @UiField
-    SpanElement author;
-    @UiField
-    SpanElement body;
+    SpanElement author, body, metadata;
 
-    public ChatMessageWidget(final String name, final Element body, ChatDisplay.MessageType type) {
+    public ChatMessageWidget(final ChatMessage message) {
 	initWidget(uiBinder.createAndBindUi(this));
-	if (name != null && name.length() > 0) {
-	    author.setInnerText(name + ": ");
-	} else {
-	    type = ChatDisplay.MessageType.info;
+	if (IsEmpty.not(message.metadata)) {
+	    metadata.setInnerText(message.metadata);
 	}
-	final Element parent = this.body.getParentElement();
-	this.body.removeFromParent();
-	parent.appendChild(body);
-	body.addClassName("body");
-	body.addClassName(type.toString());
-    }
-
-    @Override
-    public String getAuthor() {
-	return author.getInnerText();
-    }
-
-    @Override
-    public String getBody() {
-	return body.getInnerText();
+	if (IsEmpty.not(message.author)) {
+	    author.setInnerText(message.author + ": ");
+	} else {
+	    message.type = ChatMessage.MessageType.info;
+	}
+	final Element parent = body.getParentElement();
+	body.removeFromParent();
+	final Element newBody = ChatMessageFormatter.format(message.author, message.body);
+	parent.appendChild(newBody);
+	newBody.addClassName("body");
+	body.addClassName(message.type.toString());
     }
 
 }

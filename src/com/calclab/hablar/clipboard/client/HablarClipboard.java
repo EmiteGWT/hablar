@@ -1,7 +1,7 @@
 package com.calclab.hablar.clipboard.client;
 
-import com.calclab.hablar.chat.client.ui.ChatPage;
-import com.calclab.hablar.chat.client.ui.ChatPresenter;
+import com.calclab.hablar.chat.client.ui.PairChatPage;
+import com.calclab.hablar.chat.client.ui.PairChatPresenter;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.container.PageAddedEvent;
 import com.calclab.hablar.core.client.container.PageAddedHandler;
@@ -37,11 +37,11 @@ public class HablarClipboard implements EntryPoint {
 	hablar.addPageAddedHandler(new PageAddedHandler() {
 	    @Override
 	    public void onPageAdded(final PageAddedEvent event) {
-		if (event.isType(ChatPresenter.TYPE)) {
-		    final ChatPage chatPage = (ChatPage) event.getPage();
-		    chatPage.addAction(new SimpleAction<ChatPage>(actionName, ACTION_ID, actionIcon) {
+		if (event.isType(PairChatPresenter.TYPE)) {
+		    final PairChatPage chatPage = (PairChatPage) event.getPage();
+		    chatPage.addAction(new SimpleAction<PairChatPage>(actionName, ACTION_ID, actionIcon) {
 			@Override
-			public void execute(final ChatPage page) {
+			public void execute(final PairChatPage page) {
 			    copyToClipboardPage.setChatMessagesProvider(page);
 			    copyToClipboardPage.requestVisibility(Visibility.focused);
 			}

@@ -2,14 +2,10 @@ package com.calclab.hablar.chat.client.ui;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
-import java.util.ArrayList;
-
 import com.calclab.hablar.chat.client.ChatMessages;
 import com.calclab.hablar.core.client.ui.actions.ActionWidget;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.resources.client.CssResource;
@@ -77,18 +73,10 @@ public class ChatWidget extends Composite implements ChatDisplay {
     }
 
     @Override
-    public void addMessage(final String name, final Element body, final ChatDisplay.MessageType messageType) {
-	final ChatMessageWidget message = new ChatMessageWidget(name, body, messageType);
-	list.add(message);
-	scroll.ensureVisible(message);
-    }
-
-    @Override
-    public void addMessage(final String name, final String body, final MessageType messageType) {
-	final Document doc = Document.get();
-	final Element element = doc.createSpanElement();
-	element.appendChild(doc.createTextNode(body));
-	addMessage(name, element, ChatDisplay.MessageType.info);
+    public void addMessage(final ChatMessage message) {
+	final ChatMessageWidget widget = new ChatMessageWidget(message);
+	list.add(widget);
+	scroll.ensureVisible(widget);
     }
 
     /**
@@ -126,16 +114,6 @@ public class ChatWidget extends Composite implements ChatDisplay {
     @Override
     public HasText getBody() {
 	return talkBox;
-    }
-
-    @Override
-    public ArrayList<ChatMessageDisplay> getMessages() {
-	final ArrayList<ChatMessageDisplay> messageList = new ArrayList<ChatMessageDisplay>();
-	final int widgetCount = list.getWidgetCount();
-	for (int index = 0; index < widgetCount; index++) {
-	    messageList.add((ChatMessageDisplay) list.getWidget(index));
-	}
-	return messageList;
     }
 
     @Override

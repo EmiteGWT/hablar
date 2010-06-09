@@ -2,32 +2,28 @@ package com.calclab.hablar.rooms.client.room;
 
 import static com.calclab.hablar.rooms.client.HablarRooms.i18n;
 
-import java.util.ArrayList;
-
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
-import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.chat.Chat.State;
 import com.calclab.emite.xep.muc.client.Room;
-import com.calclab.hablar.chat.client.ui.ChatDisplay;
-import com.calclab.hablar.chat.client.ui.ChatMessageDisplay;
+import com.calclab.hablar.chat.client.ui.ChatMessage;
 import com.calclab.hablar.chat.client.ui.ChatMessageFormatter;
+import com.calclab.hablar.chat.client.ui.ChatPresenter;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
-import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.page.events.UserMessageEvent;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.core.client.ui.menu.Action;
+import com.calclab.hablar.core.client.validators.IsEmpty;
 import com.calclab.hablar.rooms.client.RoomName;
 import com.calclab.hablar.rooms.client.occupant.OccupantsPresenter;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 
-public class RoomPresenter extends PagePresenter<RoomDisplay> implements RoomPage {
+public class RoomPresenter extends ChatPresenter implements RoomPage {
     public static final String TYPE = "Room";
     public static final String ROOM_MESSAGE = "RoomMessage";
     private static int id = 0;
@@ -40,7 +36,7 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> implements RoomPag
 	this.room = room;
 	display.setId(getId());
 
-	new RoomNotificationPresenter(this, room, display);
+	new RoomNotificationPresenter(this, room);
 	new OccupantsPresenter(room, display.createOccupantsDisplay(room.getID()));
 
 	final Session session = Suco.get(Session.class);
@@ -56,9 +52,8 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> implements RoomPag
 		final String from = message.getFrom().getResource();
 		if (!me.equals(from)) {
 		    final String messageBody = message.getBody();
-		    final Element body = ChatMessageFormatter.format(from, messageBody);
-		    if (body != null) {
-			display.addMessage(from, body, ChatDisplay.MessageType.incoming);
+		    if (IsEmpty.not(messageBody)) {
+			addMessage(new ChatMessage(null, from, messageBody, ChatMessage.MessageType.incoming));
 			fireUserMessage(roomName, from, messageBody);
 		    }
 		}
@@ -107,47 +102,19 @@ public class RoomPresenter extends PagePresenter<RoomDisplay> implements RoomPag
 	return room.getID();
     }
 
-    @Override
-    public ArrayList<ChatMessageDisplay> getMessages() {
-	return display.getMessages();
-    }
-
     public Room getRoom() {
 	return room;
     }
 
-    public void showMessage(final String text) {
-	display.addMessage(null, text, ChatDisplay.MessageType.info);
-    }
-
     private void fireUserMessage(final String roomName, final String from, String body) {
-	final String message;
 	body = ChatMessageFormatter.ellipsis(body, 25);
-	if (from == null) {
-	    message = i18n().incommingAdminMessage(roomName, body);
-	} else {
-	    message = i18n().incommingMessage(roomName, from, body);
-	}
+	final String message = IsEmpty.is(from) ? i18n().incommingAdminMessage(roomName, body) : i18n()
+		.incommingMessage(roomName, from, body);
 	fireUserNotification(message);
-    }
-
-    private void sendMessage(final Chat chat, final ChatDisplay display) {
-	final String text = display.getBody().getText().trim();
-	if (!text.isEmpty()) {
-	    final Element body = ChatMessageFormatter.format(me, text);
-	    display.addMessage("me", body, ChatDisplay.MessageType.sent);
-	    chat.send(new Message(text));
-	    display.clearAndFocus();
-	}
-    }
-
-    private void setState(final State state) {
-	final boolean visible = state == State.ready;
-	display.setControlsVisible(visible);
-	display.setStatusVisible(visible);
     }
 
     void fireUserNotification(final String message) {
 	eventBus.fireEvent(new UserMessageEvent(this, message, ROOM_MESSAGE));
     }
+
 }
