@@ -40,7 +40,7 @@ public class SearchPage extends PagePresenter<SearchDisplay> {
 	manager = Suco.get(SearchManager.class);
 	setVisibility(visibility);
 	model.setCloseable(closeable);
-	String title = i18n().searchUsers();
+	final String title = i18n().searchUsers();
 
 	model.init(HablarIcons.getBundle().searchIcon(), title, title);
 	final MenuDisplay<SearchResultItem> menuDisplay = display.createMenu(SEARCH_MENU);
@@ -50,6 +50,14 @@ public class SearchPage extends PagePresenter<SearchDisplay> {
 
     public Menu<SearchResultItem> getItemMenu() {
 	return itemMenu;
+    }
+
+    @Override
+    public void setVisibility(final PagePresenter.Visibility visibility) {
+	super.setVisibility(visibility);
+	if (visibility == Visibility.focused) {
+	    display.focusInput();
+	}
     }
 
     private void bind() {

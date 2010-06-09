@@ -20,6 +20,8 @@ public interface SearchDisplay extends Display {
 
     MenuDisplay<SearchResultItem> createMenu(String debugId);
 
+    void focusInput();
+
     HasClickHandlers getSearchButton();
 
     HasChangeHandlers getSearchChange();

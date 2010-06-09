@@ -13,6 +13,8 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -26,25 +28,26 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class SearchWidget extends Composite implements SearchDisplay {
 
+    interface SearchWidgetUiBinder extends UiBinder<Widget, SearchWidget> {
+    }
+
     private static SearchMessages messages;
 
-    public static void setMessages(final SearchMessages messages) {
-	SearchWidget.messages = messages;
-    }
+    public static final String ID = "SearchPageWidget";
+
+    public static final String TERM_DEB_ID = "SearchPageWidget-term";
+
+    public static final String MESSAGE_DEB_ID = "SearchPageWidget-message";
+    public static final String TYPE = "Search";
+    private static SearchWidgetUiBinder uiBinder = GWT.create(SearchWidgetUiBinder.class);
 
     public static SearchMessages i18n() {
 	return messages;
     }
 
-    interface SearchWidgetUiBinder extends UiBinder<Widget, SearchWidget> {
+    public static void setMessages(final SearchMessages messages) {
+	SearchWidget.messages = messages;
     }
-
-    public static final String ID = "SearchPageWidget";
-    public static final String TERM_DEB_ID = "SearchPageWidget-term";
-    public static final String MESSAGE_DEB_ID = "SearchPageWidget-message";
-    public static final String TYPE = "Search";
-
-    private static SearchWidgetUiBinder uiBinder = GWT.create(SearchWidgetUiBinder.class);
 
     @UiField
     LayoutPanel self;
@@ -86,6 +89,16 @@ public class SearchWidget extends Composite implements SearchDisplay {
     @Override
     public MenuDisplay<SearchResultItem> createMenu(final String debugId) {
 	return new PopupMenu<SearchResultItem>(debugId);
+    }
+
+    @Override
+    public void focusInput() {
+	DeferredCommand.addCommand(new Command() {
+	    @Override
+	    public void execute() {
+		term.setFocus(true);
+	    }
+	});
     }
 
     @Override

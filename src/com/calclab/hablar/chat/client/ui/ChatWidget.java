@@ -11,6 +11,8 @@ import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -104,6 +106,16 @@ public class ChatWidget extends Composite implements ChatDisplay {
 	actionWidget.addStyleName(style.actionWidget());
 	actions.add(actionWidget);
 	return actionWidget;
+    }
+
+    @Override
+    public void focusInput() {
+	DeferredCommand.addCommand(new Command() {
+	    @Override
+	    public void execute() {
+		talkBox.setFocus(true);
+	    }
+	});
     }
 
     @Override

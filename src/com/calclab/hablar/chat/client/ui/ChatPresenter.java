@@ -49,6 +49,14 @@ public abstract class ChatPresenter extends PagePresenter<ChatDisplay> implement
 	this.showDate = showDate;
     }
 
+    @Override
+    public void setVisibility(final Visibility visibility) {
+	super.setVisibility(visibility);
+	if (visibility == Visibility.focused) {
+	    display.focusInput();
+	}
+    }
+
     protected void sendMessage(final Chat chat, final ChatDisplay display) {
 	final String text = display.getBody().getText().trim();
 	if (IsEmpty.not(text)) {

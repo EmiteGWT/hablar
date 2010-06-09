@@ -28,6 +28,8 @@ public interface ChatDisplay extends Display {
 
     HasClickHandlers createAction(Action<?> action);
 
+    void focusInput();
+
     HasClickHandlers getAction();
 
     HasText getBody();
