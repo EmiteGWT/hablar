@@ -35,11 +35,12 @@ public class CopyToClipboardPresenter extends PagePresenter<CopyToClipboardDispl
 
     public void setChatMessagesProvider(final ChatMessageProvider provider) {
 	final ArrayList<ChatMessage> messages = provider.getMessages();
-	final StringBuilder text = new StringBuilder();
+	final StringBuilder buffer = new StringBuilder();
 	for (final ChatMessage message : messages) {
-	    text.append(message.toString());
+	    message.toString(buffer);
+	    buffer.append("\n");
 	}
-	display.getContentField().setText(text.toString());
+	display.getContentField().setText(buffer.toString());
     }
 
 }

@@ -25,7 +25,10 @@ public class ChatMessage {
 
     @Override
     public String toString() {
-	final StringBuilder bf = new StringBuilder();
+	return toString(new StringBuilder());
+    }
+
+    public String toString(final StringBuilder bf) {
 	if (IsEmpty.not(metadata)) {
 	    bf.append(metadata).append(" ");
 	}
@@ -36,5 +39,6 @@ public class ChatMessage {
 	    bf.append(body);
 	}
 	return bf.toString();
+
     }
 }

@@ -70,6 +70,7 @@ public class RosterPageObject extends PageObject {
     }
 
     public RenderedWebElement getGroupMenu(final String groupId) {
+	System.out.println("Roster - getGroupMenu : " + groupId);
 	final String id = Idify.id("GroupHeaderWidget-menu", groupId);
 	return findElement(new ByIdOrName("gwt-debug-" + id));
     }

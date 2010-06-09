@@ -37,6 +37,7 @@ public class GroupChatSeleniumTests extends HablarSeleniumTest {
 	groupChat.waitForTextInRoom("1", "This group chat is now unlocked");
 	groupChat.getRoomTextBox("1").sendKeys("hi!\n");
 	groupChat.waitForTextInRoom("1", "hi!");
+	groupChat.waitForStatus("1", i18n.get("occupantHasJoined", "selenium"));
 	groupChat.waitForStatus("1", i18n.get("occupants", Integer.valueOf(1)));
 	removeFromGroup(newtestgroup);
 	removeSeleniumBuddy();

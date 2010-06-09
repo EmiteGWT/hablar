@@ -18,17 +18,24 @@ import com.google.gwt.i18n.client.DateTimeFormat;
  */
 public abstract class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPage {
     private final ArrayList<ChatMessage> messages;
+    private boolean showDate;
 
     public ChatPresenter(final String pageType, final String id, final HablarEventBus eventBus,
 	    final ChatDisplay display) {
 	super(pageType, id, eventBus, display);
 	messages = new ArrayList<ChatMessage>();
+	showDate = true;
     }
 
+    /**
+     * Add message to the chat display.
+     */
     @Override
     public void addMessage(final ChatMessage message) {
-	final Date today = new Date();
-	message.metadata = DateTimeFormat.getShortTimeFormat().format(today);
+	if (showDate) {
+	    final Date today = new Date();
+	    message.metadata = DateTimeFormat.getShortTimeFormat().format(today);
+	}
 	messages.add(message);
 	display.addMessage(message);
     }
@@ -36,6 +43,10 @@ public abstract class ChatPresenter extends PagePresenter<ChatDisplay> implement
     @Override
     public ArrayList<ChatMessage> getMessages() {
 	return messages;
+    }
+
+    public void setShowDate(final boolean showDate) {
+	this.showDate = showDate;
     }
 
     protected void sendMessage(final Chat chat, final ChatDisplay display) {
