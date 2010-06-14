@@ -43,23 +43,21 @@ public abstract class EditRoomPresenter extends PagePresenter<EditRoomDisplay> {
 	    }
 	});
 
-	roomNameValidator = new CompositeValidatorChecker(display
-		.getRoomNameError(), display.getAcceptEnabled());
+	roomNameValidator = new CompositeValidatorChecker(display.getRoomNameError(), display.getAcceptEnabled());
 	roomNameValidator.add(display.getRoomName(), Validators.notEmpty(i18n().emptyGroupChatName()));
 	roomNameValidator.add(display.getRoomName(), Validators.isValidRoomName(i18n().notValidGroupChatName()));
 	roomNameValidator.add(display.getSelectionList(), new ListNotEmptyValidator<Selectable>(i18n()
 		.selectionEmptyErrorMessage()));
-	display.getRoomNameKeys().addKeyDownHandler(new KeyDownHandler() {
 
+	display.getRoomNameKeys().addKeyDownHandler(new KeyDownHandler() {
 	    @Override
-	    public void onKeyDown(KeyDownEvent event) {
+	    public void onKeyDown(final KeyDownEvent event) {
 		DeferredCommand.addCommand(roomNameValidator.getDeferredCommand());
 	    }
 	});
 	display.getSelectionList().addValueChangeHandler(new ValueChangeHandler<List<Selectable>>() {
-
 	    @Override
-	    public void onValueChange(ValueChangeEvent<List<Selectable>> event) {
+	    public void onValueChange(final ValueChangeEvent<List<Selectable>> event) {
 		DeferredCommand.addCommand(roomNameValidator.getDeferredCommand());
 	    }
 	});

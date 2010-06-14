@@ -42,14 +42,14 @@ public class InviteToRoomPresenter extends EditRoomPresenter {
 	display.setAcceptText(i18n().acceptAction());
 
 	final Roster roster = Suco.get(Roster.class);
-	final String roomName = RoomName.decode(room.getURI().toString());
+	final String roomName = RoomName.decode(room.getURI().getNode());
 	display.getRoomName().setValue(roomName);
 	display.setRoomNameEnabled(false);
-	Set<String> occupantUris = new HashSet<String>();
-	for (Occupant occupant : room.getOccupants()) {
+	final Set<String> occupantUris = new HashSet<String>();
+	for (final Occupant occupant : room.getOccupants()) {
 	    occupantUris.add(occupant.getURI().getResource());
 	}
-	for (RosterItem item : roster.getItems()) {
+	for (final RosterItem item : roster.getItems()) {
 	    if (!occupantUris.contains(item.getJID().getNode())) {
 		createItem(item, false);
 	    }
