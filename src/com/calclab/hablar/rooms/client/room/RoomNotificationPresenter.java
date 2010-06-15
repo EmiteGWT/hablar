@@ -34,14 +34,14 @@ public class RoomNotificationPresenter {
 		show(body);
 	    }
 	});
-
+/*
 	room.onOccupantModified(new Listener<Occupant>() {
 	    @Override
 	    public void onEvent(final Occupant occupant) {
 		show(i18n().occupantModified(occupant.getNick()));
 	    }
 	});
-
+*/
 	room.onSubjectChanged(new Listener2<Occupant, String>() {
 	    @Override
 	    public void onEvent(final Occupant who, final String newSubject) {
