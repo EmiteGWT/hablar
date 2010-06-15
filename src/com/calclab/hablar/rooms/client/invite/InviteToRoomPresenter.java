@@ -45,6 +45,8 @@ public class InviteToRoomPresenter extends EditRoomPresenter {
 	final String roomName = RoomName.decode(room.getURI().getNode());
 	display.getRoomName().setValue(roomName);
 	display.setRoomNameEnabled(false);
+	display.clearList();
+	display.clearSelectionList();
 	final Set<String> occupantUris = new HashSet<String>();
 	for (final Occupant occupant : room.getOccupants()) {
 	    occupantUris.add(occupant.getURI().getResource());
