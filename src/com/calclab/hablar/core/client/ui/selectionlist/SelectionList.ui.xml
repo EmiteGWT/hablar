@@ -8,7 +8,7 @@
 		}
 	</ui:style>
 	<g:ScrollPanel>
-		<g:FlowPanel ui:field="selectionPanel" addStyleNames="{style.noOverflow}">
+		<g:FlowPanel ui:field="selectionPanel" addStyleNames="{style.noOverflow} hablar-SelectionList">
 
 		</g:FlowPanel>
 	</g:ScrollPanel>

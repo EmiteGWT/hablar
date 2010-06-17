@@ -26,3 +26,7 @@
 .hablar-Header.unattended.blinkOn {
     background-color: highlight;
 }
+
+.hablar-SelectionList {
+	zoom: 1;
+}
