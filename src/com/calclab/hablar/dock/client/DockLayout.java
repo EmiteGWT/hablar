@@ -1,7 +1,6 @@
 package com.calclab.hablar.dock.client;
 
-import static com.google.gwt.dom.client.Style.Unit.PCT;
-import static com.google.gwt.dom.client.Style.Unit.PX;
+import static com.google.gwt.dom.client.Style.Unit.*;
 
 import com.calclab.hablar.core.client.HablarDisplay;
 import com.calclab.hablar.core.client.page.Page;
@@ -58,12 +57,12 @@ public class DockLayout {
     public void slideDown(final Widget panel, final Dock dock) {
 	display.setWidgetTopHeight(panel, 0, PX, dock.size, dock.unit);
 	display.forceLayout();
-	display.setWidgetTopHeight(panel, 0, PX, 100, PCT);
+	display.setWidgetTopBottom(panel, 0, PX, 0, PX);
 	display.animate(500);
     }
 
     public void slideUp(final Widget panel, final Dock dock) {
-	display.setWidgetTopHeight(panel, 0, PX, 100, PCT);
+	display.setWidgetTopBottom(panel, 0, PX, 0, PX);
 	display.forceLayout();
 	display.setWidgetTopHeight(panel, 0, PX, dock.size, dock.unit);
 	display.animate(500);
