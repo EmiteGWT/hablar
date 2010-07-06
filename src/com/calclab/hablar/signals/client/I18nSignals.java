@@ -8,4 +8,7 @@ public class I18nSignals {
 	I18nSignals.t = t;
     }
 
+    public static SignalMessages i18n() {
+	return t;
+    }
 }

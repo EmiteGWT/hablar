@@ -21,6 +21,8 @@
 						notifications</g:CheckBox>
 					<g:CheckBox ui:field="rosterNotifications">Show roster notifications</g:CheckBox>
 				</p>
+				<h3 ui:field="methodsMessage">Notification Methods</h3>
+				<p><g:FlowPanel ui:field="methodsPanel"></g:FlowPanel></p>
 			</div>
 		</div>
 	</g:HTMLPanel>

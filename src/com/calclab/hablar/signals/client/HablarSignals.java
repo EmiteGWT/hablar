@@ -3,6 +3,8 @@ package com.calclab.hablar.signals.client;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
+import com.calclab.hablar.signals.client.browserfocus.BrowserFocus;
+import com.calclab.hablar.signals.client.notifications.BrowserPopupHablarNotifier;
 import com.calclab.hablar.signals.client.notifications.JGrowlHablarNotifier;
 import com.calclab.hablar.signals.client.notifications.NotificationManager;
 import com.calclab.hablar.signals.client.preferences.SignalsPreferencesPresenter;
@@ -18,6 +20,8 @@ import com.google.gwt.user.client.ui.HasText;
 public class HablarSignals implements EntryPoint {
 
     public static void install(final Hablar hablar) {
+	BrowserFocus.startMonitoring();
+	
 	final HablarEventBus eventBus = hablar.getEventBus();
 	final HasText titleDisplay = new HasText() {
 	    @Override
@@ -34,10 +38,13 @@ public class HablarSignals implements EntryPoint {
 
 	final UnattendedPagesManager manager = new UnattendedPagesManager(eventBus);
 	new UnattendedPresenter(eventBus, preferences, manager, titleDisplay);
-	new NotificationManager(eventBus, preferences, new JGrowlHablarNotifier());
+	NotificationManager notificationManager = new NotificationManager(eventBus, preferences);
 
+	notificationManager.addNotifier(new BrowserPopupHablarNotifier(), true);
+	notificationManager.addNotifier(new JGrowlHablarNotifier(), true);
+	
 	final SignalsPreferencesPresenter preferencesPage = new SignalsPreferencesPresenter(eventBus, preferences,
-		new SignalsPreferencesWidget());
+		new SignalsPreferencesWidget(), notificationManager);
 	hablar.addPage(preferencesPage, UserContainer.ROL);
     }
 

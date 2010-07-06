@@ -19,6 +19,8 @@ public class StoredPreferences extends SimpleStorageData {
     public static final String TITLE_NOTIF = "title-notif";
     public static final String INCOMING_NOTIF = "incoming-notif";
     public static final String ROSTER_NOTIF = "roster-notif";
+    
+    public static final String NOTIFIER_ENABLED = "notifier-%s-enabled";
 
     public static StoredPreferences parse(final IQResponse response) {
 	final StoredPreferences parsed = new StoredPreferences(response.getFirstChildInDeep(MatcherFactory
@@ -48,6 +50,22 @@ public class StoredPreferences extends SimpleStorageData {
     public boolean getTitleSignals() {
 	return parseBoolean(preferences.get(TITLE_NOTIF));
     }
+    
+    /**
+     * Determines whether a notifier is enabled
+     * @return <code>true</code> if the notifier is enabled, <code>false</code> if it's not enabled or <code>null</code> if the is no preference stored.
+     */
+    public Boolean isNotifierEnabled(final String notifierId) {
+	String preferenceId = NOTIFIER_ENABLED.replace("%s", notifierId);
+	
+	String preferenceValue = preferences.get(preferenceId);
+	
+	if(preferenceValue == null) {
+	    return null;
+	}
+	
+	return parseBoolean(preferenceValue);
+    }
 
     public void setIncomingMessages(final boolean incomingMessages) {
 	put(INCOMING_NOTIF, Boolean.toString(incomingMessages));
@@ -59,6 +77,11 @@ public class StoredPreferences extends SimpleStorageData {
 
     public void setTitleSignals(final boolean titleSignals) {
 	put(TITLE_NOTIF, Boolean.toString(titleSignals));
+    }
+    
+    public void setNotifierEnabled(final String notifierId, final boolean enabled) {
+	String preferenceId = NOTIFIER_ENABLED.replace("%s", notifierId);
+	put(preferenceId, Boolean.toString(enabled));
     }
 
     /**

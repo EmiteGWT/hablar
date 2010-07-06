@@ -1,5 +1,7 @@
 package com.calclab.hablar.signals.client.notifications;
 
+import static com.calclab.hablar.signals.client.I18nSignals.i18n;
+
 import com.google.gwt.core.client.GWT;
 
 public class JGrowlHablarNotifier implements HablarNotifier {
@@ -11,11 +13,11 @@ public class JGrowlHablarNotifier implements HablarNotifier {
     }
 
     @Override
-    public void show(final String userMessage) {
+    public void show(final String userMessage, final String messageType) {
 	if (isJGrowlPresent) {
 	    showJGrowl(userMessage);
 	} else {
-	    GWT.log("JGrown is not pressent, message: " + userMessage);
+	    GWT.log("JGrowl is not present, message: " + userMessage);
 	}
     }
 
@@ -26,5 +28,15 @@ public class JGrowlHablarNotifier implements HablarNotifier {
     private native void showJGrowl(final String userMessage) /*-{
         $wnd.jQuery.jGrowl(userMessage);
     }-*/;
+
+    @Override
+    public String getDisplayName() {
+	return i18n().jGrowlNotifierDisplayName();
+    }
+
+    @Override
+    public String getId() {
+	return "jgrowlNotifier";
+    }
 
 }
