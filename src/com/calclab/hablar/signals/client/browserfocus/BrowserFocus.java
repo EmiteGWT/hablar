@@ -1,7 +1,6 @@
 package com.calclab.hablar.signals.client.browserfocus;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Window;
 
 /**
  * Simple utility class which tracks whether the main application browser window currently
