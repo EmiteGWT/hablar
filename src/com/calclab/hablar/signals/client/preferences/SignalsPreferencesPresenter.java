@@ -12,14 +12,10 @@ import com.calclab.hablar.signals.client.I18nSignals;
 import com.calclab.hablar.signals.client.SignalPreferences;
 import com.calclab.hablar.signals.client.notifications.HablarNotifier;
 import com.calclab.hablar.signals.client.notifications.NotificationManager;
-import com.calclab.hablar.signals.client.preferences.SignalsPreferencesDisplay.NotifierSelectChange;
 import com.calclab.hablar.user.client.EditorPage;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.user.client.Window;
 
 public class SignalsPreferencesPresenter extends PagePresenter<SignalsPreferencesDisplay> implements
 	EditorPage<SignalsPreferencesDisplay> {

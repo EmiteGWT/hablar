@@ -9,7 +9,6 @@ import com.calclab.hablar.signals.client.SignalMessages;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.HeadingElement;
-import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;

@@ -1,12 +1,5 @@
 package com.calclab.hablar.signals.client;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.calclab.hablar.signals.client.notifications.HablarNotifier;
-
 public class SignalPreferences {
 
     /**
