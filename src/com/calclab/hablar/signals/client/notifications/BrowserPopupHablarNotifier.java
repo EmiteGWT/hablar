@@ -3,7 +3,6 @@ package com.calclab.hablar.signals.client.notifications;
 import static com.calclab.hablar.signals.client.I18nSignals.i18n;
 
 import com.calclab.hablar.signals.client.browserfocus.BrowserFocus;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Timer;
 
@@ -62,15 +61,28 @@ public class BrowserPopupHablarNotifier implements HablarNotifier {
     private static final int CREATE_TOASTER_WINDOW_NEWLY_OPENED = 2;
 
     /**
-     * This is used to populate the popup when it's created
+     * This is used to populate the popup when it's created. It can also be
+     * overridden by calling
+     * {@link BrowserPopupHablarNotifier#setPopupHtml(String)}.
+     * 
+     * I have inlined the css here so that it is loaded before the content,
+     * otherwise if I use an external stylesheet then there is a moment where
+     * the content is unstyled and it looks a bit rubbish.
      */
     @SuppressWarnings("unused")
-    private static final String POPUP_HTML = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">"
+    private static String popupHtml = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">"
 	    + "<html><head>"
 	    + "<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"
-	    + "<link type=\"text/css\" rel=\"stylesheet\" href=\""
-	    + GWT.getHostPageBaseURL()
-	    + "Hablar.css\">"
+	    + "<style type=\"text/css\">"
+	    + "html { font-family: Tahoma, sans-serif; font-size: 80%; }"
+	    + "body { background-color: #e9e9e9; margin: 0; padding: 0;	}"
+	    + "#notificationContainer { width: 100%; height: 100%; }"
+	    + "#notificationContainer p.message { height: 30px; line-height: 30px; margin: 10px 10px 0 10px !important; padding: 0 2px;"
+	    + " overflow: hidden; text-overflow: ellipsis; -o-text-overflow: ellipsis; -ms-text-overflow: ellipsis;"
+	    + "-moz-binding: url('ellipsis.xml#ellipsis'); text-align: center; background-color: black; -moz-border-radius: 5px;"
+	    + "-webkit-border-radius: 5px; border-radius: 5px; }"
+	    + "#notificationContainer p.message a, #notificationContainer p.message a:visited { color: white !important; text-decoration: none;	}"
+	    + "</style>"
 	    + "</head><body class=\"hablarPopupWindow\"><div id=\"notificationContainer\"></div></body></html>";
 
     /**
@@ -314,7 +326,7 @@ public class BrowserPopupHablarNotifier implements HablarNotifier {
             return @com.calclab.hablar.signals.client.notifications.BrowserPopupHablarNotifier::CREATE_TOASTER_WINDOW_FAILURE;
         }
 
-        $wnd.toasterWindow.document.write(@com.calclab.hablar.signals.client.notifications.BrowserPopupHablarNotifier::POPUP_HTML);
+        $wnd.toasterWindow.document.write(@com.calclab.hablar.signals.client.notifications.BrowserPopupHablarNotifier::popupHtml);
 
         $wnd.toasterWindow.document.title = title;
         $wnd.toasterWindow.focus();
@@ -337,4 +349,12 @@ public class BrowserPopupHablarNotifier implements HablarNotifier {
     private static native int getScreenHeight() /*-{
         return $wnd.screen.height;
     }-*/;
+
+    /**
+     * Set the html which will be used to populate the popup window. I know I
+     * shouldn't really do it like this, but at least it's simple!
+     */
+    public static void setPopupHtml(final String popupHtml) {
+	BrowserPopupHablarNotifier.popupHtml = popupHtml;
+    }
 }
