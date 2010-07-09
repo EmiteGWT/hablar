@@ -40,8 +40,8 @@ public class HablarSignals implements EntryPoint {
 	new UnattendedPresenter(eventBus, preferences, manager, titleDisplay);
 	NotificationManager notificationManager = new NotificationManager(eventBus, preferences);
 
-	notificationManager.addNotifier(new BrowserPopupHablarNotifier(), true);
-	notificationManager.addNotifier(new JGrowlHablarNotifier(), true);
+	notificationManager.addNotifier((BrowserPopupHablarNotifier) GWT.create(BrowserPopupHablarNotifier.class), true);
+	notificationManager.addNotifier((JGrowlHablarNotifier) GWT.create(JGrowlHablarNotifier.class), true);
 	
 	final SignalsPreferencesPresenter preferencesPage = new SignalsPreferencesPresenter(eventBus, preferences,
 		new SignalsPreferencesWidget(), notificationManager);

@@ -580,24 +580,35 @@ body {
 }
 
 /** NOTIFICATION POPUP **/
+body.hablarPopupWindow {
+	background-color: #e9e9e9;
+	margin: 0;
+	padding: 0;
+}
+
 #notificationContainer {
-	position: absolute;
-	left: 0;
-	top: 0;
 	width: 100%;
 	height: 100%;
 }
 
 #notificationContainer p.message {
 	height: 30px;
+	line-height: 30px;
 	margin: 10px 10px 0 10px !important;
+	padding: 0 2px;
 	overflow: hidden;
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
     -ms-text-overflow: ellipsis;
     -moz-binding: url('ellipsis.xml#ellipsis');	
+    text-align: center;
+	background-color: black;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }
 
 #notificationContainer p.message a, #notificationContainer p.message a:visited {
-	color: black !important;
+	color: white !important;
+	text-decoration: none;
 }

@@ -11,14 +11,12 @@ import com.calclab.hablar.rooms.client.room.RoomPresenter;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
 import com.calclab.hablar.signals.client.SignalPreferences;
 
+/**
+ * A class which is responsible for maintaining a list of {@link HablarNotifier}
+ * objects, storing that some are active, and sending messages to the active
+ * ones.
+ */
 public class NotificationManager {
-
-    private final SignalPreferences preferences;
-
-    /**
-     * The list of the available notifiers
-     */
-    private final ArrayList<HablarNotifier> notifiers;
 
     /**
      * The list of active notifiers. This would have been cleaner to implement
@@ -29,23 +27,23 @@ public class NotificationManager {
     private final ArrayList<HablarNotifier> activeNotifiers;
 
     /**
-     * This is to retain API compatibility.
+     * The list of the available notifiers.
+     */
+    private final ArrayList<HablarNotifier> notifiers;
+
+    /**
+     * The preferences.
+     */
+    private final SignalPreferences preferences;
+
+    /**
+     * Construct a new {@link NotificationManager} instance
      * 
      * @param eventBus
-     *            the habler event bus
+     *            the hablar event bus
      * @param preferences
-     *            the notification preferences object
-     * @param notifier
-     *            a notifier to add to the notification stack
+     *            the preferences
      */
-    public NotificationManager(final HablarEventBus eventBus, final SignalPreferences preferences,
-	    final HablarNotifier notifier) {
-
-	this(eventBus, preferences);
-
-	addNotifier(notifier, true);
-    }
-
     public NotificationManager(final HablarEventBus eventBus, final SignalPreferences preferences) {
 
 	this.preferences = preferences;
@@ -64,13 +62,21 @@ public class NotificationManager {
 	activeNotifiers = new ArrayList<HablarNotifier>();
     }
 
-    private boolean isVisibleMessage(final String messageType) {
-	if (messageType.equals(PairChatPresenter.CHAT_MESSAGE) || messageType.equals(RoomPresenter.ROOM_MESSAGE)) {
-	    return preferences.incomingMessages;
-	} else if (messageType.equals(RosterPresenter.ROSTER_MESSAGE)) {
-	    return preferences.rosterNotifications;
-	}
-	return false;
+    /**
+     * This is to retain API compatibility.
+     * 
+     * @param eventBus
+     *            the habler event bus
+     * @param preferences
+     *            the notification preferences object
+     * @param notifier
+     *            a notifier to add to the notification stack
+     */
+    public NotificationManager(final HablarEventBus eventBus, final SignalPreferences preferences,
+	    final HablarNotifier notifier) {
+	this(eventBus, preferences);
+
+	addNotifier(notifier, true);
     }
 
     /**
@@ -82,11 +88,45 @@ public class NotificationManager {
      *            <code>true</code> to activate this notifier
      */
     public void addNotifier(HablarNotifier notifier, boolean active) {
+	if (notifier == null) {
+	    throw new NullPointerException("notifier cannot be null");
+	}
+
 	notifiers.add(notifier);
 
 	if (active) {
 	    activeNotifiers.add(notifier);
 	}
+    }
+
+    /**
+     * Returns the list of active notifiers set in theis manager
+     * 
+     * @return the list of notifiers
+     */
+    public List<HablarNotifier> getActiveNotifiers() {
+	return activeNotifiers;
+    }
+
+    /**
+     * Returns a list of all the notifiers installed in this manager.
+     * 
+     * @return the list of notifiers
+     */
+    public List<HablarNotifier> getAvailableNotifiers() {
+	return notifiers;
+    }
+
+    /**
+     * Returns whether a notifier is active or not.
+     * 
+     * @param notifier
+     *            the notifier
+     * @return <code>true</code> if this notifier is currently active,
+     *         <code>false</code> otherwise
+     */
+    public boolean isNotifierActive(final HablarNotifier notifier) {
+	return activeNotifiers.contains(notifier);
     }
 
     /**
@@ -99,6 +139,10 @@ public class NotificationManager {
      *            otherwise
      */
     public void setNotifierActive(final HablarNotifier notifier, final boolean active) {
+	if (notifier == null) {
+	    throw new NullPointerException("notifier cannot be null");
+	}
+
 	if (!notifiers.contains(notifier)) {
 	    throw new IllegalArgumentException("Unknown notifier");
 	}
@@ -122,6 +166,10 @@ public class NotificationManager {
      *            otherwise
      */
     public void setNotifierActive(final String notifierId, final boolean active) {
+	if (notifierId == null) {
+	    throw new NullPointerException("notifierId cannot be null");
+	}
+
 	HablarNotifier notifier = getNotifierById(notifierId);
 
 	if (notifier == null) {
@@ -129,17 +177,6 @@ public class NotificationManager {
 	}
 
 	setNotifierActive(notifier, active);
-    }
-
-    /**
-     * Returns whether a notifier is active or not.
-     * 
-     * @param notifier
-     *            the notifier
-     * @return <code>true</code> if this notifier is currently active
-     */
-    public boolean isNotifierActive(final HablarNotifier notifier) {
-	return activeNotifiers.contains(notifier);
     }
 
     private HablarNotifier getNotifierById(final String id) {
@@ -152,11 +189,12 @@ public class NotificationManager {
 	return null;
     }
 
-    public List<HablarNotifier> getAvailableNotifiers() {
-	return notifiers;
-    }
-
-    public List<HablarNotifier> getActiveNotifiers() {
-	return activeNotifiers;
+    private boolean isVisibleMessage(final String messageType) {
+	if (messageType.equals(PairChatPresenter.CHAT_MESSAGE) || messageType.equals(RoomPresenter.ROOM_MESSAGE)) {
+	    return preferences.incomingMessages;
+	} else if (messageType.equals(RosterPresenter.ROSTER_MESSAGE)) {
+	    return preferences.rosterNotifications;
+	}
+	return false;
     }
 }

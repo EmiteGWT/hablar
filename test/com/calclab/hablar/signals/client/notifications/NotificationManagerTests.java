@@ -106,6 +106,21 @@ public class NotificationManagerTests {
 	assertTrue("Notifier not activated", notificationManager.isNotifierActive(notifier));
     }
     
+    @Test(expected=NullPointerException.class)
+    public void testAddNullNotifier() {
+	notificationManager.addNotifier(null, true);
+    }
+
+    @Test(expected=NullPointerException.class)
+    public void testSetNullNotifierActive() {
+	notificationManager.setNotifierActive((HablarNotifier) null, true);
+    }
+
+    @Test(expected=NullPointerException.class)
+    public void testSetNullNotifierIdActive() {
+	notificationManager.setNotifierActive((String) null, true);
+    }
+    
     private void fire(final String message, final String type) {
 	eventBus.fireEvent(new UserMessageEvent(page, message, type));
     }
