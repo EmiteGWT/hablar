@@ -5,7 +5,7 @@ import com.calclab.hablar.core.client.container.PageAddedEvent;
 import com.calclab.hablar.core.client.container.PageAddedHandler;
 import com.calclab.hablar.core.client.container.overlay.OverlayContainer;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.rooms.client.invite.InviteToRoomPresenter;
@@ -64,7 +64,7 @@ public class HablarRooms implements EntryPoint {
     }
 
     protected static Action<RoomPage> createInviteAction(final InviteToRoomPresenter invitePage) {
-	final ImageResource icon = HablarIcons.getBundle().buddyAddIcon();
+	final ImageResource icon = OldHablarIcons.getBundle().buddyAddIcon();
 	return new SimpleAction<RoomPage>(i18n().inviteToThisGroupChat(), ACTION_ID_INVITE, icon) {
 	    @Override
 	    public void execute(final RoomPage target) {
@@ -76,7 +76,7 @@ public class HablarRooms implements EntryPoint {
 
     protected static SimpleAction<RosterPage> createOpenRoomAction(final OpenNewRoomPresenter page) {
 	final String name = i18n().openNewGroupChatTooltip();
-	final ImageResource icon = HablarIcons.getBundle().groupChatIcon();
+	final ImageResource icon = OldHablarIcons.getBundle().groupChatIcon();
 	final SimpleAction<RosterPage> action = new SimpleAction<RosterPage>(name, ACTION_ID_OPENROOM, icon) {
 	    @Override
 	    public void execute(final RosterPage target) {

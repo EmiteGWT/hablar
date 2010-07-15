@@ -7,7 +7,7 @@ import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.core.client.container.PageAddedEvent;
 import com.calclab.hablar.core.client.container.PageAddedHandler;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
@@ -60,7 +60,7 @@ public class HablarSearch implements EntryPoint {
 		final RosterPage rosterPage = RosterPresenter.asRoster(event.getPage());
 		if (rosterPage != null) {
 		    final String name = i18n().openSearchPage();
-		    final ImageResource icon = HablarIcons.getBundle().searchIcon();
+		    final ImageResource icon = OldHablarIcons.getBundle().searchIcon();
 		    rosterPage.addAction(new SimpleAction<RosterPage>(name, ACTION_ID, icon) {
 			@Override
 			public void execute(final RosterPage page) {

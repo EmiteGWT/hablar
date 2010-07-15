@@ -12,7 +12,7 @@ import com.calclab.emite.xep.storage.client.IQResponse;
 import com.calclab.emite.xep.storage.client.PrivateStorageManager;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
 import com.calclab.hablar.core.client.ui.icon.HablarIconsBundle;
 import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
 import com.calclab.hablar.core.client.ui.menu.Menu;
@@ -54,8 +54,8 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 
 	manager = Suco.get(PresenceManager.class);
 	String title = i18n().presencePageTitle();
-	model.init(HablarIcons.getBundle().buddyIcon(), title, title);
-	display.setStatusIcon(HablarIcons.getBundle().buddyIconOff());
+	model.init(OldHablarIcons.getBundle().buddyIcon(), title, title);
+	display.setStatusIcon(OldHablarIcons.getBundle().buddyIconOff());
 	display.setPageTitle(i18n().presencePageTitle());
 	storedPresenceManager = new StoredPresenceManager(Suco.get(PrivateStorageManager.class));
 	createDefActions();
@@ -149,7 +149,7 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
     }
 
     private void createDefActions() {
-	HablarIconsBundle bundle = HablarIcons.getBundle();
+	HablarIconsBundle bundle = OldHablarIcons.getBundle();
 	defaultActions.add(createAction(i18n().available(), ACTION_ID_AVAILABLE, bundle.buddyIconOn(), null, Show.chat));
 	defaultActions.add(createAction(i18n().availableCustom(), ACTION_ID_AVAILABLE_CUSTOM, bundle.buddyIconOn(), "", Show.chat));
 	defaultActions.add(createAction(i18n().busy(), ACTION_ID_BUSY, bundle.buddyIconDnd(), null, Show.dnd));

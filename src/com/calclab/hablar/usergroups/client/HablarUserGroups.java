@@ -3,7 +3,7 @@ package com.calclab.hablar.usergroups.client;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.container.overlay.OverlayContainer;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.roster.client.groups.RosterItemPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
@@ -27,7 +27,7 @@ public class HablarUserGroups implements EntryPoint {
 
 	final String title = i18n().changeContactGroups();
 	final SimpleAction<RosterItemPresenter> addToGroup = new SimpleAction<RosterItemPresenter>(title,
-		ACTION_ID_ADD_TO_GROUP, HablarIcons.getBundle().rosterIcon()) {
+		ACTION_ID_ADD_TO_GROUP, OldHablarIcons.getBundle().rosterIcon()) {
 	    @Override
 	    public void execute(final RosterItemPresenter target) {
 		movePage.setItem(target.getItem());

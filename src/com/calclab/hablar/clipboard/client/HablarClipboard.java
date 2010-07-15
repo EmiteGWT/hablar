@@ -7,7 +7,7 @@ import com.calclab.hablar.core.client.container.PageAddedEvent;
 import com.calclab.hablar.core.client.container.PageAddedHandler;
 import com.calclab.hablar.core.client.container.overlay.OverlayContainer;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.rooms.client.room.RoomPage;
 import com.calclab.hablar.rooms.client.room.RoomPresenter;
@@ -32,7 +32,7 @@ public class HablarClipboard implements EntryPoint {
 	hablar.addPage(copyToClipboardPage, OverlayContainer.ROL);
 
 	final String actionName = i18n().copyToClipboardAction();
-	final ImageResource actionIcon = HablarIcons.getBundle().clipboardIcon();
+	final ImageResource actionIcon = OldHablarIcons.getBundle().clipboardIcon();
 
 	hablar.addPageAddedHandler(new PageAddedHandler() {
 	    @Override

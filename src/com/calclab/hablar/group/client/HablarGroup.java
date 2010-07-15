@@ -5,7 +5,7 @@ import com.calclab.hablar.core.client.container.PageAddedEvent;
 import com.calclab.hablar.core.client.container.PageAddedHandler;
 import com.calclab.hablar.core.client.container.overlay.OverlayContainer;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.group.client.manage.CreateGroupPresenter;
 import com.calclab.hablar.group.client.manage.ManageGroupPresenter;
@@ -41,7 +41,7 @@ public class HablarGroup implements EntryPoint {
 		final RosterPage rosterPage = RosterPresenter.asRoster(event.getPage());
 		if (rosterPage != null) {
 
-		    final ImageResource icon = HablarIcons.getBundle().groupAddIcon();
+		    final ImageResource icon = OldHablarIcons.getBundle().groupAddIcon();
 		    rosterPage.addAction(new SimpleAction<RosterPage>(i18n().createGroupAction(), ACTION_ID_CREATE_GROUP, icon) {
 			@Override
 			public void execute(final RosterPage page) {

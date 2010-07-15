@@ -6,7 +6,7 @@ import com.google.gwt.resources.client.ImageResource;
 public class PresenceIcon {
 
     public static ImageResource getIconResource(final boolean available, final Show show) {
-	HablarIconsBundle bundle = HablarIcons.getBundle();
+	HablarIconsBundle bundle = OldHablarIcons.getBundle();
 	if (show == Show.dnd) {
 	    return bundle.buddyIconDnd();
 	} else if (show == Show.xa) {

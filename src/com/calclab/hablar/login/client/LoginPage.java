@@ -8,7 +8,7 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.page.events.UserMessageEvent;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -23,7 +23,7 @@ public class LoginPage extends PagePresenter<LoginDisplay> {
     public LoginPage(final HablarEventBus eventBus, final LoginDisplay display) {
 	super("Login", "" + ++index, eventBus, display);
 	session = Suco.get(Session.class);
-	getState().setPageIcon(HablarIcons.getBundle().offIcon());
+	getState().setPageIcon(OldHablarIcons.getBundle().offIcon());
 
 	display.getAction().addClickHandler(new ClickHandler() {
 	    @Override
@@ -59,16 +59,16 @@ public class LoginPage extends PagePresenter<LoginDisplay> {
 	    actionEnabled = true;
 	    final String userName = session.getCurrentUser().getNode();
 	    pageTitle = i18n().connectedAs(userName);
-	    pageIcon = HablarIcons.getBundle().onIcon();
+	    pageIcon = OldHablarIcons.getBundle().onIcon();
 	} else if (state == State.disconnected) {
 	    actionText = i18n().login();
 	    actionEnabled = true;
 	    pageTitle = i18n().disconnected();
-	    pageIcon = HablarIcons.getBundle().offIcon();
+	    pageIcon = OldHablarIcons.getBundle().offIcon();
 	} else {
 	    pageTitle = actionText = i18n().waitDots();
 	    actionEnabled = false;
-	    pageIcon = HablarIcons.getBundle().offIcon();
+	    pageIcon = OldHablarIcons.getBundle().offIcon();
 	}
 	display.getActionText().setText(actionText);
 	display.setActionEnabled(actionEnabled);

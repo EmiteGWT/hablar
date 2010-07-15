@@ -2,15 +2,6 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
-	<ui:style type="com.calclab.hablar.core.client.ui.icon.DefaultHablarIcons.Styles">
-		.active {
-			background-color: #EEEEEE;
-		}
-
-		.inactive {
-			background-color: white;
-		}
-	</ui:style>
-
+	
 	<g:SimplePanel></g:SimplePanel>
 </ui:UiBinder>

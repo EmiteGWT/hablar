@@ -7,7 +7,7 @@ import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.session.Session.State;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -21,7 +21,7 @@ public class ConsolePresenter extends PagePresenter<ConsoleDisplay> {
 
     public ConsolePresenter(final HablarEventBus eventBus, final ConsoleDisplay display) {
 	super(TYPE, eventBus, display);
-	model.init(HablarIcons.getBundle().consoleIcon(), "Console", "Console");
+	model.init(OldHablarIcons.getBundle().consoleIcon(), "Console", "Console");
 	setVisibility(Visibility.hidden);
 	model.setCloseable(true);
 

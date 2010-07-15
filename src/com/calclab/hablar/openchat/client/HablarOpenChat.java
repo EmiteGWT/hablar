@@ -6,7 +6,7 @@ import com.calclab.hablar.core.client.container.PageAddedEvent;
 import com.calclab.hablar.core.client.container.PageAddedHandler;
 import com.calclab.hablar.core.client.container.overlay.OverlayContainer;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.openchat.client.ui.OpenChatPresenter;
 import com.calclab.hablar.openchat.client.ui.OpenChatWidget;
@@ -43,7 +43,7 @@ public class HablarOpenChat implements EntryPoint {
 		if (rosterPage != null) {
 
 		    final String name = i18n().openNewChat();
-		    final ImageResource icon = HablarIcons.getBundle().chatAddIcon();
+		    final ImageResource icon = OldHablarIcons.getBundle().chatAddIcon();
 		    rosterPage.addAction(new SimpleAction<RosterPage>(name, ACTION_ID, icon) {
 			@Override
 			public void execute(final RosterPage page) {

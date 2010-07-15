@@ -11,7 +11,7 @@ import com.calclab.emite.xep.search.client.SearchResultItem;
 import com.calclab.hablar.core.client.Idify;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
 import com.calclab.hablar.search.client.SearchQueryFactory;
@@ -42,7 +42,7 @@ public class SearchPage extends PagePresenter<SearchDisplay> {
 	model.setCloseable(closeable);
 	final String title = i18n().searchUsers();
 
-	model.init(HablarIcons.getBundle().searchIcon(), title, title);
+	model.init(OldHablarIcons.getBundle().searchIcon(), title, title);
 	final MenuDisplay<SearchResultItem> menuDisplay = display.createMenu(SEARCH_MENU);
 	itemMenu = new Menu<SearchResultItem>(menuDisplay);
 	bind();

@@ -8,7 +8,7 @@ import org.junit.Test;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emite.im.client.roster.SubscriptionState;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.roster.client.groups.RosterItemDisplay;
 import com.calclab.hablar.roster.client.groups.RosterItemPresenter;
@@ -35,7 +35,7 @@ public class RosterItemLogicTest {
     public void shouldSetAvailable() {
 	item.setAvailable(true);
 	presenter.setItem(item);
-	verify(display).setIcon(HablarIcons.getBundle().buddyIconOn());
+	verify(display).setIcon(OldHablarIcons.getBundle().buddyIconOn());
     }
 
     @Test

@@ -1,7 +1,7 @@
 package com.calclab.hablar.usergroups.client.changegroups;
 
 import com.calclab.hablar.core.client.mvp.Presenter;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
 import com.calclab.hablar.core.client.validators.IsEmpty;
 
 public class GroupSelectorPresenter implements Presenter<GroupSelectorDisplay> {
@@ -26,7 +26,7 @@ public class GroupSelectorPresenter implements Presenter<GroupSelectorDisplay> {
     }
 
     public void setProperties(final String name, final boolean editable, final boolean selected) {
-	display.setIcon(HablarIcons.getBundle().rosterIcon());
+	display.setIcon(OldHablarIcons.getBundle().rosterIcon());
 	display.setEditable(editable);
 	display.getSelected().setValue(selected);
 	display.getStaticName().setText(name);

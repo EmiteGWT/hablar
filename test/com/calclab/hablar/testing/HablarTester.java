@@ -9,7 +9,7 @@ import org.mockito.stubbing.Answer;
 import com.calclab.hablar.core.client.mvp.Display;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
-import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
 import com.calclab.hablar.core.mock.HablarMocks;
@@ -24,7 +24,7 @@ public class HablarTester {
     public EventBusTester eventBus;
 
     public HablarTester() {
-	HablarIcons.setStyles(new HablarIcons());
+	OldHablarIcons.setStyles(new OldHablarIcons());
 	HablarMocks.disarm();
 	eventBus = new EventBusTester();
 
