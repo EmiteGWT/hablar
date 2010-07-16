@@ -6,7 +6,7 @@ import com.google.gwt.core.client.GWT;
 
 public class DefaultIcons implements EntryPoint {
 
-    private static void load() {
+    public static void load() {
 	GWT.log("ICONS: DefaultIcons");
 	final DefaultIconsBundle bundle = GWT.create(DefaultIconsBundle.class);
 	Icons.register(Icons.BUDDY_ADD, bundle.buddyAddIcon());
@@ -33,7 +33,6 @@ public class DefaultIcons implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-	load();
     }
 
 }

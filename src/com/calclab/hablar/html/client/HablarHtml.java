@@ -5,6 +5,7 @@ import com.calclab.hablar.HablarConfig;
 import com.calclab.hablar.console.client.HablarConsole;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
+import com.calclab.hablar.icons.def.client.DefaultIcons;
 import com.calclab.hablar.login.client.HablarLogin;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -54,7 +55,8 @@ public class HablarHtml implements EntryPoint {
     }
 
     private void onModuleLoadCont() {
-	// DefaultIcons.load();
+	DefaultIcons.load();
+	// IE6GifIcons.load();
 	final HablarConfig config = HablarConfig.getFromMeta();
 	final HtmlConfig htmlConfig = HtmlConfig.getFromMeta();
 	htmlConfig.hasLogger = true;
