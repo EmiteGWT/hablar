@@ -1,5 +1,6 @@
 package com.calclab.hablar.roster.client.groups;
 
+import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -27,6 +28,7 @@ public class GroupHeaderWidget extends Composite implements GroupHeaderDisplay {
 	initWidget(uiBinder.createAndBindUi(this));
 	name.ensureDebugId("GroupHeaderWidget-name-" + id);
 	menu.ensureDebugId("GroupHeaderWidget-menu-" + id);
+	Icons.set(menu, Icons.MENU);
     }
 
     @Override

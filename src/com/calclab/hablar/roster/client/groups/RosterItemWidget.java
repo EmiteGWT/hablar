@@ -2,10 +2,10 @@ package com.calclab.hablar.roster.client.groups;
 
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.Idify;
+import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -31,13 +31,6 @@ public class RosterItemWidget extends Composite implements RosterItemDisplay {
 
     private static RosterItemWidgetUiBinder uiBinder = GWT.create(RosterItemWidgetUiBinder.class);
 
-    public RosterItemWidget(final String groupId, final String itemId) {
-	initWidget(uiBinder.createAndBindUi(this));
-	self.ensureDebugId(Idify.id("RosterItemWidget", groupId, itemId));
-//	menu.addStyleName(HablarIcons.get(IconType.menu));
-	menu.ensureDebugId(Idify.id("RosterItemWidget", groupId, itemId, "roster-menu"));
-    }
-
     public RosterItemWidget(final String groupId, final RosterItem item) {
 	this(groupId, Idify.id(item.getJID()));
 	jid.setText(item.getJID().toString());
@@ -48,7 +41,15 @@ public class RosterItemWidget extends Composite implements RosterItemDisplay {
 	    this.status.setText(status);
 	}
 	this.status.setVisible(hasStatus);
-	setIcon(PresenceIcon.getIconResource(item.isAvailable(), item.getShow()));
+	menu.setResource(Icons.get(Icons.MENU));
+	setIcon(PresenceIcon.get(item.isAvailable(), item.getShow()));
+    }
+
+    public RosterItemWidget(final String groupId, final String itemId) {
+	initWidget(uiBinder.createAndBindUi(this));
+	self.ensureDebugId(Idify.id("RosterItemWidget", groupId, itemId));
+	// menu.addStyleName(HablarIcons.get(IconType.menu));
+	menu.ensureDebugId(Idify.id("RosterItemWidget", groupId, itemId, "roster-menu"));
     }
 
     @Override
@@ -82,8 +83,13 @@ public class RosterItemWidget extends Composite implements RosterItemDisplay {
     }
 
     @Override
-    public void setIcon(final ImageResource icon) {
-	this.icon.setResource(icon);
+    public void setIcon(final String token) {
+	Icons.set(icon, token);
+    }
+
+    @Override
+    public void setMenuVisible(final boolean visible) {
+	menu.setVisible(visible);
     }
 
     @Override
@@ -92,7 +98,7 @@ public class RosterItemWidget extends Composite implements RosterItemDisplay {
     }
 
     @Override
-    public void setMenuVisible(final boolean visible) {
-	menu.setVisible(visible);
+    public void setWidgetTitle(final String title) {
+	setTitle(title);
     }
 }

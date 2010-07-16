@@ -13,7 +13,6 @@ import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.resources.client.ImageResource;
 
 public class TabsMenuPresenter implements Presenter<TabsMenuDisplay> {
 
@@ -43,9 +42,8 @@ public class TabsMenuPresenter implements Presenter<TabsMenuDisplay> {
 	if (items.get(page.getId()) == null) {
 	    display.setVisible(true);
 	    final String title = TextUtils.ellipsis(page.getState().getPageTitle(), 20);
-	    final ImageResource icon = page.getState().getPageIcon();
-	    final String actionId = TABS_MENU_PAGE_MENU_ITEM_ID_PREF
-		    + Idify.uriId(page.getState().getPageTitle());
+	    final String icon = page.getState().getPageIcon();
+	    final String actionId = TABS_MENU_PAGE_MENU_ITEM_ID_PREF + Idify.uriId(page.getState().getPageTitle());
 	    final SimpleAction<TabsMenuPresenter> newAction = new SimpleAction<TabsMenuPresenter>(title, actionId, icon) {
 		@Override
 		public void execute(final TabsMenuPresenter target) {

@@ -13,7 +13,7 @@ import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.Idify;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.events.UserMessageEvent;
-import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
+import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.validators.IsEmpty;
@@ -38,7 +38,7 @@ public class PairChatPresenter extends ChatPresenter implements PairChatPage {
 	final XmppURI fromURI = chat.getURI();
 	userName = getName(fromURI);
 
-	model.init(OldHablarIcons.getBundle().buddyIconOff(), userName, userName + ": " + fromURI.toString());
+	model.init(Icons.BUDDY_OFF, userName, userName + ": " + fromURI.toString());
 	setVisibility(Visibility.notFocused);
 	model.setCloseable(true);
 
@@ -105,7 +105,7 @@ public class PairChatPresenter extends ChatPresenter implements PairChatPage {
 
     @Override
     public void setPresence(final boolean available, final Show show) {
-	getState().setPageIcon(PresenceIcon.getIconResource(available, show));
+	getState().setPageIcon(PresenceIcon.get(available, show));
 	if (available) {
 	    display.getState().setText(i18n().stateAvailable(userName));
 	} else {

@@ -12,26 +12,27 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 public class VCardWidget extends Composite implements VCardDisplay {
 
+    interface VCardWidgetUiBinder extends UiBinder<Widget, VCardWidget> {
+    }
+
     private static VCardMessages messages;
 
-    public static void setMessages(final VCardMessages messages) {
-	VCardWidget.messages = messages;
-    }
+    protected static VCardWidgetUiBinder uiBinder = GWT.create(VCardWidgetUiBinder.class);
 
     public static VCardMessages i18n() {
 	return messages;
     }
 
-    interface VCardWidgetUiBinder extends UiBinder<Widget, VCardWidget> {
+    public static void setMessages(final VCardMessages messages) {
+	VCardWidget.messages = messages;
     }
-
-    protected static VCardWidgetUiBinder uiBinder = GWT.create(VCardWidgetUiBinder.class);
 
     @UiField
     TextBox name, nickName, givenName, middleName, familyName, email, organizationName, organizationUnit, homepage;
@@ -44,12 +45,16 @@ public class VCardWidget extends Composite implements VCardDisplay {
     @UiField
     DivElement form, loading;
     @UiField
-    LabelElement nameLabel, nicknameLabel, familyNameLabel, middleNameLabel, givenNameLabel,
-    		organizationLabel, organizationUnitLabel, homepageLabel, emailLabel;
+    LabelElement nameLabel, nicknameLabel, familyNameLabel, middleNameLabel, givenNameLabel, organizationLabel,
+	    organizationUnitLabel, homepageLabel, emailLabel;
 
+    @UiField
+    Image icon;
     protected final HashMap<Field, TextBox> fields = new HashMap<Field, TextBox>();
 
     public VCardWidget() {
+	// FIXME: ICON
+	// icon.setResource(Icons.get(Icons.LOADING));
     }
 
     public VCardWidget(final boolean readOnly, final String idPrefix) {

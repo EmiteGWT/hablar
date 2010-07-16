@@ -1,5 +1,6 @@
 package com.calclab.hablar.core.client.pages.tabs;
 
+import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
 import com.calclab.hablar.core.client.ui.menu.PopupMenu;
 import com.google.gwt.core.client.GWT;
@@ -22,6 +23,7 @@ public class TabsMenuWidget extends Composite implements TabsMenuDisplay {
 
     public TabsMenuWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
+	Icons.set(menu, Icons.MENU);
     }
 
     @Override

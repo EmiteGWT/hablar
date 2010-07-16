@@ -1,5 +1,6 @@
 package com.calclab.hablar.core.client.ui.actions;
 
+import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -15,12 +16,12 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class ActionWidget extends Composite implements HasClickHandlers {
 
-    @UiField
-    Image image;
-
     interface ActionWidgetUiBinder extends UiBinder<Widget, ActionWidget> {
 
     }
+
+    @UiField
+    Image image;
 
     private static ActionWidgetUiBinder uiBinder = GWT.create(ActionWidgetUiBinder.class);
 
@@ -29,13 +30,13 @@ public class ActionWidget extends Composite implements HasClickHandlers {
 	initWidget(uiBinder.createAndBindUi(this));
 	addStyleName("hablar-ActionWidget");
 	addStyleName("hablar-lightBackground");
-	image.setResource(action.getIcon());
+	Icons.set(image, action.getIcon());
 	ensureDebugId(action.getId());
 	setTitle(action.getName());
     }
 
     @Override
-    public HandlerRegistration addClickHandler(ClickHandler handler) {
+    public HandlerRegistration addClickHandler(final ClickHandler handler) {
 	return addDomHandler(handler, ClickEvent.getType());
     }
 }

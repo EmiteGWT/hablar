@@ -5,7 +5,7 @@ import static com.calclab.hablar.rooms.client.HablarRooms.i18n;
 import com.calclab.emite.xep.muc.client.Occupant;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.hablar.core.client.mvp.Presenter;
-import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
+import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
@@ -65,7 +65,7 @@ public class OccupantsPresenter implements Presenter<OccupantsDisplay> {
 	for (final Occupant occupant : room.getOccupants()) {
 	    final OccupantDisplay ocDisplay = display.addOccupant();
 	    ocDisplay.getName().setText(occupant.getNick());
-	    ocDisplay.setIcon(OldHablarIcons.getBundle().buddyIconOn());
+	    ocDisplay.setIcon(Icons.get(Icons.BUDDY_ON));
 	}
     }
 

@@ -1,7 +1,6 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	<ui:with type="com.calclab.hablar.core.client.ui.icon.HablarIconsBundle" field="res"></ui:with>
 	<ui:style>
 
 	</ui:style>
@@ -11,7 +10,7 @@
 		</h2>
 		<div class="form">
 			<div class="loading" ui:field="loading">
-				<g:Image ui:field="icon" addStyleNames="icon" resource="{res.loadingIcon}" />
+				<g:Image ui:field="icon" addStyleNames="icon"  />
 				<g:Label ui:field="loadingMessage">Loading preferences. Please wait...</g:Label>
 			</div>
 			<div ui:field="form">

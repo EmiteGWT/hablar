@@ -7,7 +7,7 @@ import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.core.client.container.PageAddedEvent;
 import com.calclab.hablar.core.client.container.PageAddedHandler;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
-import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
+import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
@@ -16,11 +16,10 @@ import com.calclab.hablar.search.client.page.SearchWidget;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ImageResource;
 
 /**
  * Adds Search support to Hablar
- *
+ * 
  */
 public class HablarSearch implements EntryPoint {
 
@@ -60,7 +59,7 @@ public class HablarSearch implements EntryPoint {
 		final RosterPage rosterPage = RosterPresenter.asRoster(event.getPage());
 		if (rosterPage != null) {
 		    final String name = i18n().openSearchPage();
-		    final ImageResource icon = OldHablarIcons.getBundle().searchIcon();
+		    final String icon = Icons.SEARCH;
 		    rosterPage.addAction(new SimpleAction<RosterPage>(name, ACTION_ID, icon) {
 			@Override
 			public void execute(final RosterPage page) {

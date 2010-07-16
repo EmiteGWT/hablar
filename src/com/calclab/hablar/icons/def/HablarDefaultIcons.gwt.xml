@@ -5,5 +5,5 @@
 	<inherits name='com.calclab.hablar.core.HablarCore' />
 	<source path="client" />
 	<entry-point
-		class="com.calclab.hablar.icons.def.client.DefaultIconsEntryPoint" />
+		class="com.calclab.hablar.icons.def.client.DefaultIcons" />
 </module>

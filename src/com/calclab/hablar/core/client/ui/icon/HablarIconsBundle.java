@@ -38,6 +38,9 @@ public interface HablarIconsBundle extends ClientBundle {
     @Source("png/console.png")
     ImageResource consoleIcon();
 
+    @Source("png/group-add.png")
+    ImageResource groupAddIcon();
+
     @Source("png/group-chat.png")
     ImageResource groupChatIcon();
 
@@ -58,7 +61,4 @@ public interface HablarIconsBundle extends ClientBundle {
 
     @Source("png/search2.png")
     ImageResource searchIcon();
-
-    @Source("png/group-add.png")
-    ImageResource groupAddIcon();
 }

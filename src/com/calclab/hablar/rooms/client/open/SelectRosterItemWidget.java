@@ -1,7 +1,7 @@
 package com.calclab.hablar.rooms.client.open;
 
+import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.CheckBox;
@@ -58,8 +58,8 @@ public class SelectRosterItemWidget extends Composite implements SelectRosterIte
     }
 
     @Override
-    public void setIcon(final ImageResource icon) {
-	this.icon.setResource(icon);
+    public void setIcon(final String token) {
+	Icons.set(icon, token);
     }
 
     @Override

@@ -1,7 +1,6 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	<ui:with type="com.calclab.hablar.core.client.ui.icon.HablarIconsBundle" field="res"></ui:with>
     <ui:style>
         .userWidget {
 		    width: 100%;
@@ -28,9 +27,9 @@
 
     <g:HTMLPanel addStyleNames="{style.userWidget} hablar-SearchResultItemWidget hablar-bottomLightBordered">
         <g:Image addStyleNames="{style.userWidgetItem} {style.userWidgetIcon}" ui:field="buddyIcon"
-        	resource="{res.buddyIcon}"/>
+        	"/>
         <g:Label ui:field="name" addStyleNames="{style.userWidgetItem} name">Result</g:Label>
         <g:Label ui:field="jid" addStyleNames="{style.userWidgetItem} hablar-lightColor">JID</g:Label>
-        <g:Image ui:field="menu" resource="{res.menuIcon}" addStyleNames="{style.userWidgetMenu}" />
+        <g:Image ui:field="menu"  addStyleNames="{style.userWidgetMenu}" />
     </g:HTMLPanel>
 </ui:UiBinder>

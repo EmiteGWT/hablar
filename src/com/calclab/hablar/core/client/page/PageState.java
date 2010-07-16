@@ -4,16 +4,15 @@ import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedHandler;
-import com.google.gwt.resources.client.ImageResource;
 
 public class PageState {
     private String pageTitle, pageTitleTooltip;
-    private ImageResource pageIcon;
     private boolean closeable;
     private Visibility visibility;
     private final HablarEventBus eventBus;
     private final Page<?> page;
     private String externalState;
+    private String iconToken;
 
     public PageState(final HablarEventBus eventBus, final Page<?> page) {
 	this.eventBus = eventBus;
@@ -53,8 +52,8 @@ public class PageState {
 	return page;
     }
 
-    public ImageResource getPageIcon() {
-	return pageIcon;
+    public String getPageIcon() {
+	return iconToken;
     }
 
     public String getPageTitle() {
@@ -69,8 +68,8 @@ public class PageState {
 	return visibility;
     }
 
-    public void init(ImageResource pageIcon, final String title, final String tooltip) {
-	this.pageIcon = pageIcon;
+    public void init(final String iconToken, final String title, final String tooltip) {
+	this.iconToken = iconToken;
 	pageTitle = title;
 	pageTitleTooltip = tooltip;
 	fireChanged();
@@ -90,8 +89,8 @@ public class PageState {
 	fireChanged();
     }
 
-    public void setPageIcon(final ImageResource pageIcon) {
-	this.pageIcon = pageIcon;
+    public void setPageIcon(final String iconToken) {
+	this.iconToken = iconToken;
 	fireChanged();
     }
 

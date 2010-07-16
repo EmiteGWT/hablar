@@ -1,9 +1,9 @@
 package com.calclab.hablar.core.client.pages.tabs;
 
 import com.calclab.hablar.core.client.pages.HeaderDisplay;
+import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -33,17 +33,13 @@ public class TabsHeaderWidget extends Composite implements HeaderDisplay {
 	this(id, "24px", "120px");
     }
 
-    public TabsHeaderWidget(final String id, String height, String width) {
+    public TabsHeaderWidget(final String id, final String height, final String width) {
 	initWidget(uiBinder.createAndBindUi(this));
-	this.setHeight(height);
-	this.setWidth(width);
+	setHeight(height);
+	setWidth(width);
 	ensureDebugId("HeaderWidget-" + id);
 	// title.ensureDebugId(Idify.id("HeaderWidget", id, "title"));
-    }
-
-    @Override
-    public void setIcon(final ImageResource iconStyle) {
-	icon.setResource(iconStyle);
+	Icons.set(close, Icons.CLOSE);
     }
 
     @Override
@@ -85,5 +81,10 @@ public class TabsHeaderWidget extends Composite implements HeaderDisplay {
     public void setHeaderTooltip(final String tooltip) {
 	title.setTitle(tooltip);
 	icon.setTitle(tooltip);
+    }
+
+    @Override
+    public void setIcon(final String token) {
+	Icons.set(icon, token);
     }
 }

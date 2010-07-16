@@ -5,7 +5,7 @@ import com.calclab.hablar.core.client.container.PageAddedEvent;
 import com.calclab.hablar.core.client.container.PageAddedHandler;
 import com.calclab.hablar.core.client.container.overlay.OverlayContainer;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
-import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
+import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.rooms.client.invite.InviteToRoomPresenter;
@@ -16,7 +16,6 @@ import com.calclab.hablar.rooms.client.state.HablarRoomStateManager;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ImageResource;
 
 public class HablarRooms implements EntryPoint {
     private static final String ACTION_ID_INVITE = "HablarRooms-inviteAction";
@@ -64,8 +63,8 @@ public class HablarRooms implements EntryPoint {
     }
 
     protected static Action<RoomPage> createInviteAction(final InviteToRoomPresenter invitePage) {
-	final ImageResource icon = OldHablarIcons.getBundle().buddyAddIcon();
-	return new SimpleAction<RoomPage>(i18n().inviteToThisGroupChat(), ACTION_ID_INVITE, icon) {
+	final String buddyAddIcon = Icons.BUDDY_ADD;
+	return new SimpleAction<RoomPage>(i18n().inviteToThisGroupChat(), ACTION_ID_INVITE, buddyAddIcon) {
 	    @Override
 	    public void execute(final RoomPage target) {
 		invitePage.setRoom(target.getRoom());
@@ -76,7 +75,7 @@ public class HablarRooms implements EntryPoint {
 
     protected static SimpleAction<RosterPage> createOpenRoomAction(final OpenNewRoomPresenter page) {
 	final String name = i18n().openNewGroupChatTooltip();
-	final ImageResource icon = OldHablarIcons.getBundle().groupChatIcon();
+	final String icon = Icons.GROUP_CHAT;
 	final SimpleAction<RosterPage> action = new SimpleAction<RosterPage>(name, ACTION_ID_OPENROOM, icon) {
 	    @Override
 	    public void execute(final RosterPage target) {
@@ -88,7 +87,7 @@ public class HablarRooms implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-	RoomsMessages messages = (RoomsMessages) GWT.create(RoomsMessages.class);
+	final RoomsMessages messages = (RoomsMessages) GWT.create(RoomsMessages.class);
 	HablarRooms.setMessages(messages);
 	EditRoomWidget.setMessages(messages);
     }

@@ -1,5 +1,6 @@
 package com.calclab.hablar.search.client.page;
 
+import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -26,26 +27,13 @@ public class SearchResultItemWidget extends Composite implements SearchResultIte
     public SearchResultItemWidget(final String itemId) {
 	initWidget(uiBinder.createAndBindUi(this));
 	menu.ensureDebugId(itemId + "-search-menu");
+	Icons.set(menu, Icons.MENU);
+	Icons.set(buddyIcon, Icons.BUDDY);
     }
 
     @Override
     public Widget asWidget() {
 	return this;
-    }
-
-    @Override
-    public HasText getJid() {
-	return jid;
-    }
-
-    @Override
-    public HasClickHandlers getMenu() {
-	return menu;
-    }
-
-    @Override
-    public HasText getName() {
-	return name;
     }
 
     @Override
@@ -60,6 +48,21 @@ public class SearchResultItemWidget extends Composite implements SearchResultIte
 
     @Override
     public HasClickHandlers getClickableName() {
+	return name;
+    }
+
+    @Override
+    public HasText getJid() {
+	return jid;
+    }
+
+    @Override
+    public HasClickHandlers getMenu() {
+	return menu;
+    }
+
+    @Override
+    public HasText getName() {
 	return name;
     }
 }

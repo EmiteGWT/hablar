@@ -11,7 +11,7 @@ import com.calclab.hablar.chat.client.ui.ChatMessageFormatter;
 import com.calclab.hablar.chat.client.ui.ChatPresenter;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.events.UserMessageEvent;
-import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
+import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.validators.IsEmpty;
 import com.calclab.hablar.rooms.client.RoomName;
@@ -43,7 +43,7 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
 	me = session.getCurrentUser().getNode();
 	final String roomName = RoomName.decode(room.getURI().getNode());
 	setVisibility(Visibility.notFocused);
-	model.init(OldHablarIcons.getBundle().rosterIcon(), roomName, roomName);
+	model.init(Icons.ROSTER, roomName, roomName);
 	model.setCloseable(true);
 
 	room.onMessageReceived(new Listener<Message>() {

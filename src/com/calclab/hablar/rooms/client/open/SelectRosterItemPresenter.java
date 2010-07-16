@@ -17,7 +17,7 @@ public class SelectRosterItemPresenter {
 	display.getStatus().setText(item.getStatus());
 	display.getSelected().setValue(!selectable);
 	display.setSelectEnabled(selectable);
-	display.setIcon(PresenceIcon.getIconResource(item.isAvailable(), item.getShow()));
+	display.setIcon(PresenceIcon.get(item.isAvailable(), item.getShow()));
     }
 
     public RosterItem getItem() {

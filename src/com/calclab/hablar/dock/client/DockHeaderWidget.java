@@ -1,10 +1,10 @@
 package com.calclab.hablar.dock.client;
 
 import com.calclab.hablar.core.client.pages.HeaderDisplay;
+import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.dock.client.DockConfig.Position;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -37,11 +37,7 @@ public class DockHeaderWidget extends Composite implements HeaderDisplay {
 	initWidget(uiBinder.createAndBindUi(this));
 	ensureDebugId("HeaderWidget-" + pageId);
 	flow.addStyleName("DockHeaderWidget-" + position);
-    }
-
-    @Override
-    public void setIcon(final ImageResource iconStyle) {
-	icon.setResource(iconStyle);
+	Icons.set(close, Icons.CLOSE);
     }
 
     @Override
@@ -83,5 +79,10 @@ public class DockHeaderWidget extends Composite implements HeaderDisplay {
     public void setHeaderTooltip(final String tooltip) {
 	title.setTitle(tooltip);
 	icon.setTitle(tooltip);
+    }
+
+    @Override
+    public void setIcon(final String token) {
+	Icons.set(icon, token);
     }
 }

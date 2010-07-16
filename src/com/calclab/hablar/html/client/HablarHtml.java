@@ -54,6 +54,7 @@ public class HablarHtml implements EntryPoint {
     }
 
     private void onModuleLoadCont() {
+	// DefaultIcons.load();
 	final HablarConfig config = HablarConfig.getFromMeta();
 	final HtmlConfig htmlConfig = HtmlConfig.getFromMeta();
 	htmlConfig.hasLogger = true;

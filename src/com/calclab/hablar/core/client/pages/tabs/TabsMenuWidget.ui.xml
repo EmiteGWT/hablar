@@ -1,8 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
   xmlns:g="urn:import:com.google.gwt.user.client.ui">
-  <ui:with type="com.calclab.hablar.core.client.ui.icon.HablarIconsBundle" field="res"></ui:with>
   <ui:style>
   </ui:style>
-    <g:Image resource="{res.menuIcon}" ui:field="menu" />
+    <g:Image  ui:field="menu" />
 </ui:UiBinder>

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.signals.client.SignalMessages;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
@@ -23,20 +24,20 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class SignalsPreferencesWidget extends Composite implements SignalsPreferencesDisplay {
 
+    interface SignalsPreferencesWidgetUiBinder extends UiBinder<Widget, SignalsPreferencesWidget> {
+    }
+
     private static SignalMessages messages;
 
-    public static void setMessages(final SignalMessages messages) {
-	SignalsPreferencesWidget.messages = messages;
-    }
+    private static SignalsPreferencesWidgetUiBinder uiBinder = GWT.create(SignalsPreferencesWidgetUiBinder.class);
 
     public static SignalMessages i18n() {
 	return messages;
     }
 
-    interface SignalsPreferencesWidgetUiBinder extends UiBinder<Widget, SignalsPreferencesWidget> {
+    public static void setMessages(final SignalMessages messages) {
+	SignalsPreferencesWidget.messages = messages;
     }
-
-    private static SignalsPreferencesWidgetUiBinder uiBinder = GWT.create(SignalsPreferencesWidgetUiBinder.class);
 
     @UiField
     CheckBox titleSignals, incomingNotifications, rosterNotifications;
@@ -53,7 +54,7 @@ public class SignalsPreferencesWidget extends Composite implements SignalsPrefer
     HeadingElement methodsMessage;
     @UiField
     FlowPanel methodsPanel;
-    
+
     HashMap<String, CheckBox> notifierMap;
 
     public SignalsPreferencesWidget() {
@@ -67,6 +68,17 @@ public class SignalsPreferencesWidget extends Composite implements SignalsPrefer
 	rosterNotifications.setText(i18n().showRoster());
 	methodsMessage.setInnerText(i18n().notificationMethods());
 	notifierMap = new HashMap<String, CheckBox>();
+	Icons.set(icon, Icons.ROSTER);
+    }
+
+    @Override
+    public void addNotifier(final String id, final String name) {
+	final CheckBox notifierCheckbox = new CheckBox(name);
+	notifierCheckbox.ensureDebugId("hablarNotifierPreferenceEnabled-" + id);
+
+	notifierMap.put(id, notifierCheckbox);
+
+	methodsPanel.add(notifierCheckbox);
     }
 
     @Override
@@ -90,8 +102,32 @@ public class SignalsPreferencesWidget extends Composite implements SignalsPrefer
     }
 
     @Override
+    public List<String> getSelectedNotifiers() {
+	final ArrayList<String> ret = new ArrayList<String>();
+
+	for (final Entry<String, CheckBox> entry : notifierMap.entrySet()) {
+	    if (entry.getValue().getValue()) {
+		ret.add(entry.getKey());
+	    }
+	}
+
+	return ret;
+    }
+
+    @Override
     public HasValue<Boolean> getTitleSignals() {
 	return titleSignals;
+    }
+
+    @Override
+    public boolean isNotifierSelected(final String id) {
+	final CheckBox checkbox = notifierMap.get(id);
+
+	if (checkbox != null) {
+	    return checkbox.getValue();
+	}
+
+	return false;
     }
 
     @Override
@@ -105,45 +141,11 @@ public class SignalsPreferencesWidget extends Composite implements SignalsPrefer
     }
 
     @Override
-    public void addNotifier(final String id, final String name) {
-	CheckBox notifierCheckbox = new CheckBox(name);
-	notifierCheckbox.ensureDebugId("hablarNotifierPreferenceEnabled-" + id);
-	
-	notifierMap.put(id, notifierCheckbox);
-	
-	methodsPanel.add(notifierCheckbox);
-    }
+    public void setNotifierSelected(final String id, final boolean selected) {
+	final CheckBox checkbox = notifierMap.get(id);
 
-    @Override
-    public List<String> getSelectedNotifiers() {
-	ArrayList<String> ret = new ArrayList<String>();
-	
-	for(Entry<String, CheckBox> entry : notifierMap.entrySet()) {
-	    if(entry.getValue().getValue()) {
-		ret.add(entry.getKey());
-	    }
-	}
-	
-	return ret;
-    }
-
-    @Override
-    public void setNotifierSelected(String id, boolean selected) {
-	CheckBox checkbox = notifierMap.get(id);
-	
-	if(checkbox != null) {
+	if (checkbox != null) {
 	    checkbox.setValue(selected);
 	}
     }
-
-    @Override
-    public boolean isNotifierSelected(String id) {
-	CheckBox checkbox = notifierMap.get(id);
-	
-	if(checkbox != null) {
-	    return checkbox.getValue();
-	}
-	
-	return false;
-    }   
 }

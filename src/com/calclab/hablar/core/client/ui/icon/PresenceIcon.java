@@ -1,24 +1,22 @@
 package com.calclab.hablar.core.client.ui.icon;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
-import com.google.gwt.resources.client.ImageResource;
 
 public class PresenceIcon {
 
-    public static ImageResource getIconResource(final boolean available, final Show show) {
-	HablarIconsBundle bundle = OldHablarIcons.getBundle();
+    public static String get(final boolean available, final Show show) {
 	if (show == Show.dnd) {
-	    return bundle.buddyIconDnd();
+	    return Icons.BUDDY_DND;
 	} else if (show == Show.xa) {
-	    return bundle.buddyIconWait();
+	    return Icons.BUDDY_WAIT;
 	} else if (show == Show.away) {
-	    return bundle.buddyIconWait();
+	    return Icons.BUDDY_WAIT;
 	} else if (show == Show.chat) {
-	    return bundle.buddyIconOn();
+	    return Icons.BUDDY_ON;
 	} else if (available) {
-	    return bundle.buddyIconOn();
+	    return Icons.BUDDY_ON;
 	} else {
-	    return bundle.buddyIconOff();
+	    return Icons.BUDDY_OFF;
 	}
     }
 }

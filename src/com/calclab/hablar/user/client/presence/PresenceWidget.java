@@ -1,5 +1,6 @@
 package com.calclab.hablar.user.client.presence;
 
+import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
 import com.calclab.hablar.core.client.ui.menu.PopupMenu;
 import com.calclab.hablar.user.client.UserMessages;
@@ -9,7 +10,6 @@ import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.HasBlurHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -20,20 +20,20 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class PresenceWidget extends Composite implements PresenceDisplay {
 
+    interface PresenceWidgetUiBinder extends UiBinder<Widget, PresenceWidget> {
+    }
+
     private static UserMessages messages;
 
-    public static void setMessages(final UserMessages messages) {
-	PresenceWidget.messages = messages;
-    }
+    private static PresenceWidgetUiBinder uiBinder = GWT.create(PresenceWidgetUiBinder.class);
 
     public static UserMessages i18n() {
 	return messages;
     }
 
-    interface PresenceWidgetUiBinder extends UiBinder<Widget, PresenceWidget> {
+    public static void setMessages(final UserMessages messages) {
+	PresenceWidget.messages = messages;
     }
-
-    private static PresenceWidgetUiBinder uiBinder = GWT.create(PresenceWidgetUiBinder.class);
 
     @UiField
     TextBox status;
@@ -49,6 +49,7 @@ public class PresenceWidget extends Composite implements PresenceDisplay {
 	status.ensureDebugId("PresenceWidget-status");
 	menu.addStyleName("PresenceWidget-menu");
 	statusLabel.setInnerText(i18n().statusLabelText());
+	Icons.set(menu, Icons.MENU);
     }
 
     @Override
@@ -87,6 +88,11 @@ public class PresenceWidget extends Composite implements PresenceDisplay {
     }
 
     @Override
+    public void setPageTitle(final String title) {
+	this.title.setInnerText(title);
+    }
+
+    @Override
     public void setStatusEnabled(final boolean enabled) {
 	status.setEnabled(enabled);
     }
@@ -97,12 +103,7 @@ public class PresenceWidget extends Composite implements PresenceDisplay {
     }
 
     @Override
-    public void setStatusIcon(final ImageResource icon) {
-	this.icon.setResource(icon);
-    }
-
-    @Override
-    public void setPageTitle(String title) {
-	this.title.setInnerText(title);
+    public void setStatusIcon(final String token) {
+	Icons.set(icon, token);
     }
 }

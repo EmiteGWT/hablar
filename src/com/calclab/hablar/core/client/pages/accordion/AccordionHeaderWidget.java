@@ -1,9 +1,9 @@
 package com.calclab.hablar.core.client.pages.accordion;
 
 import com.calclab.hablar.core.client.pages.HeaderDisplay;
+import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -37,11 +37,8 @@ public class AccordionHeaderWidget extends Composite implements HeaderDisplay {
 	initWidget(uiBinder.createAndBindUi(this));
 	ensureDebugId("HeaderWidget-" + pageId);
 	close.ensureDebugId("HeaderWidget-" + pageId + "-close");
-    }
-
-    @Override
-    public void setIcon(final ImageResource iconStyle) {
-	icon.setResource(iconStyle);
+	Icons.set(icon, Icons.LOADING);
+	Icons.set(close, Icons.CLOSE);
     }
 
     @Override
@@ -83,6 +80,10 @@ public class AccordionHeaderWidget extends Composite implements HeaderDisplay {
     public void setHeaderTooltip(final String tooltip) {
 	title.setTitle(tooltip);
 	icon.setTitle(tooltip);
+    }
+
+    public void setIcon(final String token) {
+	Icons.set(icon, token);
     }
 
 }

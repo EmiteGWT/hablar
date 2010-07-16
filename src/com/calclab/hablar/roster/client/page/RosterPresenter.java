@@ -13,7 +13,7 @@ import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.page.events.UserMessageEvent;
-import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
+import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.roster.client.RosterBasicActions;
@@ -29,7 +29,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 
 /**
  * The roster page presenter.
- *
+ * 
  * @see RosterPage
  */
 public class RosterPresenter extends PagePresenter<RosterDisplay> implements RosterPage {
@@ -65,19 +65,9 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 
 	addRosterListeners();
 	addSessionListeners();
-	String title = i18n().contacts();
-	getState().init(OldHablarIcons.getBundle().rosterIcon(), title, title);
+	final String title = i18n().contacts();
+	getState().init(Icons.ROSTER, title, title);
 
-    }
-
-    @Override
-    public void addHighPriorityActions() {
-	basicActions.addHighPriorityActions(this);
-    }
-
-    @Override
-    public void addLowPriorityActions() {
-	basicActions.addLowPriorityActions(this);
     }
 
     @Override
@@ -90,6 +80,16 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 	    }
 	});
 
+    }
+
+    @Override
+    public void addHighPriorityActions() {
+	basicActions.addHighPriorityActions(this);
+    }
+
+    @Override
+    public void addLowPriorityActions() {
+	basicActions.addLowPriorityActions(this);
     }
 
     @Override

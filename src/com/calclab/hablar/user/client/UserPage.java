@@ -12,7 +12,7 @@ import com.calclab.emite.im.client.presence.PresenceManager;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter;
-import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
+import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
@@ -50,7 +50,7 @@ public class UserPage extends PagePresenter<UserDisplay> {
 	});
 
 	updatePageState();
-	model.setPageIcon(OldHablarIcons.getBundle().buddyIconOff());
+	model.setPageIcon(Icons.BUDDY_OFF);
 
 	display.getClose().addClickHandler(new ClickHandler() {
 	    @Override
@@ -103,11 +103,11 @@ public class UserPage extends PagePresenter<UserDisplay> {
 
     private void setShow(final Show show) {
 	if (show == Show.notSpecified || show == Show.chat) {
-	    model.setPageIcon(OldHablarIcons.getBundle().buddyIconOn());
+	    model.setPageIcon(Icons.BUDDY_ON);
 	} else if (show == Show.dnd) {
-	    model.setPageIcon(OldHablarIcons.getBundle().buddyIconDnd());
+	    model.setPageIcon(Icons.BUDDY_DND);
 	} else if (show == Show.xa) {
-	    model.setPageIcon(OldHablarIcons.getBundle().buddyIconWait());
+	    model.setPageIcon(Icons.BUDDY_WAIT);
 	}
     }
 
@@ -124,7 +124,7 @@ public class UserPage extends PagePresenter<UserDisplay> {
 	    setShow(presence != null ? presence.getShow() : Show.unknown);
 	} else {
 	    model.setPageTitle(i18n().notLoggedIn());
-	    model.setPageIcon(OldHablarIcons.getBundle().buddyIconOff());
+	    model.setPageIcon(Icons.BUDDY_OFF);
 	    requestVisibility(Visibility.notFocused);
 	}
     }

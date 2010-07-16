@@ -18,7 +18,7 @@ public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
     private final String groupName;
 
     public RosterItemPresenter(final String groupName, final Menu<RosterItemPresenter> itemMenu,
-	    final RosterItemDisplay display, RosterConfig rosterConfig) {
+	    final RosterItemDisplay display, final RosterConfig rosterConfig) {
 	this.groupName = groupName;
 	this.display = display;
 
@@ -31,7 +31,7 @@ public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
 		    manager.open(item.getJID());
 		}
 	    });
-	    display.asWidget().addStyleName("clickable");
+	    display.addStyleName("clickable");
 	}
 
 	display.getMenuAction().addClickHandler(new ClickHandler() {
@@ -65,7 +65,7 @@ public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
 
 	String name = item.getName();
 
-	if(name == null) {
+	if (name == null) {
 	    name = item.getJID().getShortName();
 	}
 
@@ -77,7 +77,7 @@ public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
 	    display.getStatus().setText(status);
 	}
 	display.setStatusVisible(hasStatus);
-	display.setIcon(PresenceIcon.getIconResource(item.isAvailable(), item.getShow()));
+	display.setIcon(PresenceIcon.get(item.isAvailable(), item.getShow()));
     }
 
 }

@@ -23,12 +23,12 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 
     private static RosterMessages messages;
 
-    public static void setMessages(final RosterMessages messages) {
-	RosterGroupPresenter.messages = messages;
-    }
-
     public static RosterMessages i18n() {
 	return messages;
+    }
+
+    public static void setMessages(final RosterMessages messages) {
+	RosterGroupPresenter.messages = messages;
     }
 
     private final RosterGroupDisplay display;
@@ -41,7 +41,7 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
     private final RosterConfig rosterConfig;
 
     public RosterGroupPresenter(final RosterGroup group, final Menu<RosterItemPresenter> itemMenu,
-	    final RosterGroupDisplay display, RosterConfig rosterConfig) {
+	    final RosterGroupDisplay display, final RosterConfig rosterConfig) {
 	this.group = group;
 	this.itemMenu = itemMenu;
 	this.display = display;
@@ -92,19 +92,19 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	final RosterItemDisplay itemDisplay = display.newRosterItemDisplay(Idify.id(group.getName()), Idify.id(item
 		.getJID()));
 	String title;
-	
+
 	String nameOrJid = item.getName();
-	
-	if(nameOrJid == null) {
+
+	if (nameOrJid == null) {
 	    nameOrJid = item.getJID().getShortName();
 	}
-	
+
 	if (rosterConfig.oneClickChat) {
 	    title = i18n().clickToChatTooltip(nameOrJid);
 	} else {
 	    title = i18n().startChatTooltip(nameOrJid);
 	}
-	itemDisplay.asWidget().setTitle(title);
+	itemDisplay.setWidgetTitle(title);
 	final RosterItemPresenter presenter = new RosterItemPresenter(group.getName(), itemMenu, itemDisplay,
 		rosterConfig);
 	itemPresenters.put(item.getJID(), presenter);

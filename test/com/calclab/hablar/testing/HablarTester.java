@@ -9,12 +9,13 @@ import org.mockito.stubbing.Answer;
 import com.calclab.hablar.core.client.mvp.Display;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
-import com.calclab.hablar.core.client.ui.icon.OldHablarIcons;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
 import com.calclab.hablar.core.mock.HablarMocks;
 import com.calclab.hablar.roster.client.HablarRoster;
+import com.calclab.hablar.roster.client.RosterBasicActions;
 import com.calclab.hablar.roster.client.RosterMessages;
+import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.selenium.tools.I18nHelper;
 import com.calclab.hablar.testing.display.DisplayMocker;
 import com.google.gwt.event.shared.GwtEvent;
@@ -24,11 +25,13 @@ public class HablarTester {
     public EventBusTester eventBus;
 
     public HablarTester() {
-	OldHablarIcons.setStyles(new OldHablarIcons());
 	HablarMocks.disarm();
 	eventBus = new EventBusTester();
 
-	HablarRoster.setMessages(newMessages(RosterMessages.class));
+	final RosterMessages messages = newMessages(RosterMessages.class);
+	HablarRoster.setMessages(messages);
+	RosterBasicActions.setMessages(messages);
+	RosterGroupPresenter.setMessages(messages);
     }
 
     public void fire(final GwtEvent<?> event) {

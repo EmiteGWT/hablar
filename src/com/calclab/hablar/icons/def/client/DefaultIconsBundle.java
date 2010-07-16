@@ -1,67 +1,67 @@
 package com.calclab.hablar.icons.def.client;
 
+import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.resources.client.ClientBundle.Source;
 
-public interface DefaultIconsBundle {
+public interface DefaultIconsBundle extends ClientBundle {
 
-    @Source("png/buddy-add.png")
+    @Source("res/buddy-add.png")
     ImageResource buddyAddIcon();
 
-    @Source("png/buddy-small.png")
+    @Source("res/buddy-small.png")
     ImageResource buddyIcon();
 
-    @Source("png/buddy-small-dnd.png")
+    @Source("res/buddy-small-dnd.png")
     ImageResource buddyIconDnd();
 
-    @Source("png/buddy-small-off.png")
+    @Source("res/buddy-small-off.png")
     ImageResource buddyIconOff();
 
-    @Source("png/buddy-small-on.png")
+    @Source("res/buddy-small-on.png")
     ImageResource buddyIconOn();
 
-    @Source("png/buddy-small-wait.png")
+    @Source("res/buddy-small-wait.png")
     ImageResource buddyIconWait();
 
-    @Source("png/chat_add.png")
+    @Source("res/chat_add.png")
     ImageResource chatAddIcon();
 
-    @Source("png/chat.png")
+    @Source("res/chat.png")
     ImageResource chatIcon();
 
-    @Source("png/clipboard.png")
+    @Source("res/clipboard.png")
     ImageResource clipboardIcon();
 
-    @Source("png/close.png")
+    @Source("res/close.png")
     ImageResource closeIcon();
 
-    @Source("png/console.png")
+    @Source("res/console.png")
     ImageResource consoleIcon();
 
-    @Source("png/group-add.png")
+    @Source("res/group-add.png")
     ImageResource groupAddIcon();
 
-    @Source("png/group-chat.png")
+    @Source("res/group-chat.png")
     ImageResource groupChatIcon();
 
-    @Source("png/loading.gif")
+    @Source("res/loading.gif")
     ImageResource loadingIcon();
 
-    @Source("png/menu2.png")
+    @Source("res/menu2.png")
     ImageResource menuIcon();
 
-    @Source("png/missing.png")
+    @Source("res/missing.png")
     ImageResource missingIcon();
 
-    @Source("png/off.png")
+    @Source("res/off.png")
     ImageResource offIcon();
 
-    @Source("png/on.png")
+    @Source("res/on.png")
     ImageResource onIcon();
 
-    @Source("png/roster.png")
+    @Source("res/roster.png")
     ImageResource rosterIcon();
 
-    @Source("png/search2.png")
+    @Source("res/search2.png")
     ImageResource searchIcon();
 }

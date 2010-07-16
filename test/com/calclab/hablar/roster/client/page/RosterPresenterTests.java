@@ -29,7 +29,7 @@ public class RosterPresenterTests {
 	final HablarTester tester = new HablarTester();
 	eventBus = tester.eventBus;
 	display = tester.newDisplay(RosterDisplay.class);
-	RosterConfig rosterConfig = new RosterConfig();
+	final RosterConfig rosterConfig = new RosterConfig();
 	rosterConfig.oneClickChat = true;
 	new RosterPresenter(eventBus, display, rosterConfig);
 	roster.storeItem("jid1", "name1", "group1");
