@@ -38,6 +38,7 @@ public class ChatMessageWidget extends Composite {
 	final Element newBody = ChatMessageFormatter.format(message.author, message.body);
 	parent.appendChild(newBody);
 	newBody.addClassName("body");
+	newBody.addClassName(message.type.toString());
 	body.addClassName(message.type.toString());
     }
 

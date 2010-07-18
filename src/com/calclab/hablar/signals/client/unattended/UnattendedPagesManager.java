@@ -75,7 +75,7 @@ public class UnattendedPagesManager {
 
     private void onChatVisibilityChanged(final Page<?> page) {
 	final Visibility visibility = page.getVisibility();
-	if (visibility == Visibility.focused && unattendedChatPages.remove(page)) {
+	if ((visibility == Visibility.focused || visibility == Visibility.hidden) && unattendedChatPages.remove(page)) {
 	    eventBus.fireEvent(new UnattendedChatsChangedEvent(ChangeType.removed, page));
 	}
     }

@@ -16,7 +16,7 @@ import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.signals.client.unattended.UnattendedPagesManager;
 import com.calclab.hablar.testing.HablarTester;
 
-public class UnattendedChatPagesTests {
+public class UnattendedPagesManagerTests {
 
     private UnattendedPagesManager pages;
     private HablarTester tester;

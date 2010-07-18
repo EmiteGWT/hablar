@@ -12,6 +12,9 @@ public interface RoomsMessages extends Messages {
     @DefaultMessage("Cancel")
     String cancelAction();
 
+    @DefaultMessage("Are you sure you want to leave this group chat?")
+    String confirmCloseRoom();
+
     @DefaultMessage("The group name can''t be empty")
     String emptyGroupChatName();
 
@@ -77,4 +80,7 @@ public interface RoomsMessages extends Messages {
 
     @DefaultMessage("Group chat name can''t have white spaces")
     String spacesInGroupChatName();
+
+    @DefaultMessage("This group chat is locked. We''re waiting for the server to unlock...")
+    String waitingForUnlockRoom();
 }

@@ -22,6 +22,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
+import com.google.gwt.user.client.Window;
 
 public class RoomPresenter extends ChatPresenter implements RoomPage {
     public static final String TYPE = "Room";
@@ -67,7 +68,11 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
 	    }
 	});
 
-	setState(room.getState());
+	State state = room.getState();
+	setState(state);
+	if (state == State.locked) {
+	    addMessage(new ChatMessage(null, null, i18n().waitingForUnlockRoom(), ChatMessage.MessageType.info));
+	}
 
 	display.getAction().addClickHandler(new ClickHandler() {
 	    @Override
@@ -104,6 +109,19 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
 
     public Room getRoom() {
 	return room;
+    }
+
+    @Override
+    public void setVisibility(Visibility visibility) {
+	if (visibility == Visibility.hidden) {
+	    if (Window.confirm(i18n().confirmCloseRoom())) {
+		super.setVisibility(visibility);
+		room.close();
+	    }
+	} else {
+	    super.setVisibility(visibility);
+	}
+
     }
 
     private void fireUserMessage(final String roomName, final String from, String body) {
