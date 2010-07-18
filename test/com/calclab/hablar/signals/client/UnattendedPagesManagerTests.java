@@ -36,6 +36,15 @@ public class UnattendedPagesManagerTests {
     }
 
     @Test
+    public void shouldRemoveChatIfClosed() {
+	final Page<?> page = createChatPage(Visibility.notFocused);
+	tester.fire(new UserMessageEvent(page, "message", PairChatPresenter.CHAT_MESSAGE));
+	assertTrue(pages.contains(page));
+	tester.fire(new VisibilityChangedEvent(page, Visibility.hidden));
+	assertFalse(pages.contains(page));
+    }
+
+    @Test
     public void shouldRemoveChatIfFocused() {
 	final Page<?> page = createChatPage(Visibility.notFocused);
 	tester.fire(new UserMessageEvent(page, "message", PairChatPresenter.CHAT_MESSAGE));
