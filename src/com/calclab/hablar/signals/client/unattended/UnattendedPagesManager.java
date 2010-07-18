@@ -57,7 +57,7 @@ public class UnattendedPagesManager {
 	    public void onVisibilityChanged(final VisibilityChangedEvent event) {
 		final Page<?> page = event.getPage();
 		if (isChatPage(page.getType())) {
-		    onChatVisibilityChanged(page);
+		    onChatVisibilityChanged(page, event.getVisibility());
 		}
 	    }
 
@@ -73,8 +73,7 @@ public class UnattendedPagesManager {
 	return pageType.equals(PairChatPresenter.TYPE) || pageType.equals(RoomPresenter.TYPE);
     }
 
-    private void onChatVisibilityChanged(final Page<?> page) {
-	final Visibility visibility = page.getVisibility();
+    private void onChatVisibilityChanged(final Page<?> page, Visibility visibility) {
 	if ((visibility == Visibility.focused || visibility == Visibility.hidden) && unattendedChatPages.remove(page)) {
 	    eventBus.fireEvent(new UnattendedChatsChangedEvent(ChangeType.removed, page));
 	}

@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterGroup;
@@ -38,19 +39,21 @@ public class RosterGroupPresenterTests {
 	RosterConfig rosterConfig = new RosterConfig();
 	rosterConfig.oneClickChat = true;
 	new RosterGroupPresenter(group, itemMenu, display, rosterConfig);
+	verify(display, times(3)).add((RosterItemDisplay) anyObject());
+	Mockito.reset(display);
     }
 
     @Test
     public void shouldAddWhenItemAdded() {
 	group.add(RosterTester.createItem("test4", "name4", "mygroup"));
-	int expectedTimes = 3 + 4; // they have to re-add all to change order
-	verify(display, times(expectedTimes)).add((RosterItemDisplay) anyObject());
+	verify(display, times(4)).add((RosterItemDisplay) anyObject());
     }
 
     @Test
     public void shouldRemoveWhenItemRemoved() {
 	group.remove(XmppURI.uri("test1"));
-	verify(display).remove((RosterItemDisplay) anyObject());
+	verify(display).removeAll();
+	verify(display, times(2)).add((RosterItemDisplay) anyObject());
     }
 
 }

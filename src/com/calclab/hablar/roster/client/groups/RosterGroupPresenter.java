@@ -122,8 +122,10 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
     }
 
     private void updateRosterItemGroups() {
-	display.removeAll();
-	itemPresenters.clear();
+	if (!itemPresenters.isEmpty()) {
+	    display.removeAll();
+	    itemPresenters.clear();
+	}
 	final Collection<RosterItem> rosterItems = group.getItemList(ORDER);
 	for (final RosterItem item : rosterItems) {
 	    getPresenter(item);
