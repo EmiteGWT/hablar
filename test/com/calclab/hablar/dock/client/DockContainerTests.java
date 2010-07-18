@@ -44,7 +44,7 @@ public class DockContainerTests {
     }
 
     @Test
-    public void shouldAddTop() {
+    public void shouldAddPageToTop() {
 	final Page<Display> page = HablarMocks.getPage(eventBus);
 	when(page.getType()).thenReturn("top");
 	container.add(page);

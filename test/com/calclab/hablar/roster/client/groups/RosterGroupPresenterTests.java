@@ -43,7 +43,8 @@ public class RosterGroupPresenterTests {
     @Test
     public void shouldAddWhenItemAdded() {
 	group.add(RosterTester.createItem("test4", "name4", "mygroup"));
-	verify(display, times(4)).add((RosterItemDisplay) anyObject());
+	int expectedTimes = 3 + 4; // they have to re-add all to change order
+	verify(display, times(expectedTimes)).add((RosterItemDisplay) anyObject());
     }
 
     @Test
