@@ -19,6 +19,8 @@ import com.calclab.hablar.roster.client.RosterBasicActions;
 import com.calclab.hablar.roster.client.RosterMessages;
 import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.selenium.tools.I18nHelper;
+import com.calclab.hablar.signals.client.BrowserFocusManagerStub;
+import com.calclab.hablar.signals.client.browserfocus.BrowserFocusManager;
 import com.calclab.hablar.testing.display.DisplayMocker;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.i18n.client.Messages;
@@ -29,8 +31,10 @@ public class HablarTester {
 
     public HablarTester() {
 	HablarMocks.disarm();
+	BrowserFocusManager.setInstance(new BrowserFocusManagerStub());
 	eventBus = new EventBusTester();
 
+	
 	final RosterMessages messages = newMessages(RosterMessages.class);
 	HablarRoster.setMessages(messages);
 	RosterBasicActions.setMessages(messages);
@@ -74,5 +78,9 @@ public class HablarTester {
 	    }
 	};
 	return Mockito.mock(classToMock, answer);
+    }
+
+    public void setBrowserFocused(boolean hasFocus) {
+	BrowserFocusManager.getInstance().setHasFocus(hasFocus);
     }
 }

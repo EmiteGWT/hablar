@@ -7,6 +7,7 @@ import com.calclab.hablar.core.client.ui.actions.ActionWidget;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.dom.client.HasFocusHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -42,6 +43,12 @@ public class ChatWidget extends Composite implements ChatDisplay {
 
     public static ChatMessages i18n() {
 	return messages;
+    }
+    
+    
+    @Override
+    public HasFocusHandlers getTextBoxFocus() {
+	return talkBox;
     }
 
     public static void setMessages(final ChatMessages messages) {

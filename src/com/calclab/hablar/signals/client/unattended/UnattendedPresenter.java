@@ -9,6 +9,9 @@ import com.calclab.hablar.signals.client.unattended.UnattendedChatsChangedEvent.
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.HasText;
 
+/**
+ * Handles the presentation of unattended chats
+ */
 public class UnattendedPresenter {
     private static final int BLINK_TIME = 1500;
     private boolean showingMessage;
@@ -29,6 +32,7 @@ public class UnattendedPresenter {
 	    public void handleUnattendedChatChange(final UnattendedChatsChangedEvent event) {
 		if (preferences.titleSignals) {
 		    final int unattendedChatsCount = unattendedManager.getSize();
+		    
 		    if (unattendedChatsCount > 0 && active == false) {
 			startTitleChange();
 		    } else if (unattendedChatsCount == 0 && active == true) {

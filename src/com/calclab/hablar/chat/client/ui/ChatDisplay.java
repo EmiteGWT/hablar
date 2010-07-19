@@ -3,6 +3,7 @@ package com.calclab.hablar.chat.client.ui;
 import com.calclab.hablar.core.client.mvp.Display;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.dom.client.HasFocusHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
@@ -46,5 +47,8 @@ public interface ChatDisplay extends Display {
     void setId(String id);
 
     void setStatusVisible(boolean visible);
+
+    HasFocusHandlers getTextBoxFocus();
+
 
 }

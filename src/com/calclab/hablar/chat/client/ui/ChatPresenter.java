@@ -9,14 +9,17 @@ import com.calclab.emite.im.client.chat.Chat.State;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.validators.IsEmpty;
+import com.calclab.hablar.signals.client.browserfocus.BrowserFocusManager;
+import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 
 /**
  * Shared code for different chat presenters (currently PairChatPresenter and
- * RoomPresenter)
+ * RoomPresenter). Not intended for instance directly
  * 
  */
-public abstract class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPage {
+public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPage {
     private final ArrayList<ChatMessage> messages;
     private boolean showDate;
 
@@ -25,6 +28,13 @@ public abstract class ChatPresenter extends PagePresenter<ChatDisplay> implement
 	super(pageType, id, eventBus, display);
 	messages = new ArrayList<ChatMessage>();
 	showDate = true;
+	
+	display.getTextBoxFocus().addFocusHandler(new FocusHandler() {
+	    @Override
+	    public void onFocus(FocusEvent event) {
+		setVisibility(Visibility.focused);
+	    }
+	});
     }
 
     /**
@@ -52,7 +62,7 @@ public abstract class ChatPresenter extends PagePresenter<ChatDisplay> implement
     @Override
     public void setVisibility(final Visibility visibility) {
 	super.setVisibility(visibility);
-	if (visibility == Visibility.focused) {
+	if (visibility == Visibility.focused && BrowserFocusManager.getInstance().hasFocus()) {
 	    display.focusInput();
 	}
     }
