@@ -3,6 +3,7 @@ package com.calclab.hablar.signals.client;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
+import com.calclab.hablar.signals.client.browserfocus.BrowserFocusHandler;
 import com.calclab.hablar.signals.client.browserfocus.BrowserFocusManager;
 import com.calclab.hablar.signals.client.notifications.BrowserPopupHablarNotifier;
 import com.calclab.hablar.signals.client.notifications.JGrowlHablarNotifier;
@@ -20,8 +21,10 @@ import com.google.gwt.user.client.ui.HasText;
 public class HablarSignals implements EntryPoint {
 
     public static void install(final Hablar hablar) {
-	
+
 	final HablarEventBus eventBus = hablar.getEventBus();
+	new BrowserFocusManager(eventBus, BrowserFocusHandler.getInstance());
+
 	final HasText titleDisplay = new HasText() {
 	    @Override
 	    public String getText() {
@@ -35,13 +38,14 @@ public class HablarSignals implements EntryPoint {
 	};
 	final SignalPreferences preferences = new SignalPreferences();
 
-	final UnattendedPagesManager manager = new UnattendedPagesManager(eventBus, BrowserFocusManager.getInstance());
+	final UnattendedPagesManager manager = new UnattendedPagesManager(eventBus, BrowserFocusHandler.getInstance());
 	new UnattendedPresenter(eventBus, preferences, manager, titleDisplay);
 	NotificationManager notificationManager = new NotificationManager(eventBus, preferences);
 
-	notificationManager.addNotifier((BrowserPopupHablarNotifier) GWT.create(BrowserPopupHablarNotifier.class), true);
+	notificationManager
+		.addNotifier((BrowserPopupHablarNotifier) GWT.create(BrowserPopupHablarNotifier.class), true);
 	notificationManager.addNotifier((JGrowlHablarNotifier) GWT.create(JGrowlHablarNotifier.class), true);
-	
+
 	final SignalsPreferencesPresenter preferencesPage = new SignalsPreferencesPresenter(eventBus, preferences,
 		new SignalsPreferencesWidget(), notificationManager);
 	hablar.addPage(preferencesPage, UserContainer.ROL);

@@ -25,7 +25,7 @@ public class HablarWidget extends LayoutPanel implements HablarDisplay {
     @Override
     public void forceLayout() {
 	GWT.log("FORCE LAYOUT");
-        super.forceLayout();
+	super.forceLayout();
     }
 
     @Override

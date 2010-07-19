@@ -44,8 +44,7 @@ public class ChatWidget extends Composite implements ChatDisplay {
     public static ChatMessages i18n() {
 	return messages;
     }
-    
-    
+
     @Override
     public HasFocusHandlers getTextBoxFocus() {
 	return talkBox;
@@ -116,11 +115,11 @@ public class ChatWidget extends Composite implements ChatDisplay {
     }
 
     @Override
-    public void focusInput() {
+    public void setTextBoxFocus(final boolean hasFocus) {
 	DeferredCommand.addCommand(new Command() {
 	    @Override
 	    public void execute() {
-		talkBox.setFocus(true);
+		talkBox.setFocus(hasFocus);
 	    }
 	});
     }

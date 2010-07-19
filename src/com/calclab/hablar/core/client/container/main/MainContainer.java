@@ -13,6 +13,11 @@ import com.calclab.hablar.core.client.pages.HeaderPresenter;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * A main container. Every main container has a layout associated
+ * @author dani
+ *
+ */
 public class MainContainer implements PagesContainer {
     private static class PageAndHead {
 	public final Widget pageWidget;

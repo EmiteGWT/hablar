@@ -23,4 +23,5 @@ public interface HablarDisplay extends Display, AnimatedLayout {
     public void setWidgetTopHeight(Widget child, double top, Unit topUnit, double height, Unit heightUnit);
 
     void add(Widget widget);
+
 }

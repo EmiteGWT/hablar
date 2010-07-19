@@ -2,7 +2,7 @@ package com.calclab.hablar.signals.client.notifications;
 
 import static com.calclab.hablar.signals.client.I18nSignals.i18n;
 
-import com.calclab.hablar.signals.client.browserfocus.BrowserFocusManager;
+import com.calclab.hablar.signals.client.browserfocus.BrowserFocusHandler;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Timer;
 
@@ -98,7 +98,7 @@ public class BrowserPopupHablarNotifier implements HablarNotifier {
     @Override
     public void show(final String userMessage, final String messageType) {
 	// Show the message only if the browser window doesn't have focus.
-	if (!BrowserFocusManager.getInstance().hasFocus()) {
+	if (!BrowserFocusHandler.getInstance().hasFocus()) {
 	    int success = createToasterWindow(POPUP_WIDTH, POPUP_MESSAGE_HEIGHT + POPUP_STATIC_HEIGHT, i18n()
 		    .browserPopupNotifierWindowTitle());
 

@@ -9,7 +9,7 @@ import com.calclab.emite.im.client.chat.Chat.State;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.validators.IsEmpty;
-import com.calclab.hablar.signals.client.browserfocus.BrowserFocusManager;
+import com.calclab.hablar.signals.client.browserfocus.BrowserFocusHandler;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -62,8 +62,8 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
     @Override
     public void setVisibility(final Visibility visibility) {
 	super.setVisibility(visibility);
-	if (visibility == Visibility.focused && BrowserFocusManager.getInstance().hasFocus()) {
-	    display.focusInput();
+	if (visibility == Visibility.focused && BrowserFocusHandler.getInstance().hasFocus()) {
+	    display.setTextBoxFocus(true);
 	}
     }
 

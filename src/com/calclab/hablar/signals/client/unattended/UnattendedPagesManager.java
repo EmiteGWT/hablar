@@ -11,7 +11,7 @@ import com.calclab.hablar.core.client.page.events.UserMessageHandler;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedHandler;
 import com.calclab.hablar.rooms.client.room.RoomPresenter;
-import com.calclab.hablar.signals.client.browserfocus.BrowserFocusManager;
+import com.calclab.hablar.signals.client.browserfocus.BrowserFocusHandler;
 import com.calclab.hablar.signals.client.unattended.UnattendedChatsChangedEvent.ChangeType;
 
 /**
@@ -23,9 +23,9 @@ public class UnattendedPagesManager {
 
     private final HablarEventBus eventBus;
     private final HashSet<Page<?>> unattendedChatPages;
-    private final BrowserFocusManager focusManager;
+    private final BrowserFocusHandler focusManager;
 
-    public UnattendedPagesManager(final HablarEventBus hablarEventBus, BrowserFocusManager focusManager) {
+    public UnattendedPagesManager(final HablarEventBus hablarEventBus, BrowserFocusHandler focusManager) {
 	eventBus = hablarEventBus;
 	this.focusManager = focusManager;
 	unattendedChatPages = new HashSet<Page<?>>();

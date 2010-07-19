@@ -49,10 +49,12 @@ public class HablarPresenter implements Hablar {
 	aggregator.addContainer(container, chain);
     }
 
+    @Override
     public void addPage(Page<?> page) {
 	aggregator.add(page);
     }
 
+    @Override
     public void addPage(Page<?> page, String containerType) {
 	aggregator.addPage(page, containerType);
     }
@@ -78,11 +80,14 @@ public class HablarPresenter implements Hablar {
 	return display;
     }
 
+    @Override
     public HablarEventBus getEventBus() {
 	return eventBus;
     }
 
+    @Override
     public List<Page<?>> getPagesOfType(String type) {
 	return aggregator.getPagesOfType(type);
     }
+
 }

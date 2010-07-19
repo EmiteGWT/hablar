@@ -53,6 +53,7 @@ public interface Hablar extends Presenter<HablarDisplay> {
 
     public PagesContainer getContainer(String rol);
 
+    @Override
     public HablarDisplay getDisplay();
 
     public HablarEventBus getEventBus();
