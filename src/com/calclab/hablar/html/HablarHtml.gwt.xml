@@ -7,6 +7,7 @@
 	<inherits name='com.calclab.hablar.login.HablarLogin' />
     <inherits name='com.calclab.hablar.icons.def.HablarDefaultIcons' />
     <inherits name='com.calclab.hablar.icons.ie6gif.HablarIE6GifIcons' />
+    <inherits name='com.calclab.hablar.icons.alt.HablarAltIcons' />
 
 	<inherits name='com.google.gwt.user.theme.chrome.Chrome' />
 	<!-- <inherits name='com.google.gwt.user.theme.standard.Standard' /> -->

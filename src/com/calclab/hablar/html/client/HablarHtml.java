@@ -1,11 +1,14 @@
 package com.calclab.hablar.html.client;
 
+import com.calclab.emite.browser.client.PageAssist;
 import com.calclab.hablar.HablarComplete;
 import com.calclab.hablar.HablarConfig;
 import com.calclab.hablar.console.client.HablarConsole;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
+import com.calclab.hablar.icons.alt.client.AltIcons;
 import com.calclab.hablar.icons.def.client.DefaultIcons;
+import com.calclab.hablar.icons.ie6gif.client.IE6GifIcons;
 import com.calclab.hablar.login.client.HablarLogin;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -20,6 +23,7 @@ public class HablarHtml implements EntryPoint {
     @Override
     public void onModuleLoad() {
 	final GWT.UncaughtExceptionHandler uncaughtExceptionHandler = new GWT.UncaughtExceptionHandler() {
+	    @Override
 	    public void onUncaughtException(final Throwable e) {
 		GWT.log("UncaughtException: ", e);
 	    }
@@ -55,8 +59,16 @@ public class HablarHtml implements EntryPoint {
     }
 
     private void onModuleLoadCont() {
-	DefaultIcons.load();
-	// IE6GifIcons.load();
+	String icons = PageAssist.getMeta("hablar.icons");
+	if ("alt".equals(icons)) {
+	    AltIcons.load();
+	} else if ("ie6".equals(icons)) {
+	    IE6GifIcons.load();
+
+	} else {
+	    DefaultIcons.load();
+	}
+
 	final HablarConfig config = HablarConfig.getFromMeta();
 	final HtmlConfig htmlConfig = HtmlConfig.getFromMeta();
 	htmlConfig.hasLogger = true;

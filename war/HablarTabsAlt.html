@@ -1,32 +1,34 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
-  	<meta http-equiv="X-UA-Compatible" content="IE=7" >
+   	<meta http-equiv="X-UA-Compatible" content="IE=7" >
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <link type="text/css" rel="stylesheet" href="Hablar.css">
     <link type="text/css" rel="stylesheet" href="Examples.css">
- 	<!--[if IE 6]>
+	<!--[if IE 6]>
     <link type="text/css" rel="stylesheet" href="ie6.css">
 	<![endif]-->
 
-    <title>Hablar Showcase - Tabs with docked roster</title>
-
+    <title>Hablar Showcase - Accordion with login</title>
     <meta name="emite.httpBase" content="/proxy" />
     <meta name="emite.host" content="localhost" />
     <meta name="emite.searchHost" content="search.localhost" />
+    <meta name="emite.session" content="logout" />
 
 	<meta name="hablar.roomService" content="conference.localhost" />
-    <meta name="emite.session" content="login" />
-    <meta name="emite.user" content="test2@localhost" />
-    <meta name="emite.password" content="test2" />
+    <meta name="hablar.user" content="test1@localhost" />
+    <meta name="hablar.password" content="test1" />
 
+	<meta name="hablar.icons" content="alt" />
+	<meta name="hablar.vcard.readonly" content="true" />
 
-    <meta name="hablar.login" content="false" />
+    <!-- modules -->
+    <meta name="hablar.login" content="true" />
     <meta name="hablar.roster" content="true" />
-    <meta name="hablar.dockRoster" content="left" />
 
-    <meta name="hablar.layout" content="tabs" />    
-    <meta name="hablar.inline" content="horizontal_div" />
+    <!-- html -->
+    <meta name="hablar.layout" content="accordion" />
+    <meta name="hablar.inline" content="vertical_div" />
     <meta name="hablar.width" content="100%" />
     <meta name="hablar.height" content="100%" />
 
@@ -43,9 +45,9 @@
       </div>
     </noscript>
 
-    <div style="position: absolute; left: 50%;top: 0;height: 100%;">
-    <div id="horizontal_div" class="hablar"></div>
-    </div>
+	<div style="position: absolute; left: 50%;top: 0;height: 100%;">
+	<div id="vertical_div" class="hablar"></div>
+	</div>
 
   </body>
 </html>
