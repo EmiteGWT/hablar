@@ -5,63 +5,63 @@ import com.google.gwt.resources.client.ImageResource;
 
 public interface AltIconsBundle extends ClientBundle {
 
-    @Source("res/buddy-add.png")
+    @Source("res/buddy-add-alt.png")
     ImageResource buddyAddIcon();
 
-    @Source("res/buddy-small.png")
+    @Source("res/buddy-small-alt.png")
     ImageResource buddyIcon();
 
-    @Source("res/buddy-small-dnd.png")
+    @Source("res/buddy-small-dnd-alt.png")
     ImageResource buddyIconDnd();
 
-    @Source("res/buddy-small-off.png")
+    @Source("res/buddy-small-off-alt.png")
     ImageResource buddyIconOff();
 
-    @Source("res/buddy-small-on.png")
+    @Source("res/buddy-small-on-alt.png")
     ImageResource buddyIconOn();
 
-    @Source("res/buddy-small-wait.png")
+    @Source("res/buddy-small-wait-alt.png")
     ImageResource buddyIconWait();
 
-    @Source("res/chat_add.png")
+    @Source("res/chat_add-alt.png")
     ImageResource chatAddIcon();
 
-    @Source("res/chat.png")
+    @Source("res/chat-alt.png")
     ImageResource chatIcon();
 
-    @Source("res/clipboard.png")
+    @Source("res/clipboard-alt.png")
     ImageResource clipboardIcon();
 
-    @Source("res/close.png")
+    @Source("res/close-alt.png")
     ImageResource closeIcon();
 
-    @Source("res/console.png")
+    @Source("res/console-alt.png")
     ImageResource consoleIcon();
 
-    @Source("res/group-add.png")
+    @Source("res/group-add-alt.png")
     ImageResource groupAddIcon();
 
-    @Source("res/group-chat.png")
+    @Source("res/group-chat-alt.png")
     ImageResource groupChatIcon();
 
-    @Source("res/loading.gif")
+    @Source("res/loading-alt.gif")
     ImageResource loadingIcon();
 
-    @Source("res/menu2.png")
+    @Source("res/menu2-alt.png")
     ImageResource menuIcon();
 
-    @Source("res/missing.png")
+    @Source("res/missing-alt.png")
     ImageResource missingIcon();
 
-    @Source("res/off.png")
+    @Source("res/off-alt.png")
     ImageResource offIcon();
 
-    @Source("res/on.png")
+    @Source("res/on-alt.png")
     ImageResource onIcon();
 
-    @Source("res/roster.png")
+    @Source("res/roster-alt.png")
     ImageResource rosterIcon();
 
-    @Source("res/search2.png")
+    @Source("res/search2-alt.png")
     ImageResource searchIcon();
 }

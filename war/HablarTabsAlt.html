@@ -3,36 +3,37 @@
   <head>
    	<meta http-equiv="X-UA-Compatible" content="IE=7" >
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <link type="text/css" rel="stylesheet" href="Hablar.css">
-    <link type="text/css" rel="stylesheet" href="Examples.css">
+    <link type="text/css" rel="stylesheet" href="Examples.css" />
+
+    <title>Hablar Showcase - Alternative icons, no send button</title>
+    <meta name="emite.httpBase" content="/proxy" />
+    <meta name="emite.host" content="localhost" />
+    <meta name="emite.searchHost" content="search.localhost" />
+
+    <meta name="emite.session" content="login" />
+    <meta name="emite.user" content="test1@localhost" />
+    <meta name="emite.password" content="test1" />
+
+	
+    <meta name="hablar.icons" content="alt" />
+    <meta name="hablar.roomService" content="conference.localhost" />
+    <meta name="hablar.login" content="false" />
+    <meta name="hablar.roster" content="true" />
+    <meta name="hablar.dockRoster" content="left" />
+
+    <meta name="hablar.layout" content="tabs" />
+    <meta name="hablar.inline" content="vertical_dock_div" />
+    <meta name="hablar.width" content="100%" />
+    <meta name="hablar.height" content="100%" />
+
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/reset/reset-min.css">
+    <link type="text/css" rel="stylesheet" href="Hablar.css" />
 	<!--[if IE 6]>
     <link type="text/css" rel="stylesheet" href="ie6.css">
 	<![endif]-->
 
-    <title>Hablar Showcase - Accordion with login</title>
-    <meta name="emite.httpBase" content="/proxy" />
-    <meta name="emite.host" content="localhost" />
-    <meta name="emite.searchHost" content="search.localhost" />
-    <meta name="emite.session" content="logout" />
-
-	<meta name="hablar.roomService" content="conference.localhost" />
-    <meta name="hablar.user" content="test1@localhost" />
-    <meta name="hablar.password" content="test1" />
-
-	<meta name="hablar.icons" content="alt" />
-	<meta name="hablar.vcard.readonly" content="true" />
-
-    <!-- modules -->
-    <meta name="hablar.login" content="true" />
-    <meta name="hablar.roster" content="true" />
-
-    <!-- html -->
-    <meta name="hablar.layout" content="accordion" />
-    <meta name="hablar.inline" content="vertical_div" />
-    <meta name="hablar.width" content="100%" />
-    <meta name="hablar.height" content="100%" />
-
     <script type="text/javascript" language="javascript" src="HablarHtml/HablarHtml.nocache.js"></script>
+
   </head>
   <body>
 
@@ -45,9 +46,9 @@
       </div>
     </noscript>
 
-	<div style="position: absolute; left: 50%;top: 0;height: 100%;">
-	<div id="vertical_div" class="hablar"></div>
-	</div>
+    <div style="position: absolute; left: 50%;top: 0;height: 100%;">
+    <div id="vertical_dock_div" class="hablar"></div>
+    </div>
 
   </body>
 </html>

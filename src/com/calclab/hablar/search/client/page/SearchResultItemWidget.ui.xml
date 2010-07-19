@@ -26,8 +26,7 @@
     <ui:image field="buddy" src="buddy-small.png"></ui:image>
 
     <g:HTMLPanel addStyleNames="{style.userWidget} hablar-SearchResultItemWidget hablar-bottomLightBordered">
-        <g:Image addStyleNames="{style.userWidgetItem} {style.userWidgetIcon}" ui:field="buddyIcon"
-        	"/>
+        <g:Image addStyleNames="{style.userWidgetItem} {style.userWidgetIcon}" ui:field="buddyIcon" />
         <g:Label ui:field="name" addStyleNames="{style.userWidgetItem} name">Result</g:Label>
         <g:Label ui:field="jid" addStyleNames="{style.userWidgetItem} hablar-lightColor">JID</g:Label>
         <g:Image ui:field="menu"  addStyleNames="{style.userWidgetMenu}" />

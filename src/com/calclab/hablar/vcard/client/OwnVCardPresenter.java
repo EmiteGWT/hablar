@@ -5,15 +5,16 @@ import java.util.List;
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.session.Session.State;
 import com.calclab.emite.xep.vcard.client.VCard;
+import com.calclab.emite.xep.vcard.client.VCard.Data;
 import com.calclab.emite.xep.vcard.client.VCardEmail;
 import com.calclab.emite.xep.vcard.client.VCardManager;
 import com.calclab.emite.xep.vcard.client.VCardResponse;
-import com.calclab.emite.xep.vcard.client.VCard.Data;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.user.client.EditorPage;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
+import com.google.gwt.core.client.GWT;
 
 public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisplay> {
 
@@ -95,6 +96,7 @@ public class OwnVCardPresenter extends VCardPage implements EditorPage<VCardDisp
     }
 
     private void requestVCard() {
+	GWT.log("REQUEST VCARD");
 	final VCardManager manager = Suco.get(VCardManager.class);
 
 	setLoading(true, I18nVCard.t.waitingForOwnVCard());

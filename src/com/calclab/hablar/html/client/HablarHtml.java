@@ -64,7 +64,6 @@ public class HablarHtml implements EntryPoint {
 	    AltIcons.load();
 	} else if ("ie6".equals(icons)) {
 	    IE6GifIcons.load();
-
 	} else {
 	    DefaultIcons.load();
 	}
