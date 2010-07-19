@@ -10,37 +10,43 @@ public class BrowserFocusManager {
 
     private static BrowserFocusManager instance;
     private boolean hasFocus;
-    
+
     public BrowserFocusManager() {
+	GWT.log("BrowserFocusManager - init");
 	this.hasFocus = true;
+	addFocusListenerEvents();
+    }
+
+    /**
+     * Expose the method to javascript (do not use this function, use getInstance().setFocus() instead)
+     * @param hasFocus
+     */
+    public static void changeFocus(boolean hasFocus) {
+	getInstance().setHasFocus(hasFocus);
     }
     
     /**
      * Adds the focus events to the browser
      */
     protected native void addFocusListenerEvents() /*-{
-        var onBrowserFocus = function() {
-        this@com.calclab.hablar.signals.client.browserfocus.BrowserFocusManager::setBrowserHasFocus(Z)(true);
-        }
-
-        var onBrowserBlur = function() {
-        this@com.calclab.hablar.signals.client.browserfocus.BrowserFocusManager::setBrowserHasFocus(Z)(false);
-        }
-
-        $wnd.onfocus = onBrowserFocus;
-        $wnd.onblur = onBrowserBlur;
+        $wnd.onfocus = function() {
+            @com.calclab.hablar.signals.client.browserfocus.BrowserFocusManager::changeFocus(Z)(true);
+        };
+        $wnd.onblur = function() {
+            @com.calclab.hablar.signals.client.browserfocus.BrowserFocusManager::changeFocus(Z)(false);
+        };
     }-*/;
-    
+
     /**
-     * Sets whether the browser window currently has focus or not (usually called by jsni)
+     * Sets current browser focus status
      * 
      * @param hasFocus
      */
     public void setHasFocus(boolean hasFocus) {
-	GWT.log("Browser focus: " + hasFocus);
+	GWT.log("BrowserFocusManager - focus: " + hasFocus);
 	this.hasFocus = hasFocus;
     }
-    
+
     /**
      * Returns whether the browser window currently has focus. The output cannot
      * be relied upon (but will return <code>true</code>) if
@@ -53,16 +59,16 @@ public class BrowserFocusManager {
     public boolean hasFocus() {
 	return hasFocus;
     }
-    
+
     public static BrowserFocusManager getInstance() {
 	if (instance == null) {
 	    instance = GWT.create(BrowserFocusManager.class);
 	}
 	return instance;
     }
-    
+
     public static void setInstance(BrowserFocusManager newInstance) {
 	instance = newInstance;
     }
-    
+
 }

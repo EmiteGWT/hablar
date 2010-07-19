@@ -20,11 +20,23 @@ public class UnattendedPagesManagerTests {
 
     private UnattendedPagesManager pages;
     private HablarTester tester;
+    private BrowserFocusManagerStub focusManager;
 
     @Before
     public void setup() {
 	tester = new HablarTester();
-	pages = new UnattendedPagesManager(tester.eventBus);
+	focusManager = new BrowserFocusManagerStub();
+	focusManager.setHasFocus(true);
+	pages = new UnattendedPagesManager(tester.eventBus, focusManager);
+    }
+    
+    @Test
+    public void shouldAddFocusedChatIfBrowserIsNotFocused() {
+	final Page<?> page = createChatPage(Visibility.focused);
+	assertEquals(0, pages.getSize());
+	focusManager.setHasFocus(false);
+	tester.fire(new UserMessageEvent(page, "message", PairChatPresenter.CHAT_MESSAGE));
+	assertTrue(pages.contains(page));
     }
 
     @Test

@@ -3,7 +3,7 @@ package com.calclab.hablar.signals.client;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
-import com.calclab.hablar.signals.client.browserfocus.BrowserFocus;
+import com.calclab.hablar.signals.client.browserfocus.BrowserFocusManager;
 import com.calclab.hablar.signals.client.notifications.BrowserPopupHablarNotifier;
 import com.calclab.hablar.signals.client.notifications.JGrowlHablarNotifier;
 import com.calclab.hablar.signals.client.notifications.NotificationManager;
@@ -20,7 +20,6 @@ import com.google.gwt.user.client.ui.HasText;
 public class HablarSignals implements EntryPoint {
 
     public static void install(final Hablar hablar) {
-	BrowserFocus.startMonitoring();
 	
 	final HablarEventBus eventBus = hablar.getEventBus();
 	final HasText titleDisplay = new HasText() {
@@ -36,7 +35,7 @@ public class HablarSignals implements EntryPoint {
 	};
 	final SignalPreferences preferences = new SignalPreferences();
 
-	final UnattendedPagesManager manager = new UnattendedPagesManager(eventBus);
+	final UnattendedPagesManager manager = new UnattendedPagesManager(eventBus, BrowserFocusManager.getInstance());
 	new UnattendedPresenter(eventBus, preferences, manager, titleDisplay);
 	NotificationManager notificationManager = new NotificationManager(eventBus, preferences);
 

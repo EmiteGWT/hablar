@@ -6,8 +6,26 @@ import com.calclab.hablar.core.client.page.events.VisibilityChangeRequestEvent;
 
 public class PagePresenter<T extends Display> implements Page<T> {
 
+    /**
+     * The current visibility of the page in a container
+     */
     public static enum Visibility {
-	focused, notFocused, hidden, toggle
+	/**
+	 * Set this visibility to focus the page (set the page header and content visibles)
+	 */
+	focused,
+	/**
+	 * Set this visibility to show the page header but not the content
+	 */
+	notFocused,
+	/**
+	 * Set this visibility to close the page (the page header and content will not visibile)
+	 */
+	hidden,
+	/**
+	 * Set this visibility if you want to close the page if its open or open if its closed
+	 */
+	toggle
     }
 
     private static int index = 0;
