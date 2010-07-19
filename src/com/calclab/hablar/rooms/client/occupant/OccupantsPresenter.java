@@ -11,6 +11,7 @@ import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseOverHandler;
+import com.google.gwt.user.client.ui.HasText;
 
 /**
  * Shows the list of the occupants of the rooms
@@ -70,7 +71,8 @@ public class OccupantsPresenter implements Presenter<OccupantsDisplay> {
     }
 
     private void updateOccupants(final Room room) {
-	display.getLabel().setText(i18n().occupants(occupantsCount));
+	HasText label = display.getLabel();
+	label.setText(i18n().occupants(occupantsCount));
 	display.clearPanel();
 	addOccupantsToPanel(room);
     }

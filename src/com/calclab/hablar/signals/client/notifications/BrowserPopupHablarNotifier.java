@@ -50,7 +50,6 @@ public class BrowserPopupHablarNotifier implements HablarNotifier {
      * {@link BrowserPopupHablarNotifier#createToasterWindow(int, int, String)}
      * if the window is already open
      */
-    @SuppressWarnings("unused")
     private static final int CREATE_TOASTER_WINDOW_ALREDY_OPEN = 1;
 
     /**
@@ -69,7 +68,6 @@ public class BrowserPopupHablarNotifier implements HablarNotifier {
      * otherwise if I use an external stylesheet then there is a moment where
      * the content is unstyled and it looks a bit rubbish.
      */
-    @SuppressWarnings("unused")
     private static String popupHtml = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">"
 	    + "<html><head>"
 	    + "<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"

@@ -12,6 +12,8 @@ import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
 import com.calclab.hablar.core.mock.HablarMocks;
+import com.calclab.hablar.rooms.client.HablarRooms;
+import com.calclab.hablar.rooms.client.RoomsMessages;
 import com.calclab.hablar.roster.client.HablarRoster;
 import com.calclab.hablar.roster.client.RosterBasicActions;
 import com.calclab.hablar.roster.client.RosterMessages;
@@ -19,6 +21,7 @@ import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.selenium.tools.I18nHelper;
 import com.calclab.hablar.testing.display.DisplayMocker;
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.i18n.client.Messages;
 
 public class HablarTester {
 
@@ -32,6 +35,7 @@ public class HablarTester {
 	HablarRoster.setMessages(messages);
 	RosterBasicActions.setMessages(messages);
 	RosterGroupPresenter.setMessages(messages);
+	HablarRooms.setMessages(newMessages(RoomsMessages.class));
     }
 
     public void fire(final GwtEvent<?> event) {
@@ -62,7 +66,7 @@ public class HablarTester {
 	return mock;
     }
 
-    private RosterMessages newMessages(final Class<RosterMessages> classToMock) {
+    private <T extends Messages> T newMessages(final Class<T> classToMock) {
 	final Answer<Object> answer = new Answer<Object>() {
 	    @Override
 	    public Object answer(final InvocationOnMock invocation) throws Throwable {

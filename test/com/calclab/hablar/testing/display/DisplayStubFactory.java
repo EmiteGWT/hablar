@@ -8,7 +8,10 @@ import com.google.gwt.dev.util.collect.HashMap;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasFocusHandlers;
+import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.event.dom.client.HasKeyPressHandlers;
+import com.google.gwt.event.dom.client.HasMouseOutHandlers;
+import com.google.gwt.event.dom.client.HasMouseOverHandlers;
 import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.HasHTML;
 import com.google.gwt.user.client.ui.HasText;
@@ -47,6 +50,20 @@ public class DisplayStubFactory {
 		return new HasClickHandlersStub();
 	    }
 	});
+	providers.put(HasMouseOverHandlers.class, new Provider<HasMouseOverHandlers>() {
+	    @Override
+	    public HasMouseOverHandlers get() {
+		return new HasMouseOverHandlersStub();
+	    }
+	    
+	});
+	providers.put(HasMouseOutHandlers.class, new Provider<HasMouseOutHandlers>() {
+	    @Override
+	    public HasMouseOutHandlers get() {
+		return new HasMouseOutHandlersStub();
+	    }
+	    
+	});
 	providers.put(HasWidgets.class, new Provider<HasWidgets>() {
 	    @Override
 	    public HasWidgets get() {
@@ -79,6 +96,13 @@ public class DisplayStubFactory {
 	    public HasKeyPressHandlers get() {
 		return new HasKeyPressHandlersStub();
 	    }
+	});
+	providers.put(HasKeyDownHandlers.class, new Provider<HasKeyDownHandlers>() {
+	    @Override
+	    public HasKeyDownHandlers get() {
+		return new HasKeyDownHandlersStub();
+	    }
+	    
 	});
     }
 

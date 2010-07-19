@@ -114,10 +114,8 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
     @Override
     public void setVisibility(Visibility visibility) {
 	if (visibility == Visibility.hidden) {
-	    if (Window.confirm(i18n().confirmCloseRoom())) {
-		super.setVisibility(visibility);
-		room.close();
-	    }
+	    super.setVisibility(visibility);
+	    room.close();
 	} else {
 	    super.setVisibility(visibility);
 	}
