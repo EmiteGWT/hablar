@@ -11,25 +11,6 @@
 	<script src="jgrowl/jquery-1.3.2.js" />
 	<script src="jgrowl/jquery.jgrowl.js" />
 	
-	<replace-with
-		class="com.calclab.hablar.signals.client.browserfocus.BrowserFocusHandler">
-		<when-type-is
-			class="com.calclab.hablar.signals.client.browserfocus.BrowserFocusHandler" />
-	</replace-with>
-	<!--
-		IE6 requires slightly different implementation for the window focus
-		detection
-	-->
-	<replace-with
-		class="com.calclab.hablar.signals.client.browserfocus.BrowserFocusHandlerIE6">
-		<when-type-is
-			class="com.calclab.hablar.signals.client.browserfocus.BrowserFocusHandler" />
-		<any>
-			<when-property-is name="user.agent" value="ie6" />
-		</any>
-	</replace-with>
-
-
 	<extend-property name="locale" values="it" />
 	<extend-property name="locale" values="en" />
 

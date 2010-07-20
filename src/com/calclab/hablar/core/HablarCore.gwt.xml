@@ -4,6 +4,25 @@
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name='com.calclab.emite.core.EmiteCore' />
 
+	<replace-with
+		class="com.calclab.hablar.core.client.browser.BrowserFocusHandler">
+		<when-type-is
+			class="com.calclab.hablar.core.client.browser.BrowserFocusHandler" />
+	</replace-with>
+	<!--
+		IE6 requires slightly different implementation for the window focus
+		detection
+	-->
+	<replace-with
+		class="com.calclab.hablar.core.client.browser.BrowserFocusHandlerIE6">
+		<when-type-is
+			class="com.calclab.hablar.core.client.browser.BrowserFocusHandler" />
+		<any>
+			<when-property-is name="user.agent" value="ie6" />
+		</any>
+	</replace-with>
+
+
 	<source path="client" />
 	<entry-point class="com.calclab.hablar.core.client.HablarCore" />
 </module>

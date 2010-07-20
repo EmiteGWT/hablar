@@ -6,6 +6,8 @@ import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
+import com.calclab.hablar.core.client.browser.BrowserFocusHandler;
+import com.calclab.hablar.core.client.browser.BrowserFocusHandlerStub;
 import com.calclab.hablar.core.client.mvp.Display;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
@@ -19,8 +21,6 @@ import com.calclab.hablar.roster.client.RosterBasicActions;
 import com.calclab.hablar.roster.client.RosterMessages;
 import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.selenium.tools.I18nHelper;
-import com.calclab.hablar.signals.client.BrowserFocusHandlerStub;
-import com.calclab.hablar.signals.client.browserfocus.BrowserFocusHandler;
 import com.calclab.hablar.testing.display.DisplayMocker;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.i18n.client.Messages;

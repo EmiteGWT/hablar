@@ -2,7 +2,7 @@ package com.calclab.hablar.signals.client.notifications;
 
 import static com.calclab.hablar.signals.client.I18nSignals.i18n;
 
-import com.calclab.hablar.signals.client.browserfocus.BrowserFocusHandler;
+import com.calclab.hablar.core.client.browser.BrowserFocusHandler;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Timer;
 

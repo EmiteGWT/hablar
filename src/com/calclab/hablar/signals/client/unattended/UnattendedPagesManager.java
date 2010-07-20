@@ -3,6 +3,7 @@ package com.calclab.hablar.signals.client.unattended;
 import java.util.HashSet;
 
 import com.calclab.hablar.chat.client.ui.PairChatPresenter;
+import com.calclab.hablar.core.client.browser.BrowserFocusHandler;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
@@ -11,7 +12,6 @@ import com.calclab.hablar.core.client.page.events.UserMessageHandler;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedHandler;
 import com.calclab.hablar.rooms.client.room.RoomPresenter;
-import com.calclab.hablar.signals.client.browserfocus.BrowserFocusHandler;
 import com.calclab.hablar.signals.client.unattended.UnattendedChatsChangedEvent.ChangeType;
 
 /**

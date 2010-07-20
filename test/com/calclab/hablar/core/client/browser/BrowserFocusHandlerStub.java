@@ -1,6 +1,6 @@
-package com.calclab.hablar.signals.client;
+package com.calclab.hablar.core.client.browser;
 
-import com.calclab.hablar.signals.client.browserfocus.BrowserFocusHandler;
+import com.calclab.hablar.core.client.browser.BrowserFocusHandler;
 
 /**
  * A stub to simulate browser focus in tests

@@ -13,6 +13,7 @@ public class PageState {
     private final Page<?> page;
     private String externalState;
     private String iconToken;
+    private String closeConfirmationMessage;
 
     public PageState(final HablarEventBus eventBus, final Page<?> page) {
 	this.eventBus = eventBus;
@@ -114,6 +115,25 @@ public class PageState {
 
     private void fireChanged() {
 	eventBus.fireEvent(new PageInfoChangedEvent(page, this));
+    }
+
+    /**
+     * Get the confirmation message before close the page, if any
+     * 
+     * @return the confirmation message (or null)
+     */
+    public String getCloseConfirmationMessage() {
+	return this.closeConfirmationMessage;
+    }
+
+    /**
+     * Set a confirmation message. If is not null this message will be shown
+     * before close the page
+     * 
+     * @param confirmation
+     */
+    public void setCloseConfirmationMessage(String confirmation) {
+	this.closeConfirmationMessage = confirmation;
     }
 
 }

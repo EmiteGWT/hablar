@@ -2,13 +2,14 @@ package com.calclab.hablar.signals.client.browserfocus;
 
 import com.calclab.hablar.chat.client.ui.ChatPresenter;
 import com.calclab.hablar.chat.client.ui.PairChatPresenter;
+import com.calclab.hablar.core.client.browser.BrowserFocusHandler;
+import com.calclab.hablar.core.client.browser.BrowserFocusHandler.BrowserFocusListener;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedHandler;
 import com.calclab.hablar.rooms.client.room.RoomPresenter;
-import com.calclab.hablar.signals.client.browserfocus.BrowserFocusHandler.BrowserFocusListener;
 import com.calclab.hablar.signals.client.unattended.UnattendedPagesManager;
 
 /**

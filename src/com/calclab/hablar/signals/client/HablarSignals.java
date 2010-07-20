@@ -2,8 +2,8 @@ package com.calclab.hablar.signals.client;
 
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
+import com.calclab.hablar.core.client.browser.BrowserFocusHandler;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
-import com.calclab.hablar.signals.client.browserfocus.BrowserFocusHandler;
 import com.calclab.hablar.signals.client.browserfocus.BrowserFocusManager;
 import com.calclab.hablar.signals.client.notifications.BrowserPopupHablarNotifier;
 import com.calclab.hablar.signals.client.notifications.JGrowlHablarNotifier;

@@ -1,5 +1,9 @@
 package com.calclab.hablar.rooms.client;
 
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -12,7 +16,6 @@ import com.calclab.hablar.rooms.client.room.RoomDisplay;
 import com.calclab.hablar.rooms.client.room.RoomPresenter;
 import com.calclab.hablar.testing.EmiteTester;
 import com.calclab.hablar.testing.HablarTester;
-import static org.mockito.Mockito.*;
 
 public class RoomPresenterTests {
 
@@ -27,12 +30,15 @@ public class RoomPresenterTests {
 	HablarTester tester = new HablarTester();
 	display = tester.newDisplay(RoomDisplay.class);
 	OccupantsDisplay occupantsDisplay = tester.newDisplay(OccupantsDisplay.class);
-	when(display.createOccupantsDisplay(anyString())).thenReturn(occupantsDisplay );
+	when(display.createOccupantsDisplay(anyString())).thenReturn(occupantsDisplay);
 	room = Mockito.mock(Room.class);
 	when(room.getURI()).thenReturn(XmppURI.uri("room@domain"));
 	presenter = new RoomPresenter(tester.getEventBus(), room, display);
     }
 
+    /**
+     * Fixes issue 288
+     */
     @Test
     public void shouldCloseRoomWhenPageIsClosed() {
 	presenter.setVisibility(Visibility.hidden);

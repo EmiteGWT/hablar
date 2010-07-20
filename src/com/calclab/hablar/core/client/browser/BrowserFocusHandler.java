@@ -1,4 +1,4 @@
-package com.calclab.hablar.signals.client.browserfocus;
+package com.calclab.hablar.core.client.browser;
 
 import com.google.gwt.core.client.GWT;
 
@@ -53,10 +53,10 @@ public class BrowserFocusHandler {
      */
     protected native void addFocusListenerEvents() /*-{
         $wnd.onfocus = function() {
-        @com.calclab.hablar.signals.client.browserfocus.BrowserFocusHandler::changeFocus(Z)(true);
+        @com.calclab.hablar.core.client.browser.BrowserFocusHandler::changeFocus(Z)(true);
         };
         $wnd.onblur = function() {
-        @com.calclab.hablar.signals.client.browserfocus.BrowserFocusHandler::changeFocus(Z)(false);
+        @com.calclab.hablar.core.client.browser.BrowserFocusHandler::changeFocus(Z)(false);
         };
     }-*/;
 

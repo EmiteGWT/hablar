@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.calclab.hablar.chat.client.ui.PairChatPresenter;
+import com.calclab.hablar.core.client.browser.BrowserFocusHandlerStub;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.page.events.UserMessageEvent;

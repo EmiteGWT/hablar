@@ -1,11 +1,12 @@
 package com.calclab.hablar.core.client.pages;
 
+import com.calclab.hablar.core.client.browser.Browser;
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PageInfoChangedEvent;
 import com.calclab.hablar.core.client.page.PageInfoChangedHandler;
-import com.calclab.hablar.core.client.page.PageState;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
+import com.calclab.hablar.core.client.page.PageState;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -32,7 +33,10 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 	    @Override
 	    public void onClick(final ClickEvent event) {
 		event.preventDefault();
-		page.requestVisibility(Visibility.hidden);
+		String closeConfirmationMessage = state.getCloseConfirmationMessage();
+		if (closeConfirmationMessage == null || Browser.getInstance().confirm(closeConfirmationMessage)) {
+		    page.requestVisibility(Visibility.hidden);
+		}
 	    }
 	});
 
@@ -55,6 +59,7 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 	update(state);
     }
 
+    @Override
     public HeaderDisplay getDisplay() {
 	return display;
     }

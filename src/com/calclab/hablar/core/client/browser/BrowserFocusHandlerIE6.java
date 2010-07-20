@@ -1,4 +1,4 @@
-package com.calclab.hablar.signals.client.browserfocus;
+package com.calclab.hablar.core.client.browser;
 
 public class BrowserFocusHandlerIE6 {
     /**
@@ -6,10 +6,10 @@ public class BrowserFocusHandlerIE6 {
      */
     protected native void addFocusListenerEvents() /*-{
         $wnd.document.onfocusin = function() {
-            this.@com.calclab.hablar.core.client.browser.BrowserFocusHandler::setFocus(Z)(true);
+        this.@com.calclab.hablar.core.client.browser.BrowserFocusHandler::setFocus(Z)(true);
         };
         $wnd.document.onfocusout = function() {
-            this.@com.calclab.hablar.core.client.browser.BrowserFocusHandler::setFocus(Z)(false);
+        this.@com.calclab.hablar.core.client.browser.BrowserFocusHandler::setFocus(Z)(false);
         };
     }-*/;
 }

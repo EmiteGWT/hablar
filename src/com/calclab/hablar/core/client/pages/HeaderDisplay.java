@@ -20,4 +20,5 @@ public interface HeaderDisplay extends Display {
     void setHeaderTooltip(String tooltip);
 
     void setIcon(String iconToken);
+
 }

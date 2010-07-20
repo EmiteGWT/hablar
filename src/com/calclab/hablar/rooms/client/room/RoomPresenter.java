@@ -43,6 +43,7 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
 	me = session.getCurrentUser().getNode();
 	final String roomName = RoomName.decode(room.getURI().getNode());
 	setVisibility(Visibility.notFocused);
+	model.setCloseConfirmationMessage(i18n().confirmCloseRoom());
 	model.init(Icons.ROSTER, roomName, roomName);
 	model.setCloseable(true);
 
@@ -92,6 +93,7 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
 	});
     }
 
+    @Override
     public void addAction(final Action<RoomPage> action) {
 	display.createAction(action).addClickHandler(new ClickHandler() {
 	    @Override
@@ -106,6 +108,7 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
 	return room.getID();
     }
 
+    @Override
     public Room getRoom() {
 	return room;
     }
@@ -113,12 +116,9 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
     @Override
     public void setVisibility(Visibility visibility) {
 	if (visibility == Visibility.hidden) {
-	    super.setVisibility(visibility);
 	    room.close();
-	} else {
-	    super.setVisibility(visibility);
 	}
-
+	super.setVisibility(visibility);
     }
 
     private void fireUserMessage(final String roomName, final String from, String body) {
