@@ -1,6 +1,6 @@
 package com.calclab.hablar.signals.client.browserfocus;
 
-import com.calclab.hablar.chat.client.ui.ChatDisplay;
+import com.calclab.hablar.chat.client.ui.ChatPresenter;
 import com.calclab.hablar.chat.client.ui.PairChatPresenter;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.Page;
@@ -9,17 +9,23 @@ import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedHandler;
 import com.calclab.hablar.rooms.client.room.RoomPresenter;
 import com.calclab.hablar.signals.client.browserfocus.BrowserFocusHandler.BrowserFocusListener;
+import com.calclab.hablar.signals.client.unattended.UnattendedPagesManager;
 
 /**
  * This class is a workaround to clear the focus on the active chat page FIXME:
- * workaround to clear the focus TODO: change the page/header visibility
- * system... quite a big job
+ * workaround to clear the focus <br/>
+ * 
+ * <br/>
+ * TODO: change the page/header visibility system... quite a big job
+ * 
+ * 
  */
 public class BrowserFocusManager {
 
-    protected ChatDisplay currentFocused;
+    protected ChatPresenter currentFocused;
 
-    public BrowserFocusManager(HablarEventBus eventBus, BrowserFocusHandler handler) {
+    public BrowserFocusManager(HablarEventBus eventBus, final UnattendedPagesManager unattendedManager,
+	    BrowserFocusHandler handler) {
 
 	eventBus.addHandler(VisibilityChangedEvent.TYPE, new VisibilityChangedHandler() {
 	    @Override
@@ -27,7 +33,7 @@ public class BrowserFocusManager {
 		if (event.getVisibility() == Visibility.focused) {
 		    Page<?> page = event.getPage();
 		    if (PairChatPresenter.TYPE.equals(page.getType()) || RoomPresenter.TYPE.equals(page.getType())) {
-			currentFocused = (ChatDisplay) page.getDisplay();
+			currentFocused = (ChatPresenter) page;
 		    }
 		}
 	    }
@@ -36,9 +42,12 @@ public class BrowserFocusManager {
 	handler.setFocusListener(new BrowserFocusListener() {
 	    @Override
 	    public void onBrowserFocusChanged(boolean hasFocus) {
-		if (hasFocus == false && currentFocused != null) {
-		    currentFocused.setTextBoxFocus(false);
-		    currentFocused = null;
+		if (currentFocused != null) {
+		    if (hasFocus == false) {
+			currentFocused.getDisplay().setTextBoxFocus(false);
+		    } else if (!unattendedManager.contains(currentFocused)) {
+			currentFocused.getDisplay().setTextBoxFocus(true);
+		    }
 		}
 	    }
 	});

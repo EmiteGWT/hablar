@@ -23,7 +23,6 @@ public class HablarSignals implements EntryPoint {
     public static void install(final Hablar hablar) {
 
 	final HablarEventBus eventBus = hablar.getEventBus();
-	new BrowserFocusManager(eventBus, BrowserFocusHandler.getInstance());
 
 	final HasText titleDisplay = new HasText() {
 	    @Override
@@ -39,6 +38,7 @@ public class HablarSignals implements EntryPoint {
 	final SignalPreferences preferences = new SignalPreferences();
 
 	final UnattendedPagesManager manager = new UnattendedPagesManager(eventBus, BrowserFocusHandler.getInstance());
+	new BrowserFocusManager(eventBus, manager, BrowserFocusHandler.getInstance());
 	new UnattendedPresenter(eventBus, preferences, manager, titleDisplay);
 	NotificationManager notificationManager = new NotificationManager(eventBus, preferences);
 
