@@ -29,7 +29,7 @@ public class UnattendedPagesManagerTests {
 	focusManager.setFocus(true);
 	pages = new UnattendedPagesManager(tester.eventBus, focusManager);
     }
-    
+
     @Test
     public void shouldAddFocusedChatIfBrowserIsNotFocused() {
 	final Page<?> page = createChatPage(Visibility.focused);
@@ -47,6 +47,10 @@ public class UnattendedPagesManagerTests {
 	assertTrue(pages.contains(page));
     }
 
+    /**
+     * Issue 287: An unattended chat tab can be closed without the unattended
+     * flag being reset
+     */
     @Test
     public void shouldRemoveChatIfClosed() {
 	final Page<?> page = createChatPage(Visibility.notFocused);
