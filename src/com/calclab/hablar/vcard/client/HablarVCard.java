@@ -36,9 +36,9 @@ public class HablarVCard implements EntryPoint {
 
     private static final String ACTION_ID_VIEW_VCARD = "HablarVCard-seeVCardAction";
 
-    public static void install(final Hablar hablar) {
-	final OwnVCardPresenter ownVCardPage = new OwnVCardPresenter(hablar.getEventBus(), new VCardWidget(false,
-		"OwnVCardWidget"));
+    public static void install(final Hablar hablar, VCardConfig vCardConfig) {
+	VCardWidget vCardWidget = new VCardWidget(vCardConfig.vCardReadOnly, "OwnVCardWidget");
+	final OwnVCardPresenter ownVCardPage = new OwnVCardPresenter(hablar.getEventBus(), vCardWidget);
 	hablar.addPage(ownVCardPage, UserContainer.ROL);
 
 	final OthersVCardPresenter othersVCardPage = new OthersVCardPresenter(hablar.getEventBus(),

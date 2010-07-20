@@ -5,8 +5,8 @@ import com.calclab.hablar.clipboard.client.HablarClipboard;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.dock.client.DockConfig;
-import com.calclab.hablar.dock.client.HablarDock;
 import com.calclab.hablar.dock.client.DockConfig.Position;
+import com.calclab.hablar.dock.client.HablarDock;
 import com.calclab.hablar.editbuddy.client.HablarEditBuddy;
 import com.calclab.hablar.group.client.HablarGroup;
 import com.calclab.hablar.groupchat.client.HablarGroupChat;
@@ -50,7 +50,7 @@ public class HablarComplete {
 	}
 
 	if (config.hasVCard) {
-	    HablarVCard.install(hablar);
+	    HablarVCard.install(hablar, config.vcardConfig);
 	}
 
 	if (config.hasRoster) {

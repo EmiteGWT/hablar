@@ -53,8 +53,6 @@ public class VCardWidget extends Composite implements VCardDisplay {
     protected final HashMap<Field, TextBox> fields = new HashMap<Field, TextBox>();
 
     public VCardWidget() {
-	// FIXME: ICON
-	// icon.setResource(Icons.get(Icons.LOADING));
     }
 
     public VCardWidget(final boolean readOnly, final String idPrefix) {

@@ -8,8 +8,11 @@ import com.calclab.hablar.rooms.client.HablarRoomsConfig;
 import com.calclab.hablar.roster.client.RosterConfig;
 import com.calclab.hablar.search.client.SearchConfig;
 import com.calclab.hablar.signals.sound.client.SoundSignalsConfig;
+import com.calclab.hablar.vcard.client.VCardConfig;
 
 public class HablarConfig {
+
+    public VCardConfig vcardConfig;
 
     /**
      * Retrieve Hablar configuration from meta tags in html
@@ -41,6 +44,7 @@ public class HablarConfig {
 	config.rosterConfig = RosterConfig.getFromMeta();
 	config.searchConfig = SearchConfig.getFromMeta();
 	config.soundConfig = SoundSignalsConfig.getFromMeta();
+	config.vcardConfig = VCardConfig.getFromMeta();
 	return config;
     }
 
@@ -54,8 +58,8 @@ public class HablarConfig {
 		// Ignore it.
 	    }
 	}
-	config.tabHeaderSize = TabHeaderSize.create(PageAssist.getMeta("hablar.tabHeaderHeight"), PageAssist
-		.getMeta("hablar.tabHeaderWidth"), trim);
+	config.tabHeaderSize = TabHeaderSize.create(PageAssist.getMeta("hablar.tabHeaderHeight"),
+		PageAssist.getMeta("hablar.tabHeaderWidth"), trim);
     }
 
     /**
