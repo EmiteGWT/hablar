@@ -7,18 +7,22 @@
 			height: 100%;
 		}
 	</ui:style>
+	<ui:with type="com.calclab.hablar.core.client.ui.icon.MissingIconBundle"
+		field="res"></ui:with>
 
 	<g:FocusPanel ui:field="self"
 		addStyleNames='hablar-TabsHeaderWidget hablar-Header hablar-lightBackground hablar-partialLightBordered'>
 		<g:LayoutPanel addStyleNames="{style.tabInner}">
 			<g:layer left="2px" top="3px" width="20px" bottom="0">
-				<g:Image  addStyleNames="icon" ui:field="icon" />
+				<g:Image resource="{res.missingIcon}" addStyleNames="icon"
+					ui:field="icon" />
 			</g:layer>
 			<g:layer left="20px" top="3px" right="20px" bottom="0">
-				<h:TruncatedLabel addStyleNames="title ellipsis" ui:field="title">Title</h:TruncatedLabel>
+				<h:TruncatedLabel addStyleNames="title ellipsis"
+					ui:field="title">Title</h:TruncatedLabel>
 			</g:layer>
 			<g:layer width="20px" top="1px" right="0" bottom="0">
-				<g:Image  addStyleNames="close" ui:field="close" />
+				<g:Image addStyleNames="close" ui:field="close" />
 			</g:layer>
 		</g:LayoutPanel>
 	</g:FocusPanel>
