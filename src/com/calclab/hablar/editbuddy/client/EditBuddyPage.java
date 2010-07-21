@@ -23,11 +23,11 @@ public class EditBuddyPage extends PagePresenter<EditBuddyDisplay> {
     private final TextValidator nickNameValidator;
 
     public EditBuddyPage(final HablarEventBus eventBus, final EditBuddyDisplay display) {
-	super("EditButty", "" + ++index, eventBus, display);
+	super("EditBuddy", "" + ++index, eventBus, display);
 	roster = Suco.get(Roster.class);
 
-	nickNameValidator = new TextValidator(display.getNickNameKeys(), display.getNickName(), display
-		.getNickNameError(), display.getAcceptState());
+	nickNameValidator = new TextValidator(display.getNickNameKeys(), display.getNickName(),
+		display.getNickNameError(), display.getAcceptState());
 	nickNameValidator.add(Validators.notEmpty(i18n().nickNameEmpty()));
 	bind();
     }

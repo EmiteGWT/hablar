@@ -15,8 +15,9 @@ import com.google.gwt.user.client.ui.Widget;
 
 /**
  * A main container. Every main container has a layout associated
+ * 
  * @author dani
- *
+ * 
  */
 public class MainContainer implements PagesContainer {
     private static class PageAndHead {
@@ -36,8 +37,10 @@ public class MainContainer implements PagesContainer {
 
     protected Page<?> lastFocused;
     protected Page<?> focusedPage;
+    private final HablarEventBus eventBus;
 
     public MainContainer(final HablarEventBus eventBus, final MainLayout layout) {
+	this.eventBus = eventBus;
 	display = layout;
 	pages = new HashMap<Page<?>, PageAndHead>();
 	eventBus.addHandler(VisibilityChangeRequestEvent.TYPE, new VisibilityChangeRequestHandler() {
@@ -55,7 +58,7 @@ public class MainContainer implements PagesContainer {
     @Override
     public boolean add(final Page<?> page) {
 	final HeaderDisplay headerDisplay = display.createHeaderDisplay(page);
-	final HeaderPresenter header = new HeaderPresenter(page, headerDisplay);
+	final HeaderPresenter header = new HeaderPresenter(eventBus, page, headerDisplay);
 	final Widget pageWidget = page.getDisplay().asWidget();
 	final Widget headWidget = header.getDisplay().asWidget();
 	pages.put(page, new PageAndHead(pageWidget, headWidget));

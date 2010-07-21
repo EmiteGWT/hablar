@@ -11,7 +11,7 @@ public class VCardConfig {
 
     public static VCardConfig getFromMeta() {
 	VCardConfig config = new VCardConfig();
-	config.vCardReadOnly = PageAssist.isMetaTrue("hablar.vcard.read-only", false);
+	config.vCardReadOnly = PageAssist.isMetaFalse("hablar.vcard.read-only");
 	return config;
     }
 

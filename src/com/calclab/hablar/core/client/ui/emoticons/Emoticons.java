@@ -7,14 +7,14 @@ import com.google.gwt.resources.client.ImageResource;
 public interface Emoticons extends ClientBundle {
 
     // This better using Suco
-    public static class App {
-	private static Emoticons ourInstance = null;
+    public static class Instance {
+	private static Emoticons singleton = null;
 
-	public static synchronized Emoticons getInst() {
-	    if (ourInstance == null) {
-		ourInstance = (Emoticons) GWT.create(Emoticons.class);
+	public static synchronized Emoticons get() {
+	    if (singleton == null) {
+		singleton = (Emoticons) GWT.create(Emoticons.class);
 	    }
-	    return ourInstance;
+	    return singleton;
 	}
     }
 

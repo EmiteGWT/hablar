@@ -1,6 +1,6 @@
 package com.calclab.hablar.core.client.pages;
 
-import com.calclab.hablar.core.client.browser.Browser;
+import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PageInfoChangedEvent;
@@ -9,6 +9,9 @@ import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.page.PageState;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedHandler;
+import com.calclab.hablar.core.client.ui.prompt.ConfirmPage;
+import com.calclab.hablar.core.client.ui.prompt.UserConfirmationHandler;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
@@ -18,7 +21,7 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
     private String currentStyle;
     private String currentExternalStyle;
 
-    public HeaderPresenter(final Page<?> page, final HeaderDisplay display) {
+    public HeaderPresenter(final HablarEventBus eventBus, final Page<?> page, final HeaderDisplay display) {
 	this.display = display;
 
 	final PageState state = page.getState();
@@ -34,7 +37,21 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 	    public void onClick(final ClickEvent event) {
 		event.preventDefault();
 		String closeConfirmationMessage = state.getCloseConfirmationMessage();
-		if (closeConfirmationMessage == null || Browser.getInstance().confirm(closeConfirmationMessage)) {
+		if (closeConfirmationMessage != null) {
+		    GWT.log("Confirmation: " + closeConfirmationMessage);
+		    ConfirmPage.show(eventBus, state.getCloseConfirmationTitle(), closeConfirmationMessage,
+			    new UserConfirmationHandler() {
+				@Override
+				public void accept() {
+				    page.requestVisibility(Visibility.hidden);
+				}
+
+				@Override
+				public void cancel() {
+				}
+
+			    });
+		} else {
 		    page.requestVisibility(Visibility.hidden);
 		}
 	    }

@@ -59,7 +59,7 @@ public class ChatMessageFormatter {
     private static List<PatternFactoryReplacement> patternImagePairs;
 
     static {
-	icons = Emoticons.App.getInst();
+	icons = Emoticons.Instance.get();
 	patternImagePairs = new ArrayList<PatternFactoryReplacement>();
 	patternImagePairs.add(new PatternFactoryReplacement("\\r\\n", new NewlinePatternElementFactory(), NEWLINE));
 	patternImagePairs.add(new PatternFactoryReplacement("\\r|\\n", new NewlinePatternElementFactory(), NEWLINE));

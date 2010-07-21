@@ -3,6 +3,7 @@ package com.calclab.hablar;
 import com.calclab.hablar.chat.client.HablarChat;
 import com.calclab.hablar.clipboard.client.HablarClipboard;
 import com.calclab.hablar.core.client.Hablar;
+import com.calclab.hablar.core.client.HablarCore;
 import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.dock.client.DockConfig;
 import com.calclab.hablar.dock.client.DockConfig.Position;
@@ -25,6 +26,7 @@ import com.calclab.hablar.vcard.client.HablarVCard;
 public class HablarComplete {
 
     public static void install(final Hablar hablar, final HablarConfig config) {
+	HablarCore.install(hablar);
 	HablarChat.install(hablar);
 	HablarRooms.install(hablar, config.roomsConfig);
 	HablarGroupChat.install(hablar, config.roomsConfig);

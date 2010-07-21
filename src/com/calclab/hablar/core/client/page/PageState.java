@@ -14,6 +14,7 @@ public class PageState {
     private String externalState;
     private String iconToken;
     private String closeConfirmationMessage;
+    private String closeConfirmationTitle;
 
     public PageState(final HablarEventBus eventBus, final Page<?> page) {
 	this.eventBus = eventBus;
@@ -134,6 +135,14 @@ public class PageState {
      */
     public void setCloseConfirmationMessage(String confirmation) {
 	this.closeConfirmationMessage = confirmation;
+    }
+
+    public void setCloseConfirmationTitle(String confirmCloseTitle) {
+	this.closeConfirmationTitle = confirmCloseTitle;
+    }
+
+    public String getCloseConfirmationTitle() {
+	return closeConfirmationTitle;
     }
 
 }

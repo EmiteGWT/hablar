@@ -43,9 +43,10 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
 	me = session.getCurrentUser().getNode();
 	final String roomName = RoomName.decode(room.getURI().getNode());
 	setVisibility(Visibility.notFocused);
-	model.setCloseConfirmationMessage(i18n().confirmCloseRoom());
 	model.init(Icons.ROSTER, roomName, roomName);
 	model.setCloseable(true);
+	model.setCloseConfirmationMessage(i18n().confirmCloseRoom());
+	model.setCloseConfirmationTitle(i18n().confirmCloseRoomTitle(roomName));
 
 	room.onMessageReceived(new Listener<Message>() {
 	    @Override

@@ -1,0 +1,20 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	</ui:style>
+	<g:HTMLPanel addStyleNames="hablar-ConfirmWidget">
+		<div class="form">
+			<h2>
+				<span ui:field='title' />
+			</h2>
+			<p>
+				<g:Label ui:field="message">Message</g:Label>
+			</p>
+			<div class="actions hablar-topDefaultBordered">
+				<g:Button ui:field="yes">Yes</g:Button>
+				<g:Button ui:field="no">No</g:Button>
+			</div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

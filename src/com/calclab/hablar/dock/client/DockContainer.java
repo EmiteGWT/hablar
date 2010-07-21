@@ -29,8 +29,10 @@ public class DockContainer implements PagesContainer {
     private final HashMap<Position, Page<?>> pages;
     private final DockConfig config;
     private final DockLayout layout;
+    private final HablarEventBus eventBus;
 
     public DockContainer(final HablarEventBus eventBus, final DockConfig config, final DockLayout layout) {
+	this.eventBus = eventBus;
 	this.config = config;
 	this.layout = layout;
 	panels = new HashMap<Position, LayoutPanel>();
@@ -117,7 +119,7 @@ public class DockContainer implements PagesContainer {
     private void setPage(final LayoutPanel panel, final Page<?> page, final Position position) {
 	final Widget widget = page.getDisplay().asWidget();
 	final HeaderDisplay headerDisplay = layout.createHeaderWidget(page, position);
-	new HeaderPresenter(page, headerDisplay);
+	new HeaderPresenter(eventBus, page, headerDisplay);
 	final Widget headerWidget = headerDisplay.asWidget();
 	panel.add(headerWidget);
 	panel.setWidgetTopHeight(headerWidget, 0, PX, HEADER_SIZE, PX);

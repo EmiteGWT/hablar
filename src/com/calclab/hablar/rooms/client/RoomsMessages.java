@@ -1,7 +1,7 @@
 package com.calclab.hablar.rooms.client;
 
-import com.google.gwt.i18n.client.Messages;
 import com.google.gwt.i18n.client.LocalizableResource.DefaultLocale;
+import com.google.gwt.i18n.client.Messages;
 
 @DefaultLocale("en")
 public interface RoomsMessages extends Messages {
@@ -11,6 +11,9 @@ public interface RoomsMessages extends Messages {
 
     @DefaultMessage("Cancel")
     String cancelAction();
+
+    @DefaultMessage("Close group chat ''{0}''")
+    String confirmCloseRoomTitle(String roomName);
 
     @DefaultMessage("Are you sure you want to leave this group chat?")
     String confirmCloseRoom();
