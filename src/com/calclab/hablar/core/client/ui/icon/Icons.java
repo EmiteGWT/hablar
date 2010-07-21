@@ -69,7 +69,12 @@ public class Icons {
      * @param token
      */
     public static void set(final Image image, final String token) {
-	image.setUrl(get(token).getURL());
+	// image.setUrl(get(token).getURL());
+
+	// image.getElement().setAttribute("src", get(token).getURL());
+	String styles = image.getElement().getClassName();
+	image.setResource(get(token));
+	image.getElement().setClassName(styles);
     }
 
     private Icons() {

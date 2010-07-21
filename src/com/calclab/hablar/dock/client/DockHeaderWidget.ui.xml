@@ -7,11 +7,10 @@
     	float: left;
     }
   </ui:style>
-  <ui:image field='closeIcon' src='close.png' />
   <g:FocusPanel ui:field="self">
     <g:FlowPanel addStyleNames='hablar-DockHeaderWidget hablar-Header hablar-lightBackground hablar-partialLightBordered'
       ui:field="flow">
-      <g:Image resource="{res.missingIcon}" addStyleNames="icon {style.beside}" ui:field="icon" />
+      <g:Image addStyleNames="icon {style.beside}" ui:field="icon" />
       <g:Label addStyleNames="{style.beside} title" ui:field="title">Title</g:Label>
       <g:Image addStyleNames="close {style.beside}" ui:field="close" />
     </g:FlowPanel>
