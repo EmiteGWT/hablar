@@ -4,6 +4,7 @@
 	<ui:style>
 		.item {
 			height: 20px;
+			width: 100%;
 		}
 		.status {
 		    display: block;

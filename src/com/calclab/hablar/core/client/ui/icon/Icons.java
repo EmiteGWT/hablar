@@ -69,9 +69,18 @@ public class Icons {
      * @param token
      */
     public static void set(final Image image, final String token) {
-	// image.setUrl(get(token).getURL());
+	// TODO: probably we need different clases for different browsers
+	// related internet resources:
+	// http://code.google.com/p/google-web-toolkit/issues/detail?id=1700
+	// http://code.google.com/p/google-web-toolkit/issues/detail?id=4943
+	// (thanks antonio... ;) )
+	// http://stackoverflow.com/questions/2405181/can-gwt-image-sprites-using-imagebundle-be-made-to-work-in-ie7-and-ie6
 
+	// OTHER OPTIONS THAT DIDN'T WORK IN IE6:
+	// image.setUrl(get(token).getURL());
 	// image.getElement().setAttribute("src", get(token).getURL());
+
+	// Some workaround
 	String styles = image.getElement().getClassName();
 	image.setResource(get(token));
 	image.getElement().setClassName(styles);
