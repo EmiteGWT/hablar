@@ -54,7 +54,7 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
     public RosterPresenter(final HablarEventBus eventBus, final RosterDisplay display, final RosterConfig rosterConfig) {
 	super(TYPE, "" + ++index, eventBus, display);
 	roster = Suco.get(Roster.class);
-	basicActions = new RosterBasicActions();
+	basicActions = new RosterBasicActions(eventBus);
 	this.rosterConfig = rosterConfig;
 
 	groupPresenters = new HashMap<String, RosterGroupPresenter>();

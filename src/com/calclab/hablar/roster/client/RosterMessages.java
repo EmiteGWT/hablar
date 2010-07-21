@@ -1,12 +1,15 @@
 package com.calclab.hablar.roster.client;
 
-import com.google.gwt.i18n.client.Messages;
 import com.google.gwt.i18n.client.LocalizableResource.DefaultLocale;
+import com.google.gwt.i18n.client.Messages;
 
 @DefaultLocale("en")
 public interface RosterMessages extends Messages {
-    @DefaultMessage("Delete group {0} with {1} items. Are you sure?")
+    @DefaultMessage("The group ''{0}'' has {1} items. Are you sure you want to delete it?")
     String confirmDeleteGroup(String groupName, String itemCount);
+
+    @DefaultMessage("Delete group ''{0}''")
+    String confirmDeleteGroupTitle(String groupName);
 
     @DefaultMessage("Contacts")
     @Description("The roster panel title")
@@ -59,4 +62,5 @@ public interface RosterMessages extends Messages {
 
     @DefaultMessage("Remove the highlighted users from the selection")
     String deselectSomeTooltip();
+
 }

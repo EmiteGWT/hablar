@@ -5,13 +5,15 @@ import java.util.Collection;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
+import com.calclab.hablar.core.client.ui.prompt.ConfirmPage;
+import com.calclab.hablar.core.client.ui.prompt.UserConfirmationHandler;
 import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.roster.client.groups.RosterItemPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.suco.client.Suco;
-import com.google.gwt.user.client.Window;
 
 public class RosterBasicActions {
 
@@ -30,8 +32,8 @@ public class RosterBasicActions {
 	return messages;
     }
 
-    private final SimpleAction<RosterItemPresenter> startChat = new SimpleAction<RosterItemPresenter>(
-	    i18n().startChatAction(), ACTION_ID_START_CHAT) {
+    private final SimpleAction<RosterItemPresenter> startChat = new SimpleAction<RosterItemPresenter>(i18n()
+	    .startChatAction(), ACTION_ID_START_CHAT) {
 	@Override
 	public void execute(final RosterItemPresenter target) {
 	    final ChatManager manager = Suco.get(ChatManager.class);
@@ -39,8 +41,8 @@ public class RosterBasicActions {
 	}
     };
 
-    private final SimpleAction<RosterItemPresenter> removeFromRoster = new SimpleAction<RosterItemPresenter>(
-	    i18n().removeContactAction(), ACTION_ID_REMOVE_FROM_ROSTER) {
+    private final SimpleAction<RosterItemPresenter> removeFromRoster = new SimpleAction<RosterItemPresenter>(i18n()
+	    .removeContactAction(), ACTION_ID_REMOVE_FROM_ROSTER) {
 	@Override
 	public void execute(final RosterItemPresenter target) {
 	    final RosterItem item = target.getItem();
@@ -53,8 +55,8 @@ public class RosterBasicActions {
 	}
     };
 
-    private final SimpleAction<RosterItemPresenter> removeFromGroup = new SimpleAction<RosterItemPresenter>(
-	    i18n().removeFromGroupAction(), ID_ACTION_REMOVE_FROM_GROUP) {
+    private final SimpleAction<RosterItemPresenter> removeFromGroup = new SimpleAction<RosterItemPresenter>(i18n()
+	    .removeFromGroupAction(), ID_ACTION_REMOVE_FROM_GROUP) {
 	@Override
 	public void execute(final RosterItemPresenter target) {
 	    removeFromGroup(target.getItem(), target.getGroupName());
@@ -65,17 +67,26 @@ public class RosterBasicActions {
 	    return !isEntrieRoster(target);
 	}
     };
-    private final Action<RosterGroupPresenter> deleteGroup = new SimpleAction<RosterGroupPresenter>(
-	    i18n().deleteGroupAction(), ID_ACTION_DELETE_GROUP) {
+    private final Action<RosterGroupPresenter> deleteGroup = new SimpleAction<RosterGroupPresenter>(i18n()
+	    .deleteGroupAction(), ID_ACTION_DELETE_GROUP) {
 	@Override
 	public void execute(final RosterGroupPresenter target) {
 
 	    final String groupName = target.getGroupName();
 	    final Collection<RosterItem> items = roster.getItemsByGroup(groupName);
+
+	    final String title = i18n().confirmDeleteGroupTitle(groupName);
 	    final String message = i18n().confirmDeleteGroup(groupName, "" + items.size());
-	    if (Window.confirm(message)) {
-		deleteGroup(groupName, items);
-	    }
+	    ConfirmPage.show(eventBus, title, message, new UserConfirmationHandler() {
+		@Override
+		public void cancel() {
+		}
+
+		@Override
+		public void accept() {
+		    deleteGroup(groupName, items);
+		}
+	    });
 	}
 
 	@Override
@@ -84,8 +95,10 @@ public class RosterBasicActions {
 	}
     };
     private final Roster roster;
+    private final HablarEventBus eventBus;
 
-    public RosterBasicActions() {
+    public RosterBasicActions(HablarEventBus eventBus) {
+	this.eventBus = eventBus;
 	roster = Suco.get(Roster.class);
     }
 

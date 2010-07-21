@@ -19,7 +19,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 
 public class HeaderPresenterTests {
 
-    private HeaderPresenter presenter;
     private PageState state;
     private HeaderDisplay display;
     private Page<?> page;
@@ -33,7 +32,7 @@ public class HeaderPresenterTests {
 	state = new PageState(eventBus, page);
 	when(page.getState()).thenReturn(state);
 	display = tester.newDisplay(HeaderDisplay.class);
-	presenter = new HeaderPresenter(eventBus, page, display);
+	new HeaderPresenter(eventBus, page, display);
     }
 
     @Test
