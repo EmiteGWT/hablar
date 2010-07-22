@@ -3,6 +3,7 @@ package com.calclab.hablar.roster.client.groups;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.Idify;
 import com.calclab.hablar.core.client.ui.icon.Icons;
+import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -40,6 +41,7 @@ public class RosterItemWidget extends Composite implements RosterItemDisplay {
 	    this.status.setText(status);
 	}
 	this.status.setVisible(hasStatus);
+	setIcon(PresenceIcon.get(item.isAvailable(), item.getShow()));
     }
 
     public RosterItemWidget(final String groupId, final String itemId) {
