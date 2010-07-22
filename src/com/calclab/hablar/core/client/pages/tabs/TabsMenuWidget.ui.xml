@@ -1,7 +1,8 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
   xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:with field='res' type='com.calclab.hablar.core.client.ui.icon.MissingIconBundle'/>
   <ui:style>
   </ui:style>
-    <g:Image  ui:field="menu" />
+    <g:Image  ui:field="menu" resource="{res.missingIcon}" />
 </ui:UiBinder>
