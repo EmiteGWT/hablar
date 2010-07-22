@@ -8,6 +8,8 @@ import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
+import com.calclab.hablar.rooms.client.existing.OpenExistingRoomPresenter;
+import com.calclab.hablar.rooms.client.existing.OpenExistingRoomWidget;
 import com.calclab.hablar.rooms.client.invite.InviteToRoomPresenter;
 import com.calclab.hablar.rooms.client.open.EditRoomWidget;
 import com.calclab.hablar.rooms.client.room.RoomPage;
@@ -20,6 +22,7 @@ import com.google.gwt.core.client.GWT;
 public class HablarRooms implements EntryPoint {
     private static final String ACTION_ID_INVITE = "HablarRooms-inviteAction";
     private static final String ACTION_ID_OPENROOM = "HablarRooms-openRoom";
+    private static final String ACTION_ID_OPENEXISTINGROOM = "HablarRooms-openExistingRoom";
     private static RoomsMessages roomMessages;
 
     public static RoomsMessages i18n() {
@@ -40,6 +43,10 @@ public class HablarRooms implements EntryPoint {
 		hablar.getEventBus(), new EditRoomWidget());
 	hablar.addPage(openNewRoomPage, OverlayContainer.ROL);
 
+	final OpenExistingRoomPresenter openExistingRoomPresenter = new OpenExistingRoomPresenter(config.roomsService,
+		hablar.getEventBus(), new OpenExistingRoomWidget());
+	hablar.addPage(openExistingRoomPresenter, OverlayContainer.ROL);
+
 	hablar.addPageAddedHandler(new PageAddedHandler() {
 	    @Override
 	    public void onPageAdded(final PageAddedEvent event) {
@@ -51,6 +58,7 @@ public class HablarRooms implements EntryPoint {
 		} else if (event.isType(RosterPage.TYPE)) {
 		    final RosterPage rosterPage = (RosterPage) event.getPage();
 		    rosterPage.addAction(createOpenRoomAction(openNewRoomPage));
+		    rosterPage.addAction(createOpenExistingRoomAction(openExistingRoomPresenter));
 		}
 
 	    }
@@ -75,8 +83,20 @@ public class HablarRooms implements EntryPoint {
 
     protected static SimpleAction<RosterPage> createOpenRoomAction(final OpenNewRoomPresenter page) {
 	final String name = i18n().openNewGroupChatTooltip();
-	final String icon = Icons.GROUP_CHAT;
+	final String icon = Icons.GROUP_CHAT_ADD;
 	final SimpleAction<RosterPage> action = new SimpleAction<RosterPage>(name, ACTION_ID_OPENROOM, icon) {
+	    @Override
+	    public void execute(final RosterPage target) {
+		page.requestVisibility(Visibility.focused);
+	    }
+	};
+	return action;
+    }
+
+    protected static SimpleAction<RosterPage> createOpenExistingRoomAction(final OpenExistingRoomPresenter page) {
+	final String name = i18n().openExistingRoom();
+	final String icon = Icons.GROUP_CHAT;
+	final SimpleAction<RosterPage> action = new SimpleAction<RosterPage>(name, ACTION_ID_OPENEXISTINGROOM, icon) {
 	    @Override
 	    public void execute(final RosterPage target) {
 		page.requestVisibility(Visibility.focused);
@@ -90,6 +110,7 @@ public class HablarRooms implements EntryPoint {
 	final RoomsMessages messages = (RoomsMessages) GWT.create(RoomsMessages.class);
 	HablarRooms.setMessages(messages);
 	EditRoomWidget.setMessages(messages);
+	OpenExistingRoomWidget.setMessages(messages);
     }
 
 }

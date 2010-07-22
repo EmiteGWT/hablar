@@ -1,0 +1,24 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:style>
+
+  </ui:style>
+  <g:ScrollPanel ui:field="scroll" addStyleNames="hablar-defaultBordered">
+    <g:HTMLPanel addStyleNames="hablar-OpenExistingRoomWidget">
+      <div class="form">
+        <h2>
+          <span ui:field='title' />
+        </h2>
+        <p>
+          <label ui:field="availableRoomsLabel">Available rooms:</label>
+          <g:ListBox ui:field="roomList" />
+        </p>
+        <div class="actions hablar-topDefaultBordered">
+          <g:Button ui:field="accept">Accept</g:Button>
+          <g:Button ui:field="cancel">Cancel</g:Button>
+        </div>
+      </div>
+    </g:HTMLPanel>
+  </g:ScrollPanel>
+</ui:UiBinder>

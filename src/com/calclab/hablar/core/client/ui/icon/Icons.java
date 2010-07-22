@@ -30,6 +30,7 @@ public class Icons {
     public static final String CONSOLE = "console";
     public static final String ADD_GROUP = "group_add";
     public static final String GROUP_CHAT = "group_chat";
+    public static final String GROUP_CHAT_ADD = "group_chat_add";
     public static final String LOADING = "loading";
     public static final String MENU = "menu";
     public static final String NOT_CONNECTED = "off";

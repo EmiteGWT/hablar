@@ -44,6 +44,9 @@ public interface IE6GifIconsBundle extends ClientBundle {
     @Source("res/group-chat.png")
     ImageResource groupChatIcon();
 
+    @Source("res/group-chat-add.png")
+    ImageResource groupChatAddIcon();
+
     @Source("res/loading.gif")
     ImageResource loadingIcon();
 

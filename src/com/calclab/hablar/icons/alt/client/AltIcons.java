@@ -22,6 +22,7 @@ public class AltIcons implements EntryPoint {
 	Icons.register(Icons.CONSOLE, bundle.consoleIcon());
 	Icons.register(Icons.ADD_GROUP, bundle.groupAddIcon());
 	Icons.register(Icons.GROUP_CHAT, bundle.groupChatIcon());
+	Icons.register(Icons.GROUP_CHAT_ADD, bundle.groupChatAddIcon());
 	Icons.register(Icons.LOADING, bundle.loadingIcon());
 	Icons.register(Icons.MENU, bundle.menuIcon());
 	Icons.register(Icons.DEFAULT, bundle.missingIcon());

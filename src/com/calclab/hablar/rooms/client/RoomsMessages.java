@@ -78,6 +78,9 @@ public interface RoomsMessages extends Messages {
     @DefaultMessage("''{0}'' has change the subject of this conversation to ''{1}''")
     String roomSubjectChanged(String nick, String newSubject);
 
+    @DefaultMessage("The subject of this conversation has been changed to ''{0}''")
+    String roomSubjectChangedAnonymous(String newSubject);
+
     @DefaultMessage("The group chat must have at least one member")
     String selectionEmptyErrorMessage();
 
@@ -86,4 +89,10 @@ public interface RoomsMessages extends Messages {
 
     @DefaultMessage("This group chat is locked. We''re waiting for the server to unlock...")
     String waitingForUnlockRoom();
+
+    @DefaultMessage("Open an existing room")
+    String openExistingRoom();
+
+    @DefaultMessage("Available rooms:")
+    String availableRoomsLabelText();
 }

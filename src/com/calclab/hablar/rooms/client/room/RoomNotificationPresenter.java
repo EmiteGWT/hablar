@@ -45,7 +45,13 @@ public class RoomNotificationPresenter {
 	room.onSubjectChanged(new Listener2<Occupant, String>() {
 	    @Override
 	    public void onEvent(final Occupant who, final String newSubject) {
-		show(i18n().roomSubjectChanged(who.getNick(), newSubject));
+		String message;
+		if (who != null) {
+		    message = i18n().roomSubjectChanged(who.getNick(), newSubject);
+		} else { // The subject has been changed by a room rule.
+		    message = i18n().roomSubjectChangedAnonymous(newSubject);
+		}
+		show(message);
 	    }
 	});
 

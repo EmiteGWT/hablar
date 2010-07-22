@@ -44,6 +44,9 @@ public interface AltIconsBundle extends ClientBundle {
     @Source("res/group-chat-alt.png")
     ImageResource groupChatIcon();
 
+    @Source("res/group-chat-add.png")
+    ImageResource groupChatAddIcon();
+
     @Source("res/loading-alt.gif")
     ImageResource loadingIcon();
 
