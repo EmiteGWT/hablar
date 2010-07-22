@@ -6,8 +6,10 @@
 	<ui:style>
 
 	</ui:style>
+	<ui:with type="com.calclab.hablar.core.client.ui.icon.MissingIconBundle" field="res"></ui:with>
+  
 	<g:HTMLPanel addStyleNames="hablar-GroupHeaderWidget hablar-lightBackground hablar-bottomDarkBordered">
-	<g:Image  ui:field="menu" addStyleNames="menu" />
+	<g:Image resource="{res.missingIcon}"  ui:field="menu" addStyleNames="menu" />
 	<g:Label ui:field="name" addStyleNames="name">name</g:Label>
 	</g:HTMLPanel>
 </ui:UiBinder>

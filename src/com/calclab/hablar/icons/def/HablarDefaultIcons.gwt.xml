@@ -4,6 +4,10 @@
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name='com.calclab.hablar.core.HablarCore' />
 	<source path="client" />
+	  <generate-with 
+class="com.google.gwt.resources.rebind.context.StaticClientBundleGenerator">
+      <when-type-assignable class="com.calclab.hablar.icons.def.client.DefaultIconsBundle" />
+   </generate-with>
 	<entry-point
 		class="com.calclab.hablar.icons.def.client.DefaultIcons" />
 </module>

@@ -27,11 +27,13 @@
 			padding-right: 5px;
 		}
 	</ui:style>
+	  <ui:with type="com.calclab.hablar.core.client.ui.icon.MissingIconBundle" field="res"></ui:with>
+	
 	<g:FocusPanel ui:field="self" addStyleNames="user">
 		<g:FlowPanel addStyleNames="hablar-RosterItemWidget hablar-ListItem hablar-bottomLightBordered">
 			<g:LayoutPanel addStyleNames="{style.item} item">
 				<g:layer top="0" left="0" width="23px" height="20px">
-					<g:Image  addStyleNames="icon" ui:field="icon" />
+					<g:Image  resource="{res.missingIcon}" addStyleNames="icon" ui:field="icon" />
 				</g:layer>
 				<g:layer top="0" left="20px" height="16px" right="16px">
 					<g:FlowPanel addStyleNames="{style.data}">
@@ -40,7 +42,7 @@
 					</g:FlowPanel>
 				</g:layer>
 				<g:layer top="0" right="0" width="16px" height="16px">
-					<g:Image ui:field="menu" addStyleNames="menu" />
+					<g:Image resource="{res.missingIcon}"  ui:field="menu" addStyleNames="menu" />
 				</g:layer>
 			</g:LayoutPanel>
 			<g:Label addStyleNames="{style.status} hablar-mediumColor" ui:field="status" />
