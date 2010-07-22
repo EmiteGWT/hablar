@@ -1,5 +1,6 @@
 package com.calclab.hablar.core.client.ui.prompt;
 
+import com.calclab.hablar.core.client.CoreMessages;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -15,6 +16,16 @@ public class ConfirmWidget extends Composite implements ConfirmPageDisplay {
 
     private static ConfirmWidgetUiBinder uiBinder = GWT.create(ConfirmWidgetUiBinder.class);
 
+    private static CoreMessages messages;
+
+    public static void setMessages(final CoreMessages messages) {
+	ConfirmWidget.messages = messages;
+    }
+
+    public static CoreMessages i18n() {
+	return messages;
+    }
+
     interface ConfirmWidgetUiBinder extends UiBinder<Widget, ConfirmWidget> {
     }
 
@@ -27,6 +38,8 @@ public class ConfirmWidget extends Composite implements ConfirmPageDisplay {
 
     public ConfirmWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
+	yes.setText(i18n().yes());
+	no.setText(i18n().no());
     }
 
     @Override
