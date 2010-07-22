@@ -23,12 +23,14 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * This widget represents a double list, i.e. a selectable list of elements divided in two groups:
+ * This widget represents a double list, i.e. a selectable list of elements
+ * divided in two groups:
  * <ul>
  * <li>the available items;</li>
  * <li>the selected items.</li>
  * </ul>
- * Between them there are four buttons to command the movement between the two lists.
+ * Between them there are four buttons to command the movement between the two
+ * lists.
  */
 public class DoubleList extends Composite implements HasValue<List<Selectable>> {
 
@@ -48,6 +50,15 @@ public class DoubleList extends Composite implements HasValue<List<Selectable>> 
 
     public DoubleList() {
 	initWidget(uiBinder.createAndBindUi(this));
+
+	availableList.ensureDebugId("DoubleList-availableList");
+	selectedList.ensureDebugId("DoubleList-selectedList");
+
+	selectAll.ensureDebugId("DoubleList-selectAll");
+	selectSome.ensureDebugId("DoubleList-selectSome");
+	deselectSome.ensureDebugId("DoubleList-deselectSome");
+	deselectAll.ensureDebugId("DoubleList-deselectAll");
+
 	selectAll.addClickHandler(new ClickHandler() {
 
 	    @Override
