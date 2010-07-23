@@ -8,7 +8,7 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 
 public interface OpenExistingRoomDisplay extends Display {
 
-    void setRooms(List<XmppURI> rooms);
+    void setRooms(List<ExistingRoom> rooms);
 
     XmppURI getSelectedRoom();
 

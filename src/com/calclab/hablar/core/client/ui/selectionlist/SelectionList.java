@@ -26,20 +26,62 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * Manages a graphical selection list made with divs instead of select/options.
  */
-public class SelectionList extends Composite implements HasSelectionHandlers<Selectable>, HasValueChangeHandlers<List<Selectable>> {
+public class SelectionList extends Composite implements HasSelectionHandlers<Selectable>,
+	HasValueChangeHandlers<List<Selectable>> {
 
     private static final String SELECTED_CLASS = "hablar-selectedBackground";
 
     private static SelectionListUiBinder uiBinder = GWT.create(SelectionListUiBinder.class);
 
-    private List<Selectable> selectables;
+    private final List<Selectable> selectables;
 
-    private Set<Selectable> selectedItems;
+    private final Set<Selectable> selectedItems;
 
-    private List<HandlerRegistration> registrations;
+    private final List<HandlerRegistration> registrations;
+
+    private String mode;
 
     @UiField
     FlowPanel selectionPanel;
+
+    private final class MultipleSelectionHandler implements ClickHandler {
+	private final Selectable selectable;
+
+	private MultipleSelectionHandler(Selectable selectable) {
+	    this.selectable = selectable;
+	}
+
+	@Override
+	public void onClick(ClickEvent event) {
+	    if (selectedItems.contains(selectable)) {
+		selectable.getWidget().removeStyleName(SELECTED_CLASS);
+		selectedItems.remove(selectable);
+	    } else {
+		selectable.getWidget().addStyleName(SELECTED_CLASS);
+		selectedItems.add(selectable);
+	    }
+	    SelectionEvent.fire(SelectionList.this, selectable);
+	}
+    }
+
+    private final class SingleSelectionHandler implements ClickHandler {
+	private final Selectable selectable;
+
+	private SingleSelectionHandler(Selectable selectable) {
+	    this.selectable = selectable;
+	}
+
+	@Override
+	public void onClick(ClickEvent event) {
+	    selectedItems.clear();
+	    for (Selectable item : selectables) {
+		item.getWidget().removeStyleName(SELECTED_CLASS);
+	    }
+	    selectable.getWidget().addStyleName(SELECTED_CLASS);
+	    selectedItems.add(selectable);
+	    SelectionEvent.fire(SelectionList.this, selectable);
+	}
+    }
 
     interface SelectionListUiBinder extends UiBinder<Widget, SelectionList> {
     }
@@ -61,6 +103,10 @@ public class SelectionList extends Composite implements HasSelectionHandlers<Sel
 		registrations.add(registerClick(selectable));
 	    }
 	}
+    }
+
+    public void setMode(String mode) {
+	this.mode = mode;
     }
 
     public void clear() {
@@ -107,6 +153,13 @@ public class SelectionList extends Composite implements HasSelectionHandlers<Sel
 
     public Set<Selectable> getSelectedSelectables() {
 	return selectedItems;
+    }
+
+    public Selectable getSelectedSelectable() {
+	if (!selectedItems.isEmpty()) {
+	    return selectedItems.iterator().next();
+	}
+	return null;
     }
 
     public Set<Selectable> getAndRemoveSelectedSelectables() {
@@ -173,27 +226,21 @@ public class SelectionList extends Composite implements HasSelectionHandlers<Sel
 
     private List<Object> getItemsFromSelectables(Collection<Selectable> collection) {
 	List<Object> items = new ArrayList<Object>();
-	for (Selectable selectable: collection) {
+	for (Selectable selectable : collection) {
 	    items.add(selectable.getItem());
 	}
 	return items;
     }
 
     private HandlerRegistration registerClick(final Selectable selectable) {
-	HandlerRegistration registration = selectable.getAction().addClickHandler(new ClickHandler() {
-
-	@Override
-	public void onClick(ClickEvent event) {
-	    if (selectedItems.contains(selectable)) {
-		selectable.getWidget().removeStyleName(SELECTED_CLASS);
-		selectedItems.remove(selectable);
-	    } else {
-		selectable.getWidget().addStyleName(SELECTED_CLASS);
-		selectedItems.add(selectable);
-	    }
-	    SelectionEvent.fire(SelectionList.this, selectable);
-	}
-	});
+	HandlerRegistration registration = selectable.getAction().addClickHandler(getHandler(selectable));
 	return registration;
+    }
+
+    private ClickHandler getHandler(final Selectable selectable) {
+	if ("single".equals(mode)) {
+	    return new SingleSelectionHandler(selectable);
+	}
+	return new MultipleSelectionHandler(selectable);
     }
 }

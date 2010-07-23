@@ -50,11 +50,11 @@ public class OpenExistingRoomPresenter extends PagePresenter<OpenExistingRoomDis
 
 		    @Override
 		    public void onEvent(DiscoveryManagerResponse parameter) {
-			List<XmppURI> rooms = new ArrayList<XmppURI>();
+			List<ExistingRoom> rooms = new ArrayList<ExistingRoom>();
 			List<Item> items = parameter.getItems();
 			if (items != null) {
 			    for (Item item : items) {
-				rooms.add(XmppURI.uri(item.jid + "/" + user.getNode()));
+				rooms.add(new ExistingRoom(item.name, XmppURI.uri(item.jid + "/" + user.getNode())));
 			    }
 			}
 			display.setRooms(rooms);
