@@ -44,7 +44,7 @@ public class BrowserFocusHandler {
      * 
      * @param hasFocus
      */
-    public static void changeFocus(boolean hasFocus) {
+    public static void changeFocus(final boolean hasFocus) {
 	getInstance().setFocus(hasFocus);
     }
 

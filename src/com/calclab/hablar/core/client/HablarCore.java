@@ -1,5 +1,6 @@
 package com.calclab.hablar.core.client;
 
+import com.calclab.hablar.core.client.browser.BrowserFocusHandler;
 import com.calclab.hablar.core.client.container.overlay.OverlayContainer;
 import com.calclab.hablar.core.client.ui.prompt.ConfirmPage;
 import com.calclab.hablar.core.client.ui.prompt.ConfirmWidget;
@@ -10,6 +11,10 @@ public class HablarCore implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
+	// We will instantiate the BrowserFocusHandler singleton so that it
+	// starts tracking focus events as soon as possible.
+	BrowserFocusHandler.getInstance();
+
 	CoreMessages messages = GWT.create(CoreMessages.class);
 	ConfirmWidget.setMessages(messages);
     }

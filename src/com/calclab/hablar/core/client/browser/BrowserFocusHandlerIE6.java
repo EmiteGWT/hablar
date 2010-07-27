@@ -7,10 +7,10 @@ public class BrowserFocusHandlerIE6 extends BrowserFocusHandler {
     @Override
     protected native void addFocusListenerEvents() /*-{
         $wnd.document.onfocusin = function() {
-        this.@com.calclab.hablar.core.client.browser.BrowserFocusHandler::setFocus(Z)(true);
+        @com.calclab.hablar.core.client.browser.BrowserFocusHandler::changeFocus(Z)(true);
         };
         $wnd.document.onfocusout = function() {
-        this.@com.calclab.hablar.core.client.browser.BrowserFocusHandler::setFocus(Z)(false);
+        @com.calclab.hablar.core.client.browser.BrowserFocusHandler::changeFocus(Z)(false);
         };
     }-*/;
 }
