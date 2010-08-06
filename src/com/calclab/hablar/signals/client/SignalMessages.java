@@ -29,8 +29,8 @@ public interface SignalMessages extends Messages {
 
     @DefaultMessage("Show roster notifications")
     String showRoster();
-    
-    @DefaultMessage("Notification within the chat window (jgrowl)")
+
+    @DefaultMessage("Notification within the chat window")
     String jGrowlNotifierDisplayName();
 
     @DefaultMessage("Chat Notification")
@@ -38,7 +38,7 @@ public interface SignalMessages extends Messages {
 
     @DefaultMessage("Browser Popup")
     String browserPopupNotifierDisplayName();
-    
+
     @DefaultMessage("Notification Methods")
     String notificationMethods();
 }
