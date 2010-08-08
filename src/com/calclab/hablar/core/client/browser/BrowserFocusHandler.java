@@ -66,6 +66,11 @@ public class BrowserFocusHandler {
      * @param hasFocus
      */
     public void setFocus(boolean hasFocus) {
+	// Ignore the call if we already have the given level of focus
+	if (this.hasFocus == hasFocus) {
+	    return;
+	}
+
 	GWT.log("BrowserFocusHandler - focus: " + hasFocus);
 	this.hasFocus = hasFocus;
 	focusListener.onBrowserFocusChanged(hasFocus);

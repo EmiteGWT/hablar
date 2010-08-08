@@ -46,8 +46,6 @@ public class BrowserFocusManager {
 		if (currentFocused != null) {
 		    if (hasFocus == false) {
 			currentFocused.getDisplay().setTextBoxFocus(false);
-		    } else if (!unattendedManager.contains(currentFocused)) {
-			currentFocused.getDisplay().setTextBoxFocus(true);
 		    }
 		}
 	    }
