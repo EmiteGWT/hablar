@@ -63,7 +63,9 @@ public class GroupSelectorWidget extends Composite implements GroupSelectorDispl
 
     @Override
     public void setIcon(final ImageResource icon) {
+	String style = this.icon.getStyleName();
 	this.icon.setResource(icon);
+	this.icon.setStyleName(style);
     }
 
 }
