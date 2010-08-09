@@ -46,7 +46,7 @@ public class RosterItemWidget extends Composite implements RosterItemDisplay {
 
     public RosterItemWidget(final String groupId, final String itemId) {
 	initWidget(uiBinder.createAndBindUi(this));
-	menu.setResource(Icons.get(Icons.MENU));
+	Icons.set(menu, Icons.MENU);
 	self.ensureDebugId(Idify.id("RosterItemWidget", groupId, itemId));
 	// menu.addStyleName(HablarIcons.get(IconType.menu));
 	menu.ensureDebugId(Idify.id("RosterItemWidget", groupId, itemId, "roster-menu"));

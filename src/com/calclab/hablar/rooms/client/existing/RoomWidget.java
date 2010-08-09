@@ -32,7 +32,7 @@ public class RoomWidget extends Composite {
     public RoomWidget(String name) {
 	initWidget(uiBinder.createAndBindUi(this));
 	this.name.setText(name);
-	icon.setResource(Icons.get(Icons.GROUP_CHAT));
+	Icons.set(icon, Icons.GROUP_CHAT);
     }
 
     public HasClickHandlers getAction() {

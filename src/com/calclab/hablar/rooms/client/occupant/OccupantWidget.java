@@ -39,7 +39,9 @@ public class OccupantWidget extends Composite implements OccupantDisplay {
 
     @Override
     public void setIcon(final ImageResource icon) {
+	String style = this.icon.getStyleName();
 	this.icon.setResource(icon);
+	this.icon.setStyleName(style);
     }
 
 }
