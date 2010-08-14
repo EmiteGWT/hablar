@@ -32,7 +32,7 @@ public class ActionWidget extends Composite implements HasClickHandlers {
 	addStyleName("hablar-lightBackground");
 	Icons.set(image, action.getIcon());
 	ensureDebugId(action.getId());
-	setTitle(action.getName());
+	setTitle(action.getDescription());
     }
 
     @Override

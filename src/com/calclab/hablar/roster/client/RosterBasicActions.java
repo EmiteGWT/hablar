@@ -96,6 +96,7 @@ public class RosterBasicActions {
     };
     private final Roster roster;
     private final HablarEventBus eventBus;
+    private Action<RosterItem> rosterClickAction;
 
     public RosterBasicActions(HablarEventBus eventBus) {
 	this.eventBus = eventBus;
@@ -133,4 +134,9 @@ public class RosterBasicActions {
     private boolean isEntrieRoster(final RosterItemPresenter target) {
 	return target.getGroupName() == null;
     }
+
+    public Action<RosterItem> getRosterClickAction() {
+	return rosterClickAction;
+    }
+
 }

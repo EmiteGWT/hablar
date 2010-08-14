@@ -9,7 +9,7 @@ public interface Action<T> {
 
     String getId();
 
-    String getName();
+    String getDescription();
 
     boolean isApplicable(T target);
 

@@ -25,7 +25,7 @@ public class PopupMenu<T> extends PopupPanel implements MenuDisplay<T> {
     public void addAction(final Action<T> action, final Command command) {
 	String html = "<label class='" + action.getIcon()
 		+ "' style='display: block; float: left; width: 16px; height: 16px; margin-right: 3px;'>&nbsp;</label>";
-	html += action.getName();
+	html += action.getDescription();
 	final MenuItem menuItem = bar.addItem(html, true, command);
 	menuItem.ensureDebugId(action.getId());
 	items.put(action, menuItem);

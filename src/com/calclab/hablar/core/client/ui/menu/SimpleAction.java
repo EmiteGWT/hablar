@@ -1,8 +1,7 @@
 package com.calclab.hablar.core.client.ui.menu;
 
-
 public abstract class SimpleAction<T> implements Action<T> {
-    private final String name;
+    private final String description;
     private final String id;
     private final String icon;
 
@@ -10,8 +9,8 @@ public abstract class SimpleAction<T> implements Action<T> {
 	this(name, id, null);
     }
 
-    public SimpleAction(final String name, final String id, final String icon) {
-	this.name = name;
+    public SimpleAction(final String description, final String id, final String icon) {
+	this.description = description;
 	this.id = id;
 	this.icon = icon;
     }
@@ -30,10 +29,11 @@ public abstract class SimpleAction<T> implements Action<T> {
     }
 
     @Override
-    public String getName() {
-	return name;
+    public String getDescription() {
+	return description;
     }
 
+    @Override
     public boolean isApplicable(final T target) {
 	return true;
     }
