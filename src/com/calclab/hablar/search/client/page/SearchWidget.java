@@ -8,7 +8,6 @@ import com.calclab.hablar.core.client.ui.menu.PopupMenu;
 import com.calclab.hablar.search.client.SearchMessages;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.FocusEvent;
-import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -40,7 +39,8 @@ public class SearchWidget extends Composite implements SearchDisplay {
 
 	public static final String MESSAGE_DEB_ID = "SearchPageWidget-message";
 	public static final String TYPE = "Search";
-	private static SearchWidgetUiBinder uiBinder = GWT.create(SearchWidgetUiBinder.class);
+	private static SearchWidgetUiBinder uiBinder = GWT
+			.create(SearchWidgetUiBinder.class);
 
 	public static SearchMessages i18n() {
 		return messages;
@@ -114,11 +114,6 @@ public class SearchWidget extends Composite implements SearchDisplay {
 	}
 
 	@Override
-	public HasChangeHandlers getSearchChange() {
-		return term;
-	}
-
-	@Override
 	public Focusable getSearchFocus() {
 		return term;
 	}
@@ -129,7 +124,8 @@ public class SearchWidget extends Composite implements SearchDisplay {
 	}
 
 	@Override
-	public SearchResultItemDisplay newSearchResultItemDisplay(final String itemId) {
+	public SearchResultItemDisplay newSearchResultItemDisplay(
+			final String itemId) {
 		return new SearchResultItemWidget(itemId);
 	}
 
