@@ -18,118 +18,113 @@ import com.calclab.suco.client.events.Listener;
 @SuppressWarnings("unchecked")
 public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 
-    private final static Comparator<RosterItem> ORDER = RosterItemsOrder.order(RosterItemsOrder.byAvailability,
-	    RosterItemsOrder.groupedFirst, RosterItemsOrder.byName);
+	private final static Comparator<RosterItem> ORDER = RosterItemsOrder.order(
+			RosterItemsOrder.byAvailability, RosterItemsOrder.groupedFirst,
+			RosterItemsOrder.byName);
 
-    private static RosterMessages messages;
+	private static RosterMessages messages;
 
-    public static RosterMessages i18n() {
-	return messages;
-    }
+	public static RosterMessages i18n() {
+		return messages;
+	}
 
-    public static void setMessages(final RosterMessages messages) {
-	RosterGroupPresenter.messages = messages;
-    }
+	public static void setMessages(final RosterMessages messages) {
+		RosterGroupPresenter.messages = messages;
+	}
 
-    private final RosterGroupDisplay display;
-    private String groupLabel;
-    private final HashMap<XmppURI, RosterItemPresenter> itemPresenters;
-    private final Menu<RosterItemPresenter> itemMenu;
+	private final RosterGroupDisplay display;
+	private String groupLabel;
+	private final HashMap<XmppURI, RosterItemPresenter> itemPresenters;
+	private final Menu<RosterItemPresenter> itemMenu;
 
-    private final RosterGroup group;
+	private final RosterGroup group;
 
-    private final RosterConfig rosterConfig;
+	private final RosterConfig rosterConfig;
 
-    public RosterGroupPresenter(final RosterGroup group, final Menu<RosterItemPresenter> itemMenu,
-	    final RosterGroupDisplay display, final RosterConfig rosterConfig) {
-	this.group = group;
-	this.itemMenu = itemMenu;
-	this.display = display;
-	this.rosterConfig = rosterConfig;
+	public RosterGroupPresenter(final RosterGroup group,
+			final Menu<RosterItemPresenter> itemMenu,
+			final RosterGroupDisplay display, final RosterConfig rosterConfig) {
+		this.group = group;
+		this.itemMenu = itemMenu;
+		this.display = display;
+		this.rosterConfig = rosterConfig;
 
-	itemPresenters = new HashMap<XmppURI, RosterItemPresenter>();
-	display.setVisible(group.isAllContacts());
+		itemPresenters = new HashMap<XmppURI, RosterItemPresenter>();
+		display.setVisible(group.isAllContacts());
 
-	final Listener<RosterItem> updateListener = new Listener<RosterItem>() {
-	    @Override
-	    public void onEvent(final RosterItem item) {
+		final Listener<RosterItem> updateListener = new Listener<RosterItem>() {
+			@Override
+			public void onEvent(final RosterItem item) {
+				updateRosterItemGroups();
+			}
+		};
+		group.onItemAdded(updateListener);
+		group.onItemChanged(updateListener);
+		group.onItemRemoved(updateListener);
 		updateRosterItemGroups();
-	    }
-	};
-	group.onItemAdded(updateListener);
-	group.onItemChanged(updateListener);
-	group.onItemRemoved(updateListener);
-	updateRosterItemGroups();
-    }
-
-    @Override
-    public RosterGroupDisplay getDisplay() {
-	return display;
-    }
-
-    public String getGroupLabel() {
-	return groupLabel;
-    }
-
-    public String getGroupName() {
-	return group.getName();
-    }
-
-    public RosterGroup getRosterGroup() {
-	return group;
-    }
-
-    public boolean isVisible() {
-	return display.isVisible();
-    }
-
-    public void toggleVisibility() {
-	display.setVisible(!display.isVisible());
-    }
-
-    private RosterItemPresenter createRosterItem(final RosterItem item) {
-	// FIXME: no mola nada toda esta basura selenium
-	final RosterItemDisplay itemDisplay = display.newRosterItemDisplay(Idify.id(group.getName()), Idify.id(item
-		.getJID()));
-	String title;
-
-	String nameOrJid = item.getName();
-
-	if (nameOrJid == null) {
-	    nameOrJid = item.getJID().getShortName();
 	}
 
-	if (rosterConfig.oneClickChat) {
-	    title = i18n().clickToChatTooltip(nameOrJid);
-	} else {
-	    title = i18n().startChatTooltip(nameOrJid);
-	}
-	itemDisplay.setWidgetTitle(title);
-	final RosterItemPresenter presenter = new RosterItemPresenter(group.getName(), itemMenu, itemDisplay,
-		rosterConfig);
-	itemPresenters.put(item.getJID(), presenter);
-	return presenter;
-    }
+	private RosterItemPresenter createRosterItem(final RosterItem item) {
+		// FIXME: no mola nada toda esta basura selenium
+		final RosterItemDisplay itemDisplay = display.newRosterItemDisplay(
+				Idify.id(group.getName()), Idify.id(item.getJID()));
 
-    private RosterItemPresenter getPresenter(final RosterItem item) {
-	RosterItemPresenter presenter = itemPresenters.get(item.getJID());
-	if (presenter == null) {
-	    presenter = createRosterItem(item);
-	    display.add(presenter.getDisplay());
-	}
-	presenter.setItem(item);
-	return presenter;
-    }
+		String nameOrJid = item.getName();
 
-    private void updateRosterItemGroups() {
-	if (!itemPresenters.isEmpty()) {
-	    display.removeAll();
-	    itemPresenters.clear();
+		if (nameOrJid == null) {
+			nameOrJid = item.getJID().getShortName();
+		}
+
+		final RosterItemPresenter presenter = new RosterItemPresenter(
+				group.getName(), itemMenu, itemDisplay, rosterConfig);
+		itemPresenters.put(item.getJID(), presenter);
+		return presenter;
 	}
-	final Collection<RosterItem> rosterItems = group.getItemList(ORDER);
-	for (final RosterItem item : rosterItems) {
-	    getPresenter(item);
+
+	@Override
+	public RosterGroupDisplay getDisplay() {
+		return display;
 	}
-    }
+
+	public String getGroupLabel() {
+		return groupLabel;
+	}
+
+	public String getGroupName() {
+		return group.getName();
+	}
+
+	private RosterItemPresenter getPresenter(final RosterItem item) {
+		RosterItemPresenter presenter = itemPresenters.get(item.getJID());
+		if (presenter == null) {
+			presenter = createRosterItem(item);
+			display.add(presenter.getDisplay());
+		}
+		presenter.setItem(item);
+		return presenter;
+	}
+
+	public RosterGroup getRosterGroup() {
+		return group;
+	}
+
+	public boolean isVisible() {
+		return display.isVisible();
+	}
+
+	public void toggleVisibility() {
+		display.setVisible(!display.isVisible());
+	}
+
+	private void updateRosterItemGroups() {
+		if (!itemPresenters.isEmpty()) {
+			display.removeAll();
+			itemPresenters.clear();
+		}
+		final Collection<RosterItem> rosterItems = group.getItemList(ORDER);
+		for (final RosterItem item : rosterItems) {
+			getPresenter(item);
+		}
+	}
 
 }
