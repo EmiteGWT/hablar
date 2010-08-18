@@ -19,5 +19,5 @@ public class RosterConfig {
 	/**
 	 * The default action for click
 	 */
-	public SimpleAction<RosterItem> rosterItemclickAction;
+	public SimpleAction<RosterItem> rosterItemClickAction;
 }

@@ -37,9 +37,9 @@ public class HablarRoster implements EntryPoint {
 				.get(SubscriptionHandler.class);
 		subscriptionHandler.setBehaviour(Behaviour.acceptAll);
 
-		if (rosterConfig.rosterItemclickAction == null
+		if (rosterConfig.rosterItemClickAction == null
 				&& rosterConfig.oneClickChat) {
-			rosterConfig.rosterItemclickAction = new SimpleAction<RosterItem>(
+			rosterConfig.rosterItemClickAction = new SimpleAction<RosterItem>(
 					i18n().clickToOpenChat(), "rosterItemClickAction") {
 				@Override
 				public void execute(RosterItem item) {

@@ -21,13 +21,13 @@ public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
 		this.groupName = groupName;
 		this.display = display;
 
-		if (rosterConfig.rosterItemclickAction != null) {
-			display.setWidgetTitle(rosterConfig.rosterItemclickAction
+		if (rosterConfig.rosterItemClickAction != null) {
+			display.setWidgetTitle(rosterConfig.rosterItemClickAction
 					.getDescription());
 			display.getAction().addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(final ClickEvent event) {
-					rosterConfig.rosterItemclickAction.execute(item);
+					rosterConfig.rosterItemClickAction.execute(item);
 				}
 			});
 			display.addStyleName("clickable");
