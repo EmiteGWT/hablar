@@ -5,32 +5,36 @@ import com.calclab.hablar.core.client.mvp.Display;
 import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.HasText;
 
 public interface SearchDisplay extends Display {
 
-    public static enum Level {
-	info, error, success
-    }
+	public static enum Level {
+		info, error, success
+	}
 
-    void addResult(SearchResultItemDisplay item);
+	void addResult(SearchResultItemDisplay item);
 
-    void clearResults();
+	void clearResults();
 
-    MenuDisplay<SearchResultItem> createMenu(String debugId);
+	MenuDisplay<SearchResultItem> createMenu(String debugId);
 
-    void focusInput();
+	void focusInput();
 
-    HasClickHandlers getSearchButton();
+	HasKeyDownHandlers getSearchBox();
 
-    HasChangeHandlers getSearchChange();
+	HasClickHandlers getSearchButton();
 
-    Focusable getSearchFocus();
+	@Deprecated
+	HasChangeHandlers getSearchChange();
 
-    HasText getSearchTerm();
+	Focusable getSearchFocus();
 
-    SearchResultItemDisplay newSearchResultItemDisplay(String itemId);
+	HasText getSearchTerm();
 
-    void showMessage(String body, Level level);
+	SearchResultItemDisplay newSearchResultItemDisplay(String itemId);
+
+	void showMessage(String body, Level level);
 }
