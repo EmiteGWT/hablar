@@ -1,6 +1,6 @@
 package com.calclab.hablar.console.client;
 
-import com.calclab.emite.core.client.bosh.Connection;
+import com.calclab.emite.core.client.conn.Connection;
 import com.calclab.emite.core.client.packet.IPacket;
 import com.calclab.emite.core.client.services.gwt.GWTXMLService;
 import com.calclab.emite.core.client.xmpp.session.Session;

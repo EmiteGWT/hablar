@@ -37,7 +37,8 @@ public class HablarRoomManager {
 	});
     }
 
-    public HablarRoomManager(final Hablar hablar, final HablarRoomsConfig config, final RoomPageFactory factory) {
+    public HablarRoomManager(final Hablar hablar, final HablarRoomsConfig config,
+	    final RoomPageFactory factory) {
 	this.hablar = hablar;
 	this.factory = factory;
 	acceptedInvitations = new ArrayList<RoomInvitation>();
@@ -86,12 +87,14 @@ public class HablarRoomManager {
 
     protected void openRoom(final Chat room) {
 	final RoomPresenter roomPage = roomPages.get(room.getURI());
-	assert roomPage != null;
+	assert roomPage != null : "Error in room pages - HablarRoomManager";
 	final RoomInvitation invitation = getInvitation(room.getURI());
 	if (invitation != null) {
 	    acceptedInvitations.remove(invitation);
 	    roomPage.requestVisibility(Visibility.notFocused);
-	    String message = "You have been invited to this group chat by " + invitation.getInvitor().getNode();
+	    String message = "You have been invited to this group chat by ";
+	    // FIXME: NEWLIB
+	    // + invitation.getInvitor().getNode();
 	    message += invitation.getReason() != null ? ": " + invitation.getReason() : "";
 	    roomPage.addMessage(new ChatMessage(message));
 	} else {

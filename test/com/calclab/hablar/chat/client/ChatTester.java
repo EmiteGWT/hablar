@@ -1,21 +1,22 @@
 package com.calclab.hablar.chat.client;
 
+import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.AbstractChat;
 import com.calclab.emite.im.client.chat.Chat;
-import com.calclab.emite.xtesting.SessionTester;
+import com.calclab.emite.im.client.chat.ChatProperties;
 
 public class ChatTester extends AbstractChat implements Chat {
     private final String id;
 
-    public ChatTester(String uri, String starter) {
-	this(XmppURI.uri(uri), XmppURI.uri(starter));
+    public ChatTester(final XmppSession session, final ChatProperties chatProperties) {
+	super(session, chatProperties);
+	id = "chat" + chatProperties.getUri().toString() + System.currentTimeMillis();
     }
 
-    public ChatTester(XmppURI uri, XmppURI starter) {
-	super(new SessionTester(), uri, starter);
-	this.id = "chat" + uri.toString() + System.currentTimeMillis();
+    public ChatTester(final XmppSession session, final String uri, final String starter) {
+	this(session, new ChatProperties(XmppURI.uri(uri), XmppURI.uri(starter), null));
     }
 
     @Override
@@ -24,12 +25,17 @@ public class ChatTester extends AbstractChat implements Chat {
     }
 
     @Override
-    public void receive(Message message) {
+    public void open() {
+	setChatState(ChatStates.ready);
+    }
+
+    @Override
+    public void receive(final Message message) {
 	super.receive(message);
     }
 
     @Override
-    public void setState(State state) {
+    public void setState(final State state) {
 	super.setState(state);
     }
 

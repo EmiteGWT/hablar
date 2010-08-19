@@ -3,14 +3,14 @@ package com.calclab.hablar.testing;
 import org.mockito.Mockito;
 
 import com.calclab.emite.core.client.EmiteCoreModule;
-import com.calclab.emite.core.client.xmpp.session.Session;
+import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.im.client.InstantMessagingModule;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.presence.PresenceManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.xep.search.client.SearchManager;
 import com.calclab.emite.xtesting.RosterTester;
-import com.calclab.emite.xtesting.SessionTester;
+import com.calclab.emite.xtesting.XmppSessionTester;
 import com.calclab.hablar.chat.client.ChatManagerTester;
 import com.calclab.hablar.chat.client.PresenceManagerTester;
 import com.calclab.hablar.core.client.mvp.DefaultEventBus;
@@ -28,7 +28,7 @@ import com.calclab.suco.client.ioc.decorator.NoDecoration;
 public class EmiteTester {
     private static DisplayStubFactory factory = DisplayStubFactory.instance;
 
-    public final SessionTester session;
+    public final XmppSessionTester session;
 
     public final ChatManagerTester chatManager;
     public final RosterTester roster;
@@ -46,8 +46,8 @@ public class EmiteTester {
 	eventBus = new DefaultEventBus();
 	install(container, HablarEventBus.class, eventBus);
 
-	session = new SessionTester();
-	install(container, Session.class, session);
+	session = new XmppSessionTester();
+	install(container, XmppSession.class, session);
 
 	chatManager = new ChatManagerTester(session);
 	install(container, ChatManager.class, chatManager);
