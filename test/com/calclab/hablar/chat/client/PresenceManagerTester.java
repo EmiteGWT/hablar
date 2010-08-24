@@ -1,24 +1,12 @@
 package com.calclab.hablar.chat.client;
 
-import com.calclab.emite.core.client.xmpp.stanzas.Presence;
-import com.calclab.emite.im.client.presence.AbstractPresenceManager;
+import com.calclab.emite.core.client.xmpp.session.XmppSession;
+import com.calclab.emite.im.client.presence.PresenceManagerImpl;
 
-public class PresenceManagerTester extends AbstractPresenceManager {
+public class PresenceManagerTester extends PresenceManagerImpl {
 
-    private int times;
-
-    public PresenceManagerTester() {
-	setOwnPresence(new Presence());
-    }
-
-    @Override
-    public void changeOwnPresence(Presence presence) {
-	this.times++;
-	setOwnPresence(presence);
-    }
-
-    public int getChangePresenceCallCount() {
-	return times;
+    public PresenceManagerTester(final XmppSession session) {
+	super(session);
     }
 
 }

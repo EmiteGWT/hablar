@@ -3,6 +3,7 @@ package com.calclab.hablar.rooms.client.existing;
 import java.util.List;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
+import com.calclab.emite.xep.mucdisco.client.ExistingRoom;
 import com.calclab.hablar.core.client.ui.selectionlist.Selectable;
 import com.calclab.hablar.core.client.ui.selectionlist.SelectionList;
 import com.calclab.hablar.rooms.client.RoomsMessages;
@@ -20,16 +21,20 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class OpenExistingRoomWidget extends Composite implements OpenExistingRoomDisplay {
 
-    private static OpenExistingRoomWidgetUiBinder uiBinder = GWT.create(OpenExistingRoomWidgetUiBinder.class);
+    interface OpenExistingRoomWidgetUiBinder extends UiBinder<Widget, OpenExistingRoomWidget> {
+    }
+
+    private static OpenExistingRoomWidgetUiBinder uiBinder = GWT
+	    .create(OpenExistingRoomWidgetUiBinder.class);
 
     private static RoomsMessages messages;
 
-    public static void setMessages(final RoomsMessages messages) {
-	OpenExistingRoomWidget.messages = messages;
-    }
-
     public static RoomsMessages i18n() {
 	return messages;
+    }
+
+    public static void setMessages(final RoomsMessages messages) {
+	OpenExistingRoomWidget.messages = messages;
     }
 
     @UiField
@@ -44,9 +49,6 @@ public class OpenExistingRoomWidget extends Composite implements OpenExistingRoo
     @UiField
     Button accept, cancel;
 
-    interface OpenExistingRoomWidgetUiBinder extends UiBinder<Widget, OpenExistingRoomWidget> {
-    }
-
     public OpenExistingRoomWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
 	title.setInnerText(i18n().openExistingRoom());
@@ -56,28 +58,15 @@ public class OpenExistingRoomWidget extends Composite implements OpenExistingRoo
 	roomList.addSelectionHandler(new SelectionHandler<Selectable>() {
 
 	    @Override
-	    public void onSelection(SelectionEvent<Selectable> event) {
+	    public void onSelection(final SelectionEvent<Selectable> event) {
 		accept.setEnabled(true);
 	    }
 	});
     }
 
     @Override
-    public void setRooms(List<ExistingRoom> rooms) {
-	accept.setEnabled(false);
-	roomList.clear();
-	for (ExistingRoom uri : rooms) {
-	    roomList.add(new RoomSelectable(uri));
-	}
-    }
-
-    @Override
-    public XmppURI getSelectedRoom() {
-	RoomSelectable selectable = (RoomSelectable) roomList.getSelectedSelectable();
-	if (selectable != null) {
-	    return ((ExistingRoom) selectable.getItem()).getUri();
-	}
-	return null;
+    public Widget asWidget() {
+	return this;
     }
 
     @Override
@@ -91,7 +80,20 @@ public class OpenExistingRoomWidget extends Composite implements OpenExistingRoo
     }
 
     @Override
-    public Widget asWidget() {
-	return this;
+    public XmppURI getSelectedRoom() {
+	final RoomSelectable selectable = (RoomSelectable) roomList.getSelectedSelectable();
+	if (selectable != null) {
+	    return ((ExistingRoom) selectable.getItem()).getUri();
+	}
+	return null;
+    }
+
+    @Override
+    public void setRooms(final List<ExistingRoom> rooms) {
+	accept.setEnabled(false);
+	roomList.clear();
+	for (final ExistingRoom uri : rooms) {
+	    roomList.add(new RoomSelectable(uri));
+	}
     }
 }

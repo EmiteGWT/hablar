@@ -33,7 +33,7 @@ public class RosterItemLogicTest {
 
     @Test
     public void shouldSetAvailable() {
-	item.setAvailable(true);
+	item.setAvailable(true, "resource");
 	presenter.setItem(item);
 	verify(display).setIcon(Icons.BUDDY_ON);
     }

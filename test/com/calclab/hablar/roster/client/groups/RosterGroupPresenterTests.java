@@ -12,7 +12,7 @@ import org.mockito.Mockito;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterGroup;
-import com.calclab.emite.xtesting.RosterTester;
+import com.calclab.emite.xtesting.RosterItemHelper;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.roster.client.RosterConfig;
 import com.calclab.hablar.testing.EmiteTester;
@@ -33,10 +33,10 @@ public class RosterGroupPresenterTests {
 	display = hablar.newDisplay(RosterGroupDisplay.class);
 	when(display.newRosterItemDisplay(anyString(), anyString())).thenReturn(itemDisplay);
 	group = new RosterGroup("mygroup");
-	group.add(RosterTester.createItem("test1", "name1", "mygroup"));
-	group.add(RosterTester.createItem("test2", "name2", "mygroup"));
-	group.add(RosterTester.createItem("test3", "name3", "mygroup"));
-	RosterConfig rosterConfig = new RosterConfig();
+	group.add(RosterItemHelper.createItem("test1", "name1", "mygroup"));
+	group.add(RosterItemHelper.createItem("test2", "name2", "mygroup"));
+	group.add(RosterItemHelper.createItem("test3", "name3", "mygroup"));
+	final RosterConfig rosterConfig = new RosterConfig();
 	rosterConfig.oneClickChat = true;
 	new RosterGroupPresenter(group, itemMenu, display, rosterConfig);
 	verify(display, times(3)).add((RosterItemDisplay) anyObject());
@@ -45,7 +45,7 @@ public class RosterGroupPresenterTests {
 
     @Test
     public void shouldAddWhenItemAdded() {
-	group.add(RosterTester.createItem("test4", "name4", "mygroup"));
+	group.add(RosterItemHelper.createItem("test4", "name4", "mygroup"));
 	verify(display, times(4)).add((RosterItemDisplay) anyObject());
     }
 

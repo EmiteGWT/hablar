@@ -8,8 +8,8 @@ import com.calclab.emite.im.client.InstantMessagingModule;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.presence.PresenceManager;
 import com.calclab.emite.im.client.roster.Roster;
+import com.calclab.emite.im.client.roster.XmppRosterLogic;
 import com.calclab.emite.xep.search.client.SearchManager;
-import com.calclab.emite.xtesting.RosterTester;
 import com.calclab.emite.xtesting.XmppSessionTester;
 import com.calclab.hablar.chat.client.ChatManagerTester;
 import com.calclab.hablar.chat.client.PresenceManagerTester;
@@ -52,13 +52,15 @@ public class EmiteTester {
 	chatManager = new ChatManagerTester(session);
 	install(container, ChatManager.class, chatManager);
 
-	roster = new RosterTester();
+	final XmppRosterLogic xmppRoster = new XmppRosterLogic(session);
+
+	roster = new RosterTester(xmppRoster);
 	install(container, Roster.class, roster);
 
 	searchManager = new SearchManagerTester();
 	install(container, SearchManager.class, searchManager);
 
-	presenceManager = new PresenceManagerTester();
+	presenceManager = new PresenceManagerTester(session);
 	install(container, PresenceManager.class, presenceManager);
     }
 
