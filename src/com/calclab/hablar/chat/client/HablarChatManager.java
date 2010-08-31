@@ -3,6 +3,7 @@ package com.calclab.hablar.chat.client;
 import java.util.HashMap;
 import java.util.Set;
 
+import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.chat.Chat;
@@ -46,6 +47,7 @@ public class HablarChatManager {
 	this.factory = factory;
 	chatPages = new HashMap<XmppURI, PairChatPage>();
 
+	Suco.get(Session.class); // To fix recursion.
 	roster = Suco.get(Roster.class);
 	final ChatManager chatManager = Suco.get(ChatManager.class);
 
