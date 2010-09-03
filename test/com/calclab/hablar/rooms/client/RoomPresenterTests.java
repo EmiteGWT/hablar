@@ -19,30 +19,32 @@ import com.calclab.hablar.testing.HablarTester;
 
 public class RoomPresenterTests {
 
-    private RoomPresenter presenter;
-    private RoomDisplay display;
-    private Room room;
+	private RoomPresenter presenter;
+	private RoomDisplay display;
+	private Room room;
 
-    @Before
-    public void setup() {
-	EmiteTester emiteTester = new EmiteTester();
-	emiteTester.setSessionReady("user@domain/res");
-	HablarTester tester = new HablarTester();
-	display = tester.newDisplay(RoomDisplay.class);
-	OccupantsDisplay occupantsDisplay = tester.newDisplay(OccupantsDisplay.class);
-	when(display.createOccupantsDisplay(anyString())).thenReturn(occupantsDisplay);
-	room = Mockito.mock(Room.class);
-	when(room.getURI()).thenReturn(XmppURI.uri("room@domain"));
-	presenter = new RoomPresenter(tester.getEventBus(), room, display);
-    }
+	@Before
+	public void setup() {
+		EmiteTester emiteTester = new EmiteTester();
+		emiteTester.setSessionReady("some@domain");
+		HablarTester tester = new HablarTester();
+		display = tester.newDisplay(RoomDisplay.class);
+		OccupantsDisplay occupantsDisplay = tester
+				.newDisplay(OccupantsDisplay.class);
+		when(display.createOccupantsDisplay(anyString())).thenReturn(
+				occupantsDisplay);
+		room = Mockito.mock(Room.class);
+		when(room.getURI()).thenReturn(XmppURI.uri("room@domain"));
+		presenter = new RoomPresenter(tester.getEventBus(), room, display);
+	}
 
-    /**
-     * Fixes issue 288
-     */
-    @Test
-    public void shouldCloseRoomWhenPageIsClosed() {
-	presenter.setVisibility(Visibility.hidden);
-	verify(room).close();
-    }
+	/**
+	 * Fixes issue 288
+	 */
+	@Test
+	public void shouldCloseRoomWhenPageIsClosed() {
+		presenter.setVisibility(Visibility.hidden);
+		verify(room).close();
+	}
 
 }
