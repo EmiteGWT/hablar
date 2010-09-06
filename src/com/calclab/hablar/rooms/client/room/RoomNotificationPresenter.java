@@ -2,6 +2,7 @@ package com.calclab.hablar.rooms.client.room;
 
 import static com.calclab.hablar.rooms.client.HablarRooms.i18n;
 
+import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
@@ -16,8 +17,12 @@ public class RoomNotificationPresenter {
 
     private final RoomPresenter roomPresenter;
 
+    private final String me;
+
     public RoomNotificationPresenter(final RoomPresenter roomPresenter, final Room room) {
 	this.roomPresenter = roomPresenter;
+	final Session session = Suco.get(Session.class);
+	me = session.getCurrentUser().getNode();
 
 	room.onOccupantAdded(new Listener<Occupant>() {
 	    @Override
@@ -30,8 +35,10 @@ public class RoomNotificationPresenter {
 	room.onOccupantRemoved(new Listener<Occupant>() {
 	    @Override
 	    public void onEvent(final Occupant occupant) {
-		final String body = i18n().occupantHasLeft(occupant.getNick());
-		show(body);
+	    	if (!me.equals(occupant.getUserUri().getNode())) {
+				final String body = i18n().occupantHasLeft(occupant.getNick());
+				show(body);
+	    	}
 	    }
 	});
 /*
