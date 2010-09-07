@@ -15,7 +15,6 @@ import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.roster.client.RosterConfig;
 import com.calclab.hablar.roster.client.RosterMessages;
-import com.calclab.suco.client.events.Listener;
 
 @SuppressWarnings("unchecked")
 public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
@@ -54,16 +53,7 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 		itemPresenters = new HashMap<XmppURI, RosterItemPresenter>();
 		display.setVisible(group.isAllContacts());
 
-		final Listener<RosterItem> updateListener = new Listener<RosterItem>() {
-			@Override
-			public void onEvent(final RosterItem item) {
-				updateRosterItemGroups();
-			}
-		};
-		group.onItemAdded(updateListener);
-		group.onItemChanged(updateListener);
-		group.onItemRemoved(updateListener);
-		group.addMainRosterItemChangedHandler(new RosterItemChangedHandler() {
+		group.addRosterItemChangedHandler(new RosterItemChangedHandler() {
 
 			@Override
 			public void onRosterItemChanged(RosterItemChangedEvent event) {
