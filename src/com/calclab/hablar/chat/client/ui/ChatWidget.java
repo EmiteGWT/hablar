@@ -35,7 +35,7 @@ public class ChatWidget extends Composite implements ChatDisplay {
 
     private static ChatMessages messages;
 
-    private static final int CONTROLS_HEIGHT = 115;
+    private static final int CONTROLS_HEIGHT = 92;
 
     private static final int STATUS_HEIGHT = 24;
 
@@ -71,13 +71,11 @@ public class ChatWidget extends Composite implements ChatDisplay {
     ActionItemStyle style;
 
     private int controlsHeight;
-    private int statusHeight;
 
     public ChatWidget(final boolean sendButtonVisible) {
 	initWidget(uiBinder.createAndBindUi(this));
 	send.setText(i18n().sendAction());
 	controlsHeight = 0;
-	statusHeight = 0;
     }
 
     @Override
@@ -167,23 +165,12 @@ public class ChatWidget extends Composite implements ChatDisplay {
 
     @Override
     public void setStatusVisible(final boolean visible) {
-	layoutStatus();
-	// FIXME: Animation
-	// page.forceLayout();
-	statusHeight = visible ? STATUS_HEIGHT : 0;
-	layoutStatus();
-	page.animate(500);
+    	state.setVisible(visible);
     }
 
     private void layoutControls() {
-	page.setWidgetTopBottom(scroll, statusHeight + 3, PX, controlsHeight + 3, PX);
-	page.setWidgetBottomHeight(controls, 3, PX, controlsHeight, PX);
+	page.setWidgetTopBottom(scroll, STATUS_HEIGHT + 3, PX, controlsHeight + STATUS_HEIGHT + 3, PX);
+	page.setWidgetBottomHeight(state, controlsHeight, PX, STATUS_HEIGHT, PX);
+	page.setWidgetBottomHeight(controls, 3, PX, controlsHeight + 3, PX);
     }
-
-    private void layoutStatus() {
-	page.setWidgetTopBottom(scroll, statusHeight + 3, PX, controlsHeight + 3, PX);
-	page.setWidgetTopHeight(actions, 3, PX, statusHeight, PX);
-
-    }
-
 }

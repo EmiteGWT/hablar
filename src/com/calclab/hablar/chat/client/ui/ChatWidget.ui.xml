@@ -38,9 +38,11 @@
 				<g:FlowPanel addStyleNames="{style.wideArea}" ui:field="list" />
 			</g:ScrollPanel>
 		</g:layer>
+		<g:layer top="3px" left="3px" right="3px" height="24px">
+			<g:Label ui:field="state">&nbsp;</g:Label>
+		</g:layer>
 		<g:layer left="3px" right="3px" bottom="10px" height="0">
 			<g:FlowPanel ui:field="controls" addStyleNames="{style.talkPanel}">
-				<g:Label ui:field="state">&nbsp;</g:Label>
 				<g:TextArea addStyleNames="{style.talkBox}" ui:field="talkBox"></g:TextArea>
 				<g:Button ui:field="send">Send</g:Button>
 			</g:FlowPanel>
