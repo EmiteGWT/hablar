@@ -17,7 +17,7 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 /**
  * Shared code for different chat presenters (currently PairChatPresenter and
  * RoomPresenter). Not intended for instance directly
- * 
+ *
  */
 public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPage {
     private final ArrayList<ChatMessage> messages;
@@ -28,7 +28,7 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
 	super(pageType, id, eventBus, display);
 	messages = new ArrayList<ChatMessage>();
 	showDate = true;
-	
+
 	display.getTextBoxFocus().addFocusHandler(new FocusHandler() {
 	    @Override
 	    public void onFocus(FocusEvent event) {
@@ -42,13 +42,35 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
      */
     @Override
     public void addMessage(final ChatMessage message) {
-	if (showDate) {
-	    final Date today = new Date();
-	    message.metadata = DateTimeFormat.getShortTimeFormat().format(today);
-	}
-	messages.add(message);
-	display.addMessage(message);
+    	addMessage(message, null);
     }
+
+    /**
+     * Add message to the chat display.
+     */
+    @SuppressWarnings("deprecation")
+	@Override
+	public void addMessage(final ChatMessage message, final Date stamp) {
+		Date date = stamp;
+		Date now = new Date();
+		DateTimeFormat format;
+		if (date == null) {
+			date = now;
+			format = DateTimeFormat.getShortTimeFormat();
+		} else if (date.getYear() == now.getYear()
+				&& date.getMonth() == now.getMonth()
+				&& date.getDate() == now.getDate()) {
+			format = DateTimeFormat.getShortTimeFormat();
+		} else {
+			format = DateTimeFormat.getShortDateTimeFormat();
+		}
+
+		if (showDate) {
+			message.metadata = format.format(date);
+		}
+		messages.add(message);
+		display.addMessage(message);
+	}
 
     @Override
     public ArrayList<ChatMessage> getMessages() {
