@@ -22,7 +22,6 @@ package com.calclab.hablar.testing;
  *
  */
 
-import com.calclab.emite.core.client.xmpp.session.SessionComponent;
 import com.calclab.emite.core.client.xmpp.session.SessionReady;
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.im.client.chat.ChatManager;

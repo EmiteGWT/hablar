@@ -13,7 +13,6 @@ import com.calclab.emite.core.client.xmpp.sasl.DecoderRegistry;
 import com.calclab.emite.core.client.xmpp.sasl.SASLManager;
 import com.calclab.emite.core.client.xmpp.session.IMSessionManager;
 import com.calclab.emite.core.client.xmpp.session.Session;
-import com.calclab.emite.core.client.xmpp.session.SessionComponent;
 import com.calclab.emite.core.client.xmpp.session.SessionComponentsRegistry;
 import com.calclab.emite.core.client.xmpp.session.SessionImpl;
 import com.calclab.emite.core.client.xmpp.session.SessionReady;
