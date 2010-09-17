@@ -10,6 +10,7 @@ public class SearchConfig {
 	final SearchConfig config = new SearchConfig();
 	config.searchCloseable = PageAssist.isMetaTrue("hablar.searchCloseable");
 	config.searchOnRoster = PageAssist.isMetaTrue("hablar.searchOnRoster");
+	config.showSearchPageOnEmptyRoster = PageAssist.isMetaTrue("hablar.showSearchPageOnEmptyRoster", false);
 	config.searchService = PageAssist.getMeta("emite.searchHost");
 	return config;
     }
@@ -30,6 +31,8 @@ public class SearchConfig {
      * If search is closeable, it will have a close button
      */
     public boolean searchCloseable;
+
+    public boolean showSearchPageOnEmptyRoster = false;
 
     public SearchQueryFactory queryFactory = DEFAULT_QUERY_FACTORY;
 

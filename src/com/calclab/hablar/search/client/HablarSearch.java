@@ -1,6 +1,9 @@
 package com.calclab.hablar.search.client;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
+import com.calclab.emite.im.client.roster.XmppRoster;
+import com.calclab.emite.im.client.roster.events.RosterRetrievedEvent;
+import com.calclab.emite.im.client.roster.events.RosterRetrievedHandler;
 import com.calclab.emite.xep.search.client.SearchManager;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
@@ -19,7 +22,7 @@ import com.google.gwt.core.client.GWT;
 
 /**
  * Adds Search support to Hablar
- * 
+ *
  */
 public class HablarSearch implements EntryPoint {
 
@@ -41,6 +44,18 @@ public class HablarSearch implements EntryPoint {
 
 	if (config.searchOnRoster) {
 	    addSearchActionToRoster(hablar, searchPage);
+	}
+	if (config.showSearchPageOnEmptyRoster) {
+		XmppRoster roster = Suco.get(XmppRoster.class); // Cannot make it work with ImGinjector, strange.
+		roster.addRosterRetrievedHandler(new RosterRetrievedHandler() {
+
+			@Override
+			public void onRosterRetrieved(RosterRetrievedEvent event) {
+				if (event.getRosterItems().isEmpty()) {
+					searchPage.requestVisibility(Visibility.focused);
+				}
+			}
+		});
 	}
     }
 
