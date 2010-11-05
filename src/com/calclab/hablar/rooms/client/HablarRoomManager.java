@@ -10,6 +10,7 @@ import com.calclab.emite.xep.muc.client.RoomInvitation;
 import com.calclab.emite.xep.muc.client.RoomManager;
 import com.calclab.hablar.chat.client.ui.ChatMessage;
 import com.calclab.hablar.core.client.Hablar;
+import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.rooms.client.room.RoomDisplay;
 import com.calclab.hablar.rooms.client.room.RoomPresenter;
@@ -22,9 +23,14 @@ public class HablarRoomManager {
     public static interface RoomPageFactory {
 	RoomDisplay create(boolean sendButtonVisible);
     }
+    
+    public static interface RoomPresenterFactory {
+    	RoomPresenter create(HablarEventBus eventBus, Room room, RoomDisplay display);
+    }
 
     private final Hablar hablar;
     private final RoomPageFactory factory;
+    private final RoomPresenterFactory presenterFactory;
     private final HashMap<XmppURI, RoomPresenter> roomPages;
     private final ArrayList<RoomInvitation> acceptedInvitations;
 
@@ -33,14 +39,23 @@ public class HablarRoomManager {
 	    @Override
 	    public RoomDisplay create(final boolean sendButtonVisible) {
 		return new RoomWidget(sendButtonVisible);
+	    }},
+	    new RoomPresenterFactory() {
+
+			@Override
+			public RoomPresenter create(HablarEventBus eventBus, Room room, RoomDisplay display) {
+				return new RoomPresenter(eventBus, room, display);
+			}
+	    	
 	    }
-	});
+	);
     }
 
     public HablarRoomManager(final Hablar hablar, final HablarRoomsConfig config,
-	    final RoomPageFactory factory) {
+	    final RoomPageFactory factory, final RoomPresenterFactory presenterFactory) {
 	this.hablar = hablar;
 	this.factory = factory;
+	this.presenterFactory = presenterFactory;
 	acceptedInvitations = new ArrayList<RoomInvitation>();
 	roomPages = new HashMap<XmppURI, RoomPresenter>();
 
@@ -71,7 +86,7 @@ public class HablarRoomManager {
 
     protected void createRoom(final Room room) {
 	final RoomDisplay display = factory.create(true);
-	final RoomPresenter presenter = new RoomPresenter(hablar.getEventBus(), room, display);
+	final RoomPresenter presenter = presenterFactory.create(hablar.getEventBus(), room, display);
 	roomPages.put(room.getURI(), presenter);
 	hablar.addPage(presenter);
     }

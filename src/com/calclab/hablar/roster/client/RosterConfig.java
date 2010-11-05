@@ -20,4 +20,9 @@ public class RosterConfig {
 	 * The default action for click
 	 */
 	public SimpleAction<RosterItem> rosterItemClickAction;
+	
+	/**
+	 * The actions for the roster menu
+	 */
+	public RosterBasicActions rosterMenuActions;
 }

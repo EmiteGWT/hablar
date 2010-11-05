@@ -40,7 +40,12 @@ public class HablarSearch implements EntryPoint {
 	final SearchPage searchPage = new SearchPage(visible, config.searchCloseable, config.queryFactory, hablar
 		.getEventBus(), new SearchWidget());
 	hablar.addPage(searchPage);
-	new SearchBasicActions(searchPage);
+	
+	if(config.searchActions != null) {
+		config.searchActions.addMenuOptions(searchPage.getItemMenu());
+	} else {
+		new SearchBasicActions().addMenuOptions(searchPage.getItemMenu());
+	}
 
 	if (config.searchOnRoster) {
 	    addSearchActionToRoster(hablar, searchPage);

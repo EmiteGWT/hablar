@@ -32,151 +32,175 @@ import com.google.gwt.event.dom.client.ClickHandler;
  * 
  * @see RosterPage
  */
-public class RosterPresenter extends PagePresenter<RosterDisplay> implements RosterPage {
-    public static final String ROSTER_MESSAGE = "RosterMessage";
-    private static int index = 0;
+public class RosterPresenter extends PagePresenter<RosterDisplay> implements
+		RosterPage {
+	public static final String ROSTER_MESSAGE = "RosterMessage";
+	private static int index = 0;
 
-    public static RosterPage asRoster(final Page<?> page) {
-	if (TYPE.equals(page.getType())) {
-	    return (RosterPage) page;
-	} else {
-	    return null;
+	public static RosterPage asRoster(final Page<?> page) {
+		if (TYPE.equals(page.getType())) {
+			return (RosterPage) page;
+		} else {
+			return null;
+		}
 	}
-    }
-    private boolean active;
-    private final Roster roster;
-    private final RosterBasicActions basicActions;
-    private final Menu<RosterItemPresenter> itemMenu;
-    private final HashMap<String, RosterGroupPresenter> groupPresenters;
-    private final Menu<RosterGroupPresenter> groupMenu;
-    private final RosterConfig rosterConfig;
 
-    public RosterPresenter(final HablarEventBus eventBus, final RosterDisplay display, final RosterConfig rosterConfig) {
-	super(TYPE, "" + ++index, eventBus, display);
-	roster = Suco.get(Roster.class);
-	basicActions = new RosterBasicActions(eventBus);
-	this.rosterConfig = rosterConfig;
+	private boolean active;
+	private final Roster roster;
+	private final RosterBasicActions basicActions;
+	private final Menu<RosterItemPresenter> itemMenu;
+	private final HashMap<String, RosterGroupPresenter> groupPresenters;
+	private final Menu<RosterGroupPresenter> groupMenu;
+	private final RosterConfig rosterConfig;
 
-	groupPresenters = new HashMap<String, RosterGroupPresenter>();
-	active = true;
+	public RosterPresenter(final HablarEventBus eventBus,
+			final RosterDisplay display, final RosterConfig rosterConfig) {
+		super(TYPE, "" + ++index, eventBus, display);
+		roster = Suco.get(Roster.class);
 
-	itemMenu = new Menu<RosterItemPresenter>(display.newRosterItemMenuDisplay("hablar-RosterItemMenu"));
-	groupMenu = new Menu<RosterGroupPresenter>(display.newRosterGroupMenuDisplay("hablar-RosterGroupMenu"));
+		if (rosterConfig.rosterMenuActions != null) {
+			basicActions = rosterConfig.rosterMenuActions;
+		} else {
+			basicActions = new RosterBasicActions(eventBus);
+		}
+		
+		this.rosterConfig = rosterConfig;
 
-	addRosterListeners();
-	addSessionListeners();
-	final String title = i18n().contacts();
-	getState().init(Icons.ROSTER, title, title);
+		groupPresenters = new HashMap<String, RosterGroupPresenter>();
+		active = true;
 
-    }
+		itemMenu = new Menu<RosterItemPresenter>(display
+				.newRosterItemMenuDisplay("hablar-RosterItemMenu"));
+		groupMenu = new Menu<RosterGroupPresenter>(display
+				.newRosterGroupMenuDisplay("hablar-RosterGroupMenu"));
 
-    @Override
-    public void addAction(final Action<RosterPage> action) {
+		addRosterListeners();
+		addSessionListeners();
+		final String title = i18n().contacts();
+		getState().init(Icons.ROSTER, title, title);
 
-	display.createAction(action).addClickHandler(new ClickHandler() {
-	    @Override
-	    public void onClick(final ClickEvent event) {
-		action.execute(RosterPresenter.this);
-	    }
-	});
-
-    }
-
-    @Override
-    public void addHighPriorityActions() {
-	basicActions.addHighPriorityActions(this);
-    }
-
-    @Override
-    public void addLowPriorityActions() {
-	basicActions.addLowPriorityActions(this);
-    }
-
-    @Override
-    public Menu<RosterGroupPresenter> getGroupMenu() {
-	return groupMenu;
-    }
-
-    @Override
-    public Menu<RosterItemPresenter> getItemMenu() {
-	return itemMenu;
-    }
-
-    private void addRosterListeners() {
-	roster.onItemAdded(new Listener<RosterItem>() {
-	    @Override
-	    public void onEvent(final RosterItem item) {
-		final String message = i18n().userAdded(item.getJID().toString());
-		fireMessage(message);
-	    }
-
-	});
-
-	roster.onItemRemoved(new Listener<RosterItem>() {
-	    @Override
-	    public void onEvent(final RosterItem item) {
-		final String message = i18n().userRemoved(item.getJID().toString());
-		fireMessage(message);
-	    }
-	});
-
-	roster.onGroupAdded(new Listener<RosterGroup>() {
-	    @Override
-	    public void onEvent(final RosterGroup group) {
-		createGroup(group);
-	    }
-	});
-
-	roster.onGroupRemoved(new Listener<RosterGroup>() {
-	    @Override
-	    public void onEvent(final RosterGroup group) {
-		display.remove(groupPresenters.get(group.getName()));
-	    }
-	});
-
-	if (roster.isRosterReady()) {
-	    loadRoster();
 	}
-    }
 
-    private void addSessionListeners() {
-	final Session session = Suco.get(Session.class);
-	session.onStateChanged(new Listener<Session>() {
-	    @Override
-	    public void onEvent(final Session session) {
-		final State state = session.getState();
-		setSessionState(state);
-	    }
+	@Override
+	public void addAction(final Action<RosterPage> action) {
 
-	});
-	setSessionState(session.getState());
-    }
+		display.createAction(action).addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(final ClickEvent event) {
+				action.execute(RosterPresenter.this);
+			}
+		});
 
-    private void createGroup(final RosterGroup group) {
-	final RosterGroupDisplay groupDisplay = display.newRosterGroupDisplay();
-	final RosterGroupPresenter presenter = new RosterGroupPresenter(group, itemMenu, groupDisplay, rosterConfig);
-	groupPresenters.put(group.getName(), presenter);
-	display.addGroup(presenter, groupMenu);
-    }
-
-    private void fireMessage(final String message) {
-	eventBus.fireEvent(new UserMessageEvent(this, message, ROSTER_MESSAGE));
-    }
-
-    private void loadRoster() {
-	GWT.log("LOAD ROSTER");
-	groupPresenters.clear();
-	for (final RosterGroup group : roster.getRosterGroups()) {
-	    createGroup(group);
 	}
-    }
 
-    private void setSessionState(final State state) {
-	final boolean isActive = state == State.ready;
-	if (active != isActive) {
-	    active = isActive;
-	    display.setActive(active);
+	@Override
+	public void addHighPriorityActions() {
+		basicActions.addHighPriorityActions(this);
 	}
-    }
+
+	@Override
+	public void addLowPriorityActions() {
+		basicActions.addLowPriorityActions(this);
+	}
+
+	@Override
+	public Menu<RosterGroupPresenter> getGroupMenu() {
+		return groupMenu;
+	}
+
+	@Override
+	public Menu<RosterItemPresenter> getItemMenu() {
+		return itemMenu;
+	}
+
+	private void addRosterListeners() {
+		roster.onItemAdded(new Listener<RosterItem>() {
+			@Override
+			public void onEvent(final RosterItem item) {
+				final String message = i18n().userAdded(
+						item.getJID().toString());
+				fireMessage(message);
+			}
+
+		});
+
+		roster.onItemRemoved(new Listener<RosterItem>() {
+			@Override
+			public void onEvent(final RosterItem item) {
+				final String message = i18n().userRemoved(
+						item.getJID().toString());
+				fireMessage(message);
+			}
+		});
+
+		roster.onGroupAdded(new Listener<RosterGroup>() {
+			@Override
+			public void onEvent(final RosterGroup group) {
+				createGroup(group);
+			}
+		});
+
+		roster.onGroupRemoved(new Listener<RosterGroup>() {
+			@Override
+			public void onEvent(final RosterGroup group) {
+				display.remove(groupPresenters.get(group.getName()));
+			}
+		});
+/*
+		roster.onRosterRetrieved(new Listener<Collection<RosterItem>>() {
+
+			@Override
+			public void onEvent(Collection<RosterItem> parameter) {
+				for(RosterGroupPresenter presenter : RosterPresenter.this.groupPresenters.values()) {
+					presenter.refreshRosterItemGroups();
+				}
+			}
+		});
+*/
+		if (roster.isRosterReady()) {
+			loadRoster();
+		}
+	}
+
+	private void addSessionListeners() {
+		final Session session = Suco.get(Session.class);
+		session.onStateChanged(new Listener<Session>() {
+			@Override
+			public void onEvent(final Session session) {
+				final State state = session.getState();
+				setSessionState(state);
+			}
+
+		});
+		setSessionState(session.getState());
+	}
+
+	private void createGroup(final RosterGroup group) {
+		final RosterGroupDisplay groupDisplay = display.newRosterGroupDisplay();
+		final RosterGroupPresenter presenter = new RosterGroupPresenter(group,
+				itemMenu, groupDisplay, rosterConfig);
+		groupPresenters.put(group.getName(), presenter);
+		display.addGroup(presenter, groupMenu);
+	}
+
+	private void fireMessage(final String message) {
+		eventBus.fireEvent(new UserMessageEvent(this, message, ROSTER_MESSAGE));
+	}
+
+	private void loadRoster() {
+		GWT.log("LOAD ROSTER");
+		groupPresenters.clear();
+		for (final RosterGroup group : roster.getRosterGroups()) {
+			createGroup(group);
+		}
+	}
+
+	private void setSessionState(final State state) {
+		final boolean isActive = state == State.ready;
+		if (active != isActive) {
+			active = isActive;
+			display.setActive(active);
+		}
+	}
 
 }

@@ -6,6 +6,7 @@ import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.chat.ChatManager;
+import com.calclab.emite.im.client.chat.ChatProperties;
 import com.calclab.emite.im.client.chat.Chat.State;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
@@ -44,7 +45,10 @@ public class ConvertToGroupChatPresenter extends EditRoomPresenter {
 	final XmppURI currentJid = session.getCurrentUser().getJID();
 	final String roomName = display.getRoomName().getValue();
 	final XmppURI roomUri = XmppURI.uri(roomName, roomsService, currentJid.getNode());
-	final Room room = (Room) rooms.open(roomUri);
+	
+	final ChatProperties newProperties = new ChatProperties(roomUri, chat.getProperties());
+	
+	final Room room = (Room) rooms.openChat(newProperties, true);
 	room.onStateChanged(new Listener<State>() {
 	    @Override
 	    public void onEvent(final State parameter) {

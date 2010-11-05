@@ -7,9 +7,12 @@ import com.calclab.emite.core.client.events.MessageHandler;
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
 import com.calclab.emite.im.client.chat.Chat.State;
+import com.calclab.emite.im.client.roster.Roster;
+import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emite.xep.delay.client.Delay;
 import com.calclab.emite.xep.delay.client.DelayGinjector;
 import com.calclab.emite.xep.delay.client.DelayManager;
+import com.calclab.emite.xep.muc.client.Occupant;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.hablar.chat.client.ui.ChatMessage;
 import com.calclab.hablar.chat.client.ui.ChatMessageFormatter;
@@ -36,8 +39,7 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
 	private final DelayGinjector delayGinjector = GWT.create(DelayGinjector.class);
 
 	private final Room room;
-	private final String me;
-
+	
 	public RoomPresenter(final HablarEventBus eventBus, final Room room,
 			final RoomDisplay display) {
 		super(TYPE, "" + ++id, eventBus, display);
@@ -49,7 +51,8 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
 				.getID()));
 
 		final Session session = Suco.get(Session.class);
-		me = session.getCurrentUser().getNode();
+		final Roster roster = Suco.get(Roster.class);
+		session.getCurrentUser().getNode();
 		final String roomName = RoomName.decode(room.getURI().getNode());
 		setVisibility(Visibility.notFocused);
 		model.init(Icons.ROSTER, roomName, roomName);
@@ -62,10 +65,26 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
 			@Override
 			public void onMessage(MessageEvent event) {
 				Message message = event.getMessage();
-				final String from = message.getFrom().getResource();
+				
+				final String from;
+				
+				Occupant occupant = room.getOccupantByOccupantUri(message.getFrom());
+				RosterItem rosterItem;
+
+				// Check if the occupant is found, and if they exist in the roster. We can then use their nickname
+				if((occupant != null) && ((rosterItem = roster.getItemByJID(occupant.getJID())) != null)) {
+					if((rosterItem.getName() != null) && (rosterItem.getName().equals(""))) {
+						from = rosterItem.getName();
+					} else {
+						from = rosterItem.getJID().getShortName();
+					}
+				} else {
+					from = message.getFrom().getResource();
+				}
+				
 				DelayManager delayManager = delayGinjector.getDelayManager();
 				Delay delay = delayManager.getDelay(message);
-				if (!me.equals(from) || delay != null) {
+				if (!room.isComingFromMe(message) || delay != null) {
 					final String messageBody = message.getBody();
 					if (IsEmpty.not(messageBody)) {
 						addMessage(new ChatMessage(null, from, messageBody,

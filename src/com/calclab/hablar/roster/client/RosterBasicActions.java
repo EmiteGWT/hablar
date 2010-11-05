@@ -17,10 +17,10 @@ import com.calclab.suco.client.Suco;
 
 public class RosterBasicActions {
 
-    private static final String ACTION_ID_START_CHAT = "HablarRoster-startChat";
-    private static final String ACTION_ID_REMOVE_FROM_ROSTER = "HablarRoster-removeFromRosterAction";
-    private static final String ID_ACTION_REMOVE_FROM_GROUP = "HablarRoster-removeFromGroupAction";
-    private static final String ID_ACTION_DELETE_GROUP = "HablarRoster-deleteGroupAction";
+    protected static final String ACTION_ID_START_CHAT = "HablarRoster-startChat";
+    protected static final String ACTION_ID_REMOVE_FROM_ROSTER = "HablarRoster-removeFromRosterAction";
+    protected static final String ID_ACTION_REMOVE_FROM_GROUP = "HablarRoster-removeFromGroupAction";
+    protected static final String ID_ACTION_DELETE_GROUP = "HablarRoster-deleteGroupAction";
 
     private static RosterMessages messages;
 

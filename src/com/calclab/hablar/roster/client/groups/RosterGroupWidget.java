@@ -14,6 +14,17 @@ public class RosterGroupWidget extends FlowPanel implements RosterGroupDisplay {
 	add(itemDisplay.asWidget());
     }
 
+	@Override
+	public void add(RosterItemDisplay itemDisplay, RosterItemDisplay beforeItem) {
+		int index = getWidgetIndex(beforeItem.asWidget());
+		
+		if(index > -1) {
+			insert(itemDisplay.asWidget(), index);
+		} else {
+			add(itemDisplay);
+		}
+	}
+
     @Override
     public Widget asWidget() {
 	return this;

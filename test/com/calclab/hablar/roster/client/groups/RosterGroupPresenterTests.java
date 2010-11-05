@@ -46,14 +46,13 @@ public class RosterGroupPresenterTests {
     @Test
     public void shouldAddWhenItemAdded() {
 	group.add(RosterItemHelper.createItem("test4", "name4", "mygroup"));
-	verify(display, times(4)).add((RosterItemDisplay) anyObject());
+	verify(display, times(1)).add((RosterItemDisplay) anyObject());
     }
 
     @Test
     public void shouldRemoveWhenItemRemoved() {
 	group.remove(XmppURI.uri("test1"));
-	verify(display).removeAll();
-	verify(display, times(2)).add((RosterItemDisplay) anyObject());
+	verify(display, times(1)).remove((RosterItemDisplay) anyObject());
     }
 
 }

@@ -36,4 +36,5 @@ public class SearchConfig {
 
     public SearchQueryFactory queryFactory = DEFAULT_QUERY_FACTORY;
 
+    public SearchBasicActions searchActions;
 }

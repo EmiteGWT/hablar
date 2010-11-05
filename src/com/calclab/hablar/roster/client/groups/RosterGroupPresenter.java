@@ -1,5 +1,6 @@
 package com.calclab.hablar.roster.client.groups;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -36,6 +37,7 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	private final RosterGroupDisplay display;
 	private String groupLabel;
 	private final HashMap<XmppURI, RosterItemPresenter> itemPresenters;
+	private final ArrayList<RosterItemPresenter> itemPresenterList;
 	private final Menu<RosterItemPresenter> itemMenu;
 
 	private final RosterGroup group;
@@ -51,33 +53,24 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 		this.rosterConfig = rosterConfig;
 
 		itemPresenters = new HashMap<XmppURI, RosterItemPresenter>();
+		itemPresenterList = new ArrayList<RosterItemPresenter>();
+		
 		display.setVisible(group.isAllContacts());
 
 		group.addRosterItemChangedHandler(new RosterItemChangedHandler() {
 
 			@Override
 			public void onRosterItemChanged(RosterItemChangedEvent event) {
-				updateRosterItemGroups();
+				if(event.isAdded() || event.isModified()) {
+					createOrModifyItem(event.getRosterItem());
+				} else if(event.isRemoved()) {
+					removeRosterItem(event.getRosterItem());
+				} else {
+					refreshRosterItemGroups();
+				}
 			}
 		});
-		updateRosterItemGroups();
-	}
-
-	private RosterItemPresenter createRosterItem(final RosterItem item) {
-		// FIXME: no mola nada toda esta basura selenium
-		final RosterItemDisplay itemDisplay = display.newRosterItemDisplay(
-				Idify.id(group.getName()), Idify.id(item.getJID()));
-
-		String nameOrJid = item.getName();
-
-		if (nameOrJid == null) {
-			nameOrJid = item.getJID().getShortName();
-		}
-
-		final RosterItemPresenter presenter = new RosterItemPresenter(
-				group.getName(), itemMenu, itemDisplay, rosterConfig);
-		itemPresenters.put(item.getJID(), presenter);
-		return presenter;
+		refreshRosterItemGroups();
 	}
 
 	@Override
@@ -93,16 +86,6 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 		return group.getName();
 	}
 
-	private RosterItemPresenter getPresenter(final RosterItem item) {
-		RosterItemPresenter presenter = itemPresenters.get(item.getJID());
-		if (presenter == null) {
-			presenter = createRosterItem(item);
-			display.add(presenter.getDisplay());
-		}
-		presenter.setItem(item);
-		return presenter;
-	}
-
 	public RosterGroup getRosterGroup() {
 		return group;
 	}
@@ -115,15 +98,109 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 		display.setVisible(!display.isVisible());
 	}
 
-	private void updateRosterItemGroups() {
+	/**
+	 * Adds an existing {@link RosterItemPresenter} to the display.
+	 * @param presenter
+	 */
+	private void addRosterItemPresenter(final RosterItemPresenter presenter)
+	{
+		RosterItem item = presenter.getItem();
+		RosterItemDisplay itemDisplay = presenter.getDisplay();
+		
+		String nameOrJid = item.getName();
+
+		if (nameOrJid == null) {
+			nameOrJid = item.getJID().getShortName();
+		}
+
+		itemPresenters.put(item.getJID(), presenter);
+		
+		boolean found = false;
+		
+		for(int i = 0; i < itemPresenterList.size(); ++i) {
+			RosterItemPresenter listPresenter = itemPresenterList.get(i);
+			
+			if(ORDER.compare(listPresenter.getItem(), item) >= 0) {
+				itemPresenterList.add(i, presenter);
+				display.add(itemDisplay, listPresenter.getDisplay());
+				found = true;
+				break;
+			}
+		}
+		
+		if(!found) {
+			display.add(presenter.getDisplay());
+			itemPresenterList.add(presenter);
+		}
+	}
+	
+	/**
+	 * Adds a new {@link RosterItem} to the display (creating widgets and presenters as required)
+	 * @param item the roster item.
+	 * @return the new presenter.
+	 */
+	private RosterItemPresenter addRosterItem(final RosterItem item) {
+		// FIXME: no mola nada toda esta basura selenium
+		final RosterItemDisplay itemDisplay = display.newRosterItemDisplay(
+				Idify.id(group.getName()), Idify.id(item.getJID()));
+
+		final RosterItemPresenter presenter = new RosterItemPresenter(
+				group.getName(), itemMenu, itemDisplay, rosterConfig);
+		
+		presenter.setItem(item);
+		
+		addRosterItemPresenter(presenter);
+		
+		return presenter;
+	}
+	
+	/**
+	 * Will create an item (if it doesn't already exist) or update it if it does.
+	 * @param item the roster item.
+	 * @return the new or existing presenter.
+	 */
+	private RosterItemPresenter createOrModifyItem(final RosterItem item)
+	{
+		RosterItemPresenter presenter = removeRosterItem(item);
+		
+		if(presenter == null) {
+			presenter = addRosterItem(item);
+		} else {
+			presenter.setItem(item);
+			addRosterItemPresenter(presenter);
+		}
+		return presenter;
+	}
+	
+	/**
+	 * Removes the roster item. Does nothing if the item does not exist.
+	 * @param item the roster item.
+	 * @return the removed presenter (or <code>null</code> if not found)
+	 */
+	private RosterItemPresenter removeRosterItem(final RosterItem item) {
+		RosterItemPresenter presenter = itemPresenters.get(item.getJID());
+
+		if(presenter != null) {
+			itemPresenters.remove(presenter);
+			itemPresenterList.remove(presenter);
+			display.remove(presenter.getDisplay());
+		}
+		
+		return presenter;
+	}
+
+	/**
+	 * Clears and repopulates the current display.
+	 */
+	public void refreshRosterItemGroups() {
 		if (!itemPresenters.isEmpty()) {
 			display.removeAll();
 			itemPresenters.clear();
+			itemPresenterList.clear();
 		}
 		final Collection<RosterItem> rosterItems = group.getItemList(ORDER);
 		for (final RosterItem item : rosterItems) {
-			getPresenter(item);
+			addRosterItem(item);
 		}
 	}
-
 }
