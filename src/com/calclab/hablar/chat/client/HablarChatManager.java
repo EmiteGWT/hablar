@@ -105,7 +105,7 @@ public class HablarChatManager {
 				}
 				
 				if(event.isClosed()) {
-					final PairChatPage page = chatPages.get(event.getChat().getURI());
+					final PairChatPage page = chatPages.get(event.getChat());
 					page.requestVisibility(Visibility.hidden);
 				}
 			}
