@@ -67,7 +67,7 @@ public class RoomNotificationPresenter {
 	    public void onEvent(final XmppURI uri, final String reason) {
 		final Roster roster = Suco.get(Roster.class);
 		final RosterItem item = roster.getItemByJID(uri);
-		final String name = item != null ? item.getName() : uri.getNode();
+		final String name = ((item != null) && (item.getName() != null))  ? item.getName() : uri.getNode();
 
 		final String body = isEmpty(reason) ? i18n().invitationSent(name) : i18n().invitationSentWithReason(
 			name, reason);
