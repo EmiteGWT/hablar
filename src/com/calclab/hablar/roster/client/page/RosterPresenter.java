@@ -146,17 +146,16 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements
 				display.remove(groupPresenters.get(group.getName()));
 			}
 		});
-/*
-		roster.onRosterRetrieved(new Listener<Collection<RosterItem>>() {
-
+		
+		roster.onItemChanged(new Listener<RosterItem>() {
 			@Override
-			public void onEvent(Collection<RosterItem> parameter) {
-				for(RosterGroupPresenter presenter : RosterPresenter.this.groupPresenters.values()) {
-					presenter.refreshRosterItemGroups();
+			public void onEvent(RosterItem item) {
+				for(RosterGroupPresenter groupPresenter : groupPresenters.values()) {
+					groupPresenter.rosterItemChanged(item);
 				}
 			}
 		});
-*/
+
 		if (roster.isRosterReady()) {
 			loadRoster();
 		}

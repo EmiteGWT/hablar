@@ -97,6 +97,19 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	public void toggleVisibility() {
 		display.setVisible(!display.isVisible());
 	}
+	
+	/**
+	 * Called to notify this object that a roster item has been changed
+	 * @param item
+	 */
+	public void rosterItemChanged(final RosterItem item) {
+		RosterItemPresenter presenter = removeRosterItem(item);
+		
+		if(presenter != null) {
+			presenter.setItem(item);
+			addRosterItemPresenter(presenter);
+		}
+	}
 
 	/**
 	 * Adds an existing {@link RosterItemPresenter} to the display.

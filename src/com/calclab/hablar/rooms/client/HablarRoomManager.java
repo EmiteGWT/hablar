@@ -107,9 +107,12 @@ public class HablarRoomManager {
 	if (invitation != null) {
 	    acceptedInvitations.remove(invitation);
 	    roomPage.requestVisibility(Visibility.notFocused);
-	    String message = "You have been invited to this group chat by ";
-	    // FIXME: NEWLIB
-	    // + invitation.getInvitor().getNode();
+	    String message = "You have been invited to this group chat";
+	    
+	    if(invitation.getInvitor() != null) {
+	    	message += " by " + invitation.getInvitor().getNode();
+	    }
+	    
 	    message += invitation.getReason() != null ? ": " + invitation.getReason() : "";
 	    roomPage.addMessage(new ChatMessage(message));
 	} else {
