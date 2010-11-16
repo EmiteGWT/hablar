@@ -2,7 +2,7 @@ package com.calclab.hablar.rooms.client;
 
 import static com.calclab.hablar.rooms.client.HablarRooms.i18n;
 
-import com.calclab.emite.im.client.roster.Roster;
+import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.rooms.client.open.EditRoomDisplay;
 import com.calclab.hablar.rooms.client.open.OpenRoomPresenter;
@@ -28,7 +28,7 @@ public class OpenNewRoomPresenter extends OpenRoomPresenter {
     protected void onPageOpen() {
 	final String roomName = i18n().groupChatId(roomNumber);
 	display.getRoomName().setValue(roomName);
-	final Roster roster = Suco.get(Roster.class);
+	final XmppRoster roster = Suco.get(XmppRoster.class);
 	setItems(roster.getItems(), false);
 	roomNameValidator.validate();
     }

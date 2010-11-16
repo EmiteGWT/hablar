@@ -7,9 +7,9 @@ import java.util.Map;
 import java.util.Set;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
-import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterGroup;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -31,7 +31,7 @@ public class ModifyGroupPresenter extends ManageGroupPresenter {
 	    public void onClick(ClickEvent event) {
 		String groupName = display.getGroupNameText();
 		Collection<RosterItem> items = display.getSelectedItems();
-		Roster roster = Suco.get(Roster.class);
+		XmppRoster roster = Suco.get(XmppRoster.class);
 		Map<XmppURI, RosterItem> uri2item = new HashMap<XmppURI, RosterItem>();
 		RosterGroup oldGroup = roster.getRosterGroup(oldGroupName);
 		if (oldGroup != null) {
@@ -62,7 +62,7 @@ public class ModifyGroupPresenter extends ManageGroupPresenter {
     protected void preloadForm() {
 	display.clearSelectionList();
 	display.getGroupName().setValue(oldGroupName);
-	Roster roster = Suco.get(Roster.class);
+	XmppRoster roster = Suco.get(XmppRoster.class);
 	RosterGroup group = roster.getRosterGroup(oldGroupName);
 	Set<XmppURI> addedUris = new HashSet<XmppURI>();
 	if (group != null) {

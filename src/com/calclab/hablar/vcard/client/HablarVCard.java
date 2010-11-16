@@ -1,8 +1,10 @@
 package com.calclab.hablar.vcard.client;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
-import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.emite.im.client.roster.XmppRoster;
+import com.calclab.emite.im.client.roster.events.RosterItemChangedEvent;
+import com.calclab.emite.im.client.roster.events.RosterItemChangedHandler;
 import com.calclab.emite.xep.vcard.client.VCard;
 import com.calclab.emite.xep.vcard.client.VCardManager;
 import com.calclab.emite.xep.vcard.client.VCardResponse;
@@ -24,82 +26,98 @@ import com.google.gwt.core.client.GWT;
 
 public class HablarVCard implements EntryPoint {
 
-    private static VCardMessages messages;
+	private static VCardMessages messages;
 
-    public static void setMessages(final VCardMessages messages) {
-	HablarVCard.messages = messages;
-    }
+	public static void setMessages(final VCardMessages messages) {
+		HablarVCard.messages = messages;
+	}
 
-    public static VCardMessages i18n() {
-	return messages;
-    }
+	public static VCardMessages i18n() {
+		return messages;
+	}
 
-    private static final String ACTION_ID_VIEW_VCARD = "HablarVCard-seeVCardAction";
+	private static final String ACTION_ID_VIEW_VCARD = "HablarVCard-seeVCardAction";
 
-    public static void install(final Hablar hablar, VCardConfig vCardConfig) {
-	VCardWidget vCardWidget = new VCardWidget(vCardConfig.vCardReadOnly, "OwnVCardWidget");
-	final OwnVCardPresenter ownVCardPage = new OwnVCardPresenter(hablar.getEventBus(), vCardWidget);
-	hablar.addPage(ownVCardPage, UserContainer.ROL);
+	public static void install(final Hablar hablar, VCardConfig vCardConfig) {
+		VCardWidget vCardWidget = new VCardWidget(vCardConfig.vCardReadOnly,
+				"OwnVCardWidget");
+		final OwnVCardPresenter ownVCardPage = new OwnVCardPresenter(hablar
+				.getEventBus(), vCardWidget);
+		hablar.addPage(ownVCardPage, UserContainer.ROL);
 
-	final OthersVCardPresenter othersVCardPage = new OthersVCardPresenter(hablar.getEventBus(),
-		new OtherVCardWidget(true));
-	hablar.addPage(othersVCardPage, OverlayContainer.ROL);
+		final OthersVCardPresenter othersVCardPage = new OthersVCardPresenter(
+				hablar.getEventBus(), new OtherVCardWidget(true));
+		hablar.addPage(othersVCardPage, OverlayContainer.ROL);
 
-	hablar.addPageAddedHandler(new PageAddedHandler() {
-	    @Override
-	    public void onPageAdded(final PageAddedEvent event) {
-		final RosterPage rosterPage = RosterPresenter.asRoster(event.getPage());
-		if (rosterPage != null) {
-		    rosterPage.getItemMenu().addAction(createViewVCardAction(othersVCardPage));
-		}
-	    }
-	}, true);
+		hablar.addPageAddedHandler(new PageAddedHandler() {
+			@Override
+			public void onPageAdded(final PageAddedEvent event) {
+				final RosterPage rosterPage = RosterPresenter.asRoster(event
+						.getPage());
+				if (rosterPage != null) {
+					rosterPage.getItemMenu().addAction(
+							createViewVCardAction(othersVCardPage));
+				}
+			}
+		}, true);
 
-	prepareDefaultNicknameListener();
-    }
+		prepareDefaultNicknameListener();
+	}
 
-    protected static Action<RosterItemPresenter> createViewVCardAction(final OthersVCardPresenter othersVCardPage) {
-	return new SimpleAction<RosterItemPresenter>(i18n().seeUserProfileAction(), ACTION_ID_VIEW_VCARD) {
-	    @Override
-	    public void execute(final RosterItemPresenter target) {
-		othersVCardPage.setUser(target.getItem().getJID());
-		othersVCardPage.requestVisibility(Visibility.focused);
-	    }
-	};
-    }
+	protected static Action<RosterItemPresenter> createViewVCardAction(
+			final OthersVCardPresenter othersVCardPage) {
+		return new SimpleAction<RosterItemPresenter>(i18n()
+				.seeUserProfileAction(), ACTION_ID_VIEW_VCARD) {
+			@Override
+			public void execute(final RosterItemPresenter target) {
+				othersVCardPage.setUser(target.getItem().getJID());
+				othersVCardPage.requestVisibility(Visibility.focused);
+			}
+		};
+	}
 
-    @Override
-    public void onModuleLoad() {
-	final VCardMessages messages = GWT.create(VCardMessages.class);
-	I18nVCard.set(messages);
-	VCardWidget.setMessages(messages);
-	HablarVCard.setMessages(messages);
-    }
+	@Override
+	public void onModuleLoad() {
+		final VCardMessages messages = GWT.create(VCardMessages.class);
+		I18nVCard.set(messages);
+		VCardWidget.setMessages(messages);
+		HablarVCard.setMessages(messages);
+	}
 
-    private static void prepareDefaultNicknameListener() {
-	final Roster roster = Suco.get(Roster.class);
-	roster.onItemAdded(new Listener<RosterItem>() {
+	private static void prepareDefaultNicknameListener() {
+		final XmppRoster roster = Suco.get(XmppRoster.class);
 
-	    @Override
-	    public void onEvent(final RosterItem rosterItem) {
-		String itemName = rosterItem.getName();
-		XmppURI jid = rosterItem.getJID();
-		if (itemName == null || "".equals(itemName) || itemName.equals(jid.getNode())) {
-		    final VCardManager manager = Suco.get(VCardManager.class);
-		    manager.getUserVCard(jid, new Listener<VCardResponse>() {
+		roster.addRosterItemChangedHandler(new RosterItemChangedHandler() {
 
 			@Override
-			public void onEvent(VCardResponse parameter) {
-			    VCard vcard = parameter.getVCard();
-			    if (vcard != null) {
-				rosterItem.setName(vcard.getDisplayName());
-				roster.requestUpdateItem(rosterItem);
-			    }
-			}
+			public void onRosterItemChanged(RosterItemChangedEvent event) {
+				if (event.isAdded()) {
+					final RosterItem rosterItem = event.getRosterItem();
+					String itemName = rosterItem.getName();
+					XmppURI jid = rosterItem.getJID();
+					if (itemName == null || "".equals(itemName)
+							|| itemName.equals(jid.getNode())) {
+						final VCardManager manager = Suco
+								.get(VCardManager.class);
+						manager.getUserVCard(jid,
+								new Listener<VCardResponse>() {
 
-		    });
-		}
-	    }
-	});
-    }
+									@Override
+									public void onEvent(VCardResponse parameter) {
+										VCard vcard = parameter.getVCard();
+										if (vcard != null) {
+											rosterItem.setName(vcard
+													.getDisplayName());
+											roster
+													.requestUpdateItem(rosterItem);
+										}
+									}
+
+								});
+					}
+
+				}
+			}
+		});
+	}
 }

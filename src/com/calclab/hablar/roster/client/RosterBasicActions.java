@@ -3,8 +3,8 @@ package com.calclab.hablar.roster.client;
 import java.util.Collection;
 
 import com.calclab.emite.im.client.chat.ChatManager;
-import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
@@ -94,13 +94,13 @@ public class RosterBasicActions {
 	    return target.getGroupName() != null;
 	}
     };
-    private final Roster roster;
+    private final XmppRoster roster;
     private final HablarEventBus eventBus;
     private Action<RosterItem> rosterClickAction;
 
     public RosterBasicActions(HablarEventBus eventBus) {
 	this.eventBus = eventBus;
-	roster = Suco.get(Roster.class);
+	roster = Suco.get(XmppRoster.class);
     }
 
     public void addHighPriorityActions(final RosterPage rosterPage) {
@@ -114,14 +114,14 @@ public class RosterBasicActions {
     }
 
     protected void removeFromGroup(final RosterItem item, final String groupName) {
-	final Roster roster = Suco.get(Roster.class);
+	final XmppRoster roster = Suco.get(XmppRoster.class);
 	item.removeFromGroup(groupName);
 	roster.requestUpdateItem(item);
     }
 
     protected void removeFromRoster(final RosterItem item) {
-	final Roster roster = Suco.get(Roster.class);
-	roster.removeItem(item.getJID());
+	final XmppRoster roster = Suco.get(XmppRoster.class);
+	roster.requestRemoveItem(item.getJID());
     }
 
     private void deleteGroup(final String groupName, final Collection<RosterItem> items) {

@@ -4,7 +4,7 @@ import static com.calclab.hablar.openchat.client.HablarOpenChat.i18n;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatManager;
-import com.calclab.emite.im.client.roster.Roster;
+import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.validators.TextValidator;
@@ -17,14 +17,14 @@ public class OpenChatPresenter extends PagePresenter<OpenChatDisplay> {
     private static int index = 0;
     public static final String TYPE = "OpenChat";
     private final ChatManager manager;
-    private final Roster roster;
+    private final XmppRoster roster;
     private final TextValidator nameValidator;
 
     public OpenChatPresenter(final HablarEventBus eventBus, final OpenChatDisplay display) {
 	super(TYPE, "" + ++index, eventBus, display);
 
 	manager = Suco.get(ChatManager.class);
-	roster = Suco.get(Roster.class);
+	roster = Suco.get(XmppRoster.class);
 
 	display.getCancel().addClickHandler(new ClickHandler() {
 	    @Override

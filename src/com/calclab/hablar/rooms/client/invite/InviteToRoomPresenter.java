@@ -5,8 +5,8 @@ import static com.calclab.hablar.rooms.client.HablarRooms.i18n;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.xep.muc.client.Occupant;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
@@ -41,7 +41,7 @@ public class InviteToRoomPresenter extends EditRoomPresenter {
 	display.setPageTitle(i18n().invitePeopleToGroupChat());
 	display.setAcceptText(i18n().acceptAction());
 
-	final Roster roster = Suco.get(Roster.class);
+	final XmppRoster roster = Suco.get(XmppRoster.class);
 	final String roomName = RoomName.decode(room.getURI().getNode());
 	display.getRoomName().setValue(roomName);
 	display.setRoomNameEnabled(false);

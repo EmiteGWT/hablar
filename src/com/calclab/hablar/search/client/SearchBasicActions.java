@@ -3,7 +3,7 @@ package com.calclab.hablar.search.client;
 import static com.calclab.hablar.search.client.HablarSearch.i18n;
 
 import com.calclab.emite.im.client.chat.ChatManager;
-import com.calclab.emite.im.client.roster.Roster;
+import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.xep.search.client.SearchResultItem;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
@@ -15,12 +15,12 @@ public class SearchBasicActions {
 	public static final String ADD_ROSTERITEM_DEB_ID = "SearchLogic-add-item";
 	public static final String REMOVE_ROSTERITEM_DEB_ID = "SearchLogic-remove-item";
 
-	private final Roster roster;
+	private final XmppRoster roster;
 	private final ChatManager chatManager;
 
 	public SearchBasicActions() {
 		chatManager = Suco.get(ChatManager.class);
-		roster = Suco.get(Roster.class);
+		roster = Suco.get(XmppRoster.class);
 	}
 
 	public void addMenuOptions(final Menu<SearchResultItem> menu) {
@@ -59,7 +59,7 @@ public class SearchBasicActions {
 				.removeFromContacts(), REMOVE_ROSTERITEM_DEB_ID) {
 			@Override
 			public void execute(final SearchResultItem item) {
-				roster.removeItem(item.getJid());
+				roster.requestRemoveItem(item.getJid());
 			}
 
 			@Override

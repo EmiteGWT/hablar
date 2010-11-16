@@ -2,8 +2,8 @@ package com.calclab.hablar.group.client.manage;
 
 import java.util.Collection;
 
-import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -22,7 +22,7 @@ public class CreateGroupPresenter extends ManageGroupPresenter {
 	    public void onClick(ClickEvent event) {
 		String groupName = display.getGroupNameText();
 		Collection<RosterItem> items = display.getSelectedItems();
-		Roster roster = Suco.get(Roster.class);
+		XmppRoster roster = Suco.get(XmppRoster.class);
 		for (RosterItem item : items) {
 		    item.addToGroup(groupName);
 		}
@@ -34,7 +34,7 @@ public class CreateGroupPresenter extends ManageGroupPresenter {
 
     protected void preloadForm() {
 	display.clearSelectionList();
-	Roster roster = Suco.get(Roster.class);
+	XmppRoster roster = Suco.get(XmppRoster.class);
 	for (RosterItem item: roster.getItems()) {
 	    display.addRosterItem(item);
 	}

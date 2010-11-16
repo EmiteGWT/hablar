@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import com.calclab.emite.core.client.events.EmiteEventBus;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
@@ -28,6 +29,7 @@ public class RoomPresenterTests {
 		EmiteTester emiteTester = new EmiteTester();
 		emiteTester.setSessionReady("some@domain");
 		HablarTester tester = new HablarTester();
+		EmiteEventBus eventBus = Mockito.mock(EmiteEventBus.class);
 		display = tester.newDisplay(RoomDisplay.class);
 		OccupantsDisplay occupantsDisplay = tester
 				.newDisplay(OccupantsDisplay.class);
@@ -35,6 +37,7 @@ public class RoomPresenterTests {
 				occupantsDisplay);
 		room = Mockito.mock(Room.class);
 		when(room.getURI()).thenReturn(XmppURI.uri("room@domain"));
+		when(room.getChatEventBus()).thenReturn(eventBus);
 		presenter = new RoomPresenter(tester.getEventBus(), room, display);
 	}
 

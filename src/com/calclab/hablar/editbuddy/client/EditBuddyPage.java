@@ -2,8 +2,8 @@ package com.calclab.hablar.editbuddy.client;
 
 import static com.calclab.hablar.editbuddy.client.HablarEditBuddy.i18n;
 
-import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.validators.TextValidator;
@@ -18,13 +18,13 @@ import com.google.gwt.event.dom.client.ClickHandler;
  */
 public class EditBuddyPage extends PagePresenter<EditBuddyDisplay> {
     private static int index = 0;
-    private final Roster roster;
+    private final XmppRoster roster;
     private RosterItem currentItem;
     private final TextValidator nickNameValidator;
 
     public EditBuddyPage(final HablarEventBus eventBus, final EditBuddyDisplay display) {
 	super("EditBuddy", "" + ++index, eventBus, display);
-	roster = Suco.get(Roster.class);
+	roster = Suco.get(XmppRoster.class);
 
 	nickNameValidator = new TextValidator(display.getNickNameKeys(), display.getNickName(),
 		display.getNickNameError(), display.getAcceptState());

@@ -33,6 +33,7 @@ import com.calclab.emite.im.client.roster.RosterImpl;
 import com.calclab.emite.im.client.roster.SubscriptionManager;
 import com.calclab.emite.im.client.roster.SubscriptionManagerImpl;
 import com.calclab.emite.im.client.roster.XmppRoster;
+import com.calclab.emite.im.client.roster.XmppRosterLogic;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
@@ -73,6 +74,11 @@ public class InstantMessagingModule extends AbstractModule implements
 			@Override
 			public Roster create() {
 				return new RosterImpl($(XmppRoster.class));
+			}
+		}, new Factory<XmppRoster>(XmppRoster.class) {
+			@Override
+			public XmppRoster create() {
+				return new XmppRosterLogic($(XmppSession.class));
 			}
 		}, new Factory<ChatManager>(ChatManager.class) {
 			@Override

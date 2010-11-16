@@ -8,8 +8,8 @@ import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.chat.ChatProperties;
 import com.calclab.emite.im.client.chat.Chat.State;
-import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.emite.xep.muc.client.RoomManager;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
@@ -63,7 +63,7 @@ public class ConvertToGroupChatPresenter extends EditRoomPresenter {
     @Override
     protected void onPageOpen() {
 
-	final Roster roster = Suco.get(Roster.class);
+	final XmppRoster roster = Suco.get(XmppRoster.class);
 	final Session session = Suco.get(Session.class);
 
 	final XmppURI currentJid = session.getCurrentUser().getJID();

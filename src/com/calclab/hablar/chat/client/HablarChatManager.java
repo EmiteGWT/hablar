@@ -9,8 +9,10 @@ import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.chat.events.ChatChangedEvent;
 import com.calclab.emite.im.client.chat.events.ChatChangedHandler;
-import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.emite.im.client.roster.XmppRoster;
+import com.calclab.emite.im.client.roster.events.RosterItemChangedEvent;
+import com.calclab.emite.im.client.roster.events.RosterItemChangedHandler;
 import com.calclab.hablar.chat.client.ui.ChatDisplay;
 import com.calclab.hablar.chat.client.ui.ChatWidget;
 import com.calclab.hablar.chat.client.ui.PairChatPage;
@@ -19,7 +21,6 @@ import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.suco.client.Suco;
-import com.calclab.suco.client.events.Listener;
 
 public class HablarChatManager {
 
@@ -48,7 +49,7 @@ public class HablarChatManager {
 
 	private final HashMap<Chat, PairChatPage> chatPages;
 
-	private final Roster roster;
+	private final XmppRoster roster;
 	private final ChatPageFactory chatPageFactory;
 	private final PairChatPresenterFactory chatPresenterFactory;
 	private final boolean sendButtonVisible;
@@ -80,7 +81,7 @@ public class HablarChatManager {
 		this.chatPresenterFactory = chatPresenterFactory;
 		chatPages = new HashMap<Chat, PairChatPage>();
 
-		roster = Suco.get(Roster.class);
+		roster = Suco.get(XmppRoster.class);
 		final ChatManager chatManager = Suco.get(ChatManager.class);
 
 		if (config.openChat != null) {
@@ -111,14 +112,17 @@ public class HablarChatManager {
 			}
 		});
 		
-		roster.onItemChanged(new Listener<RosterItem>() {
+		roster.addRosterItemChangedHandler(new RosterItemChangedHandler() {
+			
 			@Override
-			public void onEvent(final RosterItem item) {
-				final XmppURI jid = item.getJID();
+			public void onRosterItemChanged(RosterItemChangedEvent event) {
+				if(event.isModified()) {
+				final XmppURI jid = event.getRosterItem().getJID();
 				for (final Entry<Chat, PairChatPage> entry : chatPages.entrySet()) {
 					if (entry.getKey().getURI().equalsNoResource(jid)) {
-						entry.getValue().setPresence(item.isAvailable(), item.getShow());
+						entry.getValue().setPresence(event.getRosterItem().isAvailable(), event.getRosterItem().getShow());
 					}
+				}
 				}
 			}
 		});
