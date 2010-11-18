@@ -6,23 +6,29 @@ import com.google.gwt.user.client.ui.HasText;
 
 public interface RosterItemDisplay extends Display {
 
-    void addStyleName(String styleName);
+	void addStyleName(String styleName);
 
-    HasClickHandlers getAction();
+	HasClickHandlers getAction();
 
-    HasText getJid();
+	HasText getJid();
 
-    HasClickHandlers getMenuAction();
+	HasClickHandlers getMenuAction();
 
-    HasText getName();
+	HasText getName();
 
-    HasText getStatus();
+	HasText getStatus();
 
-    void setIcon(String icon);
+	void setIcon(String icon);
 
-    void setMenuVisible(boolean visible);
+	void setMenuVisible(boolean visible);
 
-    void setStatusVisible(boolean visible);
+	void setStatusVisible(boolean visible);
 
-    void setWidgetTitle(String title);
+	void setWidgetTitle(String title);
+
+	/**
+	 * Triggers the display to force a re-layout of any LayoutPanels contained
+	 * within it. This is in order to provide a fix for Issue #333.
+	 */
+	void forceLayout();
 }

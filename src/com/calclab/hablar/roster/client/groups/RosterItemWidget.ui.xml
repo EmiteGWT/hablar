@@ -31,7 +31,7 @@
 	
 	<g:FocusPanel ui:field="self" addStyleNames="user">
 		<g:FlowPanel addStyleNames="hablar-RosterItemWidget hablar-ListItem hablar-bottomLightBordered">
-			<g:LayoutPanel addStyleNames="{style.item} item">
+			<g:LayoutPanel addStyleNames="{style.item} item" ui:field="layoutPanel">
 				<g:layer top="0" left="0" width="23px" height="20px">
 					<g:Image  resource="{res.missingIcon}" addStyleNames="icon" ui:field="icon" />
 				</g:layer>
