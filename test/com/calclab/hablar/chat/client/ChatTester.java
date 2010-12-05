@@ -6,6 +6,7 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.AbstractChat;
 import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.chat.ChatProperties;
+import com.calclab.emite.im.client.chat.ChatStates;
 
 public class ChatTester extends AbstractChat implements Chat {
     private final String id;
@@ -32,11 +33,6 @@ public class ChatTester extends AbstractChat implements Chat {
     @Override
     public void receive(final Message message) {
 	super.receive(message);
-    }
-
-    @Override
-    public void setState(final State state) {
-	super.setState(state);
     }
 
 }

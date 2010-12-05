@@ -3,6 +3,7 @@ package com.calclab.hablar.rooms.client;
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.xep.muc.client.RoomManager;
+import com.calclab.emite.xep.mucchatstate.client.MUCChatStateManager;
 import com.calclab.emite.xep.mucdisco.client.RoomDiscoveryManager;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.container.PageAddedEvent;
@@ -36,8 +37,6 @@ public class HablarRooms {
     public static void setMessages(final RoomsMessages messages) {
 	roomMessages = messages;
     }
-    private final Hablar hablar;
-    private final HablarRoomsConfig config;
 
     private final XmppRoster roster;
     private final XmppSession session;
@@ -48,17 +47,12 @@ public class HablarRooms {
     @SuppressWarnings("deprecation")
     @Inject
     public HablarRooms(final Hablar hablar, final HablarRoomsConfig config) {
-	this.hablar = hablar;
-	this.config = config;
 	this.session = Suco.get(XmppSession.class);
 	this.roster = Suco.get(XmppRoster.class);
 	this.roomManager = Suco.get(RoomManager.class);
 	this.roomDiscoveryManager = Suco.get(RoomDiscoveryManager.class);
-	install();
-    }
-
-    private void install() {
-	new HablarRoomManager(roomManager, hablar, config);
+	final MUCChatStateManager mucChatStateManager = Suco.get(MUCChatStateManager.class);
+	new HablarRoomManager(session, roster, roomManager, hablar, config);
 
 	final InviteToRoomPresenter invitePage = new InviteToRoomPresenter(roster, hablar.getEventBus(),
 		new EditRoomWidget());
@@ -78,7 +72,7 @@ public class HablarRooms {
 		if (event.isType(RoomPresenter.TYPE)) {
 		    final RoomPresenter roomPage = (RoomPresenter) event.getPage();
 		    roomPage.addAction(newInviteAction(invitePage));
-		    new HablarRoomStateManager(roomPage);
+		    new HablarRoomStateManager(mucChatStateManager, roomPage);
 		} else if (event.isType(RosterPage.TYPE)) {
 		    final RosterPage rosterPage = (RosterPage) event.getPage();
 		    rosterPage.addAction(newOpenRoomAction(openNewRoomPage));

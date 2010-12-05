@@ -3,16 +3,17 @@
 <module>
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name='com.calclab.emite.core.EmiteCore' />
-    <inherits name='com.calclab.emite.xep.vcard.EmiteVCard' />
-    <inherits name='com.calclab.emite.xep.storage.EmitePrivateStorage' />
+	<inherits name='com.calclab.emite.xep.vcard.EmiteVCard' />
+	<inherits name='com.calclab.emite.xep.storage.EmitePrivateStorage' />
 	<inherits name='com.calclab.emite.im.EmiteIM' />
 	<inherits name='com.calclab.hablar.core.HablarCore' />
 	<inherits name='com.calclab.hablar.roster.HablarRoster' />
 	<inherits name='com.calclab.hablar.user.HablarUser' />
 
-	<extend-property name="locale" values="it"/>
-	<extend-property name="locale" values="en"/>
+	<extend-property name="locale" values="it" />
+	<extend-property name="locale" values="en" />
 
 	<source path="client" />
-	<entry-point class="com.calclab.hablar.vcard.client.HablarVCard" />
+	<entry-point
+		class="com.calclab.hablar.vcard.client.HablarVCardEntryPoint" />
 </module>

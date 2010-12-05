@@ -1,15 +1,14 @@
 package com.calclab.hablar.console.client;
 
-import com.calclab.emite.core.client.conn.Connection;
-import com.calclab.emite.core.client.packet.IPacket;
+import com.calclab.emite.core.client.conn.StanzaEvent;
+import com.calclab.emite.core.client.conn.StanzaHandler;
+import com.calclab.emite.core.client.conn.XmppConnection;
 import com.calclab.emite.core.client.services.gwt.GWTXMLService;
-import com.calclab.emite.core.client.xmpp.session.Session;
-import com.calclab.emite.core.client.xmpp.session.Session.State;
+import com.calclab.emite.core.client.xmpp.session.SessionStates;
+import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.ui.icon.Icons;
-import com.calclab.suco.client.Suco;
-import com.calclab.suco.client.events.Listener;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
@@ -19,25 +18,23 @@ import com.google.gwt.user.client.ui.HasText;
 public class ConsolePresenter extends PagePresenter<ConsoleDisplay> {
     private static final String TYPE = "Logger";
 
-    public ConsolePresenter(final HablarEventBus eventBus, final ConsoleDisplay display) {
+    public ConsolePresenter(final XmppConnection connection, final XmppSession session, final HablarEventBus eventBus,
+	    final ConsoleDisplay display) {
 	super(TYPE, eventBus, display);
 	model.init(Icons.CONSOLE, "Console", "Console");
 	setVisibility(Visibility.hidden);
 	model.setCloseable(true);
 
-	final Session session = Suco.get(Session.class);
-
-	final Connection connection = Suco.get(Connection.class);
-	connection.onStanzaReceived(new Listener<IPacket>() {
+	connection.addStanzaReceivedHandler(new StanzaHandler() {
 	    @Override
-	    public void onEvent(final IPacket parameter) {
-		display.add(parameter.toString(), "input", session.getState().toString());
+	    public void onStanza(final StanzaEvent event) {
+		display.add(event.getStanza().toString(), "input", session.getSessionState());
 	    }
 	});
-	connection.onStanzaSent(new Listener<IPacket>() {
+	connection.addStanzaSentHandler(new StanzaHandler() {
 	    @Override
-	    public void onEvent(final IPacket parameter) {
-		display.add(parameter.toString(), "output", session.getState().toString());
+	    public void onStanza(final StanzaEvent event) {
+		display.add(event.getStanza().toString(), "output", session.getSessionState());
 	    }
 	});
 
@@ -61,7 +58,8 @@ public class ConsolePresenter extends PagePresenter<ConsoleDisplay> {
 			display.setInputCursorPos(newText.length());
 		    } else {
 			final String packet = input.getText();
-			if (session.getState() == State.ready && !packet.isEmpty()) {
+			final boolean isReady = SessionStates.ready.equals(session.getSessionState());
+			if (isReady && !packet.isEmpty()) {
 			    session.send(GWTXMLService.toXML(packet));
 			    input.setText("");
 			}

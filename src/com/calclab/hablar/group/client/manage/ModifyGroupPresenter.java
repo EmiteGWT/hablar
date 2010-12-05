@@ -11,7 +11,6 @@ import com.calclab.emite.im.client.roster.RosterGroup;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
-import com.calclab.suco.client.Suco;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
@@ -22,26 +21,28 @@ import com.google.gwt.event.dom.client.ClickHandler;
 public class ModifyGroupPresenter extends ManageGroupPresenter {
 
     private String oldGroupName;
+    private final XmppRoster roster;
 
-    public ModifyGroupPresenter(HablarEventBus eventBus, final ManageGroupDisplay display, String pageTitle) {
+    public ModifyGroupPresenter(final XmppRoster roster, final HablarEventBus eventBus,
+	    final ManageGroupDisplay display, final String pageTitle) {
 	super(eventBus, display, pageTitle);
+	this.roster = roster;
 	display.getApply().addClickHandler(new ClickHandler() {
 
 	    @Override
-	    public void onClick(ClickEvent event) {
-		String groupName = display.getGroupNameText();
-		Collection<RosterItem> items = display.getSelectedItems();
-		XmppRoster roster = Suco.get(XmppRoster.class);
-		Map<XmppURI, RosterItem> uri2item = new HashMap<XmppURI, RosterItem>();
-		RosterGroup oldGroup = roster.getRosterGroup(oldGroupName);
+	    public void onClick(final ClickEvent event) {
+		final String groupName = display.getGroupNameText();
+		final Collection<RosterItem> items = display.getSelectedItems();
+		final Map<XmppURI, RosterItem> uri2item = new HashMap<XmppURI, RosterItem>();
+		final RosterGroup oldGroup = roster.getRosterGroup(oldGroupName);
 		if (oldGroup != null) {
-		    Collection<RosterItem> oldItems = oldGroup.getItems();
-		    for (RosterItem item : oldItems) {
+		    final Collection<RosterItem> oldItems = oldGroup.getItems();
+		    for (final RosterItem item : oldItems) {
 			uri2item.put(item.getJID(), item);
 			item.removeFromGroup(oldGroupName);
 		    }
 		}
-		for (RosterItem item : items) {
+		for (final RosterItem item : items) {
 		    RosterItem currentItem = uri2item.get(item.getJID());
 		    if (currentItem == null) {
 			currentItem = item;
@@ -55,26 +56,26 @@ public class ModifyGroupPresenter extends ManageGroupPresenter {
 	});
     }
 
-    public void setOldGroupName(String oldGroupName) {
-	this.oldGroupName = oldGroupName;
-    }
-
+    @Override
     protected void preloadForm() {
 	display.clearSelectionList();
 	display.getGroupName().setValue(oldGroupName);
-	XmppRoster roster = Suco.get(XmppRoster.class);
-	RosterGroup group = roster.getRosterGroup(oldGroupName);
-	Set<XmppURI> addedUris = new HashSet<XmppURI>();
+	final RosterGroup group = roster.getRosterGroup(oldGroupName);
+	final Set<XmppURI> addedUris = new HashSet<XmppURI>();
 	if (group != null) {
-	    for (RosterItem item : group.getItems()) {
+	    for (final RosterItem item : group.getItems()) {
 		display.addSelectedRosterItem(item);
 		addedUris.add(item.getJID());
 	    }
 	}
-	for (RosterItem item: roster.getItems()) {
+	for (final RosterItem item : roster.getItems()) {
 	    if (!addedUris.contains(item.getJID())) {
 		display.addRosterItem(item);
 	    }
 	}
+    }
+
+    public void setOldGroupName(final String oldGroupName) {
+	this.oldGroupName = oldGroupName;
     }
 }

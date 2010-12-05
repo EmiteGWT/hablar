@@ -8,8 +8,9 @@ import java.util.List;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.presence.PresenceManager;
+import com.calclab.emite.im.client.presence.events.OwnPresenceChangedEvent;
+import com.calclab.emite.im.client.presence.events.OwnPresenceChangedHandler;
 import com.calclab.emite.xep.storage.client.IQResponse;
-import com.calclab.emite.xep.storage.client.PrivateStorageManager;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.ui.icon.Icons;
@@ -20,7 +21,6 @@ import com.calclab.hablar.user.client.EditorPage;
 import com.calclab.hablar.user.client.storedpresence.StoredPresence;
 import com.calclab.hablar.user.client.storedpresence.StoredPresenceManager;
 import com.calclab.hablar.user.client.storedpresence.StoredPresences;
-import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.BlurEvent;
@@ -38,24 +38,25 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
     public static final String ACTION_ID_BUSY_CUSTOM = "PresencePage-BusyStatus-Custom";
     public static final String ACTION_CLEAR_CUSTOM = "PresencePage-ClearCustom";
     private static int id = 0;
-    private final PresenceManager manager;
+    private final PresenceManager presenceManager;
     private final StoredPresenceManager storedPresenceManager;
     private final Menu<PresencePage> statusMenu;
     private final ArrayList<SimpleAction<PresencePage>> defaultActions;
     private SimpleAction<PresencePage> clearCustomsAction;
 
-    public PresencePage(final HablarEventBus eventBus, final PresenceDisplay display) {
+    public PresencePage(final PresenceManager presenceManager, final StoredPresenceManager storageManager,
+	    final HablarEventBus eventBus, final PresenceDisplay display) {
 	super(TYPE, "" + ++id, eventBus, display);
+	this.presenceManager = presenceManager;
+	storedPresenceManager = storageManager;
 
 	defaultActions = new ArrayList<SimpleAction<PresencePage>>();
 	statusMenu = new Menu<PresencePage>(display.newStatusMenuDisplay("hablar-StatusItemMenu"));
 
-	manager = Suco.get(PresenceManager.class);
 	final String title = i18n().presencePageTitle();
 	model.init(Icons.BUDDY, title, title);
 	display.setStatusIcon(Icons.BUDDY_OFF);
 	display.setPageTitle(i18n().presencePageTitle());
-	storedPresenceManager = new StoredPresenceManager(Suco.get(PrivateStorageManager.class));
 	createDefActions();
 	updateMenu();
 
@@ -86,32 +87,14 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 		updateStatus(display);
 	    }
 	});
-	manager.onOwnPresenceChanged(new Listener<Presence>() {
+
+	presenceManager.addOwnPresenceChangedHandler(new OwnPresenceChangedHandler() {
 	    @Override
-	    public void onEvent(final Presence presence) {
+	    public void onOwnPresenceChanged(final OwnPresenceChangedEvent event) {
+		final Presence presence = event.getCurrentPresence();
 		showPresence(presence.getStatus(), presence.getShow());
 	    }
 	});
-    }
-
-    public SimpleAction<PresencePage> createCustomAction(final String title, final String id, final String icon,
-	    final String status, final Show show) {
-	return new SimpleAction<PresencePage>(title, id, icon) {
-	    @Override
-	    public void execute(final PresencePage target) {
-		setPresence(status, show);
-	    }
-	};
-    }
-
-    @Override
-    public void saveData() {
-    }
-
-    @Override
-    public void showData() {
-	final Presence presence = manager.getOwnPresence();
-	showPresence(presence.getStatus(), presence.getShow());
     }
 
     private void addCustomPresenceActions() {
@@ -146,6 +129,16 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 	};
     }
 
+    public SimpleAction<PresencePage> createCustomAction(final String title, final String id, final String icon,
+	    final String status, final Show show) {
+	return new SimpleAction<PresencePage>(title, id, icon) {
+	    @Override
+	    public void execute(final PresencePage target) {
+		setPresence(status, show);
+	    }
+	};
+    }
+
     private void createDefActions() {
 	final String buddyIconOn = Icons.BUDDY_ON;
 	final String buddyIconDnd = Icons.BUDDY_DND;
@@ -165,6 +158,10 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 	};
     }
 
+    @Override
+    public void saveData() {
+    }
+
     private void setPresence(final String status, final Show show) {
 	showPresence(status, show);
 	if (statusNotEmpty(status)) {
@@ -177,14 +174,20 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 		}
 	    });
 	}
-	final Presence presence = manager.getOwnPresence();
+	final Presence presence = presenceManager.getOwnPresence();
 	presence.setStatus(status);
 	presence.setShow(show);
-	manager.changeOwnPresence(presence);
+	presenceManager.changeOwnPresence(presence);
     }
 
     private void setShowIcon(final Show show) {
 	display.setStatusIcon(PresenceIcon.get(true, show));
+    }
+
+    @Override
+    public void showData() {
+	final Presence presence = presenceManager.getOwnPresence();
+	showPresence(presence.getStatus(), presence.getShow());
     }
 
     private void showPresence(final String status, final Show show) {
@@ -193,7 +196,7 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
     }
 
     private boolean statusNotEmpty(final String status) {
-	return status != null && !status.isEmpty();
+	return (status != null) && !status.isEmpty();
     }
 
     private void updateMenu() {
@@ -205,7 +208,7 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
     }
 
     private void updateStatus(final PresenceDisplay display) {
-	setPresence(display.getStatusText().getText(), manager.getOwnPresence().getShow());
+	setPresence(display.getStatusText().getText(), presenceManager.getOwnPresence().getShow());
     }
 
 }

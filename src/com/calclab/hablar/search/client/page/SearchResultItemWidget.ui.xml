@@ -8,12 +8,17 @@
 		    padding: 2px 0;
 		    cursor: default;
         }
-        .userWidgetItem {
+        .name {
 		    float: left;
-		    margin-right: 5px;
+		    margin-right: -20px;
         }
-        .userWidgetIcon {
-		    margin: 0 5px;
+        .xmppUri {
+        	float: left;
+        	margin-left: 27px;
+        }
+        .icon {
+        	float: left;
+		    margin: 0 5px 0 5px;
         }
         .userWidgetMenu {
 		    float: right;
@@ -26,9 +31,9 @@
     <ui:image field="buddy" src="buddy-small.png"></ui:image>
 
     <g:HTMLPanel addStyleNames="{style.userWidget} hablar-SearchResultItemWidget hablar-bottomLightBordered">
-        <g:Image addStyleNames="{style.userWidgetItem} {style.userWidgetIcon}" ui:field="buddyIcon" />
-        <g:Label ui:field="name" addStyleNames="{style.userWidgetItem} name">Result</g:Label>
-        <g:Label ui:field="jid" addStyleNames="{style.userWidgetItem} hablar-lightColor">JID</g:Label>
+        <g:Image addStyleNames="{style.icon}" ui:field="buddyIcon" />
+        <g:Label ui:field="name" addStyleNames="{style.name} name">Result</g:Label>
+        <g:Label ui:field="jid" addStyleNames="{style.xmppUri} hablar-lightColor">JID</g:Label>
         <g:Image ui:field="menu"  addStyleNames="{style.userWidgetMenu}" />
     </g:HTMLPanel>
 </ui:UiBinder>

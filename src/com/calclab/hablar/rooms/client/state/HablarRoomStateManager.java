@@ -1,14 +1,12 @@
 package com.calclab.hablar.rooms.client.state;
 
-import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
-import com.calclab.emite.xep.chatstate.client.ChatStateManager.ChatState;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.emite.xep.mucchatstate.client.MUCChatStateManager;
 import com.calclab.emite.xep.mucchatstate.client.RoomChatStateManager;
+import com.calclab.emite.xep.mucchatstate.client.events.RoomChatStateNotificationEvent;
+import com.calclab.emite.xep.mucchatstate.client.events.RoomChatStateNotificationHandler;
 import com.calclab.hablar.chat.client.state.HablarChatStateManager;
 import com.calclab.hablar.rooms.client.room.RoomPresenter;
-import com.calclab.suco.client.Suco;
-import com.calclab.suco.client.events.Listener2;
 import com.google.gwt.user.client.ui.HasText;
 
 /**
@@ -16,18 +14,19 @@ import com.google.gwt.user.client.ui.HasText;
  */
 public class HablarRoomStateManager {
 
-    public HablarRoomStateManager(final RoomPresenter roomPage) {
+    public HablarRoomStateManager(final MUCChatStateManager manager, final RoomPresenter roomPage) {
 	final Room room = roomPage.getRoom();
-	final MUCChatStateManager manager = Suco.get(MUCChatStateManager.class);
 	final RoomChatStateManager occupantsStateManager = manager.getRoomOccupantsChatStateManager(room);
 
-	occupantsStateManager.onChatStateChanged(new Listener2<XmppURI, ChatState>() {
+	occupantsStateManager.addRoomChatStateNotificationHandler(new RoomChatStateNotificationHandler() {
 	    @Override
-	    public void onEvent(final XmppURI uri, final ChatState state) {
+	    public void onRoomChatStateNotification(final RoomChatStateNotificationEvent event) {
 		final HasText stateDisplay = roomPage.getDisplay().getState();
-		stateDisplay.setText(HablarChatStateManager.getStateText(state, uri.getResource()));
+		stateDisplay.setText(HablarChatStateManager.getStateText(event.getChatState(), event.getFrom()
+			.getResource()));
 	    }
 	});
+
     }
 
 }

@@ -4,7 +4,7 @@ import com.calclab.hablar.openchat.client.ui.OpenChatWidget;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 
-public class HablarOpenChatModule implements EntryPoint {
+public class HablarOpenChatEntryPoint implements EntryPoint {
 
     @Override
     public void onModuleLoad() {

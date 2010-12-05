@@ -9,7 +9,6 @@ import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.validators.TextValidator;
 import com.calclab.hablar.core.client.validators.Validators;
 import com.calclab.hablar.editbuddy.client.ui.EditBuddyDisplay;
-import com.calclab.suco.client.Suco;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
@@ -22,18 +21,14 @@ public class EditBuddyPage extends PagePresenter<EditBuddyDisplay> {
     private RosterItem currentItem;
     private final TextValidator nickNameValidator;
 
-    public EditBuddyPage(final HablarEventBus eventBus, final EditBuddyDisplay display) {
+    public EditBuddyPage(final XmppRoster roster, final HablarEventBus eventBus, final EditBuddyDisplay display) {
 	super("EditBuddy", "" + ++index, eventBus, display);
-	roster = Suco.get(XmppRoster.class);
+	this.roster = roster;
 
-	nickNameValidator = new TextValidator(display.getNickNameKeys(), display.getNickName(),
-		display.getNickNameError(), display.getAcceptState());
+	nickNameValidator = new TextValidator(display.getNickNameKeys(), display.getNickName(), display
+		.getNickNameError(), display.getAcceptState());
 	nickNameValidator.add(Validators.notEmpty(i18n().nickNameEmpty()));
 	bind();
-    }
-
-    public void setItem(final RosterItem item) {
-	currentItem = item;
     }
 
     private void bind() {
@@ -58,15 +53,6 @@ public class EditBuddyPage extends PagePresenter<EditBuddyDisplay> {
 	 */
     }
 
-    private void updateCurrentItem() {
-	final String newName = display.getNickName().getText();
-	assert newName != null : "Validation of new name field failed!";
-	if (!newName.equals(currentItem.getName())) {
-	    currentItem.setName(newName);
-	    roster.requestUpdateItem(currentItem);
-	}
-    }
-
     @Override
     protected void onBeforeFocus() {
 	final String nickName = currentItem.getName();
@@ -74,5 +60,18 @@ public class EditBuddyPage extends PagePresenter<EditBuddyDisplay> {
 	display.getNickName().setText("");
 	display.getFirstFocusable().setFocus(true);
 	nickNameValidator.validate();
+    }
+
+    public void setItem(final RosterItem item) {
+	currentItem = item;
+    }
+
+    private void updateCurrentItem() {
+	final String newName = display.getNickName().getText();
+	assert newName != null : "Validation of new name field failed!";
+	if (!newName.equals(currentItem.getName())) {
+	    currentItem.setName(newName);
+	    roster.requestUpdateItem(currentItem);
+	}
     }
 }

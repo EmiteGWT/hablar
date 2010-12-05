@@ -6,5 +6,5 @@
 	<inherits name='com.calclab.hablar.roster.HablarRoster' />
 	<source path="client" />
 	<entry-point
-		class="com.calclab.hablar.editbuddy.client.HablarEditBuddy" />
+		class="com.calclab.hablar.editbuddy.client.HablarEditBuddyEntryPoint" />
 </module>

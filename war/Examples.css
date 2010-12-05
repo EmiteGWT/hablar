@@ -1,53 +1,56 @@
+html {border: 0; padding: 0; height: 100%; width: 100%; overflow: hidden;}
+
 #center {
-    position: absolute;
-    left: 50%;
-    top: 50%;
+	position: absolute;
+	left: 50%;
+	top: 50%;
 }
 
 #playground {
-    position: absolute;
-    width: 900px;
-    height: 500px;
-    left: -450px;
-    top: -250px;
-    background-color: #e9e9e9;
-    border: 1px solid #bbbbbb;
-    padding: 5px;
+	position: absolute;
+	width: 900px;
+	height: 500px;
+	left: -450px;
+	top: -250px;
+	background-color: #e9e9e9;
+	border: 1px solid #bbbbbb;
+	padding: 5px;
 }
 
 .hablar {
-    padding: 1px;
-    background-color: #bBBBBB;
+	padding: 1px;
+	background-color: #bBBBBB;
 }
 
 #vertical_div {
-    position: absolute;
-    left: -150px;
-    width: 300px;
-    top: 5%;
-    height: 90%;
+	position: absolute;
+	left: -150px;
+	width: 300px;
+	top: 5%;
+	height: 90%;
 }
 
 #hablar_complete {
-    position: absolute;
-    left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;	
+	position: fixed; overflow: hidden;
+	left: 5px;
+	top: 5px;
+	right: 5px;
+	bottom: 5px;
+	background-color: #BBBBBB;
 }
 
 #vertical_dock_div {
-    position: absolute;
-    left: -250px;
-    width: 500px;
-    top: 5%;
-    height: 90%;
+	position: absolute;
+	left: -250px;
+	width: 500px;
+	top: 5%;
+	height: 90%;
 }
 
 #horizontal_div {
-    position: absolute;
-    left: -350px;
-    width: 700px;
-    top: 15%;
-    height: 70%;
+	position: absolute;
+	left: -350px;
+	width: 700px;
+	top: 15%;
+	height: 70%;
 }

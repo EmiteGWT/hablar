@@ -5,5 +5,5 @@
 	<inherits name="com.calclab.hablar.roster.HablarRoster" />
 	<source path="client" />
 	<entry-point
-		class="com.calclab.hablar.group.client.HablarGroupModule" />
+		class="com.calclab.hablar.group.client.HablarGroupEntryPoint" />
 </module>

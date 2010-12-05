@@ -26,8 +26,8 @@ import com.calclab.hablar.vcard.client.HablarVCard;
 public class HablarComplete {
 
     public static void install(final Hablar hablar, final HablarConfig config) {
-	HablarCore.install(hablar);
-	HablarChat.install(hablar);
+	new HablarCore(hablar);
+	new HablarChat(hablar, config.chatConfig);
 	new HablarRooms(hablar, config.roomsConfig);
 	new HablarGroupChat(hablar, config.roomsConfig);
 
@@ -42,41 +42,43 @@ public class HablarComplete {
 	} else if ("right".equals(config.dockRoster)) {
 	    dock.set(Position.right, RosterPage.TYPE, 250);
 	}
-	HablarDock.install(hablar, dock);
+	new HablarDock(hablar, dock);
 
-	HablarUser.install(hablar);
+	new HablarUser(hablar);
 
 	RosterPage roster = null;
+	HablarRoster hablarRoster = null;
 	if (config.hasRoster) {
-	    roster = HablarRoster.installModule(hablar, config.rosterConfig);
+	    hablarRoster = new HablarRoster(hablar, config.rosterConfig);
+	    roster = hablarRoster.getRosterPage();
 	}
 
 	if (config.hasVCard) {
-	    HablarVCard.install(hablar, config.vcardConfig);
+	    new HablarVCard(hablar, config.vcardConfig);
 	}
 
 	if (config.hasRoster) {
 	    new HablarOpenChat(hablar);
-	    HablarEditBuddy.install(hablar);
-	    HablarUserGroups.install(roster, hablar);
+	    new HablarEditBuddy(hablar);
+	    new HablarUserGroups(roster, hablar);
 	    new HablarGroup(hablar);
-	    HablarRoster.addActions(roster);
+	    hablarRoster.addLowPriorityActions();
 	}
 
 	if (config.hasSearch) {
-	    HablarSearch.install(hablar, config.searchConfig);
+	    new HablarSearch(hablar, config.searchConfig);
 	}
 
 	if (config.hasSignals) {
-	    HablarSignals.install(hablar);
+	    new HablarSignals(hablar);
 	}
 
 	if (config.hasSound) {
-	    HablarSoundSignals.install(hablar, config.soundConfig);
+	    new HablarSoundSignals(hablar, config.soundConfig);
 	}
 
 	if (config.hasCopyToClipboard) {
-	    HablarClipboard.install(hablar);
+	    new HablarClipboard(hablar);
 	}
 
     }

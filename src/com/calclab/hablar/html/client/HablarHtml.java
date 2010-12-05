@@ -10,6 +10,7 @@ import com.calclab.hablar.icons.alt.client.AltIcons;
 import com.calclab.hablar.icons.def.client.DefaultIcons;
 import com.calclab.hablar.icons.ie6gif.client.IE6GifIcons;
 import com.calclab.hablar.login.client.HablarLogin;
+import com.calclab.hablar.login.client.LoginConfig;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -20,25 +21,6 @@ import com.google.gwt.user.client.ui.Widget;
  * Use Hablar without using GWT.
  */
 public class HablarHtml implements EntryPoint {
-    @Override
-    public void onModuleLoad() {
-	final GWT.UncaughtExceptionHandler uncaughtExceptionHandler = new GWT.UncaughtExceptionHandler() {
-	    @Override
-	    public void onUncaughtException(final Throwable e) {
-		GWT.log("UncaughtException: ", e);
-	    }
-	};
-	// handle the unexpected after onModuleLoad()
-	GWT.setUncaughtExceptionHandler(uncaughtExceptionHandler);
-
-	try {
-	    onModuleLoadCont();
-	} catch (final RuntimeException ex) {
-	    // use our handler rather than duplicate code
-	    uncaughtExceptionHandler.onUncaughtException(ex);
-	}
-    }
-
     private void addHablarToDiv(final HablarWidget hablar, final HtmlConfig htmlConfig) {
 	setSize(hablar, htmlConfig);
 	final RootPanel rootPanel = RootPanel.get(htmlConfig.inline);
@@ -58,8 +40,27 @@ public class HablarHtml implements EntryPoint {
 	return dialog;
     }
 
+    @Override
+    public void onModuleLoad() {
+	final GWT.UncaughtExceptionHandler uncaughtExceptionHandler = new GWT.UncaughtExceptionHandler() {
+	    @Override
+	    public void onUncaughtException(final Throwable e) {
+		GWT.log("UncaughtException: ", e);
+	    }
+	};
+	// handle the unexpected after onModuleLoad()
+	GWT.setUncaughtExceptionHandler(uncaughtExceptionHandler);
+
+	try {
+	    onModuleLoadCont();
+	} catch (final RuntimeException ex) {
+	    // use our handler rather than duplicate code
+	    uncaughtExceptionHandler.onUncaughtException(ex);
+	}
+    }
+
     private void onModuleLoadCont() {
-	String icons = PageAssist.getMeta("hablar.icons");
+	final String icons = PageAssist.getMeta("hablar.icons");
 	if ("alt".equals(icons)) {
 	    AltIcons.load();
 	} else if ("ie6".equals(icons)) {
@@ -77,11 +78,11 @@ public class HablarHtml implements EntryPoint {
 	HablarComplete.install(hablar, config);
 
 	if (htmlConfig.hasLogger) {
-	    HablarConsole.install(hablar);
+	    new HablarConsole(hablar);
 	}
 
 	if (htmlConfig.hasLogin) {
-	    HablarLogin.install(hablar);
+	    new HablarLogin(hablar, LoginConfig.getFromMeta());
 	}
 
 	if (htmlConfig.inline == null) {

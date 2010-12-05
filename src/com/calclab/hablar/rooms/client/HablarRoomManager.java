@@ -3,10 +3,12 @@ package com.calclab.hablar.rooms.client;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.chat.events.ChatChangedEvent;
 import com.calclab.emite.im.client.chat.events.ChatChangedHandler;
+import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.emite.xep.muc.client.RoomInvitation;
 import com.calclab.emite.xep.muc.client.RoomManager;
@@ -36,22 +38,6 @@ public class HablarRoomManager {
     private final HashMap<XmppURI, RoomPresenter> roomPages;
     private final ArrayList<RoomInvitation> acceptedInvitations;
 
-    public HablarRoomManager(final RoomManager rooms, final Hablar hablar, final HablarRoomsConfig config) {
-	this(rooms, hablar, config, new RoomPageFactory() {
-	    @Override
-	    public RoomDisplay create(final boolean sendButtonVisible) {
-		return new RoomWidget(sendButtonVisible);
-	    }
-	}, new RoomPresenterFactory() {
-
-	    @Override
-	    public RoomPresenter create(final HablarEventBus eventBus, final Room room, final RoomDisplay display) {
-		return new RoomPresenter(eventBus, room, display);
-	    }
-
-	});
-    }
-
     public HablarRoomManager(final RoomManager rooms, final Hablar hablar, final HablarRoomsConfig config,
 	    final RoomPageFactory factory, final RoomPresenterFactory presenterFactory) {
 	this.hablar = hablar;
@@ -78,6 +64,22 @@ public class HablarRoomManager {
 		acceptedInvitations.add(invitation);
 		rooms.acceptRoomInvitation(invitation);
 	    }
+	});
+    }
+
+    public HablarRoomManager(final XmppSession session, final XmppRoster roster, final RoomManager rooms,
+	    final Hablar hablar, final HablarRoomsConfig config) {
+	this(rooms, hablar, config, new RoomPageFactory() {
+	    @Override
+	    public RoomDisplay create(final boolean sendButtonVisible) {
+		return new RoomWidget(sendButtonVisible);
+	    }
+	}, new RoomPresenterFactory() {
+	    @Override
+	    public RoomPresenter create(final HablarEventBus eventBus, final Room room, final RoomDisplay display) {
+		return new RoomPresenter(session, roster, eventBus, room, display);
+	    }
+
 	});
     }
 

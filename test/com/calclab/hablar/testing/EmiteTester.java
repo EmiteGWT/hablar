@@ -24,67 +24,64 @@ import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.ioc.decorator.NoDecoration;
 
 public class EmiteTester {
-	private static DisplayStubFactory factory = DisplayStubFactory.instance;
+    private static DisplayStubFactory factory = DisplayStubFactory.instance;
 
-	public final XmppSessionTester session;
+    public final XmppSessionTester session;
 
-	public final ChatManagerTester chatManager;
-	public final RosterTester roster;
-	public final SearchManagerTester searchManager;
-	public final PresenceManagerTester presenceManager;
+    public final ChatManagerTester chatManager;
+    public final RosterTester roster;
+    public final SearchManagerTester searchManager;
+    public final PresenceManagerTester presenceManager;
 
-	public DefaultEventBus eventBus;
+    public DefaultEventBus eventBus;
 
-	public EmiteTester() {
-		final HashMapContainer container = (HashMapContainer) Suco
-				.getComponents();
-		container.clear();
-		new SucoCoreModule().onInstall(container);
-		Suco.install(new EmiteCoreModule(), new InstantMessagingModule());
+    public XmppRosterLogic xmppRoster;
 
-		eventBus = new DefaultEventBus();
-		install(container, HablarEventBus.class, eventBus);
+    public EmiteTester() {
+	final HashMapContainer container = (HashMapContainer) Suco.getComponents();
+	container.clear();
+	new SucoCoreModule().onInstall(container);
+	Suco.install(new EmiteCoreModule(), new InstantMessagingModule());
 
-		session = new XmppSessionTester();
-		install(container, XmppSession.class, session);
+	eventBus = new DefaultEventBus();
+	install(container, HablarEventBus.class, eventBus);
 
-		chatManager = new ChatManagerTester(session);
-		install(container, ChatManager.class, chatManager);
+	session = new XmppSessionTester();
+	install(container, XmppSession.class, session);
 
-		final XmppRosterLogic xmppRoster = new XmppRosterLogic(session);
+	chatManager = new ChatManagerTester(session);
+	install(container, ChatManager.class, chatManager);
 
-		roster = new RosterTester(xmppRoster);
-		install(container, Roster.class, roster);
+	xmppRoster = new XmppRosterLogic(session);
+	roster = new RosterTester(xmppRoster);
+	install(container, Roster.class, roster);
 
-		searchManager = new SearchManagerTester();
-		install(container, SearchManager.class, searchManager);
+	searchManager = new SearchManagerTester();
+	install(container, SearchManager.class, searchManager);
 
-		presenceManager = new PresenceManagerTester(session);
-		install(container, PresenceManager.class, presenceManager);
-	}
+	presenceManager = new PresenceManagerTester(session);
+	install(container, PresenceManager.class, presenceManager);
+    }
 
-	public <T> T mockDisplay(final Class<T> classToMock) {
-		final T mock = Mockito.mock(classToMock, new ReturnsSingletonMocks(
-				factory));
-		return mock;
-	}
-
-	public void setSessionReady(final String uri) {
-		session.setLoggedIn(uri);
-		session.setReady();
-	}
-
-	private <T> T install(final Container container, final Class<T> clazz,
-			final T instance) {
-		container.removeProvider(clazz);
-		container.registerProvider(NoDecoration.instance, clazz,
-				new Provider<T>() {
-					@Override
-					public T get() {
-						return instance;
-					}
-				});
+    private <T> T install(final Container container, final Class<T> clazz, final T instance) {
+	container.removeProvider(clazz);
+	container.registerProvider(NoDecoration.instance, clazz, new Provider<T>() {
+	    @Override
+	    public T get() {
 		return instance;
-	}
+	    }
+	});
+	return instance;
+    }
+
+    public <T> T mockDisplay(final Class<T> classToMock) {
+	final T mock = Mockito.mock(classToMock, new ReturnsSingletonMocks(factory));
+	return mock;
+    }
+
+    public void setSessionReady(final String uri) {
+	session.setLoggedIn(uri);
+	session.setReady();
+    }
 
 }

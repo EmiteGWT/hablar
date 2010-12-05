@@ -8,7 +8,6 @@ import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.validators.IsEmpty;
-import com.calclab.suco.client.Suco;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
@@ -17,9 +16,12 @@ public class ManageGroupsPresenter extends PagePresenter<ManageGroupsDisplay> {
     public static String TYPE = "AddToGroups";
     private RosterItem item;
     private final ArrayList<GroupSelectorPresenter> groupSelectors;
+    private final XmppRoster roster;
 
-    public ManageGroupsPresenter(final HablarEventBus eventBus, final ManageGroupsDisplay display) {
+    public ManageGroupsPresenter(final XmppRoster roster, final HablarEventBus eventBus,
+	    final ManageGroupsDisplay display) {
 	super(TYPE, eventBus, display);
+	this.roster = roster;
 
 	groupSelectors = new ArrayList<GroupSelectorPresenter>();
 
@@ -46,10 +48,6 @@ public class ManageGroupsPresenter extends PagePresenter<ManageGroupsDisplay> {
 	});
     }
 
-    public void setItem(final RosterItem item) {
-	this.item = item;
-    }
-
     private void addNewGroup(final String name, final boolean editable, final boolean selected) {
 	final GroupSelectorDisplay selectorDisplay = display.addGroupSelector();
 	final GroupSelectorPresenter selector = new GroupSelectorPresenter(selectorDisplay);
@@ -58,8 +56,6 @@ public class ManageGroupsPresenter extends PagePresenter<ManageGroupsDisplay> {
     }
 
     private void addToNewGroups() {
-	final XmppRoster roster = Suco.get(XmppRoster.class);
-
 	item.getGroups().clear();
 	for (final GroupSelectorPresenter selector : groupSelectors) {
 	    if (selector.isSelected()) {
@@ -72,10 +68,7 @@ public class ManageGroupsPresenter extends PagePresenter<ManageGroupsDisplay> {
 
     @Override
     protected void onBeforeFocus() {
-
 	display.getContactNameField().setText(item.getJID().toString());
-
-	final XmppRoster roster = Suco.get(XmppRoster.class);
 	display.clearGroupList();
 	groupSelectors.clear();
 	final List<String> belongingGroups = item.getGroups();
@@ -91,6 +84,10 @@ public class ManageGroupsPresenter extends PagePresenter<ManageGroupsDisplay> {
 		addNewGroup(name, false, false);
 	    }
 	}
+    }
+
+    public void setItem(final RosterItem item) {
+	this.item = item;
     }
 
 }

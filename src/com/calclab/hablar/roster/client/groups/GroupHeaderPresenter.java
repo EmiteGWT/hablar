@@ -3,10 +3,10 @@ package com.calclab.hablar.roster.client.groups;
 import static com.calclab.hablar.roster.client.HablarRoster.i18n;
 
 import com.calclab.emite.im.client.roster.RosterGroup;
-import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.emite.im.client.roster.events.RosterItemChangedEvent;
+import com.calclab.emite.im.client.roster.events.RosterItemChangedHandler;
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.ui.menu.Menu;
-import com.calclab.suco.client.events.Listener;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -42,16 +42,17 @@ public class GroupHeaderPresenter implements Presenter<GroupHeaderDisplay> {
 	    }
 	});
 
-	final Listener<RosterItem> updateGroup = new Listener<RosterItem>() {
+	group.addRosterItemChangedHandler(new RosterItemChangedHandler() {
 	    @Override
-	    public void onEvent(final RosterItem parameter) {
-		final String groupLabel = isAllContacts ? i18n().allContactsGroupName() : i18n().groupName(group.getName(),
-			"" + group.getSize());
-		display.getName().setText(groupLabel);
+	    public void onRosterItemChanged(final RosterItemChangedEvent event) {
+		if (event.isAdded() || event.isRemoved()) {
+		    final String groupLabel = isAllContacts ? i18n().allContactsGroupName() : i18n().groupName(
+			    group.getName(), "" + group.getSize());
+		    display.getName().setText(groupLabel);
+		}
 	    }
-	};
-	group.onItemAdded(updateGroup);
-	group.onItemRemoved(updateGroup);
+	});
+
 	setVisibleStyle(groupPresenter.isVisible());
     }
 

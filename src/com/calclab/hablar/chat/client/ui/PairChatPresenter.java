@@ -9,8 +9,6 @@ import com.calclab.emite.core.client.xmpp.stanzas.Message;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.chat.Chat;
-import com.calclab.emite.im.client.chat.Chat.State;
-import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.xep.delay.client.Delay;
 import com.calclab.emite.xep.delay.client.DelayGinjector;
@@ -22,8 +20,6 @@ import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.validators.IsEmpty;
-import com.calclab.suco.client.Suco;
-import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -31,123 +27,96 @@ import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 
 public class PairChatPresenter extends ChatPresenter implements PairChatPage {
-	public static final String TYPE = "Chat";
-	public static final String CHAT_MESSAGE = "ChatMessage";
+    public static final String TYPE = "Chat";
+    public static final String CHAT_MESSAGE = "ChatMessage";
 
-	private final Chat chat;
-	private final String userName;
-	private final DelayGinjector delayGinjector = GWT.create(DelayGinjector.class);
+    private final Chat chat;
+    private final String userName;
+    private final DelayGinjector delayGinjector = GWT.create(DelayGinjector.class);
 
-	public PairChatPresenter(final HablarEventBus eventBus, final Chat chat,
-			final ChatDisplay display) {
-		super(TYPE, Idify.uriId(chat.getURI().toString()), eventBus, display);
-		this.chat = chat;
-		display.setId(getId());
-		final XmppURI fromURI = chat.getURI();
-		userName = getName(fromURI);
+    public PairChatPresenter(final XmppRoster roster, final HablarEventBus eventBus, final Chat chat,
+	    final ChatDisplay display) {
+	super(TYPE, Idify.uriId(chat.getURI().toString()), eventBus, chat, display);
+	this.chat = chat;
+	display.setId(getId());
+	final XmppURI fromURI = chat.getURI();
+	userName = roster.getJidName(fromURI);
 
-		model.init(Icons.BUDDY_OFF, userName,
-				userName + ": " + fromURI.toString());
-		setVisibility(Visibility.notFocused);
-		model.setCloseable(true);
+	model.init(Icons.BUDDY_OFF, userName, userName + ": " + fromURI.toString());
+	setVisibility(Visibility.notFocused);
+	model.setCloseable(true);
 
-		chat.addMessageReceivedHandler(new MessageHandler() {
+	chat.addMessageReceivedHandler(new MessageHandler() {
 
-			@Override
-			public void onMessage(MessageEvent event) {
-				Message message = event.getMessage();
-				final String messageBody = message.getBody();
-				if (!IsEmpty.is(messageBody)) {
-					DelayManager delayManager = delayGinjector.getDelayManager();
-					Delay delay = delayManager.getDelay(message);
-					addMessage(new ChatMessage(null, userName, messageBody,
-							ChatMessage.MessageType.incoming),
-							delay != null ? delay.getStamp() : null);
-					fireUserMessage(messageBody);
-					if (getVisibility() == Visibility.hidden) {
-						requestVisibility(Visibility.notFocused);
-					}
-				}
-			}
-		});
-		chat.onStateChanged(new Listener<State>() {
-			@Override
-			public void onEvent(final State state) {
-				setState(state);
-			}
-		});
-		setState(chat.getState());
-
-		display.getAction().addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(final ClickEvent event) {
-				sendMessage(chat, display);
-			}
-
-		});
-		display.getTextBox().addKeyDownHandler(new KeyDownHandler() {
-			@Override
-			public void onKeyDown(final KeyDownEvent event) {
-				if (event.getNativeKeyCode() == 13) {
-					event.stopPropagation();
-					event.preventDefault();
-					sendMessage(chat, display);
-				}
-			}
-		});
-	}
-
-	@Override
-	public void addAction(final Action<PairChatPage> action) {
-		display.createAction(action).addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(final ClickEvent event) {
-				action.execute(PairChatPresenter.this);
-			}
-		});
-	}
-
-	@Override
-	public Chat getChat() {
-		return chat;
-	}
-
-	@Override
-	public String getChatName() {
-		return userName;
-	}
-
-	@Override
-	public void setPresence(final boolean available, final Show show) {
-		getState().setPageIcon(PresenceIcon.get(available, show));
-		if (available) {
-			display.getState().setText(i18n().stateAvailable(userName));
-		} else {
-			display.getState().setText(i18n().stateOffline(userName));
+	    @Override
+	    public void onMessage(final MessageEvent event) {
+		final Message message = event.getMessage();
+		final String messageBody = message.getBody();
+		if (!IsEmpty.is(messageBody)) {
+		    final DelayManager delayManager = delayGinjector.getDelayManager();
+		    final Delay delay = delayManager.getDelay(message);
+		    addMessage(new ChatMessage(null, userName, messageBody, ChatMessage.MessageType.incoming),
+			    delay != null ? delay.getStamp() : null);
+		    fireUserMessage(messageBody);
+		    if (getVisibility() == Visibility.hidden) {
+			requestVisibility(Visibility.notFocused);
+		    }
 		}
-	}
+	    }
+	});
 
-	private void fireUserMessage(final String body) {
-		final String message = i18n().newChatFrom(userName,
-				TextUtils.ellipsis(body, 25));
-		eventBus.fireEvent(new UserMessageEvent(this, message, CHAT_MESSAGE));
-	}
+	display.getAction().addClickHandler(new ClickHandler() {
+	    @Override
+	    public void onClick(final ClickEvent event) {
+		sendMessage(chat, display);
+	    }
 
-	private String getName(final XmppURI fromURI) {
-		String name = null;
-		final XmppRoster roster = Suco.get(XmppRoster.class);
-		final RosterItem itemByJID = roster.getItemByJID(fromURI);
-
-		// We will try and get the name from the item
-		if (itemByJID != null) {
-			name = itemByJID.getName();
+	});
+	display.getTextBox().addKeyDownHandler(new KeyDownHandler() {
+	    @Override
+	    public void onKeyDown(final KeyDownEvent event) {
+		if (event.getNativeKeyCode() == 13) {
+		    event.stopPropagation();
+		    event.preventDefault();
+		    sendMessage(chat, display);
 		}
+	    }
+	});
+    }
 
-		// Otherwise we will use the jid
-		if (name == null) {
-			name = fromURI.getShortName();
-		}
-		return name;
+    @Override
+    public void addAction(final Action<PairChatPage> action) {
+	display.createAction(action).addClickHandler(new ClickHandler() {
+	    @Override
+	    public void onClick(final ClickEvent event) {
+		action.execute(PairChatPresenter.this);
+	    }
+	});
+    }
+
+    private void fireUserMessage(final String body) {
+	final String message = i18n().newChatFrom(userName, TextUtils.ellipsis(body, 25));
+	eventBus.fireEvent(new UserMessageEvent(this, message, CHAT_MESSAGE));
+    }
+
+    @Override
+    public Chat getChat() {
+	return chat;
+    }
+
+    @Override
+    public String getChatName() {
+	return userName;
+    }
+
+    @Override
+    public void setPresence(final boolean available, final Show show) {
+	getState().setPageIcon(PresenceIcon.get(available, show));
+	if (available) {
+	    display.getState().setText(i18n().stateAvailable(userName));
+	} else {
+	    display.getState().setText(i18n().stateOffline(userName));
 	}
+    }
 
 }

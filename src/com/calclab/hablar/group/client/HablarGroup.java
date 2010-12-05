@@ -33,6 +33,8 @@ public class HablarGroup {
 
     private final XmppRoster roster;
 
+    // FIXME: move to gin
+    @SuppressWarnings("deprecation")
     public HablarGroup(final Hablar hablar) {
 	this.hablar = hablar;
 	this.session = Suco.get(XmppSession.class);
@@ -102,7 +104,8 @@ public class HablarGroup {
     }
 
     private ModifyGroupPresenter newModifyGroupPresenter() {
-	return new ModifyGroupPresenter(hablar.getEventBus(), new ManageGroupWidget(), groupMessages.modifyGroup());
+	return new ModifyGroupPresenter(roster, hablar.getEventBus(), new ManageGroupWidget(), groupMessages
+		.modifyGroup());
     }
 
 }

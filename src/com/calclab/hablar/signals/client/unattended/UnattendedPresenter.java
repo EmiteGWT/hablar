@@ -2,7 +2,7 @@ package com.calclab.hablar.signals.client.unattended;
 
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.Page;
-import com.calclab.hablar.signals.client.I18nSignals;
+import com.calclab.hablar.signals.client.HablarSignals;
 import com.calclab.hablar.signals.client.SignalPreferences;
 import com.calclab.hablar.signals.client.WindowTextHelper;
 import com.calclab.hablar.signals.client.unattended.UnattendedChatsChangedEvent.ChangeType;
@@ -46,7 +46,7 @@ public class UnattendedPresenter {
     }
 
     private void showUnattendedInTitle(final int size) {
-	final String message = size == 0 ? "" : I18nSignals.t.unreadChats(size);
+	final String message = size == 0 ? "" : HablarSignals.signalMessages.unreadChats(size);
 	final String oldTitle = windowDisplay.getText();
 	final String newTitle = WindowTextHelper.updateTitle(oldTitle, message);
 	windowDisplay.setText(newTitle);

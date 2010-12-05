@@ -5,9 +5,9 @@ import static com.calclab.hablar.chat.client.HablarChat.i18n;
 import com.calclab.emite.xep.chatstate.client.ChatStateManager;
 import com.calclab.emite.xep.chatstate.client.StateManager;
 import com.calclab.emite.xep.chatstate.client.ChatStateManager.ChatState;
+import com.calclab.emite.xep.chatstate.client.events.ChatStateNotificationEvent;
+import com.calclab.emite.xep.chatstate.client.events.ChatStateNotificationHandler;
 import com.calclab.hablar.chat.client.ui.PairChatPage;
-import com.calclab.suco.client.Suco;
-import com.calclab.suco.client.events.Listener;
 import com.google.gwt.user.client.ui.HasText;
 
 public class HablarChatStateManager {
@@ -29,12 +29,13 @@ public class HablarChatStateManager {
 	}
     }
 
-    public HablarChatStateManager(final PairChatPage page) {
-	final StateManager manager = Suco.get(StateManager.class);
+    public HablarChatStateManager(final StateManager manager, final PairChatPage page) {
 	final ChatStateManager chatState = manager.getChatState(page.getChat());
-	chatState.onChatStateChanged(new Listener<ChatState>() {
+
+	chatState.addChatStateNotificationHandler(new ChatStateNotificationHandler() {
 	    @Override
-	    public void onEvent(final ChatState state) {
+	    public void onChatStateChanged(final ChatStateNotificationEvent event) {
+		final ChatState state = event.getChatState();
 		final HasText stateDisplay = page.getDisplay().getState();
 		stateDisplay.setText(HablarChatStateManager.getStateText(state, page.getChatName()));
 	    }

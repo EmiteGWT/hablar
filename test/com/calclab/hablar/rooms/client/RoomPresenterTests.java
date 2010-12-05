@@ -20,34 +20,32 @@ import com.calclab.hablar.testing.HablarTester;
 
 public class RoomPresenterTests {
 
-	private RoomPresenter presenter;
-	private RoomDisplay display;
-	private Room room;
+    private RoomPresenter presenter;
+    private RoomDisplay display;
+    private Room room;
 
-	@Before
-	public void setup() {
-		EmiteTester emiteTester = new EmiteTester();
-		emiteTester.setSessionReady("some@domain");
-		HablarTester tester = new HablarTester();
-		EmiteEventBus eventBus = Mockito.mock(EmiteEventBus.class);
-		display = tester.newDisplay(RoomDisplay.class);
-		OccupantsDisplay occupantsDisplay = tester
-				.newDisplay(OccupantsDisplay.class);
-		when(display.createOccupantsDisplay(anyString())).thenReturn(
-				occupantsDisplay);
-		room = Mockito.mock(Room.class);
-		when(room.getURI()).thenReturn(XmppURI.uri("room@domain"));
-		when(room.getChatEventBus()).thenReturn(eventBus);
-		presenter = new RoomPresenter(tester.getEventBus(), room, display);
-	}
+    @Before
+    public void setup() {
+	final EmiteTester emiteTester = new EmiteTester();
+	emiteTester.setSessionReady("some@domain");
+	final HablarTester tester = new HablarTester();
+	final EmiteEventBus eventBus = Mockito.mock(EmiteEventBus.class);
+	display = tester.newDisplay(RoomDisplay.class);
+	final OccupantsDisplay occupantsDisplay = tester.newDisplay(OccupantsDisplay.class);
+	when(display.createOccupantsDisplay(anyString())).thenReturn(occupantsDisplay);
+	room = Mockito.mock(Room.class);
+	when(room.getURI()).thenReturn(XmppURI.uri("room@domain"));
+	when(room.getChatEventBus()).thenReturn(eventBus);
+	presenter = new RoomPresenter(emiteTester.session, emiteTester.xmppRoster, tester.getEventBus(), room, display);
+    }
 
-	/**
-	 * Fixes issue 288
-	 */
-	@Test
-	public void shouldCloseRoomWhenPageIsClosed() {
-		presenter.setVisibility(Visibility.hidden);
-		verify(room).close();
-	}
+    /**
+     * Fixes issue 288
+     */
+    @Test
+    public void shouldCloseRoomWhenPageIsClosed() {
+	presenter.setVisibility(Visibility.hidden);
+	verify(room).close();
+    }
 
 }

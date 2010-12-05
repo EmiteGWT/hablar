@@ -1,5 +1,6 @@
 package com.calclab.hablar.usergroups.client;
 
+import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.container.overlay.OverlayContainer;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
@@ -9,10 +10,9 @@ import com.calclab.hablar.roster.client.groups.RosterItemPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.usergroups.client.changegroups.ManageGroupsPresenter;
 import com.calclab.hablar.usergroups.client.changegroups.ManageGroupsWidget;
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
+import com.calclab.suco.client.Suco;
 
-public class HablarUserGroups implements EntryPoint {
+public class HablarUserGroups {
     private static final String ACTION_ID_ADD_TO_GROUP = "HablarRoster-manageGroupsAction";
 
     private static UserGroupsMessages messages;
@@ -21,8 +21,18 @@ public class HablarUserGroups implements EntryPoint {
 	return messages;
     }
 
-    public static void install(final RosterPage roster, final Hablar hablar) {
-	final ManageGroupsPresenter movePage = new ManageGroupsPresenter(hablar.getEventBus(), new ManageGroupsWidget());
+    public static void setMessages(final UserGroupsMessages messages) {
+	HablarUserGroups.messages = messages;
+    }
+
+    // FIXME: move to gin
+    // FIXME: resoterPage can't be a parameter when move to gin
+    @SuppressWarnings("deprecation")
+    public HablarUserGroups(final RosterPage rosterPage, final Hablar hablar) {
+	final XmppRoster roster = Suco.get(XmppRoster.class);
+
+	final ManageGroupsPresenter movePage = new ManageGroupsPresenter(roster, hablar.getEventBus(),
+		new ManageGroupsWidget());
 	hablar.addPage(movePage, OverlayContainer.ROL);
 
 	final String title = i18n().changeContactGroups();
@@ -40,12 +50,7 @@ public class HablarUserGroups implements EntryPoint {
 		return target.getGroupName() == null;
 	    }
 	};
-	roster.getItemMenu().addAction(addToGroup);
+	rosterPage.getItemMenu().addAction(addToGroup);
     }
 
-    @Override
-    public void onModuleLoad() {
-	messages = GWT.create(UserGroupsMessages.class);
-	ManageGroupsWidget.setMessages(messages);
-    }
 }

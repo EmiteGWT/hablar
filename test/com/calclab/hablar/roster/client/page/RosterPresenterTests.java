@@ -36,7 +36,7 @@ public class RosterPresenterTests {
 	display = tester.newDisplay(RosterDisplay.class);
 	final RosterConfig rosterConfig = new RosterConfig();
 	rosterConfig.oneClickChat = true;
-	new RosterPresenter(hablarEventBus, display, rosterConfig);
+	new RosterPresenter(session, emite.xmppRoster, emite.chatManager, hablarEventBus, display, rosterConfig);
     }
 
     @Test
@@ -45,8 +45,8 @@ public class RosterPresenterTests {
 	final RosterGroup group = new RosterGroup("a new group");
 	session.getEventBus().fireEvent(new RosterGroupChangedEvent(ChangeTypes.added, group));
 
-	verify(display, times(1)).addGroup((RosterGroupPresenter) anyObject(),
-		(Menu<RosterGroupPresenter>) anyObject());
+	verify(display, times(1))
+		.addGroup((RosterGroupPresenter) anyObject(), (Menu<RosterGroupPresenter>) anyObject());
     }
 
     @Test

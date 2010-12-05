@@ -6,5 +6,5 @@
 	<inherits name='com.allen_sauer.gwt.voices.gwt-voices' />
 	<source path="client" />
 	<entry-point
-		class="com.calclab.hablar.signals.sound.client.HablarSoundSignals" />
+		class="com.calclab.hablar.signals.sound.client.HablarSoundSignalsEntryPoint" />
 </module>

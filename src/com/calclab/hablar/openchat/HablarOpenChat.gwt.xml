@@ -10,5 +10,5 @@
 
 	<source path="client" />
 	<entry-point
-		class="com.calclab.hablar.openchat.client.HablarOpenChatModule" />
+		class="com.calclab.hablar.openchat.client.HablarOpenChatEntryPoint" />
 </module>

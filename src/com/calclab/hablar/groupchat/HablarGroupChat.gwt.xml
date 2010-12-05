@@ -19,5 +19,5 @@
 
 	<source path="client" />
 	<entry-point
-		class="com.calclab.hablar.groupchat.client.HablarGroupChatModule" />
+		class="com.calclab.hablar.groupchat.client.HablarGroupChatEntryPoint" />
 </module>

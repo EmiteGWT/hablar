@@ -4,9 +4,10 @@ import static com.calclab.hablar.rooms.client.HablarRooms.i18n;
 
 import com.calclab.emite.xep.muc.client.Occupant;
 import com.calclab.emite.xep.muc.client.Room;
+import com.calclab.emite.xep.muc.client.events.OccupantChangedEvent;
+import com.calclab.emite.xep.muc.client.events.OccupantChangedHandler;
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.ui.icon.Icons;
-import com.calclab.suco.client.events.Listener;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
@@ -26,19 +27,16 @@ public class OccupantsPresenter implements Presenter<OccupantsDisplay> {
 	occupantsCount = 0;
 	updateOccupants(room);
 
-	room.onOccupantAdded(new Listener<Occupant>() {
+	room.addOccupantChangedHandler(new OccupantChangedHandler() {
 	    @Override
-	    public void onEvent(final Occupant occupant) {
-		occupantsCount++;
-		updateOccupants(room);
-	    }
-	});
-
-	room.onOccupantRemoved(new Listener<Occupant>() {
-	    @Override
-	    public void onEvent(final Occupant parameter) {
-		occupantsCount--;
-		updateOccupants(room);
+	    public void onOccupantChanged(final OccupantChangedEvent event) {
+		if (event.isAdded()) {
+		    occupantsCount++;
+		    updateOccupants(room);
+		} else if (event.isRemoved()) {
+		    occupantsCount--;
+		    updateOccupants(room);
+		}
 	    }
 	});
 
@@ -57,11 +55,6 @@ public class OccupantsPresenter implements Presenter<OccupantsDisplay> {
 	});
     }
 
-    @Override
-    public OccupantsDisplay getDisplay() {
-	return display;
-    }
-
     private void addOccupantsToPanel(final Room room) {
 	for (final Occupant occupant : room.getOccupants()) {
 	    final OccupantDisplay ocDisplay = display.addOccupant();
@@ -70,8 +63,13 @@ public class OccupantsPresenter implements Presenter<OccupantsDisplay> {
 	}
     }
 
+    @Override
+    public OccupantsDisplay getDisplay() {
+	return display;
+    }
+
     private void updateOccupants(final Room room) {
-	HasText label = display.getLabel();
+	final HasText label = display.getLabel();
 	label.setText(i18n().occupants(occupantsCount));
 	display.clearPanel();
 	addOccupantsToPanel(room);

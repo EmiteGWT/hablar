@@ -46,6 +46,8 @@ public class HablarGroupChat {
     private final ChatManager chatManager;
     private final HablarRoomsConfig config;
 
+    // FIXME: move to gin
+    @SuppressWarnings("deprecation")
     public HablarGroupChat(final Hablar hablar, final HablarRoomsConfig config) {
 	this.hablar = hablar;
 	this.config = config;

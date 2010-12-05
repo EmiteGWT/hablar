@@ -16,17 +16,13 @@ import com.google.gwt.event.dom.client.ClickHandler;
 public class OpenChatPresenter extends PagePresenter<OpenChatDisplay> {
     private static int index = 0;
     public static final String TYPE = "OpenChat";
-    private final ChatManager chatManager;
     private final XmppRoster roster;
     private final TextValidator nameValidator;
-    private final XmppSession session;
 
     public OpenChatPresenter(final XmppSession session, final XmppRoster roster, final ChatManager chatManager,
 	    final HablarEventBus eventBus, final OpenChatDisplay display) {
 	super(TYPE, "" + ++index, eventBus, display);
-	this.session = session;
 	this.roster = roster;
-	this.chatManager = chatManager;
 
 	display.getCancel().addClickHandler(new ClickHandler() {
 	    @Override

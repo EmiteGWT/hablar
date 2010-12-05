@@ -25,5 +25,6 @@
 
 
 	<source path="client" />
-	<entry-point class="com.calclab.hablar.core.client.HablarCore" />
+	<entry-point
+		class="com.calclab.hablar.core.client.HablarCoreModule" />
 </module>

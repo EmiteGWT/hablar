@@ -41,6 +41,8 @@ public class HablarOpenChat {
     private final XmppRoster roster;
     private final ChatManager chatManager;
 
+    // FIXME: move to gin
+    @SuppressWarnings("deprecation")
     public HablarOpenChat(final Hablar hablar) {
 	this.hablar = hablar;
 	this.session = Suco.get(XmppSession.class);

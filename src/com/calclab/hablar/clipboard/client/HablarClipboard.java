@@ -11,10 +11,8 @@ import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.rooms.client.room.RoomPage;
 import com.calclab.hablar.rooms.client.room.RoomPresenter;
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
 
-public class HablarClipboard implements EntryPoint {
+public class HablarClipboard {
 
     public static final String ACTION_ID = "CopyToClipboardAction";
 
@@ -24,8 +22,11 @@ public class HablarClipboard implements EntryPoint {
 	return messages;
     }
 
-    public static void install(final Hablar hablar) {
+    public static void setMessages(final ClipboardMessages messages) {
+	HablarClipboard.messages = messages;
+    }
 
+    public HablarClipboard(final Hablar hablar) {
 	final CopyToClipboardPresenter copyToClipboardPage = new CopyToClipboardPresenter(hablar.getEventBus(),
 		new CopyToClipboardWidget());
 	hablar.addPage(copyToClipboardPage, OverlayContainer.ROL);
@@ -58,16 +59,4 @@ public class HablarClipboard implements EntryPoint {
 	    }
 	}, true);
     }
-
-    public static void setMessages(final ClipboardMessages messages) {
-	HablarClipboard.messages = messages;
-    }
-
-    @Override
-    public void onModuleLoad() {
-	final ClipboardMessages messages = (ClipboardMessages) GWT.create(ClipboardMessages.class);
-	HablarClipboard.setMessages(messages);
-	CopyToClipboardWidget.setMessages(messages);
-    }
-
 }
