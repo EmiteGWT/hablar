@@ -2,10 +2,11 @@ package com.calclab.hablar.group.client.manage;
 
 import java.util.Collection;
 
+import com.calclab.emite.core.client.xmpp.session.XmppSession;
+import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
-import com.calclab.suco.client.Suco;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
@@ -14,16 +15,20 @@ import com.google.gwt.event.dom.client.ClickHandler;
  */
 public class CreateGroupPresenter extends ManageGroupPresenter {
 
-    public CreateGroupPresenter(HablarEventBus eventBus, final ManageGroupDisplay display, String pageTitle) {
-	super(eventBus, display, pageTitle);
-	display.getApply().addClickHandler(new ClickHandler() {
+    private final XmppRoster roster;
+    private final XmppSession session;
 
+    public CreateGroupPresenter(final XmppSession session, final XmppRoster roster, final HablarEventBus eventBus,
+	    final ManageGroupDisplay display, final String pageTitle) {
+	super(eventBus, display, pageTitle);
+	this.session = session;
+	this.roster = roster;
+	display.getApply().addClickHandler(new ClickHandler() {
 	    @Override
-	    public void onClick(ClickEvent event) {
-		String groupName = display.getGroupNameText();
-		Collection<RosterItem> items = display.getSelectedItems();
-		XmppRoster roster = Suco.get(XmppRoster.class);
-		for (RosterItem item : items) {
+	    public void onClick(final ClickEvent event) {
+		final String groupName = display.getGroupNameText();
+		final Collection<RosterItem> items = display.getSelectedItems();
+		for (final RosterItem item : items) {
 		    item.addToGroup(groupName);
 		}
 		roster.requestUpdateItems(items);
@@ -32,11 +37,14 @@ public class CreateGroupPresenter extends ManageGroupPresenter {
 	});
     }
 
+    @Override
     protected void preloadForm() {
+	final XmppURI currentUser = session.getCurrentUserURI();
 	display.clearSelectionList();
-	XmppRoster roster = Suco.get(XmppRoster.class);
-	for (RosterItem item: roster.getItems()) {
-	    display.addRosterItem(item);
+	for (final RosterItem item : roster.getItems()) {
+	    if (!currentUser.equalsNoResource(item.getJID())) {
+		display.addRosterItem(item);
+	    }
 	}
     }
 }

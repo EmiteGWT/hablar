@@ -1,5 +1,6 @@
-#Tue Aug 24 14:47:10 CEST 2010
+#Sun Dec 05 16:35:21 CET 2010
 eclipse.preferences.version=1
 jarsExcludedFromWebInfLib=/Users/dani/Emite/hablar/war/WEB-INF/lib/emite-proxy.jar|/Users/dani/Emite/hablar/lib/emite-snapshot.jar|/Users/dani/Emite/hablar/lib/google-collect-1.0-rc3.jar|/Users/dani/Emite/hablar/lib/gwt-log-3.0.1.jar|/Users/dani/Emite/hablar/lib/gwt-voices-1.7.0.jar|/Users/dani/Emite/hablar/lib/json-20080701.jar|/Users/dani/Emite/hablar/lib/mockito-all-1.8.2.jar|/Users/dani/Emite/hablar/lib/selenium-java-2.0a1.jar|/Users/dani/Emite/hablar/lib/testng-5.11-jdk15.jar|/Users/dani/Emite/hablar/lib/tigase-xmltools-2.3.0.jar
+launchConfigExternalUrlPrefix=
 warSrcDir=war
 warSrcDirIsOutput=true
