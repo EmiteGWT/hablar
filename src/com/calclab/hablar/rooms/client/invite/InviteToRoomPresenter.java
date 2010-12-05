@@ -13,19 +13,16 @@ import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.rooms.client.RoomName;
 import com.calclab.hablar.rooms.client.open.EditRoomDisplay;
 import com.calclab.hablar.rooms.client.open.EditRoomPresenter;
-import com.calclab.suco.client.Suco;
 
 public class InviteToRoomPresenter extends EditRoomPresenter {
     public static final String TYPE = "InviteToRoom";
 
     private Room room;
+    private final XmppRoster roster;
 
-    public InviteToRoomPresenter(final HablarEventBus eventBus, final EditRoomDisplay display) {
+    public InviteToRoomPresenter(final XmppRoster roster, final HablarEventBus eventBus, final EditRoomDisplay display) {
 	super(TYPE, eventBus, display);
-    }
-
-    public void setRoom(final Room room) {
-	this.room = room;
+	this.roster = roster;
     }
 
     @Override
@@ -41,7 +38,6 @@ public class InviteToRoomPresenter extends EditRoomPresenter {
 	display.setPageTitle(i18n().invitePeopleToGroupChat());
 	display.setAcceptText(i18n().acceptAction());
 
-	final XmppRoster roster = Suco.get(XmppRoster.class);
 	final String roomName = RoomName.decode(room.getURI().getNode());
 	display.getRoomName().setValue(roomName);
 	display.setRoomNameEnabled(false);
@@ -49,12 +45,16 @@ public class InviteToRoomPresenter extends EditRoomPresenter {
 	display.clearSelectionList();
 	final Set<String> occupantUris = new HashSet<String>();
 	for (final Occupant occupant : room.getOccupants()) {
-	    occupantUris.add(occupant.getURI().getResource());
+	    occupantUris.add(occupant.getOccupantUri().getResource());
 	}
 	for (final RosterItem item : roster.getItems()) {
 	    if (!occupantUris.contains(item.getJID().getNode())) {
 		createItem(item, false);
 	    }
 	}
+    }
+
+    public void setRoom(final Room room) {
+	this.room = room;
     }
 }

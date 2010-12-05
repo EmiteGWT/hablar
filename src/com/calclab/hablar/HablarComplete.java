@@ -28,7 +28,7 @@ public class HablarComplete {
     public static void install(final Hablar hablar, final HablarConfig config) {
 	HablarCore.install(hablar);
 	HablarChat.install(hablar);
-	HablarRooms.install(hablar, config.roomsConfig);
+	new HablarRooms(hablar, config.roomsConfig);
 	new HablarGroupChat(hablar, config.roomsConfig);
 
 	final DockConfig dock = new DockConfig();

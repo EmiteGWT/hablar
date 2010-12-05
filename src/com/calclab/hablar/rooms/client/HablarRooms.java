@@ -1,5 +1,9 @@
 package com.calclab.hablar.rooms.client;
 
+import com.calclab.emite.core.client.xmpp.session.XmppSession;
+import com.calclab.emite.im.client.roster.XmppRoster;
+import com.calclab.emite.xep.muc.client.RoomManager;
+import com.calclab.emite.xep.mucdisco.client.RoomDiscoveryManager;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.container.PageAddedEvent;
 import com.calclab.hablar.core.client.container.PageAddedHandler;
@@ -16,10 +20,10 @@ import com.calclab.hablar.rooms.client.room.RoomPage;
 import com.calclab.hablar.rooms.client.room.RoomPresenter;
 import com.calclab.hablar.rooms.client.state.HablarRoomStateManager;
 import com.calclab.hablar.roster.client.page.RosterPage;
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
+import com.calclab.suco.client.Suco;
+import com.google.inject.Inject;
 
-public class HablarRooms implements EntryPoint {
+public class HablarRooms {
     private static final String ACTION_ID_INVITE = "HablarRooms-inviteAction";
     private static final String ACTION_ID_OPENROOM = "HablarRooms-openRoom";
     private static final String ACTION_ID_OPENEXISTINGROOM = "HablarRooms-openExistingRoom";
@@ -29,36 +33,56 @@ public class HablarRooms implements EntryPoint {
 	return roomMessages;
     }
 
-    public static void install(final Hablar hablar) {
-	install(hablar, HablarRoomsConfig.getFromMeta());
+    public static void setMessages(final RoomsMessages messages) {
+	roomMessages = messages;
+    }
+    private final Hablar hablar;
+    private final HablarRoomsConfig config;
+
+    private final XmppRoster roster;
+    private final XmppSession session;
+    private final RoomManager roomManager;
+    private final RoomDiscoveryManager roomDiscoveryManager;
+
+    // FIXME: move to gin
+    @SuppressWarnings("deprecation")
+    @Inject
+    public HablarRooms(final Hablar hablar, final HablarRoomsConfig config) {
+	this.hablar = hablar;
+	this.config = config;
+	this.session = Suco.get(XmppSession.class);
+	this.roster = Suco.get(XmppRoster.class);
+	this.roomManager = Suco.get(RoomManager.class);
+	this.roomDiscoveryManager = Suco.get(RoomDiscoveryManager.class);
+	install();
     }
 
-    public static void install(final Hablar hablar, final HablarRoomsConfig config) {
-	new HablarRoomManager(hablar, config);
+    private void install() {
+	new HablarRoomManager(roomManager, hablar, config);
 
-	final InviteToRoomPresenter invitePage = new InviteToRoomPresenter(hablar.getEventBus(), new EditRoomWidget());
+	final InviteToRoomPresenter invitePage = new InviteToRoomPresenter(roster, hablar.getEventBus(),
+		new EditRoomWidget());
 	hablar.addPage(invitePage, OverlayContainer.ROL);
 
-	final OpenNewRoomPresenter openNewRoomPage = new OpenNewRoomPresenter(config.roomsService,
-		hablar.getEventBus(), new EditRoomWidget());
+	final OpenNewRoomPresenter openNewRoomPage = new OpenNewRoomPresenter(session, roster, roomManager,
+		config.roomsService, hablar.getEventBus(), new EditRoomWidget());
 	hablar.addPage(openNewRoomPage, OverlayContainer.ROL);
 
-	final OpenExistingRoomPresenter openExistingRoomPresenter = new OpenExistingRoomPresenter(config.roomsService,
-		hablar.getEventBus(), new OpenExistingRoomWidget());
+	final OpenExistingRoomPresenter openExistingRoomPresenter = new OpenExistingRoomPresenter(session, roomManager,
+		roomDiscoveryManager, config.roomsService, hablar.getEventBus(), new OpenExistingRoomWidget());
 	hablar.addPage(openExistingRoomPresenter, OverlayContainer.ROL);
 
 	hablar.addPageAddedHandler(new PageAddedHandler() {
 	    @Override
 	    public void onPageAdded(final PageAddedEvent event) {
-
 		if (event.isType(RoomPresenter.TYPE)) {
 		    final RoomPresenter roomPage = (RoomPresenter) event.getPage();
-		    roomPage.addAction(createInviteAction(invitePage));
+		    roomPage.addAction(newInviteAction(invitePage));
 		    new HablarRoomStateManager(roomPage);
 		} else if (event.isType(RosterPage.TYPE)) {
 		    final RosterPage rosterPage = (RosterPage) event.getPage();
-		    rosterPage.addAction(createOpenRoomAction(openNewRoomPage));
-		    rosterPage.addAction(createOpenExistingRoomAction(openExistingRoomPresenter));
+		    rosterPage.addAction(newOpenRoomAction(openNewRoomPage));
+		    rosterPage.addAction(newOpenExistingRoomAction(openExistingRoomPresenter));
 		}
 
 	    }
@@ -66,13 +90,9 @@ public class HablarRooms implements EntryPoint {
 
     }
 
-    public static void setMessages(final RoomsMessages messages) {
-	roomMessages = messages;
-    }
-
-    protected static Action<RoomPage> createInviteAction(final InviteToRoomPresenter invitePage) {
+    private Action<RoomPage> newInviteAction(final InviteToRoomPresenter invitePage) {
 	final String buddyAddIcon = Icons.BUDDY_ADD;
-	return new SimpleAction<RoomPage>(i18n().inviteToThisGroupChat(), ACTION_ID_INVITE, buddyAddIcon) {
+	return new SimpleAction<RoomPage>(roomMessages.inviteToThisGroupChat(), ACTION_ID_INVITE, buddyAddIcon) {
 	    @Override
 	    public void execute(final RoomPage target) {
 		invitePage.setRoom(target.getRoom());
@@ -81,20 +101,8 @@ public class HablarRooms implements EntryPoint {
 	};
     }
 
-    protected static SimpleAction<RosterPage> createOpenRoomAction(final OpenNewRoomPresenter page) {
-	final String name = i18n().openNewGroupChatTooltip();
-	final String icon = Icons.GROUP_CHAT_ADD;
-	final SimpleAction<RosterPage> action = new SimpleAction<RosterPage>(name, ACTION_ID_OPENROOM, icon) {
-	    @Override
-	    public void execute(final RosterPage target) {
-		page.requestVisibility(Visibility.focused);
-	    }
-	};
-	return action;
-    }
-
-    protected static SimpleAction<RosterPage> createOpenExistingRoomAction(final OpenExistingRoomPresenter page) {
-	final String name = i18n().openExistingRoom();
+    private SimpleAction<RosterPage> newOpenExistingRoomAction(final OpenExistingRoomPresenter page) {
+	final String name = roomMessages.openExistingRoom();
 	final String icon = Icons.GROUP_CHAT;
 	final SimpleAction<RosterPage> action = new SimpleAction<RosterPage>(name, ACTION_ID_OPENEXISTINGROOM, icon) {
 	    @Override
@@ -105,12 +113,16 @@ public class HablarRooms implements EntryPoint {
 	return action;
     }
 
-    @Override
-    public void onModuleLoad() {
-	final RoomsMessages messages = (RoomsMessages) GWT.create(RoomsMessages.class);
-	HablarRooms.setMessages(messages);
-	EditRoomWidget.setMessages(messages);
-	OpenExistingRoomWidget.setMessages(messages);
+    private SimpleAction<RosterPage> newOpenRoomAction(final OpenNewRoomPresenter page) {
+	final String name = roomMessages.openNewGroupChatTooltip();
+	final String icon = Icons.GROUP_CHAT_ADD;
+	final SimpleAction<RosterPage> action = new SimpleAction<RosterPage>(name, ACTION_ID_OPENROOM, icon) {
+	    @Override
+	    public void execute(final RosterPage target) {
+		page.requestVisibility(Visibility.focused);
+	    }
+	};
+	return action;
     }
 
 }

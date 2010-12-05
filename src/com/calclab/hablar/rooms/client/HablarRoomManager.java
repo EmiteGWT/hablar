@@ -5,9 +5,13 @@ import java.util.HashMap;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.Chat;
+import com.calclab.emite.im.client.chat.events.ChatChangedEvent;
+import com.calclab.emite.im.client.chat.events.ChatChangedHandler;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.emite.xep.muc.client.RoomInvitation;
 import com.calclab.emite.xep.muc.client.RoomManager;
+import com.calclab.emite.xep.muc.client.events.RoomInvitationEvent;
+import com.calclab.emite.xep.muc.client.events.RoomInvitationHandler;
 import com.calclab.hablar.chat.client.ui.ChatMessage;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
@@ -15,17 +19,15 @@ import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.rooms.client.room.RoomDisplay;
 import com.calclab.hablar.rooms.client.room.RoomPresenter;
 import com.calclab.hablar.rooms.client.room.RoomWidget;
-import com.calclab.suco.client.Suco;
-import com.calclab.suco.client.events.Listener;
 
 public class HablarRoomManager {
 
     public static interface RoomPageFactory {
 	RoomDisplay create(boolean sendButtonVisible);
     }
-    
+
     public static interface RoomPresenterFactory {
-    	RoomPresenter create(HablarEventBus eventBus, Room room, RoomDisplay display);
+	RoomPresenter create(HablarEventBus eventBus, Room room, RoomDisplay display);
     }
 
     private final Hablar hablar;
@@ -34,24 +36,23 @@ public class HablarRoomManager {
     private final HashMap<XmppURI, RoomPresenter> roomPages;
     private final ArrayList<RoomInvitation> acceptedInvitations;
 
-    public HablarRoomManager(final Hablar hablar, final HablarRoomsConfig config) {
-	this(hablar, config, new RoomPageFactory() {
+    public HablarRoomManager(final RoomManager rooms, final Hablar hablar, final HablarRoomsConfig config) {
+	this(rooms, hablar, config, new RoomPageFactory() {
 	    @Override
 	    public RoomDisplay create(final boolean sendButtonVisible) {
 		return new RoomWidget(sendButtonVisible);
-	    }},
-	    new RoomPresenterFactory() {
-
-			@Override
-			public RoomPresenter create(HablarEventBus eventBus, Room room, RoomDisplay display) {
-				return new RoomPresenter(eventBus, room, display);
-			}
-	    	
 	    }
-	);
+	}, new RoomPresenterFactory() {
+
+	    @Override
+	    public RoomPresenter create(final HablarEventBus eventBus, final Room room, final RoomDisplay display) {
+		return new RoomPresenter(eventBus, room, display);
+	    }
+
+	});
     }
 
-    public HablarRoomManager(final Hablar hablar, final HablarRoomsConfig config,
+    public HablarRoomManager(final RoomManager rooms, final Hablar hablar, final HablarRoomsConfig config,
 	    final RoomPageFactory factory, final RoomPresenterFactory presenterFactory) {
 	this.hablar = hablar;
 	this.factory = factory;
@@ -59,25 +60,21 @@ public class HablarRoomManager {
 	acceptedInvitations = new ArrayList<RoomInvitation>();
 	roomPages = new HashMap<XmppURI, RoomPresenter>();
 
-	final RoomManager rooms = Suco.get(RoomManager.class);
-
-	rooms.onChatCreated(new Listener<Chat>() {
+	rooms.addChatChangedHandler(new ChatChangedHandler() {
 	    @Override
-	    public void onEvent(final Chat chat) {
-		createRoom((Room) chat);
+	    public void onChatChanged(final ChatChangedEvent event) {
+		if (event.isCreated()) {
+		    createRoom((Room) event.getChat());
+		} else if (event.isOpened()) {
+		    openRoom(event.getChat());
+		}
 	    }
 	});
 
-	rooms.onChatOpened(new Listener<Chat>() {
+	rooms.addRoomInvitationReceivedHandler(new RoomInvitationHandler() {
 	    @Override
-	    public void onEvent(final Chat chat) {
-		openRoom(chat);
-	    }
-	});
-
-	rooms.onInvitationReceived(new Listener<RoomInvitation>() {
-	    @Override
-	    public void onEvent(final RoomInvitation invitation) {
+	    public void onRoomInvitation(final RoomInvitationEvent event) {
+		final RoomInvitation invitation = event.getRoomInvitation();
 		acceptedInvitations.add(invitation);
 		rooms.acceptRoomInvitation(invitation);
 	    }
@@ -108,11 +105,11 @@ public class HablarRoomManager {
 	    acceptedInvitations.remove(invitation);
 	    roomPage.requestVisibility(Visibility.notFocused);
 	    String message = "You have been invited to this group chat";
-	    
-	    if(invitation.getInvitor() != null) {
-	    	message += " by " + invitation.getInvitor().getNode();
+
+	    if (invitation.getInvitor() != null) {
+		message += " by " + invitation.getInvitor().getNode();
 	    }
-	    
+
 	    message += invitation.getReason() != null ? ": " + invitation.getReason() : "";
 	    roomPage.addMessage(new ChatMessage(message));
 	} else {
