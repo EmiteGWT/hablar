@@ -56,7 +56,7 @@ public class HablarComplete {
 	}
 
 	if (config.hasRoster) {
-	    HablarOpenChat.install(hablar);
+	    new HablarOpenChat(hablar);
 	    HablarEditBuddy.install(hablar);
 	    HablarUserGroups.install(roster, hablar);
 	    new HablarGroup(hablar);

@@ -1,5 +1,8 @@
 package com.calclab.hablar.core.client.validators;
 
+import com.calclab.emite.core.client.xmpp.session.XmppSession;
+import com.google.gwt.core.client.GWT;
+
 public class Validators {
 
     // Original regexp from http://www.regular-expressions.info/email.html
@@ -46,6 +49,24 @@ public class Validators {
 	    @Override
 	    public boolean isValid(final String value) {
 		return value.matches(REGEXP_VALID_ROOM);
+	    }
+	};
+    }
+
+    public static Validator<String> notCurrentUser(final XmppSession session, final String message) {
+	return new Validator<String>() {
+	    @Override
+	    public String getMessage() {
+		return message;
+	    }
+
+	    @Override
+	    public boolean isValid(final String value) {
+		final String currentJid = session.getCurrentUserURI().getJID().toString();
+		final int slashIndex = value.indexOf('/');
+		final String valueJid = slashIndex > 0 ? value.substring(0, slashIndex) : value;
+		GWT.log("JID VALUE: " + valueJid);
+		return !valueJid.equalsIgnoreCase(currentJid);
 	    }
 	};
     }

@@ -12,6 +12,9 @@ public interface OpenChatMessages extends Messages {
     @DefaultMessage("Cancel")
     String cancelAction();
 
+    @DefaultMessage("You can''t chat with yourself")
+    String currentUserJidNotAllowed();
+
     @DefaultMessage("JabberId can''t be empty")
     String jabberIdIsEmpty();
 

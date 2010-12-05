@@ -20,16 +20,13 @@ import com.calclab.hablar.rooms.client.open.EditRoomWidget;
 import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.suco.client.Suco;
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
-import com.google.inject.Inject;
 
 /**
  * This object installs the GroupChat functionallity in Hablar.
  * 
  * Group chat are anonymous rooms created by-request using normal chats
  */
-public class HablarGroupChat implements EntryPoint {
+public class HablarGroupChat {
     public static final String ACTION_ID_CONVERT = "HablarGroupChat-convertToGroup-";
     public static final String ACTION_ID_OPEN = "HablarGroupChat-openGroupChatAction";
     private static GroupChatMessages messages;
@@ -49,7 +46,6 @@ public class HablarGroupChat implements EntryPoint {
     private final ChatManager chatManager;
     private final HablarRoomsConfig config;
 
-    @Inject
     public HablarGroupChat(final Hablar hablar, final HablarRoomsConfig config) {
 	this.hablar = hablar;
 	this.config = config;
@@ -113,11 +109,6 @@ public class HablarGroupChat implements EntryPoint {
     public OpenGroupChatPresenter newOpenGroupChatPresenter(final String roomsService) {
 	return new OpenGroupChatPresenter(session, roomManager, roster, roomsService, hablar.getEventBus(),
 		new EditRoomWidget());
-    }
-
-    @Override
-    public void onModuleLoad() {
-	HablarGroupChat.setMessages((GroupChatMessages) GWT.create(GroupChatMessages.class));
     }
 
 }

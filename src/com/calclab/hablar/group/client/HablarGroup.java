@@ -10,30 +10,27 @@ import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.group.client.manage.CreateGroupPresenter;
-import com.calclab.hablar.group.client.manage.ManageGroupPresenter;
 import com.calclab.hablar.group.client.manage.ManageGroupWidget;
 import com.calclab.hablar.group.client.manage.ModifyGroupPresenter;
 import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
 import com.calclab.suco.client.Suco;
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
 
 /**
  * This object installs HablarGroup module inside hablar
  */
-public class HablarGroup implements EntryPoint {
+public class HablarGroup {
     private static final String ACTION_ID_MODIFY_GROUP = "HablarGroup-modifyGroup";
     protected static final String ACTION_ID_CREATE_GROUP = "HablarGroup-createGroup";
     private static GroupMessages groupMessages;
 
-    public static GroupMessages i18n() {
-	return groupMessages;
+    public static void setMessages(final GroupMessages messages) {
+	groupMessages = messages;
     }
-
     private final Hablar hablar;
     private final XmppSession session;
+
     private final XmppRoster roster;
 
     public HablarGroup(final Hablar hablar) {
@@ -70,8 +67,8 @@ public class HablarGroup implements EntryPoint {
      */
     private SimpleAction<RosterPage> newCreateGroupAction(final CreateGroupPresenter createGroupPresenter) {
 	final String icon = Icons.ADD_GROUP;
-	final SimpleAction<RosterPage> createGroupAction = new SimpleAction<RosterPage>(i18n().createGroupAction(),
-		ACTION_ID_CREATE_GROUP, icon) {
+	final SimpleAction<RosterPage> createGroupAction = new SimpleAction<RosterPage>(groupMessages
+		.createGroupAction(), ACTION_ID_CREATE_GROUP, icon) {
 	    @Override
 	    public void execute(final RosterPage page) {
 		createGroupPresenter.requestVisibility(Visibility.focused);
@@ -93,9 +90,8 @@ public class HablarGroup implements EntryPoint {
      * @return the action
      */
     private SimpleAction<RosterGroupPresenter> newModifyGroupAction(final ModifyGroupPresenter modifyGroupPresenter) {
-	final SimpleAction<RosterGroupPresenter> modifyGroupAction = new SimpleAction<RosterGroupPresenter>(i18n()
-		.modifyGroupAction(), ACTION_ID_MODIFY_GROUP) {
-
+	final SimpleAction<RosterGroupPresenter> modifyGroupAction = new SimpleAction<RosterGroupPresenter>(
+		groupMessages.modifyGroupAction(), ACTION_ID_MODIFY_GROUP) {
 	    @Override
 	    public void execute(final RosterGroupPresenter target) {
 		modifyGroupPresenter.setOldGroupName(target.getGroupName());
@@ -109,11 +105,4 @@ public class HablarGroup implements EntryPoint {
 	return new ModifyGroupPresenter(hablar.getEventBus(), new ManageGroupWidget(), groupMessages.modifyGroup());
     }
 
-    @Override
-    public void onModuleLoad() {
-	final GroupMessages messages = (GroupMessages) GWT.create(GroupMessages.class);
-	groupMessages = messages;
-	ManageGroupWidget.setMessages(messages);
-	ManageGroupPresenter.setMessages(messages);
-    }
 }

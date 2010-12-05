@@ -4,5 +4,6 @@
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="com.calclab.hablar.roster.HablarRoster" />
 	<source path="client" />
-	<entry-point class="com.calclab.hablar.group.client.HablarGroup"></entry-point>
+	<entry-point
+		class="com.calclab.hablar.group.client.HablarGroupModule" />
 </module>
