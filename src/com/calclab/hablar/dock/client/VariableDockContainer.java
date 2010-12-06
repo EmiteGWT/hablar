@@ -72,10 +72,11 @@ public class VariableDockContainer implements PagesContainer {
 	final String pageType = page.getType();
 	if (pageType.equals(RosterPage.TYPE)) {
 	    rosterPanel.clear();
-	    setPage(rosterPanel, page, "left");
+	    setPage(rosterPanel, page, "roster-dock");
 	} else if (pageType.equals(UserPage.TYPE)) {
 	    userPanel.clear();
-	    setPage(userPanel, page, "top");
+	    setPage(userPanel, page, "user-dock");
+	    hideTopPage(page);
 	} else {
 	    return false;
 	}

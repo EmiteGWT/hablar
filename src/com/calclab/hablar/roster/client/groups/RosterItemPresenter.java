@@ -11,73 +11,75 @@ import com.google.gwt.event.dom.client.ClickHandler;
 
 public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
 
-	private final RosterItemDisplay display;
-	private RosterItem item;
-	private final String groupName;
+    private final RosterItemDisplay display;
+    private RosterItem item;
+    private final String groupName;
+    private String clickActionDescription;
 
-	public RosterItemPresenter(final String groupName,
-			final Menu<RosterItemPresenter> itemMenu,
-			final RosterItemDisplay display, final RosterConfig rosterConfig) {
-		this.groupName = groupName;
-		this.display = display;
+    public RosterItemPresenter(final String groupName, final Menu<RosterItemPresenter> itemMenu,
+	    final RosterItemDisplay display, final RosterConfig rosterConfig) {
+	this.groupName = groupName;
+	this.display = display;
 
-		if (rosterConfig.rosterItemClickAction != null) {
-			display.setWidgetTitle(rosterConfig.rosterItemClickAction
-					.getDescription());
-			display.getAction().addClickHandler(new ClickHandler() {
-				@Override
-				public void onClick(final ClickEvent event) {
-					rosterConfig.rosterItemClickAction.execute(item);
-				}
-			});
-			display.addStyleName("clickable");
+	this.clickActionDescription = "";
+	if (rosterConfig.rosterItemClickAction != null) {
+	    this.clickActionDescription = rosterConfig.rosterItemClickAction.getDescription() + " ";
+	    display.getAction().addClickHandler(new ClickHandler() {
+		@Override
+		public void onClick(final ClickEvent event) {
+		    rosterConfig.rosterItemClickAction.execute(item);
 		}
-
-		display.getMenuAction().addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(final ClickEvent event) {
-				event.stopPropagation();
-				event.preventDefault();
-				final Element element = event.getRelativeElement();
-				itemMenu.setTarget(RosterItemPresenter.this);
-				itemMenu.show(element.getAbsoluteLeft(),
-						element.getAbsoluteTop());
-			}
-		});
-
+	    });
+	    display.addStyleName("clickable");
 	}
 
-	@Override
-	public RosterItemDisplay getDisplay() {
-		return display;
+	display.getMenuAction().addClickHandler(new ClickHandler() {
+	    @Override
+	    public void onClick(final ClickEvent event) {
+		event.stopPropagation();
+		event.preventDefault();
+		final Element element = event.getRelativeElement();
+		itemMenu.setTarget(RosterItemPresenter.this);
+		itemMenu.show(element.getAbsoluteLeft(), element.getAbsoluteTop());
+	    }
+	});
+
+    }
+
+    @Override
+    public RosterItemDisplay getDisplay() {
+	return display;
+    }
+
+    public String getGroupName() {
+	return groupName;
+    }
+
+    public RosterItem getItem() {
+	return item;
+    }
+
+    public void setItem(final RosterItem item) {
+	this.item = item;
+
+	String name = item.getName();
+
+	if (name == null) {
+	    name = item.getJID().getShortName();
 	}
 
-	public String getGroupName() {
-		return groupName;
+	display.getName().setText(name);
+	final String jidString = item.getJID().toString();
+	display.getJid().setText(jidString);
+	final String status = item.getStatus();
+	final boolean hasStatus = (status != null) && (status.trim().length() > 0);
+	if (hasStatus) {
+	    display.getStatus().setText(status);
 	}
-
-	public RosterItem getItem() {
-		return item;
-	}
-
-	public void setItem(final RosterItem item) {
-		this.item = item;
-
-		String name = item.getName();
-
-		if (name == null) {
-			name = item.getJID().getShortName();
-		}
-
-		display.getName().setText(name);
-		display.getJid().setText(item.getJID().toString());
-		final String status = item.getStatus();
-		final boolean hasStatus = status != null && status.trim().length() > 0;
-		if (hasStatus) {
-			display.getStatus().setText(status);
-		}
-		display.setStatusVisible(hasStatus);
-		display.setIcon(PresenceIcon.get(item.isAvailable(), item.getShow()));
-	}
+	display.setStatusVisible(hasStatus);
+	display.setIcon(PresenceIcon.get(item.isAvailable(), item.getShow()));
+	final String title = clickActionDescription + name + " (" + jidString + ")";
+	display.setWidgetTitle(title);
+    }
 
 }

@@ -42,7 +42,7 @@ public class HablarRoster {
 	subscriptionHandler.setBehaviour(Behaviour.acceptAll);
 
 	if ((rosterConfig.rosterItemClickAction == null) && rosterConfig.oneClickChat) {
-	    rosterConfig.rosterItemClickAction = new SimpleAction<RosterItem>(i18n().clickToOpenChat(),
+	    rosterConfig.rosterItemClickAction = new SimpleAction<RosterItem>(i18n().clickToChatWith(),
 		    "rosterItemClickAction") {
 		@Override
 		public void execute(final RosterItem item) {
