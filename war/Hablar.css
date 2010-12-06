@@ -199,8 +199,9 @@ input[disabled] {
 .chatMessage .metadata {
 	display: block;
 	float: left;
-	color: #BBBBBB;
+	color: #808080;
 	margin-right: 5px;
+	font-size: 90%;
 }
 
 .chatMessage .body {

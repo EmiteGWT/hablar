@@ -11,7 +11,7 @@ import com.calclab.emite.im.client.chat.ChatStates;
 import com.calclab.hablar.core.client.browser.BrowserFocusHandler;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
-import com.calclab.hablar.core.client.validators.IsEmpty;
+import com.calclab.hablar.core.client.validators.Empty;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -87,8 +87,8 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
 
     protected void sendMessage(final Chat chat, final ChatDisplay display) {
 	final String text = display.getBody().getText().trim();
-	if (IsEmpty.not(text)) {
-	    addMessage(new ChatMessage(null, "me", text, ChatMessage.MessageType.sent));
+	if (Empty.not(text)) {
+	    addMessage(new ChatMessage(null, ColorHelper.ME, "me", text, ChatMessage.MessageType.sent));
 	    chat.send(new Message(text));
 	    display.clearAndFocus();
 	}

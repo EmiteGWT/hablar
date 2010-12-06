@@ -17,11 +17,12 @@ import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.hablar.chat.client.ui.ChatMessage;
 import com.calclab.hablar.chat.client.ui.ChatMessageFormatter;
 import com.calclab.hablar.chat.client.ui.ChatPresenter;
+import com.calclab.hablar.chat.client.ui.ColorHelper;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.events.UserMessageEvent;
 import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.core.client.ui.menu.Action;
-import com.calclab.hablar.core.client.validators.IsEmpty;
+import com.calclab.hablar.core.client.validators.Empty;
 import com.calclab.hablar.rooms.client.RoomName;
 import com.calclab.hablar.rooms.client.occupant.OccupantsPresenter;
 import com.google.gwt.core.client.GWT;
@@ -81,8 +82,9 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
 		final Delay delay = delayManager.getDelay(message);
 		if (!room.isComingFromMe(message) || (delay != null)) {
 		    final String messageBody = message.getBody();
-		    if (IsEmpty.not(messageBody)) {
-			addMessage(new ChatMessage(null, from, messageBody, ChatMessage.MessageType.incoming),
+		    if (Empty.not(messageBody)) {
+			final String color = ColorHelper.getColor(message.getFrom());
+			addMessage(new ChatMessage(null, from, color, messageBody, ChatMessage.MessageType.incoming),
 				delay != null ? delay.getStamp() : null);
 			fireUserMessage(roomName, from, messageBody);
 		    }
@@ -91,7 +93,7 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
 	});
 
 	if (ChatStates.locked.equals(room.getChatState())) {
-	    addMessage(new ChatMessage(null, null, i18n().waitingForUnlockRoom(), ChatMessage.MessageType.info));
+	    addMessage(new ChatMessage(i18n().waitingForUnlockRoom()));
 	}
 
 	display.getAction().addClickHandler(new ClickHandler() {
@@ -125,8 +127,8 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
 
     private void fireUserMessage(final String roomName, final String from, String body) {
 	body = ChatMessageFormatter.ellipsis(body, 25);
-	final String message = IsEmpty.is(from) ? i18n().incommingAdminMessage(roomName, body) : i18n()
-		.incommingMessage(roomName, from, body);
+	final String message = Empty.is(from) ? i18n().incommingAdminMessage(roomName, body) : i18n().incommingMessage(
+		roomName, from, body);
 	fireUserNotification(message);
     }
 

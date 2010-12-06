@@ -1,6 +1,6 @@
 package com.calclab.hablar.core.client.validators;
 
-public class IsEmpty {
+public class Empty {
 
     private static final String REGEX = "^\\s*$";
 

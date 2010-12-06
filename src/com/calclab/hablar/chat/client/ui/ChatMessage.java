@@ -1,6 +1,6 @@
 package com.calclab.hablar.chat.client.ui;
 
-import com.calclab.hablar.core.client.validators.IsEmpty;
+import com.calclab.hablar.core.client.validators.Empty;
 
 public class ChatMessage {
 
@@ -11,14 +11,17 @@ public class ChatMessage {
     public String author;
     public String body;
     public MessageType type;
+    public final String color;
 
     public ChatMessage(final String body) {
-	this(null, null, body, MessageType.info);
+	this(null, null, ColorHelper.ME, body, MessageType.info);
     }
 
-    public ChatMessage(final String metadata, final String author, final String body, final MessageType type) {
+    public ChatMessage(final String metadata, final String color, final String author, final String body,
+	    final MessageType type) {
 	this.metadata = metadata;
 	this.author = author;
+	this.color = color;
 	this.body = body;
 	this.type = type;
     }
@@ -29,13 +32,13 @@ public class ChatMessage {
     }
 
     public String toString(final StringBuilder bf) {
-	if (IsEmpty.not(metadata)) {
+	if (Empty.not(metadata)) {
 	    bf.append(metadata).append(" ");
 	}
-	if (IsEmpty.not(author)) {
+	if (Empty.not(author)) {
 	    bf.append(author).append(": ");
 	}
-	if (IsEmpty.not(body)) {
+	if (Empty.not(body)) {
 	    bf.append(body);
 	}
 	return bf.toString();

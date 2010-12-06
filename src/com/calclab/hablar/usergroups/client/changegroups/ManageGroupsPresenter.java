@@ -7,7 +7,7 @@ import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
-import com.calclab.hablar.core.client.validators.IsEmpty;
+import com.calclab.hablar.core.client.validators.Empty;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
@@ -73,14 +73,14 @@ public class ManageGroupsPresenter extends PagePresenter<ManageGroupsDisplay> {
 	groupSelectors.clear();
 	final List<String> belongingGroups = item.getGroups();
 	for (final String name : belongingGroups) {
-	    if (!IsEmpty.is(name)) {
+	    if (!Empty.is(name)) {
 		addNewGroup(name, false, true);
 	    }
 	}
 	final ArrayList<String> groups = new ArrayList<String>(roster.getGroupNames());
 	groups.removeAll(belongingGroups);
 	for (final String name : groups) {
-	    if (!IsEmpty.is(name)) {
+	    if (!Empty.is(name)) {
 		addNewGroup(name, false, false);
 	    }
 	}

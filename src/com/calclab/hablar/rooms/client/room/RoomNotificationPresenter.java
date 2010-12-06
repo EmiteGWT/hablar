@@ -88,7 +88,7 @@ public class RoomNotificationPresenter {
     }
 
     private void show(final String body) {
-	roomPresenter.addMessage(new ChatMessage(null, null, body, ChatMessage.MessageType.info));
+	roomPresenter.addMessage(new ChatMessage(body));
 	roomPresenter.fireUserNotification(body);
     }
 }

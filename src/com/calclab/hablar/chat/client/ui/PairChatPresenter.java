@@ -19,7 +19,7 @@ import com.calclab.hablar.core.client.page.events.UserMessageEvent;
 import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
 import com.calclab.hablar.core.client.ui.menu.Action;
-import com.calclab.hablar.core.client.validators.IsEmpty;
+import com.calclab.hablar.core.client.validators.Empty;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -33,10 +33,12 @@ public class PairChatPresenter extends ChatPresenter implements PairChatPage {
     private final Chat chat;
     private final String userName;
     private final DelayGinjector delayGinjector = GWT.create(DelayGinjector.class);
+    private final XmppRoster roster;
 
     public PairChatPresenter(final XmppRoster roster, final HablarEventBus eventBus, final Chat chat,
 	    final ChatDisplay display) {
 	super(TYPE, Idify.uriId(chat.getURI().toString()), eventBus, chat, display);
+	this.roster = roster;
 	this.chat = chat;
 	display.setId(getId());
 	final XmppURI fromURI = chat.getURI();
@@ -50,18 +52,7 @@ public class PairChatPresenter extends ChatPresenter implements PairChatPage {
 
 	    @Override
 	    public void onMessage(final MessageEvent event) {
-		final Message message = event.getMessage();
-		final String messageBody = message.getBody();
-		if (!IsEmpty.is(messageBody)) {
-		    final DelayManager delayManager = delayGinjector.getDelayManager();
-		    final Delay delay = delayManager.getDelay(message);
-		    addMessage(new ChatMessage(null, userName, messageBody, ChatMessage.MessageType.incoming),
-			    delay != null ? delay.getStamp() : null);
-		    fireUserMessage(messageBody);
-		    if (getVisibility() == Visibility.hidden) {
-			requestVisibility(Visibility.notFocused);
-		    }
-		}
+		receiveMessage(event.getMessage());
 	    }
 	});
 
@@ -107,6 +98,22 @@ public class PairChatPresenter extends ChatPresenter implements PairChatPage {
     @Override
     public String getChatName() {
 	return userName;
+    }
+
+    private void receiveMessage(final Message message) {
+
+	final String messageBody = message.getBody();
+	if (Empty.not(messageBody)) {
+	    final DelayManager delayManager = delayGinjector.getDelayManager();
+	    final Delay delay = delayManager.getDelay(message);
+	    final String color = ColorHelper.getColor(message.getFrom());
+	    addMessage(new ChatMessage(null, color, userName, messageBody, ChatMessage.MessageType.incoming),
+		    delay != null ? delay.getStamp() : null);
+	    fireUserMessage(messageBody);
+	    if (getVisibility() == Visibility.hidden) {
+		requestVisibility(Visibility.notFocused);
+	    }
+	}
     }
 
     @Override
