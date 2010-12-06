@@ -14,12 +14,12 @@ public class OverlayContainer implements PagesContainer {
     public static final String ROL = "Overlay";
     private Page<?> currentPagePresenter;
     private final ArrayList<Page<?>> pages;
-    private final OverlayLayout layout;
+    private final OverlayPanel panel;
 
-    public OverlayContainer(final HablarEventBus eventBus, final OverlayLayout layout) {
-	this.layout = layout;
+    public OverlayContainer(final HablarEventBus eventBus, final OverlayPanel panel) {
+	this.panel = panel;
 	pages = new ArrayList<Page<?>>();
-	layout.setVisible(false);
+	panel.setVisible(false);
 	eventBus.addHandler(VisibilityChangeRequestEvent.TYPE, new VisibilityChangeRequestHandler() {
 	    @Override
 	    public void onVisibilityChangeRequest(final VisibilityChangeRequestEvent event) {
@@ -37,23 +37,13 @@ public class OverlayContainer implements PagesContainer {
 	return true;
     }
 
-    @Override
-    public String getRol() {
-	return ROL;
-    }
-
-    @Override
-    public Widget getWidget() {
-	return layout.getWidget();
-    }
-
     private void changeVisibility(final Visibility newVisibility, final Page<?> page) {
 	if (pages.contains(page)) {
 	    if (newVisibility == Visibility.focused) {
 		focus(page);
-	    } else if (newVisibility == Visibility.hidden || newVisibility == Visibility.notFocused) {
+	    } else if ((newVisibility == Visibility.hidden) || (newVisibility == Visibility.notFocused)) {
 		hide(page);
-	    } else if (newVisibility == Visibility.toggle && page.getVisibility() == Visibility.focused) {
+	    } else if ((newVisibility == Visibility.toggle) && (page.getVisibility() == Visibility.focused)) {
 		hide(page);
 	    }
 	}
@@ -64,13 +54,23 @@ public class OverlayContainer implements PagesContainer {
 	currentPagePresenter = page;
 	final Widget widget = currentPagePresenter.getDisplay().asWidget();
 	page.setVisibility(Visibility.focused);
-	layout.add(widget);
+	panel.add(widget);
+    }
+
+    @Override
+    public String getRol() {
+	return ROL;
+    }
+
+    @Override
+    public Widget getWidget() {
+	return panel.getWidget();
     }
 
     private void hide(final Page<?> page) {
 	if (currentPagePresenter == page) {
 	    final Widget widget = currentPagePresenter.getDisplay().asWidget();
-	    layout.remove(widget);
+	    panel.remove(widget);
 	    currentPagePresenter = null;
 	    page.setVisibility(Visibility.hidden);
 	}

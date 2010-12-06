@@ -7,5 +7,5 @@
 
 	<source path="client" />
 	<entry-point
-		class="com.calclab.hablar.dock.client.HablarDockModule" />
+		class="com.calclab.hablar.dock.client.HablarDockEntryPoint" />
 </module>

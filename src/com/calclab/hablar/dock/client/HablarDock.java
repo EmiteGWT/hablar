@@ -15,8 +15,7 @@ public class HablarDock {
     public HablarDock(final Hablar hablar, final DockConfig config) {
 	final HablarEventBus eventBus = hablar.getEventBus();
 	final PagesContainer main = hablar.getContainer(MainContainer.ROL);
-	final DockContainer container = new DockContainer(eventBus, config, new DockLayout(main.getWidget(), hablar
-		.getDisplay()));
+	final VariableDockContainer container = new VariableDockContainer(eventBus, config, main, hablar.getDisplay());
 	hablar.addContainer(container, Chain.before);
     }
 

@@ -2,7 +2,6 @@ package com.calclab.hablar.dock.client;
 
 import com.calclab.hablar.core.client.pages.HeaderDisplay;
 import com.calclab.hablar.core.client.ui.icon.Icons;
-import com.calclab.hablar.dock.client.DockConfig.Position;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -33,7 +32,7 @@ public class DockHeaderWidget extends Composite implements HeaderDisplay {
     @UiField
     Image icon, close;
 
-    public DockHeaderWidget(final String pageId, final Position position) {
+    public DockHeaderWidget(final String pageId, final String position) {
 	initWidget(uiBinder.createAndBindUi(this));
 	ensureDebugId("HeaderWidget-" + pageId);
 	flow.addStyleName("DockHeaderWidget-" + position);

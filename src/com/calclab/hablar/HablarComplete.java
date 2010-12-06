@@ -5,9 +5,7 @@ import com.calclab.hablar.clipboard.client.HablarClipboard;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarCore;
 import com.calclab.hablar.core.client.HablarWidget;
-import com.calclab.hablar.dock.client.DockConfig;
 import com.calclab.hablar.dock.client.HablarDock;
-import com.calclab.hablar.dock.client.DockConfig.Position;
 import com.calclab.hablar.editbuddy.client.HablarEditBuddy;
 import com.calclab.hablar.group.client.HablarGroup;
 import com.calclab.hablar.groupchat.client.HablarGroupChat;
@@ -19,7 +17,6 @@ import com.calclab.hablar.search.client.HablarSearch;
 import com.calclab.hablar.signals.client.HablarSignals;
 import com.calclab.hablar.signals.sound.client.HablarSoundSignals;
 import com.calclab.hablar.user.client.HablarUser;
-import com.calclab.hablar.user.client.UserPage;
 import com.calclab.hablar.usergroups.client.HablarUserGroups;
 import com.calclab.hablar.vcard.client.HablarVCard;
 
@@ -31,18 +28,7 @@ public class HablarComplete {
 	new HablarRooms(hablar, config.roomsConfig);
 	new HablarGroupChat(hablar, config.roomsConfig);
 
-	final DockConfig dock = new DockConfig();
-	config.dockUser = true;
-	if (config.dockUser) {
-	    dock.set(Position.top, UserPage.TYPE, 24);
-	}
-
-	if ("left".equals(config.dockRoster)) {
-	    dock.set(Position.left, RosterPage.TYPE, 250);
-	} else if ("right".equals(config.dockRoster)) {
-	    dock.set(Position.right, RosterPage.TYPE, 250);
-	}
-	new HablarDock(hablar, dock);
+	new HablarDock(hablar, config.dockConfig);
 
 	new HablarUser(hablar);
 

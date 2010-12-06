@@ -5,6 +5,7 @@ import com.calclab.hablar.chat.client.ChatConfig;
 import com.calclab.hablar.core.client.HablarDisplay;
 import com.calclab.hablar.core.client.pages.tabs.TabsLayout;
 import com.calclab.hablar.core.client.pages.tabs.TabsLayout.TabHeaderSize;
+import com.calclab.hablar.dock.client.DockConfig;
 import com.calclab.hablar.rooms.client.HablarRoomsConfig;
 import com.calclab.hablar.roster.client.RosterConfig;
 import com.calclab.hablar.search.client.SearchConfig;
@@ -59,6 +60,7 @@ public class HablarConfig {
 	config.soundConfig = SoundSignalsConfig.getFromMeta();
 	config.vcardConfig = VCardConfig.getFromMeta();
 	config.chatConfig = ChatConfig.getFromMeta();
+	config.dockConfig = DockConfig.getFromMeta();
 	return config;
     }
 
@@ -137,4 +139,6 @@ public class HablarConfig {
     public SoundSignalsConfig soundConfig = new SoundSignalsConfig();
 
     public ChatConfig chatConfig = new ChatConfig();
+
+    public DockConfig dockConfig;
 }

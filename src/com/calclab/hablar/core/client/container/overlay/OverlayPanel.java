@@ -10,11 +10,11 @@ import com.google.gwt.layout.client.Layout.Layer;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class OverlayLayout {
+public class OverlayPanel {
     private final LayoutPanel panel;
     private static final String STYLE_OVERLAY = "hablar-Overlay";
 
-    public OverlayLayout(HablarDisplay display) {
+    public OverlayPanel(final HablarDisplay display) {
 	this.panel = new LayoutPanel();
 	panel.addStyleName("hablar-OverlayContainer");
 	display.add(panel);
@@ -24,7 +24,7 @@ public class OverlayLayout {
 	panel.getElement().getParentElement().addClassName("hablar-OverlayContainerOuter");
     }
 
-    public void add(Widget widget) {
+    public void add(final Widget widget) {
 	widget.addStyleName(STYLE_OVERLAY);
 	widget.addStyleName("hablar-clearColor");
 	widget.addStyleName("hablar-darkBackground");
@@ -32,7 +32,7 @@ public class OverlayLayout {
 	// FIXME: Animation
 	panel.setWidgetLeftRight(widget, 0, PX, 0, PX);
 	panel.setWidgetTopHeight(widget, 0, PX, 0, PX);
-	//panel.forceLayout();
+	// panel.forceLayout();
 	setVisible(true);
 	panel.setWidgetTopBottom(widget, 0, PX, 0, PX);
 	panel.getWidgetContainerElement(widget).getStyle().setOverflow(Overflow.VISIBLE);
@@ -46,7 +46,7 @@ public class OverlayLayout {
     public void remove(final Widget widget) {
 	// FIXME: Animation
 	panel.setWidgetTopHeight(widget, 0, PX, 100, PCT);
-	//panel.forceLayout();
+	// panel.forceLayout();
 	panel.setWidgetTopHeight(widget, 0, PX, 0, PX);
 	panel.animate(250, new AnimationCallback() {
 	    @Override
@@ -57,18 +57,18 @@ public class OverlayLayout {
 	    }
 
 	    @Override
-	    public void onLayout(Layer layer, double progress) {
+	    public void onLayout(final Layer layer, final double progress) {
 	    }
 	});
 
     }
 
-    public void setVisible(boolean visible) {
+    public void setVisible(final boolean visible) {
 	panel.setVisible(visible);
 
-	// +++ Serious bodge for IE6
+	// +++ Serious bug for IE6
 	// Sets the z-index to 1 if visible, -1 if not
-	if(panel.getElement().getParentElement() != null) {
+	if (panel.getElement().getParentElement() != null) {
 	    panel.getElement().getParentElement().getStyle().setZIndex(visible ? 1 : -1);
 	}
 	// ---

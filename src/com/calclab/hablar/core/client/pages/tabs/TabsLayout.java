@@ -11,16 +11,10 @@ import com.google.gwt.user.client.ui.Widget;
 public class TabsLayout extends MainLayout {
 
     public static class TabHeaderSize {
-	public static TabHeaderSize DEFAULT_SIZE = new TabHeaderSize("30px", "120px", 10);
+	public static TabHeaderSize DEFAULT_SIZE = new TabHeaderSize("24px", "120px", 10);
 
-	private String height;
-
-	private String width;
-
-	private int trim;
-
-	public static TabHeaderSize create(String height, String width, Integer trim) {
-	    TabHeaderSize retValue = DEFAULT_SIZE.createCopy();
+	public static TabHeaderSize create(final String height, final String width, final Integer trim) {
+	    final TabHeaderSize retValue = DEFAULT_SIZE.createCopy();
 	    if (height != null) {
 		retValue.height = height;
 	    }
@@ -33,41 +27,47 @@ public class TabsLayout extends MainLayout {
 	    return retValue;
 	}
 
-	public TabHeaderSize(String height, String width, int trim) {
+	private String height;
+
+	private String width;
+
+	private int trim;
+
+	public TabHeaderSize(final String height, final String width, final int trim) {
 	    this.height = height;
 	    this.width = width;
 	    this.trim = trim;
+	}
+
+	protected TabHeaderSize createCopy() {
+	    return new TabHeaderSize(height, width, trim);
 	}
 
 	public String getHeight() {
 	    return height;
 	}
 
-	public String getWidth() {
-	    return width;
-	}
-
 	public int getTrim() {
 	    return trim;
 	}
 
-	protected TabHeaderSize createCopy()  {
-	    return new TabHeaderSize(height, width, trim);
+	public String getWidth() {
+	    return width;
 	}
     }
 
-    private static final double BAR_SIZE = 30;
+    private static final double BAR_SIZE = 24;
     private static TabsPanel tabs;
 
     private final TabsMenuPresenter tabsMenuPresenter;
 
-    private TabHeaderSize tabHeaderSize;
+    private final TabHeaderSize tabHeaderSize;
 
     public TabsLayout(final HablarDisplay parent) {
 	this(parent, TabHeaderSize.DEFAULT_SIZE);
     }
 
-    public TabsLayout(final HablarDisplay parent, TabHeaderSize tabHeaderSize) {
+    public TabsLayout(final HablarDisplay parent, final TabHeaderSize tabHeaderSize) {
 	super(tabs = new TabsPanel(BAR_SIZE, PX), parent);
 	tabsMenuPresenter = new TabsMenuPresenter(tabs.getMenu());
 	this.tabHeaderSize = tabHeaderSize;

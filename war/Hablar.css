@@ -78,6 +78,8 @@ div.hablar-SearchResultItemWidget:hover {
 
 .hablar-HablarWidget .gwt-TabLayoutPanel .gwt-TabLayoutPanelTab {
   background-color: #AAAAAA;
+  	padding: 0px 1px;
+  	margin: 0 3px 0 0;
 }
 
 .hablar-HablarWidget .gwt-TabLayoutPanel .gwt-TabLayoutPanelTab-selected {
@@ -271,6 +273,7 @@ body {
     background-color: transparent;
     border: none;
 }
+
 
 .hablar-TabsHeaderWidget .close {
     margin: 2px 3px;
@@ -577,4 +580,8 @@ body {
     -ms-text-overflow: ellipsis;
     -moz-binding: url('ellipsis.xml#ellipsis');
     width: 100%
+}
+
+.gwt-TextArea {
+	border: 1px solid #bbbbbb;
 }

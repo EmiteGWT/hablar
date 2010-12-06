@@ -18,14 +18,14 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class OverlayContainerTests {
 
-    private OverlayLayout layout;
+    private OverlayPanel layout;
     private OverlayContainer container;
     private EventBusTester eventBus;
 
     @Before
     public void setup() {
 	eventBus = new EventBusTester();
-	layout = mock(OverlayLayout.class);
+	layout = mock(OverlayPanel.class);
 	container = new OverlayContainer(eventBus, layout);
     }
 
