@@ -23,7 +23,7 @@
 				<br/>
 				<label ui:field="userListLabel">Users:</label>
 				<p>
-					<hs:DoubleList ui:field="selectionList" addStyleNames="{style.wideArea} hablar-clearBackground hablar-darkColor" />
+					<hs:DoubleList ui:field="selectionList" addStyleNames="{style.wideArea} hablar-darkColor" />
 				</p>
 				<div class="actions hablar-topDefaultBordered">
 					<g:Button ui:field="accept">Accept</g:Button>

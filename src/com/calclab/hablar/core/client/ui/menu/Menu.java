@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.Window;
 
 public class Menu<T> implements Presenter<MenuDisplay<T>> {
 
-    private static final int WIDTH = 169;
-    private static final int Y_OFFSET = 8;
+    private static final int DEFAULT_WIDTH = 169;
+    private static final int Y_OFFSET = 0;
+    private static final int X_OFFSET = 10;
     private final MenuDisplay<T> display;
     private T target;
     private final ArrayList<Action<T>> actions;
@@ -55,34 +55,18 @@ public class Menu<T> implements Presenter<MenuDisplay<T>> {
 	    display.setActionVisible(action, action.isApplicable(target));
 	}
 
-	int menuLeft = left;
-
-	// If the menu goes off the right edge of the window, make the anchor
-	// point the top right
-	// This should hopefully mean the menu is always displayed on the screen
-	if ((left + WIDTH) > Window.getClientWidth()) {
-	    menuLeft = left - WIDTH;
-	}
+	int menuLeft = left < DEFAULT_WIDTH ? left : (left - DEFAULT_WIDTH + X_OFFSET);
 
 	display.show(menuLeft, top + Y_OFFSET);
 
-	// This next bit is just in case the rendered width is different from the specified width - there might be some extra css or something
-	int width = display.asWidget().getOffsetWidth();
+	// This next bit is just in case the rendered width is different from
+	// the specified width - there might be some extra css or something
+	final int width = display.asWidget().getOffsetWidth();
 
-	if (width != WIDTH) {
-	    menuLeft = left;
-
-	    // If the menu goes off the right edge of the window, make the
-	    // anchor point the top right
-	    // This should hopefully mean the menu is always displayed on the
-	    // screen
-	    if ((left + width) > Window.getClientWidth()) {
-		menuLeft = left - width;
-	    }
-	    
+	if (width != DEFAULT_WIDTH) {
+	    menuLeft = left < width ? left : (left - width + X_OFFSET);
 	    display.show(menuLeft, top + Y_OFFSET);
 	}
-
     }
 
 }

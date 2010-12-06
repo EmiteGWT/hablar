@@ -15,6 +15,8 @@ public class VariableDockHelper {
     }
 
     public void slideDown(final HablarDisplay display, final LayoutPanel panel, final int headerSize) {
+	// show the second panel (content)...
+	panel.getWidget(1).setVisible(true);
 	display.setWidgetTopBottom(panel, 0, PX, headerSize, PX);
 	display.forceLayout();
 	display.setWidgetTopBottom(panel, 0, PX, 0, PX);

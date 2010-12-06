@@ -11,7 +11,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class TabsLayout extends MainLayout {
 
     public static class TabHeaderSize {
-	public static TabHeaderSize DEFAULT_SIZE = new TabHeaderSize("24px", "120px", 10);
+	public static TabHeaderSize DEFAULT_SIZE = new TabHeaderSize("23px", "120px", 10);
 
 	public static TabHeaderSize create(final String height, final String width, final Integer trim) {
 	    final TabHeaderSize retValue = DEFAULT_SIZE.createCopy();

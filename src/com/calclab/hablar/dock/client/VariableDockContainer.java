@@ -117,6 +117,7 @@ public class VariableDockContainer implements PagesContainer {
 	panel.setWidgetTopHeight(headerWidget, 0, PX, headerSize, PX);
 	panel.setWidgetLeftRight(headerWidget, 0, PX, 0, PX);
 	panel.add(widget);
+	widget.setVisible(!page.getType().equals(UserPage.TYPE));
 	panel.setWidgetTopBottom(widget, headerSize, PX, 0, PX);
 	panel.setWidgetLeftRight(widget, 0, PX, 0, PX);
     }

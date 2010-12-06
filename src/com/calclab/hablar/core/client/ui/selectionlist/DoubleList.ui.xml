@@ -23,7 +23,7 @@
 			<g:Label ui:field="selectedLabel" addStyleNames="{style.labelAlign}">Selected</g:Label>
 		</g:layer>
 		<g:layer top="1.7em" bottom="0" left="0" width="45%">
-			<hs:SelectionList ui:field="availableList" addStyleNames="hablar-lightBordered" />
+			<hs:SelectionList ui:field="availableList" addStyleNames="hablar-lightBordered hablar-clearBackground" />
 		</g:layer>
 		<g:layer top="1.7em" bottom="0" left="46%" width="8%">
 			<g:FlowPanel>
@@ -34,7 +34,7 @@
 			</g:FlowPanel>
 		</g:layer>
 		<g:layer top="1.7em" bottom="0" left="55%" width="45%">
-			<hs:SelectionList ui:field="selectedList" addStyleNames="hablar-lightBordered" />
+			<hs:SelectionList ui:field="selectedList" addStyleNames="hablar-lightBordered hablar-clearBackground" />
 		</g:layer>
 	</g:LayoutPanel>
 </ui:UiBinder>
