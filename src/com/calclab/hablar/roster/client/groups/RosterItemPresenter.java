@@ -1,7 +1,6 @@
 package com.calclab.hablar.roster.client.groups;
 
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.hablar.chat.client.ui.ColorHelper;
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
 import com.calclab.hablar.core.client.ui.menu.Menu;
@@ -81,7 +80,7 @@ public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
 	display.setIcon(PresenceIcon.get(item.isAvailable(), item.getShow()));
 	final String title = clickActionDescription + name + " (" + jidString + ")";
 	display.setWidgetTitle(title);
-	display.setColor(ColorHelper.getColor(item.getJID()));
+	// display.setColor(ColorHelper.getColor(item.getJID()));
     }
 
 }

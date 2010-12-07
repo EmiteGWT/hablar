@@ -6,6 +6,7 @@ import com.calclab.emite.core.client.events.MessageEvent;
 import com.calclab.emite.core.client.events.MessageHandler;
 import com.calclab.emite.core.client.packet.TextUtils;
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
+import com.calclab.emite.core.client.xmpp.stanzas.Message.Type;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.Chat;
@@ -30,12 +31,10 @@ public class PairChatPresenter extends ChatPresenter implements PairChatPage {
 
     private final Chat chat;
     private final String userName;
-    private final XmppRoster roster;
 
     public PairChatPresenter(final XmppRoster roster, final HablarEventBus eventBus, final Chat chat,
 	    final ChatDisplay display) {
 	super(TYPE, Idify.uriId(chat.getURI().toString()), eventBus, chat, display);
-	this.roster = roster;
 	this.chat = chat;
 	display.setId(getId());
 	final XmppURI fromURI = chat.getURI();
@@ -108,9 +107,8 @@ public class PairChatPresenter extends ChatPresenter implements PairChatPage {
     }
 
     private void receiveMessage(final Message message) {
-
 	final String messageBody = message.getBody();
-	if (Empty.not(messageBody)) {
+	if ((Type.error != message.getType()) && Empty.not(messageBody)) {
 	    final Delay delay = DelayHelper.getDelay(message);
 	    final String color = ColorHelper.getColor(message.getFrom().getJID());
 	    final ChatMessage chatMessage = new ChatMessage(null, color, userName, messageBody,
