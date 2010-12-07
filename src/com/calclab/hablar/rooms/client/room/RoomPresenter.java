@@ -10,8 +10,7 @@ import com.calclab.emite.im.client.chat.ChatStates;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.xep.delay.client.Delay;
-import com.calclab.emite.xep.delay.client.DelayGinjector;
-import com.calclab.emite.xep.delay.client.DelayManager;
+import com.calclab.emite.xep.delay.client.DelayHelper;
 import com.calclab.emite.xep.muc.client.Occupant;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.hablar.chat.client.ui.ChatMessage;
@@ -25,7 +24,6 @@ import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.validators.Empty;
 import com.calclab.hablar.rooms.client.RoomName;
 import com.calclab.hablar.rooms.client.occupant.OccupantsPresenter;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
@@ -35,7 +33,6 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
     public static final String TYPE = "Room";
     public static final String ROOM_MESSAGE = "RoomMessage";
     private static int id = 0;
-    private final DelayGinjector delayGinjector = GWT.create(DelayGinjector.class);
 
     private final Room room;
 
@@ -78,14 +75,17 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
 		    from = message.getFrom().getResource();
 		}
 
-		final DelayManager delayManager = delayGinjector.getDelayManager();
-		final Delay delay = delayManager.getDelay(message);
+		final Delay delay = DelayHelper.getDelay(message);
 		if (!room.isComingFromMe(message) || (delay != null)) {
 		    final String messageBody = message.getBody();
 		    if (Empty.not(messageBody)) {
-			final String color = ColorHelper.getColor(message.getFrom());
-			addMessage(new ChatMessage(null, from, color, messageBody, ChatMessage.MessageType.incoming),
-				delay != null ? delay.getStamp() : null);
+			final String color = ColorHelper.getColor(message.getFrom().getJID());
+			final ChatMessage chatMessage = new ChatMessage(null, from, color, messageBody,
+				ChatMessage.MessageType.incoming);
+			if (delay != null) {
+			    chatMessage.setDate(delay.getStamp());
+			}
+			addMessage(chatMessage);
 			fireUserMessage(roomName, from, messageBody);
 		    }
 		}
@@ -125,17 +125,6 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
 	});
     }
 
-    private void fireUserMessage(final String roomName, final String from, String body) {
-	body = ChatMessageFormatter.ellipsis(body, 25);
-	final String message = Empty.is(from) ? i18n().incommingAdminMessage(roomName, body) : i18n().incommingMessage(
-		roomName, from, body);
-	fireUserNotification(message);
-    }
-
-    void fireUserNotification(final String message) {
-	eventBus.fireEvent(new UserMessageEvent(this, message, ROOM_MESSAGE));
-    }
-
     @Override
     public String getChatName() {
 	return room.getID();
@@ -152,6 +141,17 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
 	    room.close();
 	}
 	super.setVisibility(visibility);
+    }
+
+    private void fireUserMessage(final String roomName, final String from, String body) {
+	body = ChatMessageFormatter.ellipsis(body, 25);
+	final String message = Empty.is(from) ? i18n().incommingAdminMessage(roomName, body) : i18n().incommingMessage(
+		roomName, from, body);
+	fireUserNotification(message);
+    }
+
+    void fireUserNotification(final String message) {
+	eventBus.fireEvent(new UserMessageEvent(this, message, ROOM_MESSAGE));
     }
 
 }

@@ -22,7 +22,9 @@ public class GroupHeaderWidget extends Composite implements GroupHeaderDisplay {
     Label name;
 
     @UiField
-    Image menu;
+    Image menu; // , toggle;
+
+    private static final String COLLAPSED_CLASS = "hablar-lightColor";
 
     public GroupHeaderWidget(final String id) {
 	initWidget(uiBinder.createAndBindUi(this));
@@ -49,6 +51,17 @@ public class GroupHeaderWidget extends Composite implements GroupHeaderDisplay {
     @Override
     public HasClickHandlers getToggleVisibility() {
 	return name;
+    }
+
+    @Override
+    public void setCollapsed(final boolean isCollapsed) {
+	if (isCollapsed) {
+	    addStyleName(COLLAPSED_CLASS);
+	    // Icons.set(toggle, Icons.PLUS);
+	} else {
+	    removeStyleName(COLLAPSED_CLASS);
+	    // Icons.set(toggle, Icons.LESS);
+	}
     }
 
     @Override

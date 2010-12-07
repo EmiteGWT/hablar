@@ -8,6 +8,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -22,7 +23,9 @@ public class ChatMessageWidget extends Composite {
     private static ChatMessageUiBinder uiBinder = GWT.create(ChatMessageUiBinder.class);
 
     @UiField
-    SpanElement author, body, metadata;
+    SpanElement body, metadata;
+    @UiField
+    Label author;
 
     public ChatMessageWidget(final ChatMessage message) {
 	initWidget(uiBinder.createAndBindUi(this));
@@ -30,9 +33,9 @@ public class ChatMessageWidget extends Composite {
 	    metadata.setInnerText(message.metadata);
 	}
 	if (Empty.not(message.author)) {
-	    author.setInnerText(message.author + ": ");
+	    author.setText(message.author + ": ");
 	    GWT.log("COLOR: " + message.color);
-	    DOM.setStyleAttribute(this.getElement(), "backgroundColor", message.color);
+	    DOM.setStyleAttribute(author.getElement(), "color", message.color);
 	} else {
 	    message.type = ChatMessage.MessageType.info;
 	}

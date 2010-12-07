@@ -8,6 +8,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HasText;
@@ -23,7 +24,7 @@ public class RosterItemWidget extends Composite implements RosterItemDisplay {
 
     @UiField
     FocusPanel self;
-    
+
     @UiField
     LayoutPanel layoutPanel;
 
@@ -40,7 +41,7 @@ public class RosterItemWidget extends Composite implements RosterItemDisplay {
 	jid.setText(item.getJID().toString());
 	name.setText(item.getName());
 	final String status = item.getStatus();
-	final boolean hasStatus = status != null && status.trim().length() > 0;
+	final boolean hasStatus = (status != null) && (status.trim().length() > 0);
 	if (hasStatus) {
 	    this.status.setText(status);
 	}
@@ -59,6 +60,11 @@ public class RosterItemWidget extends Composite implements RosterItemDisplay {
     @Override
     public Widget asWidget() {
 	return this;
+    }
+
+    @Override
+    public void forceLayout() {
+	layoutPanel.forceLayout();
     }
 
     @Override
@@ -87,6 +93,11 @@ public class RosterItemWidget extends Composite implements RosterItemDisplay {
     }
 
     @Override
+    public void setColor(final String color) {
+	DOM.setStyleAttribute(this.getElement(), "color", color);
+    }
+
+    @Override
     public void setIcon(final String token) {
 	Icons.set(icon, token);
     }
@@ -105,9 +116,4 @@ public class RosterItemWidget extends Composite implements RosterItemDisplay {
     public void setWidgetTitle(final String title) {
 	setTitle(title);
     }
-
-	@Override
-	public void forceLayout() {
-		layoutPanel.forceLayout();
-	}
 }

@@ -6,14 +6,14 @@ import com.calclab.hablar.chat.client.ChatMessages;
 import com.calclab.hablar.core.client.ui.actions.ActionWidget;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasFocusHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -45,17 +45,13 @@ public class ChatWidget extends Composite implements ChatDisplay {
 	return messages;
     }
 
-    @Override
-    public HasFocusHandlers getTextBoxFocus() {
-	return talkBox;
-    }
-
     public static void setMessages(final ChatMessages messages) {
 	ChatWidget.messages = messages;
     }
 
     @UiField
     protected TextArea talkBox;
+
     @UiField
     protected LayoutPanel page;
     @UiField
@@ -66,7 +62,6 @@ public class ChatWidget extends Composite implements ChatDisplay {
     protected Button send;
     @UiField
     protected Label state;
-
     @UiField
     ActionItemStyle style;
 
@@ -79,8 +74,9 @@ public class ChatWidget extends Composite implements ChatDisplay {
     }
 
     @Override
-    public void addMessage(final ChatMessage message) {
+    public void addMessage(final ChatMessage message, final String messageClass) {
 	final ChatMessageWidget widget = new ChatMessageWidget(message);
+	widget.addStyleName(messageClass);
 	list.add(widget);
 	scroll.ensureVisible(widget);
     }
@@ -113,16 +109,6 @@ public class ChatWidget extends Composite implements ChatDisplay {
     }
 
     @Override
-    public void setTextBoxFocus(final boolean hasFocus) {
-	DeferredCommand.addCommand(new Command() {
-	    @Override
-	    public void execute() {
-		talkBox.setFocus(hasFocus);
-	    }
-	});
-    }
-
-    @Override
     public HasClickHandlers getAction() {
 	return send;
     }
@@ -139,6 +125,11 @@ public class ChatWidget extends Composite implements ChatDisplay {
 
     @Override
     public HasKeyDownHandlers getTextBox() {
+	return talkBox;
+    }
+
+    @Override
+    public HasFocusHandlers getTextBoxFocus() {
 	return talkBox;
     }
 
@@ -165,7 +156,17 @@ public class ChatWidget extends Composite implements ChatDisplay {
 
     @Override
     public void setStatusVisible(final boolean visible) {
-    	state.setVisible(visible);
+	state.setVisible(visible);
+    }
+
+    @Override
+    public void setTextBoxFocus(final boolean hasFocus) {
+	Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+	    @Override
+	    public void execute() {
+		talkBox.setFocus(hasFocus);
+	    }
+	});
     }
 
     private void layoutControls() {

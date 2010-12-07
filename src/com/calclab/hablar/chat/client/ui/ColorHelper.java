@@ -5,15 +5,13 @@ import java.util.HashMap;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 
 public class ColorHelper {
-    public static final String ME = "#FFFFFF";
-    public static final String NONE = "#FFFFFF";
+    private static final double BRIGHTNESS = 0.95;
+    private static final double SATURATION = 0.80;
+    public static final String ME = "#0A0A0A";
+    public static final String NONE = "#0A0A0A";
     private static final double GOLDEN_RATIO = 0.618033988749895;
     private static HashMap<XmppURI, String> colors = new HashMap<XmppURI, String>();
     private static double current = Math.random();
-
-    private static String generateNext() {
-	return "#efefef";
-    }
 
     public static String getColor(final XmppURI from) {
 	String color = colors.get(from);
@@ -24,16 +22,16 @@ public class ColorHelper {
 	return color;
     }
 
-    public static int HSBtoRGB(final float hue, final float saturation, final float brightness) {
+    public static String HSBtoRGB(final double hue, final double saturation, final double brightness) {
 	int r = 0, g = 0, b = 0;
 	if (saturation == 0) {
 	    r = g = b = (int) (brightness * 255.0f + 0.5f);
 	} else {
-	    final float h = (hue - (float) Math.floor(hue)) * 6.0f;
-	    final float f = h - (float) java.lang.Math.floor(h);
-	    final float p = brightness * (1.0f - saturation);
-	    final float q = brightness * (1.0f - saturation * f);
-	    final float t = brightness * (1.0f - (saturation * (1.0f - f)));
+	    final double h = (hue - Math.floor(hue)) * 6.0f;
+	    final double f = h - java.lang.Math.floor(h);
+	    final double p = brightness * (1.0f - saturation);
+	    final double q = brightness * (1.0f - saturation * f);
+	    final double t = brightness * (1.0f - (saturation * (1.0f - f)));
 	    switch ((int) h) {
 	    case 0:
 		r = (int) (brightness * 255.0f + 0.5f);
@@ -67,12 +65,14 @@ public class ColorHelper {
 		break;
 	    }
 	}
-	return 0xff000000 | (r << 16) | (g << 8) | (b << 0);
+	return "rgb(" + r + "," + g + "," + b + ")";
+	// return 0xff000000 | (r << 16) | (g << 8) | (b << 0);
     }
 
-    private static String hsvToRgb(final double h, final double s, final double v) {
-	// TODO Auto-generated method stub
-	return null;
+    private static String generateNext() {
+	current += GOLDEN_RATIO;
+	current %= 1;
+	return HSBtoRGB(current, SATURATION, BRIGHTNESS);
     }
 
 }

@@ -6,15 +6,13 @@ import com.google.gwt.user.client.ui.HasText;
 
 public interface GroupHeaderDisplay extends Display {
 
-    void addStyleName(String styleName);
-
     HasText getName();
 
     HasClickHandlers getOpenMenu();
 
     HasClickHandlers getToggleVisibility();
 
-    void removeStyleName(String styleName);
+    void setCollapsed(boolean b);
 
     void setMenuVisible(boolean visible);
 }

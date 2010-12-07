@@ -16,7 +16,7 @@ public class Icons {
     /**
      * the default icon
      **/
-    public static final String DEFAULT = "default";
+    public static final String MISSING_ICON = "default";
     public static final String BUDDY_ADD = "add";
     public static final String BUDDY = "buddy";
     public static final String BUDDY_DND = "buddy_dnd";
@@ -37,6 +37,8 @@ public class Icons {
     public static final String CONNECTED = "on";
     public static final String ROSTER = "roster";
     public static final String SEARCH = "search";
+    public static final String PLUS = "plus";
+    public static final String LESS = "less";
 
     private static HashMap<String, ImageResource> icons = new HashMap<String, ImageResource>();
 
@@ -49,7 +51,8 @@ public class Icons {
      * @return the icon if any or a default icon
      */
     public static ImageResource get(final String token) {
-	return icons.get(token);
+	final ImageResource icon = icons.get(token);
+	return icon;
     }
 
     /**
@@ -82,8 +85,10 @@ public class Icons {
 	// image.getElement().setAttribute("src", get(token).getURL());
 
 	// Some workaround
-	String styles = image.getElement().getClassName();
-	image.setResource(get(token));
+	final String styles = image.getElement().getClassName();
+	ImageResource resource = get(token);
+	resource = resource != null ? resource : get(MISSING_ICON);
+	image.setResource(resource);
 	image.getElement().setClassName(styles);
     }
 

@@ -1,7 +1,6 @@
 package com.calclab.hablar.chat.client.ui;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import com.calclab.emite.core.client.events.StateChangedEvent;
 import com.calclab.emite.core.client.events.StateChangedHandler;
@@ -14,7 +13,6 @@ import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.validators.Empty;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
-import com.google.gwt.i18n.client.DateTimeFormat;
 
 /**
  * Shared code for different chat presenters (currently PairChatPresenter and
@@ -22,14 +20,18 @@ import com.google.gwt.i18n.client.DateTimeFormat;
  * 
  */
 public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPage {
+    private static final String ODD = "odd";
+    private static final String EVEN = "even";
     private final ArrayList<ChatMessage> messages;
-    private boolean showDate;
+    private String currentClass;
+    private String lastAuthor;
 
     public ChatPresenter(final String pageType, final String id, final HablarEventBus eventBus, final Chat chat,
 	    final ChatDisplay display) {
 	super(pageType, id, eventBus, display);
 	messages = new ArrayList<ChatMessage>();
-	showDate = true;
+	this.currentClass = ODD;
+	this.lastAuthor = null;
 
 	display.getTextBoxFocus().addFocusHandler(new FocusHandler() {
 	    @Override
@@ -51,38 +53,26 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
      */
     @Override
     public void addMessage(final ChatMessage message) {
-	addMessage(message, null);
-    }
-
-    /**
-     * Add message to the chat display.
-     */
-    @SuppressWarnings("deprecation")
-    @Override
-    public void addMessage(final ChatMessage message, final Date stamp) {
-	Date date = stamp;
-	final Date now = new Date();
-	DateTimeFormat format;
-	if (date == null) {
-	    date = now;
-	    format = DateTimeFormat.getShortTimeFormat();
-	} else if ((date.getYear() == now.getYear()) && (date.getMonth() == now.getMonth())
-		&& (date.getDate() == now.getDate())) {
-	    format = DateTimeFormat.getShortTimeFormat();
-	} else {
-	    format = DateTimeFormat.getShortDateTimeFormat();
-	}
-
-	if (showDate) {
-	    message.metadata = format.format(date);
+	final boolean sameAuthor = (lastAuthor == null ? message.author == null : lastAuthor.equals(message.author));
+	if (!sameAuthor) {
+	    currentClass = currentClass == EVEN ? ODD : EVEN;
+	    lastAuthor = message.author;
 	}
 	messages.add(message);
-	display.addMessage(message);
+	display.addMessage(message, currentClass);
     }
 
     @Override
     public ArrayList<ChatMessage> getMessages() {
 	return messages;
+    }
+
+    @Override
+    public void setVisibility(final Visibility visibility) {
+	super.setVisibility(visibility);
+	if ((visibility == Visibility.focused) && BrowserFocusHandler.getInstance().hasFocus()) {
+	    display.setTextBoxFocus(true);
+	}
     }
 
     protected void sendMessage(final Chat chat, final ChatDisplay display) {
@@ -94,22 +84,10 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
 	}
     }
 
-    public void setShowDate(final boolean showDate) {
-	this.showDate = showDate;
-    }
-
     protected void setState(final String chatState) {
 	final boolean visible = ChatStates.ready.equals(chatState);
 	display.setControlsVisible(visible);
 	display.setStatusVisible(visible);
-    }
-
-    @Override
-    public void setVisibility(final Visibility visibility) {
-	super.setVisibility(visibility);
-	if ((visibility == Visibility.focused) && BrowserFocusHandler.getInstance().hasFocus()) {
-	    display.setTextBoxFocus(true);
-	}
     }
 
 }

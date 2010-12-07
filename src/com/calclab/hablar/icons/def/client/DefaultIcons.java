@@ -25,7 +25,7 @@ public class DefaultIcons implements EntryPoint {
 	Icons.register(Icons.GROUP_CHAT_ADD, bundle.groupChatAddIcon());
 	Icons.register(Icons.LOADING, bundle.loadingIcon());
 	Icons.register(Icons.MENU, bundle.menuIcon());
-	Icons.register(Icons.DEFAULT, bundle.missingIcon());
+	Icons.register(Icons.MISSING_ICON, bundle.missingIcon());
 	Icons.register(Icons.NOT_CONNECTED, bundle.offIcon());
 	Icons.register(Icons.CONNECTED, bundle.onIcon());
 	Icons.register(Icons.ROSTER, bundle.rosterIcon());

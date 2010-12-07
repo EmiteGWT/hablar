@@ -6,13 +6,12 @@ import com.calclab.emite.core.client.events.MessageEvent;
 import com.calclab.emite.core.client.events.MessageHandler;
 import com.calclab.emite.core.client.packet.TextUtils;
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
-import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
+import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.xep.delay.client.Delay;
-import com.calclab.emite.xep.delay.client.DelayGinjector;
-import com.calclab.emite.xep.delay.client.DelayManager;
+import com.calclab.emite.xep.delay.client.DelayHelper;
 import com.calclab.hablar.core.client.Idify;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.events.UserMessageEvent;
@@ -20,7 +19,6 @@ import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.validators.Empty;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
@@ -32,7 +30,6 @@ public class PairChatPresenter extends ChatPresenter implements PairChatPage {
 
     private final Chat chat;
     private final String userName;
-    private final DelayGinjector delayGinjector = GWT.create(DelayGinjector.class);
     private final XmppRoster roster;
 
     public PairChatPresenter(final XmppRoster roster, final HablarEventBus eventBus, final Chat chat,
@@ -85,11 +82,6 @@ public class PairChatPresenter extends ChatPresenter implements PairChatPage {
 	});
     }
 
-    private void fireUserMessage(final String body) {
-	final String message = i18n().newChatFrom(userName, TextUtils.ellipsis(body, 25));
-	eventBus.fireEvent(new UserMessageEvent(this, message, CHAT_MESSAGE));
-    }
-
     @Override
     public Chat getChat() {
 	return chat;
@@ -98,22 +90,6 @@ public class PairChatPresenter extends ChatPresenter implements PairChatPage {
     @Override
     public String getChatName() {
 	return userName;
-    }
-
-    private void receiveMessage(final Message message) {
-
-	final String messageBody = message.getBody();
-	if (Empty.not(messageBody)) {
-	    final DelayManager delayManager = delayGinjector.getDelayManager();
-	    final Delay delay = delayManager.getDelay(message);
-	    final String color = ColorHelper.getColor(message.getFrom());
-	    addMessage(new ChatMessage(null, color, userName, messageBody, ChatMessage.MessageType.incoming),
-		    delay != null ? delay.getStamp() : null);
-	    fireUserMessage(messageBody);
-	    if (getVisibility() == Visibility.hidden) {
-		requestVisibility(Visibility.notFocused);
-	    }
-	}
     }
 
     @Override
@@ -126,4 +102,27 @@ public class PairChatPresenter extends ChatPresenter implements PairChatPage {
 	}
     }
 
+    private void fireUserMessage(final String body) {
+	final String message = i18n().newChatFrom(userName, TextUtils.ellipsis(body, 25));
+	eventBus.fireEvent(new UserMessageEvent(this, message, CHAT_MESSAGE));
+    }
+
+    private void receiveMessage(final Message message) {
+
+	final String messageBody = message.getBody();
+	if (Empty.not(messageBody)) {
+	    final Delay delay = DelayHelper.getDelay(message);
+	    final String color = ColorHelper.getColor(message.getFrom().getJID());
+	    final ChatMessage chatMessage = new ChatMessage(null, color, userName, messageBody,
+		    ChatMessage.MessageType.incoming);
+	    if (delay != null) {
+		chatMessage.setDate(delay.getStamp());
+	    }
+	    addMessage(chatMessage);
+	    fireUserMessage(messageBody);
+	    if (getVisibility() == Visibility.hidden) {
+		requestVisibility(Visibility.notFocused);
+	    }
+	}
+    }
 }

@@ -15,7 +15,7 @@ public interface ChatDisplay extends Display {
      * 
      * @param message
      */
-    void addMessage(ChatMessage message);
+    void addMessage(ChatMessage message, String messageClass);
 
     /**
      * Adds a widget to the action bar for this chat view
@@ -29,8 +29,6 @@ public interface ChatDisplay extends Display {
 
     HasClickHandlers createAction(Action<?> action);
 
-    void setTextBoxFocus(boolean hasFocus);
-
     HasClickHandlers getAction();
 
     HasText getBody();
@@ -38,6 +36,8 @@ public interface ChatDisplay extends Display {
     HasText getState();
 
     HasKeyDownHandlers getTextBox();
+
+    HasFocusHandlers getTextBoxFocus();
 
     void setControlsVisible(boolean visible);
 
@@ -48,7 +48,6 @@ public interface ChatDisplay extends Display {
 
     void setStatusVisible(boolean visible);
 
-    HasFocusHandlers getTextBoxFocus();
-
+    void setTextBoxFocus(boolean hasFocus);
 
 }

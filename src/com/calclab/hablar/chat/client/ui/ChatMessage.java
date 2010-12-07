@@ -1,6 +1,9 @@
 package com.calclab.hablar.chat.client.ui;
 
+import java.util.Date;
+
 import com.calclab.hablar.core.client.validators.Empty;
+import com.google.gwt.i18n.client.DateTimeFormat;
 
 public class ChatMessage {
 
@@ -24,6 +27,23 @@ public class ChatMessage {
 	this.color = color;
 	this.body = body;
 	this.type = type;
+    }
+
+    @SuppressWarnings("deprecation")
+    public void setDate(Date date) {
+	final Date now = new Date();
+	DateTimeFormat format;
+	if (date == null) {
+	    date = now;
+	    format = DateTimeFormat.getShortTimeFormat();
+	} else if ((date.getYear() == now.getYear()) && (date.getMonth() == now.getMonth())
+		&& (date.getDate() == now.getDate())) {
+	    format = DateTimeFormat.getShortTimeFormat();
+	} else {
+	    format = DateTimeFormat.getShortDateTimeFormat();
+	}
+
+	this.metadata = format.format(date);
     }
 
     @Override

@@ -81,10 +81,6 @@ public class BrowserPopupHablarNotifier implements HablarNotifier {
 	    + "</style>"
 	    + "</head><body class=\"hablarPopupWindow\"><div id=\"notificationContainer\"></div></body></html>";
 
-    private static native int getScreenHeight() /*-{
-        return $wnd.screen.height;
-    }-*/;
-
     /**
      * Set the html which will be used to populate the popup window. I know I
      * shouldn't really do it like this, but at least it's simple!
@@ -92,6 +88,10 @@ public class BrowserPopupHablarNotifier implements HablarNotifier {
     public static void setPopupHtml(final String popupHtml) {
 	BrowserPopupHablarNotifier.popupHtml = popupHtml;
     }
+
+    private static native int getScreenHeight() /*-{
+        return $wnd.screen.height;
+    }-*/;
 
     /**
      * A counter of the number of messages in the current popup window
@@ -103,6 +103,34 @@ public class BrowserPopupHablarNotifier implements HablarNotifier {
      */
     public BrowserPopupHablarNotifier() {
 	messageCount = 0;
+    }
+
+    @Override
+    public String getDisplayName() {
+	return HablarSignals.i18n().browserPopupNotifierDisplayName();
+    }
+
+    @Override
+    public String getId() {
+	return "browserPopupNotifier";
+    }
+
+    @Override
+    public void show(final String userMessage, final String messageType) {
+	// Show the message only if the browser window doesn't have focus.
+	if (!BrowserFocusHandler.getInstance().hasFocus()) {
+	    final int success = createToasterWindow(POPUP_WIDTH, POPUP_MESSAGE_HEIGHT + POPUP_STATIC_HEIGHT,
+		    HablarSignals.i18n().browserPopupNotifierWindowTitle());
+
+	    if (success != CREATE_TOASTER_WINDOW_FAILURE) {
+		if (success == CREATE_TOASTER_WINDOW_NEWLY_OPENED) {
+		    // If we have just opened a new window, reset the message
+		    // count
+		    messageCount = 0;
+		}
+		addMessage(userMessage);
+	    }
+	}
     }
 
     /**
@@ -213,9 +241,10 @@ public class BrowserPopupHablarNotifier implements HablarNotifier {
         return @com.calclab.hablar.signals.client.notifications.BrowserPopupHablarNotifier::CREATE_TOASTER_WINDOW_FAILURE;
         }
 
+        if ($wnd.toasterWindow.document) {
         $wnd.toasterWindow.document.write(@com.calclab.hablar.signals.client.notifications.BrowserPopupHablarNotifier::popupHtml);
-
         $wnd.toasterWindow.document.title = title;
+        }
         $wnd.toasterWindow.focus();
 
         var notifier = this;
@@ -225,16 +254,6 @@ public class BrowserPopupHablarNotifier implements HablarNotifier {
         return @com.calclab.hablar.signals.client.notifications.BrowserPopupHablarNotifier::CREATE_TOASTER_WINDOW_FAILURE;
         }
     }-*/;
-
-    @Override
-    public String getDisplayName() {
-	return HablarSignals.i18n().browserPopupNotifierDisplayName();
-    }
-
-    @Override
-    public String getId() {
-	return "browserPopupNotifier";
-    }
 
     /**
      * Removes all messages from the popup window and closes it.
@@ -339,22 +358,4 @@ public class BrowserPopupHablarNotifier implements HablarNotifier {
         $wnd.toasterWindow.resizeTo(width, height);
         }
     }-*/;
-
-    @Override
-    public void show(final String userMessage, final String messageType) {
-	// Show the message only if the browser window doesn't have focus.
-	if (!BrowserFocusHandler.getInstance().hasFocus()) {
-	    final int success = createToasterWindow(POPUP_WIDTH, POPUP_MESSAGE_HEIGHT + POPUP_STATIC_HEIGHT,
-		    HablarSignals.i18n().browserPopupNotifierWindowTitle());
-
-	    if (success != CREATE_TOASTER_WINDOW_FAILURE) {
-		if (success == CREATE_TOASTER_WINDOW_NEWLY_OPENED) {
-		    // If we have just opened a new window, reset the message
-		    // count
-		    messageCount = 0;
-		}
-		addMessage(userMessage);
-	    }
-	}
-    }
 }
