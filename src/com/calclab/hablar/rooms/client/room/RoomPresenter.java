@@ -79,9 +79,9 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
 		if (!room.isComingFromMe(message) || (delay != null)) {
 		    final String messageBody = message.getBody();
 		    if (Empty.not(messageBody)) {
-			final String color = ColorHelper.getColor(message.getFrom().getJID());
-			final ChatMessage chatMessage = new ChatMessage(null, from, color, messageBody,
+			final ChatMessage chatMessage = new ChatMessage(from, messageBody,
 				ChatMessage.MessageType.incoming);
+			chatMessage.color = ColorHelper.getColor(message.getFrom().getJID());
 			if (delay != null) {
 			    chatMessage.setDate(delay.getStamp());
 			}

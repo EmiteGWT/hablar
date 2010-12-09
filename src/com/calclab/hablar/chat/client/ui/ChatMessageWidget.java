@@ -1,5 +1,6 @@
 package com.calclab.hablar.chat.client.ui;
 
+import com.calclab.hablar.chat.client.ui.ChatMessage.MessageType;
 import com.calclab.hablar.core.client.validators.Empty;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
@@ -32,20 +33,21 @@ public class ChatMessageWidget extends Composite {
 	if (Empty.not(message.metadata)) {
 	    metadata.setInnerText(message.metadata);
 	}
+	MessageType type = message.type;
 	if (Empty.not(message.author)) {
 	    author.setText(message.author + ": ");
-	    GWT.log("COLOR: " + message.color);
-	    DOM.setStyleAttribute(author.getElement(), "color", message.color);
 	} else {
-	    message.type = ChatMessage.MessageType.info;
+	    author.setText("");
+	    type = ChatMessage.MessageType.info;
 	}
+	DOM.setStyleAttribute(author.getElement(), "color", message.color);
 	final Element parent = body.getParentElement();
 	body.removeFromParent();
 	final Element newBody = ChatMessageFormatter.format(message.author, message.body);
 	parent.appendChild(newBody);
 	newBody.addClassName("body");
-	newBody.addClassName(message.type.toString());
-	body.addClassName(message.type.toString());
+	newBody.addClassName(type.toString());
+	body.addClassName(type.toString());
     }
 
 }

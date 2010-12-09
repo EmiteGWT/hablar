@@ -78,7 +78,9 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
     protected void sendMessage(final Chat chat, final ChatDisplay display) {
 	final String text = display.getBody().getText().trim();
 	if (Empty.not(text)) {
-	    addMessage(new ChatMessage(null, ColorHelper.ME, "me", text, ChatMessage.MessageType.sent));
+	    final ChatMessage message = new ChatMessage("me", text, ChatMessage.MessageType.sent);
+	    message.color = ColorHelper.ME;
+	    addMessage(message);
 	    chat.send(new Message(text));
 	    display.clearAndFocus();
 	}

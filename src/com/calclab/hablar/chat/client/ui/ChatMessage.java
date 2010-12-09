@@ -11,22 +11,21 @@ public class ChatMessage {
 	incoming, sent, info, alert
     }
     public String metadata;
-    public String author;
-    public String body;
-    public MessageType type;
-    public final String color;
+    public final String author;
+    public final String body;
+    public final MessageType type;
+    public String color;
 
     public ChatMessage(final String body) {
-	this(null, null, ColorHelper.ME, body, MessageType.info);
+	this(null, body, MessageType.info);
     }
 
-    public ChatMessage(final String metadata, final String color, final String author, final String body,
-	    final MessageType type) {
-	this.metadata = metadata;
+    public ChatMessage(final String author, final String body, final MessageType type) {
 	this.author = author;
-	this.color = color;
 	this.body = body;
 	this.type = type;
+	this.metadata = null;
+	this.color = null;
     }
 
     @SuppressWarnings("deprecation")

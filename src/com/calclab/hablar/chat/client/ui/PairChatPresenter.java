@@ -110,9 +110,8 @@ public class PairChatPresenter extends ChatPresenter implements PairChatPage {
 	final String messageBody = message.getBody();
 	if ((Type.error != message.getType()) && Empty.not(messageBody)) {
 	    final Delay delay = DelayHelper.getDelay(message);
-	    final String color = ColorHelper.getColor(message.getFrom().getJID());
-	    final ChatMessage chatMessage = new ChatMessage(null, color, userName, messageBody,
-		    ChatMessage.MessageType.incoming);
+	    final ChatMessage chatMessage = new ChatMessage(userName, messageBody, ChatMessage.MessageType.incoming);
+	    chatMessage.color = ColorHelper.getColor(message.getFrom().getJID());
 	    if (delay != null) {
 		chatMessage.setDate(delay.getStamp());
 	    }
