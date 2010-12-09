@@ -56,7 +56,7 @@ public class VariableDockContainer implements PagesContainer {
 	display.setWidgetLeftRight(userPanel, 0, Unit.PX, 0, Unit.PX);
 	display.setWidgetTopHeight(userPanel, 0, Unit.PX, 24, Unit.PX);
 
-	eventBus.addHandler(VisibilityChangeRequestEvent.TYPE, new VisibilityChangeRequestHandler() {
+	VisibilityChangeRequestEvent.bind(eventBus, new VisibilityChangeRequestHandler() {
 	    @Override
 	    public void onVisibilityChangeRequest(final VisibilityChangeRequestEvent event) {
 		final Page<?> page = event.getPage();
@@ -81,16 +81,6 @@ public class VariableDockContainer implements PagesContainer {
 	    return false;
 	}
 	return true;
-    }
-
-    protected void changeVisibility(final Page<?> page, final Visibility newVisibility) {
-	if ((newVisibility == Visibility.toggle) && (page.getVisibility() == Visibility.notFocused)) {
-	    showTopPage(page);
-	} else if ((newVisibility == Visibility.toggle) && (page.getVisibility() == Visibility.focused)) {
-	    hideTopPage(page);
-	} else if ((newVisibility == Visibility.hidden) || (newVisibility == Visibility.notFocused)) {
-	    hideTopPage(page);
-	}
     }
 
     @Override
@@ -125,6 +115,16 @@ public class VariableDockContainer implements PagesContainer {
     private void showTopPage(final Page<?> page) {
 	helper.slideDown(display, userPanel, headerSize);
 	page.setVisibility(Visibility.focused);
+    }
+
+    protected void changeVisibility(final Page<?> page, final Visibility newVisibility) {
+	if ((newVisibility == Visibility.toggle) && (page.getVisibility() == Visibility.notFocused)) {
+	    showTopPage(page);
+	} else if ((newVisibility == Visibility.toggle) && (page.getVisibility() == Visibility.focused)) {
+	    hideTopPage(page);
+	} else if ((newVisibility == Visibility.hidden) || (newVisibility == Visibility.notFocused)) {
+	    hideTopPage(page);
+	}
     }
 
 }

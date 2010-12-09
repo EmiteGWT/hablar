@@ -13,6 +13,7 @@ import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedHandler;
 import com.calclab.hablar.rooms.client.room.RoomPresenter;
 import com.calclab.hablar.signals.client.unattended.UnattendedChatsChangedEvent.ChangeType;
+import com.google.gwt.core.client.GWT;
 
 /**
  * A registry of unattended pages. It listen to events and tracks which chat are
@@ -25,7 +26,7 @@ public class UnattendedPagesManager {
     private final HashSet<Page<?>> unattendedChatPages;
     private final BrowserFocusHandler focusManager;
 
-    public UnattendedPagesManager(final HablarEventBus hablarEventBus, BrowserFocusHandler focusManager) {
+    public UnattendedPagesManager(final HablarEventBus hablarEventBus, final BrowserFocusHandler focusManager) {
 	eventBus = hablarEventBus;
 	this.focusManager = focusManager;
 	unattendedChatPages = new HashSet<Page<?>>();
@@ -48,8 +49,11 @@ public class UnattendedPagesManager {
 		if (isChatMessage(messageType)) {
 		    final Page<?> page = event.getPage();
 		    final Visibility visibility = page.getVisibility();
-		    
-		    if ((visibility != Visibility.focused || !focusManager.hasFocus()) && unattendedChatPages.add(page)) {
+
+		    GWT.log("USER MESSAGE " + visibility);
+
+		    if (((visibility != Visibility.focused) || !focusManager.hasFocus())
+			    && unattendedChatPages.add(page)) {
 			eventBus.fireEvent(new UnattendedChatsChangedEvent(ChangeType.added, page));
 		    }
 		}
@@ -77,8 +81,9 @@ public class UnattendedPagesManager {
 	return pageType.equals(PairChatPresenter.TYPE) || pageType.equals(RoomPresenter.TYPE);
     }
 
-    private void onChatVisibilityChanged(final Page<?> page, Visibility visibility) {
-	if ((visibility == Visibility.focused || visibility == Visibility.hidden) && unattendedChatPages.remove(page)) {
+    private void onChatVisibilityChanged(final Page<?> page, final Visibility visibility) {
+	if (((visibility == Visibility.focused) || (visibility == Visibility.hidden))
+		&& unattendedChatPages.remove(page)) {
 	    eventBus.fireEvent(new UnattendedChatsChangedEvent(ChangeType.removed, page));
 	}
     }

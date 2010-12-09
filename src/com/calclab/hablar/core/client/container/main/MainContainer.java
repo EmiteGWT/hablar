@@ -15,9 +15,6 @@ import com.google.gwt.user.client.ui.Widget;
 
 /**
  * A main container. Every main container has a layout associated
- * 
- * @author dani
- * 
  */
 public class MainContainer implements PagesContainer {
     private static class PageAndHead {
@@ -43,7 +40,8 @@ public class MainContainer implements PagesContainer {
 	this.eventBus = eventBus;
 	display = layout;
 	pages = new HashMap<Page<?>, PageAndHead>();
-	eventBus.addHandler(VisibilityChangeRequestEvent.TYPE, new VisibilityChangeRequestHandler() {
+
+	VisibilityChangeRequestEvent.bind(eventBus, new VisibilityChangeRequestHandler() {
 	    @Override
 	    public void onVisibilityChangeRequest(final VisibilityChangeRequestEvent event) {
 		final Page<?> page = event.getPage();
@@ -71,7 +69,6 @@ public class MainContainer implements PagesContainer {
 	} else if (initialVisibility == Visibility.notFocused) {
 	    display.add(pageWidget, headWidget);
 	    if (focusedPage == null) {
-		// first page, can't be notFocused
 		focus(page);
 	    } else {
 		focus(focusedPage);
@@ -126,7 +123,7 @@ public class MainContainer implements PagesContainer {
     }
 
     protected boolean hide(final Page<?> page) {
-	if (focusedPage == page && lastFocused != null) {
+	if ((focusedPage == page) && (lastFocused != null)) {
 	    focus(lastFocused);
 	    lastFocused = focusedPage;
 	}
@@ -149,9 +146,10 @@ public class MainContainer implements PagesContainer {
     }
 
     protected void unfocus(final Page<?> page) {
-	if (focusedPage != null && focusedPage == page) {
+	assert page != null : "Can't unfocus a null page";
+	if ((focusedPage == page) && (lastFocused != null)) {
 	    page.setVisibility(Visibility.notFocused);
-	    focusedPage = null;
+	    focus(lastFocused);
 	} else if (page.getVisibility() == Visibility.hidden) {
 	    final PageAndHead widgets = getWidgets(page);
 	    display.add(widgets.pageWidget, widgets.headWidget);

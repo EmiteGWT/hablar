@@ -28,7 +28,7 @@ public class PageInfoChangedEvent extends GwtEvent<PageInfoChangedHandler> {
 
     @Override
     public String toDebugString() {
-	return super.toDebugString() + pageState + " (" + page + ")";
+	return super.toDebugString() + " (" + page + ")";
     }
 
     @Override

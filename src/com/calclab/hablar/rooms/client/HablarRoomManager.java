@@ -105,15 +105,11 @@ public class HablarRoomManager {
 	final RoomInvitation invitation = getInvitation(room.getURI());
 	if (invitation != null) {
 	    acceptedInvitations.remove(invitation);
-	    roomPage.requestVisibility(Visibility.notFocused);
 	    String message = "You have been invited to this group chat";
-
-	    if (invitation.getInvitor() != null) {
-		message += " by " + invitation.getInvitor().getNode();
-	    }
-
+	    message += invitation.getInvitor() != null ? " by " + invitation.getInvitor().getNode() : "";
 	    message += invitation.getReason() != null ? ": " + invitation.getReason() : "";
 	    roomPage.addMessage(new ChatMessage(message));
+	    roomPage.requestVisibility(Visibility.notFocused);
 	} else {
 	    roomPage.requestVisibility(Visibility.focused);
 	}

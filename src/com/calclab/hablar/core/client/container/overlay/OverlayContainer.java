@@ -20,7 +20,7 @@ public class OverlayContainer implements PagesContainer {
 	this.panel = panel;
 	pages = new ArrayList<Page<?>>();
 	panel.setVisible(false);
-	eventBus.addHandler(VisibilityChangeRequestEvent.TYPE, new VisibilityChangeRequestHandler() {
+	VisibilityChangeRequestEvent.bind(eventBus, new VisibilityChangeRequestHandler() {
 	    @Override
 	    public void onVisibilityChangeRequest(final VisibilityChangeRequestEvent event) {
 		changeVisibility(event.getNewVisibility(), event.getPage());
@@ -35,6 +35,16 @@ public class OverlayContainer implements PagesContainer {
 	    focus(page);
 	}
 	return true;
+    }
+
+    @Override
+    public String getRol() {
+	return ROL;
+    }
+
+    @Override
+    public Widget getWidget() {
+	return panel.getWidget();
     }
 
     private void changeVisibility(final Visibility newVisibility, final Page<?> page) {
@@ -55,16 +65,6 @@ public class OverlayContainer implements PagesContainer {
 	final Widget widget = currentPagePresenter.getDisplay().asWidget();
 	page.setVisibility(Visibility.focused);
 	panel.add(widget);
-    }
-
-    @Override
-    public String getRol() {
-	return ROL;
-    }
-
-    @Override
-    public Widget getWidget() {
-	return panel.getWidget();
     }
 
     private void hide(final Page<?> page) {

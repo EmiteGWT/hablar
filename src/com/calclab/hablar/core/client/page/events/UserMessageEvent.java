@@ -33,6 +33,11 @@ public class UserMessageEvent extends GwtEvent<UserMessageHandler> {
     }
 
     @Override
+    public String toDebugString() {
+	return super.toDebugString() + messageType + " - " + userMessage + "(" + page.getId() + ")";
+    }
+
+    @Override
     protected void dispatch(final UserMessageHandler handler) {
 	handler.onUserMessage(this);
     }

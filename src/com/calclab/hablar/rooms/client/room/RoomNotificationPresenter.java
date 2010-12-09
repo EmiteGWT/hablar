@@ -36,7 +36,9 @@ public class RoomNotificationPresenter {
 		    final String body = i18n().occupantHasJoined(event.getOccupant().getNick());
 		    show(body);
 		} else if (event.isRemoved()) {
-		    if (!me.equals(event.getOccupant().getUserUri().getNode())) {
+		    final XmppURI occupantUserUri = event.getOccupant().getUserUri();
+		    final String node = occupantUserUri != null ? occupantUserUri.getNode() : null;
+		    if (!me.equals(node)) {
 			final String body = i18n().occupantHasLeft(event.getOccupant().getNick());
 			show(body);
 		    }
@@ -69,10 +71,6 @@ public class RoomNotificationPresenter {
 
 	room.addRoomInvitationSentHandler(new RoomInvitationSentHandler() {
 
-	    private boolean isEmpty(final String reason) {
-		return (reason == null) || reason.trim().equals("");
-	    }
-
 	    @Override
 	    public void onRoomInvitationSent(final RoomInvitationSentEvent event) {
 		final XmppURI userJid = event.getUserJid();
@@ -82,6 +80,10 @@ public class RoomNotificationPresenter {
 		final String body = isEmpty(event.getReasonText()) ? i18n().invitationSent(name) : i18n()
 			.invitationSentWithReason(name, event.getReasonText());
 		show(body);
+	    }
+
+	    private boolean isEmpty(final String reason) {
+		return (reason == null) || reason.trim().equals("");
 	    }
 	});
 

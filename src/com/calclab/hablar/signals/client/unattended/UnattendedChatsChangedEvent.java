@@ -30,6 +30,11 @@ public class UnattendedChatsChangedEvent extends GwtEvent<UnattendedChatsChanged
     }
 
     @Override
+    public String toDebugString() {
+	return super.toDebugString() + changeType + " (pageId: " + page.getId() + ")";
+    }
+
+    @Override
     protected void dispatch(final UnattendedChatsChangedHandler handler) {
 	handler.handleUnattendedChatChange(this);
     }

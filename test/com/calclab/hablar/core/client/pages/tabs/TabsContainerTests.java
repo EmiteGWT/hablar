@@ -55,6 +55,15 @@ public class TabsContainerTests {
     }
 
     @Test
+    public void shouldNotUnfocusIfOnlyOnePage() {
+	final Page<?> lonely = tester.newPage(Visibility.focused);
+	container.add(lonely);
+	verify(lonely).setVisibility(Visibility.focused);
+	tester.fire(new VisibilityChangeRequestEvent(lonely, Visibility.notFocused));
+	verify(lonely, times(0)).setVisibility(Visibility.notFocused);
+    }
+
+    @Test
     public void shouldSetFocusedFirstPage() {
 	final Page<?> page = tester.newPage(Visibility.notFocused);
 	container.add(page);
