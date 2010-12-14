@@ -14,214 +14,263 @@ import com.calclab.emite.im.client.roster.events.RosterItemChangedHandler;
 import com.calclab.hablar.core.client.Idify;
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.ui.menu.Menu;
+import com.calclab.hablar.core.client.util.NonBlockingCommandScheduler;
 import com.calclab.hablar.roster.client.RosterConfig;
 import com.calclab.hablar.roster.client.RosterMessages;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Command;
 
 @SuppressWarnings("unchecked")
 public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 
-	private final static Comparator<RosterItem> ORDER = RosterItemsOrder.order(
-			RosterItemsOrder.byAvailability, RosterItemsOrder.groupedFirst,
-			RosterItemsOrder.byName);
+    private final static Comparator<RosterItem> ORDER = RosterItemsOrder.order(RosterItemsOrder.byAvailability,
+	    RosterItemsOrder.groupedFirst, RosterItemsOrder.byName);
 
-	private static RosterMessages messages;
+    private static RosterMessages messages;
 
-	public static RosterMessages i18n() {
-		return messages;
-	}
+    public static RosterMessages i18n() {
+	return messages;
+    }
 
-	public static void setMessages(final RosterMessages messages) {
-		RosterGroupPresenter.messages = messages;
-	}
+    public static void setMessages(final RosterMessages messages) {
+	RosterGroupPresenter.messages = messages;
+    }
 
-	private final RosterGroupDisplay display;
-	private String groupLabel;
-	private final HashMap<XmppURI, RosterItemPresenter> itemPresenters;
-	private final ArrayList<RosterItemPresenter> itemPresenterList;
-	private final Menu<RosterItemPresenter> itemMenu;
+    private final RosterGroupDisplay display;
+    private String groupLabel;
+    private final HashMap<XmppURI, RosterItemPresenter> itemPresenters;
+    private final ArrayList<RosterItemPresenter> itemPresenterList;
+    private final Menu<RosterItemPresenter> itemMenu;
 
-	private final RosterGroup group;
+    private final RosterGroup group;
 
-	private final RosterConfig rosterConfig;
+    private final RosterConfig rosterConfig;
 
-	public RosterGroupPresenter(final RosterGroup group,
-			final Menu<RosterItemPresenter> itemMenu,
-			final RosterGroupDisplay display, final RosterConfig rosterConfig) {
-		this.group = group;
-		this.itemMenu = itemMenu;
-		this.display = display;
-		this.rosterConfig = rosterConfig;
+    /**
+     * Used to queue up roster updates as an incremental command
+     */
+    private final NonBlockingCommandScheduler commandQueue;
 
-		itemPresenters = new HashMap<XmppURI, RosterItemPresenter>();
-		itemPresenterList = new ArrayList<RosterItemPresenter>();
+    public RosterGroupPresenter(final RosterGroup group, final Menu<RosterItemPresenter> itemMenu,
+	    final RosterGroupDisplay display, final RosterConfig rosterConfig,
+	    final NonBlockingCommandScheduler commandQueue) {
+	this.group = group;
+	this.itemMenu = itemMenu;
+	this.display = display;
+	this.rosterConfig = rosterConfig;
+	this.commandQueue = commandQueue;
 
-		display.setVisible(group.isAllContacts());
+	itemPresenters = new HashMap<XmppURI, RosterItemPresenter>();
+	itemPresenterList = new ArrayList<RosterItemPresenter>();
 
-		group.addRosterItemChangedHandler(new RosterItemChangedHandler() {
+	display.setVisible(group.isAllContacts());
+
+	group.addRosterItemChangedHandler(new RosterItemChangedHandler() {
+
+	    @Override
+	    public void onRosterItemChanged(final RosterItemChangedEvent event) {
+		final Command command;
+
+		if (event.isAdded() || event.isModified()) {
+		    command = new Command() {
 
 			@Override
-			public void onRosterItemChanged(final RosterItemChangedEvent event) {
-				if (event.isAdded() || event.isModified()) {
-					createOrModifyItem(event.getRosterItem());
-				} else if (event.isRemoved()) {
-					removeRosterItem(event.getRosterItem());
-				} else {
-					refreshRosterItemGroups();
-				}
+			public void execute() {
+			    createOrModifyItem(event.getRosterItem());
 			}
-		});
-		refreshRosterItemGroups();
-	}
+		    };
+		} else if (event.isRemoved()) {
+		    command = new Command() {
 
-	@Override
-	public RosterGroupDisplay getDisplay() {
-		return display;
-	}
-
-	public String getGroupLabel() {
-		return groupLabel;
-	}
-
-	public String getGroupName() {
-		return group.getName();
-	}
-
-	public RosterGroup getRosterGroup() {
-		return group;
-	}
-
-	public boolean isVisible() {
-		return display.isVisible();
-	}
-
-	public void toggleVisibility() {
-		display.setVisible(!display.isVisible());
-	}
-
-	/**
-	 * Called to notify this object that a roster item has been changed
-	 * 
-	 * @param item
-	 */
-	public void rosterItemChanged(final RosterItem item) {
-		RosterItemPresenter presenter = removeRosterItem(item);
-
-		if (presenter != null) {
-			presenter.setItem(item);
-			addRosterItemPresenter(presenter);
-		}
-	}
-
-	/**
-	 * Adds an existing {@link RosterItemPresenter} to the display.
-	 * 
-	 * @param presenter
-	 */
-	private void addRosterItemPresenter(final RosterItemPresenter presenter) {
-		RosterItem item = presenter.getItem();
-		RosterItemDisplay itemDisplay = presenter.getDisplay();
-
-		String nameOrJid = item.getName();
-
-		if (nameOrJid == null) {
-			nameOrJid = item.getJID().getShortName();
-		}
-
-		itemPresenters.put(item.getJID(), presenter);
-
-		boolean found = false;
-
-		for (int i = 0; i < itemPresenterList.size(); ++i) {
-			RosterItemPresenter listPresenter = itemPresenterList.get(i);
-
-			if (ORDER.compare(listPresenter.getItem(), item) >= 0) {
-				itemPresenterList.add(i, presenter);
-				display.add(itemDisplay, listPresenter.getDisplay());
-				found = true;
-				break;
+			@Override
+			public void execute() {
+			    removeRosterItem(event.getRosterItem());
 			}
-		}
-
-		if (!found) {
-			display.add(presenter.getDisplay());
-			itemPresenterList.add(presenter);
-		}
-	}
-
-	/**
-	 * Adds a new {@link RosterItem} to the display (creating widgets and
-	 * presenters as required)
-	 * 
-	 * @param item
-	 *            the roster item.
-	 * @return the new presenter.
-	 */
-	private RosterItemPresenter addRosterItem(final RosterItem item) {
-		// FIXME: no mola nada toda esta basura selenium
-		final RosterItemDisplay itemDisplay = display.newRosterItemDisplay(
-				Idify.id(group.getName()), Idify.id(item.getJID()));
-
-		final RosterItemPresenter presenter = new RosterItemPresenter(group
-				.getName(), itemMenu, itemDisplay, rosterConfig);
-
-		presenter.setItem(item);
-
-		addRosterItemPresenter(presenter);
-
-		return presenter;
-	}
-
-	/**
-	 * Will create an item (if it doesn't already exist) or update it if it
-	 * does.
-	 * 
-	 * @param item
-	 *            the roster item.
-	 * @return the new or existing presenter.
-	 */
-	private RosterItemPresenter createOrModifyItem(final RosterItem item) {
-		RosterItemPresenter presenter = removeRosterItem(item);
-
-		if (presenter == null) {
-			presenter = addRosterItem(item);
+		    };
 		} else {
-			presenter.setItem(item);
-			addRosterItemPresenter(presenter);
+		    command = new Command() {
+
+			@Override
+			public void execute() {
+			    refreshRosterItemGroups();
+			}
+		    };
 		}
-		return presenter;
+
+		if (group.isAllContacts()) {
+		    commandQueue.addPriorityCommand(command);
+		} else {
+		    commandQueue.addCommand(command);
+		}
+	    }
+	});
+    }
+
+    @Override
+    public RosterGroupDisplay getDisplay() {
+	return display;
+    }
+
+    public String getGroupLabel() {
+	return groupLabel;
+    }
+
+    public String getGroupName() {
+	return group.getName();
+    }
+
+    public RosterGroup getRosterGroup() {
+	return group;
+    }
+
+    public boolean isVisible() {
+	return display.isVisible();
+    }
+
+    /**
+     * Clears and repopulates the current display.
+     */
+    public void refreshRosterItemGroups() {
+	if (!itemPresenters.isEmpty()) {
+	    display.removeAll();
+	    itemPresenters.clear();
+	    itemPresenterList.clear();
+	}
+	final Collection<RosterItem> rosterItems = group.getItemList(ORDER);
+	for (final RosterItem item : rosterItems) {
+	    final Command command = new Command() {
+
+		@Override
+		public void execute() {
+		    addRosterItem(item);
+		}
+
+	    };
+
+	    if (group.isAllContacts()) {
+		commandQueue.addPriorityCommand(command);
+	    } else {
+		commandQueue.addCommand(command);
+	    }
+	}
+    }
+
+    /**
+     * Called to notify this object that a roster item has been changed
+     * 
+     * @param item
+     */
+    public void rosterItemChanged(final RosterItem item) {
+	final RosterItemPresenter presenter = removeRosterItem(item);
+
+	if (presenter != null) {
+	    presenter.setItem(item);
+	    addRosterItemPresenter(presenter);
+	}
+    }
+
+    public void toggleVisibility() {
+	display.setVisible(!display.isVisible());
+    }
+
+    /**
+     * Adds a new {@link RosterItem} to the display (creating widgets and
+     * presenters as required)
+     * 
+     * @param item
+     *            the roster item.
+     * @return the new presenter.
+     */
+    private RosterItemPresenter addRosterItem(final RosterItem item) {
+	GWT.log("xxx Adding roster item " + item.getJID() + " to group " + group.getName());
+
+	// FIXME: no mola nada toda esta basura selenium
+	final RosterItemDisplay itemDisplay = display.newRosterItemDisplay(Idify.id(group.getName()), Idify.id(item
+		.getJID()));
+
+	final RosterItemPresenter presenter = new RosterItemPresenter(group.getName(), itemMenu, itemDisplay,
+		rosterConfig);
+
+	presenter.setItem(item);
+
+	addRosterItemPresenter(presenter);
+
+	return presenter;
+    }
+
+    /**
+     * Adds an existing {@link RosterItemPresenter} to the display.
+     * 
+     * @param presenter
+     */
+    private void addRosterItemPresenter(final RosterItemPresenter presenter) {
+	final RosterItem item = presenter.getItem();
+	final RosterItemDisplay itemDisplay = presenter.getDisplay();
+
+	String nameOrJid = item.getName();
+
+	if (nameOrJid == null) {
+	    nameOrJid = item.getJID().getShortName();
 	}
 
-	/**
-	 * Removes the roster item. Does nothing if the item does not exist.
-	 * 
-	 * @param item
-	 *            the roster item.
-	 * @return the removed presenter (or <code>null</code> if not found)
-	 */
-	private RosterItemPresenter removeRosterItem(final RosterItem item) {
-		RosterItemPresenter presenter = itemPresenters.get(item.getJID());
+	itemPresenters.put(item.getJID(), presenter);
 
-		if (presenter != null) {
-			itemPresenters.remove(presenter);
-			itemPresenterList.remove(presenter);
-			display.remove(presenter.getDisplay());
-		}
+	boolean found = false;
 
-		return presenter;
+	for (int i = 0; i < itemPresenterList.size(); ++i) {
+	    final RosterItemPresenter listPresenter = itemPresenterList.get(i);
+
+	    if (ORDER.compare(listPresenter.getItem(), item) >= 0) {
+		itemPresenterList.add(i, presenter);
+		display.add(itemDisplay, listPresenter.getDisplay());
+		found = true;
+		break;
+	    }
 	}
 
-	/**
-	 * Clears and repopulates the current display.
-	 */
-	public void refreshRosterItemGroups() {
-		if (!itemPresenters.isEmpty()) {
-			display.removeAll();
-			itemPresenters.clear();
-			itemPresenterList.clear();
-		}
-		final Collection<RosterItem> rosterItems = group.getItemList(ORDER);
-		for (final RosterItem item : rosterItems) {
-			addRosterItem(item);
-		}
+	if (!found) {
+	    display.add(presenter.getDisplay());
+	    itemPresenterList.add(presenter);
 	}
+    }
+
+    /**
+     * Will create an item (if it doesn't already exist) or update it if it
+     * does.
+     * 
+     * @param item
+     *            the roster item.
+     * @return the new or existing presenter.
+     */
+    private RosterItemPresenter createOrModifyItem(final RosterItem item) {
+	GWT.log("xxx createOrModifyItem roster item " + item.getJID() + " to group " + group.getName());
+	RosterItemPresenter presenter = removeRosterItem(item);
+
+	if (presenter == null) {
+	    presenter = addRosterItem(item);
+	} else {
+	    presenter.setItem(item);
+	    addRosterItemPresenter(presenter);
+	}
+	return presenter;
+    }
+
+    /**
+     * Removes the roster item. Does nothing if the item does not exist.
+     * 
+     * @param item
+     *            the roster item.
+     * @return the removed presenter (or <code>null</code> if not found)
+     */
+    private RosterItemPresenter removeRosterItem(final RosterItem item) {
+	final RosterItemPresenter presenter = itemPresenters.get(item.getJID());
+
+	if (presenter != null) {
+	    itemPresenters.remove(presenter);
+	    itemPresenterList.remove(presenter);
+	    display.remove(presenter.getDisplay());
+	}
+
+	return presenter;
+    }
 }

@@ -22,6 +22,7 @@ import com.calclab.hablar.core.client.page.events.UserMessageEvent;
 import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.calclab.hablar.core.client.ui.menu.Menu;
+import com.calclab.hablar.core.client.util.NonBlockingCommandScheduler;
 import com.calclab.hablar.roster.client.RosterBasicActions;
 import com.calclab.hablar.roster.client.RosterConfig;
 import com.calclab.hablar.roster.client.groups.RosterGroupDisplay;
@@ -57,11 +58,15 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
     private final RosterConfig rosterConfig;
     private final XmppSession session;
 
+    private final NonBlockingCommandScheduler commandQueue;
+
     public RosterPresenter(final XmppSession session, final XmppRoster roster, final ChatManager chatManager,
-	    final HablarEventBus eventBus, final RosterDisplay display, final RosterConfig rosterConfig) {
+	    final HablarEventBus eventBus, final RosterDisplay display, final RosterConfig rosterConfig,
+	    final NonBlockingCommandScheduler commandQueue) {
 	super(TYPE, "" + ++index, eventBus, display);
 	this.session = session;
 	this.roster = roster;
+	this.commandQueue = commandQueue;
 
 	if (rosterConfig.rosterMenuActions != null) {
 	    basicActions = rosterConfig.rosterMenuActions;
@@ -104,6 +109,16 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
     @Override
     public void addLowPriorityActions() {
 	basicActions.addLowPriorityActions(this);
+    }
+
+    @Override
+    public Menu<RosterGroupPresenter> getGroupMenu() {
+	return groupMenu;
+    }
+
+    @Override
+    public Menu<RosterItemPresenter> getItemMenu() {
+	return itemMenu;
     }
 
     private void addRosterListeners() {
@@ -155,23 +170,14 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> implements Ros
 
     private void createGroup(final RosterGroup group) {
 	final RosterGroupDisplay groupDisplay = display.newRosterGroupDisplay();
-	final RosterGroupPresenter presenter = new RosterGroupPresenter(group, itemMenu, groupDisplay, rosterConfig);
+	final RosterGroupPresenter presenter = new RosterGroupPresenter(group, itemMenu, groupDisplay, rosterConfig,
+		commandQueue);
 	groupPresenters.put(group.getName(), presenter);
 	display.addGroup(presenter, groupMenu);
     }
 
     private void fireMessage(final String message) {
 	eventBus.fireEvent(new UserMessageEvent(this, message, ROSTER_MESSAGE));
-    }
-
-    @Override
-    public Menu<RosterGroupPresenter> getGroupMenu() {
-	return groupMenu;
-    }
-
-    @Override
-    public Menu<RosterItemPresenter> getItemMenu() {
-	return itemMenu;
     }
 
     private void loadRoster() {

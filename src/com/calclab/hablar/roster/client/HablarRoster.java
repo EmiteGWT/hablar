@@ -12,6 +12,7 @@ import com.calclab.emite.im.client.roster.SubscriptionHandler.Behaviour;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
+import com.calclab.hablar.core.client.util.NonBlockingCommandScheduler;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
 import com.calclab.hablar.roster.client.page.RosterWidget;
@@ -39,6 +40,8 @@ public class HablarRoster {
 	final SubscriptionHandler subscriptionHandler = Suco.get(SubscriptionHandler.class);
 	final ChatManager chatManager = Suco.get(ChatManager.class);
 
+	final NonBlockingCommandScheduler commandQueue = new NonBlockingCommandScheduler();
+
 	subscriptionHandler.setBehaviour(Behaviour.acceptAll);
 
 	if ((rosterConfig.rosterItemClickAction == null) && rosterConfig.oneClickChat) {
@@ -52,7 +55,7 @@ public class HablarRoster {
 	}
 
 	rosterPage = new RosterPresenter(session, roster, chatManager, hablar.getEventBus(), new RosterWidget(),
-		rosterConfig);
+		rosterConfig, commandQueue);
 	rosterPage.setVisibility(Visibility.notFocused);
 	hablar.addPage(rosterPage);
 
