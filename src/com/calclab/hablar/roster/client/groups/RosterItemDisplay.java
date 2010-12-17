@@ -8,12 +8,6 @@ public interface RosterItemDisplay extends Display {
 
     void addStyleName(String styleName);
 
-    /**
-     * Triggers the display to force a re-layout of any LayoutPanels contained
-     * within it. This is in order to provide a fix for Issue #333.
-     */
-    void forceLayout();
-
     HasClickHandlers getAction();
 
     HasText getJid();

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 
 public class ColorHelper {
-    private static final double BRIGHTNESS = 0.95;
+    private static final double BRIGHTNESS = 0.5;
     private static final double SATURATION = 0.80;
     public static final String ME = "#0A0A0A";
     public static final String NONE = "#0A0A0A";

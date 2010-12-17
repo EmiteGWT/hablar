@@ -1,51 +1,105 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<!-- TODO: Figure out a way of removing the reliance on pixel sizes -->
 	<ui:style>
 		.item {
-			height: 20px;
-			width: 100%;
+			position: relative;
+			padding: 3px 0;
 		}
+		
 		.status {
-		    display: block;
-		    margin: 0 0 2px 25px;
+			display: block;
+			margin: 0 0 0 25px;
 			padding: 2px 0;
+			clear: both;
 		}
-		.jid {
-		    float: left;
-		    display: block;
-		    padding-right: 5px;
-		}
-
-		.data {
-			width: 100%;
-			overflow: hidden;
-		}
+		
 		.name {
 			display: inline;
-			float: left;
+		}
+		
+		.jid {
+			display: inline;
 			padding-right: 5px;
 		}
+		
+		.dataOuter {
+			height: 16px;
+			line-height: 16px;
+			width: 100%;
+			position: absolute;
+			top: 5px;
+			left: -20px;
+			overflow: hidden;
+		}
+		
+		.data {
+			padding-left: 45px;
+			width: auto;
+			white-space: nowrap;
+		}
 	</ui:style>
-	  <ui:with type="com.calclab.hablar.core.client.ui.icon.MissingIconBundle" field="res"></ui:with>
-	
+	<ui:with type="com.calclab.hablar.core.client.ui.icon.MissingIconBundle"
+		field="res"></ui:with>
+
 	<g:FocusPanel ui:field="self" addStyleNames="user">
-		<g:FlowPanel addStyleNames="hablar-RosterItemWidget hablar-ListItem hablar-bottomLightBordered">
-			<g:LayoutPanel addStyleNames="{style.item} item" ui:field="layoutPanel">
-				<g:layer top="0" left="0" width="23px" height="20px">
-					<g:Image  resource="{res.missingIcon}" addStyleNames="icon" ui:field="icon" />
-				</g:layer>
-				<g:layer top="0" left="20px" height="16px" right="16px">
-					<g:FlowPanel addStyleNames="{style.data}">
+		<g:HTMLPanel>
+			<div
+				class="hablar-RosterItemWidget hablar-ListItem hablar-bottomLightBordered {style.item}">
+				<g:Image resource="{res.missingIcon}" addStyleNames="icon"
+					ui:field="icon" />
+				<g:Image resource="{res.missingIcon}" ui:field="menu"
+					addStyleNames="menu" />
+				<div class="{style.dataOuter}">
+					<div class="{style.data} ellipsis">
 						<g:Label addStyleNames="{style.name} name" ui:field="name">name-here</g:Label>
-						<g:Label addStyleNames="{style.jid} hablar-lightColor" ui:field="jid">jid</g:Label>
-					</g:FlowPanel>
-				</g:layer>
-				<g:layer top="0" right="0" width="16px" height="16px">
-					<g:Image resource="{res.missingIcon}"  ui:field="menu" addStyleNames="menu" />
-				</g:layer>
-			</g:LayoutPanel>
-			<g:Label addStyleNames="{style.status} hablar-mediumColor" ui:field="status" />
-		</g:FlowPanel>
+						<g:Label addStyleNames="{style.jid} hablar-lightColor"
+							ui:field="jid">jid</g:Label>
+					</div>
+				</div>
+				<g:Label addStyleNames="{style.status} hablar-mediumColor"
+					ui:field="status" />
+			</div>
+		</g:HTMLPanel>
+
+		<!--
+			<g:FlowPanel addStyleNames="hablar-RosterItemWidget hablar-ListItem
+			hablar-bottomLightBordered">
+		-->
+		<!--
+			<g:LayoutPanel addStyleNames="{style.item} item"
+			ui:field="layoutPanel">
+		-->
+		<!--				<g:layer top="0" left="0" width="23px" height="20px">-->
+		<!--
+			<g:Image resource="{res.missingIcon}" addStyleNames="icon"
+			ui:field="icon" />
+		-->
+		<!--				</g:layer>-->
+		<!--				<g:layer top="0" left="20px" height="16px" right="16px">-->
+		<!--					<g:FlowPanel addStyleNames="{style.data}">-->
+		<!--
+			<g:Label addStyleNames="{style.name} name"
+			ui:field="name">name-here</g:Label>
+		-->
+		<!--
+			<g:Label addStyleNames="{style.jid} hablar-lightColor"
+			ui:field="jid">jid</g:Label>
+		-->
+		<!--					</g:FlowPanel>-->
+		<!--				</g:layer>-->
+		<!--				<g:layer top="0" right="0" width="16px" height="16px">-->
+		<!--
+			<g:Image resource="{res.missingIcon}" ui:field="menu"
+			addStyleNames="menu" />
+		-->
+		<!--				</g:layer>-->
+		<!--			</g:LayoutPanel>-->
+		<!--
+			<g:Label addStyleNames="{style.status} hablar-mediumColor"
+			ui:field="status" />
+		-->
+		<!--		</g:FlowPanel>-->
 	</g:FocusPanel>
 </ui:UiBinder>
