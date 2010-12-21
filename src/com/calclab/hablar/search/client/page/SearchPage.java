@@ -51,6 +51,18 @@ public class SearchPage extends PagePresenter<SearchDisplay> {
 	bind();
     }
 
+    public Menu<SearchResultItem> getItemMenu() {
+	return itemMenu;
+    }
+
+    @Override
+    public void setVisibility(final PagePresenter.Visibility visibility) {
+	super.setVisibility(visibility);
+	if (visibility == Visibility.focused) {
+	    display.focusInput();
+	}
+    }
+
     private void bind() {
 	display.getSearchButton().addClickHandler(new ClickHandler() {
 	    @Override
@@ -70,10 +82,6 @@ public class SearchPage extends PagePresenter<SearchDisplay> {
 	});
     }
 
-    public Menu<SearchResultItem> getItemMenu() {
-	return itemMenu;
-    }
-
     private void search() {
 	final String text = display.getSearchTerm().getText().trim();
 	if (text.length() > 0) {
@@ -90,27 +98,21 @@ public class SearchPage extends PagePresenter<SearchDisplay> {
 		@Override
 		public void onSuccess(final List<SearchResultItem> items) {
 		    final XmppURI currentUri = session.getCurrentUserURI();
-		    display.showMessage(i18n().searchResultsFor(text, items.size()), Level.success);
+		    int resultCount = 0;
 		    for (final SearchResultItem item : items) {
 			if (!currentUri.equalsNoResource(item.getJid())) {
+			    resultCount++;
 			    final SearchResultItemDisplay itemDisplay = display.newSearchResultItemDisplay(Idify
 				    .id(item.getJid()));
 			    new SearchResultItemPresenter(item, itemMenu, itemDisplay);
 			    display.addResult(itemDisplay);
 			}
 		    }
+		    display.showMessage(i18n().searchResultsFor(text, resultCount), Level.success);
 		}
 	    });
 	    display.getSearchTerm().setText("");
 	    display.getSearchFocus().setFocus(true);
-	}
-    }
-
-    @Override
-    public void setVisibility(final PagePresenter.Visibility visibility) {
-	super.setVisibility(visibility);
-	if (visibility == Visibility.focused) {
-	    display.focusInput();
 	}
     }
 
