@@ -14,10 +14,9 @@ import com.calclab.emite.im.client.roster.events.RosterItemChangedHandler;
 import com.calclab.hablar.core.client.Idify;
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.ui.menu.Menu;
-import com.calclab.hablar.core.client.util.NonBlockingCommandScheduler;
+import com.calclab.hablar.core.client.util.CommandQueue;
 import com.calclab.hablar.roster.client.RosterConfig;
 import com.calclab.hablar.roster.client.RosterMessages;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
 
 @SuppressWarnings("unchecked")
@@ -49,11 +48,10 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
     /**
      * Used to queue up roster updates as an incremental command
      */
-    private final NonBlockingCommandScheduler commandQueue;
+    private final CommandQueue commandQueue;
 
     public RosterGroupPresenter(final RosterGroup group, final Menu<RosterItemPresenter> itemMenu,
-	    final RosterGroupDisplay display, final RosterConfig rosterConfig,
-	    final NonBlockingCommandScheduler commandQueue) {
+	    final RosterGroupDisplay display, final RosterConfig rosterConfig, final CommandQueue commandQueue) {
 	this.group = group;
 	this.itemMenu = itemMenu;
 	this.display = display;
@@ -161,10 +159,11 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
      * @param item
      */
     public void rosterItemChanged(final RosterItem item) {
-	final RosterItemPresenter presenter = removeRosterItem(item);
+	final RosterItemPresenter presenter = itemPresenters.get(item.getJID());
 
-	if (presenter != null) {
-	    presenter.setItem(item);
+	// presenter.setItem(item) will return true if the item has changed
+	if ((presenter != null) && presenter.setItem(item)) {
+	    removeRosterItem(item);
 	    addRosterItemPresenter(presenter);
 	}
     }
@@ -182,8 +181,6 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
      * @return the new presenter.
      */
     private RosterItemPresenter addRosterItem(final RosterItem item) {
-	GWT.log("xxx Adding roster item " + item.getJID() + " to group " + group.getName());
-
 	// FIXME: no mola nada toda esta basura selenium
 	final RosterItemDisplay itemDisplay = display.newRosterItemDisplay(Idify.id(group.getName()), Idify.id(item
 		.getJID()));
@@ -243,14 +240,16 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
      * @return the new or existing presenter.
      */
     private RosterItemPresenter createOrModifyItem(final RosterItem item) {
-	GWT.log("xxx createOrModifyItem roster item " + item.getJID() + " to group " + group.getName());
-	RosterItemPresenter presenter = removeRosterItem(item);
+	RosterItemPresenter presenter = itemPresenters.get(item.getJID());
 
 	if (presenter == null) {
 	    presenter = addRosterItem(item);
 	} else {
-	    presenter.setItem(item);
-	    addRosterItemPresenter(presenter);
+	    // presenter.setItem(item) will return true if the item has changed
+	    if (presenter.setItem(item)) {
+		removeRosterItem(item);
+		addRosterItemPresenter(presenter);
+	    }
 	}
 	return presenter;
     }

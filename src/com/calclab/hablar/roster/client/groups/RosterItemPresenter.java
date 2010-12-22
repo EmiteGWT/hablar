@@ -1,5 +1,6 @@
 package com.calclab.hablar.roster.client.groups;
 
+import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
@@ -15,6 +16,12 @@ public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
     private RosterItem item;
     private final String groupName;
     private String clickActionDescription;
+
+    private String itemName;
+    private String itemJid;
+    private String itemStatus;
+    private boolean itemIsAvailable;
+    private Show itemShow;
 
     public RosterItemPresenter(final String groupName, final Menu<RosterItemPresenter> itemMenu,
 	    final RosterItemDisplay display, final RosterConfig rosterConfig) {
@@ -59,7 +66,17 @@ public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
 	return item;
     }
 
-    public void setItem(final RosterItem item) {
+    /**
+     * Updates the display to reflect the given {@link RosterItem}.
+     * 
+     * @param item
+     *            the item to update the display to.
+     * @return <code>true</code> if the item had different data to that already
+     *         displayed, <code>false</code> otherwise.
+     */
+    public boolean setItem(final RosterItem item) {
+	boolean hasChanged = false;
+
 	this.item = item;
 
 	String name = item.getName();
@@ -68,19 +85,47 @@ public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
 	    name = item.getJID().getShortName();
 	}
 
-	display.getName().setText(name);
+	if (!name.equals(itemName)) {
+	    display.getName().setText(name);
+	    itemName = name;
+	    hasChanged = true;
+	}
+
 	final String jidString = item.getJID().toString();
-	display.getJid().setText(jidString);
+
+	if (!jidString.equals(itemJid)) {
+	    display.getJid().setText(jidString);
+	    itemJid = jidString;
+	    hasChanged = true;
+	}
+
 	final String status = item.getStatus();
 	final boolean hasStatus = (status != null) && (status.trim().length() > 0);
+
 	if (hasStatus) {
-	    display.getStatus().setText(status);
+	    if (!status.equals(itemStatus)) {
+		display.getStatus().setText(status);
+		itemStatus = status;
+		hasChanged = true;
+	    }
 	}
+
 	display.setStatusVisible(hasStatus);
-	display.setIcon(PresenceIcon.get(item.isAvailable(), item.getShow()));
-	final String title = clickActionDescription + name + " (" + jidString + ")";
-	display.setWidgetTitle(title);
-	// display.setColor(ColorHelper.getColor(item.getJID()));
+
+	if ((item.isAvailable() != itemIsAvailable) || !item.getShow().equals(itemShow)) {
+	    display.setIcon(PresenceIcon.get(item.isAvailable(), item.getShow()));
+	    itemIsAvailable = item.isAvailable();
+	    itemShow = item.getShow();
+	    hasChanged = true;
+	}
+
+	if (hasChanged) {
+	    final String title = clickActionDescription + name + " (" + jidString + ")";
+	    display.setWidgetTitle(title);
+	    // display.setColor(ColorHelper.getColor(item.getJID()));
+	}
+
+	return hasChanged;
     }
 
 }

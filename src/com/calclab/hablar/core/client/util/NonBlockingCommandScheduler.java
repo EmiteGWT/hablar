@@ -21,7 +21,7 @@ import com.google.gwt.user.client.Command;
  * Note that there is no consideration of synchronisation here as JS is single
  * threaded.
  */
-public class NonBlockingCommandScheduler implements RepeatingCommand {
+public class NonBlockingCommandScheduler implements RepeatingCommand, CommandQueue {
     private final LinkedList<Command> commandQueue;
     private final LinkedList<Command> priorityCommandQueue;
     private boolean isExecuting;
@@ -33,9 +33,7 @@ public class NonBlockingCommandScheduler implements RepeatingCommand {
     }
 
     /**
-     * Adds a command to be queued
-     * 
-     * @param command
+     * {@inheritDoc}
      */
     public void addCommand(final Command command) {
 	commandQueue.addLast(command);
@@ -46,10 +44,7 @@ public class NonBlockingCommandScheduler implements RepeatingCommand {
     }
 
     /**
-     * Adds a high priority command to be queued. These will be run before all
-     * the normal commands (added using {@link #addCommand(Command)} are run).
-     * 
-     * @param command
+     * {@inheritDoc}
      */
     public void addPriorityCommand(final Command command) {
 	priorityCommandQueue.addLast(command);
