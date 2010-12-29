@@ -2,6 +2,8 @@ package com.calclab.hablar.rooms.client.room;
 
 import static com.calclab.hablar.rooms.client.HablarRooms.i18n;
 
+import java.util.Date;
+
 import com.calclab.emite.core.client.events.MessageEvent;
 import com.calclab.emite.core.client.events.MessageHandler;
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
@@ -84,6 +86,8 @@ public class RoomPresenter extends ChatPresenter implements RoomPage {
 			chatMessage.color = ColorHelper.getColor(message.getFrom());
 			if (delay != null) {
 			    chatMessage.setDate(delay.getStamp());
+			} else {
+			    chatMessage.setDate(new Date());
 			}
 			addMessage(chatMessage);
 			fireUserMessage(roomName, from, messageBody);

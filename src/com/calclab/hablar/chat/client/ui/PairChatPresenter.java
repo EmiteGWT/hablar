@@ -2,13 +2,15 @@ package com.calclab.hablar.chat.client.ui;
 
 import static com.calclab.hablar.chat.client.HablarChat.i18n;
 
+import java.util.Date;
+
 import com.calclab.emite.core.client.events.MessageEvent;
 import com.calclab.emite.core.client.events.MessageHandler;
 import com.calclab.emite.core.client.packet.TextUtils;
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
+import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.core.client.xmpp.stanzas.Message.Type;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
-import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.xep.delay.client.Delay;
@@ -114,6 +116,8 @@ public class PairChatPresenter extends ChatPresenter implements PairChatPage {
 	    chatMessage.color = ColorHelper.getColor(message.getFrom().getJID());
 	    if (delay != null) {
 		chatMessage.setDate(delay.getStamp());
+	    } else {
+		chatMessage.setDate(new Date());
 	    }
 	    addMessage(chatMessage);
 	    fireUserMessage(messageBody);

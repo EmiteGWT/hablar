@@ -1,6 +1,7 @@
 package com.calclab.hablar.chat.client.ui;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.calclab.emite.core.client.events.StateChangedEvent;
 import com.calclab.emite.core.client.events.StateChangedHandler;
@@ -80,6 +81,7 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPag
 	if (Empty.not(text)) {
 	    final ChatMessage message = new ChatMessage("me", text, ChatMessage.MessageType.sent);
 	    message.color = ColorHelper.ME;
+	    message.setDate(new Date());
 	    addMessage(message);
 	    chat.send(new Message(text));
 	    display.clearAndFocus();
