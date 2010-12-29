@@ -35,7 +35,7 @@ public class ChatMessageWidget extends Composite {
 	}
 	MessageType type = message.type;
 	if (Empty.not(message.author)) {
-	    author.setText(message.author + ": ");
+	    author.setText(message.author + ":");
 	} else {
 	    author.setText("");
 	    type = ChatMessage.MessageType.info;

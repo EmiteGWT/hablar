@@ -201,22 +201,18 @@ input[disabled] {
 }
 
 .chatMessage .author {
-	display: block;
-	float: left;
+	display: inline;
 	font-weight: bold;
 }
 
 .chatMessage .metadata {
-	display: block;
-	float: left;
+	display: inline;
 	color: #808080;
-	margin-right: 5px;
 	font-size: 90%;
 }
 
 .chatMessage .body {
-	margin-left: 5px;
-	float: left;
+	display: inline;
 }
 
 .hablar-EmoticonImage {
