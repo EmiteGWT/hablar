@@ -31,11 +31,11 @@ public class ChatMessageWidget extends Composite {
     public ChatMessageWidget(final ChatMessage message) {
 	initWidget(uiBinder.createAndBindUi(this));
 	if (Empty.not(message.metadata)) {
-	    metadata.setInnerText(message.metadata);
+	    metadata.setInnerText(message.metadata + " ");
 	}
 	MessageType type = message.type;
 	if (Empty.not(message.author)) {
-	    author.setText(message.author + ":");
+	    author.setText(message.author + ": ");
 	} else {
 	    author.setText("");
 	    type = ChatMessage.MessageType.info;

@@ -41,6 +41,10 @@ public class ConvertToGroupChatPresenter extends EditRoomPresenter {
 	display.setAcceptText(i18n().convertToGroupAction());
     }
 
+    public void setChat(final Chat chat) {
+	this.chat = chat;
+    }
+
     @Override
     protected void onAccept() {
 
@@ -72,6 +76,7 @@ public class ConvertToGroupChatPresenter extends EditRoomPresenter {
 	name = name.replaceAll("[^-a-zA-Z0-9 ]", "-");
 	display.getRoomName().setValue(name);
 
+	display.clearList();
 	for (final RosterItem item : roster.getItems()) {
 	    if (chatJid.equals(item.getJID())) {
 		createItem(item, true);
@@ -79,9 +84,5 @@ public class ConvertToGroupChatPresenter extends EditRoomPresenter {
 		createItem(item, false);
 	    }
 	}
-    }
-
-    public void setChat(final Chat chat) {
-	this.chat = chat;
     }
 }
