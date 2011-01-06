@@ -161,8 +161,7 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
     public void rosterItemChanged(final RosterItem item) {
 	final RosterItemPresenter presenter = itemPresenters.get(item.getJID());
 
-	// presenter.setItem(item) will return true if the item has changed
-	if ((presenter != null) && presenter.setItem(item)) {
+	if (presenter != null) {
 	    removeRosterItem(item);
 	    addRosterItemPresenter(presenter);
 	}
@@ -245,11 +244,8 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
 	if (presenter == null) {
 	    presenter = addRosterItem(item);
 	} else {
-	    // presenter.setItem(item) will return true if the item has changed
-	    if (presenter.setItem(item)) {
-		removeRosterItem(item);
-		addRosterItemPresenter(presenter);
-	    }
+	    removeRosterItem(item);
+	    addRosterItemPresenter(presenter);
 	}
 	return presenter;
     }
