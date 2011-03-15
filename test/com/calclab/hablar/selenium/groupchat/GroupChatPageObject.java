@@ -1,6 +1,7 @@
 package com.calclab.hablar.selenium.groupchat;
 
 import org.openqa.selenium.RenderedWebElement;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ByIdOrName;
 import org.openqa.selenium.support.FindBy;
 
@@ -15,11 +16,15 @@ public class GroupChatPageObject extends PageObject {
     @FindBy(id = "gwt-debug-InviteToRoomWidget-invite")
     private RenderedWebElement openGroupChatAccept;
 
+    public GroupChatPageObject(final WebDriver webdriver) {
+	super(webdriver);
+    }
+
     public RenderedWebElement getConvertAction(final String jid) {
 	final String id = Idify.id(HablarGroupChat.ACTION_ID_CONVERT, Idify.uriId(jid));
 	return findElement(new ByIdOrName("gwt-debug-" + id));
     }
-    
+
     public RenderedWebElement getOpenGroupChatAccept() {
 	return openGroupChatAccept;
     }

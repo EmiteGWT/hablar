@@ -2,6 +2,7 @@ package com.calclab.hablar.selenium.opengroupchat;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.RenderedWebElement;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -28,6 +29,10 @@ public class OpenGroupChatPageObject extends PageObject {
 
     @FindBy(className = "hablar-OpenRoomWidget")
     private RenderedWebElement widget;
+
+    public OpenGroupChatPageObject(final WebDriver webdriver) {
+	super(webdriver);
+    }
 
     public RenderedWebElement getAction() {
 	return action;

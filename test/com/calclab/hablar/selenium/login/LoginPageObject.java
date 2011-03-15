@@ -1,6 +1,7 @@
 package com.calclab.hablar.selenium.login;
 
 import org.openqa.selenium.RenderedWebElement;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import com.calclab.hablar.login.client.LoginMessages;
@@ -19,7 +20,8 @@ public class LoginPageObject extends PageObject {
     private RenderedWebElement button;
     private final I18nHelper i18n;
 
-    public LoginPageObject() {
+    public LoginPageObject(final WebDriver webdriver) {
+	super(webdriver);
 	i18n = new I18nHelper(LoginMessages.class);
     }
 

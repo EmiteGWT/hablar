@@ -1,6 +1,8 @@
 package com.calclab.hablar.html.client;
 
 import com.calclab.emite.browser.client.PageAssist;
+import com.calclab.emite.core.client.xmpp.session.XmppSession;
+import com.calclab.hablar.EmiteCompleteGinjector;
 import com.calclab.hablar.HablarComplete;
 import com.calclab.hablar.HablarConfig;
 import com.calclab.hablar.console.client.HablarConsole;
@@ -75,14 +77,17 @@ public class HablarHtml implements EntryPoint {
 	final HablarWidget widget = new HablarWidget(config.layout, config.tabHeaderSize);
 	final Hablar hablar = widget.getHablar();
 
-	HablarComplete.install(hablar, config);
+	final EmiteCompleteGinjector ginjector = GWT.create(EmiteCompleteGinjector.class);
+	final XmppSession session = ginjector.getXmppSession();
+
+	HablarComplete.install(hablar, config, ginjector);
 
 	if (htmlConfig.hasLogger) {
-	    new HablarConsole(hablar);
+	    new HablarConsole(hablar, ginjector.getXmppConnection(), session);
 	}
 
 	if (htmlConfig.hasLogin) {
-	    new HablarLogin(hablar, LoginConfig.getFromMeta());
+	    new HablarLogin(hablar, LoginConfig.getFromMeta(), session);
 	}
 
 	if (htmlConfig.inline == null) {

@@ -1,6 +1,7 @@
 package com.calclab.hablar.selenium.clipboard;
 
 import org.openqa.selenium.RenderedWebElement;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import com.calclab.hablar.selenium.PageObject;
@@ -13,6 +14,10 @@ public class CopyToClipboardPageObject extends PageObject {
     private RenderedWebElement close;
     @FindBy(id = "gwt-debug-CopyToClipboardWidget-content")
     private RenderedWebElement content;
+
+    public CopyToClipboardPageObject(final WebDriver webdriver) {
+	super(webdriver);
+    }
 
     public RenderedWebElement getAction() {
 	return action;

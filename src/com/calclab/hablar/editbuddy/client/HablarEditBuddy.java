@@ -12,7 +12,6 @@ import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.editbuddy.client.ui.EditBuddyWidget;
 import com.calclab.hablar.roster.client.groups.RosterItemPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
-import com.calclab.suco.client.Suco;
 
 /**
  * Adds the ability to edit a buddy in the roster
@@ -41,16 +40,14 @@ public class HablarEditBuddy {
 
     private final XmppRoster roster;
 
-    // FIXME: move to gin
-    @SuppressWarnings("deprecation")
-    public HablarEditBuddy(final Hablar hablar) {
-	roster = Suco.get(XmppRoster.class);
+    public HablarEditBuddy(final Hablar hablar, final XmppRoster roster) {
+	this.roster = roster;
 	final EditBuddyPage editBuddy = new EditBuddyPage(roster, hablar.getEventBus(), new EditBuddyWidget());
 	hablar.addPage(editBuddy, OverlayContainer.ROL);
 	final List<Page<?>> rosters = hablar.getPagesOfType(RosterPage.TYPE);
 	for (final Page<?> page : rosters) {
-	    final RosterPage roster = (RosterPage) page;
-	    roster.getItemMenu().addAction(createEditBuddyAction(editBuddy));
+	    final RosterPage rosterPage = (RosterPage) page;
+	    rosterPage.getItemMenu().addAction(createEditBuddyAction(editBuddy));
 	}
     }
 

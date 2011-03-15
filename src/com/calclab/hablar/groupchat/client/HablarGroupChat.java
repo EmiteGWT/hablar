@@ -19,7 +19,6 @@ import com.calclab.hablar.rooms.client.HablarRoomsConfig;
 import com.calclab.hablar.rooms.client.open.EditRoomWidget;
 import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
-import com.calclab.suco.client.Suco;
 
 /**
  * This object installs the GroupChat functionallity in Hablar.
@@ -46,15 +45,14 @@ public class HablarGroupChat {
     private final ChatManager chatManager;
     private final HablarRoomsConfig config;
 
-    // FIXME: move to gin
-    @SuppressWarnings("deprecation")
-    public HablarGroupChat(final Hablar hablar, final HablarRoomsConfig config) {
+    public HablarGroupChat(final Hablar hablar, final HablarRoomsConfig config, final XmppSession session,
+	    final XmppRoster roster, final ChatManager chatManager, final RoomManager roomManager) {
 	this.hablar = hablar;
 	this.config = config;
-	this.session = Suco.get(XmppSession.class);
-	this.roster = Suco.get(XmppRoster.class);
-	this.chatManager = Suco.get(ChatManager.class);
-	this.roomManager = Suco.get(RoomManager.class);
+	this.session = session;
+	this.roster = roster;
+	this.chatManager = chatManager;
+	this.roomManager = roomManager;
 	install();
     }
 
@@ -93,8 +91,8 @@ public class HablarGroupChat {
     }
 
     public ConvertToGroupChatPresenter newConvertToGroupChatPresenter(final String roomsService) {
-	return new ConvertToGroupChatPresenter(session, roster, chatManager, roomManager, roomsService, hablar
-		.getEventBus(), new EditRoomWidget());
+	return new ConvertToGroupChatPresenter(session, roster, chatManager, roomManager, roomsService,
+		hablar.getEventBus(), new EditRoomWidget());
     }
 
     private SimpleAction<RosterGroupPresenter> newOpenGroupChatAction(final OpenGroupChatPresenter openGroupPage) {

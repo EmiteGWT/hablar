@@ -1,6 +1,7 @@
 package com.calclab.hablar.selenium.roster;
 
 import org.openqa.selenium.RenderedWebElement;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ByIdOrName;
 import org.openqa.selenium.support.FindBy;
 
@@ -45,7 +46,8 @@ public class RosterPageObject extends PageObject {
     @FindBy(id = "gwt-debug-GroupSelectorWidget-editableName")
     private RenderedWebElement newGroupField;
 
-    public RosterPageObject() {
+    public RosterPageObject(final WebDriver webdriver) {
+	super(webdriver);
     }
 
     public RenderedWebElement getCreateNewGroupButton() {

@@ -3,6 +3,7 @@ package com.calclab.hablar.selenium;
 import java.awt.Point;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
@@ -20,10 +21,8 @@ import com.calclab.hablar.selenium.roster.RosterPageObject;
 import com.calclab.hablar.selenium.search.SearchPageObject;
 import com.calclab.hablar.selenium.tools.GenericWebTester;
 import com.calclab.hablar.selenium.tools.SeleniumConstants;
-import com.calclab.hablar.selenium.tools.SeleniumModule;
 import com.calclab.hablar.selenium.userpage.UserPageObject;
 import com.calclab.hablar.selenium.vcard.OtherVCardPageObject;
-import com.calclab.suco.client.Suco;
 
 public class HablarSeleniumDefaults {
     public static boolean mustCloseFinally = true;
@@ -67,22 +66,21 @@ public class HablarSeleniumDefaults {
 
     @BeforeMethod
     public void setupSeleniumModule(final ITestContext context) {
-	if (!Suco.getComponents().hasProvider(WebDriver.class)) {
-	    Suco.install(new SeleniumModule());
-	}
 	if (webtester == null) {
-	    webtester = Suco.get(GenericWebTester.class);
-	    login = Suco.get(LoginPageObject.class);
-	    roster = Suco.get(RosterPageObject.class);
-	    openChat = Suco.get(OpenChatPageObject.class);
-	    search = Suco.get(SearchPageObject.class);
-	    chat = Suco.get(ChatPageObject.class);
-	    editBuddy = Suco.get(EditBuddyPageObject.class);
-	    groupChat = Suco.get(GroupChatPageObject.class);
-	    userPage = Suco.get(UserPageObject.class);
-	    otherVCardPage = Suco.get(OtherVCardPageObject.class);
-	    copyToClipboard = Suco.get(CopyToClipboardPageObject.class);
-	    openGroupChat = Suco.get(OpenGroupChatPageObject.class);
+	    final WebDriver webdriver = new FirefoxDriver(SeleniumConstants.FIREFOX_PROFILE_NAME);
+	    webtester = new GenericWebTester(webdriver,
+		    "http://localhost:8888/HablarSelenium.html?gwt.codesvr=127.0.0.1:9997");
+	    login = new LoginPageObject(webdriver);
+	    roster = new RosterPageObject(webdriver);
+	    openChat = new OpenChatPageObject(webdriver);
+	    search = new SearchPageObject(webdriver);
+	    chat = new ChatPageObject(webdriver);
+	    editBuddy = new EditBuddyPageObject(webdriver);
+	    groupChat = new GroupChatPageObject(webdriver);
+	    userPage = new UserPageObject(webdriver);
+	    otherVCardPage = new OtherVCardPageObject(webdriver);
+	    copyToClipboard = new CopyToClipboardPageObject(webdriver);
+	    openGroupChat = new OpenGroupChatPageObject(webdriver);
 	}
 	webtester.home();
     }

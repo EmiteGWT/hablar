@@ -10,18 +10,12 @@ import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
-import com.calclab.suco.client.Suco;
 
 public class HablarConsole {
 
     protected static final String ACTION_ID = "hablar-ConsoleAction";
 
-    // FIXME: move to gin
-    @SuppressWarnings("deprecation")
-    public HablarConsole(final Hablar hablar) {
-	final XmppSession session = Suco.get(XmppSession.class);
-	final XmppConnection connection = Suco.get(XmppConnection.class);
-
+    public HablarConsole(final Hablar hablar, final XmppConnection connection, final XmppSession session) {
 	final ConsolePresenter loggerPage = new ConsolePresenter(connection, session, hablar.getEventBus(),
 		new ConsoleWidget());
 	hablar.addPage(loggerPage);

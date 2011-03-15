@@ -16,7 +16,6 @@ import com.calclab.emite.xtesting.RosterItemHelper;
 import com.calclab.hablar.core.client.ui.menu.Menu;
 import com.calclab.hablar.core.client.util.ImmediateRunCommandScheduler;
 import com.calclab.hablar.roster.client.RosterConfig;
-import com.calclab.hablar.testing.EmiteTester;
 import com.calclab.hablar.testing.HablarTester;
 
 public class RosterGroupPresenterTests {
@@ -27,7 +26,6 @@ public class RosterGroupPresenterTests {
 
     @Before
     public void setup() {
-	new EmiteTester();
 	final HablarTester hablar = new HablarTester();
 	itemMenu = hablar.newMenu();
 	final RosterItemDisplay itemDisplay = hablar.newDisplay(RosterItemDisplay.class);

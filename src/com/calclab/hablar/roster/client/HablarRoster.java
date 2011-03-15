@@ -7,8 +7,8 @@ import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emite.im.client.roster.SubscriptionHandler;
-import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.im.client.roster.SubscriptionHandler.Behaviour;
+import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.hablar.core.client.ui.menu.SimpleAction;
@@ -16,7 +16,6 @@ import com.calclab.hablar.core.client.util.NonBlockingCommandScheduler;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
 import com.calclab.hablar.roster.client.page.RosterWidget;
-import com.calclab.suco.client.Suco;
 
 public class HablarRoster {
 
@@ -32,13 +31,8 @@ public class HablarRoster {
 
     private final RosterPage rosterPage;
 
-    // FIXME: move to gin
-    @SuppressWarnings("deprecation")
-    public HablarRoster(final Hablar hablar, final RosterConfig rosterConfig) {
-	final XmppSession session = Suco.get(XmppSession.class);
-	final XmppRoster roster = Suco.get(XmppRoster.class);
-	final SubscriptionHandler subscriptionHandler = Suco.get(SubscriptionHandler.class);
-	final ChatManager chatManager = Suco.get(ChatManager.class);
+    public HablarRoster(final Hablar hablar, final RosterConfig rosterConfig, final XmppSession session,
+	    final XmppRoster roster, final ChatManager chatManager, final SubscriptionHandler subscriptionHandler) {
 
 	final NonBlockingCommandScheduler commandQueue = new NonBlockingCommandScheduler();
 

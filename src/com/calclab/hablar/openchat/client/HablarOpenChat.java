@@ -14,7 +14,6 @@ import com.calclab.hablar.openchat.client.ui.OpenChatPresenter;
 import com.calclab.hablar.openchat.client.ui.OpenChatWidget;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
-import com.calclab.suco.client.Suco;
 
 /**
  * Adds the ability to open a chat with any jabber id.<br/>
@@ -41,13 +40,12 @@ public class HablarOpenChat {
     private final XmppRoster roster;
     private final ChatManager chatManager;
 
-    // FIXME: move to gin
-    @SuppressWarnings("deprecation")
-    public HablarOpenChat(final Hablar hablar) {
+    public HablarOpenChat(final Hablar hablar, final XmppSession session, final XmppRoster roster,
+	    final ChatManager chatManager) {
 	this.hablar = hablar;
-	this.session = Suco.get(XmppSession.class);
-	this.roster = Suco.get(XmppRoster.class);
-	this.chatManager = Suco.get(ChatManager.class);
+	this.session = session;
+	this.roster = roster;
+	this.chatManager = chatManager;
 	install();
     }
 

@@ -7,7 +7,6 @@ import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
-import com.calclab.suco.client.Suco;
 
 public class HablarLogin {
 
@@ -27,10 +26,7 @@ public class HablarLogin {
 	}
     }
 
-    // FIXME: move to gin
-    @SuppressWarnings("deprecation")
-    public HablarLogin(final Hablar hablar, final LoginConfig config) {
-	final XmppSession session = Suco.get(XmppSession.class);
+    public HablarLogin(final Hablar hablar, final LoginConfig config, final XmppSession session) {
 	final LoginPage login = new LoginPage(session, hablar.getEventBus(), new LoginWidget());
 	hablar.addPage(login);
 

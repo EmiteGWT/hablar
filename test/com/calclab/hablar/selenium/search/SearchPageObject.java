@@ -1,6 +1,7 @@
 package com.calclab.hablar.selenium.search;
 
 import org.openqa.selenium.RenderedWebElement;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ByIdOrName;
 import org.openqa.selenium.support.FindBy;
 
@@ -35,6 +36,14 @@ public class SearchPageObject extends PageObject {
 
     @FindBy(id = "gwt-debug-SearchLogic-chat")
     private RenderedWebElement searchChatAction;
+
+    public SearchPageObject(final WebDriver webdriver) {
+	super(webdriver);
+    }
+
+    private RenderedWebElement findJid(final String jid) {
+	return findElement(new ByIdOrName("gwt-debug-" + Idify.uriId(jid) + "-search-menu"));
+    }
 
     public RenderedWebElement getAction() {
 	return searchAction;
@@ -90,10 +99,6 @@ public class SearchPageObject extends PageObject {
 
     public void waitForResultMenu(final String jid) {
 	waitForId("gwt-debug-" + Idify.uriId(jid) + "-search-menu");
-    }
-
-    private RenderedWebElement findJid(final String jid) {
-	return findElement(new ByIdOrName("gwt-debug-" + Idify.uriId(jid) + "-search-menu"));
     }
 
 }

@@ -22,7 +22,6 @@ import com.calclab.hablar.roster.client.groups.RosterItemPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
 import com.calclab.hablar.user.client.UserContainer;
-import com.calclab.suco.client.Suco;
 
 public class HablarVCard {
 
@@ -48,14 +47,13 @@ public class HablarVCard {
 
     private final XmppSession session;
 
-    // FIXME: move to gin
-    @SuppressWarnings("deprecation")
-    public HablarVCard(final Hablar hablar, final VCardConfig vCardConfig) {
+    public HablarVCard(final Hablar hablar, final VCardConfig vCardConfig, final XmppSession session,
+	    final XmppRoster roster, final VCardManager vCardManager) {
 	this.hablar = hablar;
 	this.vCardConfig = vCardConfig;
-	session = Suco.get(XmppSession.class);
-	roster = Suco.get(XmppRoster.class);
-	vCardManager = Suco.get(VCardManager.class);
+	this.session = session;
+	this.roster = roster;
+	this.vCardManager = vCardManager;
 	install();
     }
 

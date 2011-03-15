@@ -21,7 +21,6 @@ import com.calclab.hablar.rooms.client.room.RoomPage;
 import com.calclab.hablar.rooms.client.room.RoomPresenter;
 import com.calclab.hablar.rooms.client.state.HablarRoomStateManager;
 import com.calclab.hablar.roster.client.page.RosterPage;
-import com.calclab.suco.client.Suco;
 import com.google.inject.Inject;
 
 public class HablarRooms {
@@ -43,15 +42,14 @@ public class HablarRooms {
     private final RoomManager roomManager;
     private final RoomDiscoveryManager roomDiscoveryManager;
 
-    // FIXME: move to gin
-    @SuppressWarnings("deprecation")
     @Inject
-    public HablarRooms(final Hablar hablar, final HablarRoomsConfig config) {
-	this.session = Suco.get(XmppSession.class);
-	this.roster = Suco.get(XmppRoster.class);
-	this.roomManager = Suco.get(RoomManager.class);
-	this.roomDiscoveryManager = Suco.get(RoomDiscoveryManager.class);
-	final MUCChatStateManager mucChatStateManager = Suco.get(MUCChatStateManager.class);
+    public HablarRooms(final Hablar hablar, final HablarRoomsConfig config, final XmppSession session,
+	    final XmppRoster roster, final RoomManager roomManager, final RoomDiscoveryManager roomDiscoveryManager,
+	    final MUCChatStateManager mucChatStateManager) {
+	this.session = session;
+	this.roster = roster;
+	this.roomManager = roomManager;
+	this.roomDiscoveryManager = roomDiscoveryManager;
 	new HablarRoomManager(session, roster, roomManager, hablar, config);
 
 	final InviteToRoomPresenter invitePage = new InviteToRoomPresenter(roster, hablar.getEventBus(),

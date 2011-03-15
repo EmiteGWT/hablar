@@ -1,12 +1,17 @@
 package com.calclab.hablar.selenium.chat;
 
 import org.openqa.selenium.RenderedWebElement;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ByIdOrName;
 
 import com.calclab.hablar.core.client.Idify;
 import com.calclab.hablar.selenium.PageObject;
 
 public class ChatPageObject extends PageObject {
+
+    public ChatPageObject(final WebDriver webDriver) {
+	super(webDriver);
+    }
 
     public RenderedWebElement getHeader(final String uri) {
 	final String pageId = Idify.uriId(uri);

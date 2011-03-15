@@ -14,7 +14,6 @@ import com.calclab.hablar.signals.client.preferences.SignalsPreferencesWidget;
 import com.calclab.hablar.signals.client.unattended.UnattendedPagesManager;
 import com.calclab.hablar.signals.client.unattended.UnattendedPresenter;
 import com.calclab.hablar.user.client.UserContainer;
-import com.calclab.suco.client.Suco;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasText;
@@ -48,12 +47,8 @@ public class HablarSignals {
 	HablarSignals.signalMessages = t;
     }
 
-    // FIXME: move to gin
-    @SuppressWarnings("deprecation")
-    public HablarSignals(final Hablar hablar) {
+    public HablarSignals(final Hablar hablar, final XmppSession session, final PrivateStorageManager storageManager) {
 	final HablarEventBus eventBus = hablar.getEventBus();
-	final XmppSession session = Suco.get(XmppSession.class);
-	final PrivateStorageManager storageManager = Suco.get(PrivateStorageManager.class);
 
 	final HasText titleDisplay = new HasText() {
 	    @Override

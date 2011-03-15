@@ -1,27 +1,40 @@
 package com.calclab.hablar.selenium.vcard;
 
 import org.openqa.selenium.RenderedWebElement;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import com.calclab.hablar.selenium.PageObject;
 
 public class OtherVCardPageObject extends PageObject implements VCardPageObject {
 
-    @FindBy(id = "gwt-debug-OtherVCardWidget-name") RenderedWebElement name;
+    @FindBy(id = "gwt-debug-OtherVCardWidget-name")
+    RenderedWebElement name;
 
-    @FindBy(id = "gwt-debug-OtherVCardWidget-nickName") RenderedWebElement nickName;
+    @FindBy(id = "gwt-debug-OtherVCardWidget-nickName")
+    RenderedWebElement nickName;
 
-    @FindBy(id = "gwt-debug-OtherVCardWidget-familyName") RenderedWebElement familyName;
+    @FindBy(id = "gwt-debug-OtherVCardWidget-familyName")
+    RenderedWebElement familyName;
 
-    @FindBy(id = "gwt-debug-OtherVCardWidget-givenName") RenderedWebElement givenName;
+    @FindBy(id = "gwt-debug-OtherVCardWidget-givenName")
+    RenderedWebElement givenName;
 
-    @FindBy(id = "gwt-debug-OtherVCardWidget-middleName") RenderedWebElement middleName;
+    @FindBy(id = "gwt-debug-OtherVCardWidget-middleName")
+    RenderedWebElement middleName;
 
-    @FindBy(id = "gwt-debug-OtherVCardWidget-organizationName") RenderedWebElement organizationName;
+    @FindBy(id = "gwt-debug-OtherVCardWidget-organizationName")
+    RenderedWebElement organizationName;
 
-    @FindBy(id = "gwt-debug-OtherVCardWidget-email") RenderedWebElement email;
+    @FindBy(id = "gwt-debug-OtherVCardWidget-email")
+    RenderedWebElement email;
 
-    @FindBy(id = "gwt-debug-OtherVCardWidget-homepage") RenderedWebElement homepage;
+    @FindBy(id = "gwt-debug-OtherVCardWidget-homepage")
+    RenderedWebElement homepage;
+
+    public OtherVCardPageObject(final WebDriver webdriver) {
+	super(webdriver);
+    }
 
     public RenderedWebElement getEmail() {
 	return email;

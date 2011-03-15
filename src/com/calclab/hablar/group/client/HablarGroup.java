@@ -15,7 +15,7 @@ import com.calclab.hablar.group.client.manage.ModifyGroupPresenter;
 import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
-import com.calclab.suco.client.Suco;
+import com.google.inject.Inject;
 
 /**
  * This object installs HablarGroup module inside hablar
@@ -33,12 +33,11 @@ public class HablarGroup {
 
     private final XmppRoster roster;
 
-    // FIXME: move to gin
-    @SuppressWarnings("deprecation")
-    public HablarGroup(final Hablar hablar) {
+    @Inject
+    public HablarGroup(final Hablar hablar, final XmppSession session, final XmppRoster roster) {
 	this.hablar = hablar;
-	this.session = Suco.get(XmppSession.class);
-	this.roster = Suco.get(XmppRoster.class);
+	this.session = session;
+	this.roster = roster;
 	install();
     }
 
@@ -69,8 +68,8 @@ public class HablarGroup {
      */
     private SimpleAction<RosterPage> newCreateGroupAction(final CreateGroupPresenter createGroupPresenter) {
 	final String icon = Icons.ADD_GROUP;
-	final SimpleAction<RosterPage> createGroupAction = new SimpleAction<RosterPage>(groupMessages
-		.createGroupAction(), ACTION_ID_CREATE_GROUP, icon) {
+	final SimpleAction<RosterPage> createGroupAction = new SimpleAction<RosterPage>(
+		groupMessages.createGroupAction(), ACTION_ID_CREATE_GROUP, icon) {
 	    @Override
 	    public void execute(final RosterPage page) {
 		createGroupPresenter.requestVisibility(Visibility.focused);
@@ -80,8 +79,8 @@ public class HablarGroup {
     }
 
     private CreateGroupPresenter newCreateGroupPresenter() {
-	return new CreateGroupPresenter(session, roster, hablar.getEventBus(), new ManageGroupWidget(), groupMessages
-		.createNewGroup());
+	return new CreateGroupPresenter(session, roster, hablar.getEventBus(), new ManageGroupWidget(),
+		groupMessages.createNewGroup());
     }
 
     /**
@@ -104,8 +103,8 @@ public class HablarGroup {
     }
 
     private ModifyGroupPresenter newModifyGroupPresenter() {
-	return new ModifyGroupPresenter(roster, hablar.getEventBus(), new ManageGroupWidget(), groupMessages
-		.modifyGroup());
+	return new ModifyGroupPresenter(roster, hablar.getEventBus(), new ManageGroupWidget(),
+		groupMessages.modifyGroup());
     }
 
 }

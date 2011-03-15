@@ -7,11 +7,22 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ByIdOrName;
 import org.testng.Assert;
 
-import com.calclab.suco.client.Suco;
-
 public abstract class PageObject {
 
     private static final long[] POLL_INTERVALS = { 10, 20, 30, 40, 50, 50, 50, 50, 100 };
+    private final WebDriver webDriver;
+
+    public PageObject(final WebDriver webDriver) {
+	this.webDriver = webDriver;
+    }
+
+    protected RenderedWebElement findElement(final By by) {
+	return (RenderedWebElement) getWebDriver().findElement(by);
+    }
+
+    private WebDriver getWebDriver() {
+	return webDriver;
+    }
 
     public void waitFor(final RenderedWebElement element) {
 	final String id = element.getAttribute("id");
@@ -24,14 +35,6 @@ public abstract class PageObject {
 	});
     }
 
-    private WebDriver getWebDriver() {
-	return Suco.get(WebDriver.class);
-    }
-
-    protected RenderedWebElement findElement(final By by) {
-	return (RenderedWebElement) getWebDriver().findElement(by);
-    }
-    
     /**
      * Thanks to:
      * http://groups.google.com/group/webdriver/browse_frm/thread/6e705242
@@ -44,7 +47,7 @@ public abstract class PageObject {
 	int i = 0;
 	boolean success = false;
 	final long timeout = System.currentTimeMillis() + 9000;
-	while (i < POLL_INTERVALS.length && !success) {
+	while ((i < POLL_INTERVALS.length) && !success) {
 	    try {
 		runnable.run();
 		success = true;
@@ -78,6 +81,16 @@ public abstract class PageObject {
 	});
     }
 
+    protected void waitForId(final String id) {
+	System.out.println("WAIT FOR: " + id);
+	waitFor(id, new Runnable() {
+	    @Override
+	    public void run() {
+		Assert.assertTrue(((RenderedWebElement) getWebDriver().findElement(new ByIdOrName(id))).isDisplayed());
+	    }
+	});
+    }
+
     protected void waitForValue(final WebElement element, final String text) {
 	System.out.println("WAIT FOR: " + text);
 	waitFor(text, new Runnable() {
@@ -86,16 +99,6 @@ public abstract class PageObject {
 		final String elValue = element.getValue();
 		System.out.println("Element value: " + elValue);
 		Assert.assertTrue(elValue.contains(text));
-	    }
-	});
-    }
-
-    protected void waitForId(final String id) {
-	System.out.println("WAIT FOR: " + id);
-	waitFor(id, new Runnable() {
-	    @Override
-	    public void run() {
-		Assert.assertTrue(((RenderedWebElement) getWebDriver().findElement(new ByIdOrName(id))).isDisplayed());
 	    }
 	});
     }

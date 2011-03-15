@@ -10,7 +10,6 @@ import com.calclab.hablar.roster.client.groups.RosterItemPresenter;
 import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.usergroups.client.changegroups.ManageGroupsPresenter;
 import com.calclab.hablar.usergroups.client.changegroups.ManageGroupsWidget;
-import com.calclab.suco.client.Suco;
 
 public class HablarUserGroups {
     private static final String ACTION_ID_ADD_TO_GROUP = "HablarRoster-manageGroupsAction";
@@ -25,11 +24,7 @@ public class HablarUserGroups {
 	HablarUserGroups.messages = messages;
     }
 
-    // FIXME: move to gin
-    // FIXME: resoterPage can't be a parameter when move to gin
-    @SuppressWarnings("deprecation")
-    public HablarUserGroups(final RosterPage rosterPage, final Hablar hablar) {
-	final XmppRoster roster = Suco.get(XmppRoster.class);
+    public HablarUserGroups(final RosterPage rosterPage, final Hablar hablar, final XmppRoster roster) {
 
 	final ManageGroupsPresenter movePage = new ManageGroupsPresenter(roster, hablar.getEventBus(),
 		new ManageGroupsWidget());

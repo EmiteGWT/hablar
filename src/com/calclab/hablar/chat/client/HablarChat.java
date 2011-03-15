@@ -9,8 +9,6 @@ import com.calclab.hablar.chat.client.ui.PairChatPresenter;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.container.PageAddedEvent;
 import com.calclab.hablar.core.client.container.PageAddedHandler;
-import com.calclab.suco.client.Suco;
-import com.google.inject.Inject;
 
 public class HablarChat {
 
@@ -24,14 +22,8 @@ public class HablarChat {
 	chatMessages = messages;
     }
 
-    // FIXME: add suco
-    @SuppressWarnings("deprecation")
-    @Inject
-    public HablarChat(final Hablar hablar, final ChatConfig chatConfig) {
-	final XmppRoster roster = Suco.get(XmppRoster.class);
-	final ChatManager chatManager = Suco.get(ChatManager.class);
-	final StateManager stateManager = Suco.get(StateManager.class);
-
+    public HablarChat(final Hablar hablar, final ChatConfig chatConfig, final XmppRoster roster,
+	    final ChatManager chatManager, final StateManager stateManager) {
 	new HablarChatManager(roster, chatManager, hablar, chatConfig);
 
 	hablar.addPageAddedHandler(new PageAddedHandler() {

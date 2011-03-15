@@ -1,6 +1,7 @@
 package com.calclab.hablar.selenium.userpage;
 
 import org.openqa.selenium.RenderedWebElement;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import com.calclab.hablar.selenium.PageObject;
@@ -52,6 +53,10 @@ public class UserPageObject extends PageObject implements VCardPageObject {
 
     @FindBy(id = "gwt-debug-OwnVCardWidget-homepage")
     private RenderedWebElement homepage;
+
+    public UserPageObject(final WebDriver webdriver) {
+	super(webdriver);
+    }
 
     public RenderedWebElement getClose() {
 	return close;

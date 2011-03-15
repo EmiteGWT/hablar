@@ -1,5 +1,9 @@
 package com.calclab.hablar;
 
+import com.calclab.emite.core.client.xmpp.session.XmppSession;
+import com.calclab.emite.im.client.chat.ChatManager;
+import com.calclab.emite.im.client.roster.XmppRoster;
+import com.calclab.emite.xep.muc.client.RoomManager;
 import com.calclab.hablar.chat.client.HablarChat;
 import com.calclab.hablar.clipboard.client.HablarClipboard;
 import com.calclab.hablar.core.client.Hablar;
@@ -22,41 +26,48 @@ import com.calclab.hablar.vcard.client.HablarVCard;
 
 public class HablarComplete {
 
-    public static void install(final Hablar hablar, final HablarConfig config) {
+    public static void install(final Hablar hablar, final HablarConfig config, final EmiteCompleteGinjector ginjector) {
+	final XmppSession session = ginjector.getXmppSession();
+	final XmppRoster roster = ginjector.getXmppRoster();
+	final ChatManager chatManager = ginjector.getChatManager();
+	final RoomManager roomManager = ginjector.getRoomManager();
+
 	new HablarCore(hablar);
-	new HablarChat(hablar, config.chatConfig);
-	new HablarRooms(hablar, config.roomsConfig);
-	new HablarGroupChat(hablar, config.roomsConfig);
+	new HablarChat(hablar, config.chatConfig, roster, chatManager, ginjector.getStateManager());
+	new HablarRooms(hablar, config.roomsConfig, session, roster, roomManager, ginjector.getRoomDiscoveryManager(),
+		ginjector.getMUCChatStateManager());
+	new HablarGroupChat(hablar, config.roomsConfig, session, roster, chatManager, roomManager);
 
 	new HablarDock(hablar, config.dockConfig);
 
-	new HablarUser(hablar);
+	new HablarUser(hablar, session, ginjector.getPresenceManager(), ginjector.getPrivateStorageManager());
 
-	RosterPage roster = null;
+	RosterPage rosterPage = null;
 	HablarRoster hablarRoster = null;
 	if (config.hasRoster) {
-	    hablarRoster = new HablarRoster(hablar, config.rosterConfig);
-	    roster = hablarRoster.getRosterPage();
+	    hablarRoster = new HablarRoster(hablar, config.rosterConfig, session, roster, chatManager,
+		    ginjector.getSubscriptionHandler());
+	    rosterPage = hablarRoster.getRosterPage();
 	}
 
 	if (config.hasVCard) {
-	    new HablarVCard(hablar, config.vcardConfig);
+	    new HablarVCard(hablar, config.vcardConfig, session, roster, ginjector.getVCardManager());
 	}
 
 	if (config.hasRoster) {
-	    new HablarOpenChat(hablar);
-	    new HablarEditBuddy(hablar);
-	    new HablarUserGroups(roster, hablar);
-	    new HablarGroup(hablar);
+	    new HablarOpenChat(hablar, session, roster, chatManager);
+	    new HablarEditBuddy(hablar, roster);
+	    new HablarUserGroups(rosterPage, hablar, roster);
+	    new HablarGroup(hablar, session, roster);
 	    hablarRoster.addLowPriorityActions();
 	}
 
 	if (config.hasSearch) {
-	    new HablarSearch(hablar, config.searchConfig);
+	    new HablarSearch(hablar, config.searchConfig, session, roster, chatManager, ginjector.getSearchManager());
 	}
 
 	if (config.hasSignals) {
-	    new HablarSignals(hablar);
+	    new HablarSignals(hablar, session, ginjector.getPrivateStorageManager());
 	}
 
 	if (config.hasSound) {
@@ -69,9 +80,10 @@ public class HablarComplete {
 
     }
 
-    public static void install(final HablarWidget widget, final HablarConfig config) {
+    public static void install(final HablarWidget widget, final HablarConfig config,
+	    final EmiteCompleteGinjector ginjector) {
 	final Hablar hablar = widget.getHablar();
-	install(hablar, config);
+	install(hablar, config, ginjector);
 
     }
 

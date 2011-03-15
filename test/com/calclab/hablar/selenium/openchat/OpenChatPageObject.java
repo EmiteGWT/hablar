@@ -1,6 +1,7 @@
 package com.calclab.hablar.selenium.openchat;
 
 import org.openqa.selenium.RenderedWebElement;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -25,6 +26,10 @@ public class OpenChatPageObject extends PageObject {
 
     @FindBy(id = "gwt-debug-OpenChatWidget-addToRoster-input")
     private RenderedWebElement addToRoster;
+
+    public OpenChatPageObject(final WebDriver webdriver) {
+	super(webdriver);
+    }
 
     public RenderedWebElement getAction() {
 	return action;

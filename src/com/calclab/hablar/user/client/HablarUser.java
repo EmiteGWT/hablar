@@ -9,7 +9,6 @@ import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.user.client.presence.PresencePage;
 import com.calclab.hablar.user.client.presence.PresenceWidget;
 import com.calclab.hablar.user.client.storedpresence.StoredPresenceManager;
-import com.calclab.suco.client.Suco;
 
 public class HablarUser {
 
@@ -23,12 +22,8 @@ public class HablarUser {
 	userMessages = messages;
     }
 
-    // FIXME: add suco
-    @SuppressWarnings("deprecation")
-    public HablarUser(final Hablar hablar) {
-	final XmppSession session = Suco.get(XmppSession.class);
-	final PresenceManager presenceManager = Suco.get(PresenceManager.class);
-	final PrivateStorageManager privateStorageManager = Suco.get(PrivateStorageManager.class);
+    public HablarUser(final Hablar hablar, final XmppSession session, final PresenceManager presenceManager,
+	    final PrivateStorageManager privateStorageManager) {
 	final StoredPresenceManager storedPresenceManager = new StoredPresenceManager(privateStorageManager);
 
 	final HablarEventBus eventBus = hablar.getEventBus();

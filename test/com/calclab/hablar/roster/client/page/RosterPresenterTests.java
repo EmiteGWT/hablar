@@ -36,7 +36,7 @@ public class RosterPresenterTests {
 	display = tester.newDisplay(RosterDisplay.class);
 	final RosterConfig rosterConfig = new RosterConfig();
 	rosterConfig.oneClickChat = true;
-	new RosterPresenter(session, emite.xmppRoster, emite.chatManager, hablarEventBus, display, rosterConfig);
+	new RosterPresenter(session, emite.xmppRoster, emite.chatManager, hablarEventBus, display, rosterConfig, null);
     }
 
     @Test

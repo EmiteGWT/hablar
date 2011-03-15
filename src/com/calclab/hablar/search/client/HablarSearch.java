@@ -17,7 +17,6 @@ import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.roster.client.page.RosterPresenter;
 import com.calclab.hablar.search.client.page.SearchPage;
 import com.calclab.hablar.search.client.page.SearchWidget;
-import com.calclab.suco.client.Suco;
 
 /**
  * Adds Search support to Hablar
@@ -36,13 +35,8 @@ public class HablarSearch {
 	searchMessages = messages;
     }
 
-    // FIXME: move to gin
-    @SuppressWarnings("deprecation")
-    public HablarSearch(final Hablar hablar, final SearchConfig searchConfig) {
-	final XmppSession session = Suco.get(XmppSession.class);
-	final XmppRoster roster = Suco.get(XmppRoster.class);
-	final SearchManager searchManager = Suco.get(SearchManager.class);
-	final ChatManager chatManager = Suco.get(ChatManager.class);
+    public HablarSearch(final Hablar hablar, final SearchConfig searchConfig, final XmppSession session,
+	    final XmppRoster roster, final ChatManager chatManager, final SearchManager searchManager) {
 
 	searchManager.setHost(XmppURI.uri(null, searchConfig.searchService, null));
 	final Visibility visible = searchConfig.searchOnRoster ? Visibility.hidden : Visibility.notFocused;
