@@ -67,7 +67,7 @@ public class HablarSeleniumDefaults {
     @BeforeMethod
     public void setupSeleniumModule(final ITestContext context) {
 	if (webtester == null) {
-	    final WebDriver webdriver = new FirefoxDriver(SeleniumConstants.FIREFOX_PROFILE_NAME);
+	    final WebDriver webdriver = new FirefoxDriver();
 	    webtester = new GenericWebTester(webdriver,
 		    "http://localhost:8888/HablarSelenium.html?gwt.codesvr=127.0.0.1:9997");
 	    login = new LoginPageObject(webdriver);
