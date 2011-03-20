@@ -2,9 +2,9 @@ package com.calclab.hablar.html.client;
 
 import com.calclab.emite.browser.client.PageAssist;
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
-import com.calclab.hablar.EmiteCompleteGinjector;
-import com.calclab.hablar.HablarComplete;
-import com.calclab.hablar.HablarConfig;
+import com.calclab.hablar.client.EmiteCompleteGinjector;
+import com.calclab.hablar.client.HablarComplete;
+import com.calclab.hablar.client.HablarConfig;
 import com.calclab.hablar.console.client.HablarConsole;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
