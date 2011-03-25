@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.calclab.emite.core.client.packet.IPacket;
 import com.calclab.emite.core.client.packet.MatcherFactory;
-import com.calclab.emite.xep.storage.client.IQResponse;
+import com.calclab.emite.core.client.xmpp.stanzas.IQ;
 import com.calclab.emite.xep.storage.client.SimpleStorageData;
 
 public class StoredPresences extends SimpleStorageData {
@@ -15,7 +15,7 @@ public class StoredPresences extends SimpleStorageData {
     public static final String HABLAR_PRESENCES_XMLNS = "hablar:presences";
     public static final StoredPresences empty = new StoredPresences();
 
-    public static StoredPresences parse(final IQResponse response) {
+    public static StoredPresences parse(final IQ response) {
 	final StoredPresences parsed = new StoredPresences();
 	for (final IPacket packet : (List<? extends IPacket>) response.getFirstChildInDeep(
 		MatcherFactory.byNameAndXMLNS(HABLAR_PRESENCES, HABLAR_PRESENCES_XMLNS)).getChildren(

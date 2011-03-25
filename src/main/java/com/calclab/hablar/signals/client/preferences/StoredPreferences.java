@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import com.calclab.emite.core.client.packet.IPacket;
 import com.calclab.emite.core.client.packet.MatcherFactory;
-import com.calclab.emite.xep.storage.client.IQResponse;
+import com.calclab.emite.core.client.xmpp.stanzas.IQ;
 import com.calclab.emite.xep.storage.client.SimpleStorageData;
 
 /**
@@ -22,7 +22,7 @@ public class StoredPreferences extends SimpleStorageData {
     
     public static final String NOTIFIER_ENABLED = "notifier-%s-enabled";
 
-    public static StoredPreferences parse(final IQResponse response) {
+    public static StoredPreferences parse(final IQ response) {
 	final StoredPreferences parsed = new StoredPreferences(response.getFirstChildInDeep(MatcherFactory
 		.byNameAndXMLNS(HABLAR_PREFERENCES, HABLAR_PREFERENCES_XMLNS)));
 	return parsed;

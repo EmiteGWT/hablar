@@ -5,12 +5,14 @@ import static com.calclab.hablar.user.client.HablarUser.i18n;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.calclab.emite.core.client.xmpp.stanzas.IQ;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.presence.PresenceManager;
 import com.calclab.emite.im.client.presence.events.OwnPresenceChangedEvent;
 import com.calclab.emite.im.client.presence.events.OwnPresenceChangedHandler;
-import com.calclab.emite.xep.storage.client.IQResponse;
+import com.calclab.emite.xep.storage.client.events.PrivateStorageResponseEvent;
+import com.calclab.emite.xep.storage.client.events.PrivateStorageResponseHandler;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.ui.icon.Icons;
@@ -21,7 +23,6 @@ import com.calclab.hablar.user.client.EditorPage;
 import com.calclab.hablar.user.client.storedpresence.StoredPresence;
 import com.calclab.hablar.user.client.storedpresence.StoredPresenceManager;
 import com.calclab.hablar.user.client.storedpresence.StoredPresences;
-import com.calclab.suco.client.events.Listener;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
@@ -98,10 +99,11 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
     }
 
     private void addCustomPresenceActions() {
-	storedPresenceManager.get(new Listener<IQResponse>() {
+	storedPresenceManager.get(new PrivateStorageResponseHandler() {
 	    @Override
-	    public void onEvent(final IQResponse response) {
-		if (response.isSuccess()) {
+	    public void onStorageResponse(PrivateStorageResponseEvent event) {
+		IQ response = event.getResponseIQ();
+		if (IQ.isSuccess(response)) {
 		    final List<StoredPresence> presences = StoredPresences.parse(response).get();
 		    if (presences.size() > 0) {
 			for (final StoredPresence presence : presences) {
@@ -165,10 +167,11 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
     private void setPresence(final String status, final Show show) {
 	showPresence(status, show);
 	if (statusNotEmpty(status)) {
-	    storedPresenceManager.add(status, show, new Listener<IQResponse>() {
+	    storedPresenceManager.add(status, show, new PrivateStorageResponseHandler() {
 		@Override
-		public void onEvent(final IQResponse response) {
-		    if (response.isSuccess()) {
+		public void onStorageResponse(PrivateStorageResponseEvent event) {
+		    IQ response = event.getResponseIQ();
+		    if (IQ.isSuccess(response)) {
 			updateMenu();
 		    }
 		}

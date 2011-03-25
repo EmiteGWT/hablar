@@ -6,8 +6,10 @@ import com.calclab.emite.core.client.events.StateChangedEvent;
 import com.calclab.emite.core.client.events.StateChangedHandler;
 import com.calclab.emite.core.client.xmpp.session.SessionStates;
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
-import com.calclab.emite.xep.storage.client.IQResponse;
+import com.calclab.emite.core.client.xmpp.stanzas.IQ;
 import com.calclab.emite.xep.storage.client.PrivateStorageManager;
+import com.calclab.emite.xep.storage.client.events.PrivateStorageResponseEvent;
+import com.calclab.emite.xep.storage.client.events.PrivateStorageResponseHandler;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.signals.client.HablarSignals;
@@ -15,7 +17,6 @@ import com.calclab.hablar.signals.client.SignalPreferences;
 import com.calclab.hablar.signals.client.notifications.HablarNotifier;
 import com.calclab.hablar.signals.client.notifications.NotificationManager;
 import com.calclab.hablar.user.client.EditorPage;
-import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
 
 public class SignalsPreferencesPresenter extends PagePresenter<SignalsPreferencesDisplay> implements
@@ -25,7 +26,6 @@ public class SignalsPreferencesPresenter extends PagePresenter<SignalsPreference
     private final SignalPreferences preferences;
     private final PrivateStorageManager storageManager;
     private final NotificationManager notificationManager;
-    private final Listener<IQResponse> savingListener;
     private boolean loaded;
     private StoredPreferences storedPreferences;
 
@@ -37,14 +37,6 @@ public class SignalsPreferencesPresenter extends PagePresenter<SignalsPreference
 	this.storageManager = storageManager;
 	this.preferences = preferences;
 	this.notificationManager = notificationManager;
-	savingListener = new Listener<IQResponse>() {
-	    @Override
-	    public void onEvent(final IQResponse parameter) {
-		if (parameter.isError()) {
-		    setLoading(true, HablarSignals.signalMessages.saveError());
-		}
-	    }
-	};
 
 	setLoading(true, HablarSignals.signalMessages.waitingToSession());
 
@@ -85,10 +77,11 @@ public class SignalsPreferencesPresenter extends PagePresenter<SignalsPreference
 
     private void loadPreferences() {
 	setLoading(true, HablarSignals.signalMessages.loadingPreferences());
-	storageManager.retrieve(StoredPreferences.empty, new Listener<IQResponse>() {
+	storageManager.retrieve(StoredPreferences.empty, new PrivateStorageResponseHandler() {
 	    @Override
-	    public void onEvent(final IQResponse parameter) {
-		if (parameter.isSuccess()) {
+	    public void onStorageResponse(PrivateStorageResponseEvent event) {
+		IQ parameter = event.getResponseIQ();
+		if (IQ.isSuccess(parameter)) {
 		    storedPreferences = StoredPreferences.parse(parameter);
 		    preferences.titleSignals = storedPreferences.getTitleSignals();
 		    preferences.incomingMessages = storedPreferences.getIncommingMessages();
@@ -131,7 +124,15 @@ public class SignalsPreferencesPresenter extends PagePresenter<SignalsPreference
 		    notificationManager.setNotifierActive(notifier, notifierSelected);
 		}
 
-		storageManager.store(storedPreferences, savingListener);
+		storageManager.store(storedPreferences, new PrivateStorageResponseHandler() {
+		    @Override
+		    public void onStorageResponse(PrivateStorageResponseEvent event) {
+			IQ parameter = event.getResponseIQ();
+			if (!IQ.isSuccess(parameter)) {
+			    setLoading(true, HablarSignals.signalMessages.saveError());
+			}
+		    }
+		});
 	    }
 	}
     }
