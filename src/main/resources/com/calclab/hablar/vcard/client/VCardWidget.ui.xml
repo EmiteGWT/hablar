@@ -1,0 +1,60 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	</ui:style>
+	<g:HTMLPanel addStyleNames="hablar-VCardWidget">
+		<h2 class="hablar-bottomLightBordered">
+			<span ui:field='title' />
+		</h2>
+		<div class="loading" ui:field="loading">
+			<g:Image ui:field="icon" addStyleNames="icon"  />
+			<g:Label ui:field="loadingMessage">Loading profile. Please wait...</g:Label>
+		</div>
+		<div class="form">
+			<div ui:field="form">
+				<p>
+					<label ui:field="nameLabel">Name:</label>
+					<g:TextBox ui:field="name"></g:TextBox>
+				</p>
+				<p>
+					<label ui:field="nicknameLabel">Nickname:</label>
+					<g:TextBox ui:field="nickName"></g:TextBox>
+				</p>
+				<p>
+					<label ui:field="familyNameLabel">Family name:</label>
+					<g:TextBox ui:field="familyName"></g:TextBox>
+				</p>
+				<p>
+					<label ui:field="middleNameLabel">Middle name:</label>
+					<g:TextBox ui:field="middleName"></g:TextBox>
+				</p>
+				<p>
+					<label ui:field="givenNameLabel">Given name:</label>
+					<g:TextBox ui:field="givenName"></g:TextBox>
+				</p>
+				<p>
+					<label ui:field="organizationLabel">Organization:</label>
+					<g:TextBox ui:field="organizationName"></g:TextBox>
+				</p>
+				<p>
+					<label ui:field="organizationUnitLabel">Organization unit:</label>
+					<g:TextBox ui:field="organizationUnit"></g:TextBox>
+				</p>
+				<p>
+					<label ui:field="homepageLabel">Homepage:</label>
+					<g:TextBox ui:field="homepage"></g:TextBox>
+				</p>
+				<p>
+					<label ui:field="emailLabel">Email:</label>
+					<g:TextBox ui:field="email"></g:TextBox>
+				</p>
+			</div>
+			<div class="actions hablar-topDefaultBordered">
+				<g:Button ui:field="accept">Accept</g:Button>
+				<g:Button ui:field="cancel">Cancel</g:Button>
+			</div>
+		</div>
+	</g:HTMLPanel>
+
+</ui:UiBinder>

@@ -1,0 +1,13 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		
+	</ui:style>
+
+	<g:HTMLPanel addStyleNames="chatMessage">
+		<span ui:field="metadata" class="metadata" />
+		<g:Label ui:field="author" styleName="author"></g:Label>
+		<span ui:field="body" class="body"></span>
+	</g:HTMLPanel>
+</ui:UiBinder>

@@ -1,0 +1,28 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+
+	</ui:style>
+	<g:HTMLPanel addStyleNames="hablar-VCardWidget">
+		<h2 class="hablar-bottomLightBordered">
+			<span ui:field='title' />
+		</h2>
+		<div class="form">
+			<div class="loading" ui:field="loading">
+				<g:Image ui:field="icon" addStyleNames="icon"  />
+				<g:Label ui:field="loadingMessage">Loading preferences. Please wait...</g:Label>
+			</div>
+			<div ui:field="form">
+				<p>
+					<g:CheckBox ui:field="titleSignals">Show unread conversations in title</g:CheckBox>
+					<g:CheckBox ui:field="incomingNotifications">Show incomming message
+						notifications</g:CheckBox>
+					<g:CheckBox ui:field="rosterNotifications">Show roster notifications</g:CheckBox>
+				</p>
+				<h3 ui:field="methodsMessage">Notification Methods</h3>
+				<p><g:FlowPanel ui:field="methodsPanel"></g:FlowPanel></p>
+			</div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>
