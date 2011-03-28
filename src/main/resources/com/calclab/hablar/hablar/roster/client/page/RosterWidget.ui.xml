@@ -1,0 +1,51 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+    xmlns:g="urn:import:com.google.gwt.user.client.ui"
+    xmlns:r="urn:import:com.calclab.hablar.roster.client.page">
+    <ui:style type="com.calclab.hablar.roster.client.page.RosterWidget.ActionItemStyle">
+	    .actionWidget {
+	    	float: left;
+		    -moz-border-radius: 5px;
+		    -webkit-border-radius: 5px;
+		    cursor: pointer;
+		    padding-left: 2px;
+		    padding-top: 2px;
+	    }
+
+	    .wideArea {
+		    width: 100%;
+		    overflow: hidden;
+	    }
+
+		.disabledPanel {
+		    position: relative;
+		    left: 0;
+		    top: 0;
+		    right: 0;
+		    bottom: 0;
+		    display: block;
+		}
+    </ui:style>
+    <g:LayoutPanel ui:field="roster" addStyleNames="hablar-RosterWidget hablar-lightBackground">
+        <!--  Actions -->
+        <g:layer left="3px" top="3px" right="3px" height="20px">
+            <g:FlowPanel ui:field="actions" addStyleNames="actions">
+            </g:FlowPanel>
+        </g:layer>
+        <!-- Results -->
+        <g:layer left="3px" top="20px" right="3px" bottom="0px">
+            <g:ScrollPanel ui:field="scroll" height="100%"
+                addStyleNames="hablar-defaultBordered hablar-clearBackground">
+                <r:RosterListWidget addStyleNames="{style.wideArea}" ui:field="list">
+                </r:RosterListWidget>
+            </g:ScrollPanel>
+        </g:layer>
+        <!-- Inactive -->
+        <g:layer left="3px" top="20px" right="3px" height="0px">
+        	<!-- Why do we need this? -->
+            <g:FlowPanel addStyleNames="{style.disabledPanel} hablar-defaultBackground hablar-disabledBordered" ui:field="disabledPanel">
+                <g:Label ui:field="disabledLabel" />
+            </g:FlowPanel>
+        </g:layer>
+    </g:LayoutPanel>
+</ui:UiBinder>

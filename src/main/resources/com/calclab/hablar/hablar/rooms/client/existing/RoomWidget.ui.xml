@@ -1,0 +1,44 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.item {
+			height: 20px;
+			width: 100%;
+		}
+		.status {
+		    display: block;
+		    margin: 0 0 2px 25px;
+			padding: 2px 0;
+		}
+		.jid {
+		    float: left;
+		    display: block;
+		    padding-right: 5px;
+		}
+
+		.data {
+			width: 100%;
+			overflow: hidden;
+		}
+		.name {
+			display: inline;
+			float: left;
+			padding-right: 5px;
+		}
+	</ui:style>
+	  <ui:with type="com.calclab.hablar.core.client.ui.icon.MissingIconBundle" field="res"></ui:with>
+
+	<g:FocusPanel ui:field="self" addStyleNames="user">
+		<g:FlowPanel addStyleNames="hablar-RoomWidget hablar-ListItem hablar-bottomLightBordered">
+			<g:LayoutPanel addStyleNames="{style.item} item">
+				<g:layer top="0" left="0" width="23px" height="20px">
+					<g:Image  resource="{res.missingIcon}" addStyleNames="icon" ui:field="icon" />
+				</g:layer>
+				<g:layer top="0" left="20px" height="16px" right="16px">
+                    <g:Label addStyleNames="{style.name} name" ui:field="name">name-here</g:Label>
+				</g:layer>
+			</g:LayoutPanel>
+		</g:FlowPanel>
+	</g:FocusPanel>
+</ui:UiBinder>

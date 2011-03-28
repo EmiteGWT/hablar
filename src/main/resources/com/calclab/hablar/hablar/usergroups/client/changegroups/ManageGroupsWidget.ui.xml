@@ -1,0 +1,33 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	    .wideArea {
+		    width: 100%;
+		    overflow: hidden;
+	    }
+	</ui:style>
+	<g:ScrollPanel ui:field="scroll" addStyleNames="hablar-defaultBordered">
+		<g:HTMLPanel addStyleNames="hablar-ManageGroupsWidget">
+			<div class="form">
+				<h2>
+					<span ui:field='title' />
+				</h2>
+				<p>
+					<label ui:field="contactNameLabel">Contact Name:</label>
+					<g:Label ui:field="contactName"></g:Label>
+				</p>
+				<br/>
+				<label ui:field="groupListLabel">Roster Groups:</label>
+				<g:FlowPanel ui:field="groupList" addStyleNames="{style.wideArea} hablar-clearBackground"></g:FlowPanel>
+				<p>
+					<g:Button ui:field="newGroup">New group</g:Button>
+				</p>
+				<div class="actions hablar-topDefaultBordered">
+					<g:Button ui:field="accept">Accept</g:Button>
+					<g:Button ui:field="cancel">Cancel</g:Button>
+				</div>
+			</div>
+		</g:HTMLPanel>
+	</g:ScrollPanel>
+</ui:UiBinder>
