@@ -2,6 +2,8 @@ package com.calclab.hablar.rooms.client.occupant;
 
 import static com.calclab.hablar.rooms.client.HablarRooms.i18n;
 
+import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
+import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.xep.muc.client.Occupant;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.emite.xep.muc.client.events.OccupantChangedEvent;
@@ -20,10 +22,12 @@ import com.google.gwt.user.client.ui.HasText;
 public class OccupantsPresenter implements Presenter<OccupantsDisplay> {
 
     private final OccupantsDisplay display;
+    private final XmppRoster roster;
     private int occupantsCount;
 
-    public OccupantsPresenter(final Room room, final OccupantsDisplay display) {
+    public OccupantsPresenter(final Room room, final OccupantsDisplay display, final XmppRoster roster) {
 	this.display = display;
+	this.roster = roster;
 	occupantsCount = 0;
 	updateOccupants(room);
 
@@ -58,7 +62,19 @@ public class OccupantsPresenter implements Presenter<OccupantsDisplay> {
     private void addOccupantsToPanel(final Room room) {
 	for (final Occupant occupant : room.getOccupants()) {
 	    final OccupantDisplay ocDisplay = display.addOccupant();
-	    ocDisplay.getName().setText(occupant.getNick());
+
+	    String label = occupant.getNick();
+	    final XmppURI userUri = occupant.getUserUri();
+	    
+	    if(userUri != null) {
+	    	final String name = roster.getJidName(userUri);
+	    	
+	    	if((name != null) && (name != "")) {
+	    		label += " (" + name + ")";
+	    	}
+	    }
+	    
+	    ocDisplay.getName().setText(label);
 	    ocDisplay.setIcon(Icons.get(Icons.BUDDY_ON));
 	}
     }

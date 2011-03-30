@@ -41,8 +41,16 @@ public class PairChatPresenter extends ChatPresenter implements PairChatPage {
 	display.setId(getId());
 	final XmppURI fromURI = chat.getURI();
 	userName = roster.getJidName(fromURI);
+	
+	String title;
+	
+	if((userName != null) && (userName != "")) {
+		title = userName + ": " + fromURI.toString();
+	} else {
+		title = fromURI.toString();
+	}
 
-	model.init(Icons.BUDDY_OFF, userName, userName + ": " + fromURI.toString());
+	model.init(Icons.BUDDY_OFF, userName, title);
 	setVisibility(Visibility.notFocused);
 	model.setCloseable(true);
 
