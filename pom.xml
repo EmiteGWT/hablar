@@ -93,7 +93,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>RELEASE</version>
 				<configuration>
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
