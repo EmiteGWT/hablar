@@ -69,7 +69,8 @@ public class OccupantsPresenter implements Presenter<OccupantsDisplay> {
 	    if(userUri != null) {
 	    	final String name = roster.getJidName(userUri);
 	    	
-	    	if((name != null) && (name != "")) {
+	    	// If they have a roster nickname, and it is different from the room nickname
+	    	if((name != null) && (name != "") && !name.equals(label)) {
 	    		label += " (" + name + ")";
 	    	}
 	    }
