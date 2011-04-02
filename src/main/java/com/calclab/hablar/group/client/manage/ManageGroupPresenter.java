@@ -9,13 +9,13 @@ import com.calclab.hablar.core.client.validators.CompositeValidatorChecker;
 import com.calclab.hablar.core.client.validators.ListNotEmptyValidator;
 import com.calclab.hablar.core.client.validators.Validators;
 import com.calclab.hablar.group.client.GroupMessages;
+import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.user.client.DeferredCommand;
 
 /**
  * Abstract class that displays a form to manage a group in the roster.
@@ -53,14 +53,14 @@ public abstract class ManageGroupPresenter extends PagePresenter<ManageGroupDisp
 
 	    @Override
 	    public void onKeyDown(KeyDownEvent event) {
-		DeferredCommand.addCommand(groupNameValidator.getDeferredCommand());
+		Scheduler.get().scheduleDeferred(groupNameValidator.getScheduledCommand());
 	    }
 	});
 	display.getSelectionList().addValueChangeHandler(new ValueChangeHandler<List<Selectable>>() {
 
 	    @Override
 	    public void onValueChange(ValueChangeEvent<List<Selectable>> event) {
-		DeferredCommand.addCommand(groupNameValidator.getDeferredCommand());
+		Scheduler.get().scheduleDeferred(groupNameValidator.getScheduledCommand());
 	    }
 	});
     }

@@ -18,9 +18,9 @@ public class SoundManager {
 
 	String mimeTypeAudioMpeg = null;
 	if (extension.equals("mp3")) {
-	    mimeTypeAudioMpeg = Sound.MIME_TYPE_AUDIO_MPEG;
+	    mimeTypeAudioMpeg = Sound.MIME_TYPE_AUDIO_MPEG_MP3;
 	} else if (extension.equals("wav")) {
-	    mimeTypeAudioMpeg = Sound.MIME_TYPE_AUDIO_X_WAV;
+	    mimeTypeAudioMpeg = Sound.MIME_TYPE_AUDIO_WAV_PCM;
 	}
 	sound = mimeTypeAudioMpeg != null ? soundController.createSound(mimeTypeAudioMpeg, fileUrl) : null;
     }

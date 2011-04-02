@@ -3,8 +3,7 @@ package com.calclab.hablar.core.client.validators;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HasValue;
 
@@ -40,14 +39,14 @@ public class CompositeValidatorChecker {
     private final List<ValueValidatorPair<?>> pairs;
     private final HasText errorText;
     private final HasState<Boolean> acceptEnabled;
-    private final Command command;
+    private final ScheduledCommand command;
 
     public CompositeValidatorChecker(final HasText errorText, final HasState<Boolean> acceptState) {
 	this.errorText = errorText;
 	acceptEnabled = acceptState;
 	pairs = new ArrayList<ValueValidatorPair<?>>();
 
-	command = new Command() {
+	command = new ScheduledCommand() {
 	    @Override
 	    public void execute() {
 		validate();
@@ -59,7 +58,7 @@ public class CompositeValidatorChecker {
 	pairs.add(new ValueValidatorPair<I>(hasValue, validator));
     }
 
-    public Command getDeferredCommand() {
+    public ScheduledCommand getScheduledCommand() {
         return command;
     }
 

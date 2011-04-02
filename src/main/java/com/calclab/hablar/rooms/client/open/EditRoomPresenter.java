@@ -14,13 +14,13 @@ import com.calclab.hablar.core.client.validators.CompositeValidatorChecker;
 import com.calclab.hablar.core.client.validators.ListNotEmptyValidator;
 import com.calclab.hablar.core.client.validators.Validators;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.user.client.DeferredCommand;
 
 public abstract class EditRoomPresenter extends PagePresenter<EditRoomDisplay> {
 
@@ -52,13 +52,13 @@ public abstract class EditRoomPresenter extends PagePresenter<EditRoomDisplay> {
 	display.getRoomNameKeys().addKeyDownHandler(new KeyDownHandler() {
 	    @Override
 	    public void onKeyDown(final KeyDownEvent event) {
-		DeferredCommand.addCommand(roomNameValidator.getDeferredCommand());
+		Scheduler.get().scheduleDeferred(roomNameValidator.getScheduledCommand());
 	    }
 	});
 	display.getSelectionList().addValueChangeHandler(new ValueChangeHandler<List<Selectable>>() {
 	    @Override
 	    public void onValueChange(final ValueChangeEvent<List<Selectable>> event) {
-		DeferredCommand.addCommand(roomNameValidator.getDeferredCommand());
+		Scheduler.get().scheduleDeferred(roomNameValidator.getScheduledCommand());
 	    }
 	});
 

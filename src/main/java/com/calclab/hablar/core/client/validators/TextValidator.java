@@ -1,12 +1,12 @@
 package com.calclab.hablar.core.client.validators;
 
+import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HasValue;
 
@@ -20,7 +20,7 @@ public class TextValidator extends CompositeValidatorChecker {
 	keys.addKeyDownHandler(new KeyDownHandler() {
 	    @Override
 	    public void onKeyDown(final KeyDownEvent event) {
-		DeferredCommand.addCommand(getDeferredCommand());
+		Scheduler.get().scheduleDeferred(getScheduledCommand());
 	    }
 	});
     }
