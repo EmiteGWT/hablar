@@ -101,6 +101,7 @@
               <goal>resources</goal>
               <goal>compile</goal>
               <goal>test</goal>
+              <goal>i18n</goal>
             </goals>
           </execution>
         </executions>
@@ -109,6 +110,22 @@
         <configuration>
           <runTarget>Hablar.html</runTarget>
           <hostedWebapp>${webappDirectory}</hostedWebapp>
+          <i18nMessagesBundles>
+            <i18nMessagesBundle>com.calclab.hablar.chat.client.ChatMessages</i18nMessagesBundle>
+            <i18nMessagesBundle>com.calclab.hablar.clipboard.client.ClipboardMessages</i18nMessagesBundle>
+            <i18nMessagesBundle>com.calclab.hablar.core.client.CoreMessages</i18nMessagesBundle>
+            <i18nMessagesBundle>com.calclab.hablar.editbuddy.client.EditBuddyMessages</i18nMessagesBundle>
+            <i18nMessagesBundle>com.calclab.hablar.group.client.GroupMessages</i18nMessagesBundle>
+            <i18nMessagesBundle>com.calclab.hablar.groupchat.client.GroupChatMessages</i18nMessagesBundle>
+            <i18nMessagesBundle>com.calclab.hablar.login.client.LoginMessages</i18nMessagesBundle>
+            <i18nMessagesBundle>com.calclab.hablar.rooms.client.RoomsMessages</i18nMessagesBundle>
+            <i18nMessagesBundle>com.calclab.hablar.roster.client.RosterMessages</i18nMessagesBundle>
+            <i18nMessagesBundle>com.calclab.hablar.search.client.SearchMessages</i18nMessagesBundle>
+            <i18nMessagesBundle>com.calclab.hablar.signals.client.SignalMessages</i18nMessagesBundle>
+            <i18nMessagesBundle>com.calclab.hablar.user.client.UserMessages</i18nMessagesBundle>
+            <i18nMessagesBundle>com.calclab.hablar.usergroups.client.UserGroupsMessages</i18nMessagesBundle>
+            <i18nMessagesBundle>com.calclab.hablar.vcard.client.VCardMessages</i18nMessagesBundle>
+          </i18nMessagesBundles>
         </configuration>
       </plugin>
 

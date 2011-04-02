@@ -30,7 +30,7 @@ public class OpenNewRoomPresenter extends OpenRoomPresenter {
 
     @Override
     protected void onPageOpen() {
-	final String roomName = i18n().groupChatId(roomNumber);
+	final String roomName = i18n().groupChatId(Integer.toString(roomNumber));
 	display.getRoomName().setValue(roomName);
 	setItems(roster.getItems(), false);
 	roomNameValidator.validate();

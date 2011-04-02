@@ -46,7 +46,7 @@ public class UnattendedPresenter {
     }
 
     private void showUnattendedInTitle(final int size) {
-	final String message = size == 0 ? "" : HablarSignals.signalMessages.unreadChats(size);
+	final String message = size == 0 ? "" : HablarSignals.signalMessages.unreadChats(Integer.toString(size));
 	final String oldTitle = windowDisplay.getText();
 	final String newTitle = WindowTextHelper.updateTitle(oldTitle, message);
 	windowDisplay.setText(newTitle);

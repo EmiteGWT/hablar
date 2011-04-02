@@ -108,7 +108,7 @@ public class SearchPage extends PagePresenter<SearchDisplay> {
 			    display.addResult(itemDisplay);
 			}
 		    }
-		    display.showMessage(i18n().searchResultsFor(text, resultCount), Level.success);
+		    display.showMessage(i18n().searchResultsFor(text, Integer.toString(resultCount)), Level.success);
 		}
 	    });
 	    display.getSearchTerm().setText("");

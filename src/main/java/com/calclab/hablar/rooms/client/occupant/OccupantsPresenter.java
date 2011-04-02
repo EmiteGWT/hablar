@@ -70,7 +70,7 @@ public class OccupantsPresenter implements Presenter<OccupantsDisplay> {
 
     private void updateOccupants(final Room room) {
 	final HasText label = display.getLabel();
-	label.setText(i18n().occupants(occupantsCount));
+	label.setText(i18n().occupants(Integer.toString(occupantsCount)));
 	display.clearPanel();
 	addOccupantsToPanel(room);
     }
