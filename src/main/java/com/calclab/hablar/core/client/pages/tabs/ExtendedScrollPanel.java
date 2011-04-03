@@ -18,20 +18,22 @@ public class ExtendedScrollPanel extends ScrollPanel {
      * This ensureVisible works also vertically (needed for the tabsBar)
      * 
      */
+    //@formatter:off
     private native void ensureVisibleImpl(Element scroll, Element e) /*-{
-        if (!e)
-        return;
+	if (!e)
+	    return;
 
-        var item = e;
-        var realOffset = 0;
-        var realOffsetH = 0;
-        while (item && (item != scroll)) {
-        realOffset += item.offsetTop;
-        realOffsetH += item.offsetLeft;
-        item = item.offsetParent;
-        }
+	var item = e;
+	var realOffset = 0;
+	var realOffsetH = 0;
+	while (item && (item != scroll)) {
+	    realOffset += item.offsetTop;
+	    realOffsetH += item.offsetLeft;
+	    item = item.offsetParent;
+	}
 
-        scroll.scrollTop = realOffset - scroll.offsetHeight / 2;
-        scroll.scrollLeft = (realOffsetH - scroll.offsetWidth / 2) + 5;
+	scroll.scrollTop = realOffset - scroll.offsetHeight / 2;
+	scroll.scrollLeft = (realOffsetH - scroll.offsetWidth / 2) + 5;
     }-*/;
+    //@formatter:on
 }

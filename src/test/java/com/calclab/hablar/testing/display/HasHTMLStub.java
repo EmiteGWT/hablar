@@ -12,23 +12,23 @@ public class HasHTMLStub implements HasHTML {
 
     @Override
     public String getHTML() {
-        return html;
+	return html;
     }
 
     @Override
     public String getText() {
-        return text;
+	return text;
     }
 
     @Override
     public void setHTML(String html) {
-        this.html = html;
+	this.html = html;
 
     }
 
     @Override
     public void setText(String text) {
-        this.text = text;
+	this.text = text;
     }
 
 }

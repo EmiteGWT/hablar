@@ -32,7 +32,7 @@ public class UnattendedPresenter {
 	    public void handleUnattendedChatChange(final UnattendedChatsChangedEvent event) {
 		if (preferences.titleSignals) {
 		    final int unattendedChatsCount = unattendedManager.getSize();
-		    
+
 		    if (unattendedChatsCount > 0 && active == false) {
 			startTitleChange();
 		    } else if (unattendedChatsCount == 0 && active == true) {
@@ -89,11 +89,12 @@ public class UnattendedPresenter {
     }
 
     protected void togglePageBlink(final Page<?> page, final boolean on) {
-	// TODO This is non-ideal. Need to come up with a better way of doing this.
+	// TODO This is non-ideal. Need to come up with a better way of doing
+	// this.
 
-	if((page.getState() == null) || (page.getState().getExternalState() == null))
+	if ((page.getState() == null) || (page.getState().getExternalState() == null))
 	    return;
-	
+
 	if (page.getState().getExternalState().startsWith("unattended")) {
 	    if (on) {
 		page.getState().setExternalState("unattended blinkOn");
@@ -102,6 +103,7 @@ public class UnattendedPresenter {
 	    }
 
 	    new Timer() {
+		@Override
 		public void run() {
 		    togglePageBlink(page, !on);
 		}

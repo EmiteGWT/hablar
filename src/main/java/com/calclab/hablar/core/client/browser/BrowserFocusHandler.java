@@ -51,14 +51,16 @@ public class BrowserFocusHandler {
     /**
      * Adds the focus events to the browser
      */
+    //@formatter:off
     protected native void addFocusListenerEvents() /*-{
-        $wnd.onfocus = function() {
-        @com.calclab.hablar.core.client.browser.BrowserFocusHandler::changeFocus(Z)(true);
-        };
-        $wnd.onblur = function() {
-        @com.calclab.hablar.core.client.browser.BrowserFocusHandler::changeFocus(Z)(false);
-        };
+	$wnd.onfocus = function() {
+	    @com.calclab.hablar.core.client.browser.BrowserFocusHandler::changeFocus(Z)(true);
+	};
+	$wnd.onblur = function() {
+	    @com.calclab.hablar.core.client.browser.BrowserFocusHandler::changeFocus(Z)(false);
+	};
     }-*/;
+    //@formatter:on
 
     /**
      * Sets current browser focus status

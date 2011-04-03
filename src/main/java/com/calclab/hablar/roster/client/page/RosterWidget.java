@@ -98,6 +98,7 @@ public class RosterWidget extends Composite implements RosterDisplay {
 	groups.remove(groupPresenter);
     }
 
+    @Override
     public void setActive(final boolean active) {
 	GWT.log("ROSTER: " + active, null);
 	if (active) {

@@ -35,6 +35,7 @@ public class NonBlockingCommandScheduler implements RepeatingCommand, CommandQue
     /**
      * {@inheritDoc}
      */
+    @Override
     public void addCommand(final Command command) {
 	commandQueue.addLast(command);
 
@@ -46,6 +47,7 @@ public class NonBlockingCommandScheduler implements RepeatingCommand, CommandQue
     /**
      * {@inheritDoc}
      */
+    @Override
     public void addPriorityCommand(final Command command) {
 	priorityCommandQueue.addLast(command);
 

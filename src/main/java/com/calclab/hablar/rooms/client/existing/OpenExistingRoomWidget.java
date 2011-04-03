@@ -24,8 +24,7 @@ public class OpenExistingRoomWidget extends Composite implements OpenExistingRoo
     interface OpenExistingRoomWidgetUiBinder extends UiBinder<Widget, OpenExistingRoomWidget> {
     }
 
-    private static OpenExistingRoomWidgetUiBinder uiBinder = GWT
-	    .create(OpenExistingRoomWidgetUiBinder.class);
+    private static OpenExistingRoomWidgetUiBinder uiBinder = GWT.create(OpenExistingRoomWidgetUiBinder.class);
 
     private static RoomsMessages messages;
 

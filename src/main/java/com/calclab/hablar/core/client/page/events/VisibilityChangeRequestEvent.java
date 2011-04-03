@@ -12,6 +12,7 @@ public class VisibilityChangeRequestEvent extends GwtEvent<VisibilityChangeReque
     public static void bind(final HablarEventBus eventBus, final VisibilityChangeRequestHandler handler) {
 	eventBus.addHandler(TYPE, handler);
     }
+
     private final Page<?> page;
 
     private final Visibility newVisibility;

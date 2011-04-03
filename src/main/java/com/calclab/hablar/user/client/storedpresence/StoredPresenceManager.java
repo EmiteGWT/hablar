@@ -14,22 +14,22 @@ public class StoredPresenceManager {
 	this.manager = manager;
     }
 
-	public void add(final StoredPresence presence, final PrivateStorageResponseHandler handler) {
-		manager.retrieve(StoredPresences.empty, new PrivateStorageResponseHandler() {
-			@Override
-			public void onStorageResponse(PrivateStorageResponseEvent event) {
-				IQ response = event.getResponseIQ();
-				if (IQ.isSuccess(response)) {
-					final StoredPresences currentPresences = StoredPresences.parse(response);
-					if (currentPresences.add(presence)) {
-						manager.store(currentPresences, handler);
-					}
-				} else {
-					checkError(response);
-				}
-			}
-		});
-	}
+    public void add(final StoredPresence presence, final PrivateStorageResponseHandler handler) {
+	manager.retrieve(StoredPresences.empty, new PrivateStorageResponseHandler() {
+	    @Override
+	    public void onStorageResponse(PrivateStorageResponseEvent event) {
+		IQ response = event.getResponseIQ();
+		if (IQ.isSuccess(response)) {
+		    final StoredPresences currentPresences = StoredPresences.parse(response);
+		    if (currentPresences.add(presence)) {
+			manager.store(currentPresences, handler);
+		    }
+		} else {
+		    checkError(response);
+		}
+	    }
+	});
+    }
 
     public void add(final String status, final Show show, final PrivateStorageResponseHandler handler) {
 	add(new StoredPresence(status, show), handler);

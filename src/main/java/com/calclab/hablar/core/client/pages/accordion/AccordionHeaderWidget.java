@@ -82,6 +82,7 @@ public class AccordionHeaderWidget extends Composite implements HeaderDisplay {
 	icon.setTitle(tooltip);
     }
 
+    @Override
     public void setIcon(final String token) {
 	Icons.set(icon, token);
     }

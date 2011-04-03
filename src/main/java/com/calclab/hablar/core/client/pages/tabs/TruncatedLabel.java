@@ -25,7 +25,9 @@ public class TruncatedLabel extends Label {
 	}
     }
 
+    //@formatter:off
     public static native String getUserAgent() /*-{
-        return navigator.userAgent.toLowerCase();
+	return navigator.userAgent.toLowerCase();
     }-*/;
+    //@formatter:on
 }

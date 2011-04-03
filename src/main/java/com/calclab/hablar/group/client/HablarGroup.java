@@ -28,6 +28,7 @@ public class HablarGroup {
     public static void setMessages(final GroupMessages messages) {
 	groupMessages = messages;
     }
+
     private final Hablar hablar;
     private final XmppSession session;
 

@@ -7,7 +7,6 @@ import java.util.List;
 import org.junit.Test;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
-import com.calclab.emite.xep.storage.client.IQResponse;
 import com.calclab.emite.xtesting.services.TigaseXMLService;
 
 public class StoredPresencesTest {

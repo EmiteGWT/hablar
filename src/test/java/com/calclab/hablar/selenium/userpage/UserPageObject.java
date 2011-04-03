@@ -62,14 +62,17 @@ public class UserPageObject extends PageObject implements VCardPageObject {
 	return close;
     }
 
+    @Override
     public RenderedWebElement getEmail() {
 	return email;
     }
 
+    @Override
     public RenderedWebElement getFamilyName() {
 	return familyName;
     }
 
+    @Override
     public RenderedWebElement getGivenName() {
 	return givenName;
     }
@@ -78,6 +81,7 @@ public class UserPageObject extends PageObject implements VCardPageObject {
 	return header;
     }
 
+    @Override
     public RenderedWebElement getHomepage() {
 	return homepage;
     }
@@ -90,18 +94,22 @@ public class UserPageObject extends PageObject implements VCardPageObject {
 	return menu;
     }
 
+    @Override
     public RenderedWebElement getMiddleName() {
 	return middleName;
     }
 
+    @Override
     public RenderedWebElement getName() {
 	return name;
     }
 
+    @Override
     public RenderedWebElement getNickName() {
 	return nickName;
     }
 
+    @Override
     public RenderedWebElement getOrganizationName() {
 	return organizationName;
     }

@@ -3,9 +3,7 @@ package com.calclab.hablar.selenium.tools;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
-import com.calclab.suco.client.ioc.decorator.Singleton;
-import com.calclab.suco.client.ioc.module.AbstractModule;
-import com.calclab.suco.client.ioc.module.Factory;
+import com.google.inject.AbstractModule;
 
 public abstract class PageObjectModule extends AbstractModule {
     protected <T> void registerPageObject(final Class<T> componentType, final T object) {

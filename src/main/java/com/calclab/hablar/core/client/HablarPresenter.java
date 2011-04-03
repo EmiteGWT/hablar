@@ -28,6 +28,7 @@ public class HablarPresenter implements Hablar {
 	final MainContainer container = new TabsContainer(eventBus, new TabsLayout(display, tabHeaderSize));
 	return new HablarPresenter(eventBus, display, container);
     }
+
     private final HablarDisplay display;
 
     private final HablarEventBus eventBus;

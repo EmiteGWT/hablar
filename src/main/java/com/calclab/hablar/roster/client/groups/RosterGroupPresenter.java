@@ -182,8 +182,8 @@ public class RosterGroupPresenter implements Presenter<RosterGroupDisplay> {
      */
     private RosterItemPresenter addRosterItem(final RosterItem item) {
 	// FIXME: no mola nada toda esta basura selenium
-	final RosterItemDisplay itemDisplay = display.newRosterItemDisplay(Idify.id(group.getName()), Idify.id(item
-		.getJID()));
+	final RosterItemDisplay itemDisplay = display.newRosterItemDisplay(Idify.id(group.getName()),
+		Idify.id(item.getJID()));
 
 	final RosterItemPresenter presenter = new RosterItemPresenter(group.getName(), itemMenu, itemDisplay,
 		rosterConfig);

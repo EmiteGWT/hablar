@@ -1,7 +1,7 @@
 package com.calclab.hablar.openchat.client;
 
-import com.google.gwt.i18n.client.Messages;
 import com.google.gwt.i18n.client.LocalizableResource.DefaultLocale;
+import com.google.gwt.i18n.client.Messages;
 
 @DefaultLocale("en")
 public interface OpenChatMessages extends Messages {

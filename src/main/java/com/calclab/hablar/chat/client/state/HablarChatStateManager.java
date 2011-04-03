@@ -3,8 +3,8 @@ package com.calclab.hablar.chat.client.state;
 import static com.calclab.hablar.chat.client.HablarChat.i18n;
 
 import com.calclab.emite.xep.chatstate.client.ChatStateManager;
-import com.calclab.emite.xep.chatstate.client.StateManager;
 import com.calclab.emite.xep.chatstate.client.ChatStateManager.ChatState;
+import com.calclab.emite.xep.chatstate.client.StateManager;
 import com.calclab.emite.xep.chatstate.client.events.ChatStateNotificationEvent;
 import com.calclab.emite.xep.chatstate.client.events.ChatStateNotificationHandler;
 import com.calclab.hablar.chat.client.ui.PairChatPage;

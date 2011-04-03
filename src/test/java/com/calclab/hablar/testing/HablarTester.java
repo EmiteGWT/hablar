@@ -34,7 +34,6 @@ public class HablarTester {
 	BrowserFocusHandler.setInstance(new BrowserFocusHandlerStub());
 	eventBus = new EventBusTester();
 
-	
 	final RosterMessages messages = newMessages(RosterMessages.class);
 	HablarRoster.setMessages(messages);
 	RosterBasicActions.setMessages(messages);

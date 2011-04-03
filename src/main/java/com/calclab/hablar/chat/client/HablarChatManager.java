@@ -3,8 +3,8 @@ package com.calclab.hablar.chat.client;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
+import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.chat.events.ChatChangedEvent;

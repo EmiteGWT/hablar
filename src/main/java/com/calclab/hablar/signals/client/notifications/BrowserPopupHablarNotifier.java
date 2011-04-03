@@ -67,7 +67,7 @@ public class BrowserPopupHablarNotifier implements HablarNotifier {
      * otherwise if I use an external stylesheet then there is a moment where
      * the content is unstyled and it looks a bit rubbish.
      */
-    private static String popupHtml = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">"
+    private static String popupHtml = "<!DOCTYPE html\">"
 	    + "<html><head>"
 	    + "<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"
 	    + "<style type=\"text/css\">"
@@ -89,9 +89,11 @@ public class BrowserPopupHablarNotifier implements HablarNotifier {
 	BrowserPopupHablarNotifier.popupHtml = popupHtml;
     }
 
+    //@formatter:off
     private static native int getScreenHeight() /*-{
-        return $wnd.screen.height;
+	return $wnd.screen.height;
     }-*/;
+    //@formatter:on
 
     /**
      * A counter of the number of messages in the current popup window
@@ -168,40 +170,40 @@ public class BrowserPopupHablarNotifier implements HablarNotifier {
      *            the message
      * @return the <code>div</code> element
      */
+    //@formatter:off
     private native JavaScriptObject addMessageNative(final String userMessage) /*-{
-        if(!$wnd.toasterWindow) {
-        return null;
-        }
+	if(!$wnd.toasterWindow) {
+	    return null;
+	}
 
-        var document = $wnd.toasterWindow.document;
+	var document = $wnd.toasterWindow.document;
 
-        var messageDiv = document.createElement("p");
-        messageDiv.className = "message";
+	var messageDiv = document.createElement("p");
+	messageDiv.className = "message";
 
-        var anchorDiv = document.createElement("a");
-        anchorDiv.setAttribute("href", "#");
-        anchorDiv.setAttribute("title", userMessage);
+	var anchorDiv = document.createElement("a");
+	anchorDiv.setAttribute("href", "#");
+	anchorDiv.setAttribute("title", userMessage);
 
-        anchorDiv.onclick = function() {
-        // If the user clicks a message, focus the main window and close the popup
-        if ($wnd.toasterWindow && $wnd.toasterWindow.opener) {
-        if ($wnd.toasterWindow.opener.focus) {
-        $wnd.toasterWindow.opener.focus();
-        }
-        $wnd.toasterWindow.close();
-        }
+	anchorDiv.onclick = function() {
+	    // If the user clicks a message, focus the main window and close the popup
+	    if ($wnd.toasterWindow && $wnd.toasterWindow.opener) {
+		if ($wnd.toasterWindow.opener.focus) {
+		    $wnd.toasterWindow.opener.focus();
+		}
+		$wnd.toasterWindow.close();
+	    }
 
-        return false;
-        }
+	    return false;
+	}
 
-        anchorDiv.appendChild(document.createTextNode(userMessage));
+	anchorDiv.appendChild(document.createTextNode(userMessage));
+	messageDiv.appendChild(anchorDiv);
+	document.getElementById("notificationContainer").appendChild(messageDiv);
 
-        messageDiv.appendChild(anchorDiv);
-
-        document.getElementById("notificationContainer").appendChild(messageDiv);
-
-        return messageDiv;
+	return messageDiv;
     }-*/;
+    //@formatter:on
 
     /**
      * Creates the popup window if it's not already open
@@ -212,48 +214,50 @@ public class BrowserPopupHablarNotifier implements HablarNotifier {
      * @param title
      * @return
      */
+    //@formatter:off
     private native int createToasterWindow(final int width, final int height, final String title) /*-{
-        try {
-        // If the toaster window is already open, our work is done!
-        if($wnd.toasterWindow && !$wnd.toasterWindow.closed) {
-        return @com.calclab.hablar.signals.client.notifications.BrowserPopupHablarNotifier::CREATE_TOASTER_WINDOW_ALREDY_OPEN;
-        }
+	try {
+	    // If the toaster window is already open, our work is done!
+	    if($wnd.toasterWindow && !$wnd.toasterWindow.closed) {
+		return @com.calclab.hablar.signals.client.notifications.BrowserPopupHablarNotifier::CREATE_TOASTER_WINDOW_ALREDY_OPEN;
+	    }
 
-        var screenWidth = $wnd.screen.width;
-        var screenHeight = $wnd.screen.height;
+	    var screenWidth = $wnd.screen.width;
+	    var screenHeight = $wnd.screen.height;
 
-        var left = screenWidth - width;
-        var top = screenHeight - height;
+	    var left = screenWidth - width;
+	    var top = screenHeight - height;
 
-        // We will include a random element to the window handle
-        // just in case we have multiple chat clients running within
-        // one browser instance
-        var windowHandle = "chatNotifierPopup" + Math.floor(Math.random() * 1000000);
+	    // We will include a random element to the window handle
+	    // just in case we have multiple chat clients running within
+	    // one browser instance
+	    var windowHandle = "chatNotifierPopup" + Math.floor(Math.random() * 1000000);
 
-        $wnd.toasterWindow = $wnd.open("", windowHandle, "status=no" +
-        ",toolbar=no,location=yes,menubar=no,directories=no" +
-        ",resizable=yes,width=" + width + ",height=" + height +
-        ",left=" + left + ",top=" + top + ",alwaysRaised=yes," +
-        ",scrollbars=yes");
+	    $wnd.toasterWindow = $wnd.open("", windowHandle, "status=no" +
+	    ",toolbar=no,location=yes,menubar=no,directories=no" +
+	    ",resizable=yes,width=" + width + ",height=" + height +
+	    ",left=" + left + ",top=" + top + ",alwaysRaised=yes," +
+	    ",scrollbars=yes");
 
-        if($wnd.toasterWindow == null) {
-        // Popups must be blocked :(
-        return @com.calclab.hablar.signals.client.notifications.BrowserPopupHablarNotifier::CREATE_TOASTER_WINDOW_FAILURE;
-        }
+	    if($wnd.toasterWindow == null) {
+		// Popups must be blocked :(
+		return @com.calclab.hablar.signals.client.notifications.BrowserPopupHablarNotifier::CREATE_TOASTER_WINDOW_FAILURE;
+	    }
 
-        if ($wnd.toasterWindow.document) {
-        $wnd.toasterWindow.document.write(@com.calclab.hablar.signals.client.notifications.BrowserPopupHablarNotifier::popupHtml);
-        $wnd.toasterWindow.document.title = title;
-        }
-        $wnd.toasterWindow.focus();
+	    if ($wnd.toasterWindow.document) {
+		$wnd.toasterWindow.document.write(@com.calclab.hablar.signals.client.notifications.BrowserPopupHablarNotifier::popupHtml);
+		$wnd.toasterWindow.document.title = title;
+	    }
+	    $wnd.toasterWindow.focus();
 
-        var notifier = this;
+	    var notifier = this;
 
-        return @com.calclab.hablar.signals.client.notifications.BrowserPopupHablarNotifier::CREATE_TOASTER_WINDOW_NEWLY_OPENED;
-        } catch (e) {
-        return @com.calclab.hablar.signals.client.notifications.BrowserPopupHablarNotifier::CREATE_TOASTER_WINDOW_FAILURE;
-        }
+	    return @com.calclab.hablar.signals.client.notifications.BrowserPopupHablarNotifier::CREATE_TOASTER_WINDOW_NEWLY_OPENED;
+	} catch (e) {
+	    return @com.calclab.hablar.signals.client.notifications.BrowserPopupHablarNotifier::CREATE_TOASTER_WINDOW_FAILURE;
+	}
     }-*/;
+    //@formatter:on
 
     /**
      * Removes all messages from the popup window and closes it.
@@ -266,18 +270,20 @@ public class BrowserPopupHablarNotifier implements HablarNotifier {
     /**
      * Called by hideToasterWindow
      */
+    //@formatter:off
     private native void hideToasterWindowNative() /*-{
-        if($wnd.toasterWindow && !$wnd.toasterWindow.closed) {
-        var messageContainer = $wnd.toasterWindow.document.getElementById("notificationContainer");
+	if($wnd.toasterWindow && !$wnd.toasterWindow.closed) {
+	    var messageContainer = $wnd.toasterWindow.document.getElementById("notificationContainer");
 
-        while(messageContainer.hasChildNodes()) {
-        messageContainer.removeChild(messageContainer.lastChild);
-        }
+	    while(messageContainer.hasChildNodes()) {
+		messageContainer.removeChild(messageContainer.lastChild);
+	    }
 
-        $wnd.toasterWindow.close();
-        }        
-        $wnd.toasterWindow = null;
+	    $wnd.toasterWindow.close();
+	}
+	$wnd.toasterWindow = null;
     }-*/;
+    //@formatter:on
 
     /**
      * Remove a message from the popup
@@ -307,20 +313,22 @@ public class BrowserPopupHablarNotifier implements HablarNotifier {
      * @return <code>true</code> if the element was found and removed,
      *         <code>false</code> otherwise
      */
+    //@formatter:off
     private native boolean removeMessageNative(final JavaScriptObject messageDiv) /*-{
-        var container = $wnd.toasterWindow.document.getElementById("notificationContainer");
-        var element;
+	var container = $wnd.toasterWindow.document.getElementById("notificationContainer");
+	var element;
 
-        for (var i = 0; i < container.childNodes.length; ++i) {
-        element = container.childNodes[i];
-        if(element == messageDiv) {
-        container.removeChild(element);
-        return true;
-        }
-        }
+	for (var i = 0; i < container.childNodes.length; ++i) {
+	    element = container.childNodes[i];
+	    if(element == messageDiv) {
+		container.removeChild(element);
+		return true;
+	    }
+	}
 
-        return false;
+	return false;
     }-*/;
+    //@formatter:on
 
     /**
      * Resizes and repositions the popup window
@@ -343,19 +351,22 @@ public class BrowserPopupHablarNotifier implements HablarNotifier {
      * @param height
      *            the height in px
      */
+    //@formatter:off
     private native void resizePopupWindowTo(final int width, final int height) /*-{
-        // We can't resize something that doesn't exist
-        if($wnd.toasterWindow && !$wnd.toasterWindow.closed) {
-        var screenWidth = $wnd.screen.width;
-        var screenHeight = $wnd.screen.height;
+	// We can't resize something that doesn't exist
+	if($wnd.toasterWindow && !$wnd.toasterWindow.closed) {
+	    var screenWidth = $wnd.screen.width;
+	    var screenHeight = $wnd.screen.height;
 
-        var left = screenWidth - width;
-        var top = screenHeight - height;
+	    var left = screenWidth - width;
+	    var top = screenHeight - height;
 
-        $wnd.toasterWindow.moveTo(left, top);
-        $wnd.toasterWindow.resizeTo(width, height);
-        $wnd.toasterWindow.moveTo(left, top);
-        $wnd.toasterWindow.resizeTo(width, height);
-        }
+	    $wnd.toasterWindow.moveTo(left, top);
+	    $wnd.toasterWindow.resizeTo(width, height);
+	    $wnd.toasterWindow.moveTo(left, top);
+	    $wnd.toasterWindow.resizeTo(width, height);
+	}
     }-*/;
+    //@formatter:on
+
 }

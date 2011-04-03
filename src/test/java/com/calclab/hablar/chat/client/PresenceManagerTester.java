@@ -6,8 +6,8 @@ import com.calclab.emite.im.client.presence.PresenceManagerImpl;
 
 public class PresenceManagerTester extends PresenceManagerImpl {
 
-	public PresenceManagerTester(final XmppSession session) {
-		super(session, new SessionReady(session));
-	}
+    public PresenceManagerTester(final XmppSession session) {
+	super(session, new SessionReady(session));
+    }
 
 }

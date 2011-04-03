@@ -3,6 +3,7 @@ package com.calclab.hablar.core.client.validators;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HasValue;
@@ -13,10 +14,10 @@ import com.google.gwt.user.client.ui.HasValue;
  * the component that will change state if validations passes or not.<br>
  * Call the {@link #add(HasValue, Validator)} method for all value
  * provider-validator pair you want to check.<br>
- * Link the validation to events using the {@link #getDeferredCommand()}, that
- * must be executed using {@link DeferredCommand#addCommand(Command)} in an
- * event handler.
- *
+ * Link the validation to events using the {@link #getScheduledCommand()}, that
+ * must be executed using {@link Scheduler#scheduleDeferred(ScheduledCommand)}
+ * in an event handler.
+ * 
  */
 public class CompositeValidatorChecker {
 
@@ -59,7 +60,7 @@ public class CompositeValidatorChecker {
     }
 
     public ScheduledCommand getScheduledCommand() {
-        return command;
+	return command;
     }
 
     public void validate() {

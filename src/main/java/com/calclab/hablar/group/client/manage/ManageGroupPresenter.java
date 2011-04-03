@@ -44,8 +44,7 @@ public abstract class ManageGroupPresenter extends PagePresenter<ManageGroupDisp
 	});
 
 	display.setPageTitle(pageTitle);
-	groupNameValidator = new CompositeValidatorChecker(display
-		.getGroupNameError(), display.getAcceptEnabled());
+	groupNameValidator = new CompositeValidatorChecker(display.getGroupNameError(), display.getAcceptEnabled());
 	groupNameValidator.add(display.getGroupName(), Validators.notEmpty(i18n().groupNameEmptyErrorMessage()));
 	groupNameValidator.add(display.getSelectionList(), new ListNotEmptyValidator<Selectable>(i18n()
 		.selectionEmptyErrorMessage()));

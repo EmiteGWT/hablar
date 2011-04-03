@@ -24,8 +24,8 @@ public class HablarConfig {
 		// Ignore it.
 	    }
 	}
-	config.tabHeaderSize = TabHeaderSize.create(PageAssist.getMeta("hablar.tabHeaderHeight"), PageAssist
-		.getMeta("hablar.tabHeaderWidth"), trim);
+	config.tabHeaderSize = TabHeaderSize.create(PageAssist.getMeta("hablar.tabHeaderHeight"),
+		PageAssist.getMeta("hablar.tabHeaderWidth"), trim);
     }
 
     /**

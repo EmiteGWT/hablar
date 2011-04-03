@@ -3,7 +3,6 @@
  */
 package com.calclab.hablar.testing.display;
 
-import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.dev.util.collect.HashMap;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -55,14 +54,14 @@ public class DisplayStubFactory {
 	    public HasMouseOverHandlers get() {
 		return new HasMouseOverHandlersStub();
 	    }
-	    
+
 	});
 	providers.put(HasMouseOutHandlers.class, new Provider<HasMouseOutHandlers>() {
 	    @Override
 	    public HasMouseOutHandlers get() {
 		return new HasMouseOutHandlersStub();
 	    }
-	    
+
 	});
 	providers.put(HasWidgets.class, new Provider<HasWidgets>() {
 	    @Override
@@ -102,7 +101,7 @@ public class DisplayStubFactory {
 	    public HasKeyDownHandlers get() {
 		return new HasKeyDownHandlersStub();
 	    }
-	    
+
 	});
     }
 

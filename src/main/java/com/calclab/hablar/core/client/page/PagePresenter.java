@@ -11,7 +11,8 @@ public class PagePresenter<T extends Display> implements Page<T> {
      */
     public static enum Visibility {
 	/**
-	 * Set this visibility to focus the page (set the page header and content visibles)
+	 * Set this visibility to focus the page (set the page header and
+	 * content visibles)
 	 */
 	focused,
 	/**
@@ -19,11 +20,13 @@ public class PagePresenter<T extends Display> implements Page<T> {
 	 */
 	notFocused,
 	/**
-	 * Set this visibility to close the page (the page header and content will not visibile)
+	 * Set this visibility to close the page (the page header and content
+	 * will not visibile)
 	 */
 	hidden,
 	/**
-	 * Set this visibility if you want to close the page if its open or open if its closed
+	 * Set this visibility if you want to close the page if its open or open
+	 * if its closed
 	 */
 	toggle
     }
@@ -53,6 +56,7 @@ public class PagePresenter<T extends Display> implements Page<T> {
 	return display;
     }
 
+    @Override
     public String getId() {
 	return id;
     }
@@ -62,6 +66,7 @@ public class PagePresenter<T extends Display> implements Page<T> {
 	return model;
     }
 
+    @Override
     public String getType() {
 	return pageType;
     }

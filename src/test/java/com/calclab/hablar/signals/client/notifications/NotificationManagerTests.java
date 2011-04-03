@@ -1,6 +1,8 @@
 package com.calclab.hablar.signals.client.notifications;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -71,15 +73,15 @@ public class NotificationManagerTests {
 	HablarNotifier inactiveNotifier = mock(HablarNotifier.class);
 	notificationManager.addNotifier(activeNotifier, true);
 	notificationManager.addNotifier(inactiveNotifier, false);
-	
+
 	List<HablarNotifier> notifiers = notificationManager.getAvailableNotifiers();
 	List<HablarNotifier> activeNotifiers = notificationManager.getActiveNotifiers();
-	
+
 	assertEquals("Wrong number of notifiers returned", 3, notifiers.size());
 	assertTrue("Initial notifier not returned", notifiers.contains(notifier));
 	assertTrue("Active notifier not returned", notifiers.contains(activeNotifier));
 	assertTrue("Inactive notifier not returned", notifiers.contains(inactiveNotifier));
-	
+
 	assertEquals("Wrong number of active notifiers returned", 2, activeNotifiers.size());
 	assertTrue("Initial notifier not returned", activeNotifiers.contains(notifier));
 	assertTrue("Active notifier not returned", activeNotifiers.contains(activeNotifier));
@@ -97,7 +99,7 @@ public class NotificationManagerTests {
 	assertFalse("Inactive notifier not identified", notificationManager.isNotifierActive(inactiveNotifier));
 	assertFalse("Non-existant notifier not identified", notificationManager.isNotifierActive(nonExistantNotifier));
     }
-    
+
     @Test
     public void testSetNotifierActive() {
 	notificationManager.setNotifierActive(notifier, false);
@@ -105,22 +107,22 @@ public class NotificationManagerTests {
 	notificationManager.setNotifierActive(notifier, true);
 	assertTrue("Notifier not activated", notificationManager.isNotifierActive(notifier));
     }
-    
-    @Test(expected=NullPointerException.class)
+
+    @Test(expected = NullPointerException.class)
     public void testAddNullNotifier() {
 	notificationManager.addNotifier(null, true);
     }
 
-    @Test(expected=NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testSetNullNotifierActive() {
 	notificationManager.setNotifierActive((HablarNotifier) null, true);
     }
 
-    @Test(expected=NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testSetNullNotifierIdActive() {
 	notificationManager.setNotifierActive((String) null, true);
     }
-    
+
     private void fire(final String message, final String type) {
 	eventBus.fireEvent(new UserMessageEvent(page, message, type));
     }

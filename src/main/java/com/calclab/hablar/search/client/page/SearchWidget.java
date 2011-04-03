@@ -28,121 +28,119 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class SearchWidget extends Composite implements SearchDisplay {
 
-	interface SearchWidgetUiBinder extends UiBinder<Widget, SearchWidget> {
-	}
+    interface SearchWidgetUiBinder extends UiBinder<Widget, SearchWidget> {
+    }
 
-	private static SearchMessages messages;
+    private static SearchMessages messages;
 
-	public static final String ID = "SearchPageWidget";
+    public static final String ID = "SearchPageWidget";
 
-	public static final String TERM_DEB_ID = "SearchPageWidget-term";
+    public static final String TERM_DEB_ID = "SearchPageWidget-term";
 
-	public static final String MESSAGE_DEB_ID = "SearchPageWidget-message";
-	public static final String TYPE = "Search";
-	private static SearchWidgetUiBinder uiBinder = GWT
-			.create(SearchWidgetUiBinder.class);
+    public static final String MESSAGE_DEB_ID = "SearchPageWidget-message";
+    public static final String TYPE = "Search";
+    private static SearchWidgetUiBinder uiBinder = GWT.create(SearchWidgetUiBinder.class);
 
-	public static SearchMessages i18n() {
-		return messages;
-	}
+    public static SearchMessages i18n() {
+	return messages;
+    }
 
-	public static void setMessages(final SearchMessages messages) {
-		SearchWidget.messages = messages;
-	}
+    public static void setMessages(final SearchMessages messages) {
+	SearchWidget.messages = messages;
+    }
 
-	@UiField
-	LayoutPanel self;
-	@UiField
-	ScrollPanel scroll;
-	@UiField
-	FlowPanel results, messagePanel;
-	@UiField
-	TextBox term;
-	@UiField
-	Label message;
-	@UiField
-	Button search;
+    @UiField
+    LayoutPanel self;
+    @UiField
+    ScrollPanel scroll;
+    @UiField
+    FlowPanel results, messagePanel;
+    @UiField
+    TextBox term;
+    @UiField
+    Label message;
+    @UiField
+    Button search;
 
-	public SearchWidget() {
-		initWidget(uiBinder.createAndBindUi(this));
+    public SearchWidget() {
+	initWidget(uiBinder.createAndBindUi(this));
 
-		term.ensureDebugId("SearchWidget-term");
-		message.ensureDebugId("SearchWidget-message");
-		search.ensureDebugId("SearchWidget-search");
-		search.setText(i18n().searchAction());
-		term.setTitle(i18n().searchTooltip());
-	}
+	term.ensureDebugId("SearchWidget-term");
+	message.ensureDebugId("SearchWidget-message");
+	search.ensureDebugId("SearchWidget-search");
+	search.setText(i18n().searchAction());
+	term.setTitle(i18n().searchTooltip());
+    }
 
-	@Override
-	public void addResult(final SearchResultItemDisplay item) {
-		results.add(item.asWidget());
-	}
+    @Override
+    public void addResult(final SearchResultItemDisplay item) {
+	results.add(item.asWidget());
+    }
 
-	@Override
-	public Widget asWidget() {
-		return this;
-	}
+    @Override
+    public Widget asWidget() {
+	return this;
+    }
 
-	@Override
-	public void clearResults() {
-		results.clear();
-	}
+    @Override
+    public void clearResults() {
+	results.clear();
+    }
 
-	@Override
-	public MenuDisplay<SearchResultItem> createMenu(final String debugId) {
-		return new PopupMenu<SearchResultItem>(debugId);
-	}
+    @Override
+    public MenuDisplay<SearchResultItem> createMenu(final String debugId) {
+	return new PopupMenu<SearchResultItem>(debugId);
+    }
 
-	@Override
-	public void focusInput() {
-	    Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-			@Override
-			public void execute() {
-				term.setFocus(true);
-			}
-		});
-	}
+    @Override
+    public void focusInput() {
+	Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+	    @Override
+	    public void execute() {
+		term.setFocus(true);
+	    }
+	});
+    }
 
-	@Override
-	public HasKeyDownHandlers getSearchBox() {
-		return term;
-	}
+    @Override
+    public HasKeyDownHandlers getSearchBox() {
+	return term;
+    }
 
-	@Override
-	public HasClickHandlers getSearchButton() {
-		return search;
-	}
+    @Override
+    public HasClickHandlers getSearchButton() {
+	return search;
+    }
 
-	@Override
-	public Focusable getSearchFocus() {
-		return term;
-	}
+    @Override
+    public Focusable getSearchFocus() {
+	return term;
+    }
 
-	@Override
-	public HasText getSearchTerm() {
-		return term;
-	}
+    @Override
+    public HasText getSearchTerm() {
+	return term;
+    }
 
-	@Override
-	public SearchResultItemDisplay newSearchResultItemDisplay(
-			final String itemId) {
-		return new SearchResultItemWidget(itemId);
-	}
+    @Override
+    public SearchResultItemDisplay newSearchResultItemDisplay(final String itemId) {
+	return new SearchResultItemWidget(itemId);
+    }
 
-	@UiHandler("term")
-	public void onFocus(final FocusEvent evt) {
-		term.setText("");
-		term.getElement().removeClassName("unfocus");
-		term.getElement().addClassName("focus");
-	}
+    @UiHandler("term")
+    public void onFocus(final FocusEvent evt) {
+	term.setText("");
+	term.getElement().removeClassName("unfocus");
+	term.getElement().addClassName("focus");
+    }
 
-	@Override
-	public void showMessage(final String body, final Level level) {
-		self.setWidgetTopHeight(messagePanel, 3, PX, 22, PX);
-		self.setWidgetTopBottom(scroll, 22, PX, 47, PX);
-		self.animate(250);
+    @Override
+    public void showMessage(final String body, final Level level) {
+	self.setWidgetTopHeight(messagePanel, 3, PX, 22, PX);
+	self.setWidgetTopBottom(scroll, 22, PX, 47, PX);
+	self.animate(250);
 
-		message.setText(body);
-		message.getElement().addClassName(level.toString());
-	}
+	message.setText(body);
+	message.getElement().addClassName(level.toString());
+    }
 }

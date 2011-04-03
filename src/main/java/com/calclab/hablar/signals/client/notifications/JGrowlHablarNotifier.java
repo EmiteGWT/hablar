@@ -21,9 +21,11 @@ public class JGrowlHablarNotifier implements HablarNotifier {
 	return "jgrowlNotifier";
     }
 
+    //@formatter:off
     private native boolean isJGrowlPresent() /*-{
-        return ($wnd.jQuery != undefined && $wnd.jQuery.jGrowl != undefined);
+	return ($wnd.jQuery != undefined && $wnd.jQuery.jGrowl != undefined);
     }-*/;
+    //@formatter:on
 
     @Override
     public void show(final String userMessage, final String messageType) {
@@ -34,8 +36,10 @@ public class JGrowlHablarNotifier implements HablarNotifier {
 	}
     }
 
+    //@formatter:off
     private native void showJGrowl(final String userMessage) /*-{
-        $wnd.jQuery.jGrowl(userMessage);
+	$wnd.jQuery.jGrowl(userMessage);
     }-*/;
+    //@formatter:on
 
 }

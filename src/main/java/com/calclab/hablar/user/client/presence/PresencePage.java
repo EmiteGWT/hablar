@@ -108,8 +108,8 @@ public class PresencePage extends PagePresenter<PresenceDisplay> implements Edit
 		    if (presences.size() > 0) {
 			for (final StoredPresence presence : presences) {
 			    final Show show = presence.getShow();
-			    statusMenu.addAction(createCustomAction(presence.getStatus(), null, PresenceIcon.get(true,
-				    show), presence.getStatus(), show));
+			    statusMenu.addAction(createCustomAction(presence.getStatus(), null,
+				    PresenceIcon.get(true, show), presence.getStatus(), show));
 			}
 			statusMenu.addAction(clearCustomsAction);
 		    }

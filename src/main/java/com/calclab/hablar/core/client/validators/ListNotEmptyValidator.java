@@ -2,11 +2,11 @@ package com.calclab.hablar.core.client.validators;
 
 import java.util.List;
 
-
 /**
  * Checks if a list is not empty.
- *
- * @param <T> The type of the elements of the list to check.
+ * 
+ * @param <T>
+ *            The type of the elements of the list to check.
  */
 public class ListNotEmptyValidator<T> implements Validator<List<T>> {
 

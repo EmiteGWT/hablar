@@ -1,6 +1,5 @@
 package com.calclab.hablar.search.client;
 
-
 import com.calclab.emite.browser.client.PageAssist;
 import com.calclab.hablar.search.client.query.NicknameStartsWithSearchQueryFactory;
 

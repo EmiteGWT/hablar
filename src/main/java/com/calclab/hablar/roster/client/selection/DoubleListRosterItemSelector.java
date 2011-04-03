@@ -10,7 +10,8 @@ import com.calclab.hablar.roster.client.RosterMessages;
 import com.calclab.hablar.roster.client.groups.RosterItemWidget;
 
 /**
- * An implementation of {@link RosterItemSelector} that uses a double list for the selection.
+ * An implementation of {@link RosterItemSelector} that uses a double list for
+ * the selection.
  */
 public class DoubleListRosterItemSelector implements RosterItemSelector {
 

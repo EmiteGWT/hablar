@@ -63,54 +63,88 @@ public class ChatMessageFormatter {
 	patternImagePairs = new ArrayList<PatternFactoryReplacement>();
 	patternImagePairs.add(new PatternFactoryReplacement("\\r\\n", new NewlinePatternElementFactory(), NEWLINE));
 	patternImagePairs.add(new PatternFactoryReplacement("\\r|\\n", new NewlinePatternElementFactory(), NEWLINE));
-	patternImagePairs.add(new PatternFactoryReplacement(TextUtils.URL_REGEXP, new AnchorPatternElementFactory(), ANCHOR));
-	patternImagePairs.add(new PatternFactoryReplacement("&gt;:\\)", new ImagePatternElementFactory(icons.devil()), DEVIL));
-	patternImagePairs.add(new PatternFactoryReplacement("O:\\)|o:\\)|o:-\\)|O:-\\)|0:\\)|0:-\\)", new ImagePatternElementFactory(icons.angel()), ANGEL));
-	patternImagePairs.add(new PatternFactoryReplacement("\\^_\\^|\\^-\\^|\\^\\^|:\\)\\)|:-\\)\\)", new ImagePatternElementFactory(icons.joyful()), JOYFUL));
-	patternImagePairs.add(new PatternFactoryReplacement("\\(police\\)|\\(cop\\)|\\{\\):\\)", new ImagePatternElementFactory(icons.policeman()), POLICEMAN));
-	patternImagePairs.add(new PatternFactoryReplacement("=:\\)|\\(alien\\)", new ImagePatternElementFactory(icons.alien()), ALIEN));
-	patternImagePairs.add(new PatternFactoryReplacement("o_O|o_0|O_O|o_o|O_o|0_o|o0|0o|oO|Oo|0_0", new ImagePatternElementFactory(icons.andy()), ANDY));
-	patternImagePairs.add(new PatternFactoryReplacement("&gt;:o|&gt;:-o|&gt;:O|&gt;:-O|X\\(|X-\\(|x\\(|x-\\(|:@|&lt;_&lt;",
-		new ImagePatternElementFactory(icons.angry()), ANGRY));
-	patternImagePairs.add(new PatternFactoryReplacement("\\(bandit\\)|:\\(&gt;", new ImagePatternElementFactory(icons.bandit()), BANDIT));
-	patternImagePairs.add(new PatternFactoryReplacement(":&quot;&gt;|:\\*&gt;|:-\\$|:\\$", new ImagePatternElementFactory(icons.blushing()), BLUSHING));
-	patternImagePairs.add(new PatternFactoryReplacement("B\\)|B-\\)|8\\)", new ImagePatternElementFactory(icons.cool()), COOL));
-	patternImagePairs.add(new PatternFactoryReplacement(":\'\\(|=\'\\(", new ImagePatternElementFactory(icons.crying()), CRYING));
-	patternImagePairs.add(new PatternFactoryReplacement(":-d|:d|:-D|:D|:d|=D|=-D", new ImagePatternElementFactory(icons.grin()), GRIN));
-	patternImagePairs.add(new PatternFactoryReplacement("=\\)|=-\\)", new ImagePatternElementFactory(icons.happy()), HAPPY));
-	patternImagePairs.add(new PatternFactoryReplacement("\\(L\\)|\\(h\\)|\\(H\\)", new ImagePatternElementFactory(icons.heart()), HEART));
-	patternImagePairs.add(new PatternFactoryReplacement(":-\\*|:\\*", new ImagePatternElementFactory(icons.kissing()), KISSING));
-	patternImagePairs.add(new PatternFactoryReplacement("\\(LOL\\)|lol", new ImagePatternElementFactory(icons.lol()), LOL));
-	patternImagePairs
-		.add(new PatternFactoryReplacement(":-X|:-xX|:x|\\(wubya\\)|\\(wubyou\\)|\\(wub\\)", new ImagePatternElementFactory(icons.love()), LOVE));
-	patternImagePairs.add(new PatternFactoryReplacement("\\(:\\)|\\(ph33r\\)|\\(ph34r\\)", new ImagePatternElementFactory(icons.ninja()), NINJA));
-	patternImagePairs.add(new PatternFactoryReplacement("&gt;_&lt;", new ImagePatternElementFactory(icons.pinched()), PINCHED));
-	patternImagePairs.add(new PatternFactoryReplacement(":\\||=\\||:-\\|", new ImagePatternElementFactory(icons.pouty()), POUTY));
-	patternImagePairs.add(new PatternFactoryReplacement(":\\(|=\\(|=-\\(|:-\\(", new ImagePatternElementFactory(icons.sad()), SAD));
-	patternImagePairs.add(new PatternFactoryReplacement(":&amp;|:-&amp;", new ImagePatternElementFactory(icons.sick()), SICK));
-	patternImagePairs.add(new PatternFactoryReplacement("=]", new ImagePatternElementFactory(icons.sideways()), SIDEWAYS));
-	patternImagePairs.add(new PatternFactoryReplacement("\\(-.-\\)|\\|\\)|\\|-\\)|I-\\)|I-\\|", new ImagePatternElementFactory(icons.sleeping()), SLEEPING));
-	patternImagePairs.add(new PatternFactoryReplacement(":-O|:O|:-o|:o|:-0|=-O|=-o|=o|=O", new ImagePatternElementFactory(icons.surprised()), SURPRISED));
-	patternImagePairs.add(new PatternFactoryReplacement(":P|=P|=p|:-P|:p|:-p|:b", new ImagePatternElementFactory(icons.tongue()), TONGUE));
-	patternImagePairs.add(new PatternFactoryReplacement(":-\\\\|:-/|:/|:\\\\", new ImagePatternElementFactory(icons.uncertain()), UNCERTAIN));
-	patternImagePairs.add(new PatternFactoryReplacement(":s|:-S|:-s|:S", new ImagePatternElementFactory(icons.unsure()), UNSURE));
-	patternImagePairs.add(new PatternFactoryReplacement("\\(woot\\)|\\(w00t\\)|\\(wOOt\\)", new ImagePatternElementFactory(icons.w00t()), W00T));
-	patternImagePairs.add(new PatternFactoryReplacement(":-&quot;", new ImagePatternElementFactory(icons.whistling()), WHISTLING));
-	patternImagePairs.add(new PatternFactoryReplacement(";\\)|;-\\)|;&gt;", new ImagePatternElementFactory(icons.wink()), WINK));
-	patternImagePairs.add(new PatternFactoryReplacement("\\(wizard\\)", new ImagePatternElementFactory(icons.wizard()), WIZARD));
-	patternImagePairs.add(new PatternFactoryReplacement(":\\?", new ImagePatternElementFactory(icons.wondering()), WONDERING));
-	patternImagePairs.add(new PatternFactoryReplacement(":-\\)|:\\)", new ImagePatternElementFactory(icons.smile()), SMILE));
+	patternImagePairs.add(new PatternFactoryReplacement(TextUtils.URL_REGEXP, new AnchorPatternElementFactory(),
+		ANCHOR));
+	patternImagePairs.add(new PatternFactoryReplacement("&gt;:\\)", new ImagePatternElementFactory(icons.devil()),
+		DEVIL));
+	patternImagePairs.add(new PatternFactoryReplacement("O:\\)|o:\\)|o:-\\)|O:-\\)|0:\\)|0:-\\)",
+		new ImagePatternElementFactory(icons.angel()), ANGEL));
+	patternImagePairs.add(new PatternFactoryReplacement("\\^_\\^|\\^-\\^|\\^\\^|:\\)\\)|:-\\)\\)",
+		new ImagePatternElementFactory(icons.joyful()), JOYFUL));
+	patternImagePairs.add(new PatternFactoryReplacement("\\(police\\)|\\(cop\\)|\\{\\):\\)",
+		new ImagePatternElementFactory(icons.policeman()), POLICEMAN));
+	patternImagePairs.add(new PatternFactoryReplacement("=:\\)|\\(alien\\)", new ImagePatternElementFactory(icons
+		.alien()), ALIEN));
+	patternImagePairs.add(new PatternFactoryReplacement("o_O|o_0|O_O|o_o|O_o|0_o|o0|0o|oO|Oo|0_0",
+		new ImagePatternElementFactory(icons.andy()), ANDY));
+	patternImagePairs.add(new PatternFactoryReplacement(
+		"&gt;:o|&gt;:-o|&gt;:O|&gt;:-O|X\\(|X-\\(|x\\(|x-\\(|:@|&lt;_&lt;", new ImagePatternElementFactory(
+			icons.angry()), ANGRY));
+	patternImagePairs.add(new PatternFactoryReplacement("\\(bandit\\)|:\\(&gt;", new ImagePatternElementFactory(
+		icons.bandit()), BANDIT));
+	patternImagePairs.add(new PatternFactoryReplacement(":&quot;&gt;|:\\*&gt;|:-\\$|:\\$",
+		new ImagePatternElementFactory(icons.blushing()), BLUSHING));
+	patternImagePairs.add(new PatternFactoryReplacement("B\\)|B-\\)|8\\)", new ImagePatternElementFactory(icons
+		.cool()), COOL));
+	patternImagePairs.add(new PatternFactoryReplacement(":\'\\(|=\'\\(", new ImagePatternElementFactory(icons
+		.crying()), CRYING));
+	patternImagePairs.add(new PatternFactoryReplacement(":-d|:d|:-D|:D|:d|=D|=-D", new ImagePatternElementFactory(
+		icons.grin()), GRIN));
+	patternImagePairs.add(new PatternFactoryReplacement("=\\)|=-\\)",
+		new ImagePatternElementFactory(icons.happy()), HAPPY));
+	patternImagePairs.add(new PatternFactoryReplacement("\\(L\\)|\\(h\\)|\\(H\\)", new ImagePatternElementFactory(
+		icons.heart()), HEART));
+	patternImagePairs.add(new PatternFactoryReplacement(":-\\*|:\\*", new ImagePatternElementFactory(icons
+		.kissing()), KISSING));
+	patternImagePairs.add(new PatternFactoryReplacement("\\(LOL\\)|lol",
+		new ImagePatternElementFactory(icons.lol()), LOL));
+	patternImagePairs.add(new PatternFactoryReplacement(":-X|:-xX|:x|\\(wubya\\)|\\(wubyou\\)|\\(wub\\)",
+		new ImagePatternElementFactory(icons.love()), LOVE));
+	patternImagePairs.add(new PatternFactoryReplacement("\\(:\\)|\\(ph33r\\)|\\(ph34r\\)",
+		new ImagePatternElementFactory(icons.ninja()), NINJA));
+	patternImagePairs.add(new PatternFactoryReplacement("&gt;_&lt;",
+		new ImagePatternElementFactory(icons.pinched()), PINCHED));
+	patternImagePairs.add(new PatternFactoryReplacement(":\\||=\\||:-\\|", new ImagePatternElementFactory(icons
+		.pouty()), POUTY));
+	patternImagePairs.add(new PatternFactoryReplacement(":\\(|=\\(|=-\\(|:-\\(", new ImagePatternElementFactory(
+		icons.sad()), SAD));
+	patternImagePairs.add(new PatternFactoryReplacement(":&amp;|:-&amp;", new ImagePatternElementFactory(icons
+		.sick()), SICK));
+	patternImagePairs.add(new PatternFactoryReplacement("=]", new ImagePatternElementFactory(icons.sideways()),
+		SIDEWAYS));
+	patternImagePairs.add(new PatternFactoryReplacement("\\(-.-\\)|\\|\\)|\\|-\\)|I-\\)|I-\\|",
+		new ImagePatternElementFactory(icons.sleeping()), SLEEPING));
+	patternImagePairs.add(new PatternFactoryReplacement(":-O|:O|:-o|:o|:-0|=-O|=-o|=o|=O",
+		new ImagePatternElementFactory(icons.surprised()), SURPRISED));
+	patternImagePairs.add(new PatternFactoryReplacement(":P|=P|=p|:-P|:p|:-p|:b", new ImagePatternElementFactory(
+		icons.tongue()), TONGUE));
+	patternImagePairs.add(new PatternFactoryReplacement(":-\\\\|:-/|:/|:\\\\", new ImagePatternElementFactory(icons
+		.uncertain()), UNCERTAIN));
+	patternImagePairs.add(new PatternFactoryReplacement(":s|:-S|:-s|:S", new ImagePatternElementFactory(icons
+		.unsure()), UNSURE));
+	patternImagePairs.add(new PatternFactoryReplacement("\\(woot\\)|\\(w00t\\)|\\(wOOt\\)",
+		new ImagePatternElementFactory(icons.w00t()), W00T));
+	patternImagePairs.add(new PatternFactoryReplacement(":-&quot;", new ImagePatternElementFactory(icons
+		.whistling()), WHISTLING));
+	patternImagePairs.add(new PatternFactoryReplacement(";\\)|;-\\)|;&gt;", new ImagePatternElementFactory(icons
+		.wink()), WINK));
+	patternImagePairs.add(new PatternFactoryReplacement("\\(wizard\\)", new ImagePatternElementFactory(icons
+		.wizard()), WIZARD));
+	patternImagePairs.add(new PatternFactoryReplacement(":\\?", new ImagePatternElementFactory(icons.wondering()),
+		WONDERING));
+	patternImagePairs.add(new PatternFactoryReplacement(":-\\)|:\\)",
+		new ImagePatternElementFactory(icons.smile()), SMILE));
     }
 
     /**
      * Ellipsis.
-     *
+     * 
      * @param text
      *            the string to truncate
      * @param length
      *            the size (if 0 returns the same text, if null return an empty
      *            string)
-     *
+     * 
      * @return the result string
      */
     public static String ellipsis(final String text, final int length) {
@@ -180,10 +214,12 @@ public class ChatMessageFormatter {
 	return message;
     }
 
+    //@formatter:off
     private static native JsArrayString getMatches(String text, String pattern) /*-{
-        var regexp = new RegExp(pattern);
-        return text.match(regexp);
+	var regexp = new RegExp(pattern);
+	return text.match(regexp);
     }-*/;
+    //@formatter:on
 
     /**
      * It represents a factory of elements, given the original text.

@@ -7,6 +7,7 @@ public class UnattendedChatsChangedEvent extends GwtEvent<UnattendedChatsChanged
     public static enum ChangeType {
 	added, removed
     }
+
     public static final Type<UnattendedChatsChangedHandler> TYPE = new Type<UnattendedChatsChangedHandler>();
     private final ChangeType changeType;
     private final Page<?> page;

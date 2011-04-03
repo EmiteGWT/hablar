@@ -25,8 +25,8 @@ public class EditBuddyPage extends PagePresenter<EditBuddyDisplay> {
 	super("EditBuddy", "" + ++index, eventBus, display);
 	this.roster = roster;
 
-	nickNameValidator = new TextValidator(display.getNickNameKeys(), display.getNickName(), display
-		.getNickNameError(), display.getAcceptState());
+	nickNameValidator = new TextValidator(display.getNickNameKeys(), display.getNickName(),
+		display.getNickNameError(), display.getAcceptState());
 	nickNameValidator.add(Validators.notEmpty(i18n().nickNameEmpty()));
 	bind();
     }

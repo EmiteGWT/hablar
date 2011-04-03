@@ -12,6 +12,7 @@ public class HablarSoundSignals {
 
 	final HablarEventBus eventBus = hablar.getEventBus();
 	eventBus.addHandler(UserMessageEvent.TYPE, new UserMessageHandler() {
+	    @Override
 	    public void onUserMessage(final UserMessageEvent event) {
 		soundManager.play();
 	    }

@@ -4,14 +4,16 @@ import com.calclab.hablar.core.client.mvp.Display;
 
 public interface RosterGroupDisplay extends Display {
 
-	/**
-	 * Adds a {@link RosterItemDisplay} at the end of the group
-	 * @param itemDisplay
-	 */
+    /**
+     * Adds a {@link RosterItemDisplay} at the end of the group
+     * 
+     * @param itemDisplay
+     */
     void add(RosterItemDisplay itemDisplay);
 
     /**
      * Adds a {@link RosterItemDisplay} before the specified item
+     * 
      * @param itemDisplay
      * @param beforeItem
      */

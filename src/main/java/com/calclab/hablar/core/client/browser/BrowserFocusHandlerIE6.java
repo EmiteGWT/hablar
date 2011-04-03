@@ -9,17 +9,19 @@ public class BrowserFocusHandlerIE6 extends BrowserFocusHandler {
      * focus-blues/
      */
     @Override
+    //@formatter:off
     protected native void addFocusListenerEvents() /*-{
-        $wnd.document.onfocusin = function() {
-        @com.calclab.hablar.core.client.browser.BrowserFocusHandler::changeFocus(Z)(true);
-        };
-        $wnd.document.onfocusout = function() {
-        if($wnd._BrowserFocusHandlerIE6ActiveElement != $wnd.document.activeElement) {
-        $wnd._BrowserFocusHandlerIE6ActiveElement = $wnd.document.activeElement;
-        } else {
-        @com.calclab.hablar.core.client.browser.BrowserFocusHandler::changeFocus(Z)(false);
-        }
-        };
-        $wnd._BrowserFocusHandlerIE6ActiveElement = $wnd.document.activeElement;
+	$wnd.document.onfocusin = function() {
+	    @com.calclab.hablar.core.client.browser.BrowserFocusHandler::changeFocus(Z)(true);
+	};
+	$wnd.document.onfocusout = function() {
+	    if($wnd._BrowserFocusHandlerIE6ActiveElement != $wnd.document.activeElement) {
+		$wnd._BrowserFocusHandlerIE6ActiveElement = $wnd.document.activeElement;
+	    } else {
+		@com.calclab.hablar.core.client.browser.BrowserFocusHandler::changeFocus(Z)(false);
+	    }
+	};
+	$wnd._BrowserFocusHandlerIE6ActiveElement = $wnd.document.activeElement;
     }-*/;
+    //@formatter:on
 }

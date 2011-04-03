@@ -10,27 +10,27 @@ import com.google.gwt.user.client.ui.HasText;
 
 public interface SearchDisplay extends Display {
 
-	public static enum Level {
-		info, error, success
-	}
+    public static enum Level {
+	info, error, success
+    }
 
-	void addResult(SearchResultItemDisplay item);
+    void addResult(SearchResultItemDisplay item);
 
-	void clearResults();
+    void clearResults();
 
-	MenuDisplay<SearchResultItem> createMenu(String debugId);
+    MenuDisplay<SearchResultItem> createMenu(String debugId);
 
-	void focusInput();
+    void focusInput();
 
-	HasKeyDownHandlers getSearchBox();
+    HasKeyDownHandlers getSearchBox();
 
-	HasClickHandlers getSearchButton();
+    HasClickHandlers getSearchButton();
 
-	Focusable getSearchFocus();
+    Focusable getSearchFocus();
 
-	HasText getSearchTerm();
+    HasText getSearchTerm();
 
-	SearchResultItemDisplay newSearchResultItemDisplay(String itemId);
+    SearchResultItemDisplay newSearchResultItemDisplay(String itemId);
 
-	void showMessage(String body, Level level);
+    void showMessage(String body, Level level);
 }

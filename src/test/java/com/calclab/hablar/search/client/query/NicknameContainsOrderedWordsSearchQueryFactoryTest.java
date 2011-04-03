@@ -3,7 +3,7 @@
  */
 package com.calclab.hablar.search.client.query;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,12 +14,14 @@ import com.calclab.hablar.search.client.SearchQueryFactory;
 
 /**
  * Tests {@link NicknameContainsOrderedWordsSearchQueryFactory}.
- *
+ * 
  */
 public class NicknameContainsOrderedWordsSearchQueryFactoryTest {
 
     /**
-     * Test method for {@link NicknameContainsOrderedWordsSearchQueryFactory#createSearchQuery(java.lang.String)}.
+     * Test method for
+     * {@link NicknameContainsOrderedWordsSearchQueryFactory#createSearchQuery(java.lang.String)}
+     * .
      */
     @Test
     public void testCreateSearchQuery() {

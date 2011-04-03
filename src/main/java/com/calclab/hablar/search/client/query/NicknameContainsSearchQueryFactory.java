@@ -13,8 +13,8 @@ public class NicknameContainsSearchQueryFactory implements SearchQueryFactory {
     /** {@inheritDoc} */
     @Override
     public HashMap<String, String> createSearchQuery(final String term) {
-        final HashMap<String, String> query = new HashMap<String, String>();
-        query.put("nick", "*" + term + "*");
-        return query;
+	final HashMap<String, String> query = new HashMap<String, String>();
+	query.put("nick", "*" + term + "*");
+	return query;
     }
 }

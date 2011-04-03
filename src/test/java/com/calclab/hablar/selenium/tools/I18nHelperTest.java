@@ -11,8 +11,8 @@ public class I18nHelperTest {
 
     @Test
     public void testOnePlural() {
-	assertEquals("Results for «test1»: One user found.", I18nHelper.get(SearchMessages.class, "searchResultsFor",
-		"test1", 1));
+	assertEquals("Results for «test1»: One user found.",
+		I18nHelper.get(SearchMessages.class, "searchResultsFor", "test1", 1));
     }
 
     @Test
@@ -22,8 +22,8 @@ public class I18nHelperTest {
 
     @Test
     public void testSimpleSeveralArgs() {
-	assertEquals("Results for «test1»: 2 users found.", I18nHelper.get(SearchMessages.class, "searchResultsFor",
-		"test1", 2));
+	assertEquals("Results for «test1»: 2 users found.",
+		I18nHelper.get(SearchMessages.class, "searchResultsFor", "test1", 2));
     }
 
 }

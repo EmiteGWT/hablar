@@ -2,8 +2,8 @@ package com.calclab.hablar.core.client.mvp;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 public interface HablarEventBus {
     <H extends EventHandler> HandlerRegistration addHandler(Type<H> type, H handler);

@@ -7,8 +7,8 @@ import static org.mockito.Mockito.when;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
+import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.roster.client.groups.RosterItemDisplay;
 
@@ -60,7 +60,7 @@ public class RosterItemSelectableTests {
     @Test
     public void testCompareToNullWhenNotEquals() {
 	int actual = getCompareTo(null, TEST_JID, Show.chat, null, TEST_JID, Show.chat);
-	
+
 	assertTrue("Zero returned for different objects", actual != 0);
     }
 
@@ -74,10 +74,10 @@ public class RosterItemSelectableTests {
 	RosterItemSelectable item = new RosterItemSelectable(user, widget);
 
 	int actual = item.compareTo(item);
-	
+
 	assertTrue("Zero not returned for equal objects", actual == 0);
     }
-    
+
     /**
      * 
      * @param sign

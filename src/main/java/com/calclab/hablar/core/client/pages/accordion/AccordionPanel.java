@@ -30,11 +30,11 @@ import com.google.gwt.user.client.ui.Widget;
 
 /**
  * A regular GWT StackLayoutPanel but with some improvements.
- *
+ * 
  * 1) Fire events when the header are clicked, but do not open them<br/>
  * 2) Remove widgets correctly (see
  * http://code.google.com/p/google-web-toolkit/issues/detail?id=4174)
- *
+ * 
  */
 public class AccordionPanel extends Composite implements HasWidgets, RequiresResize, ProvidesResize {
 
@@ -59,7 +59,7 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
 
     /**
      * Creates an empty stack panel.
-     *
+     * 
      * @param unit
      *            the unit to be used for layout
      */
@@ -69,6 +69,7 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
 	layoutPanel.addStyleName("hablar-AccordionPanel");
     }
 
+    @Override
     public void add(Widget w) {
 	assert false : "Single-argument add() is not supported for this widget";
     }
@@ -76,7 +77,7 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
     /**
      * Adds a child widget to this stack, along with a widget representing the
      * stack header.
-     *
+     * 
      * @param widget
      *            the child widget to be added
      * @param header
@@ -105,6 +106,7 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
 	}
     }
 
+    @Override
     public void clear() {
 	layoutPanel.clear();
 	visibleWidget = null;
@@ -116,7 +118,7 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
 
     /**
      * Check if the given widget is a child of this accordion
-     *
+     * 
      * @param widget
      *            the widget to check
      * @return true if the widget is in the accordion, false if not
@@ -125,14 +127,17 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
 	return widget.getParent() == layoutPanel;
     }
 
+    @Override
     public Iterator<Widget> iterator() {
 	return new Iterator<Widget>() {
 	    int i = 0, last = -1;
 
+	    @Override
 	    public boolean hasNext() {
 		return i < layoutData.size();
 	    }
 
+	    @Override
 	    public Widget next() {
 		if (!hasNext()) {
 		    throw new NoSuchElementException();
@@ -140,6 +145,7 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
 		return layoutData.get(last = i++).widget;
 	    }
 
+	    @Override
 	    public void remove() {
 		if (last < 0) {
 		    throw new IllegalStateException();
@@ -152,6 +158,7 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
 	};
     }
 
+    @Override
     public void onResize() {
 	layoutPanel.onResize();
     }
@@ -159,9 +166,10 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
     /**
      * Because the accordion panel never changes the visibility of its children,
      * you can not remove the visible widget
-     *
+     * 
      * @see http://code.google.com/p/google-web-toolkit/issues/detail?id=4174
      */
+    @Override
     public boolean remove(Widget child) {
 	if (!hasWidget(child)) {
 	    return false;
@@ -177,7 +185,7 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
 	else {
 	    visibleWidget = null;
 	    // FIXME: Animation
-	    //layoutPanel.forceLayout();
+	    // layoutPanel.forceLayout();
 	}
 
 	return true;
@@ -185,7 +193,7 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
 
     /**
      * Shows the specified widget.
-     *
+     * 
      * @param widget
      *            the child widget to be shown.
      */

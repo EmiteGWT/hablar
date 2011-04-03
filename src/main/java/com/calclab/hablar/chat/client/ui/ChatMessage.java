@@ -10,6 +10,7 @@ public class ChatMessage {
     public static enum MessageType {
 	incoming, sent, info, alert
     }
+
     public String metadata;
     public final String author;
     public final String body;
