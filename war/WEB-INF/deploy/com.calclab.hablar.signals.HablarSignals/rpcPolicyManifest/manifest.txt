@@ -1,0 +1,2 @@
+# Module com.calclab.hablar.signals.HablarSignals
+# RPC service class, partial path of RPC policy file

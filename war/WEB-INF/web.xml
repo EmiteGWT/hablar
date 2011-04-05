@@ -5,24 +5,35 @@
 <web-app>
 	<servlet>
 		<servlet-name>Proxy</servlet-name>
-		<servlet-class>de.spieleck.servlets.ProxyServlet
-    </servlet-class>
+		<servlet-class>de.spieleck.servlets.ProxyServlet</servlet-class>
 		<init-param>
 			<param-name>remotePath</param-name>
 			<param-value>/http-bind/</param-value>
 		</init-param>
 		<init-param>
 			<param-name>remoteServer</param-name>
-			<param-value>localhost</param-value>
+			<param-value>tomsurevine</param-value>
 		</init-param>
 		<init-param>
 			<param-name>remotePort</param-name>
-			<param-value>5280</param-value>
+			<param-value>7070</param-value>
 		</init-param>
 	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>Proxy</servlet-name>
-		<url-pattern>/proxy
-    </url-pattern>
+		<url-pattern>/proxy</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+	  <servlet-name>gwt-log-remote-logger-servlet</servlet-name>
+	  <servlet-class>com.allen_sauer.gwt.log.server.RemoteLoggerServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+	  <servlet-name>gwt-log-remote-logger-servlet</servlet-name>
+	  <url-pattern>/HablarHtml/gwt-log</url-pattern>
+	</servlet-mapping>
+
+	
 </web-app>

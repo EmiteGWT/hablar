@@ -1,0 +1,2 @@
+# Module com.calclab.hablar.search.HablarSearch
+# RPC service class, partial path of RPC policy file

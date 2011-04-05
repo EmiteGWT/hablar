@@ -1,5 +1,6 @@
 package com.calclab.hablar.html.client;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.emite.browser.client.PageAssist;
 import com.calclab.hablar.HablarComplete;
 import com.calclab.hablar.HablarConfig;
@@ -42,6 +43,9 @@ public class HablarHtml implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
+
+	Log.debug("HablarHtml module loaded");
+
 	final GWT.UncaughtExceptionHandler uncaughtExceptionHandler = new GWT.UncaughtExceptionHandler() {
 	    @Override
 	    public void onUncaughtException(final Throwable e) {
