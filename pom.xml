@@ -125,6 +125,9 @@
 				<version>${gwtVersion}</version>
 				<executions>
 					<execution>
+						<configuration>
+							<module>com.calclab.hablar.html.HablarHtml</module>
+						</configuration>
 						<goals>
 							<goal>resources</goal>
 							<goal>compile</goal>
