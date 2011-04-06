@@ -9,21 +9,9 @@
     <inherits name='com.calclab.hablar.icons.ie6gif.HablarIE6GifIcons' />
     <inherits name='com.calclab.hablar.icons.alt.HablarAltIcons' />
 
-
-	<inherits name="com.allen_sauer.gwt.log.gwt-log-DEBUG" />
- 	<set-property name="log_DivLogger" value="DISABLED" />
-	<set-property name="log_GWTLogger" value="DISABLED" />
-	<set-property name="log_WindowLogger" value="DISABLED" />
-
- 	<set-property name="log_RemoteLogger" value="ENABLED" />
- 	<set-configuration-property name="log_url" value="/HablarHtml/gwt-log" />
-
-
 	<inherits name='com.google.gwt.user.theme.chrome.Chrome' />
 	<!-- <inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
 	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
-
-
 
 	<!--
 		for add ensureDebugIds (debugId in UIBinder), remove/comment in

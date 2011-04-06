@@ -4,6 +4,7 @@
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name='com.calclab.emite.core.EmiteCore' />
 	<inherits name="com.calclab.emite.suco.EmiteSuco" />
+	<inherits name="com.allen_sauer.gwt.log.gwt-log" />
 
 	<replace-with
 		class="com.calclab.hablar.core.client.browser.BrowserFocusHandler">
