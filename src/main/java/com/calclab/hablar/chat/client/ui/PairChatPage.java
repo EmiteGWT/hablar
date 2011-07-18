@@ -6,12 +6,12 @@ import com.calclab.hablar.core.client.ui.menu.Action;
 
 public interface PairChatPage extends ChatPage {
 
-    void addAction(Action<PairChatPage> action);
+	void addAction(Action<PairChatPage> action);
 
-    Chat getChat();
+	Chat getChat();
 
-    String getChatName();
+	String getChatName();
 
-    void setPresence(boolean available, Show show);
+	void setPresence(boolean available, Show show);
 
 }

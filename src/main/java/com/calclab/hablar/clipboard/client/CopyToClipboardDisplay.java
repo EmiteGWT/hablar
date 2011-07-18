@@ -6,12 +6,12 @@ import com.google.gwt.user.client.ui.HasText;
 
 public interface CopyToClipboardDisplay extends Display {
 
-    HasClickHandlers getCopyButton();
+	HasClickHandlers getCopyButton();
 
-    HasClickHandlers getCloseButton();
+	HasClickHandlers getCloseButton();
 
-    HasText getContentField();
+	HasText getContentField();
 
-    void setCopyButtonVisible(boolean visible);
+	void setCopyButtonVisible(boolean visible);
 
 }

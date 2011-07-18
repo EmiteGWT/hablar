@@ -2,29 +2,30 @@ package com.calclab.hablar.roster.client.groups;
 
 import com.calclab.hablar.core.client.mvp.Display;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.HasText;
 
 public interface RosterItemDisplay extends Display {
 
-    void addStyleName(String styleName);
+	void addStyleName(String styleName);
 
-    HasClickHandlers getAction();
+	HasClickHandlers getAction();
 
-    HasText getJid();
+	HasText getJid();
 
-    HasClickHandlers getMenuAction();
+	HasClickHandlers getMenuAction();
 
-    HasText getName();
+	HasText getName();
 
-    HasText getStatus();
+	HasText getStatus();
 
-    void setColor(String color);
+	void setColor(String color);
 
-    void setIcon(String icon);
+	void setIcon(ImageResource imageResource);
 
-    void setMenuVisible(boolean visible);
+	void setMenuVisible(boolean visible);
 
-    void setStatusVisible(boolean visible);
+	void setStatusVisible(boolean visible);
 
-    void setWidgetTitle(String title);
+	void setWidgetTitle(String title);
 }

@@ -9,136 +9,131 @@ import com.calclab.hablar.dock.client.DockConfig;
 import com.calclab.hablar.rooms.client.HablarRoomsConfig;
 import com.calclab.hablar.roster.client.RosterConfig;
 import com.calclab.hablar.search.client.SearchConfig;
-import com.calclab.hablar.signals.sound.client.SoundSignalsConfig;
 import com.calclab.hablar.vcard.client.VCardConfig;
 
 public class HablarConfig {
 
-    private static void createTabHeaderSize(final HablarConfig config) {
-	Integer trim = null;
-	final String trimString = PageAssist.getMeta("hablar.tabHeaderTrim");
-	if (trimString != null) {
-	    try {
-		trim = Integer.decode(trimString);
-	    } catch (final NumberFormatException e) {
-		// Ignore it.
-	    }
-	}
-	config.tabHeaderSize = TabHeaderSize.create(PageAssist.getMeta("hablar.tabHeaderHeight"),
-		PageAssist.getMeta("hablar.tabHeaderWidth"), trim);
-    }
-
-    /**
-     * Retrieve Hablar configuration from meta tags in html
-     */
-    public static HablarConfig getFromMeta() {
-	final HablarConfig config = new HablarConfig();
-
-	config.hasRoster = PageAssist.isMetaTrue("hablar.roster");
-	config.hasSearch = PageAssist.isMetaTrue("hablar.search");
-	config.hasSignals = PageAssist.isMetaTrue("hablar.hasSignals");
-	config.hasChat = PageAssist.isMetaTrue("hablar.hasChats");
-	config.hasVCard = PageAssist.isMetaTrue("hablar.hasVCard");
-	config.hasCopyToClipboard = PageAssist.isMetaTrue("hablar.hasCopyToClipboard");
-	config.hasSound = PageAssist.isMetaTrue("hablar.hasSound");
-
-	config.dockRoster = PageAssist.getMeta("hablar.dockRoster");
-
-	final String layout = PageAssist.getMeta("hablar.layout");
-	if ("tabs".equals(layout)) {
-	    config.layout = HablarDisplay.Layout.tabs;
-	} else {
-	    config.layout = HablarDisplay.Layout.accordion;
-	}
-	if (config.layout == HablarDisplay.Layout.tabs) {
-	    createTabHeaderSize(config);
+	private static void createTabHeaderSize(final HablarConfig config) {
+		Integer trim = null;
+		final String trimString = PageAssist.getMeta("hablar.tabHeaderTrim");
+		if (trimString != null) {
+			try {
+				trim = Integer.decode(trimString);
+			} catch (final NumberFormatException e) {
+				// Ignore it.
+			}
+		}
+		config.tabHeaderSize = TabHeaderSize.create(PageAssist.getMeta("hablar.tabHeaderHeight"), PageAssist.getMeta("hablar.tabHeaderWidth"), trim);
 	}
 
-	config.roomsConfig = HablarRoomsConfig.getFromMeta();
-	config.rosterConfig = RosterConfig.getFromMeta();
-	config.searchConfig = SearchConfig.getFromMeta();
-	config.soundConfig = SoundSignalsConfig.getFromMeta();
-	config.vcardConfig = VCardConfig.getFromMeta();
-	config.chatConfig = ChatConfig.getFromMeta();
-	config.dockConfig = DockConfig.getFromMeta();
-	return config;
-    }
+	/**
+	 * Retrieve Hablar configuration from meta tags in html
+	 */
+	public static HablarConfig getFromMeta() {
+		final HablarConfig config = new HablarConfig();
 
-    public VCardConfig vcardConfig;
+		config.hasRoster = PageAssist.isMetaTrue("hablar.roster");
+		config.hasSearch = PageAssist.isMetaTrue("hablar.search");
+		config.hasSignals = PageAssist.isMetaTrue("hablar.hasSignals");
+		config.hasChat = PageAssist.isMetaTrue("hablar.hasChats");
+		config.hasVCard = PageAssist.isMetaTrue("hablar.hasVCard");
+		config.hasCopyToClipboard = PageAssist.isMetaTrue("hablar.hasCopyToClipboard");
+		config.hasSound = PageAssist.isMetaTrue("hablar.hasSound");
 
-    /**
-     * The Rooms configuration
-     */
-    public HablarRoomsConfig roomsConfig = new HablarRoomsConfig();
+		config.dockRoster = PageAssist.getMeta("hablar.dockRoster");
 
-    /**
-     * Has ChatModule
-     */
-    public boolean hasChat = true;
+		final String layout = PageAssist.getMeta("hablar.layout");
+		if ("tabs".equals(layout)) {
+			config.layout = HablarDisplay.Layout.tabs;
+		} else {
+			config.layout = HablarDisplay.Layout.accordion;
+		}
+		if (config.layout == HablarDisplay.Layout.tabs) {
+			createTabHeaderSize(config);
+		}
 
-    /**
-     * Dock the roster: "left" or "right"
-     */
-    public String dockRoster = "left";
+		config.roomsConfig = HablarRoomsConfig.getFromMeta();
+		config.rosterConfig = RosterConfig.getFromMeta();
+		config.searchConfig = SearchConfig.getFromMeta();
+		config.vcardConfig = VCardConfig.getFromMeta();
+		config.chatConfig = ChatConfig.getFromMeta();
+		config.dockConfig = DockConfig.getFromMeta();
+		return config;
+	}
 
-    /**
-     * Choose a layout
-     */
-    public HablarDisplay.Layout layout = HablarDisplay.Layout.tabs;
+	public VCardConfig vcardConfig;
 
-    /**
-     * The size of the header in tabs layout
-     */
-    public TabsLayout.TabHeaderSize tabHeaderSize;
+	/**
+	 * The Rooms configuration
+	 */
+	public HablarRoomsConfig roomsConfig = new HablarRoomsConfig();
 
-    /**
-     * Install Roster module
-     */
-    public boolean hasRoster = true;
+	/**
+	 * Has ChatModule
+	 */
+	public boolean hasChat = true;
 
-    /**
-     * Install Search module
-     */
-    public boolean hasSearch = true;
+	/**
+	 * Dock the roster: "left" or "right"
+	 */
+	public String dockRoster = "left";
 
-    /**
-     * Install signals module
-     */
-    public boolean hasSignals = true;
+	/**
+	 * Choose a layout
+	 */
+	public HablarDisplay.Layout layout = HablarDisplay.Layout.tabs;
 
-    /**
-     * Show user page docked on top
-     */
-    public boolean dockUser = true;
+	/**
+	 * The size of the header in tabs layout
+	 */
+	public TabsLayout.TabHeaderSize tabHeaderSize;
 
-    /**
-     * The Search module configuration
-     */
-    public RosterConfig rosterConfig = new RosterConfig();
+	/**
+	 * Install Roster module
+	 */
+	public boolean hasRoster = true;
 
-    /**
-     * The Search module configuration
-     */
-    public SearchConfig searchConfig = new SearchConfig();
+	/**
+	 * Install Search module
+	 */
+	public boolean hasSearch = true;
 
-    /**
-     * Install the copy-to-clipboard module
-     */
-    public boolean hasCopyToClipboard = true;
+	/**
+	 * Install signals module
+	 */
+	public boolean hasSignals = true;
 
-    /**
-     * Install the VCard module
-     */
-    public boolean hasVCard = true;
+	/**
+	 * Show user page docked on top
+	 */
+	public boolean dockUser = true;
 
-    /**
-     * Install SoundSignalModule
-     */
-    public boolean hasSound = true;
+	/**
+	 * The Search module configuration
+	 */
+	public RosterConfig rosterConfig = new RosterConfig();
 
-    public SoundSignalsConfig soundConfig = new SoundSignalsConfig();
+	/**
+	 * The Search module configuration
+	 */
+	public SearchConfig searchConfig = new SearchConfig();
 
-    public ChatConfig chatConfig = new ChatConfig();
+	/**
+	 * Install the copy-to-clipboard module
+	 */
+	public boolean hasCopyToClipboard = true;
 
-    public DockConfig dockConfig;
+	/**
+	 * Install the VCard module
+	 */
+	public boolean hasVCard = true;
+
+	/**
+	 * Install SoundSignalModule
+	 */
+	public boolean hasSound = true;
+
+	public ChatConfig chatConfig = new ChatConfig();
+
+	public DockConfig dockConfig;
 }

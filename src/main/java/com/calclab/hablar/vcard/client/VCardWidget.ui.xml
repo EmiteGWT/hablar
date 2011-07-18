@@ -9,50 +9,50 @@
 		</h2>
 		<div class="loading" ui:field="loading">
 			<g:Image ui:field="icon" addStyleNames="icon"  />
-			<g:Label ui:field="loadingMessage">Loading profile. Please wait...</g:Label>
+			<g:Label ui:field="loadingMessage"><ui:msg key="loadingMessage">Loading profile. Please wait...</ui:msg></g:Label>
 		</div>
 		<div class="form">
 			<div ui:field="form">
 				<p>
-					<label ui:field="nameLabel">Name:</label>
-					<g:TextBox ui:field="name"></g:TextBox>
+					<label><ui:msg key="nameLabelText">Name:</ui:msg></label>
+					<g:TextBox ui:field="name" />
 				</p>
 				<p>
-					<label ui:field="nicknameLabel">Nickname:</label>
-					<g:TextBox ui:field="nickName"></g:TextBox>
+					<label><ui:msg key="nicknameLabelText">Nickname:</ui:msg></label>
+					<g:TextBox ui:field="nickName" />
 				</p>
 				<p>
-					<label ui:field="familyNameLabel">Family name:</label>
-					<g:TextBox ui:field="familyName"></g:TextBox>
+					<label><ui:msg key="familyNameLabelText">Family name:</ui:msg></label>
+					<g:TextBox ui:field="familyName" />
 				</p>
 				<p>
-					<label ui:field="middleNameLabel">Middle name:</label>
-					<g:TextBox ui:field="middleName"></g:TextBox>
+					<label><ui:msg key="middleNameLabelText">Middle name:</ui:msg></label>
+					<g:TextBox ui:field="middleName" />
 				</p>
 				<p>
-					<label ui:field="givenNameLabel">Given name:</label>
-					<g:TextBox ui:field="givenName"></g:TextBox>
+					<label><ui:msg key="givenNameLabelText">Given name:</ui:msg></label>
+					<g:TextBox ui:field="givenName" />
 				</p>
 				<p>
-					<label ui:field="organizationLabel">Organization:</label>
-					<g:TextBox ui:field="organizationName"></g:TextBox>
+					<label><ui:msg key="organizationLabelText">Organization:</ui:msg></label>
+					<g:TextBox ui:field="organizationName" />
 				</p>
 				<p>
-					<label ui:field="organizationUnitLabel">Organization unit:</label>
-					<g:TextBox ui:field="organizationUnit"></g:TextBox>
+					<label><ui:msg key="organizationUnitLabelText">Organization unit:</ui:msg></label>
+					<g:TextBox ui:field="organizationUnit" />
 				</p>
 				<p>
-					<label ui:field="homepageLabel">Homepage:</label>
-					<g:TextBox ui:field="homepage"></g:TextBox>
+					<label><ui:msg key="homepageLabelText">Homepage:</ui:msg></label>
+					<g:TextBox ui:field="homepage" />
 				</p>
 				<p>
-					<label ui:field="emailLabel">Email:</label>
-					<g:TextBox ui:field="email"></g:TextBox>
+					<label><ui:msg key="emailLabelText">Email:</ui:msg></label>
+					<g:TextBox ui:field="email" />
 				</p>
 			</div>
 			<div class="actions hablar-topDefaultBordered">
-				<g:Button ui:field="accept">Accept</g:Button>
-				<g:Button ui:field="cancel">Cancel</g:Button>
+				<g:Button ui:field="accept"><ui:msg key="acceptAction">Accept</ui:msg></g:Button>
+				<g:Button ui:field="cancel"><ui:msg key="cancelAction">Cancel</ui:msg></g:Button>
 			</div>
 		</div>
 	</g:HTMLPanel>

@@ -4,6 +4,6 @@ import com.google.gwt.event.shared.EventHandler;
 
 public interface UnattendedChatsChangedHandler extends EventHandler {
 
-    void handleUnattendedChatChange(UnattendedChatsChangedEvent event);
+	void handleUnattendedChatChange(UnattendedChatsChangedEvent event);
 
 }

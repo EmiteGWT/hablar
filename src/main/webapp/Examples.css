@@ -24,8 +24,8 @@ html {border: 0; padding: 0; height: 100%; width: 100%; overflow: hidden;}
 
 #vertical_div {
 	position: absolute;
-	left: -150px;
-	width: 300px;
+	left: 5%;
+	width: 90%;
 	top: 5%;
 	height: 90%;
 }

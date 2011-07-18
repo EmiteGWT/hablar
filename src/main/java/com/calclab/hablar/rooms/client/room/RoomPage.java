@@ -5,9 +5,9 @@ import com.calclab.hablar.chat.client.ui.ChatPage;
 import com.calclab.hablar.core.client.ui.menu.Action;
 
 public interface RoomPage extends ChatPage {
-    void addAction(Action<RoomPage> action);
+	void addAction(Action<RoomPage> action);
 
-    String getChatName();
+	String getChatName();
 
-    Room getRoom();
+	Room getRoom();
 }

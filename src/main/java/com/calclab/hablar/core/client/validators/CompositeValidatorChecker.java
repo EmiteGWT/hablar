@@ -21,57 +21,57 @@ import com.google.gwt.user.client.ui.HasValue;
  */
 public class CompositeValidatorChecker {
 
-    private static class ValueValidatorPair<I> {
+	private static class ValueValidatorPair<I> {
 
-	private HasValue<I> hasValue;
+		private HasValue<I> hasValue;
 
-	private Validator<I> validator;
+		private Validator<I> validator;
 
-	public ValueValidatorPair(HasValue<I> hasValue, Validator<I> validator) {
-	    this.hasValue = hasValue;
-	    this.validator = validator;
+		public ValueValidatorPair(HasValue<I> hasValue, Validator<I> validator) {
+			this.hasValue = hasValue;
+			this.validator = validator;
+		}
+
+		public boolean isValid() {
+			return validator.isValid(hasValue.getValue());
+		}
 	}
 
-	public boolean isValid() {
-	    return validator.isValid(hasValue.getValue());
+	private final List<ValueValidatorPair<?>> pairs;
+	private final HasText errorText;
+	private final HasState<Boolean> acceptEnabled;
+	private final ScheduledCommand command;
+
+	public CompositeValidatorChecker(final HasText errorText, final HasState<Boolean> acceptState) {
+		this.errorText = errorText;
+		acceptEnabled = acceptState;
+		pairs = new ArrayList<ValueValidatorPair<?>>();
+
+		command = new ScheduledCommand() {
+			@Override
+			public void execute() {
+				validate();
+			}
+		};
 	}
-    }
 
-    private final List<ValueValidatorPair<?>> pairs;
-    private final HasText errorText;
-    private final HasState<Boolean> acceptEnabled;
-    private final ScheduledCommand command;
-
-    public CompositeValidatorChecker(final HasText errorText, final HasState<Boolean> acceptState) {
-	this.errorText = errorText;
-	acceptEnabled = acceptState;
-	pairs = new ArrayList<ValueValidatorPair<?>>();
-
-	command = new ScheduledCommand() {
-	    @Override
-	    public void execute() {
-		validate();
-	    }
-	};
-    }
-
-    public <I> void add(final HasValue<I> hasValue, final Validator<I> validator) {
-	pairs.add(new ValueValidatorPair<I>(hasValue, validator));
-    }
-
-    public ScheduledCommand getScheduledCommand() {
-	return command;
-    }
-
-    public void validate() {
-	for (final ValueValidatorPair<?> pair : pairs) {
-	    if (!pair.isValid()) {
-		errorText.setText(pair.validator.getMessage());
-		acceptEnabled.setState(false);
-		return;
-	    }
+	public <I> void add(final HasValue<I> hasValue, final Validator<I> validator) {
+		pairs.add(new ValueValidatorPair<I>(hasValue, validator));
 	}
-	errorText.setText("");
-	acceptEnabled.setState(true);
-    }
+
+	public ScheduledCommand getScheduledCommand() {
+		return command;
+	}
+
+	public void validate() {
+		for (final ValueValidatorPair<?> pair : pairs) {
+			if (!pair.isValid()) {
+				errorText.setText(pair.validator.getMessage());
+				acceptEnabled.setState(false);
+				return;
+			}
+		}
+		errorText.setText("");
+		acceptEnabled.setState(true);
+	}
 }

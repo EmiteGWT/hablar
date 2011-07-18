@@ -15,51 +15,50 @@ import com.google.gwt.event.dom.client.ClickHandler;
 
 public class OpenExistingRoomPresenter extends PagePresenter<OpenExistingRoomDisplay> {
 
-    public static final String TYPE = "OpenExistingRoom";
-    private final String roomsService;
-    private final XmppSession session;
-    private final RoomManager roomManager;
-    private final RoomDiscoveryManager roomDiscoveryManager;
+	public static final String TYPE = "OpenExistingRoom";
+	private final String roomsService;
+	private final XmppSession session;
+	private final RoomManager roomManager;
+	private final RoomDiscoveryManager roomDiscoveryManager;
 
-    public OpenExistingRoomPresenter(final XmppSession session, final RoomManager roomManager,
-	    final RoomDiscoveryManager roomDiscoveryManager, final String roomsService, final HablarEventBus eventBus,
-	    final OpenExistingRoomDisplay display) {
-	super(TYPE, eventBus, display);
-	this.session = session;
-	this.roomManager = roomManager;
-	this.roomDiscoveryManager = roomDiscoveryManager;
-	this.roomsService = roomsService;
-	display.getCancel().addClickHandler(new ClickHandler() {
-	    @Override
-	    public void onClick(final ClickEvent event) {
-		requestVisibility(Visibility.hidden);
-	    }
-	});
+	public OpenExistingRoomPresenter(final XmppSession session, final RoomManager roomManager, final RoomDiscoveryManager roomDiscoveryManager,
+			final String roomsService, final HablarEventBus eventBus, final OpenExistingRoomDisplay display) {
+		super(TYPE, eventBus, display);
+		this.session = session;
+		this.roomManager = roomManager;
+		this.roomDiscoveryManager = roomDiscoveryManager;
+		this.roomsService = roomsService;
+		display.getCancel().addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(final ClickEvent event) {
+				requestVisibility(Visibility.hidden);
+			}
+		});
 
-	display.getAccept().addClickHandler(new ClickHandler() {
-	    @Override
-	    public void onClick(final ClickEvent event) {
-		onAccept();
-		requestVisibility(Visibility.notFocused);
-	    }
-	});
-    }
+		display.getAccept().addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(final ClickEvent event) {
+				onAccept();
+				requestVisibility(Visibility.notFocused);
+			}
+		});
+	}
 
-    private void onAccept() {
-	final XmppURI roomUri = display.getSelectedRoom();
-	final XmppURI user = session.getCurrentUserURI();
-	final XmppURI openRoomUri = XmppURI.uri(roomUri.getNode(), roomUri.getHost(), user.getNode());
-	roomManager.open(openRoomUri);
-    }
+	private void onAccept() {
+		final XmppURI roomUri = display.getSelectedRoom();
+		final XmppURI user = session.getCurrentUserURI();
+		final XmppURI openRoomUri = XmppURI.uri(roomUri.getNode(), roomUri.getHost(), user.getNode());
+		roomManager.open(openRoomUri);
+	}
 
-    @Override
-    protected void onBeforeFocus() {
-	roomDiscoveryManager.discoverRooms(XmppURI.uri(roomsService), new ExistingRoomsCallback() {
-	    @Override
-	    public void onExistingRooms(final List<ExistingRoom> roomItems) {
-		display.setRooms(roomItems);
-	    }
-	});
+	@Override
+	protected void onBeforeFocus() {
+		roomDiscoveryManager.discoverRooms(XmppURI.uri(roomsService), new ExistingRoomsCallback() {
+			@Override
+			public void onExistingRooms(final List<ExistingRoom> roomItems) {
+				display.setRooms(roomItems);
+			}
+		});
 
-    }
+	}
 }

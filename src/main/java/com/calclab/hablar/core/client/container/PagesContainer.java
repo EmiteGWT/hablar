@@ -8,10 +8,10 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public interface PagesContainer {
 
-    boolean add(Page<?> page);
+	boolean add(Page<?> page);
 
-    String getRol();
+	String getRol();
 
-    Widget getWidget();
+	Widget getWidget();
 
 }

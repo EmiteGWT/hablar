@@ -13,30 +13,30 @@ import com.google.gwt.user.client.ui.HasValue;
 
 public interface EditRoomDisplay extends Display, RosterItemSelector {
 
-    void clearList();
+	void clearList();
 
-    SelectRosterItemDisplay createItem();
+	SelectRosterItemDisplay createItem();
 
-    HasState<Boolean> getAcceptEnabled();
+	HasState<Boolean> getAcceptEnabled();
 
-    HasClickHandlers getCancel();
+	HasClickHandlers getCancel();
 
-    HasClickHandlers getInvite();
+	HasClickHandlers getInvite();
 
-    HasText getMessage();
+	HasText getMessage();
 
-    HasValue<String> getRoomName();
+	HasValue<String> getRoomName();
 
-    HasValue<List<Selectable>> getSelectionList();
+	HasValue<List<Selectable>> getSelectionList();
 
-    HasText getRoomNameError();
+	HasText getRoomNameError();
 
-    HasKeyDownHandlers getRoomNameKeys();
+	HasKeyDownHandlers getRoomNameKeys();
 
-    void setAcceptText(String string);
+	void setAcceptText(String string);
 
-    void setPageTitle(String text);
+	void setPageTitle(String text);
 
-    void setRoomNameEnabled(boolean enabled);
+	void setRoomNameEnabled(boolean enabled);
 
 }

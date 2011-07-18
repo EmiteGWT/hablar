@@ -6,8 +6,8 @@ import com.google.gwt.user.client.ui.HasText;
 
 public interface OccupantDisplay extends Display {
 
-    HasText getName();
+	HasText getName();
 
-    void setIcon(ImageResource icon);
+	void setIcon(ImageResource icon);
 
 }

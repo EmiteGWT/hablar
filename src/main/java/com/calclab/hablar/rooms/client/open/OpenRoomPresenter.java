@@ -19,33 +19,33 @@ import com.calclab.hablar.rooms.client.RoomName;
  * @see OpenNewRoomPresenter
  */
 public abstract class OpenRoomPresenter extends EditRoomPresenter {
-    protected final String roomsService;
-    protected final XmppSession session;
-    protected final RoomManager roomManager;
+	protected final String roomsService;
+	protected final XmppSession session;
+	protected final RoomManager roomManager;
 
-    public OpenRoomPresenter(final XmppSession session, final RoomManager roomManager, final String type,
-	    final HablarEventBus eventBus, final EditRoomDisplay display, final String roomsService) {
-	super(type, eventBus, display);
-	this.session = session;
-	this.roomManager = roomManager;
-	this.roomsService = roomsService;
+	public OpenRoomPresenter(final XmppSession session, final RoomManager roomManager, final String type, final HablarEventBus eventBus,
+			final EditRoomDisplay display, final String roomsService) {
+		super(type, eventBus, display);
+		this.session = session;
+		this.roomManager = roomManager;
+		this.roomsService = roomsService;
 
-    }
+	}
 
-    @Override
-    protected void onAccept() {
-	final XmppURI user = session.getCurrentUserURI();
-	final String roomName = RoomName.encode(display.getRoomName().getValue(), user.getResource());
-	final XmppURI roomUri = XmppURI.uri(roomName, roomsService, user.getNode());
-	final Room room = (Room) roomManager.open(roomUri);
+	@Override
+	protected void onAccept() {
+		final XmppURI user = session.getCurrentUserURI();
+		final String roomName = RoomName.encode(display.getRoomName().getValue(), user.getResource());
+		final XmppURI roomUri = XmppURI.uri(roomName, roomsService, user.getNode());
+		final Room room = (Room) roomManager.open(roomUri);
 
-	room.addChatStateChangedHandler(true, new StateChangedHandler() {
-	    @Override
-	    public void onStateChanged(final StateChangedEvent event) {
-		if (event.is(ChatStates.ready)) {
-		    sendInvitations(room);
-		}
-	    }
-	});
-    }
+		room.addChatStateChangedHandler(true, new StateChangedHandler() {
+			@Override
+			public void onStateChanged(final StateChangedEvent event) {
+				if (event.is(ChatStates.ready)) {
+					sendInvitations(room);
+				}
+			}
+		});
+	}
 }

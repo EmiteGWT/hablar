@@ -4,6 +4,6 @@ import com.google.gwt.event.shared.EventHandler;
 
 public interface PageInfoChangedHandler extends EventHandler {
 
-    void onPageInfoChanged(PageInfoChangedEvent event);
+	void onPageInfoChanged(PageInfoChangedEvent event);
 
 }

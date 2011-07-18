@@ -1,6 +1,5 @@
 package com.calclab.hablar.core.client.ui.actions;
 
-import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.core.client.ui.menu.Action;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -16,27 +15,27 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class ActionWidget extends Composite implements HasClickHandlers {
 
-    interface ActionWidgetUiBinder extends UiBinder<Widget, ActionWidget> {
+	interface ActionWidgetUiBinder extends UiBinder<Widget, ActionWidget> {
 
-    }
+	}
 
-    @UiField
-    Image image;
+	@UiField
+	Image image;
 
-    private static ActionWidgetUiBinder uiBinder = GWT.create(ActionWidgetUiBinder.class);
+	private static ActionWidgetUiBinder uiBinder = GWT.create(ActionWidgetUiBinder.class);
 
-    @UiConstructor
-    public ActionWidget(final Action<?> action) {
-	initWidget(uiBinder.createAndBindUi(this));
-	addStyleName("hablar-ActionWidget");
-	addStyleName("hablar-lightBackground");
-	Icons.set(image, action.getIcon());
-	ensureDebugId(action.getId());
-	setTitle(action.getDescription());
-    }
+	@UiConstructor
+	public ActionWidget(final Action<?> action) {
+		initWidget(uiBinder.createAndBindUi(this));
+		addStyleName("hablar-ActionWidget");
+		addStyleName("hablar-lightBackground");
+		image.setResource(action.getIcon());
+		ensureDebugId(action.getId());
+		setTitle(action.getDescription());
+	}
 
-    @Override
-    public HandlerRegistration addClickHandler(final ClickHandler handler) {
-	return addDomHandler(handler, ClickEvent.getType());
-    }
+	@Override
+	public HandlerRegistration addClickHandler(final ClickHandler handler) {
+		return addDomHandler(handler, ClickEvent.getType());
+	}
 }
