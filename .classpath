@@ -24,5 +24,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/emite"/>
-	<classpathentry kind="output" path="target/hablar-0.7-SNAPSHOT/WEB-INF/classes"/>
+	<classpathentry kind="output" path="src/main/webapp/WEB-INF/classes"/>
 </classpath>

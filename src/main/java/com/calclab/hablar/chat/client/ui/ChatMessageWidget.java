@@ -1,6 +1,7 @@
 package com.calclab.hablar.chat.client.ui;
 
 import com.calclab.hablar.chat.client.ui.ChatMessage.MessageType;
+import com.calclab.hablar.chat.client.ui.chatmessageformat.ChatMessageFormatter;
 import com.calclab.hablar.core.client.validators.Empty;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
