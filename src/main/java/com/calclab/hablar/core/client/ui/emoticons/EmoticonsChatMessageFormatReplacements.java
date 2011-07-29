@@ -50,7 +50,7 @@ public class EmoticonsChatMessageFormatReplacements implements
 
 	@Override
 	public void addReplacements(final List<PatternFactoryReplacement> replacements) {
-		replacements.add(new PatternFactoryReplacement("&gt;:\\)",
+		replacements.add(new PatternFactoryReplacement(">:\\)",
 				new ImagePatternElementFactory(icons.devil()), DEVIL));
 		replacements.add(new PatternFactoryReplacement(
 				"O:\\)|o:\\)|o:-\\)|O:-\\)|0:\\)|0:-\\)",
@@ -69,13 +69,13 @@ public class EmoticonsChatMessageFormatReplacements implements
 				new ImagePatternElementFactory(icons.andy()), ANDY));
 		replacements
 				.add(new PatternFactoryReplacement(
-						"&gt;:o|&gt;:-o|&gt;:O|&gt;:-O|X\\(|X-\\(|x\\(|x-\\(|:@|&lt;_&lt;",
+						">:o|>:-o|>:O|>:-O|X\\(|X-\\(|x\\(|x-\\(|:@|<_<",
 						new ImagePatternElementFactory(icons.angry()), ANGRY));
 		replacements.add(new PatternFactoryReplacement(
-				"\\(bandit\\)|:\\(&gt;", new ImagePatternElementFactory(icons
+				"\\(bandit\\)|:\\(>", new ImagePatternElementFactory(icons
 						.bandit()), BANDIT));
 		replacements.add(new PatternFactoryReplacement(
-				":&quot;&gt;|:\\*&gt;|:-\\$|:\\$",
+				":\">|:\\*>|:-\\$|:\\$",
 				new ImagePatternElementFactory(icons.blushing()), BLUSHING));
 		replacements.add(new PatternFactoryReplacement(
 				"B\\)|B-\\)|8\\)",
@@ -102,7 +102,7 @@ public class EmoticonsChatMessageFormatReplacements implements
 		replacements.add(new PatternFactoryReplacement(
 				"\\(:\\)|\\(ph33r\\)|\\(ph34r\\)",
 				new ImagePatternElementFactory(icons.ninja()), NINJA));
-		replacements.add(new PatternFactoryReplacement("&gt;_&lt;",
+		replacements.add(new PatternFactoryReplacement(">_<",
 				new ImagePatternElementFactory(icons.pinched()), PINCHED));
 		replacements.add(new PatternFactoryReplacement(
 				":\\||=\\||:-\\|",
@@ -111,7 +111,7 @@ public class EmoticonsChatMessageFormatReplacements implements
 				":\\(|=\\(|=-\\(|:-\\(", new ImagePatternElementFactory(icons
 						.sad()), SAD));
 		replacements.add(new PatternFactoryReplacement(
-				":&amp;|:-&amp;", new ImagePatternElementFactory(icons.sick()),
+				":&|:-&", new ImagePatternElementFactory(icons.sick()),
 				SICK));
 		replacements.add(new PatternFactoryReplacement("=]",
 				new ImagePatternElementFactory(icons.sideways()), SIDEWAYS));
@@ -133,10 +133,10 @@ public class EmoticonsChatMessageFormatReplacements implements
 		replacements.add(new PatternFactoryReplacement(
 				"\\(woot\\)|\\(w00t\\)|\\(wOOt\\)",
 				new ImagePatternElementFactory(icons.w00t()), W00T));
-		replacements.add(new PatternFactoryReplacement(":-&quot;",
+		replacements.add(new PatternFactoryReplacement(":-\"",
 				new ImagePatternElementFactory(icons.whistling()), WHISTLING));
 		replacements.add(new PatternFactoryReplacement(
-				";\\)|;-\\)|;&gt;",
+				";\\)|;-\\)|;>",
 				new ImagePatternElementFactory(icons.wink()), WINK));
 		replacements.add(new PatternFactoryReplacement(
 				"\\(wizard\\)", new ImagePatternElementFactory(icons.wizard()),
