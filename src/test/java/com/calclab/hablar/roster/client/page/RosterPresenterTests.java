@@ -6,6 +6,7 @@ import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import com.calclab.emite.core.client.events.ChangedEvent.ChangeTypes;
 import com.calclab.emite.im.client.roster.RosterGroup;
@@ -13,6 +14,7 @@ import com.calclab.emite.im.client.roster.events.RosterGroupChangedEvent;
 import com.calclab.emite.xtesting.XmppSessionTester;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.ui.menu.Menu;
+import com.calclab.hablar.core.client.util.NonBlockingCommandScheduler;
 import com.calclab.hablar.roster.client.RosterConfig;
 import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.testing.EmiteTester;
@@ -36,7 +38,8 @@ public class RosterPresenterTests {
 	display = tester.newDisplay(RosterDisplay.class);
 	final RosterConfig rosterConfig = new RosterConfig();
 	rosterConfig.oneClickChat = true;
-	new RosterPresenter(session, emite.xmppRoster, emite.chatManager, hablarEventBus, display, rosterConfig);
+	NonBlockingCommandScheduler scheduler = Mockito.mock(NonBlockingCommandScheduler.class);
+	new RosterPresenter(session, emite.xmppRoster, emite.chatManager, hablarEventBus, display, rosterConfig, scheduler);
     }
 
     @Test
