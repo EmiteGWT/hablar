@@ -8,13 +8,13 @@ import com.google.gwt.user.client.Command;
  */
 public class ImmediateRunCommandScheduler implements CommandQueue {
 
-    @Override
-    public void addCommand(final Command command) {
-	command.execute();
-    }
+	@Override
+	public void addCommand(final Command command) {
+		command.execute();
+	}
 
-    @Override
-    public void addPriorityCommand(final Command command) {
-	command.execute();
-    }
+	@Override
+	public void addPriorityCommand(final Command command) {
+		command.execute();
+	}
 }

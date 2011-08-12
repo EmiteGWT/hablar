@@ -5,11 +5,11 @@ import com.google.gwt.user.client.ui.Widget;
 
 public interface Selectable extends Comparable<Selectable> {
 
-    String getId();
+	String getId();
 
-    Widget getWidget();
+	Widget getWidget();
 
-    HasClickHandlers getAction();
+	HasClickHandlers getAction();
 
-    Object getItem();
+	Object getItem();
 }

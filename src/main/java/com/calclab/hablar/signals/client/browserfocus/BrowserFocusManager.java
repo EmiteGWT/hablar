@@ -23,32 +23,31 @@ import com.calclab.hablar.signals.client.unattended.UnattendedPagesManager;
  */
 public class BrowserFocusManager {
 
-    protected ChatPresenter currentFocused;
+	protected ChatPresenter currentFocused;
 
-    public BrowserFocusManager(HablarEventBus eventBus, final UnattendedPagesManager unattendedManager,
-	    BrowserFocusHandler handler) {
+	public BrowserFocusManager(HablarEventBus eventBus, final UnattendedPagesManager unattendedManager, BrowserFocusHandler handler) {
 
-	eventBus.addHandler(VisibilityChangedEvent.TYPE, new VisibilityChangedHandler() {
-	    @Override
-	    public void onVisibilityChanged(VisibilityChangedEvent event) {
-		if (event.getVisibility() == Visibility.focused) {
-		    Page<?> page = event.getPage();
-		    if (PairChatPresenter.TYPE.equals(page.getType()) || RoomPresenter.TYPE.equals(page.getType())) {
-			currentFocused = (ChatPresenter) page;
-		    }
-		}
-	    }
-	});
+		eventBus.addHandler(VisibilityChangedEvent.TYPE, new VisibilityChangedHandler() {
+			@Override
+			public void onVisibilityChanged(VisibilityChangedEvent event) {
+				if (event.getVisibility() == Visibility.focused) {
+					Page<?> page = event.getPage();
+					if (PairChatPresenter.TYPE.equals(page.getType()) || RoomPresenter.TYPE.equals(page.getType())) {
+						currentFocused = (ChatPresenter) page;
+					}
+				}
+			}
+		});
 
-	handler.setFocusListener(new BrowserFocusListener() {
-	    @Override
-	    public void onBrowserFocusChanged(boolean hasFocus) {
-		if (currentFocused != null) {
-		    if (hasFocus == false) {
-			currentFocused.getDisplay().setTextBoxFocus(false);
-		    }
-		}
-	    }
-	});
-    }
+		handler.setFocusListener(new BrowserFocusListener() {
+			@Override
+			public void onBrowserFocusChanged(boolean hasFocus) {
+				if (currentFocused != null) {
+					if (hasFocus == false) {
+						currentFocused.getDisplay().setTextBoxFocus(false);
+					}
+				}
+			}
+		});
+	}
 }

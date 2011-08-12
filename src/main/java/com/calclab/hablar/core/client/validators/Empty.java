@@ -2,14 +2,14 @@ package com.calclab.hablar.core.client.validators;
 
 public class Empty {
 
-    private static final String REGEX = "^\\s*$";
+	private static final String REGEX = "^\\s*$";
 
-    public static boolean is(final String string) {
-	return string == null || string.matches(REGEX);
-    }
+	public static boolean is(final String string) {
+		return string == null || string.matches(REGEX);
+	}
 
-    public static boolean not(final String string) {
-	return !is(string);
-    }
+	public static boolean not(final String string) {
+		return !is(string);
+	}
 
 }

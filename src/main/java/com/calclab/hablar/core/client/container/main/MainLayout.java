@@ -8,25 +8,25 @@ import com.calclab.hablar.core.client.pages.HeaderDisplay;
 import com.google.gwt.user.client.ui.Widget;
 
 public abstract class MainLayout {
-    private final Widget container;
+	private final Widget container;
 
-    public MainLayout(Widget container, HablarDisplay parent) {
-	this.container = container;
-	parent.add(container);
-	parent.setWidgetLeftRight(container, 0, PX, 0, PX);
-	parent.setWidgetTopBottom(container, 0, PX, 0, PX);
-    }
+	public MainLayout(Widget container, HablarDisplay parent) {
+		this.container = container;
+		parent.add(container);
+		parent.setWidgetLeftRight(container, 0, PX, 0, PX);
+		parent.setWidgetTopBottom(container, 0, PX, 0, PX);
+	}
 
-    public abstract void add(Widget pageWidget, Widget headWidget);
+	public abstract void add(Widget pageWidget, Widget headWidget);
 
-    public abstract HeaderDisplay createHeaderDisplay(Page<?> page);
+	public abstract HeaderDisplay createHeaderDisplay(Page<?> page);
 
-    public abstract void focus(Widget pageWidget);
+	public abstract void focus(Widget pageWidget);
 
-    public Widget getWidget() {
-	return container;
-    }
+	public Widget getWidget() {
+		return container;
+	}
 
-    public abstract void remove(Widget pageWidget);
+	public abstract void remove(Widget pageWidget);
 
 }

@@ -10,22 +10,20 @@
 	<g:ScrollPanel ui:field="scroll" addStyleNames="hablar-defaultBordered">
 		<g:HTMLPanel addStyleNames="hablar-ManageGroupsWidget">
 			<div class="form">
-				<h2>
-					<span ui:field='title' />
-				</h2>
+				<h2><ui:msg key="changeContactGroupsTitle">Change contact groups</ui:msg></h2>
 				<p>
-					<label ui:field="contactNameLabel">Contact Name:</label>
-					<g:Label ui:field="contactName"></g:Label>
+					<label><ui:msg key="contactNameLabelText">Contact Name:</ui:msg></label>
+					<g:Label ui:field="contactName" />
 				</p>
 				<br/>
-				<label ui:field="groupListLabel">Roster Groups:</label>
-				<g:FlowPanel ui:field="groupList" addStyleNames="{style.wideArea} hablar-clearBackground"></g:FlowPanel>
+				<label><ui:msg key="rosterGroupsLabelText">Roster Groups:</ui:msg></label>
+				<g:FlowPanel ui:field="groupList" addStyleNames="{style.wideArea} hablar-clearBackground" />
 				<p>
-					<g:Button ui:field="newGroup">New group</g:Button>
+					<g:Button ui:field="newGroup"><ui:msg key="newGroupAction">New group</ui:msg></g:Button>
 				</p>
 				<div class="actions hablar-topDefaultBordered">
-					<g:Button ui:field="accept">Accept</g:Button>
-					<g:Button ui:field="cancel">Cancel</g:Button>
+					<g:Button ui:field="accept"><ui:msg key="acceptAction">Accept</ui:msg></g:Button>
+					<g:Button ui:field="cancel"><ui:msg key="cancelAction">Cancel</ui:msg></g:Button>
 				</div>
 			</div>
 		</g:HTMLPanel>

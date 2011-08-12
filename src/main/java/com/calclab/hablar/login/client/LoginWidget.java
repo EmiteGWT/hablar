@@ -1,7 +1,6 @@
 package com.calclab.hablar.login.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.LabelElement;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -15,76 +14,56 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class LoginWidget extends Composite implements LoginDisplay {
 
-    private static LoginMessages messages;
+	interface LoginWidgetUiBinder extends UiBinder<Widget, LoginWidget> {
+	}
 
-    public static void setMessages(final LoginMessages messages) {
-	LoginWidget.messages = messages;
-    }
+	private static LoginWidgetUiBinder uiBinder = GWT.create(LoginWidgetUiBinder.class);
 
-    public static LoginMessages i18n() {
-	return messages;
-    }
+	@UiField
+	Button button;
 
-    interface LoginWidgetUiBinder extends UiBinder<Widget, LoginWidget> {
-    }
+	@UiField
+	TextBox user, password;
 
-    private static LoginWidgetUiBinder uiBinder = GWT.create(LoginWidgetUiBinder.class);
+	@UiField
+	FlowPanel output;
 
-    @UiField
-    Button button;
+	public LoginWidget() {
+		initWidget(uiBinder.createAndBindUi(this));
+		button.ensureDebugId("LoginWidget-button");
+		user.ensureDebugId("LoginWidget-user");
+		password.ensureDebugId("LoginWidget-password");
+		output.ensureDebugId("LoginWidget-output");
+	}
 
-    @UiField
-    TextBox user, password;
+	@Override
+	public void addMessage(String message) {
+		output.add(new Label(message));
+	}
 
-    @UiField
-    FlowPanel output;
+	@Override
+	public HasClickHandlers getAction() {
+		return button;
+	}
 
-    @UiField
-    LabelElement userLabel, passwordLabel;
+	@Override
+	public HasText getActionText() {
+		return button;
+	}
 
-    public LoginWidget() {
-	initWidget(uiBinder.createAndBindUi(this));
-	button.ensureDebugId("LoginWidget-button");
-	user.ensureDebugId("LoginWidget-user");
-	password.ensureDebugId("LoginWidget-password");
-	output.ensureDebugId("LoginWidget-output");
-	userLabel.setInnerText(i18n().userLabelText());
-	passwordLabel.setInnerText(i18n().passwordLabelText());
-    }
+	@Override
+	public HasText getPassword() {
+		return password;
+	}
 
-    @Override
-    public void addMessage(String message) {
-	output.add(new Label(message));
-    }
+	@Override
+	public HasText getUser() {
+		return user;
+	}
 
-    @Override
-    public Widget asWidget() {
-	return this;
-    }
-
-    @Override
-    public HasClickHandlers getAction() {
-	return button;
-    }
-
-    @Override
-    public HasText getActionText() {
-	return button;
-    }
-
-    @Override
-    public HasText getPassword() {
-	return password;
-    }
-
-    @Override
-    public HasText getUser() {
-	return user;
-    }
-
-    @Override
-    public void setActionEnabled(boolean enabled) {
-	button.setEnabled(enabled);
-    }
+	@Override
+	public void setActionEnabled(boolean enabled) {
+		button.setEnabled(enabled);
+	}
 
 }

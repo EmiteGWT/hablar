@@ -6,26 +6,26 @@ import com.google.gwt.user.client.ui.HasText;
 
 public interface VCardDisplay extends Display {
 
-    public static enum Field {
-	name, nickName, familyName, givenName, middleName, organizationName, organizationUnit, email, homepage
-    }
+	public static enum Field {
+		name, nickName, familyName, givenName, middleName, organizationName, organizationUnit, email, homepage
+	}
 
-    HasClickHandlers getCancel();
+	HasClickHandlers getCancel();
 
-    HasText getField(Field field);
+	HasText getField(Field field);
 
-    HasText getLoading();
+	HasText getLoading();
 
-    void setAcceptVisible(boolean visible);
+	void setAcceptVisible(boolean visible);
 
-    void setCancelText(String text);
+	void setCancelText(String text);
 
-    void setCancelVisible(boolean visible);
+	void setCancelVisible(boolean visible);
 
-    void setFormVisible(boolean visible);
+	void setFormVisible(boolean visible);
 
-    void setLoadingVisible(boolean visible);
+	void setLoadingVisible(boolean visible);
 
-    void setPageTitle(String title);
+	void setPageTitle(String title);
 
 }

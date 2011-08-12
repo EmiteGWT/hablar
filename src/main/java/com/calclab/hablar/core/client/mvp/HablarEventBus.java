@@ -6,13 +6,13 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 public interface HablarEventBus {
-    <H extends EventHandler> HandlerRegistration addHandler(Type<H> type, H handler);
+	<H extends EventHandler> HandlerRegistration addHandler(Type<H> type, H handler);
 
-    void fireEvent(GwtEvent<?> event);
+	void fireEvent(GwtEvent<?> event);
 
-    <H extends EventHandler> H getHandler(Type<H> type, int index);
+	<H extends EventHandler> H getHandler(Type<H> type, int index);
 
-    int getHandlerCount(Type<?> type);
+	int getHandlerCount(Type<?> type);
 
-    boolean isEventHandled(Type<?> e);
+	boolean isEventHandled(Type<?> e);
 }

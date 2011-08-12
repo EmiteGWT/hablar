@@ -6,18 +6,16 @@
 	</ui:style>
 	<g:HTMLPanel addStyleNames="hablar-OpenChatWidget">
 		<div class="form">
-			<h2>
-				<span ui:field='title' />
-			</h2>
+			<h2><ui:msg key="openNewChatLabelText">Open a New Chat</ui:msg></h2>
 			<p>
-				<label ui:field="jabberIdLabel">Jabber ID:</label>
-				<g:TextBox ui:field="jabberId"></g:TextBox>
-				<g:Label ui:field="jabberIdError" addStyleNames="hablar-errorColor"></g:Label>
+				<label><ui:msg key="jabberIdLabelText">Jabber ID:</ui:msg></label>
+				<g:TextBox ui:field="jabberId" />
+				<g:Label ui:field="jabberIdError" addStyleNames="hablar-errorColor" />
 			</p>
-			<p><g:CheckBox ui:field="addToRoster">Add to roster</g:CheckBox></p>
+			<p><g:CheckBox ui:field="addToRoster"><ui:msg key="addToRosterLabelText">Add to roster</ui:msg></g:CheckBox></p>
 			<div class="actions hablar-topDefaultBordered">
-				<g:Button ui:field="accept">Open Chat</g:Button>
-				<g:Button ui:field="cancel">Cancel</g:Button>
+				<g:Button ui:field="accept"><ui:msg key="openChatAction">Open Chat</ui:msg></g:Button>
+				<g:Button ui:field="cancel"><ui:msg key="cancelAction">Cancel</ui:msg></g:Button>
 			</div>
 		</div>
 	</g:HTMLPanel>

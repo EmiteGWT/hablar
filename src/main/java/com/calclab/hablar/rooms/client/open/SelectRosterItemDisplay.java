@@ -1,21 +1,22 @@
 package com.calclab.hablar.rooms.client.open;
 
 import com.calclab.hablar.core.client.mvp.Display;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HasValue;
 
 public interface SelectRosterItemDisplay extends Display {
 
-    HasText getJid();
+	HasText getJid();
 
-    HasText getName();
+	HasText getName();
 
-    HasValue<Boolean> getSelected();
+	HasValue<Boolean> getSelected();
 
-    HasText getStatus();
+	HasText getStatus();
 
-    void setIcon(String token);
+	void setIcon(ImageResource imageResource);
 
-    void setSelectEnabled(boolean enabled);
+	void setSelectEnabled(boolean enabled);
 
 }

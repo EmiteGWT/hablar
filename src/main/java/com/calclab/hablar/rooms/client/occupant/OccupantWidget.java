@@ -12,36 +12,31 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class OccupantWidget extends Composite implements OccupantDisplay {
 
-    interface OccupantWidgetUiBinder extends UiBinder<Widget, OccupantWidget> {
-    }
+	interface OccupantWidgetUiBinder extends UiBinder<Widget, OccupantWidget> {
+	}
 
-    private static OccupantWidgetUiBinder uiBinder = GWT.create(OccupantWidgetUiBinder.class);
+	private static OccupantWidgetUiBinder uiBinder = GWT.create(OccupantWidgetUiBinder.class);
 
-    @UiField
-    Label name;
+	@UiField
+	Label name;
 
-    @UiField
-    Image icon;
+	@UiField
+	Image icon;
 
-    public OccupantWidget() {
-	initWidget(uiBinder.createAndBindUi(this));
-    }
+	public OccupantWidget() {
+		initWidget(uiBinder.createAndBindUi(this));
+	}
 
-    @Override
-    public Widget asWidget() {
-	return this;
-    }
+	@Override
+	public HasText getName() {
+		return name;
+	}
 
-    @Override
-    public HasText getName() {
-	return name;
-    }
-
-    @Override
-    public void setIcon(final ImageResource icon) {
-	String style = this.icon.getStyleName();
-	this.icon.setResource(icon);
-	this.icon.setStyleName(style);
-    }
+	@Override
+	public void setIcon(final ImageResource icon) {
+		String style = this.icon.getStyleName();
+		this.icon.setResource(icon);
+		this.icon.setStyleName(style);
+	}
 
 }

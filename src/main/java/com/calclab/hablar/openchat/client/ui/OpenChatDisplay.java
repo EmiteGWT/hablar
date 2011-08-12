@@ -8,17 +8,17 @@ import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HasValue;
 
 public interface OpenChatDisplay extends Display {
-    HasState<Boolean> getAcceptState();
+	HasState<Boolean> getAcceptState();
 
-    HasValue<Boolean> getAddToRoster();
+	HasValue<Boolean> getAddToRoster();
 
-    HasClickHandlers getCancel();
+	HasClickHandlers getCancel();
 
-    HasText getJabberId();
+	HasText getJabberId();
 
-    HasText getJabberIdError();
+	HasText getJabberIdError();
 
-    HasKeyDownHandlers getNameKeys();
+	HasKeyDownHandlers getNameKeys();
 
-    HasClickHandlers getOpen();
+	HasClickHandlers getOpen();
 }

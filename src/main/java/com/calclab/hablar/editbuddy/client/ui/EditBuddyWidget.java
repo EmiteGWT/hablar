@@ -1,10 +1,7 @@
 package com.calclab.hablar.editbuddy.client.ui;
 
 import com.calclab.hablar.core.client.validators.HasState;
-import com.calclab.hablar.editbuddy.client.EditBuddyMessages;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.LabelElement;
-import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
@@ -19,97 +16,72 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 public class EditBuddyWidget extends Composite implements EditBuddyDisplay {
+	interface EditBuddyWidgetUiBinder extends UiBinder<Widget, EditBuddyWidget> {
+	}
 
-    private static EditBuddyMessages messages;
+	private static EditBuddyWidgetUiBinder uiBinder = GWT.create(EditBuddyWidgetUiBinder.class);
 
-    public static void setMessages(final EditBuddyMessages messages) {
-	EditBuddyWidget.messages = messages;
-    }
+	@UiField
+	Button cancel, save;
+	@UiField
+	TextBox nickName;
+	@UiField
+	Label oldNickName, nickNameError;
 
-    public static EditBuddyMessages i18n() {
-	return messages;
-    }
+	public EditBuddyWidget() {
+		initWidget(uiBinder.createAndBindUi(this));
+		nickName.ensureDebugId("EditBuddyWidget-nickname");
+		save.ensureDebugId("EditBuddyWidget-save");
+	}
 
-    interface EditBuddyWidgetUiBinder extends UiBinder<Widget, EditBuddyWidget> {
-    }
+	@Override
+	public HasState<Boolean> getAcceptState() {
+		return new HasState<Boolean>() {
+			@Override
+			public void setState(final Boolean state) {
+				save.setEnabled(state);
+			}
+		};
+	}
 
-    @UiField
-    SpanElement title;
-    @UiField
-    Button cancel, save;
-    @UiField
-    TextBox nickName;
-    @UiField
-    Label oldNickName, nickNameError;
-    @UiField
-    LabelElement changeFromLabel, changeToLabel;
+	@Override
+	public HasClickHandlers getCancel() {
+		return cancel;
+	}
 
-    private static EditBuddyWidgetUiBinder uiBinder = GWT.create(EditBuddyWidgetUiBinder.class);
+	@Override
+	public HasChangeHandlers getEnterAction() {
+		return nickName;
+	}
 
-    public EditBuddyWidget() {
-	initWidget(uiBinder.createAndBindUi(this));
-	nickName.ensureDebugId("EditBuddyWidget-nickname");
-	save.ensureDebugId("EditBuddyWidget-save");
-	title.setInnerText(i18n().changeBuddyNickname());
-	changeFromLabel.setInnerText(i18n().changeFromLabelText());
-	changeToLabel.setInnerText(i18n().changeToLabelText());
-	save.setText(i18n().acceptAction());
-	cancel.setText(i18n().cancelAction());
-    }
+	@Override
+	public Focusable getFirstFocusable() {
+		return nickName;
+	}
 
-    @Override
-    public Widget asWidget() {
-	return this;
-    }
+	@Override
+	public HasText getNickName() {
+		return nickName;
+	}
 
-    @Override
-    public HasState<Boolean> getAcceptState() {
-	return new HasState<Boolean>() {
-	    @Override
-	    public void setState(final Boolean state) {
-		save.setEnabled(state);
-	    }
-	};
-    }
+	@Override
+	public HasText getNickNameError() {
+		return nickNameError;
+	}
 
-    @Override
-    public HasClickHandlers getCancel() {
-	return cancel;
-    }
+	@Override
+	public HasKeyDownHandlers getNickNameKeys() {
+		return nickName;
+	}
 
-    @Override
-    public HasChangeHandlers getEnterAction() {
-	return nickName;
-    }
+	@Override
+	public HasText getOldNickName() {
+		return oldNickName;
+	}
 
-    @Override
-    public Focusable getFirstFocusable() {
-	return nickName;
-    }
-
-    @Override
-    public HasText getNickName() {
-	return nickName;
-    }
-
-    @Override
-    public HasText getNickNameError() {
-	return nickNameError;
-    }
-
-    @Override
-    public HasKeyDownHandlers getNickNameKeys() {
-	return nickName;
-    }
-
-    @Override
-    public HasText getOldNickName() {
-	return oldNickName;
-    }
-
-    @Override
-    public HasClickHandlers getSave() {
-	return save;
-    }
+	@Override
+	public HasClickHandlers getSave() {
+		return save;
+	}
 
 }

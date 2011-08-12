@@ -4,12 +4,10 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 
 public class OtherVCardWidget extends VCardWidget implements VCardDisplay {
 
-    public OtherVCardWidget(final boolean readOnly) {
-	final ScrollPanel scroll = new ScrollPanel();
-	scroll.add(uiBinder.createAndBindUi(this));
-	initWidget(scroll);
-	initI18n();
-	init(readOnly, "OtherVCardWidget");
-    }
+	public OtherVCardWidget(final boolean readOnly) {
+		final ScrollPanel scroll = new ScrollPanel();
+		scroll.add(uiBinder.createAndBindUi(this));
+		init(readOnly, "OtherVCardWidget");
+	}
 
 }

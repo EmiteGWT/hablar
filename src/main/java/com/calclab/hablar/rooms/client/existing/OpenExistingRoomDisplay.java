@@ -9,12 +9,12 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 
 public interface OpenExistingRoomDisplay extends Display {
 
-    HasClickHandlers getAccept();
+	HasClickHandlers getAccept();
 
-    HasClickHandlers getCancel();
+	HasClickHandlers getCancel();
 
-    XmppURI getSelectedRoom();
+	XmppURI getSelectedRoom();
 
-    void setRooms(List<ExistingRoom> rooms);
+	void setRooms(List<ExistingRoom> rooms);
 
 }

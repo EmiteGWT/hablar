@@ -17,47 +17,47 @@ import com.calclab.hablar.core.client.page.Page;
  */
 public interface Hablar extends Presenter<HablarDisplay> {
 
-    public static enum Chain {
-	before, after
-    }
+	public static enum Chain {
+		before, after
+	}
 
-    /**
-     * Add a container to Hablar
-     * 
-     * @param container
-     * @param chain
-     *            The priority indicates the position of the container in the
-     *            chain.
-     * 
-     */
-    public void addContainer(PagesContainer container, Chain chain);
+	/**
+	 * Add a container to Hablar
+	 * 
+	 * @param container
+	 * @param chain
+	 *            The priority indicates the position of the container in the
+	 *            chain.
+	 * 
+	 */
+	public void addContainer(PagesContainer container, Chain chain);
 
-    /**
-     * Add a page to hablar.
-     * 
-     * @param page
-     */
-    public void addPage(Page<?> page);
+	/**
+	 * Add a page to hablar.
+	 * 
+	 * @param page
+	 */
+	public void addPage(Page<?> page);
 
-    /**
-     * Add a page to hablar using the specified container
-     * 
-     * @param page
-     *            the page to be added
-     * @param containerRol
-     *            the Rol name of the container to use
-     */
-    public void addPage(Page<?> page, String containerRol);
+	/**
+	 * Add a page to hablar using the specified container
+	 * 
+	 * @param page
+	 *            the page to be added
+	 * @param containerRol
+	 *            the Rol name of the container to use
+	 */
+	public void addPage(Page<?> page, String containerRol);
 
-    public void addPageAddedHandler(PageAddedHandler handler, boolean fireAlreadyAdded);
+	public void addPageAddedHandler(PageAddedHandler handler, boolean fireAlreadyAdded);
 
-    public PagesContainer getContainer(String rol);
+	public PagesContainer getContainer(String rol);
 
-    @Override
-    public HablarDisplay getDisplay();
+	@Override
+	public HablarDisplay getDisplay();
 
-    public HablarEventBus getEventBus();
+	public HablarEventBus getEventBus();
 
-    public List<Page<?>> getPagesOfType(String type);
+	public List<Page<?>> getPagesOfType(String type);
 
 }
