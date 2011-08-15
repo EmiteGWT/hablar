@@ -5,8 +5,8 @@ import com.calclab.hablar.core.client.page.Page;
 
 public interface EditorPage<T extends Display> extends Page<T> {
 
-    void saveData();
+	void saveData();
 
-    void showData();
+	void showData();
 
 }

@@ -6,12 +6,12 @@ import com.google.gwt.user.client.ui.HasText;
 
 public interface ConfirmPageDisplay extends Display {
 
-    HasClickHandlers getYes();
+	HasClickHandlers getYes();
 
-    HasClickHandlers getNo();
+	HasClickHandlers getNo();
 
-    HasText getMessage();
+	HasText getMessage();
 
-    void setPageTitle(String title);
+	void setPageTitle(String title);
 
 }

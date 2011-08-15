@@ -11,47 +11,46 @@ import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HasValue;
 
 public class TextValidator extends CompositeValidatorChecker {
-    private final HasText hasValue;
+	private final HasText hasValue;
 
-    public TextValidator(final HasKeyDownHandlers keys, final HasText hasValue, final HasText errorText,
-	    final HasState<Boolean> acceptState) {
-	super(errorText, acceptState);
-	this.hasValue = hasValue;
-	keys.addKeyDownHandler(new KeyDownHandler() {
-	    @Override
-	    public void onKeyDown(final KeyDownEvent event) {
-		Scheduler.get().scheduleDeferred(getScheduledCommand());
-	    }
-	});
-    }
+	public TextValidator(final HasKeyDownHandlers keys, final HasText hasValue, final HasText errorText, final HasState<Boolean> acceptState) {
+		super(errorText, acceptState);
+		this.hasValue = hasValue;
+		keys.addKeyDownHandler(new KeyDownHandler() {
+			@Override
+			public void onKeyDown(final KeyDownEvent event) {
+				Scheduler.get().scheduleDeferred(getScheduledCommand());
+			}
+		});
+	}
 
-    public void add(final Validator<String> validator) {
-	super.add(new HasValue<String>() {
+	public void add(final Validator<String> validator) {
+		super.add(new HasValue<String>() {
 
-	    @Override
-	    public String getValue() {
-		return hasValue.getText();
-	    }
+			@Override
+			public String getValue() {
+				return hasValue.getText();
+			}
 
-	    @Override
-	    public void setValue(String value) {
-		hasValue.setText(value);
-	    }
+			@Override
+			public void setValue(String value) {
+				hasValue.setText(value);
+			}
 
-	    @Override
-	    public void setValue(String value, boolean fireEvents) {
-		hasValue.setText(value);
-	    }
+			@Override
+			public void setValue(String value, boolean fireEvents) {
+				hasValue.setText(value);
+			}
 
-	    @Override
-	    public HandlerRegistration addValueChangeHandler(ValueChangeHandler<String> handler) {
-		return null;
-	    }
+			@Override
+			public HandlerRegistration addValueChangeHandler(ValueChangeHandler<String> handler) {
+				return null;
+			}
 
-	    @Override
-	    public void fireEvent(GwtEvent<?> event) {
-		// Does nothing
-	    }
-	}, validator);
-    }
+			@Override
+			public void fireEvent(GwtEvent<?> event) {
+				// Does nothing
+			}
+		}, validator);
+	}
 }

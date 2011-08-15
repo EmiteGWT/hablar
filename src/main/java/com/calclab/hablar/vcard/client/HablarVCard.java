@@ -25,100 +25,83 @@ import com.calclab.hablar.user.client.UserContainer;
 
 public class HablarVCard {
 
-    private static VCardMessages messages;
+	private static final String ACTION_ID_VIEW_VCARD = "HablarVCard-seeVCardAction";
 
-    private static final String ACTION_ID_VIEW_VCARD = "HablarVCard-seeVCardAction";
+	private final Hablar hablar;
+	private final VCardConfig vCardConfig;
+	private final XmppRoster roster;
+	private final VCardManager vCardManager;
+	private final XmppSession session;
 
-    public static VCardMessages i18n() {
-	return messages;
-    }
+	public HablarVCard(final Hablar hablar, final VCardConfig vCardConfig, final XmppSession session, final XmppRoster roster, final VCardManager vCardManager) {
+		this.hablar = hablar;
+		this.vCardConfig = vCardConfig;
+		this.session = session;
+		this.roster = roster;
+		this.vCardManager = vCardManager;
+		install();
+	}
 
-    public static void setMessages(final VCardMessages messages) {
-	HablarVCard.messages = messages;
-    }
+	private void install() {
+		final VCardWidget vCardWidget = new VCardWidget(vCardConfig.vCardReadOnly, "OwnVCardWidget");
+		final OwnVCardPresenter ownVCardPage = new OwnVCardPresenter(session, vCardManager, hablar.getEventBus(), vCardWidget);
+		hablar.addPage(ownVCardPage, UserContainer.ROL);
 
-    private final Hablar hablar;
+		final OthersVCardPresenter othersVCardPage = new OthersVCardPresenter(vCardManager, hablar.getEventBus(), new OtherVCardWidget(true));
+		hablar.addPage(othersVCardPage, OverlayContainer.ROL);
 
-    private final VCardConfig vCardConfig;
-
-    private final XmppRoster roster;
-
-    private final VCardManager vCardManager;
-
-    private final XmppSession session;
-
-    public HablarVCard(final Hablar hablar, final VCardConfig vCardConfig, final XmppSession session,
-	    final XmppRoster roster, final VCardManager vCardManager) {
-	this.hablar = hablar;
-	this.vCardConfig = vCardConfig;
-	this.session = session;
-	this.roster = roster;
-	this.vCardManager = vCardManager;
-	install();
-    }
-
-    private void install() {
-	final VCardWidget vCardWidget = new VCardWidget(vCardConfig.vCardReadOnly, "OwnVCardWidget");
-	final OwnVCardPresenter ownVCardPage = new OwnVCardPresenter(session, vCardManager, hablar.getEventBus(),
-		vCardWidget);
-	hablar.addPage(ownVCardPage, UserContainer.ROL);
-
-	final OthersVCardPresenter othersVCardPage = new OthersVCardPresenter(vCardManager, hablar.getEventBus(),
-		new OtherVCardWidget(true));
-	hablar.addPage(othersVCardPage, OverlayContainer.ROL);
-
-	hablar.addPageAddedHandler(new PageAddedHandler() {
-	    @Override
-	    public void onPageAdded(final PageAddedEvent event) {
-		final RosterPage rosterPage = RosterPresenter.asRoster(event.getPage());
-		if (rosterPage != null) {
-		    rosterPage.getItemMenu().addAction(newViewVCardAction(othersVCardPage));
-		}
-	    }
-	}, true);
-
-	prepareDefaultNicknameListener();
-    }
-
-    private Action<RosterItemPresenter> newViewVCardAction(final OthersVCardPresenter othersVCardPage) {
-	return new SimpleAction<RosterItemPresenter>(i18n().seeUserProfileAction(), ACTION_ID_VIEW_VCARD) {
-	    @Override
-	    public void execute(final RosterItemPresenter target) {
-		othersVCardPage.setUser(target.getItem().getJID());
-		othersVCardPage.requestVisibility(Visibility.focused);
-	    }
-	};
-    }
-
-    private void prepareDefaultNicknameListener() {
-
-	roster.addRosterItemChangedHandler(new RosterItemChangedHandler() {
-
-	    @Override
-	    public void onRosterItemChanged(final RosterItemChangedEvent event) {
-		if (event.isAdded()) {
-		    final RosterItem rosterItem = event.getRosterItem();
-		    final String itemName = rosterItem.getName();
-		    final XmppURI jid = rosterItem.getJID();
-		    if ((itemName == null) || "".equals(itemName) || itemName.equals(jid.getNode())) {
-
-			vCardManager.getUserVCard(jid, new VCardResponseHandler() {
-			    @Override
-			    public void onVCardResponse(final VCardResponseEvent event) {
-				final VCardResponse vCardResponse = event.getVCardResponse();
-				final VCard vcard = vCardResponse != null ? vCardResponse.getVCard() : null;
-				if (vcard != null) {
-				    rosterItem.setName(vcard.getDisplayName());
-				    roster.requestUpdateItem(rosterItem);
+		hablar.addPageAddedHandler(new PageAddedHandler() {
+			@Override
+			public void onPageAdded(final PageAddedEvent event) {
+				final RosterPage rosterPage = RosterPresenter.asRoster(event.getPage());
+				if (rosterPage != null) {
+					rosterPage.getItemMenu().addAction(newViewVCardAction(othersVCardPage));
 				}
-			    }
-			});
+			}
+		}, true);
 
-		    }
+		prepareDefaultNicknameListener();
+	}
 
-		}
-	    }
-	});
-    }
+	private Action<RosterItemPresenter> newViewVCardAction(final OthersVCardPresenter othersVCardPage) {
+		return new SimpleAction<RosterItemPresenter>(VCardMessages.msg.seeUserProfileAction(), ACTION_ID_VIEW_VCARD) {
+			@Override
+			public void execute(final RosterItemPresenter target) {
+				othersVCardPage.setUser(target.getItem().getJID());
+				othersVCardPage.requestVisibility(Visibility.focused);
+			}
+		};
+	}
+
+	private void prepareDefaultNicknameListener() {
+
+		roster.addRosterItemChangedHandler(new RosterItemChangedHandler() {
+
+			@Override
+			public void onRosterItemChanged(final RosterItemChangedEvent event) {
+				if (event.isAdded()) {
+					final RosterItem rosterItem = event.getRosterItem();
+					final String itemName = rosterItem.getName();
+					final XmppURI jid = rosterItem.getJID();
+					if ((itemName == null) || "".equals(itemName) || itemName.equals(jid.getNode())) {
+
+						vCardManager.getUserVCard(jid, new VCardResponseHandler() {
+							@Override
+							public void onVCardResponse(final VCardResponseEvent event) {
+								final VCardResponse vCardResponse = event.getVCardResponse();
+								final VCard vcard = vCardResponse != null ? vCardResponse.getVCard() : null;
+								if (vcard != null) {
+									rosterItem.setName(vcard.getDisplayName());
+									roster.requestUpdateItem(rosterItem);
+								}
+							}
+						});
+
+					}
+
+				}
+			}
+		});
+	}
 
 }

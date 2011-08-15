@@ -22,66 +22,66 @@ import com.google.gwt.user.client.Command;
  * threaded.
  */
 public class NonBlockingCommandScheduler implements RepeatingCommand, CommandQueue {
-    private final LinkedList<Command> commandQueue;
-    private final LinkedList<Command> priorityCommandQueue;
-    private boolean isExecuting;
+	private final LinkedList<Command> commandQueue;
+	private final LinkedList<Command> priorityCommandQueue;
+	private boolean isExecuting;
 
-    public NonBlockingCommandScheduler() {
-	commandQueue = new LinkedList<Command>();
-	priorityCommandQueue = new LinkedList<Command>();
-	isExecuting = false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addCommand(final Command command) {
-	commandQueue.addLast(command);
-
-	GWT.log(this.getClass().getName() + " - Command added: " + command);
-
-	this.startIfRequired();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addPriorityCommand(final Command command) {
-	priorityCommandQueue.addLast(command);
-
-	GWT.log(this.getClass().getName() + " - Priority command added: " + command);
-
-	this.startIfRequired();
-    }
-
-    @Override
-    public boolean execute() {
-	final Command command;
-
-	if (!priorityCommandQueue.isEmpty()) {
-	    command = priorityCommandQueue.remove();
-	} else if (!commandQueue.isEmpty()) {
-	    command = commandQueue.remove();
-	} else {
-	    // This shouldn't really happen but we might as well handle it
-	    // anyway
-	    isExecuting = false;
-	    return false;
+	public NonBlockingCommandScheduler() {
+		commandQueue = new LinkedList<Command>();
+		priorityCommandQueue = new LinkedList<Command>();
+		isExecuting = false;
 	}
 
-	command.execute();
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void addCommand(final Command command) {
+		commandQueue.addLast(command);
 
-	isExecuting = ((commandQueue.size() > 0) || (priorityCommandQueue.size() > 0));
+		GWT.log(this.getClass().getName() + " - Command added: " + command);
 
-	return isExecuting;
-    }
-
-    private void startIfRequired() {
-	if (!isExecuting) {
-	    isExecuting = true;
-	    Scheduler.get().scheduleIncremental(NonBlockingCommandScheduler.this);
+		this.startIfRequired();
 	}
-    }
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void addPriorityCommand(final Command command) {
+		priorityCommandQueue.addLast(command);
+
+		GWT.log(this.getClass().getName() + " - Priority command added: " + command);
+
+		this.startIfRequired();
+	}
+
+	@Override
+	public boolean execute() {
+		final Command command;
+
+		if (!priorityCommandQueue.isEmpty()) {
+			command = priorityCommandQueue.remove();
+		} else if (!commandQueue.isEmpty()) {
+			command = commandQueue.remove();
+		} else {
+			// This shouldn't really happen but we might as well handle it
+			// anyway
+			isExecuting = false;
+			return false;
+		}
+
+		command.execute();
+
+		isExecuting = ((commandQueue.size() > 0) || (priorityCommandQueue.size() > 0));
+
+		return isExecuting;
+	}
+
+	private void startIfRequired() {
+		if (!isExecuting) {
+			isExecuting = true;
+			Scheduler.get().scheduleIncremental(NonBlockingCommandScheduler.this);
+		}
+	}
 }

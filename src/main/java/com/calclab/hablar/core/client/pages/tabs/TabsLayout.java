@@ -10,91 +10,91 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class TabsLayout extends MainLayout {
 
-    public static class TabHeaderSize {
-	public static TabHeaderSize DEFAULT_SIZE = new TabHeaderSize("23px", "120px", 10);
+	public static class TabHeaderSize {
+		public static TabHeaderSize DEFAULT_SIZE = new TabHeaderSize("23px", "120px", 10);
 
-	public static TabHeaderSize create(final String height, final String width, final Integer trim) {
-	    final TabHeaderSize retValue = DEFAULT_SIZE.createCopy();
-	    if (height != null) {
-		retValue.height = height;
-	    }
-	    if (width != null) {
-		retValue.width = width;
-	    }
-	    if (trim != null) {
-		retValue.trim = trim;
-	    }
-	    return retValue;
+		public static TabHeaderSize create(final String height, final String width, final Integer trim) {
+			final TabHeaderSize retValue = DEFAULT_SIZE.createCopy();
+			if (height != null) {
+				retValue.height = height;
+			}
+			if (width != null) {
+				retValue.width = width;
+			}
+			if (trim != null) {
+				retValue.trim = trim;
+			}
+			return retValue;
+		}
+
+		private String height;
+
+		private String width;
+
+		private int trim;
+
+		public TabHeaderSize(final String height, final String width, final int trim) {
+			this.height = height;
+			this.width = width;
+			this.trim = trim;
+		}
+
+		protected TabHeaderSize createCopy() {
+			return new TabHeaderSize(height, width, trim);
+		}
+
+		public String getHeight() {
+			return height;
+		}
+
+		public int getTrim() {
+			return trim;
+		}
+
+		public String getWidth() {
+			return width;
+		}
 	}
 
-	private String height;
+	private static final double BAR_SIZE = 24;
+	private static TabsPanel tabs;
 
-	private String width;
+	private final TabsMenuPresenter tabsMenuPresenter;
 
-	private int trim;
+	private final TabHeaderSize tabHeaderSize;
 
-	public TabHeaderSize(final String height, final String width, final int trim) {
-	    this.height = height;
-	    this.width = width;
-	    this.trim = trim;
+	public TabsLayout(final HablarDisplay parent) {
+		this(parent, TabHeaderSize.DEFAULT_SIZE);
 	}
 
-	protected TabHeaderSize createCopy() {
-	    return new TabHeaderSize(height, width, trim);
+	public TabsLayout(final HablarDisplay parent, final TabHeaderSize tabHeaderSize) {
+		super(tabs = new TabsPanel(BAR_SIZE, PX), parent);
+		tabsMenuPresenter = new TabsMenuPresenter(tabs.getMenu());
+		this.tabHeaderSize = tabHeaderSize;
 	}
 
-	public String getHeight() {
-	    return height;
+	@Override
+	public void add(final Widget pageWidget, final Widget headWidget) {
+		tabs.add(pageWidget, headWidget);
 	}
 
-	public int getTrim() {
-	    return trim;
+	@Override
+	public HeaderDisplay createHeaderDisplay(final Page<?> page) {
+		return new TabsHeaderWidget(page.getId(), tabHeaderSize.getHeight(), tabHeaderSize.getWidth());
 	}
 
-	public String getWidth() {
-	    return width;
+	@Override
+	public void focus(final Widget pageWidget) {
+		tabs.selectTab(pageWidget);
 	}
-    }
 
-    private static final double BAR_SIZE = 24;
-    private static TabsPanel tabs;
+	public TabsMenuPresenter getTabsMenuPresenter() {
+		return tabsMenuPresenter;
+	}
 
-    private final TabsMenuPresenter tabsMenuPresenter;
-
-    private final TabHeaderSize tabHeaderSize;
-
-    public TabsLayout(final HablarDisplay parent) {
-	this(parent, TabHeaderSize.DEFAULT_SIZE);
-    }
-
-    public TabsLayout(final HablarDisplay parent, final TabHeaderSize tabHeaderSize) {
-	super(tabs = new TabsPanel(BAR_SIZE, PX), parent);
-	tabsMenuPresenter = new TabsMenuPresenter(tabs.getMenu());
-	this.tabHeaderSize = tabHeaderSize;
-    }
-
-    @Override
-    public void add(final Widget pageWidget, final Widget headWidget) {
-	tabs.add(pageWidget, headWidget);
-    }
-
-    @Override
-    public HeaderDisplay createHeaderDisplay(final Page<?> page) {
-	return new TabsHeaderWidget(page.getId(), tabHeaderSize.getHeight(), tabHeaderSize.getWidth());
-    }
-
-    @Override
-    public void focus(final Widget pageWidget) {
-	tabs.selectTab(pageWidget);
-    }
-
-    public TabsMenuPresenter getTabsMenuPresenter() {
-	return tabsMenuPresenter;
-    }
-
-    @Override
-    public void remove(final Widget pageWidget) {
-	tabs.remove(pageWidget);
-    }
+	@Override
+	public void remove(final Widget pageWidget) {
+		tabs.remove(pageWidget);
+	}
 
 }

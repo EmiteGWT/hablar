@@ -11,11 +11,11 @@ import com.calclab.hablar.search.client.SearchQueryFactory;
  */
 public class NicknameContainsOrderedWordsSearchQueryFactory implements SearchQueryFactory {
 
-    /** {@inheritDoc} */
-    @Override
-    public HashMap<String, String> createSearchQuery(final String term) {
-	final HashMap<String, String> query = new HashMap<String, String>();
-	query.put("nick", "*" + term.trim().replaceAll("\\s+", "*") + "*");
-	return query;
-    }
+	/** {@inheritDoc} */
+	@Override
+	public HashMap<String, String> createSearchQuery(final String term) {
+		final HashMap<String, String> query = new HashMap<String, String>();
+		query.put("nick", "*" + term.trim().replaceAll("\\s+", "*") + "*");
+		return query;
+	}
 }
