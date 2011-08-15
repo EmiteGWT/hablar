@@ -7,16 +7,16 @@ import com.google.gwt.user.client.ui.HasText;
 
 public interface ConsoleDisplay extends Display {
 
-    void add(String message, String styleName, String sessionStyle);
+	void add(String message, String styleName, String sessionStyle);
 
-    void clear();
+	void clear();
 
-    HasText getInputText();
+	HasText getInputText();
 
-    HasClickHandlers getClear();
+	HasClickHandlers getClear();
 
-    HasKeyDownHandlers getInput();
+	HasKeyDownHandlers getInput();
 
-    void setInputCursorPos(int pos);
+	void setInputCursorPos(int pos);
 
 }

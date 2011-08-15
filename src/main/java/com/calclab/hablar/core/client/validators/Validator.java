@@ -2,8 +2,8 @@ package com.calclab.hablar.core.client.validators;
 
 public interface Validator<T> {
 
-    String getMessage();
+	String getMessage();
 
-    boolean isValid(T value);
+	boolean isValid(T value);
 
 }

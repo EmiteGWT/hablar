@@ -45,7 +45,7 @@
 		<g:layer left="3px" right="3px" bottom="10px" height="0">
 			<g:FlowPanel ui:field="controls" addStyleNames="{style.talkPanel}">
 				<g:TextArea addStyleNames="{style.talkBox}" ui:field="talkBox"></g:TextArea>
-				<g:Button ui:field="send">Send</g:Button>
+				<g:Button ui:field="send"><ui:msg key="sendAction">Send</ui:msg></g:Button>
 			</g:FlowPanel>
 		</g:layer>
 	</g:LayoutPanel>

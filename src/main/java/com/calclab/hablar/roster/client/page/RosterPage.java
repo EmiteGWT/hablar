@@ -7,16 +7,16 @@ import com.calclab.hablar.roster.client.groups.RosterGroupPresenter;
 import com.calclab.hablar.roster.client.groups.RosterItemPresenter;
 
 public interface RosterPage extends Page<RosterDisplay> {
-    public static final String TYPE = "Roster";
+	public static final String TYPE = "Roster";
 
-    void addHighPriorityActions();
+	void addHighPriorityActions();
 
-    void addLowPriorityActions();
+	void addLowPriorityActions();
 
-    void addAction(Action<RosterPage> action);
+	void addAction(Action<RosterPage> action);
 
-    Menu<RosterGroupPresenter> getGroupMenu();
+	Menu<RosterGroupPresenter> getGroupMenu();
 
-    Menu<RosterItemPresenter> getItemMenu();
+	Menu<RosterItemPresenter> getItemMenu();
 
 }

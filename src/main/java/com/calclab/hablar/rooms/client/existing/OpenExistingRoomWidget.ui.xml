@@ -12,15 +12,15 @@
     <g:HTMLPanel addStyleNames="hablar-OpenExistingRoomWidget">
       <div class="form">
         <h2>
-          <span ui:field='title' />
+          <span><ui:msg key="openExistingRoom">Open an existing room</ui:msg></span>
         </h2>
         <p>
-          <label ui:field="availableRoomsLabel">Available rooms:</label>
+          <label><ui:msg key="availableRoomsLabelText">Available rooms:</ui:msg></label>
           <hs:SelectionList ui:field="roomList" mode="single" addStyleNames="{style.wideArea} hablar-clearBackground hablar-darkColor" />
         </p>
         <div class="actions hablar-topDefaultBordered">
-          <g:Button ui:field="accept">Accept</g:Button>
-          <g:Button ui:field="cancel">Cancel</g:Button>
+          <g:Button ui:field="accept"><ui:msg key="acceptAction">Accept</ui:msg></g:Button>
+          <g:Button ui:field="cancel"><ui:msg key="acceptAction">Cancel</ui:msg></g:Button>
         </div>
       </div>
     </g:HTMLPanel>

@@ -10,44 +10,44 @@ import com.google.gwt.user.client.ui.Widget;
 
 public interface ChatDisplay extends Display {
 
-    /**
-     * Adds a message to this chat display
-     * 
-     * @param message
-     */
-    void addMessage(ChatMessage message, String messageClass);
+	/**
+	 * Adds a message to this chat display
+	 * 
+	 * @param message
+	 */
+	void addMessage(ChatMessage message, String messageClass);
 
-    /**
-     * Adds a widget to the action bar for this chat view
-     * 
-     * @param widget
-     *            the widget to add
-     */
-    void addToActions(Widget widget);
+	/**
+	 * Adds a widget to the action bar for this chat view
+	 * 
+	 * @param widget
+	 *            the widget to add
+	 */
+	void addToActions(Widget widget);
 
-    void clearAndFocus();
+	void clearAndFocus();
 
-    HasClickHandlers createAction(Action<?> action);
+	HasClickHandlers createAction(Action<?> action);
 
-    HasClickHandlers getAction();
+	HasClickHandlers getAction();
 
-    HasText getBody();
+	HasText getBody();
 
-    HasText getState();
+	HasText getState();
 
-    HasKeyDownHandlers getTextBox();
+	HasKeyDownHandlers getTextBox();
 
-    HasFocusHandlers getTextBoxFocus();
+	HasFocusHandlers getTextBoxFocus();
 
-    void setControlsVisible(boolean visible);
+	void setControlsVisible(boolean visible);
 
-    /**
-     * Ensure each chat display has a unique id
-     */
-    void setId(String id);
+	/**
+	 * Ensure each chat display has a unique id
+	 */
+	void setId(String id);
 
-    void setStatusVisible(boolean visible);
+	void setStatusVisible(boolean visible);
 
-    void setTextBoxFocus(boolean hasFocus);
+	void setTextBoxFocus(boolean hasFocus);
 
 }

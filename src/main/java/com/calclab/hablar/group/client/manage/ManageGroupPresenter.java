@@ -22,53 +22,43 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
  */
 public abstract class ManageGroupPresenter extends PagePresenter<ManageGroupDisplay> {
 
-    private CompositeValidatorChecker groupNameValidator;
-    private static GroupMessages groupMessages;
+	private CompositeValidatorChecker groupNameValidator;
 
-    public static GroupMessages i18n() {
-	return groupMessages;
-    }
+	public ManageGroupPresenter(HablarEventBus eventBus, final ManageGroupDisplay display, String pageTitle) {
+		super("ManageGroup", eventBus, display);
 
-    public static void setMessages(GroupMessages groupMessages) {
-	ManageGroupPresenter.groupMessages = groupMessages;
-    }
+		display.getCancel().addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(final ClickEvent event) {
+				requestVisibility(Visibility.hidden);
+			}
+		});
 
-    public ManageGroupPresenter(HablarEventBus eventBus, final ManageGroupDisplay display, String pageTitle) {
-	super("ManageGroup", eventBus, display);
+		display.setPageTitle(pageTitle);
+		groupNameValidator = new CompositeValidatorChecker(display.getGroupNameError(), display.getAcceptEnabled());
+		groupNameValidator.add(display.getGroupName(), Validators.notEmpty(GroupMessages.msg.groupNameEmptyErrorMessage()));
+		groupNameValidator.add(display.getSelectionList(), new ListNotEmptyValidator<Selectable>(GroupMessages.msg.selectionEmptyErrorMessage()));
+		display.getGroupNameKeys().addKeyDownHandler(new KeyDownHandler() {
 
-	display.getCancel().addClickHandler(new ClickHandler() {
-	    @Override
-	    public void onClick(final ClickEvent event) {
-		requestVisibility(Visibility.hidden);
-	    }
-	});
+			@Override
+			public void onKeyDown(KeyDownEvent event) {
+				Scheduler.get().scheduleDeferred(groupNameValidator.getScheduledCommand());
+			}
+		});
+		display.getSelectionList().addValueChangeHandler(new ValueChangeHandler<List<Selectable>>() {
 
-	display.setPageTitle(pageTitle);
-	groupNameValidator = new CompositeValidatorChecker(display.getGroupNameError(), display.getAcceptEnabled());
-	groupNameValidator.add(display.getGroupName(), Validators.notEmpty(i18n().groupNameEmptyErrorMessage()));
-	groupNameValidator.add(display.getSelectionList(), new ListNotEmptyValidator<Selectable>(i18n()
-		.selectionEmptyErrorMessage()));
-	display.getGroupNameKeys().addKeyDownHandler(new KeyDownHandler() {
+			@Override
+			public void onValueChange(ValueChangeEvent<List<Selectable>> event) {
+				Scheduler.get().scheduleDeferred(groupNameValidator.getScheduledCommand());
+			}
+		});
+	}
 
-	    @Override
-	    public void onKeyDown(KeyDownEvent event) {
-		Scheduler.get().scheduleDeferred(groupNameValidator.getScheduledCommand());
-	    }
-	});
-	display.getSelectionList().addValueChangeHandler(new ValueChangeHandler<List<Selectable>>() {
+	@Override
+	protected void onBeforeFocus() {
+		preloadForm();
+		groupNameValidator.validate();
+	}
 
-	    @Override
-	    public void onValueChange(ValueChangeEvent<List<Selectable>> event) {
-		Scheduler.get().scheduleDeferred(groupNameValidator.getScheduledCommand());
-	    }
-	});
-    }
-
-    @Override
-    protected void onBeforeFocus() {
-	preloadForm();
-	groupNameValidator.validate();
-    }
-
-    protected abstract void preloadForm();
+	protected abstract void preloadForm();
 }

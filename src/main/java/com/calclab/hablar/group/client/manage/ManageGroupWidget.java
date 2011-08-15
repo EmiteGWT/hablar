@@ -7,11 +7,9 @@ import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.ui.selectionlist.DoubleList;
 import com.calclab.hablar.core.client.ui.selectionlist.Selectable;
 import com.calclab.hablar.core.client.validators.HasState;
-import com.calclab.hablar.group.client.GroupMessages;
 import com.calclab.hablar.roster.client.selection.DoubleListRosterItemSelector;
 import com.calclab.hablar.roster.client.selection.RosterItemSelector;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.LabelElement;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
@@ -21,7 +19,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HasValue;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -30,122 +27,101 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class ManageGroupWidget extends Composite implements ManageGroupDisplay {
 
-    private static ManageGroupWidgetUiBinder uiBinder = GWT.create(ManageGroupWidgetUiBinder.class);
-    private static GroupMessages groupMessages;
+	interface ManageGroupWidgetUiBinder extends UiBinder<Widget, ManageGroupWidget> {
+	}
 
-    public static GroupMessages i18n() {
-	return groupMessages;
-    }
+	private static ManageGroupWidgetUiBinder uiBinder = GWT.create(ManageGroupWidgetUiBinder.class);
 
-    public static void setMessages(GroupMessages groupMessages) {
-	ManageGroupWidget.groupMessages = groupMessages;
-    }
+	@UiField
+	SpanElement title;
 
-    @UiField
-    SpanElement title;
+	@UiField
+	TextBox groupName;
 
-    @UiField
-    TextBox groupName;
+	@UiField
+	HasText groupNameError;
 
-    @UiField
-    Label groupNameError;
+	@UiField
+	Button accept, cancel;
 
-    @UiField
-    LabelElement groupNameLabel, userListLabel;
+	@UiField
+	DoubleList selectionList;
 
-    @UiField
-    Button accept, cancel;
+	private RosterItemSelector selector;
 
-    @UiField
-    DoubleList selectionList;
+	public ManageGroupWidget() {
+		initWidget(uiBinder.createAndBindUi(this));
+		selector = new DoubleListRosterItemSelector(selectionList);
+	}
 
-    private RosterItemSelector selector;
+	@Override
+	public HasClickHandlers getApply() {
+		return accept;
+	}
 
-    interface ManageGroupWidgetUiBinder extends UiBinder<Widget, ManageGroupWidget> {
-    }
+	@Override
+	public HasClickHandlers getCancel() {
+		return cancel;
+	}
 
-    public ManageGroupWidget() {
-	initWidget(uiBinder.createAndBindUi(this));
-	groupNameLabel.setInnerText(i18n().groupNameLabelText());
-	userListLabel.setInnerText(i18n().usersLabelText());
-	accept.setText(i18n().acceptAction());
-	cancel.setText(i18n().cancelAction());
-	selector = new DoubleListRosterItemSelector(selectionList);
-    }
+	@Override
+	public void addRosterItem(RosterItem rosterItem) {
+		selector.addRosterItem(rosterItem);
+	}
 
-    @Override
-    public Widget asWidget() {
-	return this;
-    }
+	@Override
+	public void addSelectedRosterItem(RosterItem rosterItem) {
+		selector.addSelectedRosterItem(rosterItem);
+	}
 
-    @Override
-    public HasClickHandlers getApply() {
-	return accept;
-    }
+	@Override
+	public void clearSelectionList() {
+		groupName.setText("");
+		selector.clearSelectionList();
+	}
 
-    @Override
-    public HasClickHandlers getCancel() {
-	return cancel;
-    }
+	@Override
+	public String getGroupNameText() {
+		return groupName.getText();
+	}
 
-    @Override
-    public void addRosterItem(RosterItem rosterItem) {
-	selector.addRosterItem(rosterItem);
-    }
+	@Override
+	public Collection<RosterItem> getSelectedItems() {
+		return selector.getSelectedItems();
+	}
 
-    @Override
-    public void addSelectedRosterItem(RosterItem rosterItem) {
-	selector.addSelectedRosterItem(rosterItem);
-    }
+	@Override
+	public HasValue<String> getGroupName() {
+		return groupName;
+	}
 
-    @Override
-    public void clearSelectionList() {
-	groupName.setText("");
-	selector.clearSelectionList();
-    }
+	@Override
+	public HasValue<List<Selectable>> getSelectionList() {
+		return selectionList;
+	}
 
-    @Override
-    public String getGroupNameText() {
-	return groupName.getText();
-    }
+	@Override
+	public HasKeyDownHandlers getGroupNameKeys() {
+		return groupName;
+	}
 
-    @Override
-    public Collection<RosterItem> getSelectedItems() {
-	return selector.getSelectedItems();
-    }
+	@Override
+	public HasState<Boolean> getAcceptEnabled() {
+		return new HasState<Boolean>() {
+			@Override
+			public void setState(final Boolean state) {
+				accept.setEnabled(state);
+			}
+		};
+	}
 
-    @Override
-    public HasValue<String> getGroupName() {
-	return groupName;
-    }
+	@Override
+	public HasText getGroupNameError() {
+		return groupNameError;
+	}
 
-    @Override
-    public HasValue<List<Selectable>> getSelectionList() {
-	return selectionList;
-    }
-
-    @Override
-    public HasKeyDownHandlers getGroupNameKeys() {
-	return groupName;
-    }
-
-    @Override
-    public HasState<Boolean> getAcceptEnabled() {
-	return new HasState<Boolean>() {
-	    @Override
-	    public void setState(final Boolean state) {
-		accept.setEnabled(state);
-	    }
-	};
-    }
-
-    @Override
-    public HasText getGroupNameError() {
-	return groupNameError;
-    }
-
-    @Override
-    public void setPageTitle(String title) {
-	this.title.setInnerText(title);
-    }
+	@Override
+	public void setPageTitle(String title) {
+		this.title.setInnerText(title);
+	}
 }

@@ -8,10 +8,5 @@
 	<inherits name='com.calclab.hablar.chat.HablarChat' />
 	<inherits name='com.calclab.hablar.rooms.HablarRooms' />
 
-	<extend-property name="locale" values="it" />
-	<extend-property name="locale" values="en" />
-
 	<source path="client" />
-	<entry-point
-		class="com.calclab.hablar.clipboard.client.HablarClipboardEntryPoint" />
 </module>

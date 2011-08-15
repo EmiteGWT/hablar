@@ -7,10 +7,5 @@
 	<inherits name='com.calclab.emite.im.EmiteIM' />
 	<inherits name='com.calclab.emite.xep.storage.EmitePrivateStorage' />
 
-	<extend-property name="locale" values="it" />
-	<extend-property name="locale" values="en" />
-
 	<source path="client" />
-	<entry-point
-		class="com.calclab.hablar.user.client.HablarUserEntryPoint" />
 </module>

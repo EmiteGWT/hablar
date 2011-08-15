@@ -17,37 +17,36 @@ import com.google.gwt.user.client.ui.Widget;
  */
 // FIXME: probably UIBinder is too much
 public class ChatMessageWidget extends Composite {
+	private static ChatMessageUiBinder uiBinder = GWT.create(ChatMessageUiBinder.class);
 
-    interface ChatMessageUiBinder extends UiBinder<Widget, ChatMessageWidget> {
-    }
-
-    private static ChatMessageUiBinder uiBinder = GWT.create(ChatMessageUiBinder.class);
-
-    @UiField
-    SpanElement body, metadata;
-    @UiField
-    Label author;
-
-    public ChatMessageWidget(final ChatMessage message) {
-	initWidget(uiBinder.createAndBindUi(this));
-	if (Empty.not(message.metadata)) {
-	    metadata.setInnerText(message.metadata + " ");
+	interface ChatMessageUiBinder extends UiBinder<Widget, ChatMessageWidget> {
 	}
-	MessageType type = message.type;
-	if (Empty.not(message.author)) {
-	    author.setText(message.author + ": ");
-	} else {
-	    author.setText("");
-	    type = ChatMessage.MessageType.info;
+
+	@UiField
+	SpanElement body, metadata;
+	@UiField
+	Label author;
+
+	public ChatMessageWidget(final ChatMessage message) {
+		initWidget(uiBinder.createAndBindUi(this));
+		if (Empty.not(message.metadata)) {
+			metadata.setInnerText(message.metadata + " ");
+		}
+		MessageType type = message.type;
+		if (Empty.not(message.author)) {
+			author.setText(message.author + ": ");
+		} else {
+			author.setText("");
+			type = ChatMessage.MessageType.info;
+		}
+		DOM.setStyleAttribute(author.getElement(), "color", message.color);
+		final Element parent = body.getParentElement();
+		body.removeFromParent();
+		final Element newBody = ChatMessageFormatter.format(message.author, message.body);
+		parent.appendChild(newBody);
+		newBody.addClassName("body");
+		newBody.addClassName(type.toString());
+		body.addClassName(type.toString());
 	}
-	DOM.setStyleAttribute(author.getElement(), "color", message.color);
-	final Element parent = body.getParentElement();
-	body.removeFromParent();
-	final Element newBody = ChatMessageFormatter.format(message.author, message.body);
-	parent.appendChild(newBody);
-	newBody.addClassName("body");
-	newBody.addClassName(type.toString());
-	body.addClassName(type.toString());
-    }
 
 }

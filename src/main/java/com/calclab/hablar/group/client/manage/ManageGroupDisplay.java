@@ -16,21 +16,21 @@ import com.google.gwt.user.client.ui.HasValue;
  */
 public interface ManageGroupDisplay extends Display, RosterItemSelector {
 
-    HasClickHandlers getApply();
+	HasClickHandlers getApply();
 
-    HasClickHandlers getCancel();
+	HasClickHandlers getCancel();
 
-    String getGroupNameText();
+	String getGroupNameText();
 
-    HasValue<String> getGroupName();
+	HasValue<String> getGroupName();
 
-    HasValue<List<Selectable>> getSelectionList();
+	HasValue<List<Selectable>> getSelectionList();
 
-    HasText getGroupNameError();
+	HasText getGroupNameError();
 
-    HasKeyDownHandlers getGroupNameKeys();
+	HasKeyDownHandlers getGroupNameKeys();
 
-    HasState<Boolean> getAcceptEnabled();
+	HasState<Boolean> getAcceptEnabled();
 
-    void setPageTitle(String title);
+	void setPageTitle(String title);
 }

@@ -6,15 +6,15 @@ import com.calclab.hablar.rooms.client.occupant.OccupantsWidget;
 
 public class RoomWidget extends ChatWidget implements RoomDisplay {
 
-    public RoomWidget(final boolean sendButtonVisible) {
-	super(sendButtonVisible);
-    }
+	public RoomWidget(final boolean sendButtonVisible) {
+		super(sendButtonVisible);
+	}
 
-    @Override
-    public OccupantsDisplay createOccupantsDisplay(final String roomId) {
-	final OccupantsWidget occupantsWidget = new OccupantsWidget(roomId);
-	actions.add(occupantsWidget);
-	return occupantsWidget;
-    }
+	@Override
+	public OccupantsDisplay createOccupantsDisplay(final String roomId) {
+		final OccupantsWidget occupantsWidget = new OccupantsWidget(roomId);
+		actions.add(occupantsWidget);
+		return occupantsWidget;
+	}
 
 }

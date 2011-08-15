@@ -6,16 +6,16 @@ import com.google.gwt.user.client.ui.HasText;
 
 public interface LoginDisplay extends Display {
 
-    void addMessage(String message);
+	void addMessage(String message);
 
-    HasClickHandlers getAction();
+	HasClickHandlers getAction();
 
-    HasText getActionText();
+	HasText getActionText();
 
-    HasText getPassword();
+	HasText getPassword();
 
-    HasText getUser();
+	HasText getUser();
 
-    void setActionEnabled(boolean enabled);
+	void setActionEnabled(boolean enabled);
 
 }

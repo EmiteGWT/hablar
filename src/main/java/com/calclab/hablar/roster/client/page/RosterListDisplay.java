@@ -6,10 +6,10 @@ import com.calclab.hablar.roster.client.groups.RosterGroupDisplay;
 
 public interface RosterListDisplay extends Display {
 
-    void add(GroupHeaderDisplay headerDisplay, RosterGroupDisplay groupDisplay);
+	void add(GroupHeaderDisplay headerDisplay, RosterGroupDisplay groupDisplay);
 
-    GroupHeaderDisplay createGroupHeader(String groupId);
+	GroupHeaderDisplay createGroupHeader(String groupId);
 
-    void remove(GroupHeaderDisplay headerDisplay, RosterGroupDisplay groupDisplay);
+	void remove(GroupHeaderDisplay headerDisplay, RosterGroupDisplay groupDisplay);
 
 }

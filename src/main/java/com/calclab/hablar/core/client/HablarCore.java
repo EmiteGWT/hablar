@@ -7,9 +7,9 @@ import com.google.inject.Inject;
 
 public class HablarCore {
 
-    @Inject
-    public HablarCore(final Hablar hablar) {
-	final ConfirmPage confirmPage = new ConfirmPage(hablar.getEventBus(), new ConfirmWidget());
-	hablar.addPage(confirmPage, OverlayContainer.ROL);
-    }
+	@Inject
+	public HablarCore(final Hablar hablar) {
+		final ConfirmPage confirmPage = new ConfirmPage(hablar.getEventBus(), new ConfirmWidget());
+		hablar.addPage(confirmPage, OverlayContainer.ROL);
+	}
 }

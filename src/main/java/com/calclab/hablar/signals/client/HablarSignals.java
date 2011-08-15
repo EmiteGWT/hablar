@@ -23,58 +23,33 @@ import com.google.gwt.user.client.ui.HasText;
  */
 public class HablarSignals {
 
-    public static SignalMessages signalMessages;
+	public HablarSignals(final Hablar hablar, final XmppSession session, final PrivateStorageManager storageManager) {
+		final HablarEventBus eventBus = hablar.getEventBus();
 
-    /**
-     * Gets the {@link SignalMessages} object containing the internationalised
-     * messages
-     * 
-     * @return the SignalMessages object containing the internationalised
-     *         messages
-     */
-    public static SignalMessages i18n() {
-	return signalMessages;
-    }
+		final HasText titleDisplay = new HasText() {
+			@Override
+			public String getText() {
+				return Window.getTitle();
+			}
 
-    /**
-     * Sets the {@link SignalMessages} object containing the internationalised
-     * messages
-     * 
-     * @param t
-     *            the messages object
-     */
-    public static void setMessages(final SignalMessages t) {
-	HablarSignals.signalMessages = t;
-    }
+			@Override
+			public void setText(final String text) {
+				Window.setTitle(text);
+			}
+		};
+		final SignalPreferences preferences = new SignalPreferences();
 
-    public HablarSignals(final Hablar hablar, final XmppSession session, final PrivateStorageManager storageManager) {
-	final HablarEventBus eventBus = hablar.getEventBus();
+		final UnattendedPagesManager manager = new UnattendedPagesManager(eventBus, BrowserFocusHandler.getInstance());
+		new BrowserFocusManager(eventBus, manager, BrowserFocusHandler.getInstance());
+		new UnattendedPresenter(eventBus, preferences, manager, titleDisplay);
+		final NotificationManager notificationManager = new NotificationManager(eventBus, preferences);
 
-	final HasText titleDisplay = new HasText() {
-	    @Override
-	    public String getText() {
-		return Window.getTitle();
-	    }
+		notificationManager.addNotifier((BrowserPopupHablarNotifier) GWT.create(BrowserPopupHablarNotifier.class), true);
+		notificationManager.addNotifier((JGrowlHablarNotifier) GWT.create(JGrowlHablarNotifier.class), true);
 
-	    @Override
-	    public void setText(final String text) {
-		Window.setTitle(text);
-	    }
-	};
-	final SignalPreferences preferences = new SignalPreferences();
-
-	final UnattendedPagesManager manager = new UnattendedPagesManager(eventBus, BrowserFocusHandler.getInstance());
-	new BrowserFocusManager(eventBus, manager, BrowserFocusHandler.getInstance());
-	new UnattendedPresenter(eventBus, preferences, manager, titleDisplay);
-	final NotificationManager notificationManager = new NotificationManager(eventBus, preferences);
-
-	notificationManager
-		.addNotifier((BrowserPopupHablarNotifier) GWT.create(BrowserPopupHablarNotifier.class), true);
-	notificationManager.addNotifier((JGrowlHablarNotifier) GWT.create(JGrowlHablarNotifier.class), true);
-
-	final SignalsPreferencesPresenter preferencesPage = new SignalsPreferencesPresenter(session, storageManager,
-		eventBus, preferences, new SignalsPreferencesWidget(), notificationManager);
-	hablar.addPage(preferencesPage, UserContainer.ROL);
-    }
+		final SignalsPreferencesPresenter preferencesPage = new SignalsPreferencesPresenter(session, storageManager, eventBus, preferences,
+				new SignalsPreferencesWidget(), notificationManager);
+		hablar.addPage(preferencesPage, UserContainer.ROL);
+	}
 
 }

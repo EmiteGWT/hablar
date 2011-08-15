@@ -15,57 +15,52 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class GroupSelectorWidget extends Composite implements GroupSelectorDisplay {
 
-    interface GroupSelectorWidgetUiBinder extends UiBinder<Widget, GroupSelectorWidget> {
-    }
+	interface GroupSelectorWidgetUiBinder extends UiBinder<Widget, GroupSelectorWidget> {
+	}
 
-    private static GroupSelectorWidgetUiBinder uiBinder = GWT.create(GroupSelectorWidgetUiBinder.class);
+	private static GroupSelectorWidgetUiBinder uiBinder = GWT.create(GroupSelectorWidgetUiBinder.class);
 
-    @UiField
-    CheckBox select;
+	@UiField
+	CheckBox select;
 
-    @UiField
-    Label staticName;
-    @UiField
-    TextBox editableName;
-    @UiField
-    Image icon;
+	@UiField
+	Label staticName;
+	@UiField
+	TextBox editableName;
+	@UiField
+	Image icon;
 
-    public GroupSelectorWidget() {
-	initWidget(uiBinder.createAndBindUi(this));
-	editableName.ensureDebugId("GroupSelectorWidget-editableName");
-    }
+	public GroupSelectorWidget() {
+		initWidget(uiBinder.createAndBindUi(this));
+		editableName.ensureDebugId("GroupSelectorWidget-editableName");
+	}
 
-    @Override
-    public Widget asWidget() {
-	return this;
-    }
+	@Override
+	public HasText getEditableName() {
+		return editableName;
+	}
 
-    @Override
-    public HasText getEditableName() {
-	return editableName;
-    }
+	@Override
+	public HasValue<Boolean> getSelected() {
+		return select;
+	}
 
-    @Override
-    public HasValue<Boolean> getSelected() {
-	return select;
-    }
+	@Override
+	public HasText getStaticName() {
+		return staticName;
+	}
 
-    @Override
-    public HasText getStaticName() {
-	return staticName;
-    }
+	@Override
+	public void setEditable(final boolean editable) {
+		editableName.setVisible(editable);
+		staticName.setVisible(!editable);
+	}
 
-    @Override
-    public void setEditable(final boolean editable) {
-	editableName.setVisible(editable);
-	staticName.setVisible(!editable);
-    }
-
-    @Override
-    public void setIcon(final ImageResource icon) {
-	String style = this.icon.getStyleName();
-	this.icon.setResource(icon);
-	this.icon.setStyleName(style);
-    }
+	@Override
+	public void setIcon(final ImageResource icon) {
+		String style = this.icon.getStyleName();
+		this.icon.setResource(icon);
+		this.icon.setStyleName(style);
+	}
 
 }

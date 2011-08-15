@@ -22,69 +22,67 @@ import com.google.gwt.core.client.GWT;
  */
 public class UnattendedPagesManager {
 
-    private final HablarEventBus eventBus;
-    private final HashSet<Page<?>> unattendedChatPages;
-    private final BrowserFocusHandler focusManager;
+	private final HablarEventBus eventBus;
+	private final HashSet<Page<?>> unattendedChatPages;
+	private final BrowserFocusHandler focusManager;
 
-    public UnattendedPagesManager(final HablarEventBus hablarEventBus, final BrowserFocusHandler focusManager) {
-	eventBus = hablarEventBus;
-	this.focusManager = focusManager;
-	unattendedChatPages = new HashSet<Page<?>>();
-	bind();
-    }
-
-    public boolean contains(final Page<?> page) {
-	return unattendedChatPages.contains(page);
-    }
-
-    public int getSize() {
-	return unattendedChatPages.size();
-    }
-
-    private void bind() {
-	eventBus.addHandler(UserMessageEvent.TYPE, new UserMessageHandler() {
-	    @Override
-	    public void onUserMessage(final UserMessageEvent event) {
-		final String messageType = event.getMessageType();
-		if (isChatMessage(messageType)) {
-		    final Page<?> page = event.getPage();
-		    final Visibility visibility = page.getVisibility();
-
-		    GWT.log("USER MESSAGE " + visibility);
-
-		    if (((visibility != Visibility.focused) || !focusManager.hasFocus())
-			    && unattendedChatPages.add(page)) {
-			eventBus.fireEvent(new UnattendedChatsChangedEvent(ChangeType.added, page));
-		    }
-		}
-	    }
-	});
-
-	eventBus.addHandler(VisibilityChangedEvent.TYPE, new VisibilityChangedHandler() {
-	    @Override
-	    public void onVisibilityChanged(final VisibilityChangedEvent event) {
-		final Page<?> page = event.getPage();
-		if (isChatPage(page.getType())) {
-		    onChatVisibilityChanged(page, event.getVisibility());
-		}
-	    }
-
-	});
-
-    }
-
-    private boolean isChatMessage(final String messageType) {
-	return messageType.equals(PairChatPresenter.CHAT_MESSAGE) || messageType.equals(RoomPresenter.ROOM_MESSAGE);
-    }
-
-    private boolean isChatPage(final String pageType) {
-	return pageType.equals(PairChatPresenter.TYPE) || pageType.equals(RoomPresenter.TYPE);
-    }
-
-    private void onChatVisibilityChanged(final Page<?> page, final Visibility visibility) {
-	if (((visibility == Visibility.focused) || (visibility == Visibility.hidden))
-		&& unattendedChatPages.remove(page)) {
-	    eventBus.fireEvent(new UnattendedChatsChangedEvent(ChangeType.removed, page));
+	public UnattendedPagesManager(final HablarEventBus hablarEventBus, final BrowserFocusHandler focusManager) {
+		eventBus = hablarEventBus;
+		this.focusManager = focusManager;
+		unattendedChatPages = new HashSet<Page<?>>();
+		bind();
 	}
-    }
+
+	public boolean contains(final Page<?> page) {
+		return unattendedChatPages.contains(page);
+	}
+
+	public int getSize() {
+		return unattendedChatPages.size();
+	}
+
+	private void bind() {
+		eventBus.addHandler(UserMessageEvent.TYPE, new UserMessageHandler() {
+			@Override
+			public void onUserMessage(final UserMessageEvent event) {
+				final String messageType = event.getMessageType();
+				if (isChatMessage(messageType)) {
+					final Page<?> page = event.getPage();
+					final Visibility visibility = page.getVisibility();
+
+					GWT.log("USER MESSAGE " + visibility);
+
+					if (((visibility != Visibility.focused) || !focusManager.hasFocus()) && unattendedChatPages.add(page)) {
+						eventBus.fireEvent(new UnattendedChatsChangedEvent(ChangeType.added, page));
+					}
+				}
+			}
+		});
+
+		eventBus.addHandler(VisibilityChangedEvent.TYPE, new VisibilityChangedHandler() {
+			@Override
+			public void onVisibilityChanged(final VisibilityChangedEvent event) {
+				final Page<?> page = event.getPage();
+				if (isChatPage(page.getType())) {
+					onChatVisibilityChanged(page, event.getVisibility());
+				}
+			}
+
+		});
+
+	}
+
+	private boolean isChatMessage(final String messageType) {
+		return messageType.equals(PairChatPresenter.CHAT_MESSAGE) || messageType.equals(RoomPresenter.ROOM_MESSAGE);
+	}
+
+	private boolean isChatPage(final String pageType) {
+		return pageType.equals(PairChatPresenter.TYPE) || pageType.equals(RoomPresenter.TYPE);
+	}
+
+	private void onChatVisibilityChanged(final Page<?> page, final Visibility visibility) {
+		if (((visibility == Visibility.focused) || (visibility == Visibility.hidden)) && unattendedChatPages.remove(page)) {
+			eventBus.fireEvent(new UnattendedChatsChangedEvent(ChangeType.removed, page));
+		}
+	}
 }

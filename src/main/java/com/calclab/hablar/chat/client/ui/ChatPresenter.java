@@ -21,77 +21,76 @@ import com.google.gwt.event.dom.client.FocusHandler;
  * 
  */
 public class ChatPresenter extends PagePresenter<ChatDisplay> implements ChatPage {
-    private static final String ODD = "odd";
-    private static final String EVEN = "even";
-    private final ArrayList<ChatMessage> messages;
-    private String currentClass;
-    private String lastAuthor;
+	private static final String ODD = "odd";
+	private static final String EVEN = "even";
+	private final ArrayList<ChatMessage> messages;
+	private String currentClass;
+	private String lastAuthor;
 
-    public ChatPresenter(final String pageType, final String id, final HablarEventBus eventBus, final Chat chat,
-	    final ChatDisplay display) {
-	super(pageType, id, eventBus, display);
-	messages = new ArrayList<ChatMessage>();
-	this.currentClass = ODD;
-	this.lastAuthor = null;
+	public ChatPresenter(final String pageType, final String id, final HablarEventBus eventBus, final Chat chat, final ChatDisplay display) {
+		super(pageType, id, eventBus, display);
+		messages = new ArrayList<ChatMessage>();
+		this.currentClass = ODD;
+		this.lastAuthor = null;
 
-	display.getTextBoxFocus().addFocusHandler(new FocusHandler() {
-	    @Override
-	    public void onFocus(final FocusEvent event) {
-		setVisibility(Visibility.focused);
-	    }
-	});
+		display.getTextBoxFocus().addFocusHandler(new FocusHandler() {
+			@Override
+			public void onFocus(final FocusEvent event) {
+				setVisibility(Visibility.focused);
+			}
+		});
 
-	chat.addChatStateChangedHandler(true, new StateChangedHandler() {
-	    @Override
-	    public void onStateChanged(final StateChangedEvent event) {
-		setState(event.getState());
-	    }
-	});
-    }
-
-    /**
-     * Add message to the chat display.
-     */
-    @Override
-    public void addMessage(final ChatMessage message) {
-	final boolean sameAuthor = (lastAuthor == null ? message.author == null : lastAuthor.equals(message.author));
-	if (!sameAuthor) {
-	    currentClass = currentClass == EVEN ? ODD : EVEN;
-	    lastAuthor = message.author;
+		chat.addChatStateChangedHandler(true, new StateChangedHandler() {
+			@Override
+			public void onStateChanged(final StateChangedEvent event) {
+				setState(event.getState());
+			}
+		});
 	}
-	messages.add(message);
-	display.addMessage(message, currentClass);
-    }
 
-    @Override
-    public ArrayList<ChatMessage> getMessages() {
-	return messages;
-    }
-
-    @Override
-    public void setVisibility(final Visibility visibility) {
-	super.setVisibility(visibility);
-	if ((visibility == Visibility.focused) && BrowserFocusHandler.getInstance().hasFocus()) {
-	    display.setTextBoxFocus(true);
+	/**
+	 * Add message to the chat display.
+	 */
+	@Override
+	public void addMessage(final ChatMessage message) {
+		final boolean sameAuthor = (lastAuthor == null ? message.author == null : lastAuthor.equals(message.author));
+		if (!sameAuthor) {
+			currentClass = currentClass == EVEN ? ODD : EVEN;
+			lastAuthor = message.author;
+		}
+		messages.add(message);
+		display.addMessage(message, currentClass);
 	}
-    }
 
-    protected void sendMessage(final Chat chat, final ChatDisplay display) {
-	final String text = display.getBody().getText().trim();
-	if (Empty.not(text)) {
-	    final ChatMessage message = new ChatMessage("me", text, ChatMessage.MessageType.sent);
-	    message.color = ColorHelper.ME;
-	    message.setDate(new Date());
-	    addMessage(message);
-	    chat.send(new Message(text));
-	    display.clearAndFocus();
+	@Override
+	public ArrayList<ChatMessage> getMessages() {
+		return messages;
 	}
-    }
 
-    protected void setState(final String chatState) {
-	final boolean visible = ChatStates.ready.equals(chatState);
-	display.setControlsVisible(visible);
-	display.setStatusVisible(visible);
-    }
+	@Override
+	public void setVisibility(final Visibility visibility) {
+		super.setVisibility(visibility);
+		if ((visibility == Visibility.focused) && BrowserFocusHandler.getInstance().hasFocus()) {
+			display.setTextBoxFocus(true);
+		}
+	}
+
+	protected void sendMessage(final Chat chat, final ChatDisplay display) {
+		final String text = display.getBody().getText().trim();
+		if (Empty.not(text)) {
+			final ChatMessage message = new ChatMessage("me", text, ChatMessage.MessageType.sent);
+			message.color = ColorHelper.ME;
+			message.setDate(new Date());
+			addMessage(message);
+			chat.send(new Message(text));
+			display.clearAndFocus();
+		}
+	}
+
+	protected void setState(final String chatState) {
+		final boolean visible = ChatStates.ready.equals(chatState);
+		display.setControlsVisible(visible);
+		display.setStatusVisible(visible);
+	}
 
 }

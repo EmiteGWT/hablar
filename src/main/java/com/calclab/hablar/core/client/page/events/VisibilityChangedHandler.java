@@ -4,6 +4,6 @@ import com.google.gwt.event.shared.EventHandler;
 
 public interface VisibilityChangedHandler extends EventHandler {
 
-    void onVisibilityChanged(VisibilityChangedEvent event);
+	void onVisibilityChanged(VisibilityChangedEvent event);
 
 }

@@ -1,15 +1,17 @@
 package com.calclab.hablar.core.client.ui.menu;
 
+import com.google.gwt.resources.client.ImageResource;
+
 public interface Action<T> {
 
-    void execute(T target);
+	void execute(T target);
 
-    String getIcon();
+	ImageResource getIcon();
 
-    String getId();
+	String getId();
 
-    String getDescription();
+	String getDescription();
 
-    boolean isApplicable(T target);
+	boolean isApplicable(T target);
 
 }

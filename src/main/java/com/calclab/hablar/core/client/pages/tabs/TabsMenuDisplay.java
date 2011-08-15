@@ -6,10 +6,10 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 
 public interface TabsMenuDisplay extends Display {
 
-    HasClickHandlers getMenu();
+	HasClickHandlers getMenu();
 
-    MenuDisplay<TabsMenuPresenter> newTabsMenu(String menuId);
+	MenuDisplay<TabsMenuPresenter> newTabsMenu(String menuId);
 
-    void setVisible(boolean visible);
+	void setVisible(boolean visible);
 
 }

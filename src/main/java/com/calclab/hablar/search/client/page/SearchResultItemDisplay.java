@@ -6,15 +6,15 @@ import com.google.gwt.user.client.ui.HasText;
 
 public interface SearchResultItemDisplay extends Display {
 
-    HasText getJid();
+	HasText getJid();
 
-    HasText getName();
+	HasText getName();
 
-    HasClickHandlers getMenu();
+	HasClickHandlers getMenu();
 
-    HasClickHandlers getBuddyIcon();
+	HasClickHandlers getBuddyIcon();
 
-    HasClickHandlers getClickableJid();
+	HasClickHandlers getClickableJid();
 
-    HasClickHandlers getClickableName();
+	HasClickHandlers getClickableName();
 }

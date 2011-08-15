@@ -9,12 +9,12 @@ import com.calclab.emite.im.client.roster.RosterItem;
  */
 public interface RosterItemSelector {
 
-    void addRosterItem(RosterItem rosterItem);
+	void addRosterItem(RosterItem rosterItem);
 
-    void addSelectedRosterItem(RosterItem rosterItem);
+	void addSelectedRosterItem(RosterItem rosterItem);
 
-    void clearSelectionList();
+	void clearSelectionList();
 
-    Collection<RosterItem> getSelectedItems();
+	Collection<RosterItem> getSelectedItems();
 
 }

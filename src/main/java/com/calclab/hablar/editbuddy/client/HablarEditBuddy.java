@@ -18,37 +18,24 @@ import com.calclab.hablar.roster.client.page.RosterPage;
  */
 public class HablarEditBuddy {
 
-    private static EditBuddyMessages editBuddyMessages;
-
-    private static Action<RosterItemPresenter> createEditBuddyAction(final EditBuddyPage editBuddy) {
-	return new SimpleAction<RosterItemPresenter>(i18n().changeNickName(), "EditBuddy-editAction") {
-	    @Override
-	    public void execute(final RosterItemPresenter target) {
-		editBuddy.setItem(target.getItem());
-		editBuddy.requestVisibility(Visibility.focused);
-	    }
-	};
-    }
-
-    public static EditBuddyMessages i18n() {
-	return editBuddyMessages;
-    }
-
-    public static void setMessages(final EditBuddyMessages messages) {
-	editBuddyMessages = messages;
-    }
-
-    private final XmppRoster roster;
-
-    public HablarEditBuddy(final Hablar hablar, final XmppRoster roster) {
-	this.roster = roster;
-	final EditBuddyPage editBuddy = new EditBuddyPage(roster, hablar.getEventBus(), new EditBuddyWidget());
-	hablar.addPage(editBuddy, OverlayContainer.ROL);
-	final List<Page<?>> rosters = hablar.getPagesOfType(RosterPage.TYPE);
-	for (final Page<?> page : rosters) {
-	    final RosterPage rosterPage = (RosterPage) page;
-	    rosterPage.getItemMenu().addAction(createEditBuddyAction(editBuddy));
+	private static Action<RosterItemPresenter> createEditBuddyAction(final EditBuddyPage editBuddy) {
+		return new SimpleAction<RosterItemPresenter>(EditBuddyMessages.msg.changeNickName(), "EditBuddy-editAction") {
+			@Override
+			public void execute(final RosterItemPresenter target) {
+				editBuddy.setItem(target.getItem());
+				editBuddy.requestVisibility(Visibility.focused);
+			}
+		};
 	}
-    }
+
+	public HablarEditBuddy(final Hablar hablar, final XmppRoster roster) {
+		final EditBuddyPage editBuddy = new EditBuddyPage(roster, hablar.getEventBus(), new EditBuddyWidget());
+		hablar.addPage(editBuddy, OverlayContainer.ROL);
+		final List<Page<?>> rosters = hablar.getPagesOfType(RosterPage.TYPE);
+		for (final Page<?> page : rosters) {
+			final RosterPage rosterPage = (RosterPage) page;
+			rosterPage.getItemMenu().addAction(createEditBuddyAction(editBuddy));
+		}
+	}
 
 }

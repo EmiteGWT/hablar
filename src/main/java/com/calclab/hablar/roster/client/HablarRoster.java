@@ -19,56 +19,44 @@ import com.calclab.hablar.roster.client.page.RosterWidget;
 
 public class HablarRoster {
 
-    private static RosterMessages rosterMessages;
+	private final RosterPage rosterPage;
 
-    public static RosterMessages i18n() {
-	return rosterMessages;
-    }
+	public HablarRoster(final Hablar hablar, final RosterConfig rosterConfig, final XmppSession session, final XmppRoster roster,
+			final ChatManager chatManager, final SubscriptionHandler subscriptionHandler) {
 
-    public static void setMessages(final RosterMessages messages) {
-	rosterMessages = messages;
-    }
+		final NonBlockingCommandScheduler commandQueue = new NonBlockingCommandScheduler();
 
-    private final RosterPage rosterPage;
+		subscriptionHandler.setBehaviour(Behaviour.acceptAll);
 
-    public HablarRoster(final Hablar hablar, final RosterConfig rosterConfig, final XmppSession session,
-	    final XmppRoster roster, final ChatManager chatManager, final SubscriptionHandler subscriptionHandler) {
-
-	final NonBlockingCommandScheduler commandQueue = new NonBlockingCommandScheduler();
-
-	subscriptionHandler.setBehaviour(Behaviour.acceptAll);
-
-	if ((rosterConfig.rosterItemClickAction == null) && rosterConfig.oneClickChat) {
-	    rosterConfig.rosterItemClickAction = new SimpleAction<RosterItem>(i18n().clickToChatWith(),
-		    "rosterItemClickAction") {
-		@Override
-		public void execute(final RosterItem item) {
-		    chatManager.open(item.getJID());
+		if ((rosterConfig.rosterItemClickAction == null) && rosterConfig.oneClickChat) {
+			rosterConfig.rosterItemClickAction = new SimpleAction<RosterItem>(RosterMessages.msg.clickToChatWith(), "rosterItemClickAction") {
+				@Override
+				public void execute(final RosterItem item) {
+					chatManager.open(item.getJID());
+				}
+			};
 		}
-	    };
+
+		rosterPage = new RosterPresenter(session, roster, chatManager, hablar.getEventBus(), new RosterWidget(), rosterConfig, commandQueue);
+		rosterPage.setVisibility(Visibility.notFocused);
+		hablar.addPage(rosterPage);
+
+		session.addSessionStateChangedHandler(true, new StateChangedHandler() {
+			@Override
+			public void onStateChanged(final StateChangedEvent event) {
+				if (SessionStates.ready.equals(event.getState())) {
+					rosterPage.requestVisibility(Visibility.focused);
+				}
+			}
+		});
+		rosterPage.addHighPriorityActions();
 	}
 
-	rosterPage = new RosterPresenter(session, roster, chatManager, hablar.getEventBus(), new RosterWidget(),
-		rosterConfig, commandQueue);
-	rosterPage.setVisibility(Visibility.notFocused);
-	hablar.addPage(rosterPage);
+	public void addLowPriorityActions() {
+		rosterPage.addLowPriorityActions();
+	}
 
-	session.addSessionStateChangedHandler(true, new StateChangedHandler() {
-	    @Override
-	    public void onStateChanged(final StateChangedEvent event) {
-		if (SessionStates.ready.equals(event.getState())) {
-		    rosterPage.requestVisibility(Visibility.focused);
-		}
-	    }
-	});
-	rosterPage.addHighPriorityActions();
-    }
-
-    public void addLowPriorityActions() {
-	rosterPage.addLowPriorityActions();
-    }
-
-    public RosterPage getRosterPage() {
-	return rosterPage;
-    }
+	public RosterPage getRosterPage() {
+		return rosterPage;
+	}
 }

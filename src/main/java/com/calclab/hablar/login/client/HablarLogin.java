@@ -10,35 +10,25 @@ import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 
 public class HablarLogin {
 
-    private static LoginMessages loginMessages;
-
-    public static LoginMessages i18n() {
-	return loginMessages;
-    }
-
-    public static void setMessages(final LoginMessages messages) {
-	loginMessages = messages;
-    }
-
-    private static void setState(final Page<?> login, final String sessionState) {
-	if (SessionStates.disconnected.equals(sessionState)) {
-	    login.requestVisibility(Visibility.focused);
+	private static void setState(final Page<?> login, final String sessionState) {
+		if (SessionStates.disconnected.equals(sessionState)) {
+			login.requestVisibility(Visibility.focused);
+		}
 	}
-    }
 
-    public HablarLogin(final Hablar hablar, final LoginConfig config, final XmppSession session) {
-	final LoginPage login = new LoginPage(session, hablar.getEventBus(), new LoginWidget());
-	hablar.addPage(login);
+	public HablarLogin(final Hablar hablar, final LoginConfig config, final XmppSession session) {
+		final LoginPage login = new LoginPage(session, hablar.getEventBus(), new LoginWidget());
+		hablar.addPage(login);
 
-	session.addSessionStateChangedHandler(true, new StateChangedHandler() {
-	    @Override
-	    public void onStateChanged(final StateChangedEvent event) {
-		setState(login, event.getState());
-	    }
-	});
+		session.addSessionStateChangedHandler(true, new StateChangedHandler() {
+			@Override
+			public void onStateChanged(final StateChangedEvent event) {
+				setState(login, event.getState());
+			}
+		});
 
-	login.getDisplay().getUser().setText(config.userName);
-	login.getDisplay().getPassword().setText(config.password);
-    }
+		login.getDisplay().getUser().setText(config.userName);
+		login.getDisplay().getPassword().setText(config.password);
+	}
 
 }

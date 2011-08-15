@@ -12,29 +12,18 @@ import com.calclab.hablar.core.client.container.PageAddedHandler;
 
 public class HablarChat {
 
-    private static ChatMessages chatMessages;
+	public HablarChat(final Hablar hablar, final ChatConfig chatConfig, final XmppRoster roster, final ChatManager chatManager, final StateManager stateManager) {
+		new HablarChatManager(roster, chatManager, hablar, chatConfig);
 
-    public static ChatMessages i18n() {
-	return chatMessages;
-    }
-
-    public static void setMessages(final ChatMessages messages) {
-	chatMessages = messages;
-    }
-
-    public HablarChat(final Hablar hablar, final ChatConfig chatConfig, final XmppRoster roster,
-	    final ChatManager chatManager, final StateManager stateManager) {
-	new HablarChatManager(roster, chatManager, hablar, chatConfig);
-
-	hablar.addPageAddedHandler(new PageAddedHandler() {
-	    @Override
-	    public void onPageAdded(final PageAddedEvent event) {
-		if (event.isType(PairChatPresenter.TYPE)) {
-		    final PairChatPage page = (PairChatPage) event.getPage();
-		    new HablarChatStateManager(stateManager, page);
-		}
-	    }
-	}, true);
-    }
+		hablar.addPageAddedHandler(new PageAddedHandler() {
+			@Override
+			public void onPageAdded(final PageAddedEvent event) {
+				if (event.isType(PairChatPresenter.TYPE)) {
+					final PairChatPage page = (PairChatPage) event.getPage();
+					new HablarChatStateManager(stateManager, page);
+				}
+			}
+		}, true);
+	}
 
 }

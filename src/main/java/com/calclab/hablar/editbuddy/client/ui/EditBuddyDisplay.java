@@ -9,21 +9,21 @@ import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.HasText;
 
 public interface EditBuddyDisplay extends Display {
-    HasState<Boolean> getAcceptState();
+	HasState<Boolean> getAcceptState();
 
-    HasClickHandlers getCancel();
+	HasClickHandlers getCancel();
 
-    HasChangeHandlers getEnterAction();
+	HasChangeHandlers getEnterAction();
 
-    Focusable getFirstFocusable();
+	Focusable getFirstFocusable();
 
-    HasText getNickName();
+	HasText getNickName();
 
-    HasText getNickNameError();
+	HasText getNickNameError();
 
-    HasKeyDownHandlers getNickNameKeys();
+	HasKeyDownHandlers getNickNameKeys();
 
-    HasText getOldNickName();
+	HasText getOldNickName();
 
-    HasClickHandlers getSave();
+	HasClickHandlers getSave();
 }

@@ -10,19 +10,19 @@ import java.util.List;
  */
 public class ListNotEmptyValidator<T> implements Validator<List<T>> {
 
-    private String message;
+	private String message;
 
-    public ListNotEmptyValidator(String message) {
-	this.message = message;
-    }
+	public ListNotEmptyValidator(String message) {
+		this.message = message;
+	}
 
-    @Override
-    public String getMessage() {
-	return message;
-    }
+	@Override
+	public String getMessage() {
+		return message;
+	}
 
-    @Override
-    public boolean isValid(List<T> value) {
-	return !value.isEmpty();
-    }
+	@Override
+	public boolean isValid(List<T> value) {
+		return !value.isEmpty();
+	}
 }

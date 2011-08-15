@@ -11,47 +11,31 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class UserWidget extends Composite implements UserDisplay {
 
-    private static UserMessages messages;
+	interface UserWidgetUiBinder extends UiBinder<Widget, UserWidget> {
+	}
 
-    public static void setMessages(final UserMessages messages) {
-	UserWidget.messages = messages;
-    }
+	private static UserWidgetUiBinder uiBinder = GWT.create(UserWidgetUiBinder.class);
 
-    public static UserMessages i18n() {
-	return messages;
-    }
+	@UiField
+	FlowPanel container;
+	@UiField
+	Button close;
 
-    interface UserWidgetUiBinder extends UiBinder<Widget, UserWidget> {
-    }
+	public UserWidget() {
+		initWidget(uiBinder.createAndBindUi(this));
+		close.ensureDebugId("UserWidget-close");
+	}
 
-    private static UserWidgetUiBinder uiBinder = GWT.create(UserWidgetUiBinder.class);
+	@Override
+	public void addPage(final EditorPage<?> page) {
+		// final HeaderPresenter head = new HeaderPresenter(page, new
+		// AccordionHeaderWidget(page.getId()));
+		// container.add(head.getDisplay().asWidget());
+		container.add(page.getDisplay().asWidget());
+	}
 
-    @UiField
-    FlowPanel container;
-    @UiField
-    Button close;
-
-    public UserWidget() {
-	initWidget(uiBinder.createAndBindUi(this));
-	close.ensureDebugId("UserWidget-close");
-	close.setText(i18n().closeAction());
-    }
-
-    @Override
-    public void addPage(final EditorPage<?> page) {
-	// final HeaderPresenter head = new HeaderPresenter(page, new
-	// AccordionHeaderWidget(page.getId()));
-	// container.add(head.getDisplay().asWidget());
-	container.add(page.getDisplay().asWidget());
-    }
-
-    @Override
-    public Widget asWidget() {
-	return this;
-    }
-
-    @Override
-    public HasClickHandlers getClose() {
-	return close;
-    }
+	@Override
+	public HasClickHandlers getClose() {
+		return close;
+	}
 }

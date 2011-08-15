@@ -10,25 +10,25 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
  */
 public class Idify {
 
-    public static String id(final String text) {
-	return text == null ? "" : text.replaceAll("[\\s]", "_");
-    }
-
-    public static String id(final String... strings) {
-	String result = null;
-	for (final String s : strings) {
-	    result = result == null ? "" : result + "-";
-	    result += id(s);
+	public static String id(final String text) {
+		return text == null ? "" : text.replaceAll("[\\s]", "_");
 	}
-	return result;
-    }
 
-    public static String id(final XmppURI jid) {
-	return uriId(jid.toString());
-    }
+	public static String id(final String... strings) {
+		String result = null;
+		for (final String s : strings) {
+			result = result == null ? "" : result + "-";
+			result += id(s);
+		}
+		return result;
+	}
 
-    public static String uriId(final String uri) {
-	return uri == null ? "" : uri.replaceAll("[@/\\.]", "-");
-    }
+	public static String id(final XmppURI jid) {
+		return uriId(jid.toString());
+	}
+
+	public static String uriId(final String uri) {
+		return uri == null ? "" : uri.replaceAll("[@/\\.]", "-");
+	}
 
 }

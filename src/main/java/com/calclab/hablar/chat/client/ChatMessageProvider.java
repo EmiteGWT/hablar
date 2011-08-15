@@ -9,5 +9,5 @@ import com.calclab.hablar.chat.client.ui.ChatMessage;
  * the copy to clipboard functionality (or some other in the future)
  */
 public interface ChatMessageProvider {
-    ArrayList<ChatMessage> getMessages();
+	ArrayList<ChatMessage> getMessages();
 }

@@ -1,18 +1,12 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	<!-- <ui:with type="com.calclab.hablar.core.client.ui.icon.HablarIconsBundle" 
-		field="res"></ui:with> -->
-	<ui:style>
-		
-	</ui:style>
-	<ui:with type="com.calclab.hablar.core.client.ui.icon.MissingIconBundle"
-		field="res"></ui:with>
+	<ui:with type="com.calclab.hablar.icons.client.IconsBundle" field="res" />
 	<g:HTMLPanel
 		addStyleNames="hablar-GroupHeaderWidget hablar-lightBackground hablar-bottomDarkBordered">
 		<!-- g:Image resource="{res.missingIcon}" ui:field="toggle"
 			addStyleNames="toggleButton" / -->
-		<g:Image resource="{res.missingIcon}" ui:field="menu"
+		<g:Image resource="{res.menuIcon}" ui:field="menu"
 			addStyleNames="menu" />
 		<g:Label ui:field="name" addStyleNames="name">name</g:Label>
 	</g:HTMLPanel>

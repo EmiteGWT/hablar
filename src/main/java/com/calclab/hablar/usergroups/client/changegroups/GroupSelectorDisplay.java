@@ -7,13 +7,13 @@ import com.google.gwt.user.client.ui.HasValue;
 
 public interface GroupSelectorDisplay extends Display {
 
-    HasText getEditableName();
+	HasText getEditableName();
 
-    HasValue<Boolean> getSelected();
+	HasValue<Boolean> getSelected();
 
-    HasText getStaticName();
+	HasText getStaticName();
 
-    void setEditable(boolean editable);
+	void setEditable(boolean editable);
 
-    void setIcon(ImageResource icon);
+	void setIcon(ImageResource icon);
 }

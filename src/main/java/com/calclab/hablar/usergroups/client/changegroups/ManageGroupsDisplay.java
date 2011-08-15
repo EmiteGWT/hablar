@@ -6,16 +6,16 @@ import com.google.gwt.user.client.ui.HasText;
 
 public interface ManageGroupsDisplay extends Display {
 
-    GroupSelectorDisplay addGroupSelector();
+	GroupSelectorDisplay addGroupSelector();
 
-    void clearGroupList();
+	void clearGroupList();
 
-    HasClickHandlers getApply();
+	HasClickHandlers getApply();
 
-    HasClickHandlers getCancel();
+	HasClickHandlers getCancel();
 
-    HasText getContactNameField();
+	HasText getContactNameField();
 
-    HasClickHandlers getNewGroup();
+	HasClickHandlers getNewGroup();
 
 }

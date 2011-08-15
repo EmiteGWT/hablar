@@ -7,20 +7,20 @@ import com.google.gwt.event.dom.client.HasMouseOverHandlers;
 import com.google.gwt.user.client.ui.HasText;
 
 public interface OccupantsDisplay extends Display {
-    OccupantDisplay addOccupant();
+	OccupantDisplay addOccupant();
 
-    void clearPanel();
+	void clearPanel();
 
-    HasClickHandlers getAction();
+	HasClickHandlers getAction();
 
-    HasText getLabel();
+	HasText getLabel();
 
-    HasMouseOutHandlers getOutAction();
+	HasMouseOutHandlers getOutAction();
 
-    HasMouseOverHandlers getOverAction();
+	HasMouseOverHandlers getOverAction();
 
-    boolean isPanelVisible();
+	boolean isPanelVisible();
 
-    void setPanelVisible(boolean visible);
+	void setPanelVisible(boolean visible);
 
 }

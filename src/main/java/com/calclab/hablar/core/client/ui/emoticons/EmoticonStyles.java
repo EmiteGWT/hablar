@@ -4,78 +4,78 @@ import com.google.gwt.resources.client.CssResource;
 
 public interface EmoticonStyles extends CssResource {
 
-    String alien();
+	String alien();
 
-    String andy();
+	String andy();
 
-    String angel();
+	String angel();
 
-    String angry();
+	String angry();
 
-    String bandit();
+	String bandit();
 
-    String base();
+	String base();
 
-    String blushing();
+	String blushing();
 
-    String bulletBlack();
+	String bulletBlack();
 
-    String bulletStar();
+	String bulletStar();
 
-    String cool();
+	String cool();
 
-    String crying();
+	String crying();
 
-    String devil();
+	String devil();
 
-    String grin();
+	String grin();
 
-    String happy();
+	String happy();
 
-    String heart();
+	String heart();
 
-    String joyful();
+	String joyful();
 
-    String kissing();
+	String kissing();
 
-    String lol();
+	String lol();
 
-    String love();
+	String love();
 
-    String ninja();
+	String ninja();
 
-    String pinched();
+	String pinched();
 
-    String policeman();
+	String policeman();
 
-    String pouty();
+	String pouty();
 
-    String sad();
+	String sad();
 
-    String sick();
+	String sick();
 
-    String sideways();
+	String sideways();
 
-    String sleeping();
+	String sleeping();
 
-    String smile();
+	String smile();
 
-    String surprised();
+	String surprised();
 
-    String tongue();
+	String tongue();
 
-    String uncertain();
+	String uncertain();
 
-    String unsure();
+	String unsure();
 
-    String w00t();
+	String w00t();
 
-    String whistling();
+	String whistling();
 
-    String wink();
+	String wink();
 
-    String wizard();
+	String wizard();
 
-    String wondering();
+	String wondering();
 
 }

@@ -16,18 +16,18 @@
 					<span ui:field='title'>Manage group</span>
 				</h2>
 				<p>
-					<label ui:field="groupNameLabel">Group name:</label>
-					<g:TextBox ui:field="groupName"></g:TextBox>
-          			<g:Label ui:field="groupNameError" addStyleNames="hablar-errorColor"></g:Label>
+					<label><ui:msg key="groupNameLabelText">Group name:</ui:msg></label>
+					<g:TextBox ui:field="groupName" />
+          			<g:Label ui:field="groupNameError" addStyleNames="hablar-errorColor" />
 				</p>
 				<br/>
-				<label ui:field="userListLabel">Users:</label>
+				<label><ui:msg key="usersLabelText">Users:</ui:msg></label>
 				<p>
 					<hs:DoubleList ui:field="selectionList" addStyleNames="{style.wideArea} hablar-darkColor" />
 				</p>
 				<div class="actions hablar-topDefaultBordered">
-					<g:Button ui:field="accept">Accept</g:Button>
-					<g:Button ui:field="cancel">Cancel</g:Button>
+					<g:Button ui:field="accept"><ui:msg key="acceptAction">Accept</ui:msg></g:Button>
+					<g:Button ui:field="cancel"><ui:msg key="cancelAction">Cancel</ui:msg></g:Button>
 				</div>
 			</div>
 		</g:HTMLPanel>

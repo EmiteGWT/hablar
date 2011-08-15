@@ -13,15 +13,15 @@
 				<g:north size="10">
 					<g:HTMLPanel addStyleNames="form">
 						<p>
-							<label ui:field="userLabel">User:</label>
-							<g:TextBox  ui:field="user" />
+							<label><ui:msg key="userLabel">User:</ui:msg></label>
+							<g:TextBox ui:field="user" />
 						</p>
 						<p>
-							<label ui:field="passwordLabel">Password:</label>
+							<label><ui:msg key="passwordLabel">Password:</ui:msg></label>
 							<g:PasswordTextBox ui:field="password" />
 						</p>
 						<div addStyleNames="actions">
-							<g:Button ui:field="button">Login</g:Button>
+							<g:Button ui:field="button"><ui:msg key="login">Login</ui:msg></g:Button>
 						</div>
 					</g:HTMLPanel>
 				</g:north>

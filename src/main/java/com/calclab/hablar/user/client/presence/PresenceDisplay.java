@@ -5,28 +5,29 @@ import com.calclab.hablar.core.client.ui.menu.MenuDisplay;
 import com.google.gwt.event.dom.client.HasBlurHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.HasText;
 
 public interface PresenceDisplay extends Display {
 
-    HasClickHandlers getIcon();
+	HasClickHandlers getIcon();
 
-    HasClickHandlers getMenu();
+	HasClickHandlers getMenu();
 
-    HasKeyDownHandlers getStatus();
+	HasKeyDownHandlers getStatus();
 
-    HasBlurHandlers getStatusFocus();
+	HasBlurHandlers getStatusFocus();
 
-    HasText getStatusText();
+	HasText getStatusText();
 
-    MenuDisplay<PresencePage> newStatusMenuDisplay(String menuId);
+	MenuDisplay<PresencePage> newStatusMenuDisplay(String menuId);
 
-    void setPageTitle(String title);
+	void setPageTitle(String title);
 
-    void setStatusEnabled(boolean enabled);
+	void setStatusEnabled(boolean enabled);
 
-    void setStatusFocused(boolean focused);
+	void setStatusFocused(boolean focused);
 
-    void setStatusIcon(String icon);
+	void setStatusIcon(ImageResource iconResource);
 
 }

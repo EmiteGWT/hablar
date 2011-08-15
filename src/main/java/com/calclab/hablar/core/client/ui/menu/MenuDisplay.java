@@ -5,17 +5,17 @@ import com.google.gwt.user.client.Command;
 
 public interface MenuDisplay<T> extends Display {
 
-    void addAction(Action<T> action, Command command);
+	void addAction(Action<T> action, Command command);
 
-    void clearActions();
+	void clearActions();
 
-    void hide();
+	void hide();
 
-    boolean isVisible();
+	boolean isVisible();
 
-    void removeAction(Action<T> action);
+	void removeAction(Action<T> action);
 
-    void setActionVisible(Action<T> action, boolean visible);
+	void setActionVisible(Action<T> action, boolean visible);
 
-    void show(int left, int top);
+	void show(int left, int top);
 }

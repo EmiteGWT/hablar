@@ -14,19 +14,18 @@ import com.google.gwt.user.client.ui.HasText;
  */
 public class HablarRoomStateManager {
 
-    public HablarRoomStateManager(final MUCChatStateManager manager, final RoomPresenter roomPage) {
-	final Room room = roomPage.getRoom();
-	final RoomChatStateManager occupantsStateManager = manager.getRoomOccupantsChatStateManager(room);
+	public HablarRoomStateManager(final MUCChatStateManager manager, final RoomPresenter roomPage) {
+		final Room room = roomPage.getRoom();
+		final RoomChatStateManager occupantsStateManager = manager.getRoomOccupantsChatStateManager(room);
 
-	occupantsStateManager.addRoomChatStateNotificationHandler(new RoomChatStateNotificationHandler() {
-	    @Override
-	    public void onRoomChatStateNotification(final RoomChatStateNotificationEvent event) {
-		final HasText stateDisplay = roomPage.getDisplay().getState();
-		stateDisplay.setText(HablarChatStateManager.getStateText(event.getChatState(), event.getFrom()
-			.getResource()));
-	    }
-	});
+		occupantsStateManager.addRoomChatStateNotificationHandler(new RoomChatStateNotificationHandler() {
+			@Override
+			public void onRoomChatStateNotification(final RoomChatStateNotificationEvent event) {
+				final HasText stateDisplay = roomPage.getDisplay().getState();
+				stateDisplay.setText(HablarChatStateManager.getStateText(event.getChatState(), event.getFrom().getResource()));
+			}
+		});
 
-    }
+	}
 
 }

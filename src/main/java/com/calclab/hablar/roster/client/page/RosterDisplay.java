@@ -11,18 +11,18 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 
 public interface RosterDisplay extends Display {
 
-    void addGroup(RosterGroupPresenter group, Menu<RosterGroupPresenter> menu);
+	void addGroup(RosterGroupPresenter group, Menu<RosterGroupPresenter> menu);
 
-    HasClickHandlers createAction(Action<?> action);
+	HasClickHandlers createAction(Action<?> action);
 
-    RosterGroupDisplay newRosterGroupDisplay();
+	RosterGroupDisplay newRosterGroupDisplay();
 
-    MenuDisplay<RosterGroupPresenter> newRosterGroupMenuDisplay(String menuId);
+	MenuDisplay<RosterGroupPresenter> newRosterGroupMenuDisplay(String menuId);
 
-    MenuDisplay<RosterItemPresenter> newRosterItemMenuDisplay(String menuId);
+	MenuDisplay<RosterItemPresenter> newRosterItemMenuDisplay(String menuId);
 
-    void remove(RosterGroupPresenter groupPresenter);
+	void remove(RosterGroupPresenter groupPresenter);
 
-    void setActive(boolean active);
+	void setActive(boolean active);
 
 }

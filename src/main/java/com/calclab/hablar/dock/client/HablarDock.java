@@ -8,15 +8,15 @@ import com.calclab.hablar.core.client.mvp.HablarEventBus;
 
 public class HablarDock {
 
-    public static enum Position {
-	left, right
-    }
+	public static enum Position {
+		left, right
+	}
 
-    public HablarDock(final Hablar hablar, final DockConfig config) {
-	final HablarEventBus eventBus = hablar.getEventBus();
-	final PagesContainer main = hablar.getContainer(MainContainer.ROL);
-	final VariableDockContainer container = new VariableDockContainer(eventBus, config, main, hablar.getDisplay());
-	hablar.addContainer(container, Chain.before);
-    }
+	public HablarDock(final Hablar hablar, final DockConfig config) {
+		final HablarEventBus eventBus = hablar.getEventBus();
+		final PagesContainer main = hablar.getContainer(MainContainer.ROL);
+		final VariableDockContainer container = new VariableDockContainer(eventBus, config, main, hablar.getDisplay());
+		hablar.addContainer(container, Chain.before);
+	}
 
 }

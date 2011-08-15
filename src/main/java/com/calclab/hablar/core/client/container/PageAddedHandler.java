@@ -4,6 +4,6 @@ import com.google.gwt.event.shared.EventHandler;
 
 public interface PageAddedHandler extends EventHandler {
 
-    void onPageAdded(PageAddedEvent event);
+	void onPageAdded(PageAddedEvent event);
 
 }

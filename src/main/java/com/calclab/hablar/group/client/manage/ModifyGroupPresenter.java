@@ -20,62 +20,61 @@ import com.google.gwt.event.dom.client.ClickHandler;
  */
 public class ModifyGroupPresenter extends ManageGroupPresenter {
 
-    private String oldGroupName;
-    private final XmppRoster roster;
+	private String oldGroupName;
+	private final XmppRoster roster;
 
-    public ModifyGroupPresenter(final XmppRoster roster, final HablarEventBus eventBus,
-	    final ManageGroupDisplay display, final String pageTitle) {
-	super(eventBus, display, pageTitle);
-	this.roster = roster;
-	display.getApply().addClickHandler(new ClickHandler() {
+	public ModifyGroupPresenter(final XmppRoster roster, final HablarEventBus eventBus, final ManageGroupDisplay display, final String pageTitle) {
+		super(eventBus, display, pageTitle);
+		this.roster = roster;
+		display.getApply().addClickHandler(new ClickHandler() {
 
-	    @Override
-	    public void onClick(final ClickEvent event) {
-		final String groupName = display.getGroupNameText();
-		final Collection<RosterItem> items = display.getSelectedItems();
-		final Map<XmppURI, RosterItem> uri2item = new HashMap<XmppURI, RosterItem>();
-		final RosterGroup oldGroup = roster.getRosterGroup(oldGroupName);
-		if (oldGroup != null) {
-		    final Collection<RosterItem> oldItems = oldGroup.getItems();
-		    for (final RosterItem item : oldItems) {
-			uri2item.put(item.getJID(), item);
-			item.removeFromGroup(oldGroupName);
-		    }
-		}
-		for (final RosterItem item : items) {
-		    RosterItem currentItem = uri2item.get(item.getJID());
-		    if (currentItem == null) {
-			currentItem = item;
-			uri2item.put(currentItem.getJID(), currentItem);
-		    }
-		    currentItem.addToGroup(groupName);
-		}
-		roster.requestUpdateItems(uri2item.values());
-		requestVisibility(Visibility.hidden);
-	    }
-	});
-    }
-
-    @Override
-    protected void preloadForm() {
-	display.clearSelectionList();
-	display.getGroupName().setValue(oldGroupName);
-	final RosterGroup group = roster.getRosterGroup(oldGroupName);
-	final Set<XmppURI> addedUris = new HashSet<XmppURI>();
-	if (group != null) {
-	    for (final RosterItem item : group.getItems()) {
-		display.addSelectedRosterItem(item);
-		addedUris.add(item.getJID());
-	    }
+			@Override
+			public void onClick(final ClickEvent event) {
+				final String groupName = display.getGroupNameText();
+				final Collection<RosterItem> items = display.getSelectedItems();
+				final Map<XmppURI, RosterItem> uri2item = new HashMap<XmppURI, RosterItem>();
+				final RosterGroup oldGroup = roster.getRosterGroup(oldGroupName);
+				if (oldGroup != null) {
+					final Collection<RosterItem> oldItems = oldGroup.getItems();
+					for (final RosterItem item : oldItems) {
+						uri2item.put(item.getJID(), item);
+						item.removeFromGroup(oldGroupName);
+					}
+				}
+				for (final RosterItem item : items) {
+					RosterItem currentItem = uri2item.get(item.getJID());
+					if (currentItem == null) {
+						currentItem = item;
+						uri2item.put(currentItem.getJID(), currentItem);
+					}
+					currentItem.addToGroup(groupName);
+				}
+				roster.requestUpdateItems(uri2item.values());
+				requestVisibility(Visibility.hidden);
+			}
+		});
 	}
-	for (final RosterItem item : roster.getItems()) {
-	    if (!addedUris.contains(item.getJID())) {
-		display.addRosterItem(item);
-	    }
-	}
-    }
 
-    public void setOldGroupName(final String oldGroupName) {
-	this.oldGroupName = oldGroupName;
-    }
+	@Override
+	protected void preloadForm() {
+		display.clearSelectionList();
+		display.getGroupName().setValue(oldGroupName);
+		final RosterGroup group = roster.getRosterGroup(oldGroupName);
+		final Set<XmppURI> addedUris = new HashSet<XmppURI>();
+		if (group != null) {
+			for (final RosterItem item : group.getItems()) {
+				display.addSelectedRosterItem(item);
+				addedUris.add(item.getJID());
+			}
+		}
+		for (final RosterItem item : roster.getItems()) {
+			if (!addedUris.contains(item.getJID())) {
+				display.addRosterItem(item);
+			}
+		}
+	}
+
+	public void setOldGroupName(final String oldGroupName) {
+		this.oldGroupName = oldGroupName;
+	}
 }
