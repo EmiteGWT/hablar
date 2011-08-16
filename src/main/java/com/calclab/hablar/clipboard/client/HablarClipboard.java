@@ -25,7 +25,7 @@ public class HablarClipboard {
 			public void onPageAdded(final PageAddedEvent event) {
 				if (event.isType(PairChatPresenter.TYPE)) {
 					final PairChatPage chatPage = (PairChatPage) event.getPage();
-					chatPage.addAction(new SimpleAction<PairChatPage>(ClipboardMessages.msg.copyToClipboardAction(), ACTION_ID, IconsBundle.bundle.consoleIcon()) {
+					chatPage.addAction(new SimpleAction<PairChatPage>(ClipboardMessages.msg.copyToClipboardAction(), ACTION_ID, IconsBundle.bundle.clipboardIcon()) {
 						@Override
 						public void execute(final PairChatPage page) {
 							copyToClipboardPage.setChatMessagesProvider(page);
@@ -34,7 +34,7 @@ public class HablarClipboard {
 					});
 				} else if (event.isType(RoomPresenter.TYPE)) {
 					final RoomPage roomPage = (RoomPage) event.getPage();
-					roomPage.addAction(new SimpleAction<RoomPage>(ClipboardMessages.msg.copyToClipboardAction(), ACTION_ID, IconsBundle.bundle.consoleIcon()) {
+					roomPage.addAction(new SimpleAction<RoomPage>(ClipboardMessages.msg.copyToClipboardAction(), ACTION_ID, IconsBundle.bundle.clipboardIcon()) {
 						@Override
 						public void execute(final RoomPage page) {
 							copyToClipboardPage.setChatMessagesProvider(page);
