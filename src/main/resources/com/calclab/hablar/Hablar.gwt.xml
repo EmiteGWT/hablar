@@ -23,14 +23,6 @@
 	<inherits name='com.calclab.hablar.user.HablarUser' />
 	<inherits name='com.calclab.hablar.usergroups.HablarUserGroups' />
 	<inherits name='com.calclab.hablar.vcard.HablarVCard' />
-
-	<inherits name='com.google.gwt.user.theme.chrome.Chrome' />
-	<!-- <inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
-	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
-
-	<!-- for add ensureDebugIds (debugId in UIBinder), remove/comment in production 
-		see UIObject.ensureDebugId()) -->
-	<inherits name="com.google.gwt.user.Debug" />
 	
 	<set-configuration-property name="UiBinder.useSafeHtmlTemplates" value="true" /> 
 
@@ -38,5 +30,4 @@
 	<extend-property name="locale" values="en" />
 
 	<source path='client' />
-	<entry-point class="com.calclab.hablar.client.HablarEntryPoint" />
 </module>
