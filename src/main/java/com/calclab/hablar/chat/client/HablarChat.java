@@ -1,7 +1,5 @@
 package com.calclab.hablar.chat.client;
 
-import org.openqa.jetty.jetty.servlet.Default;
-
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.xep.chatstate.client.StateManager;
