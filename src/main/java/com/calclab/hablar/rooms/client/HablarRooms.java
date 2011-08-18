@@ -62,6 +62,14 @@ public class HablarRooms {
 
 	}
 
+    /**
+     * Creates the action for the "Invite more people to this room" button on
+     * the chat.
+     * 
+     * @param page
+     *            the page to display.
+     * @return the {@link Action}
+     */
 	private Action<RoomPage> newInviteAction(final InviteToRoomPresenter invitePage) {
 		return new SimpleAction<RoomPage>(RoomMessages.msg.inviteToThisGroupChat(), ACTION_ID_INVITE, IconsBundle.bundle.buddyAddIcon()) {
 			@Override
@@ -83,6 +91,13 @@ public class HablarRooms {
 		return action;
 	}
 
+    /**
+     * Creates the action for the "Open room" button on the roster.
+     * 
+     * @param page
+     *            the page to display.
+     * @return the {@link Action}
+     */
 	private SimpleAction<RosterPage> newOpenRoomAction(final OpenNewRoomPresenter page) {
 		final String name = RoomMessages.msg.openNewGroupChatTooltip();
 		final SimpleAction<RosterPage> action = new SimpleAction<RosterPage>(name, ACTION_ID_OPENROOM, IconsBundle.bundle.groupChatAddIcon()) {
