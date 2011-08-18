@@ -3,6 +3,8 @@
 <module>
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name='com.calclab.emite.core.EmiteCore' />
+	<!-- TODO: Move emoticons into com.calclab.hablar.chat.ui -->
+	<inherits name='com.calclab.hablar.chat.HablarChat' />
 
 	<replace-with
 		class="com.calclab.hablar.core.client.browser.BrowserFocusHandler">
