@@ -17,6 +17,7 @@ public class ChatConfig {
 		String chatURI = PageAssist.getMeta("hablar.chatWidget");
 		config.openChat = XmppURI.uri(chatURI);
 		config.sendButtonVisible = PageAssist.isMetaTrue("hablar.sendButton");
+		config.enableEmoticons = PageAssist.isMetaTrue("hablar.enableEmoticons");
 		return config;
 	}
 

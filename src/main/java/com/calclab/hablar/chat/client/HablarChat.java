@@ -12,13 +12,18 @@ import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.container.PageAddedEvent;
 import com.calclab.hablar.core.client.container.PageAddedHandler;
 import com.calclab.hablar.core.client.ui.emoticons.EmoticonsChatMessageFormatReplacements;
-import com.calclab.suco.client.Suco;
-import com.google.inject.Inject;
 
 public class HablarChat {
 
 	public HablarChat(final Hablar hablar, final ChatConfig chatConfig, final XmppRoster roster, final ChatManager chatManager, final StateManager stateManager) {
-		new HablarChatManager(roster, chatManager, hablar, chatConfig);
+        // Set up the message replacements
+        ChatMessageFormatter.addReplacements(new StandardChatMessageFormatReplacements());
+        
+        if(chatConfig.enableEmoticons) {
+                ChatMessageFormatter.addReplacements(new EmoticonsChatMessageFormatReplacements());
+        }
+
+        new HablarChatManager(roster, chatManager, hablar, chatConfig);
 
 		hablar.addPageAddedHandler(new PageAddedHandler() {
 			@Override
