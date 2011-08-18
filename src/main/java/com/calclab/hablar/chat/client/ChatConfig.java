@@ -29,4 +29,8 @@ public class ChatConfig {
 	 */
 	public boolean sendButtonVisible = true;
 
+    /**
+     * Whether to enable emoticons. Default to <code>true</code>.
+     */
+    public boolean enableEmoticons = true;
 }
