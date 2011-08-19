@@ -95,7 +95,7 @@
 				<!-- Plugin configuration. There are many available options, see gwt-maven-plugin 
 					documentation at codehaus.org -->
 				<configuration>
-					<module>com.calclab.hablar.Hablar</module>
+					<module>com.calclab.hablar.HablarHtml</module>
 					<runTarget>Hablar.html</runTarget>
 					<hostedWebapp>${webappDirectory}</hostedWebapp>
 				</configuration>
