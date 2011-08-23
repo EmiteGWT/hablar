@@ -18,7 +18,7 @@
       <p>
         <label><ui:msg key="statusLabelText">Status:</ui:msg></label>
         <div class="controls">
-          <g:Image  ui:field="icon" addStyleNames="icon" />
+          <g:Image  ui:field="icon" addStyleNames="icon" resource="{res.buddyIconOff}" />
           <g:Image ui:field="menu" addStyleNames="menu" resource="{res.menuIcon}" />
           <g:TextBox ui:field="status" styleName="{style.status}" />
         </div>
