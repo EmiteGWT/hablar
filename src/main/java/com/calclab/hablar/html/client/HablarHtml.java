@@ -3,14 +3,6 @@ package com.calclab.hablar.html.client;
 import java.util.HashMap;
 
 import com.calclab.emite.core.client.LoginXmpp;
-import com.calclab.emite.core.client.xmpp.session.XmppSession;
-import com.calclab.emite.im.client.chat.ChatManager;
-import com.calclab.emite.im.client.presence.PresenceManager;
-import com.calclab.emite.im.client.roster.XmppRoster;
-import com.calclab.emite.xep.chatstate.client.StateManager;
-import com.calclab.emite.xep.muc.client.RoomManager;
-import com.calclab.emite.xep.mucchatstate.client.MUCChatStateManager;
-import com.calclab.emite.xep.mucdisco.client.RoomDiscoveryManager;
 import com.calclab.hablar.chat.client.HablarChat;
 import com.calclab.hablar.client.HablarConfig;
 import com.calclab.hablar.client.HablarGinjector;
