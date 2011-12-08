@@ -4,12 +4,17 @@ import com.calclab.emite.browser.client.PageAssist;
 
 public class HtmlConfig {
 
-    public static HtmlConfig getFromMeta() {
+    public String loginId;
+
+	public static HtmlConfig getFromMeta() {
 	final HtmlConfig config = new HtmlConfig();
 	config.hasLogin = PageAssist.isMetaTrue("hablar.login");
 	config.inline = PageAssist.getMeta("hablar.inline");
 	config.width = PageAssist.getMeta("hablar.width");
 	config.height = PageAssist.getMeta("hablar.height");
+	//This needs to match the loginId supplied to Emite
+	config.loginId = PageAssist.getMeta("hablar.loginId");
+	
 	if (config.width == null) {
 	    config.width = "400px";
 	}

@@ -1,9 +1,16 @@
 package com.calclab.hablar.html.client;
 
+import java.util.HashMap;
+
+import com.calclab.emite.core.client.LoginXmpp;
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.im.client.chat.ChatManager;
+import com.calclab.emite.im.client.presence.PresenceManager;
 import com.calclab.emite.im.client.roster.XmppRoster;
+import com.calclab.emite.xep.chatstate.client.StateManager;
 import com.calclab.emite.xep.muc.client.RoomManager;
+import com.calclab.emite.xep.mucchatstate.client.MUCChatStateManager;
+import com.calclab.emite.xep.mucdisco.client.RoomDiscoveryManager;
 import com.calclab.hablar.chat.client.HablarChat;
 import com.calclab.hablar.client.HablarConfig;
 import com.calclab.hablar.client.HablarGinjector;
@@ -72,43 +79,45 @@ public class HablarHtml implements EntryPoint {
 		final HablarWidget widget = new HablarWidget(config.layout, config.tabHeaderSize);
 		final Hablar hablar = widget.getHablar();
 
-		final XmppSession session = ginjector.getXmppSession();
-		final XmppRoster roster = ginjector.getXmppRoster();
-		final ChatManager chatManager = ginjector.getChatManager();
-		final RoomManager roomManager = ginjector.getRoomManager();
-
+		
+		//final HablarGinjector ginjector = GWT.create(HablarGinjector.class);		
+		HashMap <String, LoginXmpp>loginXmppMap = ginjector.getLoginXmppMap();    	      		
+		String loginId=htmlConfig.loginId;
+		
+		LoginXmpp loginXmpp = loginXmppMap.get(loginId);
+		
 		new HablarCore(hablar);
-		new HablarChat(hablar, config.chatConfig, roster, chatManager, ginjector.getStateManager());
-		new HablarRooms(hablar, config.roomsConfig, session, roster, roomManager, ginjector.getRoomDiscoveryManager(), ginjector.getMUCChatStateManager());
-		new HablarGroupChat(hablar, config.roomsConfig, session, roster, chatManager, roomManager);
+		new HablarChat(hablar, config.chatConfig, loginXmpp.xmppRoster, loginXmpp.chatManager, loginXmpp.stateManager);
+		new HablarRooms(hablar, config.roomsConfig, loginXmpp.xmppSession, loginXmpp.xmppRoster, loginXmpp.roomManager, loginXmpp.roomDiscoveryManager, loginXmpp.mucChatStateManager);
+		new HablarGroupChat(hablar, config.roomsConfig, loginXmpp.xmppSession, loginXmpp.xmppRoster, loginXmpp.chatManager, loginXmpp.roomManager);
 		new HablarDock(hablar, config.dockConfig);
-		new HablarUser(hablar, session, ginjector.getPresenceManager(), ginjector.getPrivateStorageManager());
+		new HablarUser(hablar, loginXmpp.xmppSession, loginXmpp.presenceManager, loginXmpp.privateStorageManager);
 
 		RosterPage rosterPage = null;
 		HablarRoster hablarRoster = null;
 		if (config.hasRoster) {
-			hablarRoster = new HablarRoster(hablar, config.rosterConfig, session, roster, chatManager, ginjector.getSubscriptionHandler());
+			hablarRoster = new HablarRoster(hablar, config.rosterConfig, loginXmpp.xmppSession, loginXmpp.xmppRoster, loginXmpp.chatManager, loginXmpp.subscriptionHandler);
 			rosterPage = hablarRoster.getRosterPage();
 		}
 
 		if (config.hasVCard) {
-			new HablarVCard(hablar, config.vcardConfig, session, roster, ginjector.getVCardManager());
+			new HablarVCard(hablar, config.vcardConfig, loginXmpp.xmppSession, loginXmpp.xmppRoster, ginjector.getVCardManager());
 		}
 
 		if (config.hasRoster) {
-			new HablarOpenChat(hablar, session, roster, chatManager);
-			new HablarEditBuddy(hablar, roster);
-			new HablarUserGroups(rosterPage, hablar, roster);
-			new HablarGroup(hablar, session, roster);
+			new HablarOpenChat(hablar, loginXmpp.xmppSession, loginXmpp.xmppRoster, loginXmpp.chatManager);
+			new HablarEditBuddy(hablar, loginXmpp.xmppRoster); 
+			new HablarUserGroups(rosterPage, hablar, loginXmpp.xmppRoster);
+			new HablarGroup(hablar, loginXmpp.xmppSession, loginXmpp.xmppRoster);
 			hablarRoster.addLowPriorityActions();
 		}
 
 		if (config.hasSearch) {
-			new HablarSearch(hablar, config.searchConfig, session, roster, chatManager, ginjector.getSearchManager());
+			new HablarSearch(hablar, config.searchConfig, loginXmpp.xmppSession, loginXmpp.xmppRoster, loginXmpp.chatManager, loginXmpp.searchManager);
 		}
 
 		if (config.hasSignals) {
-			new HablarSignals(hablar, session, ginjector.getPrivateStorageManager());
+			new HablarSignals(hablar, loginXmpp.xmppSession, loginXmpp.privateStorageManager);
 		}
 
 		if (config.hasSound) {
@@ -120,11 +129,11 @@ public class HablarHtml implements EntryPoint {
 		}
 
 		if (htmlConfig.hasLogger) {
-			new HablarConsole(hablar, ginjector.getXmppConnection(), session);
+			new HablarConsole(hablar, ginjector.getXmppConnection(), loginXmpp.xmppSession);
 		}
 
 		if (htmlConfig.hasLogin) {
-			new HablarLogin(hablar, LoginConfig.getFromMeta(), session);
+			new HablarLogin(hablar, LoginConfig.getFromMeta(), loginXmpp.xmppSession);
 		}
 
 		if (htmlConfig.inline == null) {
