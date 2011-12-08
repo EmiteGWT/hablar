@@ -12,7 +12,7 @@ public class HtmlConfig {
 	config.inline = PageAssist.getMeta("hablar.inline");
 	config.width = PageAssist.getMeta("hablar.width");
 	config.height = PageAssist.getMeta("hablar.height");
-	//This needs to match the loginId supplied to Emite
+	//This needs to match the loginId supplied to Emite emite.user
 	config.loginId = PageAssist.getMeta("hablar.loginId");
 	
 	if (config.width == null) {
