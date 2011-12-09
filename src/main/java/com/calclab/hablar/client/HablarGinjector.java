@@ -51,4 +51,6 @@ public interface HablarGinjector extends Ginjector {
 	
 	HashMap <String, LoginXmpp> getLoginXmppMap();
 
+	LoginXmpp getLoginXmpp();
+
 }
