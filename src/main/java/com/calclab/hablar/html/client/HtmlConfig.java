@@ -4,8 +4,6 @@ import com.calclab.emite.browser.client.PageAssist;
 
 public class HtmlConfig {
 
-    public String loginId;
-
 	public static HtmlConfig getFromMeta() {
 	final HtmlConfig config = new HtmlConfig();
 	config.hasLogin = PageAssist.isMetaTrue("hablar.login");
@@ -23,6 +21,8 @@ public class HtmlConfig {
 	}
 	return config;
     }
+
+	public String loginId ="";
 
     /**
      * Width

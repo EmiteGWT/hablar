@@ -70,12 +70,12 @@ public class HablarHtml implements EntryPoint {
 		htmlConfig.hasLogger = true;
 		final HablarWidget widget = new HablarWidget(config.layout, config.tabHeaderSize);
 		final Hablar hablar = widget.getHablar();
-
+		String loginId=htmlConfig.loginId;
+		
+		if (loginId != null) {
 		
 		//final HablarGinjector ginjector = GWT.create(HablarGinjector.class);		
 		HashMap <String, LoginXmpp>loginXmppMap = ginjector.getLoginXmppMap();    	      		
-		String loginId=htmlConfig.loginId;
-		
 		LoginXmpp loginXmpp = loginXmppMap.get(loginId);
 		
 		new HablarCore(hablar);
@@ -121,7 +121,7 @@ public class HablarHtml implements EntryPoint {
 		}
 
 		if (htmlConfig.hasLogger) {
-			new HablarConsole(hablar, ginjector.getXmppConnection(), loginXmpp.xmppSession);
+			new HablarConsole(hablar, loginXmpp.xmppConnection, loginXmpp.xmppSession);
 		}
 
 		if (htmlConfig.hasLogin) {
@@ -132,6 +132,7 @@ public class HablarHtml implements EntryPoint {
 			createDialog(widget, htmlConfig);
 		} else {
 			addHablarToDiv(widget, htmlConfig);
+		}
 		}
 	}
 

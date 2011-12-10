@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import com.calclab.emite.browser.client.BrowserModule;
 import com.calclab.emite.core.client.LoginXmpp;
+import com.calclab.emite.core.client.LoginXmppMap;
 import com.calclab.emite.core.client.conn.XmppConnection;
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.im.client.chat.ChatManager;
@@ -49,7 +50,7 @@ public interface HablarGinjector extends Ginjector {
 
 	PrivateStorageManager getPrivateStorageManager();
 	
-	HashMap <String, LoginXmpp> getLoginXmppMap();
+	@LoginXmppMap HashMap <String, LoginXmpp> getLoginXmppMap();
 
 	LoginXmpp getLoginXmpp();
 
