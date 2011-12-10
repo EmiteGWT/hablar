@@ -1,8 +1,10 @@
 package com.calclab.hablar.html.client;
 
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import com.calclab.emite.core.client.LoginXmpp;
+import com.calclab.emite.core.client.events.GwtEmiteEventBus;
 import com.calclab.hablar.chat.client.HablarChat;
 import com.calclab.hablar.client.HablarConfig;
 import com.calclab.hablar.client.HablarGinjector;
@@ -39,6 +41,8 @@ import com.google.gwt.user.client.ui.Widget;
  * embed it within another GWT application
  */
 public class HablarHtml implements EntryPoint {
+	private static final Logger logger = Logger.getLogger(HablarHtml.class.getName());
+	
 	private void addHablarToDiv(final HablarWidget hablar, final HtmlConfig htmlConfig) {
 		setSize(hablar, htmlConfig);
 		final RootPanel rootPanel = RootPanel.get(htmlConfig.inline);
@@ -71,6 +75,12 @@ public class HablarHtml implements EntryPoint {
 		final HablarWidget widget = new HablarWidget(config.layout, config.tabHeaderSize);
 		final Hablar hablar = widget.getHablar();
 		String loginId=htmlConfig.loginId;
+		
+		
+		if (loginId == null) {
+			logger.info("Trying to use the browser module outside of GWT apps without setting <meta id=\"hablar.loginId\" content=\"exampleuserid\" /> is not supported");
+			logger.info("<meta id=\"hablar.loginId\" content=\"exampleuserid\" /> should match <meta id=\"emite.user\" content=\"exampleuserid\" /> otherwise this instance of hablar will not know which instance of Emite to use.");		
+		}
 		
 		if (loginId != null) {
 		
