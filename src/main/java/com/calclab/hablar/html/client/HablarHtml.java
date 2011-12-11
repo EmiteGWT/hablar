@@ -3,8 +3,9 @@ package com.calclab.hablar.html.client;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
+import com.calclab.emite.browser.client.PageAssist;
 import com.calclab.emite.core.client.LoginXmpp;
-import com.calclab.emite.core.client.events.GwtEmiteEventBus;
+import com.calclab.emite.im.client.ImComponents;
 import com.calclab.hablar.chat.client.HablarChat;
 import com.calclab.hablar.client.HablarConfig;
 import com.calclab.hablar.client.HablarGinjector;
@@ -41,6 +42,7 @@ import com.google.gwt.user.client.ui.Widget;
  * embed it within another GWT application
  */
 public class HablarHtml implements EntryPoint {
+	
 	private static final Logger logger = Logger.getLogger(HablarHtml.class.getName());
 	
 	private void addHablarToDiv(final HablarWidget hablar, final HtmlConfig htmlConfig) {
@@ -64,25 +66,27 @@ public class HablarHtml implements EntryPoint {
 
 	@Override
 	public void onModuleLoad() {
+
+		final HtmlConfig htmlConfig = HtmlConfig.getFromMeta();
+		String loginId=PageAssist.getMeta("emite.user");
+		
+		if (loginId == null) {
+			logger.info("Trying to use the browser module outside of GWT apps without setting <meta id=\"emite.user\" content=\"exampleuserid\" /> is not supported");	
+		}
+		
+		if (loginId != null) {
 		final HablarGinjector ginjector = GWT.create(HablarGinjector.class);
 
+			ImComponents imComponents = ginjector.getImComponents();
+			imComponents.setInstanceId(loginId);
+		
 		// We will instantiate the BrowserFocusHandler singleton so that it
 		// starts tracking focus events as soon as possible.
 		BrowserFocusHandler.getInstance();
 		final HablarConfig config = HablarConfig.getFromMeta();
-		final HtmlConfig htmlConfig = HtmlConfig.getFromMeta();
 		htmlConfig.hasLogger = true;
 		final HablarWidget widget = new HablarWidget(config.layout, config.tabHeaderSize);
 		final Hablar hablar = widget.getHablar();
-		String loginId=htmlConfig.loginId;
-		
-		
-		if (loginId == null) {
-			logger.info("Trying to use the browser module outside of GWT apps without setting <meta id=\"hablar.loginId\" content=\"exampleuserid\" /> is not supported");
-			logger.info("<meta id=\"hablar.loginId\" content=\"exampleuserid\" /> should match <meta id=\"emite.user\" content=\"exampleuserid\" /> otherwise this instance of hablar will not know which instance of Emite to use.");		
-		}
-		
-		if (loginId != null) {
 		
 		//final HablarGinjector ginjector = GWT.create(HablarGinjector.class);		
 		HashMap <String, LoginXmpp>loginXmppMap = ginjector.getLoginXmppMap();    	      		
@@ -103,7 +107,7 @@ public class HablarHtml implements EntryPoint {
 		}
 
 		if (config.hasVCard) {
-			new HablarVCard(hablar, config.vcardConfig, loginXmpp.xmppSession, loginXmpp.xmppRoster, ginjector.getVCardManager());
+				new HablarVCard(hablar, config.vcardConfig, loginXmpp.xmppSession, loginXmpp.xmppRoster, loginXmpp.vCardManager);
 		}
 
 		if (config.hasRoster) {

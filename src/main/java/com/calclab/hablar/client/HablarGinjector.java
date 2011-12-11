@@ -7,6 +7,7 @@ import com.calclab.emite.core.client.LoginXmpp;
 import com.calclab.emite.core.client.LoginXmppMap;
 import com.calclab.emite.core.client.conn.XmppConnection;
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
+import com.calclab.emite.im.client.ImComponents;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.presence.PresenceManager;
 import com.calclab.emite.im.client.roster.SubscriptionHandler;
@@ -54,4 +55,6 @@ public interface HablarGinjector extends Ginjector {
 
 	LoginXmpp getLoginXmpp();
 
+	ImComponents getImComponents();
+	
 }
