@@ -57,7 +57,7 @@ public class TabsLayout extends MainLayout {
 	}
 
 	private static final double BAR_SIZE = 24;
-	private static TabsPanel tabs;
+	private TabsPanel tabs = new TabsPanel(BAR_SIZE, PX);
 
 	private final TabsMenuPresenter tabsMenuPresenter;
 
@@ -68,7 +68,7 @@ public class TabsLayout extends MainLayout {
 	}
 
 	public TabsLayout(final HablarDisplay parent, final TabHeaderSize tabHeaderSize) {
-		super(tabs = new TabsPanel(BAR_SIZE, PX), parent);
+		initialize(tabs, parent);
 		tabsMenuPresenter = new TabsMenuPresenter(tabs.getMenu());
 		this.tabHeaderSize = tabHeaderSize;
 	}

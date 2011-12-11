@@ -8,10 +8,10 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class AccordionLayout extends MainLayout {
 	private static final double HEAD_SIZE = 24;
-	private static AccordionPanel accordion;
+	private  AccordionPanel accordion = new AccordionPanel();
 
 	public AccordionLayout(HablarDisplay display) {
-		super(accordion = new AccordionPanel(), display);
+		initialize(accordion,display);
 	}
 
 	@Override
