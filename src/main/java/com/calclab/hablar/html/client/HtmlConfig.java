@@ -4,12 +4,14 @@ import com.calclab.emite.browser.client.PageAssist;
 
 public class HtmlConfig {
 
-    public static HtmlConfig getFromMeta() {
+	public static HtmlConfig getFromMeta() {
 	final HtmlConfig config = new HtmlConfig();
 	config.hasLogin = PageAssist.isMetaTrue("hablar.login");
 	config.inline = PageAssist.getMeta("hablar.inline");
 	config.width = PageAssist.getMeta("hablar.width");
 	config.height = PageAssist.getMeta("hablar.height");
+
+	
 	if (config.width == null) {
 	    config.width = "400px";
 	}
@@ -18,6 +20,7 @@ public class HtmlConfig {
 	}
 	return config;
     }
+
 
     /**
      * Width

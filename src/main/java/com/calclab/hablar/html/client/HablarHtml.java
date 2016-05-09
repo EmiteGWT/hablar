@@ -1,9 +1,11 @@
 package com.calclab.hablar.html.client;
 
-import com.calclab.emite.core.client.xmpp.session.XmppSession;
-import com.calclab.emite.im.client.chat.ChatManager;
-import com.calclab.emite.im.client.roster.XmppRoster;
-import com.calclab.emite.xep.muc.client.RoomManager;
+import java.util.HashMap;
+import java.util.logging.Logger;
+
+import com.calclab.emite.browser.client.PageAssist;
+import com.calclab.emite.core.client.LoginXmpp;
+import com.calclab.emite.im.client.ImComponents;
 import com.calclab.hablar.chat.client.HablarChat;
 import com.calclab.hablar.client.HablarConfig;
 import com.calclab.hablar.client.HablarGinjector;
@@ -40,6 +42,9 @@ import com.google.gwt.user.client.ui.Widget;
  * embed it within another GWT application
  */
 public class HablarHtml implements EntryPoint {
+	
+	private static final Logger logger = Logger.getLogger(HablarHtml.class.getName());
+	
 	private void addHablarToDiv(final HablarWidget hablar, final HtmlConfig htmlConfig) {
 		setSize(hablar, htmlConfig);
 		final RootPanel rootPanel = RootPanel.get(htmlConfig.inline);
@@ -61,54 +66,64 @@ public class HablarHtml implements EntryPoint {
 
 	@Override
 	public void onModuleLoad() {
+
+		final HtmlConfig htmlConfig = HtmlConfig.getFromMeta();
+		String loginId=PageAssist.getMeta("emite.user");
+		
+		if (loginId == null) {
+			logger.info("Trying to use the browser module outside of GWT apps without setting <meta id=\"emite.user\" content=\"exampleuserid\" /> is not supported");	
+		}
+		
+		if (loginId != null) {
 		final HablarGinjector ginjector = GWT.create(HablarGinjector.class);
 
+			ImComponents imComponents = ginjector.getImComponents();
+			imComponents.setInstanceId(loginId);
+		
 		// We will instantiate the BrowserFocusHandler singleton so that it
 		// starts tracking focus events as soon as possible.
 		BrowserFocusHandler.getInstance();
 		final HablarConfig config = HablarConfig.getFromMeta();
-		final HtmlConfig htmlConfig = HtmlConfig.getFromMeta();
 		htmlConfig.hasLogger = true;
 		final HablarWidget widget = new HablarWidget(config.layout, config.tabHeaderSize);
 		final Hablar hablar = widget.getHablar();
-
-		final XmppSession session = ginjector.getXmppSession();
-		final XmppRoster roster = ginjector.getXmppRoster();
-		final ChatManager chatManager = ginjector.getChatManager();
-		final RoomManager roomManager = ginjector.getRoomManager();
-
+		
+		//final HablarGinjector ginjector = GWT.create(HablarGinjector.class);		
+		HashMap <String, LoginXmpp>loginXmppMap = ginjector.getLoginXmppMap();    	      		
+		LoginXmpp loginXmpp = loginXmppMap.get(loginId);
+		
 		new HablarCore(hablar);
-		new HablarChat(hablar, config.chatConfig, roster, chatManager, ginjector.getStateManager());
-		new HablarRooms(hablar, config.roomsConfig, session, roster, roomManager, ginjector.getRoomDiscoveryManager(), ginjector.getMUCChatStateManager());
-		new HablarGroupChat(hablar, config.roomsConfig, session, roster, chatManager, roomManager);
+		new HablarChat(hablar, config.chatConfig, loginXmpp.xmppRoster, loginXmpp.chatManager, loginXmpp.stateManager);
+		new HablarRooms(hablar, config.roomsConfig, loginXmpp.xmppSession, loginXmpp.xmppRoster, loginXmpp.roomManager, loginXmpp.roomDiscoveryManager, loginXmpp.mucChatStateManager);
+		new HablarGroupChat(hablar, config.roomsConfig, loginXmpp.xmppSession, loginXmpp.xmppRoster, loginXmpp.chatManager, loginXmpp.roomManager);
 		new HablarDock(hablar, config.dockConfig);
-		new HablarUser(hablar, session, ginjector.getPresenceManager(), ginjector.getPrivateStorageManager());
+		new HablarUser(hablar, loginXmpp.xmppSession, loginXmpp.presenceManager, loginXmpp.privateStorageManager);
 
 		RosterPage rosterPage = null;
 		HablarRoster hablarRoster = null;
 		if (config.hasRoster) {
-			hablarRoster = new HablarRoster(hablar, config.rosterConfig, session, roster, chatManager, ginjector.getSubscriptionHandler());
+			hablarRoster = new HablarRoster(hablar, config.rosterConfig, loginXmpp.xmppSession, loginXmpp.xmppRoster, loginXmpp.chatManager, loginXmpp.subscriptionHandler);
 			rosterPage = hablarRoster.getRosterPage();
 		}
 
 		if (config.hasVCard) {
-			new HablarVCard(hablar, config.vcardConfig, session, roster, ginjector.getVCardManager());
+				new HablarVCard(hablar, config.vcardConfig, loginXmpp.xmppSession, loginXmpp.xmppRoster, loginXmpp.vCardManager);
 		}
 
 		if (config.hasRoster) {
-			new HablarOpenChat(hablar, session, roster, chatManager);
-			new HablarEditBuddy(hablar, roster);
-			new HablarUserGroups(rosterPage, hablar, roster);
-			new HablarGroup(hablar, session, roster);
+			new HablarOpenChat(hablar, loginXmpp.xmppSession, loginXmpp.xmppRoster, loginXmpp.chatManager);
+			new HablarEditBuddy(hablar, loginXmpp.xmppRoster); 
+			new HablarUserGroups(rosterPage, hablar, loginXmpp.xmppRoster);
+			new HablarGroup(hablar, loginXmpp.xmppSession, loginXmpp.xmppRoster);
 			hablarRoster.addLowPriorityActions();
 		}
 
 		if (config.hasSearch) {
-			new HablarSearch(hablar, config.searchConfig, session, roster, chatManager, ginjector.getSearchManager());
+			new HablarSearch(hablar, config.searchConfig, loginXmpp.xmppSession, loginXmpp.xmppRoster, loginXmpp.chatManager, loginXmpp.searchManager);
 		}
 
 		if (config.hasSignals) {
-			new HablarSignals(hablar, session, ginjector.getPrivateStorageManager());
+			new HablarSignals(hablar, loginXmpp.xmppSession, loginXmpp.privateStorageManager);
 		}
 
 		if (config.hasSound) {
@@ -120,17 +135,18 @@ public class HablarHtml implements EntryPoint {
 		}
 
 		if (htmlConfig.hasLogger) {
-			new HablarConsole(hablar, ginjector.getXmppConnection(), session);
+			new HablarConsole(hablar, loginXmpp.xmppConnection, loginXmpp.xmppSession);
 		}
 
 		if (htmlConfig.hasLogin) {
-			new HablarLogin(hablar, LoginConfig.getFromMeta(), session);
+			new HablarLogin(hablar, LoginConfig.getFromMeta(), loginXmpp.xmppSession);
 		}
 
 		if (htmlConfig.inline == null) {
 			createDialog(widget, htmlConfig);
 		} else {
 			addHablarToDiv(widget, htmlConfig);
+		}
 		}
 	}
 

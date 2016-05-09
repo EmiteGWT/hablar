@@ -8,9 +8,17 @@ import com.calclab.hablar.core.client.pages.HeaderDisplay;
 import com.google.gwt.user.client.ui.Widget;
 
 public abstract class MainLayout {
-	private final Widget container;
+	private Widget container;
 
 	public MainLayout(Widget container, HablarDisplay parent) {
+		initialize(container, parent);
+	}
+	
+	public MainLayout(){
+		
+	}
+	
+	public void initialize(Widget container, HablarDisplay parent) {
 		this.container = container;
 		parent.add(container);
 		parent.setWidgetLeftRight(container, 0, PX, 0, PX);

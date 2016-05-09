@@ -5,6 +5,10 @@
 	<inherits name="com.calclab.hablar.Hablar" />
 	<inherits name='com.calclab.hablar.console.HablarConsole' />
 	<inherits name='com.calclab.hablar.login.HablarLogin' />
+	<inherits name='com.calclab.emite.xep.privacylists.PrivacyLists' />
+	<inherits name='com.calclab.emite.reconnect.EmiteReconnect' />
+	<inherits name='com.calclab.emite.xep.avatar.EmiteAvatar' />
+	<inherits name="com.calclab.emite.browser.EmiteBrowser" />
 
 	<inherits name='com.google.gwt.user.theme.chrome.Chrome' />
 	<!-- <inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
